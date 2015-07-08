@@ -20,6 +20,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim.git'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
+Plugin 'elzr/vim-json' " JSON support
 call vundle#end()
 
 " Now we can turn our filetype functionality back on
