@@ -11,8 +11,8 @@ set rtp+=~/.vim/bundle/vundle/
 " For GitHub repos, you specify plugins using the
 " 'user/repository' format
 call vundle#begin()
-Plugin 'gmarik/vundle' 
-Plugin 'scrooloose/nerdtree.git' 
+Plugin 'gmarik/vundle'
+Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'vimoutliner/vimoutliner'
@@ -74,13 +74,6 @@ nnoremap <space>/ :Ag
 """""""""""""""""""""""""""""""""""""""""""""
 " END -> GREP on steroids
 """""""""""""""""""""""""""""""""""""""""""""
-
-" -- Solarized personal conf
-set background=dark
-try
-    colorscheme solarized
-catch
-endtry
 
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
@@ -151,3 +144,14 @@ let g:NERDTreeToggle="<F2>"
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
+
+" -- Solarized personal conf
+set background=dark
+try
+	set t_Co=256 " says terminal has 256 colors
+	let g:solarized_termcolors=256 " Sets to terminal color
+	let g:solarized_contrast="high"
+	let g:solarized_visibility="high"
+    colorscheme solarized
+catch
+endtry
