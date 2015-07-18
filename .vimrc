@@ -21,20 +21,81 @@ Plugin 'mattn/emmet-vim.git'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
+Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
+Plugin 'altercation/vim-colors-solarized' " low-contrast color scheme
+" -----------------------------------------
+" Requirements for final three
+" go to .vim/plugin/vimproc.vim and type 'make'
+" sudo apt-get install silversearcher-ag
+" -----------------------------------------
+Plugin 'Shougo/vimproc.vim' " Finding files
+Plugin 'Shougo/unite.vim' " Finding files
+Plugin 'rking/ag.vim' " Requirement: sudo apt-get install silversearcher-ag
 call vundle#end()
 
 " Now we can turn our filetype functionality back on
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""
-" Personal Settings
+"""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""
+" Main Settings
+"""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""
+" START -> GREP on steroids
+"
+" Usage instructions
+" Get list of files : type <space><space>
+" Reset list of files : type <space>r
+
+" Type & while over a word to search the word in all files in
+"   current directory
+" Type <space>/ followed by your string to search all occurence of string in
+"   project files
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:unite_source_history_yank_enable = 1
+try
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
+" search a file in the filetree
+nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
+" reset not it is <C-l> normally
+:nnoremap <space>r <Plug>(unite_restart)
+
+" --- type & to search the word in all files in the current dir
+nmap & :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <space>/ :Ag 
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" END -> GREP on steroids
+"""""""""""""""""""""""""""""""""""""""""""""
+
+" -- Solarized personal conf
+set background=dark
+try
+    colorscheme solarized
+catch
+endtry
+
+" Set column to light grey at 80 characters
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
+endif
+
 " Rainbow parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+try
+	au VimEnter * RainbowParenthesesToggle
+	au Syntax * RainbowParenthesesLoadRound
+	au Syntax * RainbowParenthesesLoadSquare
+	au Syntax * RainbowParenthesesLoadBraces
+catch
+endtry
 
 " Tabs
 map ;l :tabe . <ENTER>
