@@ -23,6 +23,8 @@ Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'altercation/vim-colors-solarized' " low-contrast color scheme
+Plugin 'jpo/vim-railscasts-theme' " Another theme
+Plugin 'tomasr/molokai' " Another theme: My favorite currently
 " -----------------------------------------
 " Requirements for final three
 " go to .vim/plugin/vimproc.vim and type 'make'
@@ -146,12 +148,15 @@ let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
 
 " -- Solarized personal conf
-set background=dark
 try
 	set t_Co=256 " says terminal has 256 colors
-	let g:solarized_termcolors=256 " Sets to terminal color
-	let g:solarized_contrast="high"
-	let g:solarized_visibility="high"
-    colorscheme solarized
+	let g:molokai_original = 1
+	let g:rehash256 = 1
+	"set background=dark
+	"let g:solarized_termcolors=256 " Sets to terminal color
+	"let g:solarized_contrast="high"
+	"let g:solarized_visibility="high"
+    "colorscheme solarized
+	colorscheme molokai
 catch
 endtry
