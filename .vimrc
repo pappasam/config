@@ -22,9 +22,7 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
-Plugin 'altercation/vim-colors-solarized' " low-contrast color scheme
-Plugin 'jpo/vim-railscasts-theme' " Another theme
-Plugin 'tomasr/molokai' " Another theme: My favorite currently
+Plugin 'tomasr/molokai' " Color theme; best background for vim
 " -----------------------------------------
 " Requirements for final three
 " go to .vim/plugin/vimproc.vim and type 'make'
@@ -152,11 +150,6 @@ try
 	set t_Co=256 " says terminal has 256 colors
 	let g:molokai_original = 1
 	let g:rehash256 = 1
-	"set background=dark
-	"let g:solarized_termcolors=256 " Sets to terminal color
-	"let g:solarized_contrast="high"
-	"let g:solarized_visibility="high"
-    "colorscheme solarized
 	colorscheme molokai
 catch
 endtry
