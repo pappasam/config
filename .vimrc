@@ -162,4 +162,4 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.h,*.c,*.java,*.py,*.scala :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.h,*.c,*.java,*.py,*.scala,*.sql,*.hql :call <SID>StripTrailingWhitespaces()
