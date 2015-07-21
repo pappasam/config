@@ -153,3 +153,13 @@ try
 	colorscheme molokai
 catch
 endtry
+
+" Remove trailing white space for certain files
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre *.h,*.c,*.java,*.py,*.scala :call <SID>StripTrailingWhitespaces()
