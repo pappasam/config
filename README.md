@@ -1,6 +1,8 @@
 # Configuration Settings
-This a repository of my personal settings across Unix tools.
+This a repository of my personal settings across Unix tools. It is intended for use by all.
 
-It is intended for use by all. Enjoy!
+Currently, the repository contains configuration files for the following programs:
+* tmux
+* vim
 
 Written by: Samuel Roeca
