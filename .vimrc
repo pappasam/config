@@ -16,11 +16,11 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'rust-lang/rust.vim'
-Plugin 'vim-scripts/closetag.vim' " For HTML and XML; set explicitly below
 Plugin 'vimoutliner/vimoutliner'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-ragtag'
-Plugin 'mattn/emmet-vim.git'
+Plugin 'vim-scripts/closetag.vim' " For HTML and XML; set explicitly below
+Plugin 'tpope/vim-surround' " Good for XMl editing
+Plugin 'tpope/vim-ragtag' " Extends vim-surround
+Plugin 'mattn/emmet-vim.git' " Adds custom something to vim; read more later
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
