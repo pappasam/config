@@ -1,0 +1,64 @@
+" Through chapter 11
+
+" Set number preferences
+" set relativenumber
+set shiftround
+set number
+set numberwidth=2
+set wrap
+
+" Enable movement within block of text
+nnoremap k gk
+nnoremap j gj
+nnoremap 0 g0
+nnoremap $ g$
+
+" Autogenerate Parentheses, braces, and brackets
+inoremap (<CR>  (<CR>)<Esc>O
+inoremap (     (   
+inoremap ()     ()  
+
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {     {   
+inoremap {}     {}  
+
+inoremap [<CR>  [<CR>]<Esc>O
+inoremap [     [   
+inoremap []     []  
+
+" Change window
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+
+" Move line up and down with hyphen key
+nnoremap - ddp
+nnoremap _ ddkP
+
+" Set the leader
+let mapleader = ","
+let maplocalleader = "\\"
+
+" Open .vimrc file in vertical split
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" Resource .vimrc file
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Spell checking
+iabbrev adn and
+iabbrev waht what
+iabbrev tehn then
+
+" Add abbreviations
+iabbrev @@ sroeca@keplergrp.com
+iabbrev ccopy Copyright 2015 Sam Roeca, all rights reserved.
+
+" Surround text in quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+
+" Remap H and L to beginning and end of line
+nnoremap H 0
+nnoremap L $
