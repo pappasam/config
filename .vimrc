@@ -58,11 +58,6 @@ map ;l :tabe . <ENTER>
 map ;j :tabp <ENTER>
 map ;k :tabn <ENTER>
 
-" Set indentation settings
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
 
 " Enable movement within block of text
 nnoremap k gk
@@ -125,7 +120,13 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.otl,*.h,*.c,*.java,*.py,*.scala,*.sql,*.hql :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.sh,*.otl,*.h,*.c,*.java,*.py,*.scala,*.sql,*.hql :call <SID>StripTrailingWhitespaces()
 
 " XML and HTML tag closing; simply enter </ and the tag completes
 " autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+
+" Set indentation settings
+set autoindent
+set smartindent
+set tabstop=4
+set shiftwidth=4
