@@ -14,11 +14,6 @@ nnoremap $ g$
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap [<CR>  [<CR>]<Esc>O
-" Change window
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
 " Remap operators for doing things inserting in previous and next parentheses
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -75,4 +70,24 @@ set statusline+=%=
 set statusline+=%l
 set statusline+=/
 set statusline+=%L
+" }}}
+" Search Utilities ----------------- {{{
+
+" Grep through all files in directory
+" nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+" }}}
+
+" Tabs and Windows ----------------- {{{
+
+" Open new tab
+nnoremap ;l :tabe . <ENTER>
+nnoremap ;j :tabp <ENTER>
+nnoremap ;k :tabn <ENTER>
+
+" Change change window thorough Control + directional movement
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+
 " }}}
