@@ -16,18 +16,6 @@ if (exists('+colorcolumn'))
 	highlight ColorColumn ctermbg=9
 endif
 " }}}
-" Tab settings (eg, line spacing) --------------- {{{
-set tabstop=4 softtabstop=4 shiftwidth=4
-set noexpandtab smarttab shiftround smartindent autoindent
-augroup tabs_kernal
-	autocmd!
-	autocmd Filetype c,cpp :setlocal ts=8 sts=8 sw=8 noexpandtab
-augroup END
-augroup tabs_two
-	autocmd!
-	autocmd Filetype scala,html :setlocal ts=2 sts=2 sw=2 noexpandtab
-augroup END
-" }}}
 " Vundle --------------------- {{{
 " Turn off important incompatibilities with vundle
 set nocompatible
@@ -38,8 +26,8 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'vim-scripts/EasyGrep'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'rust-lang/rust.vim'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
@@ -52,7 +40,6 @@ Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'tomasr/molokai' " Color theme; best background for vim
 call vundle#end()
 
-" Now we can turn our filetype functionality back on
 filetype plugin indent on
 " }}}
 " Rainbow Parentheses ------------ {{{
@@ -72,8 +59,8 @@ nnoremap 0 g0
 nnoremap $ g$
 " Autogenerate Parentheses, braces, and brackets
 inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap [<CR>  [<CR>]<Esc>O
+inoremap {<CR>	{<CR>}<Esc>O
+inoremap [<CR>	[<CR>]<Esc>O
 " Remap operators for doing things inserting in previous and next parentheses
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -150,4 +137,10 @@ let g:NERDTreeToggle="<F2>"
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
+" }}}
+" Python --------------------- {{{
+augroup python_sr
+    autocmd!
+    autocmd Filetype python :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+augroup END
 " }}}
