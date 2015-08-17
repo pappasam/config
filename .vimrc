@@ -3,9 +3,6 @@ let mapleader = ","
 let maplocalleader = "\\"
 " }}}
 " Display settings ------------ {{{
-set shiftround
-set number
-set numberwidth=2
 set wrap
 " Status bar
 set statusline=%F
