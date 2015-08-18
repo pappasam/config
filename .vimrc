@@ -38,6 +38,7 @@ Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'tomasr/molokai' " Color theme; best background for vim
+Plugin 'autowitch/hive.vim'
 call vundle#end()
 
 filetype plugin indent on
@@ -138,9 +139,22 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
 " }}}
+" General Tab Width ------------- {{{
+augroup generaltabs_sr
+    autocmd!
+    autocmd Filetype * :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+augroup END
+" }}}
 " Python --------------------- {{{
 augroup python_sr
     autocmd!
     autocmd Filetype python :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+augroup END
+" }}}
+" Hive ----------------------- {{{
+augroup hive_sr
+    autocmd!
+    autocmd BufNewFile,BufRead *.hql set filetype=hive
+    autocmd BufNewFile,BufRead *.q set filetype=hive
 augroup END
 " }}}
