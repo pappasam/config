@@ -139,16 +139,16 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
 " }}}
-" General Tab Width ------------- {{{
-augroup generaltabs_sr
+" General Widths ------------- {{{
+augroup tabwidth_sr
     autocmd!
     autocmd Filetype * :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 augroup END
 " }}}
-" Python --------------------- {{{
-augroup python_sr
+" Outline Files------------------ {{{
+augroup outline_sr
     autocmd!
-    autocmd Filetype python :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
 " Hive ----------------------- {{{
