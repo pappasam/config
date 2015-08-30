@@ -7,3 +7,6 @@ alias tmux='tmux -2'
 
 # View public IP address
 alias publicip='wget -qO - http://ipecho.net/plain ; echo'
+
+# Sets the Mail Environment Variable
+MAIL=/var/spool/mail/sroeca && export MAIL

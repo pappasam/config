@@ -28,6 +28,7 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'wting/rust.vim' " Rust support
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
