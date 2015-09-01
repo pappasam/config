@@ -45,13 +45,26 @@ call vundle#end()
 
 filetype plugin indent on
 " }}}
+" Filetypes ------------ {{{
+augroup filetype_recognition
+    autocmd!
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
+augroup END
+" }}}
+" HTML Files --------------- {{{
+augroup filetype_html
+    autocmd!
+    autocmd FileType html nnoremap <buffer> <localheader>f Vatzf
+augroup END
+" }}}
 " Rainbow Parentheses ------------ {{{
 augroup rainbow_parentheses
-	autocmd!
-	autocmd VimEnter * RainbowParenthesesToggle
-	autocmd Syntax * RainbowParenthesesLoadRound
-	autocmd Syntax * RainbowParenthesesLoadSquare
-	autocmd Syntax * RainbowParenthesesLoadBraces
+    autocmd!
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax * RainbowParenthesesLoadRound
+    autocmd Syntax * RainbowParenthesesLoadSquare
+    autocmd Syntax * RainbowParenthesesLoadBraces
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
@@ -94,12 +107,6 @@ augroup END
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " }}}
-" HTML Files --------------- {{{
-augroup filetype_html
-	autocmd!
-	autocmd FileType html nnoremap <buffer> <localheader>f Vatzf
-augroup END
-" }}}
 " Tabs and Windows ----------------- {{{
 " Open new tab
 nnoremap ;l :tabe . <ENTER>
@@ -113,23 +120,27 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 " }}}
 " Syntax coloring ---------------- {{{
 try
-	set t_Co=256 " says terminal has 256 colors
-	let g:molokai_original = 1
-	let g:rehash256 = 1
-	colorscheme molokai
+    set t_Co=256 " says terminal has 256 colors
+    let g:molokai_original = 1
+    let g:rehash256 = 1
+    colorscheme molokai
 catch
 endtry
 " }}}
 " Trailing whitespace ------------- {{{
 function! <SID>StripTrailingWhitespaces()
-	let l = line(".")
-	let c = col(".")
-	%s/\s\+$//e
-	call cursor(l, c)
+    if exists('b:noStripWhitespace')
+        return
+    endif
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
 endfun
 augroup allfiles_trailingspace
-	autocmd!
-	autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+    autocmd!
+    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+    autocmd FileType markdown let b:noStripWhitespace=1
 augroup END
 " }}}
 " Nerdtree --------------- {{{
@@ -151,12 +162,5 @@ augroup END
 augroup outline_sr
     autocmd!
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
-augroup END
-" }}}
-" Hive ----------------------- {{{
-augroup hive_sr
-    autocmd!
-    autocmd BufNewFile,BufRead *.hql set filetype=hive
-    autocmd BufNewFile,BufRead *.q set filetype=hive
 augroup END
 " }}}
