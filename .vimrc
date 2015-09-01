@@ -41,6 +41,7 @@ Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'tomasr/molokai' " Color theme; best background for vim
 Plugin 'autowitch/hive.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview' " Preview markdown
 call vundle#end()
 
 filetype plugin indent on
@@ -164,3 +165,9 @@ augroup outline_sr
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
+" Markdown Preview ---------------- {{{
+augroup markdown_preview
+    autocmd!
+    autocmd Filetype markdown let vim_markdown_preview_github=1
+augroup END
+"  }}}
