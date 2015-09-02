@@ -41,8 +41,6 @@ Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'tomasr/molokai' " Color theme; best background for vim
 Plugin 'autowitch/hive.vim'
-Plugin 'JamshedVesuna/vim-markdown-preview' " Preview markdown
-Plugin 'jtratner/vim-flavored-markdown' " Github flavored markdown
 call vundle#end()
 
 filetype plugin indent on
@@ -50,7 +48,7 @@ filetype plugin indent on
 " Filetypes ------------ {{{
 augroup filetype_recognition
     autocmd!
-    autocmd BufNewFile,BufRead *.md,*.markdown set filetype=ghmarkdown
+    autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
 augroup END
 " }}}
@@ -142,7 +140,7 @@ endfun
 augroup allfiles_trailingspace
     autocmd!
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-    autocmd FileType ghmarkdown let b:noStripWhitespace=1
+    autocmd FileType markdown let b:noStripWhitespace=1
 augroup END
 " }}}
 " Nerdtree --------------- {{{
@@ -166,9 +164,3 @@ augroup outline_sr
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
-" Markdown Preview ---------------- {{{
-augroup markdown_preview
-    autocmd!
-    autocmd Filetype markdown let vim_markdown_preview_github=1
-augroup END
-"  }}}
