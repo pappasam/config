@@ -152,10 +152,11 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
 " }}}
-" General Widths ------------- {{{
-augroup tabwidth_sr
+" Indentation ------------- {{{
+augroup indentation_sr
     autocmd!
     autocmd Filetype * :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd Filetype dot :setlocal autoindent cindent
 augroup END
 " }}}
 " Outline Files------------------ {{{
