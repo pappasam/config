@@ -32,15 +32,19 @@ Plugin 'wting/rust.vim' " Rust support
 Plugin 'cespare/vim-toml' " .toml support
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround' " Good for XMl editing
-Plugin 'tpope/vim-ragtag' " Extends vim-surround
 Plugin 'mattn/emmet-vim.git' " Adds custom something to vim; read more later
 Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
 Plugin 'elzr/vim-json' " JSON support
 Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
 Plugin 'tomasr/molokai' " Color theme; best background for vim
 Plugin 'autowitch/hive.vim'
+
+" Web Development
+Plugin 'edsono/vim-matchit'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-ragtag'
+
 call vundle#end()
 
 filetype plugin indent on
