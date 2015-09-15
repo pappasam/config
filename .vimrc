@@ -44,6 +44,7 @@ Plugin 'edsono/vim-matchit'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 call vundle#end()
 
