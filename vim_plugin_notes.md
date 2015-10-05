@@ -12,4 +12,6 @@ Mappings for Markup language files.
 1. Close an open HTML tag
   * CTRL+X /
 * Create pair of open/close HTML tags from a word
-  * *word* CTRL+X SPACE
+  * *word* CTRL+X SPACE *or* ENTER
+    * Takes typed word, places in tags, keeps on same line or next line
+*

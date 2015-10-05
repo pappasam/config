@@ -28,15 +28,15 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'wting/rust.vim' " Rust support
-Plugin 'cespare/vim-toml' " .toml support
+Plugin 'wting/rust.vim'
+Plugin 'cespare/vim-toml'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-commentary'
-Plugin 'mattn/emmet-vim.git' " Adds custom something to vim; read more later
-Plugin 'kien/rainbow_parentheses.vim' " Add matching parentheses
-Plugin 'elzr/vim-json' " JSON support
-Plugin 'bronson/vim-trailing-whitespace' " Trailing whitespace
-Plugin 'tomasr/molokai' " Color theme; best background for vim
+Plugin 'mattn/emmet-vim.git'
+Plugin 'luochen1990/rainbow'
+Plugin 'elzr/vim-json'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'tomasr/molokai'
 Plugin 'autowitch/hive.vim'
 
 " Web Development
@@ -57,19 +57,13 @@ augroup filetype_recognition
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
 augroup END
 " }}}
-" HTML Files --------------- {{{
-augroup filetype_html
-    autocmd!
-    autocmd FileType html nnoremap <buffer> <localheader>f Vatzf
-augroup END
-" }}}
 " Rainbow Parentheses ------------ {{{
+let g:rainbow_active = 0
 augroup rainbow_parentheses
     autocmd!
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax * RainbowParenthesesLoadRound
-    autocmd Syntax * RainbowParenthesesLoadSquare
-    autocmd Syntax * RainbowParenthesesLoadBraces
+    autocmd BufNewFile,BufRead * :RainbowToggle
+    autocmd BufNewFile,BufRead * :RainbowToggleOn
+    autocmd BufNewFile,BufRead *.html :RainbowToggleOff
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
@@ -160,8 +154,8 @@ set wildignore+=*/target/*
 " Indentation ------------- {{{
 augroup indentation_sr
     autocmd!
-    autocmd Filetype * :setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-    autocmd Filetype dot :setlocal autoindent cindent
+    autocmd Filetype * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd Filetype dot setlocal autoindent cindent
 augroup END
 " }}}
 " Outline Files------------------ {{{
