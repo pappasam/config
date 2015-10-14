@@ -38,6 +38,7 @@ Plugin 'elzr/vim-json'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'tomasr/molokai'
 Plugin 'autowitch/hive.vim'
+Plugin 'hdima/python-syntax'
 
 " Web Development
 Plugin 'edsono/vim-matchit'
@@ -163,4 +164,7 @@ augroup outline_sr
     autocmd!
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
+" }}}
+" Python------------------
+let python_highlight_all = 1
 " }}}
