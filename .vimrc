@@ -165,6 +165,6 @@ augroup outline_sr
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
-" Python------------------
+" Python------------------ {{{
 let python_highlight_all = 1
 " }}}
