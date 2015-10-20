@@ -10,10 +10,11 @@ set statusline+=%=
 set statusline+=%l
 set statusline+=/
 set statusline+=%L
+
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
-	set colorcolumn=80
-	highlight ColorColumn ctermbg=9
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
 endif
 " }}}
 " Vundle --------------------- {{{
@@ -168,4 +169,11 @@ augroup END
 " }}}
 " Python------------------ {{{
 let python_highlight_all = 1
+" }}}
+" Writing ------------------ {{{
+augroup writing
+    autocmd!
+    autocmd FileType markdown :setlocal wrap linebreak nolist
+    autocmd FileType markdown :setlocal colorcolumn=0
+augroup END
 " }}}
