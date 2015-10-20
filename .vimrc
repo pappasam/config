@@ -159,12 +159,13 @@ augroup indentation_sr
     autocmd Filetype dot setlocal autoindent cindent
 augroup END
 " }}}
-" Outline Files------------------ {{{
-augroup outline_sr
+" Tabs, not spaces------------------ {{{
+augroup TabsNotSpaces
     autocmd!
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+    autocmd BufRead,BufNewFile *GNUmakefile,*makefile,*Makefile :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
-" Python------------------
+" Python------------------ {{{
 let python_highlight_all = 1
 " }}}
