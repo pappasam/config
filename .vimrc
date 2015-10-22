@@ -49,6 +49,7 @@ Plugin 'elzr/vim-json'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'cespare/vim-toml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'plasticboy/vim-markdown'
 
 " Web Development
 Plugin 'edsono/vim-matchit'
@@ -181,6 +182,8 @@ augroup END
 let python_highlight_all = 1
 " }}}
 " Writing ------------------ {{{
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_no_default_key_mappings=1
 augroup writing
     autocmd!
     autocmd FileType markdown :setlocal wrap linebreak nolist
