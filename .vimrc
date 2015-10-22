@@ -24,22 +24,30 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 
 call vundle#begin()
+
+" Basics
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'wting/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'vimoutliner/vimoutliner'
+
+" Basic coloring
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'junegunn/rainbow_parentheses.vim'
+Plugin 'tomasr/molokai'
+
+" Utils
 Plugin 'tpope/vim-commentary'
 Plugin 'mattn/emmet-vim.git'
-Plugin 'luochen1990/rainbow'
-Plugin 'elzr/vim-json'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'tomasr/molokai'
-Plugin 'autowitch/hive.vim'
+
+" Language-specific syntax
+Plugin 'derekwyatt/vim-scala'
+Plugin 'wting/rust.vim'
 Plugin 'hdima/python-syntax'
+Plugin 'autowitch/hive.vim'
+Plugin 'elzr/vim-json'
+Plugin 'vimoutliner/vimoutliner'
+Plugin 'cespare/vim-toml'
 
 " Web Development
 Plugin 'edsono/vim-matchit'
@@ -60,12 +68,14 @@ augroup filetype_recognition
 augroup END
 " }}}
 " Rainbow Parentheses ------------ {{{
-let g:rainbow_active = 0
+let g:rainbow#pairs = [['(',')'], ['[', ']'], ['{','}']]
 augroup rainbow_parentheses
+    " Must list all languages that experience rainbow parentheses below
+    " Not explicitly listing here causes conflicts with other languages
+    " Trust me, this is the best solution I could find
     autocmd!
-    autocmd BufNewFile,BufRead * :RainbowToggle
-    autocmd BufNewFile,BufRead * :RainbowToggleOn
-    autocmd BufNewFile,BufRead *.html :RainbowToggleOff
+    autocmd FileType python,javascript RainbowParentheses
+    autocmd FileType list,closure,scheme RainbowParentheses
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
