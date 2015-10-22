@@ -48,13 +48,13 @@ Plugin 'autowitch/hive.vim'
 Plugin 'elzr/vim-json'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'cespare/vim-toml'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " Web Development
 Plugin 'edsono/vim-matchit'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
-Plugin 'Glench/Vim-Jinja2-Syntax'
 
 call vundle#end()
 
