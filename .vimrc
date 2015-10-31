@@ -64,7 +64,6 @@ filetype plugin indent on
 " Filetypes ------------ {{{
 augroup filetype_recognition
     autocmd!
-    autocmd BufNewFile,BufRead *.html set filetype=html
     autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
 augroup END
@@ -187,7 +186,9 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
 augroup writing
     autocmd!
-    autocmd FileType markdown,html :setlocal wrap linebreak nolist
-    autocmd FileType markdown,html :setlocal colorcolumn=0
+    autocmd FileType markdown :setlocal wrap linebreak nolist
+    autocmd FileType markdown :setlocal colorcolumn=0
+    autocmd BufNewFile,BufRead *.html :setlocal wrap linebreak nolist
+    autocmd BufNewFile,BufRead *.html :setlocal colorcolumn=0
 augroup END
 " }}}
