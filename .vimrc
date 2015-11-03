@@ -38,7 +38,6 @@ Plugin 'tomasr/molokai'
 
 " Utils
 Plugin 'tpope/vim-commentary'
-Plugin 'mattn/emmet-vim.git'
 
 " Language-specific syntax
 Plugin 'derekwyatt/vim-scala'
@@ -52,6 +51,7 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
 
 " Web Development
+Plugin 'mattn/emmet-vim.git'
 Plugin 'edsono/vim-matchit'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
