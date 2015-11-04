@@ -50,7 +50,11 @@ Plugin 'cespare/vim-toml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
 
-" Web Development
+" Web Development - Javascript
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+
+" Web Development - General
 Plugin 'mattn/emmet-vim.git'
 Plugin 'edsono/vim-matchit'
 Plugin 'tpope/vim-repeat'
