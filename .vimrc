@@ -54,6 +54,7 @@ Plugin 'plasticboy/vim-markdown'
 " Web Development - Javascript
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " Web Development - General
 Plugin 'mattn/emmet-vim.git'
@@ -170,6 +171,7 @@ let g:NERDTreeMapPreview="<F4>"
 set wildignore+=*/target/*
 " }}}
 " Indentation ------------- {{{
+
 augroup indentation_sr
     autocmd!
     autocmd Filetype * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
