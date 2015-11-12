@@ -174,6 +174,7 @@ set wildignore+=*/target/*
 
 augroup indentation_sr
     autocmd!
+    autocmd BufRead,BufNewFile * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
     autocmd Filetype * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
     autocmd Filetype dot setlocal autoindent cindent
 augroup END
