@@ -33,7 +33,6 @@ Plugin 'vim-scripts/EasyGrep'
 
 " Basic coloring
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'tomasr/molokai'
 
 " Utils
@@ -52,9 +51,9 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
 
 " Web Development - Javascript
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/javascript-libraries-syntax.vim'
 
 " Web Development - General
 Plugin 'mattn/emmet-vim.git'
@@ -67,22 +66,17 @@ call vundle#end()
 
 filetype plugin indent on
 " }}}
+" Plugin constants ------------ {{{
+
+" Set the javascript libraries that need syntax highlighting
+let g:used_javascript_libs = 'jquery,underscore,backbone,react,requirejs,prelude'
+
+"  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
     autocmd!
     autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
-augroup END
-" }}}
-" Rainbow Parentheses ------------ {{{
-let g:rainbow#pairs = [['(',')'], ['[', ']'], ['{','}']]
-augroup rainbow_parentheses
-    " Must list all languages that experience rainbow parentheses below
-    " Not explicitly listing here causes conflicts with other languages
-    " Trust me, this is the best solution I could find
-    autocmd!
-    autocmd FileType python,javascript RainbowParentheses
-    autocmd FileType list,closure,scheme RainbowParentheses
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
