@@ -54,6 +54,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'mxw/vim-jsx'
 
 " Web Development - General
 Plugin 'mattn/emmet-vim.git'
