@@ -38,6 +38,8 @@ Plugin 'tomasr/molokai'
 " Utils
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 " Language-specific syntax
 Plugin 'derekwyatt/vim-scala'
