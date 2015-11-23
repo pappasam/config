@@ -81,6 +81,7 @@ augroup filetype_recognition
     autocmd!
     autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
+    autocmd BufNewFile,BufRead *.config set filetype=yaml
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
