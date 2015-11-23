@@ -51,6 +51,7 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'cespare/vim-toml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " Web Development - Javascript
 Plugin 'pangloss/vim-javascript'
