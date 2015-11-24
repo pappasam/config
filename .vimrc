@@ -42,11 +42,10 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 
 " C-syntax
-Plugin 'justinmk/vim-syntax-extra'
+Plugin 'vim-scripts/aftersyntaxc.vim'
 
 " Rainbow
 Plugin 'luochen1990/rainbow'
-let g:rainbow_active = 1
 
 " Language-specific syntax
 Plugin 'derekwyatt/vim-scala'
