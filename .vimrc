@@ -42,7 +42,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 
 " C-syntax
-Plugin 'vim-scripts/aftersyntaxc.vim'
+Plugin 'justinmk/vim-syntax-extra'
 
 " Rainbow
 Plugin 'luochen1990/rainbow'
