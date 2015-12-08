@@ -60,7 +60,6 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'digitaltoad/vim-jade'
-Plugin 'EricGebhart/SAS-Vim'
 
 " Web Development - Javascript
 Plugin 'pangloss/vim-javascript'
