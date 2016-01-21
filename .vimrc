@@ -81,7 +81,7 @@ filetype plugin indent on
 " Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
-let g:used_javascript_libs = 'jquery,underscore,backbone,react,requirejs,prelude'
+let g:used_javascript_libs = 'jquery,requirejs,angularjs,angularui,angularuirouter'
 
 "  }}}
 " Filetypes ------------ {{{
@@ -204,7 +204,7 @@ augroup writing
     autocmd!
     autocmd FileType markdown :setlocal wrap linebreak nolist
     autocmd FileType markdown :setlocal colorcolumn=0
-    autocmd BufNewFile,BufRead *.html :setlocal wrap linebreak nolist
-    autocmd BufNewFile,BufRead *.html :setlocal colorcolumn=0
+    autocmd BufNewFile,BufRead *.html,*.txt :setlocal wrap linebreak nolist
+    autocmd BufNewFile,BufRead *.html,*.txt :setlocal colorcolumn=0
 augroup END
 " }}}
