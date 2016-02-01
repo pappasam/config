@@ -21,18 +21,18 @@ endif
 " Turn off important incompatibilities with vundle
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-" Rainbow
-Plugin 'junegunn/rainbow_parentheses.vim'
-
 " Basics
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
+
+" Rainbow
+Plugin 'junegunn/rainbow_parentheses.vim'
 
 " Basic coloring
 Plugin 'bronson/vim-trailing-whitespace'
@@ -57,8 +57,6 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'cespare/vim-toml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plugin 'digitaltoad/vim-jade'
 
 " Web Development - Javascript
 Plugin 'pangloss/vim-javascript'
@@ -80,7 +78,7 @@ filetype plugin indent on
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-augroup rainbow_lisp
+augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
   autocmd FileType * RainbowParentheses
