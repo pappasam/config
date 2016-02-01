@@ -69,7 +69,7 @@ Plugin 'mattn/emmet-vim.git'
 Plugin 'edsono/vim-matchit'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-ragtag'
+Plugin 'pappasam/vim-ragtag'
 
 call vundle#end()
 
