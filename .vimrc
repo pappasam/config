@@ -25,6 +25,9 @@ set rtp+=~/.vim/bundle/vundle/
 
 call vundle#begin()
 
+" Rainbow
+Plugin 'junegunn/rainbow_parentheses.vim'
+
 " Basics
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree.git'
@@ -75,10 +78,23 @@ call vundle#end()
 
 filetype plugin indent on
 " }}}
+" Configure Rainbow ------------- {{{
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+augroup rainbow_lisp
+  " Section to turn on rainbow parentheses
+  autocmd!
+  autocmd FileType * RainbowParentheses
+augroup END
+
+" }}}
 " Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
-let g:used_javascript_libs = 'jquery,requirejs,angularjs,angularui,angularuirouter'
+let g:used_javascript_libs = 'jquery,requirejs,react'
+
+" Python highlighting
+let python_highlight_all = 1
 
 "  }}}
 " Filetypes ------------ {{{
@@ -177,22 +193,17 @@ set wildignore+=*/target/*
 " }}}
 " Indentation ------------- {{{
 
+" Note -> apparently BufRead, BufNewFile trumps Filetype
+" Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
+" This is why default settings are chosed with Filetype *
 augroup indentation_sr
     autocmd!
-    autocmd BufRead,BufNewFile * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-    autocmd Filetype * setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
+    autocmd Filetype python setlocal shiftwidth=4 softtabstop=4 tabstop=8
     autocmd Filetype dot setlocal autoindent cindent
-augroup END
-" }}}
-" Tabs, not spaces------------------ {{{
-augroup TabsNotSpaces
-    autocmd!
     autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
     autocmd BufRead,BufNewFile *GNUmakefile,*makefile,*Makefile :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
-" }}}
-" Python------------------ {{{
-let python_highlight_all = 1
 " }}}
 " Writing ------------------ {{{
 let g:vim_markdown_folding_disabled=1
