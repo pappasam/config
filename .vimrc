@@ -100,6 +100,7 @@ augroup filetype_recognition
     autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
     autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
     autocmd BufNewFile,BufRead *.config set filetype=yaml
+    autocmd BufNewFile,BufRead *.bowerrc set filetype=json
     au BufNewFile,BufRead *.handlebars set filetype=html
 augroup END
 " }}}
@@ -198,8 +199,8 @@ augroup indentation_sr
     autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
     autocmd Filetype python setlocal shiftwidth=4 softtabstop=4 tabstop=8
     autocmd Filetype dot setlocal autoindent cindent
-    autocmd BufRead,BufNewFile *.otl :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
-    autocmd BufRead,BufNewFile *GNUmakefile,*makefile,*Makefile :setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+    autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile
+          \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
 " Writing ------------------ {{{
