@@ -30,6 +30,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Rainbow
 Plugin 'junegunn/rainbow_parentheses.vim'
@@ -63,6 +64,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'groenewege/vim-less'
 
 " Web Development - General
 Plugin 'mattn/emmet-vim.git'
@@ -93,6 +95,9 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 " Python highlighting
 let python_highlight_all = 1
 
+" Plugin settings for powerline
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+set laststatus=2
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
