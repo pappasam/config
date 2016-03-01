@@ -215,7 +215,7 @@ augroup writing
     autocmd!
     autocmd FileType markdown :setlocal wrap linebreak nolist
     autocmd FileType markdown :setlocal colorcolumn=0
-    autocmd BufNewFile,BufRead *.html,*.txt :setlocal wrap linebreak nolist
-    autocmd BufNewFile,BufRead *.html,*.txt :setlocal colorcolumn=0
+    autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
+    autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
 augroup END
 " }}}
