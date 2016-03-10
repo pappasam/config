@@ -62,6 +62,7 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'cespare/vim-toml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'lambdatoast/elm.vim'
 
 " Web Development - Javascript
 Plugin 'pangloss/vim-javascript'
