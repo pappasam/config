@@ -207,9 +207,9 @@ set wildignore+=*/target/*
 augroup indentation_sr
     autocmd!
     autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-    autocmd Filetype python,c setlocal shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd Filetype python,c,elm setlocal shiftwidth=4 softtabstop=4 tabstop=8
     autocmd Filetype dot setlocal autoindent cindent
-    autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile
+    autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile,*.tsv
           \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
 augroup END
 " }}}
