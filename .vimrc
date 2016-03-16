@@ -31,6 +31,10 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'scrooloose/syntastic'
+
+" Static checking
+Plugin 'nvie/vim-flake8'
 
 " Requirements for vimdeck
 Plugin 'vim-scripts/SyntaxRange'
@@ -47,7 +51,6 @@ Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
 
 " C-syntax
 Plugin 'justinmk/vim-syntax-extra'
@@ -81,6 +84,16 @@ Plugin 'pappasam/vim-ragtag'
 call vundle#end()
 
 filetype plugin indent on
+" }}}
+" Configure syntastic ----------- {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 " }}}
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
