@@ -31,11 +31,9 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'scrooloose/syntastic'
 
 " Static checking
-" Plugin 'nvie/vim-flake8'
-Plugin 'andviro/flake8-vim'
+Plugin 'scrooloose/syntastic'
 
 " Requirements for vimdeck
 Plugin 'vim-scripts/SyntaxRange'
@@ -93,19 +91,11 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
-" }}}
-" Configure flake8-vim ------ {{{
-let g:PyFlakeOnWrite = 0
-let g:PyFlakeCheckers = 'pep8,mccabe,frosted'
-let g:PyFlakeDefaultComplexity=10
-let g:PyFlakeCWindow = 6
-let g:PyFlakeDisabledMessages = 'E302'
-" let g:PyFlakeForcePyVersion = 3
-silent! nnoremap <leader>f :PyFlake<CR>
+let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
+let g:syntastic_python_flake8_args = "--ignore=E302"
+nnoremap <leader>s :write<CR> :SyntasticCheck<CR>
 " }}}
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
@@ -115,7 +105,6 @@ augroup rainbow_settings
   autocmd!
   autocmd FileType * RainbowParentheses
 augroup END
-
 " }}}
 " Plugin constants ------------ {{{
 
@@ -162,10 +151,6 @@ nnoremap _ ddkP
 " Remap H and L to beginning and end of line
 nnoremap H 0
 nnoremap L $
-" }}}
-" Access vimrc ------------------- {{{
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :so $MYVIMRC<cr>
 " }}}
 " Vimscript file settings ------------------- {{{
 augroup filetype_vim
