@@ -34,7 +34,8 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'scrooloose/syntastic'
 
 " Static checking
-Plugin 'nvie/vim-flake8'
+" Plugin 'nvie/vim-flake8'
+Plugin 'andviro/flake8-vim'
 
 " Requirements for vimdeck
 Plugin 'vim-scripts/SyntaxRange'
@@ -94,6 +95,17 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+" }}}
+" Configure flake8-vim ------ {{{
+let g:PyFlakeOnWrite = 0
+let g:PyFlakeCheckers = 'pep8,mccabe,frosted'
+let g:PyFlakeDefaultComplexity=10
+let g:PyFlakeCWindow = 6
+let g:PyFlakeDisabledMessages = 'E302'
+" let g:PyFlakeForcePyVersion = 3
+silent! nnoremap <leader>f :PyFlake<CR>
 " }}}
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
