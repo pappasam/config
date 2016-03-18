@@ -95,7 +95,9 @@ let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
 let g:syntastic_python_flake8_args = "--ignore=E302"
-nnoremap <leader>s :write<CR> :SyntasticCheck<CR>
+
+nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
 " }}}
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
