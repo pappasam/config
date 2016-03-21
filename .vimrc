@@ -30,7 +30,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Static checking
 Plugin 'scrooloose/syntastic'
@@ -117,9 +119,12 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 " Python highlighting
 let python_highlight_all = 1
 
-" Plugin settings for powerline
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='hybridline'
 set laststatus=2
+set ttimeoutlen=50
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
