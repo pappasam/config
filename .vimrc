@@ -50,6 +50,7 @@ Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-abolish'
 Plugin 'xolox/vim-misc'
+Plugin 'jiangmiao/auto-pairs'
 
 " C-syntax
 Plugin 'justinmk/vim-syntax-extra'
@@ -136,10 +137,6 @@ nnoremap k gk
 nnoremap j gj
 nnoremap 0 g0
 nnoremap $ g$
-" Autogenerate Parentheses, braces, and brackets
-inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR>	{<CR>}<Esc>O
-inoremap [<CR>	[<CR>]<Esc>O
 " Remap operators for doing things inserting in previous and next parentheses
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
