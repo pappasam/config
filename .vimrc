@@ -16,6 +16,10 @@ if (exists('+colorcolumn'))
     set colorcolumn=80
     highlight ColorColumn ctermbg=9
 endif
+
+" Set hybrid line numbers
+set relativenumber
+set number
 " }}}
 " Vundle --------------------- {{{
 " Turn off important incompatibilities with vundle
