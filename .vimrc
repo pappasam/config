@@ -119,10 +119,10 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 " Python highlighting
 let python_highlight_all = 1
 
-" airline
+" Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='hybridline'
+let g:airline_theme='powerlineish'
 set laststatus=2
 set ttimeoutlen=50
 "  }}}
