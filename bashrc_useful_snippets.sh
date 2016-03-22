@@ -17,7 +17,7 @@ alias tmux='tmux -2'
 alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 
 #######################################################################
-# Set command to include git branch
+# Set command to include git branch in my prompt
 #######################################################################
 function parse_git_branch () {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
