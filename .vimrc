@@ -21,75 +21,74 @@ endif
 set relativenumber
 set number
 " }}}
-" Vundle --------------------- {{{
-" Turn off important incompatibilities with vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
+" Vim-Plug Auto Load ----------------- {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+" }}}
+" Plugins --------------------- {{{
+call plug#begin('~/.vim/plugged')
 
 " Basics
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'vim-scripts/EasyGrep'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'vim-scripts/EasyGrep'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Static checking
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Requirements for vimdeck
-Plugin 'vim-scripts/SyntaxRange'
-Plugin 'vim-scripts/ingo-library'
+Plug 'vim-scripts/SyntaxRange'
+Plug 'vim-scripts/ingo-library'
 
 " Rainbow
-Plugin 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " Basic coloring
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'tomasr/molokai'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'tomasr/molokai'
 
 " Utils
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-abolish'
-Plugin 'xolox/vim-misc'
-Plugin 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+Plug 'xolox/vim-misc'
+Plug 'jiangmiao/auto-pairs'
 
 " C-syntax
-Plugin 'justinmk/vim-syntax-extra'
+Plug 'justinmk/vim-syntax-extra', {'for': 'C'}
 
 " Language-specific syntax
-Plugin 'derekwyatt/vim-scala'
-Plugin 'wting/rust.vim'
-Plugin 'hdima/python-syntax'
-Plugin 'autowitch/hive.vim'
-Plugin 'elzr/vim-json'
-Plugin 'vimoutliner/vimoutliner'
-Plugin 'cespare/vim-toml'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'ElmCast/elm-vim'
+Plug 'derekwyatt/vim-scala',
+Plug 'wting/rust.vim'
+Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'autowitch/hive.vim'
+Plug 'elzr/vim-json', {'for': 'json'}
+Plug 'vimoutliner/vimoutliner'
+Plug 'cespare/vim-toml'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'plasticboy/vim-markdown'
+Plug 'ElmCast/elm-vim'
 
 " Web Development - Javascript
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'groenewege/vim-less'
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'mxw/vim-jsx'
+Plug 'groenewege/vim-less'
 
 " Web Development - General
-Plugin 'mattn/emmet-vim.git'
-Plugin 'edsono/vim-matchit'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'pappasam/vim-ragtag'
+Plug 'mattn/emmet-vim'
+Plug 'edsono/vim-matchit'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'pappasam/vim-ragtag'
 
-call vundle#end()
-
-filetype plugin indent on
+call plug#end()
 " }}}
 " Configure syntastic ----------- {{{
 set statusline+=%#warningmsg#
