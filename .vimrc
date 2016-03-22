@@ -27,7 +27,6 @@ call vundle#begin()
 
 " Basics
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree.git'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/EasyGrep'
 Plugin 'tpope/vim-fugitive'
@@ -169,11 +168,11 @@ augroup END
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " }}}
-" Tabs and Windows ----------------- {{{
-" Open new tab
-nnoremap ;l :tabe . <ENTER>
-nnoremap ;j :tabp <ENTER>
-nnoremap ;k :tabn <ENTER>
+" Buffers and Windows ----------------- {{{
+" Open new buffer, scroll buffers
+nnoremap ;l :e . <ENTER>
+nnoremap ;j :bp <ENTER>
+nnoremap ;k :bn <ENTER>
 " Change change window thorough Control + directional movement
 nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
