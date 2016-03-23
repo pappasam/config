@@ -114,21 +114,21 @@ augroup rainbow_settings
   autocmd FileType * RainbowParentheses
 augroup END
 " }}}
-" Plugin constants ------------ {{{
-
-" Set the javascript libraries that need syntax highlighting
-let g:used_javascript_libs = 'jquery,requirejs,react'
-
-" Python highlighting
-let python_highlight_all = 1
-
-" Airline
+" Configure Airline ----------- {{{
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
+" }}}
+" Configure Additional Plugin constants ------------ {{{
+
+" Set the javascript libraries that need syntax highlighting
+let g:used_javascript_libs = 'jquery,requirejs,react'
+
+" Python highlighting
+let python_highlight_all = 1
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
@@ -207,15 +207,6 @@ augroup allfiles_trailingspace
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
     autocmd FileType markdown let b:noStripWhitespace=1
 augroup END
-" }}}
-" Nerdtree --------------- {{{
-silent! nnoremap <C-p> :NERDTreeToggle<CR>
-silent! noremap <F2> :NERDTreeToggle<CR>
-silent! noremap <F3> :NERDTreeFind<CR>
-let g:NERDTreeToggle="<F2>"
-let g:NERDTreeMapActivateNode="<F3>"
-let g:NERDTreeMapPreview="<F4>"
-set wildignore+=*/target/*
 " }}}
 " Indentation ------------- {{{
 
