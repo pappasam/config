@@ -122,6 +122,31 @@ set laststatus=2
 set ttimeoutlen=50
 set noshowmode
 " }}}
+" Configure EasyGrep ---------- {{{
+
+" Track the current file extension
+let g:EasyGrepMode = 2
+
+" User regular Grep, not VimGrep
+let gEasyGrepCommand = 1
+
+" Root the search at the git repo
+let g:EasyGrepRoot = 'repository'
+
+" Search the escaped string (eg, non-regex)
+let g:EasyGrepPatternType = 'fixed'
+
+" Enable recursive search by default
+let g:EasyGrepRecursive = 1
+
+" Ignore certain directories
+let g:EasyGrepFilesToExclude = '*?/venv/*,' .
+      \ '*?/__pycache__/*,' .
+      \ '*?/node_modules/*,' .
+      \ '*?/bin/*,' .
+      \ '*?/target/*,'
+
+" }}}
 " Configure Additional Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
@@ -129,6 +154,7 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 
 " Python highlighting
 let python_highlight_all = 1
+
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
