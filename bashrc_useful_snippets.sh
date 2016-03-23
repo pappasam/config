@@ -23,12 +23,14 @@ function parse_git_branch () {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
-BOLD_GREEN="\[\033[0;32m\]\e[1m"
-BOLD_LIGHT_BLUE="\[\033[0;94m\]\e[1m"
-NO_COLOR="\[\033[0m\]"
+BOLD_GREEN="\[$(tput bold)\]\[\033[38;5;10m\]"
+BOLD_BLUE="\[$(tput bold)\]\[\033[38;5;115m\]"
+BOLD_YELLOW="\[$(tput bold)\]\[\033[38;5;226m\]"
+NO_COLOR="\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]"
+ENDING="\[$(tput sgr0)\]"
 
-PS1_BEGINNING="$BOLD_GREEN\u@\h$BOLD_LIGHT_BLUE:\w"
-PS1_ENDING="$YELLOW\$(parse_git_branch)$BOLD_LIGHT_BLUE \$$NO_COLOR "
-PS1="${PS1_BEGINNING}${PS1_ENDING}"
+PS1_USER_HOST="${BOLD_GREEN}\u@\h"
+PS1_GIT_BRANCH="${BOLD_YELLOW}\$(parse_git_branch)${NO_COLOR} "
+PS1_ENDING="${BOLD_BLUE}\w${NO_COLOR} ${BOLD_BLUE}\$${NO_COLOR} ${ENDING}"
+
+PS1="${PS1_USER_HOST}${PS1_GIT_BRANCH}${PS1_ENDING}"
