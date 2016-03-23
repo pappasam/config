@@ -33,7 +33,7 @@ call plug#begin('~/.vim/plugged')
 
 " Basics
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'vim-scripts/EasyGrep'
+Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
