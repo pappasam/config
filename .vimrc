@@ -100,7 +100,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
-let g:syntastic_python_flake8_args = "--ignore=E302"
+let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
@@ -147,6 +147,13 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
       \ '*?/target/*,'
 
 " }}}
+" Configure Auto Pairs ----------- {{{
+" How to insert parens purely
+" There are 3 ways
+" 1. use Ctrl-V ) to insert paren without trigger the plugin.
+" 2. use Alt-P to turn off the plugin.
+" 3. use DEL or <C-O>x to delete the character insert by plugin.
+" --- }}}
 " Configure Additional Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
