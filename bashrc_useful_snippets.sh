@@ -36,7 +36,7 @@ ENDING="\[$(tput sgr0)\]"
 
 PS1_USER_HOST="${BOLD_GREEN}\u@\h"
 PS1_GIT_BRANCH="${BOLD_YELLOW}\$(parse_git_branch)${NO_COLOR} "
-PS1_ENDING="${BOLD_BLUE}\W${NO_COLOR} ${BOLD_BLUE}\$${NO_COLOR} ${ENDING}"
+PS1_ENDING="${BOLD_BLUE}\w${NO_COLOR} ${BOLD_BLUE}\$${NO_COLOR} ${ENDING}"
 
 PS1="${PS1_USER_HOST}${PS1_GIT_BRANCH}${PS1_ENDING}"
 
@@ -45,6 +45,7 @@ PS1="${PS1_USER_HOST}${PS1_GIT_BRANCH}${PS1_ENDING}"
 # using:  cd.. 10   cd.. dir
 #######################################################################
 function cd_up() {
+  pushd . >/dev/null
   case $1 in
     *[!0-9]*)                                          # if no a number
       cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
