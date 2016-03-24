@@ -72,6 +72,7 @@ Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'plasticboy/vim-markdown'
 Plug 'ElmCast/elm-vim'
+Plug 'mopp/rik_octave.vim'
 
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
