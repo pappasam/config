@@ -1,3 +1,12 @@
+" Notes --------- {{{
+
+" Text object selection
+" object-select OR text-objects
+" delete the inner (...) block where the cursor is.
+" dib ( or 'di(' )
+" http://vimdoc.sourceforge.net/htmldoc/motion.html#object-select
+
+" }}}
 " Leader mappings -------------------- {{{
 let mapleader = ","
 let maplocalleader = "\\"
@@ -114,6 +123,8 @@ nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-anyblock-a)
 nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-anyblock-a)
 nmap <silent>sdb <Plug>(operator-surround-delete)<Plug>(textobj-between-a)
 nmap <silent>srb <Plug>(operator-surround-replace)<Plug>(textobj-between-a)
+
+nmap <silent>src <Plug>(textobj-between-a)
 
 " }}}
 " Configure syntastic ----------- {{{
