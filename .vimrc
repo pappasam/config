@@ -96,6 +96,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'pappasam/vim-ragtag'
 
+" Data analysis
+Plug 'chrisbra/csv.vim'
+
 call plug#end()
 " }}}
 " Configure Operator Surround --------- {{{
@@ -185,6 +188,8 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 " Python highlighting
 let python_highlight_all = 1
 
+"  }}}
+"  Configure csv.vim ------------ {{{
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
