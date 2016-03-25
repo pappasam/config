@@ -12,6 +12,14 @@ let mapleader = ","
 let maplocalleader = "\\"
 " }}}
 " Display settings ------------ {{{
+
+" Enable buffer deletion instead of having to write each buffer
+set hidden
+
+" Prevent creation of swap files
+set nobackup
+set noswapfile
+
 set wrap
 " Status bar
 set statusline=%F
@@ -181,7 +189,11 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
       \ '*?/__pycache__/*,' .
       \ '*?/node_modules/*,' .
       \ '*?/bin/*,' .
-      \ '*?/target/*,'
+      \ '*?/target/*,' .
+      \ '*?/instance/*,' .
+      \ '*?/doc/*,' .
+      \ '*?/data/*,' .
+      \ '*?/dot/*'
 
 " }}}
 " Configure Auto Pairs ----------- {{{
