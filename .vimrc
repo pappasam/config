@@ -269,6 +269,8 @@ augroup indentation_sr
     autocmd Filetype dot setlocal autoindent cindent
     autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile,*.tsv
           \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+    " Prevent auto-indenting from occuring
+    autocmd Filetype yaml setlocal indentkeys-=<:>
 augroup END
 " }}}
 " Writing ------------------ {{{
