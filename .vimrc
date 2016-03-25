@@ -38,6 +38,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Surrounding things
+Plug 'kana/vim-operator-user'
+Plug 'rhysd/vim-operator-surround'
+Plug 'kana/vim-textobj-user'
+Plug 'thinca/vim-textobj-between'
+Plug 'rhysd/vim-textobj-anyblock'
+
 " Static checking
 Plug 'scrooloose/syntastic'
 
@@ -90,6 +97,21 @@ Plug 'tpope/vim-surround'
 Plug 'pappasam/vim-ragtag'
 
 call plug#end()
+" }}}
+" Configure Operator Surround --------- {{{
+
+" DANGER-> THIS USES RECURSIVE MAPPING; BUGS MAY ARISE BECAUSE OF THIS CHOICE
+" operator mappings
+map <silent>sa <Plug>(operator-surround-append)
+map <silent>sd <Plug>(operator-surround-delete)
+map <silent>sr <Plug>(operator-surround-replace)
+
+" delete or replace most inner surround
+nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-anyblock-a)
+nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-anyblock-a)
+nmap <silent>sdb <Plug>(operator-surround-delete)<Plug>(textobj-between-a)
+nmap <silent>srb <Plug>(operator-surround-replace)<Plug>(textobj-between-a)
+
 " }}}
 " Configure syntastic ----------- {{{
 set statusline+=%#warningmsg#
@@ -180,13 +202,6 @@ nnoremap k gk
 nnoremap j gj
 nnoremap 0 g0
 nnoremap $ g$
-" Remap operators for doing things inserting in previous and next parentheses
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap il( :<c-u>normal! F)vi(<cr>
-onoremap in{ :<c-u>normal! f{vi{<cr>
-onoremap il{ :<c-u>normal! F}vi{<cr>
-onoremap in[ :<c-u>normal! f[vi[<cr>
-onoremap il[ :<c-u>normal! F]vi[<cr>
 " Move line up and down with hyphen key
 nnoremap - ddp
 nnoremap _ ddkP
