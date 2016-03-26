@@ -4,7 +4,6 @@
 " object-select OR text-objects
 " delete the inner (...) block where the cursor is.
 " dib ( or 'di(' )
-" http://vimdoc.sourceforge.net/htmldoc/motion.html#object-select
 
 " }}}
 " Leader mappings -------------------- {{{
