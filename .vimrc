@@ -82,14 +82,14 @@ Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
 
 " C-syntax
-Plug 'justinmk/vim-syntax-extra', {'for': 'C'}
+Plug 'justinmk/vim-syntax-extra'
 
 " Language-specific syntax
 Plug 'derekwyatt/vim-scala',
 Plug 'wting/rust.vim'
-Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'hdima/python-syntax',
 Plug 'autowitch/hive.vim'
-Plug 'elzr/vim-json', {'for': 'json'}
+Plug 'elzr/vim-json',
 Plug 'vimoutliner/vimoutliner'
 Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -98,10 +98,9 @@ Plug 'ElmCast/elm-vim'
 Plug 'mopp/rik_octave.vim'
 
 " Web Development - Javascript
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
-Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/yajs.vim'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 
@@ -156,6 +155,7 @@ augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
   autocmd FileType * RainbowParentheses
+  autocmd FileType javascript RainbowParentheses!
 augroup END
 " }}}
 " Configure Airline ----------- {{{
