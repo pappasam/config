@@ -57,6 +57,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Surrounding things
 Plug 'kana/vim-operator-user'
@@ -119,6 +120,22 @@ Plug 'pappasam/vim-ragtag'
 Plug 'chrisbra/csv.vim'
 
 call plug#end()
+" }}}
+" Configure Control-P ---------- {{{
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 " }}}
 " Configure Operator Surround --------- {{{
 
