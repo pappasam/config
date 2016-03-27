@@ -15,6 +15,9 @@ let maplocalleader = "\\"
 " Enable buffer deletion instead of having to write each buffer
 set hidden
 
+" Automatically change directory to current file
+" set autochdir
+
 " Prevent creation of swap files
 set nobackup
 set noswapfile
@@ -53,6 +56,7 @@ Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-rooter'
 
 " Surrounding things
 Plug 'kana/vim-operator-user'
@@ -174,14 +178,15 @@ let g:EasyGrepMode = 2
 " User regular Grep, not VimGrep
 let gEasyGrepCommand = 1
 
-" Root the search at the git repo
-let g:EasyGrepRoot = 'repository'
-
 " Search the escaped string (eg, non-regex)
 let g:EasyGrepPatternType = 'fixed'
 
 " Enable recursive search by default
 let g:EasyGrepRecursive = 1
+
+" Make root of project the repository
+" Current directory is made project repo by vim-rooter
+let g:EasyGrepRoot = 'cwd'
 
 " Ignore certain directories
 let g:EasyGrepFilesToExclude = '*?/venv/*,' .
@@ -192,7 +197,13 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
       \ '*?/instance/*,' .
       \ '*?/doc/*,' .
       \ '*?/data/*,' .
-      \ '*?/dot/*'
+      \ '*?/dot/*,' .
+      \ '*?/redis-stable/*,' .
+      \ '*?\.conf,' .
+      \ '*?/tests/*,' .
+      \ '*?/logs/*,' .
+      \ '*?/diagrams/*,' .
+      \ '*?/data_templates/*'
 
 " }}}
 " Configure Auto Pairs ----------- {{{
@@ -250,7 +261,10 @@ nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " }}}
 " Buffers and Windows ----------------- {{{
 " Open new buffer, scroll buffers
-nnoremap ;l :e . <ENTER>
+" Open from project directory's root directory
+nnoremap ;p :e . <ENTER>
+" Open with current file's root directory
+nnoremap ;l :e %:p:h <ENTER>
 nnoremap ;j :bp <ENTER>
 nnoremap ;k :bn <ENTER>
 " Change change window thorough Control + directional movement
