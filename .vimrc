@@ -32,8 +32,8 @@ set statusline+=%L
 
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
-    set colorcolumn=80
-    highlight ColorColumn ctermbg=9
+  set colorcolumn=80
+  highlight ColorColumn ctermbg=9
 endif
 
 " Set hybrid line numbers
@@ -264,12 +264,12 @@ let python_highlight_all = 1
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
-    autocmd!
-    autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
-    autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
-    autocmd BufNewFile,BufRead *.config set filetype=yaml
-    autocmd BufNewFile,BufRead *.bowerrc set filetype=json
-    au BufNewFile,BufRead *.handlebars set filetype=html
+  autocmd!
+  autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
+  autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
+  autocmd BufNewFile,BufRead *.config set filetype=yaml
+  autocmd BufNewFile,BufRead *.bowerrc set filetype=json
+  au BufNewFile,BufRead *.handlebars set filetype=html
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
@@ -287,19 +287,25 @@ nnoremap L $
 
 " Enable pasting without having to do 'set paste'
 if &term =~ "xterm.*"
-    let &t_ti = &t_ti . "\e[?2004h"
-    let &t_te = "\e[?2004l" . &t_te
-    function XTermPasteBegin(ret)
-        set pastetoggle=<Esc>[201~
-        set paste
-        return a:ret
-    endfunction
-    map <expr> <Esc>[200~ XTermPasteBegin("i")
-    imap <expr> <Esc>[200~ XTermPasteBegin("")
-    vmap <expr> <Esc>[200~ XTermPasteBegin("c")
-    cmap <Esc>[200~ <nop>
-    cmap <Esc>[201~ <nop>
+  let &t_ti = &t_ti . "\e[?2004h"
+  let &t_te = "\e[?2004l" . &t_te
+  function! XTermPasteBegin(ret)
+    set pastetoggle=<Esc>[201~
+    set paste
+    return a:ret
+  endfunction
+  map <expr> <Esc>[200~ XTermPasteBegin("i")
+  imap <expr> <Esc>[200~ XTermPasteBegin("")
+  vmap <expr> <Esc>[200~ XTermPasteBegin("c")
+  cmap <Esc>[200~ <nop>
+  cmap <Esc>[201~ <nop>
 endif
+
+" Quickfix window automatically close after selecting file
+augroup quickfix_sr
+  autocmd!
+  autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
+augroup END
 " }}}
 " Vimscript file settings ------------------- {{{
 augroup filetype_vim
@@ -329,27 +335,27 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 " }}}
 " Syntax coloring ---------------- {{{
 try
-    set t_Co=256 " says terminal has 256 colors
-    let g:molokai_original = 1
-    let g:rehash256 = 1
-    colorscheme molokai
+  set t_Co=256 " says terminal has 256 colors
+  let g:molokai_original = 1
+  let g:rehash256 = 1
+  colorscheme molokai
 catch
 endtry
 " }}}
 " Trailing whitespace ------------- {{{
 function! <SID>StripTrailingWhitespaces()
-    if exists('b:noStripWhitespace')
-        return
-    endif
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+  if exists('b:noStripWhitespace')
+    return
+  endif
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfun
 augroup allfiles_trailingspace
-    autocmd!
-    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-    autocmd FileType markdown let b:noStripWhitespace=1
+  autocmd!
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+  autocmd FileType markdown let b:noStripWhitespace=1
 augroup END
 " }}}
 " Indentation ------------- {{{
@@ -358,24 +364,24 @@ augroup END
 " Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
 " This is why default settings are chosed with Filetype *
 augroup indentation_sr
-    autocmd!
-    autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-    autocmd Filetype python,c,elm setlocal shiftwidth=4 softtabstop=4 tabstop=8
-    autocmd Filetype dot setlocal autoindent cindent
-    autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile,*.tsv
-          \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
-    " Prevent auto-indenting from occuring
-    autocmd Filetype yaml setlocal indentkeys-=<:>
+  autocmd!
+  autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
+  autocmd Filetype python,c,elm setlocal shiftwidth=4 softtabstop=4 tabstop=8
+  autocmd Filetype dot setlocal autoindent cindent
+  autocmd BufRead,BufNewFile *.otl,*GNUmakefile,*makefile,*Makefile,*.tsv
+        \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+  " Prevent auto-indenting from occuring
+  autocmd Filetype yaml setlocal indentkeys-=<:>
 augroup END
 " }}}
 " Writing ------------------ {{{
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
 augroup writing
-    autocmd!
-    autocmd FileType markdown :setlocal wrap linebreak nolist
-    autocmd FileType markdown :setlocal colorcolumn=0
-    autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
-    autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
+  autocmd!
+  autocmd FileType markdown :setlocal wrap linebreak nolist
+  autocmd FileType markdown :setlocal colorcolumn=0
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
 augroup END
 " }}}
