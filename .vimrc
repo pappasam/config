@@ -58,9 +58,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim'
-
-" Kill buffer without closing split
-" Using :BD (not :bd)
 Plug 'qpkorr/vim-bufkill'
 
 " Surrounding things
