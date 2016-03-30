@@ -87,6 +87,9 @@ Plug 'tpope/vim-abolish'
 Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
 
+" In-line documentation
+Plug 'KabbAmine/zeavim.vim'
+
 " C-syntax
 Plug 'justinmk/vim-syntax-extra'
 
@@ -102,6 +105,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'plasticboy/vim-markdown'
 Plug 'ElmCast/elm-vim'
 Plug 'mopp/rik_octave.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Web Development - Javascript
 Plug 'jelera/vim-javascript-syntax'
