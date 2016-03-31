@@ -88,7 +88,7 @@ Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
 
 " In-line documentation
-Plug 'KabbAmine/zeavim.vim'
+Plug 'keith/investigate.vim'
 
 " C-syntax
 Plug 'justinmk/vim-syntax-extra'
@@ -256,6 +256,40 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
 " --- }}}
+"  Configure Investigate for Zeal --------- {{{
+
+" Helper function to get visual selection into a variable
+function! s:get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+" Zeal documentation functions to search zeal from both normal mode
+" and visual mode
+" Clean up these functions tomorrow to deal with more general cases
+" of zeal documentation
+function! ZealSelectNormal(filetype)
+  silent execute '!pkill zeal && (zeal --query ' . a:filetype . ':' .
+        \ shellescape(expand('<cWORD>')) . ' &) > /dev/null'
+endfunction
+
+function! ZealSelectVisual(filetype)
+  let visually_selected_text = s:get_visual_selection()
+  silent execute '!pkill zeal && (zeal --query ' . a:filetype . ':' .
+        \ shellescape(visually_selected_text) . ' &) > /dev/null'
+endfunction
+
+" nnoremap <leader>z Zeal(<cword>)&<CR><CR>
+nnoremap <leader>z :call ZealSelectNormal(&filetype)<CR><CR><c-l><CR>
+vnoremap <leader>z :call ZealSelectVisual(&filetype)<CR><CR><c-l><CR>
+" nnoremap <leader>z :!zeal --query '&filetype:<cword>'&<CR><CR>
+
+"  }}}
 " Configure Additional Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
@@ -263,6 +297,7 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 
 " Python highlighting
 let python_highlight_all = 1
+
 
 "  }}}
 "  Configure csv.vim ------------ {{{
