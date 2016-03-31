@@ -87,9 +87,6 @@ Plug 'tpope/vim-abolish'
 Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
 
-" In-line documentation
-Plug 'keith/investigate.vim'
-
 " C-syntax
 Plug 'justinmk/vim-syntax-extra'
 
