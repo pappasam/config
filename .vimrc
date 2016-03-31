@@ -258,9 +258,17 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
 " --- }}}
 "  Configure Investigate for Zeal --------- {{{
 
-" Helper function to get visual selection into a variable
+" Zeal documentation functions to search zeal from both normal mode
+" and visual mode
+" Clean up these functions tomorrow to deal with more general cases
+" of zeal documentation
+
 function! s:get_visual_selection()
+  " Helper function to get visual selection into a variable
   " Why is this not a built-in Vim script function?!
+  " Taken from xolox on stackoverflow
+  " http://stackoverflow.com/questions/1533565/
+  " how-to-get-visually-selected-text-in-vimscript
   let [lnum1, col1] = getpos("'<")[1:2]
   let [lnum2, col2] = getpos("'>")[1:2]
   let lines = getline(lnum1, lnum2)
@@ -269,25 +277,35 @@ function! s:get_visual_selection()
   return join(lines, "\n")
 endfunction
 
-" Zeal documentation functions to search zeal from both normal mode
-" and visual mode
-" Clean up these functions tomorrow to deal with more general cases
-" of zeal documentation
-function! ZealSelectNormal(filetype)
-  silent execute '!pkill zeal && (zeal --query ' . a:filetype . ':' .
-        \ shellescape(expand('<cWORD>')) . ' &) > /dev/null'
+function! s:ZealString(docset, query)
+  let cmd_begin = '!(pkill zeal || true) && (zeal --query '
+  let doc_escape = shellescape(a:docset)
+  let query_escape = shellescape(a:query)
+  let cmd_end = ' &) > /dev/null'
+  return cmd_begin . doc_escape . ':' . query_escape . cmd_end
 endfunction
 
-function! ZealSelectVisual(filetype)
-  let visually_selected_text = s:get_visual_selection()
-  silent execute '!pkill zeal && (zeal --query ' . a:filetype . ':' .
-        \ shellescape(visually_selected_text) . ' &) > /dev/null'
+function! ZealNormal(docset)
+  call inputsave()
+  let docset = input("Zeal Docset: ", a:docset)
+  let query = input("Zeal Query: ", expand('<cword>'))
+  call inputrestore()
+  let cmd = s:ZealString(docset, query)
+  silent execute cmd
 endfunction
 
-" nnoremap <leader>z Zeal(<cword>)&<CR><CR>
-nnoremap <leader>z :call ZealSelectNormal(&filetype)<CR><CR><c-l><CR>
-vnoremap <leader>z :call ZealSelectVisual(&filetype)<CR><CR><c-l><CR>
-" nnoremap <leader>z :!zeal --query '&filetype:<cword>'&<CR><CR>
+function! ZealVisual(docset)
+  call inputsave()
+  let docset = input("Zeal Docset: ", a:docset)
+  let query = input("Zeal Query: ", s:get_visual_selection())
+  call inputrestore()
+  let cmd = s:ZealString(docset, query)
+  silent execute cmd
+endfunction
+
+" Key bindings for zeal functions
+nnoremap <leader>z :call ZealNormal(&filetype)<CR><CR><c-l><CR>
+vnoremap <leader>z :call ZealVisual(&filetype)<CR><CR><c-l><CR>
 
 "  }}}
 " Configure Additional Plugin constants ------------ {{{
