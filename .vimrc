@@ -253,7 +253,19 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
 " --- }}}
-"  Configure Investigate for Zeal --------- {{{
+" Configure Additional Plugin constants ------------ {{{
+
+" Set the javascript libraries that need syntax highlighting
+let g:used_javascript_libs = 'jquery,requirejs,react'
+
+" Python highlighting
+let python_highlight_all = 1
+
+
+"  }}}
+"  Configure csv.vim ------------ {{{
+"  }}}
+"  Zeal --------- {{{
 
 " Zeal documentation functions to search zeal from both normal mode
 " and visual mode
@@ -304,18 +316,6 @@ endfunction
 nnoremap <leader>z :call ZealNormal(&filetype)<CR><CR><c-l><CR>
 vnoremap <leader>z :call ZealVisual(&filetype)<CR><CR><c-l><CR>
 
-"  }}}
-" Configure Additional Plugin constants ------------ {{{
-
-" Set the javascript libraries that need syntax highlighting
-let g:used_javascript_libs = 'jquery,requirejs,react'
-
-" Python highlighting
-let python_highlight_all = 1
-
-
-"  }}}
-"  Configure csv.vim ------------ {{{
 "  }}}
 " Filetypes ------------ {{{
 augroup filetype_recognition
