@@ -1,10 +1,27 @@
 " Notes --------- {{{
 
+" -----------------------------------------------------------
 " Text object selection
 " object-select OR text-objects
 " delete the inner (...) block where the cursor is.
 " dib ( or 'di(' )
+" -----------------------------------------------------------
+"
+" -----------------------------------------------------------
+" The default mapping is cp, and can be followed by any motion or text object. For instance:
 
+" cpiw => copy word into system clipboard
+" cpi' => copy inside single quotes to system clipboard
+" In addition, cP is mapped to copy the current line directly.
+
+" The sequence cv is mapped to paste the content of system clipboard to the next line.
+" -----------------------------------------------------------
+"
+" -----------------------------------------------------------
+"  Enable and disable folding
+"  zi
+" -----------------------------------------------------------
+"
 " }}}
 " Leader mappings -------------------- {{{
 let mapleader = ","
@@ -59,6 +76,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'qpkorr/vim-bufkill'
+Plug 'christoomey/vim-system-copy'
 
 " Surrounding things
 Plug 'kana/vim-operator-user'
@@ -359,12 +377,20 @@ augroup quickfix_sr
   autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END
 " }}}
+" Folding Settings --------------- {{{
+augroup fold_settings
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+	autocmd FileType vim setlocal foldlevelstart=0
+        autocmd FileType python setlocal foldmethod=indent
+        autocmd FileType python setlocal foldlevelstart=0
+augroup END
+
+" }}}
 " Vimscript file settings ------------------- {{{
 augroup filetype_vim
 	autocmd!
 	autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-	autocmd FileType vim setlocal foldmethod=marker
-	autocmd FileType vim setlocal foldlevelstart=0
 augroup END
 " }}}
 " Surround text ------------------ {{{
