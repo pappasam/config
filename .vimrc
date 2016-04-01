@@ -118,9 +118,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'pappasam/vim-ragtag'
 
-" Data analysis
-Plug 'chrisbra/csv.vim'
-
 call plug#end()
 " }}}
 " Configure vim-fugitive --------- {{{
