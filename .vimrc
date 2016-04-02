@@ -123,10 +123,10 @@ Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
 
 " Web Development - Javascript
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
-Plug 'mxw/vim-jsx'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/jsdoc-syntax.vim'
 Plug 'groenewege/vim-less'
 
 " Web Development - General
