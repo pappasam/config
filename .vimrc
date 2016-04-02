@@ -340,6 +340,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead *.config set filetype=yaml
   autocmd BufNewFile,BufRead *.bowerrc set filetype=json
   au BufNewFile,BufRead *.handlebars set filetype=html
+  au BufNewFile,BufRead *.m,*.oct set filetype=octave
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
