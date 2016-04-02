@@ -92,9 +92,6 @@ Plug 'scrooloose/syntastic'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-scripts/ingo-library'
 
-" Rainbow
-Plug 'junegunn/rainbow_parentheses.vim'
-
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tomasr/molokai'
@@ -123,10 +120,10 @@ Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
 
 " Web Development - Javascript
+Plug 'gavocanov/vim-js-indent'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/jsdoc-syntax.vim'
 Plug 'groenewege/vim-less'
 
 " Web Development - General
@@ -135,6 +132,9 @@ Plug 'edsono/vim-matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'pappasam/vim-ragtag'
+
+" Rainbow
+Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 " }}}
@@ -209,12 +209,12 @@ nnoremap <leader>sr :SyntasticReset<CR>
 " }}}
 " Configure Rainbow ------------- {{{
 let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+let g:rainbow#pairs = [['{', '}'], ['(', ')'], ['[', ']']]
 augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
-  autocmd FileType * RainbowParentheses
-  autocmd FileType javascript RainbowParentheses!
+  autocmd BufEnter,BufRead * :RainbowParentheses
+  autocmd BufEnter,BufRead *.html :RainbowParentheses!
 augroup END
 " }}}
 " Configure Airline ----------- {{{
