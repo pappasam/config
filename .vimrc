@@ -82,7 +82,6 @@ Plug 'christoomey/vim-system-copy'
 Plug 'kana/vim-operator-user'
 Plug 'rhysd/vim-operator-surround'
 Plug 'kana/vim-textobj-user'
-Plug 'thinca/vim-textobj-between'
 Plug 'rhysd/vim-textobj-anyblock'
 
 " Static checking
@@ -186,10 +185,7 @@ map <silent>sr <Plug>(operator-surround-replace)
 " delete or replace most inner surround
 nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-anyblock-a)
 nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-anyblock-a)
-nmap <silent>sdb <Plug>(operator-surround-delete)<Plug>(textobj-between-a)
-nmap <silent>srb <Plug>(operator-surround-replace)<Plug>(textobj-between-a)
-
-nmap <silent>src <Plug>(textobj-between-a)
+nmap <silent>saa <Plug>(operator-surround-append)<Plug>(textobj-anyblock-a)
 
 " }}}
 " Configure syntastic ----------- {{{
