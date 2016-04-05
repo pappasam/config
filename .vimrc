@@ -53,6 +53,9 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
+" }}}
+" Set number display ------------- {{{
+
 " Set hybrid line numbers
 set relativenumber
 set number
@@ -70,6 +73,7 @@ augroup rnu_nu
     au InsertEnter * :set nornu
     au InsertLeave  * :set rnu
 augroup end
+
 " }}}
 " Vim-Plug Auto Load ----------------- {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
