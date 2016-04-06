@@ -144,6 +144,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/vim-js-pretty-template'
+Plug 'mxw/vim-jsx'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
