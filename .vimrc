@@ -369,9 +369,6 @@ nnoremap $ g$
 " Move line up and down with hyphen key
 nnoremap - ddp
 nnoremap _ ddkP
-" Remap H and L to beginning and end of line
-nnoremap H 0
-nnoremap L $
 
 " Enable pasting without having to do 'set paste'
 if &term =~ "xterm.*"
@@ -428,6 +425,12 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
+" Change change window thorough Control + directional movement
+nnoremap <silent> K <c-w>+
+nnoremap <silent> J <c-w>-
+nnoremap <silent> H <c-w><
+nnoremap <silent> L <c-w>>
+
 " }}}
 " Syntax coloring ---------------- {{{
 try
