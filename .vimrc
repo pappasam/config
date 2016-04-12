@@ -295,7 +295,14 @@ let python_highlight_all = 1
 
 
 "  }}}
-"  Configure csv.vim ------------ {{{
+"  File Explorer------------ {{{
+augroup explorer_options
+  " Note that this still retains the very first buffer
+  " used by NetRW to show file listing. All the NetRW buffers
+  " that were created later, do not appear in the buffer list.
+  " Not a perfect solution, but I can live with it.
+  autocmd FileType netrw setl bufhidden=wipe
+augroup END
 "  }}}
 "  Zeal --------- {{{
 
