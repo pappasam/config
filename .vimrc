@@ -56,10 +56,6 @@ endif
 " }}}
 " Set number display ------------- {{{
 
-" Set hybrid line numbers
-set relativenumber
-set number
-
 function! ToggleRelativeNumber()
   if &rnu
     set norelativenumber
@@ -85,11 +81,40 @@ function! RNUInsertLeave()
   endif
 endfunction
 
+function! RNUBufEnter()
+  if exists('b:number_state')
+    if b:number_state == 'rnu'
+      set relativenumber
+    else
+      set norelativenumber
+    endif
+  else
+    set relativenumber
+    set number
+    let b:number_state = 'rnu'
+  endif
+endfunction
+
+function! RNUBufLeave()
+  if &rnu
+    let b:number_state = 'rnu'
+  else
+    let b:number_state = 'nornu'
+  endif
+  set norelativenumber
+endfunction
+
+" Set mappings for relative numbers
+
+" Toggle relative number status
 nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 augroup rnu_nu
     au!
+    " Don't have relative numbers during insert mode
     au InsertEnter * :call RNUInsertEnter()
-    au InsertLeave  * :call RNUInsertLeave()
+    au InsertLeave * :call RNUInsertLeave()
+    au BufNew,BufEnter * :call RNUBufEnter()
+    au BufLeave * :call RNUBufLeave()
 augroup end
 
 " }}}
