@@ -60,18 +60,36 @@ endif
 set relativenumber
 set number
 
-" Remove relative numbers while moving
-" Update the screen every 470 milliseconds; this is how often
-" Vim checks for relative numbers
-" Remove relative numbers while in insert mode
-set updatetime=470
-let s:prev_line = 0
+function! ToggleRelativeNumber()
+  if &rnu
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
+
+function! RNUInsertEnter()
+  if &rnu
+    let b:number_state = 'rnu'
+    set norelativenumber
+  else
+    let b:number_state = 'nornu'
+  endif
+endfunction
+
+function! RNUInsertLeave()
+  if b:number_state == 'rnu'
+    set relativenumber
+  else
+    set norelativenumber
+  endif
+endfunction
+
+nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 augroup rnu_nu
     au!
-    au CursorMoved * if &rnu && line('.') != s:prev_line | set nornu nu | endif
-    au CursorHold  * if &nu | set rnu | let s:prev_line = line('.') | endif
-    au InsertEnter * :set nornu
-    au InsertLeave  * :set rnu
+    au InsertEnter * :call RNUInsertEnter()
+    au InsertLeave  * :call RNUInsertLeave()
 augroup end
 
 " }}}
@@ -401,11 +419,11 @@ augroup END
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
-	autocmd!
-	autocmd FileType vim setlocal foldmethod=marker
-	autocmd FileType vim setlocal foldlevelstart=0
-        autocmd FileType python setlocal foldmethod=indent
-        autocmd FileType python setlocal foldlevelstart=0
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal foldlevelstart=0
+  autocmd FileType python setlocal foldmethod=indent
+  autocmd FileType python setlocal foldlevelstart=0
 augroup END
 
 " }}}
