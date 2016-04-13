@@ -420,11 +420,8 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " }}}
 " Buffers and Windows ----------------- {{{
-" Open new buffer, scroll buffers
-" Open from project directory's root directory
-nnoremap ;p :e . <ENTER>
 " Open with current file's root directory
-nnoremap ;l :e %:p:h <ENTER>
+nnoremap ;l :Explore <ENTER>
 nnoremap ;j :bp <ENTER>
 nnoremap ;k :bn <ENTER>
 " Change change window thorough Control + directional movement
