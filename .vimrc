@@ -411,6 +411,7 @@ augroup filetype_recognition
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
+
 " Enable movement within block of text
 nnoremap k gk
 nnoremap j gj
