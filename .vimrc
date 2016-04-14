@@ -66,15 +66,15 @@ endfunction
 
 function! RNUInsertEnter()
   if &rnu
-    let b:number_state = 'rnu'
+    let b:line_number_state = 'rnu'
     set norelativenumber
   else
-    let b:number_state = 'nornu'
+    let b:line_number_state = 'nornu'
   endif
 endfunction
 
 function! RNUInsertLeave()
-  if b:number_state == 'rnu'
+  if b:line_number_state == 'rnu'
     set relativenumber
   else
     set norelativenumber
@@ -82,8 +82,8 @@ function! RNUInsertLeave()
 endfunction
 
 function! RNUBufEnter()
-  if exists('b:number_state')
-    if b:number_state == 'rnu'
+  if exists('b:line_number_state')
+    if b:line_number_state == 'rnu'
       set relativenumber
     else
       set norelativenumber
@@ -91,15 +91,15 @@ function! RNUBufEnter()
   else
     set relativenumber
     set number
-    let b:number_state = 'rnu'
+    let b:line_number_state = 'rnu'
   endif
 endfunction
 
 function! RNUBufLeave()
   if &rnu
-    let b:number_state = 'rnu'
+    let b:line_number_state = 'rnu'
   else
-    let b:number_state = 'nornu'
+    let b:line_number_state = 'nornu'
   endif
   set norelativenumber
 endfunction
@@ -109,12 +109,13 @@ endfunction
 " Toggle relative number status
 nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 augroup rnu_nu
-    au!
-    " Don't have relative numbers during insert mode
-    au InsertEnter * :call RNUInsertEnter()
-    au InsertLeave * :call RNUInsertLeave()
-    au BufNew,BufEnter * :call RNUBufEnter()
-    au BufLeave * :call RNUBufLeave()
+  autocmd!
+  " Don't have relative numbers during insert mode
+  autocmd InsertEnter * :call RNUInsertEnter()
+  autocmd InsertLeave * :call RNUInsertLeave()
+  " Set and unset relative numbers when buffer is active
+  autocmd BufNew,BufEnter * :call RNUBufEnter()
+  autocmd BufLeave * :call RNUBufLeave()
 augroup end
 
 " }}}
@@ -406,8 +407,8 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead *.config set filetype=yaml
   autocmd BufNewFile,BufRead *.bowerrc set filetype=json
-  au BufNewFile,BufRead *.handlebars set filetype=html
-  au BufNewFile,BufRead *.m,*.oct set filetype=octave
+  autocmd BufNewFile,BufRead *.handlebars set filetype=html
+  autocmd BufNewFile,BufRead *.m,*.oct set filetype=octave
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
@@ -455,13 +456,9 @@ augroup END
 " }}}
 " Vimscript file settings ------------------- {{{
 augroup filetype_vim
-	autocmd!
-	autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+  autocmd!
+  autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-" }}}
-" Surround text ------------------ {{{
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 " }}}
 " Buffers and Windows ----------------- {{{
 " Open with current file's root directory
@@ -473,7 +470,7 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
-" Change change window thorough Control + directional movement
+" Change change window width and height with capital movement letters
 nnoremap <silent> K <c-w>+
 nnoremap <silent> J <c-w>-
 nnoremap <silent> H <c-w><
