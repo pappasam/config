@@ -40,12 +40,6 @@ set nobackup
 set noswapfile
 
 set wrap
-" Status bar
-set statusline=%F
-set statusline+=%=
-set statusline+=%l
-set statusline+=/
-set statusline+=%L
 
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
