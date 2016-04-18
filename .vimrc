@@ -179,6 +179,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'ElmCast/elm-vim'
 Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'StanAngeloff/php.vim'
 
 " Web Development - Javascript
 Plug 'gavocanov/vim-js-indent'
