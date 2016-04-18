@@ -461,21 +461,27 @@ augroup END
 " }}}
 " Smart insertion of semicolon and comma ------------ {{{
 
-" Write the closing character in insert mode, then escape to normal mode
+" Write both a placeholder (in this case l) and the closing character
+" Escape to Normal mode, then move over the closing character
 " Save current position to a mark called a
-" Migrate to the matching value, saving position to mark b
-" Move back to a, deleting created character
+" Migrate to the matching opening character, saving position to mark b
+" Move back to a, deleting closing character
 " Move back to b
 " Move to matching closing character
 " Place either semicolon or comma at end
 " Return to original cursor location
+inoremap <silent><C-l>} l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+inoremap <silent><C-l>] l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+inoremap <silent><C-l>) l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
 
-inoremap <silent><leader>}; }<Esc>ma%mb%`ax`b%a;<Esc>`aa
-inoremap <silent><leader>); )<Esc>ma%mb%`ax`b%a;<Esc>`aa
-inoremap <silent><leader>]; ]<Esc>ma%mb%`ax`b%a;<Esc>`aa
-inoremap <silent><leader>}, }<Esc>ma%mb%`ax`b%a,<Esc>`aa
-inoremap <silent><leader>), )<Esc>ma%mb%`ax`b%a,<Esc>`aa
-inoremap <silent><leader>], ]<Esc>ma%mb%`ax`b%a,<Esc>`aa
+inoremap <silent><C-l>}; l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+inoremap <silent><C-l>]; l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+inoremap <silent><C-l>); l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+
+inoremap <silent><C-l>}, l}<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+inoremap <silent><C-l>], l]<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+inoremap <silent><C-l>), l)<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+
 
 " }}}
 " Buffers and Windows ----------------- {{{
