@@ -32,6 +32,12 @@ let maplocalleader = "\\"
 " Enable buffer deletion instead of having to write each buffer
 set hidden
 
+" Remove GUI mouse support
+" This support is actually annoying, because I may occasionally
+" use the mouse to select text or something, and don't actually
+" want the cursor to move
+set mouse=""
+
 " Automatically change directory to current file
 " set autochdir
 
