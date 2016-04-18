@@ -403,6 +403,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead *.bowerrc set filetype=json
   autocmd BufNewFile,BufRead *.handlebars set filetype=html
   autocmd BufNewFile,BufRead *.m,*.oct set filetype=octave
+  autocmd BufNewFile,BufRead *.babelrc set filetype=json
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
