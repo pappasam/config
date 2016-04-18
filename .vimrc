@@ -408,9 +408,13 @@ augroup END
 " }}}
 " General Key remappings ----------------------- {{{
 
-" Enable movement within block of text
-nnoremap k gk
-nnoremap j gj
+" Move up and down visually only if count is specified before
+" Otherwise, you want to move up lines numerically
+" e.g. ignoring wrapped lines
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+
+" Move to beginning and end of visual line
 nnoremap 0 g0
 nnoremap $ g$
 " Move line up and down with hyphen key
