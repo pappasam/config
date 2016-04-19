@@ -70,7 +70,9 @@ function git_branch {
 PS1_USR="\[$BOLD\]\[$COLOR_BRIGHT_GREEN\]\u@\h"
 PS1_DIR="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\] \w "
 PS1_GIT="\[\$(git_color)\]\[$BOLD\]\$(git_branch)\[$BOLD\]\[$COLOR_RESET\]"
-PS1_END="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\]$ \[$COLOR_RESET\]"
+PS1_END="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\]\
+
+$ \[$COLOR_RESET\]"
 PS1="${PS1_USR}${PS1_DIR}${PS1_GIT}${PS1_END}"
 
 #######################################################################
