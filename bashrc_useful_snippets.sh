@@ -42,7 +42,9 @@ function git_color {
   local git_status="$(git status 2> /dev/null)"
   local branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
   local git_commit="$(git --no-pager diff --stat origin/${branch} 2>/dev/null)"
-  if [[ ! $git_status =~ "working directory clean" ]]; then
+  if [[ $git_status == "" ]]; then
+    echo -e $COLOR_SILVER
+  elif [[ ! $git_status =~ "working directory clean" ]]; then
     echo -e $COLOR_RED
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo -e $COLOR_YELLOW
@@ -61,10 +63,12 @@ function git_branch {
 
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
-    echo "($branch) "
+    echo "($branch)"
   elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
-    echo "($commit) "
+    echo "($commit)"
+  else
+    echo "(no git)"
   fi
 }
 
@@ -76,7 +80,7 @@ PS1_USR="\[$BOLD\]\[$COLOR_GOLD\]\u@\h"
 PS1_END="\[$BOLD\]\[$COLOR_SILVER\]$ \[$COLOR_RESET\]"
 
 # PS1="${PS1_LNE}\
-PS1="${PS1_GIT}${PS1_DIR}\
+PS1="${PS1_DIR} ${PS1_GIT}\
 
 ${PS1_USR} ${PS1_END}"
 
