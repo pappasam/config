@@ -33,6 +33,8 @@ COLOR_PURPLE="\033[1;35m"
 COLOR_ORANGE="\033[38;5;202m"
 COLOR_BLUE="\033[34;5;115m"
 COLOR_WHITE="\033[0;37m"
+COLOR_GOLD="\033[38;5;142m"
+COLOR_SILVER="\033[38;5;248m"
 COLOR_RESET="\033[0m"
 BOLD="$(tput bold)"
 
@@ -67,16 +69,16 @@ function git_branch {
 }
 
 # Set Bash PS1
-PS1_USR="\[$BOLD\]\[$COLOR_ORANGE\]\
--~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\
-
-\[$BOLD\]\[$COLOR_BRIGHT_GREEN\]\u@\h"
-PS1_DIR="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\] \w "
+# PS1_LNE="\[$BOLD\]\[$COLOR_SILVER\]-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~"
+PS1_DIR="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\]\w"
 PS1_GIT="\[\$(git_color)\]\[$BOLD\]\$(git_branch)\[$BOLD\]\[$COLOR_RESET\]"
-PS1_END="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\]\
+PS1_USR="\[$BOLD\]\[$COLOR_GOLD\]\u@\h"
+PS1_END="\[$BOLD\]\[$COLOR_SILVER\]$ \[$COLOR_RESET\]"
 
-$ \[$COLOR_RESET\]"
-PS1="${PS1_USR}${PS1_DIR}${PS1_GIT}${PS1_END}"
+# PS1="${PS1_LNE}\
+PS1="${PS1_GIT}${PS1_DIR}\
+
+${PS1_USR} ${PS1_END}"
 
 #######################################################################
 # Move up n directories
