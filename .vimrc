@@ -407,10 +407,9 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
   autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead *.config set filetype=yaml
-  autocmd BufNewFile,BufRead *.bowerrc set filetype=json
+  autocmd BufNewFile,BufRead *.bowerrc,*.babelrc,*.eslintrc set filetype=json
   autocmd BufNewFile,BufRead *.handlebars set filetype=html
   autocmd BufNewFile,BufRead *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead *.babelrc set filetype=json
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{

@@ -67,7 +67,8 @@ function git_branch {
 }
 
 # Set Bash PS1
-PS1_USR="~~~~~~~~~~~~~~~~~~\
+PS1_USR="\[$BOLD\]\[$COLOR_ORANGE\]\
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\
 
 \[$BOLD\]\[$COLOR_BRIGHT_GREEN\]\u@\h"
 PS1_DIR="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\] \w "
