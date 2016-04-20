@@ -477,17 +477,17 @@ augroup END
 " Move to matching closing character
 " Place either semicolon or comma at end
 " Return to original cursor location
-inoremap <silent><C-l>} l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-inoremap <silent><C-l>] l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-inoremap <silent><C-l>) l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>} l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>] l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>) l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
 
-inoremap <silent><C-l>}; l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-inoremap <silent><C-l>]; l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-inoremap <silent><C-l>); l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>}; l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>]; l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
+" inoremap <silent><C-l>); l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
 
-inoremap <silent><C-l>}, l}<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
-inoremap <silent><C-l>], l]<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
-inoremap <silent><C-l>), l)<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+" inoremap <silent><C-l>}, l}<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+" inoremap <silent><C-l>], l]<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
+" inoremap <silent><C-l>), l)<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
 
 
 " }}}
