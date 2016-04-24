@@ -276,7 +276,7 @@ augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
   autocmd BufEnter,BufRead * :RainbowParentheses
-  autocmd BufEnter,BufRead *.html :RainbowParentheses!
+  autocmd BufEnter,BufRead *.html,*.css :RainbowParentheses!
 augroup END
 " }}}
 " Configure Airline ----------- {{{
