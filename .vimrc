@@ -404,12 +404,13 @@ vnoremap <leader>z :call ZealVisual(&filetype)<CR><CR><c-l><CR>
 " Filetypes ------------ {{{
 augroup filetype_recognition
   autocmd!
-  autocmd BufNewFile,BufRead *.md,*.markdown set filetype=markdown
-  autocmd BufNewFile,BufRead *.hql,*.q set filetype=hive
-  autocmd BufNewFile,BufRead *.config set filetype=yaml
-  autocmd BufNewFile,BufRead *.bowerrc,*.babelrc,*.eslintrc set filetype=json
-  autocmd BufNewFile,BufRead *.handlebars set filetype=html
-  autocmd BufNewFile,BufRead *.m,*.oct set filetype=octave
+  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
+  autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
+  autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
+  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc set filetype=json
+  autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
+  autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
+  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
 augroup END
 " }}}
 " General Key remappings ----------------------- {{{
