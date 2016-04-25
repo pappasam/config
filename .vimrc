@@ -53,6 +53,11 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
+" Remove query for terminal version
+" This prevents un-editable garbage characters from being printed
+" after the 80 character highlight line
+set t_RV=
+
 " }}}
 " Set number display ------------- {{{
 
