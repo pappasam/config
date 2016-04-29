@@ -58,6 +58,8 @@ endif
 " after the 80 character highlight line
 set t_RV=
 
+filetype plugin indent on
+
 " }}}
 " Set number display ------------- {{{
 
@@ -186,15 +188,18 @@ Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
 
+" Indentation
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'pappasam/vim-javascript-indent'
+Plug 'mxw/vim-jsx'
+
 " Web Development - Javascript
-Plug 'gavocanov/vim-js-indent'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/vim-js-pretty-template'
-Plug 'mxw/vim-jsx'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
@@ -334,6 +339,10 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
 " 1. use Ctrl-V ) to insert paren without trigger the plugin.
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_jump_expansion = 1
+let g:delimitMate_balance_matchpairs = 1
 " --- }}}
 " Configure Additional Plugin constants ------------ {{{
 
