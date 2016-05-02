@@ -187,6 +187,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
+Plug 'vim-scripts/SAS-Syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
