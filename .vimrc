@@ -191,7 +191,8 @@ Plug 'vim-scripts/SAS-Syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'jason0x43/vim-js-indent'
+Plug 'pappasam/vim-javascript-indent'
+Plug 'mxw/vim-jsx'
 
 " Web Development - Javascript
 Plug 'othree/yajs.vim'
@@ -422,7 +423,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc set filetype=json
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
+  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
 augroup END
 
 " Toggle different filetypes
