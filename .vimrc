@@ -206,6 +206,7 @@ Plug 'mattn/emmet-vim'
 Plug 'edsono/vim-matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
 
 " Rainbow
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -347,6 +348,8 @@ let g:used_javascript_libs = 'jquery,requirejs,react'
 " Python highlighting
 let python_highlight_all = 1
 
+" Ragtag on every filetype
+let g:ragtag_global_maps = 1
 
 "  }}}
 "  File Explorer------------ {{{
