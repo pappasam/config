@@ -2,7 +2,7 @@
 	email = samuel.roeca@gmail.com
 	name = Sam Roeca
 [core]
-	editor = vim
+	editor = nvim
 	autocrlf = input
 	safecrlf = true
 [alias]
