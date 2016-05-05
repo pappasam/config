@@ -206,7 +206,6 @@ Plug 'mattn/emmet-vim'
 Plug 'edsono/vim-matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'pappasam/vim-ragtag'
 
 " Rainbow
 Plug 'junegunn/rainbow_parentheses.vim'
