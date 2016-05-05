@@ -424,6 +424,11 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
 augroup END
+
+" Toggle different filetypes
+nnoremap <silent><leader>fj :set ft=javascript<CR>
+nnoremap <silent><leader>fh :set ft=html<CR>
+
 " }}}
 " General Key remappings ----------------------- {{{
 
