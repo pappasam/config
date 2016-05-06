@@ -530,19 +530,9 @@ catch
 endtry
 " }}}
 " Trailing whitespace ------------- {{{
-function! <SID>StripTrailingWhitespaces()
-  if exists('b:noStripWhitespace')
-    return
-  endif
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-endfun
-augroup allfiles_trailingspace
-  autocmd!
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-  autocmd FileType markdown let b:noStripWhitespace=1
+augroup fix_whitespace_save
+  let blacklist = ['markdown']
+  autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
 augroup END
 " }}}
 " Indentation ------------- {{{
