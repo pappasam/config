@@ -191,16 +191,12 @@ Plug 'vim-scripts/SAS-Syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'pappasam/vim-javascript-indent'
-Plug 'mxw/vim-jsx'
 
 " Web Development - Javascript
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
+Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
+Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
@@ -425,10 +421,6 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
 augroup END
-
-" Toggle different filetypes
-nnoremap <silent><leader>fj :set ft=javascript<CR>
-nnoremap <silent><leader>fh :set ft=html<CR>
 
 " }}}
 " General Key remappings ----------------------- {{{
