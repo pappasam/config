@@ -348,6 +348,9 @@ let python_highlight_all = 1
 " Ragtag on every filetype
 let g:ragtag_global_maps = 1
 
+" JSX for .js files in addition to .jsx
+let g:jsx_ext_required = 0
+
 "  }}}
 "  File Explorer------------ {{{
 augroup explorer_options
