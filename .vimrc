@@ -507,20 +507,20 @@ augroup END
 
 " }}}
 " Buffers and Windows ----------------- {{{
-" Open with current file's root directory
-nnoremap ;l :Explore <ENTER>
-nnoremap ;j :bp <ENTER>
-nnoremap ;k :bn <ENTER>
 " Change change window thorough Control + directional movement
 nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
 " Change change window width and height with capital movement letters
-nnoremap <silent> K <c-w>+
-nnoremap <silent> J <c-w>-
-nnoremap <silent> H <c-w><
-nnoremap <silent> L <c-w>>
+" nnoremap <silent> K <c-w>+
+" nnoremap <silent> J <c-w>-
+" nnoremap <silent> H <c-w><
+" nnoremap <silent> L <c-w>>
+" Open with current file's root directory
+nnoremap <silent> L :Explore <ENTER>
+nnoremap <silent> J :bp <ENTER>
+nnoremap <silent> K :bn <ENTER>
 
 " }}}
 " Syntax coloring ---------------- {{{
