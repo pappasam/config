@@ -518,9 +518,10 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 " nnoremap <silent> H <c-w><
 " nnoremap <silent> L <c-w>>
 " Open with current file's root directory
-nnoremap <silent> L :Explore <ENTER>
-nnoremap <silent> J :bp <ENTER>
-nnoremap <silent> K :bn <ENTER>
+nnoremap <silent> J :Explore <ENTER>
+nnoremap <silent> K :Vexplore <ENTER>
+nnoremap <silent> H :bp <ENTER>
+nnoremap <silent> L :bn <ENTER>
 
 " }}}
 " Syntax coloring ---------------- {{{
