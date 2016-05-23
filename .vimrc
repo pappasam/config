@@ -468,8 +468,6 @@ augroup fold_settings
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldlevelstart=0
-  autocmd FileType javascript,c setlocal foldmethod=marker
-  autocmd FileType javascript,c setlocal foldmarker={,}
   autocmd FileType * setlocal foldnestmax=1
 augroup END
 nnoremap z<space> zA
