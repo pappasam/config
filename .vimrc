@@ -146,6 +146,7 @@ Plug 'airblade/vim-rooter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
+Plug 'easymotion/vim-easymotion'
 
 " Surrounding things
 Plug 'kana/vim-operator-user'
