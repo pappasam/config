@@ -198,6 +198,7 @@ Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
 Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
+Plug 'heavenshell/vim-jsdoc'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
@@ -351,6 +352,9 @@ let g:ragtag_global_maps = 1
 
 " JSX for .js files in addition to .jsx
 let g:jsx_ext_required = 0
+
+" js-doc
+let g:jsdoc_enable_es6 = 1
 
 "  }}}
 "  File Explorer------------ {{{
