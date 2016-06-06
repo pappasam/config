@@ -137,7 +137,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Basics
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
