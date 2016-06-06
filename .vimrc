@@ -147,6 +147,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'easymotion/vim-easymotion'
+Plug 'jlanzarotta/bufexplorer'
 
 " Surrounding things
 Plug 'kana/vim-operator-user'
@@ -365,6 +366,25 @@ augroup explorer_options
   " Not a perfect solution, but I can live with it.
   autocmd FileType netrw setl bufhidden=wipe
 augroup END
+
+" See line numbers like normal vim; necessary because of netrw overrides
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
+" absolute width of netrw window
+let g:netrw_winsize = -28
+
+" do not display info on the top of window
+let g:netrw_banner = 0
+
+" tree-view
+let g:netrw_liststyle = 3
+
+" sort is affecting only: directories on the top, files below
+let g:netrw_sort_sequence = '[\/]$,*'
+
+" use the previous window to open file
+let g:netrw_browse_split = 4
+
 "  }}}
 "  Zeal --------- {{{
 
@@ -516,16 +536,18 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
+
 " Change change window width and height with capital movement letters
-" nnoremap <silent> K <c-w>+
-" nnoremap <silent> J <c-w>-
-" nnoremap <silent> H <c-w><
-" nnoremap <silent> L <c-w>>
-" Open with current file's root directory
-nnoremap <silent> J :Explore <ENTER>
-nnoremap <silent> K :Vexplore <ENTER>
-nnoremap <silent> H :bp <ENTER>
-nnoremap <silent> L :bn <ENTER>
+nnoremap <silent> K <c-w>+
+nnoremap <silent> J <c-w>-
+nnoremap <silent> H <c-w><
+nnoremap <silent> L <c-w>>
+
+" Toggle explorer window
+nnoremap <silent> <space>j :Lexplore <ENTER>
+
+" Shortcuts for opening buffers
+" <leader>be -> edit buffer
 
 " }}}
 " Syntax coloring ---------------- {{{
