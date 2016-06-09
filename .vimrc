@@ -545,6 +545,11 @@ nnoremap <silent> L <c-w>>
 " Toggle explorer window
 nnoremap <silent> <space>j :Lexplore <ENTER>
 
+" Switch buffers
+nnoremap gn :bn<CR>
+nnoremap gd :BD<CR>
+nnoremap gp :bp<CR>
+
 " Shortcuts for opening buffers
 " <leader>be -> edit buffer
 
