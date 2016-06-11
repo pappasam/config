@@ -123,6 +123,7 @@ augroup rnu_nu
   " Set and unset relative numbers when buffer is active
   autocmd BufNew,BufEnter * :call RNUBufEnter()
   autocmd BufLeave * :call RNUBufLeave()
+  autocmd BufNewFile,BufRead,BufEnter *.txt set norelativenumber nonumber
 augroup end
 
 " }}}
