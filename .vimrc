@@ -53,6 +53,9 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
+" Don't highlight all search results
+set nohlsearch
+
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
 " after the 80 character highlight line
