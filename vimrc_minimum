@@ -1,0 +1,161 @@
+" Display settings ------------ {{{
+
+" Enable buffer deletion instead of having to write each buffer
+set hidden
+
+" Remove GUI mouse support
+" This support is actually annoying, because I may occasionally
+" use the mouse to select text or something, and don't actually
+" want the cursor to move
+set mouse=""
+
+" Automatically change directory to current file
+" set autochdir
+
+" Prevent creation of swap files
+set nobackup
+set noswapfile
+
+set wrap
+
+" Set column to light grey at 80 characters
+if (exists('+colorcolumn'))
+  set colorcolumn=80
+  highlight ColorColumn ctermbg=9
+endif
+
+" Remove query for terminal version
+" This prevents un-editable garbage characters from being printed
+" after the 80 character highlight line
+set t_RV=
+
+filetype plugin indent on
+
+" }}}
+" Plugins --------------------- {{{
+call plug#begin('~/.vim/plugged')
+
+" Requirements for vimdeck
+Plug 'vim-scripts/SyntaxRange'
+Plug 'vim-scripts/ingo-library'
+
+" Basic coloring
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'tomasr/molokai'
+
+" Language-specific syntax
+Plug 'hdima/python-syntax',
+Plug 'elzr/vim-json',
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'plasticboy/vim-markdown'
+
+" Indentation
+Plug 'hynek/vim-python-pep8-indent'
+
+call plug#end()
+" }}}
+" Plugin constants ------------ {{{
+
+" Python highlighting
+let python_highlight_all = 1
+
+"  }}}
+"  File Explorer------------ {{{
+augroup explorer_options
+  " Note that this still retains the very first buffer
+  " used by NetRW to show file listing. All the NetRW buffers
+  " that were created later, do not appear in the buffer list.
+  " Not a perfect solution, but I can live with it.
+  autocmd FileType netrw setl bufhidden=wipe
+augroup END
+
+" See line numbers like normal vim; necessary because of netrw overrides
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
+" absolute width of netrw window
+let g:netrw_winsize = -28
+
+" do not display info on the top of window
+let g:netrw_banner = 0
+
+" tree-view
+let g:netrw_liststyle = 3
+
+" sort is affecting only: directories on the top, files below
+let g:netrw_sort_sequence = '[\/]$,*'
+
+" use the previous window to open file
+let g:netrw_browse_split = 4
+
+"  }}}
+" Pasting ----------------------- {{{
+
+" Enable pasting without having to do 'set paste'
+if &term =~ "xterm.*"
+  let &t_ti = &t_ti . "\e[?2004h"
+  let &t_te = "\e[?2004l" . &t_te
+  function! XTermPasteBegin(ret)
+    set pastetoggle=<Esc>[201~
+    set paste
+    return a:ret
+  endfunction
+  map <expr> <Esc>[200~ XTermPasteBegin("i")
+  imap <expr> <Esc>[200~ XTermPasteBegin("")
+  vmap <expr> <Esc>[200~ XTermPasteBegin("c")
+  cmap <Esc>[200~ <nop>
+  cmap <Esc>[201~ <nop>
+endif
+
+" }}}
+" Folding Settings --------------- {{{
+augroup fold_settings
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal foldlevelstart=0
+  autocmd FileType * setlocal foldnestmax=1
+augroup END
+nnoremap z<space> zA
+
+" }}}
+" Vimscript file settings ------------------- {{{
+augroup filetype_vim
+  autocmd!
+  autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+" }}}
+" Syntax coloring ---------------- {{{
+try
+  set t_Co=256 " says terminal has 256 colors
+  let g:molokai_original = 1
+  let g:rehash256 = 1
+  colorscheme molokai
+catch
+endtry
+" }}}
+" Trailing whitespace ------------- {{{
+augroup fix_whitespace_save
+  let blacklist = ['markdown']
+  autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
+augroup END
+" }}}
+" Indentation ------------- {{{
+
+" Note -> apparently BufRead, BufNewFile trumps Filetype
+" Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
+" This is why default settings are chosed with Filetype *
+augroup indentation_sr
+  autocmd!
+  autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
+  autocmd Filetype python setlocal shiftwidth=4 softtabstop=4 tabstop=8
+  autocmd Filetype yaml setlocal indentkeys-=<:>
+augroup END
+" }}}
+" Writing ------------------ {{{
+augroup writing
+  autocmd!
+  autocmd FileType markdown :setlocal wrap linebreak nolist
+  autocmd FileType markdown :setlocal colorcolumn=0
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
+augroup END
+" }}}
