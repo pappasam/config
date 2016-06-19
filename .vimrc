@@ -446,9 +446,6 @@ nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 " Move to beginning and end of visual line
 nnoremap 0 g0
 nnoremap $ g$
-" Move line up and down with hyphen key
-nnoremap - ddp
-nnoremap _ ddkP
 
 " Enable pasting without having to do 'set paste'
 if &term =~ "xterm.*"
