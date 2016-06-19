@@ -152,12 +152,6 @@ Plug 'christoomey/vim-system-copy'
 Plug 'easymotion/vim-easymotion'
 Plug 'jlanzarotta/bufexplorer'
 
-" Surrounding things
-Plug 'kana/vim-operator-user'
-Plug 'rhysd/vim-operator-surround'
-Plug 'kana/vim-textobj-user'
-Plug 'rhysd/vim-textobj-anyblock'
-
 " Static checking
 Plug 'scrooloose/syntastic'
 
@@ -251,20 +245,6 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" }}}
-" Configure Operator Surround --------- {{{
-
-" DANGER-> THIS USES RECURSIVE MAPPING; BUGS MAY ARISE BECAUSE OF THIS CHOICE
-" operator mappings
-map <silent>sa <Plug>(operator-surround-append)
-map <silent>sd <Plug>(operator-surround-delete)
-map <silent>sr <Plug>(operator-surround-replace)
-
-" delete or replace most inner surround
-nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-anyblock-a)
-nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-anyblock-a)
-nmap <silent>saa <Plug>(operator-surround-append)<Plug>(textobj-anyblock-a)
 
 " }}}
 " Configure syntastic ----------- {{{
