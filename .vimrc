@@ -130,13 +130,6 @@ augroup rnu_nu
 augroup end
 
 " }}}
-" Vim-Plug Auto Load ----------------- {{{
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-" }}}
 " Plugins --------------------- {{{
 call plug#begin('~/.vim/plugged')
 
@@ -166,7 +159,6 @@ Plug 'tomasr/molokai'
 " Utils
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
-Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
 
 " C-syntax
@@ -484,31 +476,6 @@ augroup filetype_vim
   autocmd!
   autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-" }}}
-" Smart insertion of semicolon and comma ------------ {{{
-
-" Write both a placeholder (in this case l) and the closing character
-" Escape to Normal mode, then move over the closing character
-" Save current position to a mark called a
-" Migrate to the matching opening character, saving position to mark b
-" Move back to a, deleting closing character
-" Move back to b
-" Move to matching closing character
-" Place either semicolon or comma at end
-" Return to original cursor location
-" inoremap <silent><C-l>} l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-" inoremap <silent><C-l>] l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-" inoremap <silent><C-l>) l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-
-" inoremap <silent><C-l>}; l}<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-" inoremap <silent><C-l>]; l]<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-" inoremap <silent><C-l>); l)<Esc>ma%mb%`ax`b%a;<Esc>`aa<BS>
-
-" inoremap <silent><C-l>}, l}<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
-" inoremap <silent><C-l>], l]<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
-" inoremap <silent><C-l>), l)<Esc>ma%mb%`ax`b%a,<Esc>`aa<BS>
-
-
 " }}}
 " Buffers and Windows ----------------- {{{
 " Change change window thorough Control + directional movement
