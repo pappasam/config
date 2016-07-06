@@ -22,6 +22,12 @@
 "  zi
 " -----------------------------------------------------------
 "
+" How to insert parens purely
+" There are 3 ways
+" 1. use Ctrl-V ) to insert paren without trigger the plugin.
+" 2. use Alt-P to turn off the plugin.
+" 3. use DEL or <C-O>x to delete the character insert by plugin.
+"
 " }}}
 " Leader mappings -------------------- {{{
 let mapleader = ","
@@ -144,6 +150,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'easymotion/vim-easymotion'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'scrooloose/nerdtree'
 
 " Static checking
 Plug 'scrooloose/syntastic'
@@ -202,26 +209,6 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 " }}}
-" Configure vim-fugitive --------- {{{
-
-" The following are key shortcuts which add commits
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gt :Gcommit -v -q %:p<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
-nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gw :Gwrite<CR><CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
-
-" }}}
 " Configure Control-P ---------- {{{
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_map = '<c-p>'
@@ -253,24 +240,6 @@ let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
-" }}}
-" Configure Rainbow ------------- {{{
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['{', '}'], ['(', ')'], ['[', ']']]
-augroup rainbow_settings
-  " Section to turn on rainbow parentheses
-  autocmd!
-  autocmd BufEnter,BufRead * :RainbowParentheses
-  autocmd BufEnter,BufRead *.html,*.css :RainbowParentheses!
-augroup END
-" }}}
-" Configure Airline ----------- {{{
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
 " }}}
 " Configure EasyGrep ---------- {{{
 
@@ -308,13 +277,6 @@ let g:EasyGrepFilesToExclude = '*?/venv/*,' .
       \ '*?/data_templates/*'
 
 " }}}
-" Configure Auto Pairs ----------- {{{
-" How to insert parens purely
-" There are 3 ways
-" 1. use Ctrl-V ) to insert paren without trigger the plugin.
-" 2. use Alt-P to turn off the plugin.
-" 3. use DEL or <C-O>x to delete the character insert by plugin.
-" --- }}}
 " Configure Additional Plugin constants ------------ {{{
 
 " Set the javascript libraries that need syntax highlighting
@@ -332,33 +294,43 @@ let g:jsx_ext_required = 0
 " js-doc
 let g:jsdoc_enable_es6 = 1
 
-"  }}}
-"  File Explorer------------ {{{
-augroup explorer_options
-  " Note that this still retains the very first buffer
-  " used by NetRW to show file listing. All the NetRW buffers
-  " that were created later, do not appear in the buffer list.
-  " Not a perfect solution, but I can live with it.
-  autocmd FileType netrw setl bufhidden=wipe
+" NERDTree
+let NERDTreeShowLineNumbers = 1
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+
+" Rainbow
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['{', '}'], ['(', ')'], ['[', ']']]
+augroup rainbow_settings
+  " Section to turn on rainbow parentheses
+  autocmd!
+  autocmd BufEnter,BufRead * :RainbowParentheses
+  autocmd BufEnter,BufRead *.html,*.css :RainbowParentheses!
 augroup END
 
-" See line numbers like normal vim; necessary because of netrw overrides
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-
-" absolute width of netrw window
-let g:netrw_winsize = -28
-
-" do not display info on the top of window
-let g:netrw_banner = 0
-
-" tree-view
-let g:netrw_liststyle = 3
-
-" sort is affecting only: directories on the top, files below
-let g:netrw_sort_sequence = '[\/]$,*'
-
-" use the previous window to open file
-let g:netrw_browse_split = 4
+" vim-fugitive
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
 
 "  }}}
 "  Zeal --------- {{{
@@ -490,16 +462,13 @@ nnoremap <silent> J <c-w>-
 nnoremap <silent> H <c-w><
 nnoremap <silent> L <c-w>>
 
-" Toggle explorer window
-nnoremap <silent> <space>j :Lexplore <ENTER>
+" Toggle NERDTree
+nnoremap <silent> <space>j :NERDTreeToggle<ENTER>
 
 " Switch buffers
 nnoremap gn :bn<CR>
 nnoremap gd :BD<CR>
 nnoremap gp :bp<CR>
-
-" Shortcuts for opening buffers
-" <leader>be -> edit buffer
 
 " }}}
 " Syntax coloring ---------------- {{{
@@ -517,7 +486,7 @@ augroup fix_whitespace_save
   autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
 augroup END
 " }}}
-" Indentation ------------- {{{
+" Tabs versus Spaces ( Indentation )------------- {{{
 
 " Note -> apparently BufRead, BufNewFile trumps Filetype
 " Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
