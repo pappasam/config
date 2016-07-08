@@ -1,24 +1,21 @@
 # File contains useful code for ~/.bashrc files
 
 #######################################################################
-# Copy and paste using terminal
+# Aliases
 #######################################################################
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
-#######################################################################
-# Open tmux with proper color schemes enabled
-#######################################################################
-alias tmux='tmux -2'
-
-#######################################################################
-# View public IP address
-#######################################################################
 alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 
-#######################################################################
-# Git aliases
-#######################################################################
+alias tmux='tmux -2'
+
+alias g="git status"
+
+alias va="source venv/bin/activate"
+alias ve="virtualenv -p python3.4 venv"
+alias sl="ls"
+
 alias g="git status"
 
 #######################################################################
