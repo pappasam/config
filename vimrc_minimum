@@ -35,18 +35,22 @@ filetype plugin indent on
 " Plugins --------------------- {{{
 call plug#begin('~/.vim/plugged')
 
-" Requirements for vimdeck
-Plug 'vim-scripts/SyntaxRange'
-Plug 'vim-scripts/ingo-library'
+" Better bars
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tomasr/molokai'
 
+" Autocompletion
+Plug 'jiangmiao/auto-pairs'
+
+" Better directory explorer
+Plug 'scrooloose/nerdtree'
+
 " Language-specific syntax
 Plug 'hdima/python-syntax',
-Plug 'elzr/vim-json',
-Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'plasticboy/vim-markdown'
 
 " Indentation
@@ -59,33 +63,17 @@ call plug#end()
 " Python highlighting
 let python_highlight_all = 1
 
-"  }}}
-"  File Explorer------------ {{{
-augroup explorer_options
-  " Note that this still retains the very first buffer
-  " used by NetRW to show file listing. All the NetRW buffers
-  " that were created later, do not appear in the buffer list.
-  " Not a perfect solution, but I can live with it.
-  autocmd FileType netrw setl bufhidden=wipe
-augroup END
+" Show line numbers for nerdtree
+let NERDTreeShowLineNumbers = 1
+nnoremap <silent> <space>j :NERDTreeToggle<ENTER>
 
-" See line numbers like normal vim; necessary because of netrw overrides
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-
-" absolute width of netrw window
-let g:netrw_winsize = -28
-
-" do not display info on the top of window
-let g:netrw_banner = 0
-
-" tree-view
-let g:netrw_liststyle = 3
-
-" sort is affecting only: directories on the top, files below
-let g:netrw_sort_sequence = '[\/]$,*'
-
-" use the previous window to open file
-let g:netrw_browse_split = 4
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
 
 "  }}}
 " Pasting ----------------------- {{{
@@ -108,6 +96,7 @@ endif
 
 " }}}
 " Folding Settings --------------- {{{
+
 augroup fold_settings
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
