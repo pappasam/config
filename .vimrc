@@ -433,9 +433,6 @@ augroup quickfix_sr
   autocmd!
   autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END
-
-nmap f <Leader><Leader>w
-nmap F <Leader><Leader>W
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
