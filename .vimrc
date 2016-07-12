@@ -149,6 +149,7 @@ Plug 'christoomey/vim-system-copy'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
+Plug 'troydm/zoomwintab.vim'
 
 " Static checking
 Plug 'scrooloose/syntastic'
