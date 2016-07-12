@@ -140,15 +140,12 @@ augroup end
 call plug#begin('~/.vim/plugged')
 
 " Basics
-Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
-" Plug 'easymotion/vim-easymotion'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
@@ -194,7 +191,6 @@ Plug 'hynek/vim-python-pep8-indent'
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
 Plug 'mxw/vim-jsx'
-Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'heavenshell/vim-jsdoc'
 
@@ -209,23 +205,6 @@ Plug 'tpope/vim-ragtag'
 Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
-" }}}
-" Configure Control-P ---------- {{{
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
-
-" Custom ignore
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
 " }}}
 " Configure syntastic ----------- {{{
 set statusline+=%#warningmsg#
@@ -242,46 +221,7 @@ let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
 " }}}
-" Configure EasyGrep ---------- {{{
-
-" Track the current file extension
-let g:EasyGrepMode = 2
-
-" User regular Grep, not VimGrep
-let gEasyGrepCommand = 1
-
-" Search the escaped string (eg, non-regex)
-let g:EasyGrepPatternType = 'fixed'
-
-" Enable recursive search by default
-let g:EasyGrepRecursive = 1
-
-" Make root of project the repository
-" Current directory is made project repo by vim-rooter
-let g:EasyGrepRoot = 'cwd'
-
-" Ignore certain directories
-let g:EasyGrepFilesToExclude = '*?/venv/*,' .
-      \ '*?/__pycache__/*,' .
-      \ '*?/node_modules/*,' .
-      \ '*?/bin/*,' .
-      \ '*?/target/*,' .
-      \ '*?/instance/*,' .
-      \ '*?/doc/*,' .
-      \ '*?/data/*,' .
-      \ '*?/dot/*,' .
-      \ '*?/redis-stable/*,' .
-      \ '*?\.conf,' .
-      \ '*?/tests/*,' .
-      \ '*?/logs/*,' .
-      \ '*?/diagrams/*,' .
-      \ '*?/data_templates/*'
-
-" }}}
 " Configure Additional Plugin constants ------------ {{{
-
-" Set the javascript libraries that need syntax highlighting
-let g:used_javascript_libs = 'jquery,requirejs,react'
 
 " Python highlighting
 let python_highlight_all = 1
