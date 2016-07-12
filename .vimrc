@@ -339,6 +339,11 @@ augroup filetype_recognition
 augroup END
 nnoremap <leader>jx :set filetype=javascript.jsx<CR>
 nnoremap <leader>jj :set filetype=javascript<CR>
+
+augroup filetype_vim
+  autocmd!
+  autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 " }}}
 " General Key remappings ----------------------- {{{
 
@@ -383,12 +388,6 @@ augroup fold_settings
 augroup END
 nnoremap z<space> zA
 
-" }}}
-" Vimscript file settings ------------------- {{{
-augroup filetype_vim
-  autocmd!
-  autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
 " }}}
 " Buffers and Windows ----------------- {{{
 " Change change window thorough Control + directional movement
