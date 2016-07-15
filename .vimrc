@@ -274,6 +274,10 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
+" bufexplorer
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerSortBy='fullpath'
+
 "  }}}
 "  Zeal --------- {{{
 
