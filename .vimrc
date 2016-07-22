@@ -150,6 +150,7 @@ Plug 'joequery/Stupid-EasyMotion'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'troydm/zoomwintab.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Static checking
 Plug 'scrooloose/syntastic'
@@ -238,6 +239,10 @@ let g:jsdoc_enable_es6 = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers = 1
+
+" Ctrl p
+let g:ctrlp_working_path_mode = 'rw' " start from cwd
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Airline
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
