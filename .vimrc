@@ -240,9 +240,13 @@ let g:jsdoc_enable_es6 = 1
 let NERDTreeShowLineNumbers = 1
 
 " Airline
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
+let g:airline_inactive_collapse=0
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
