@@ -142,7 +142,6 @@ augroup rnu_nu
   autocmd BufNew,BufEnter * :call RNUBufEnter()
   autocmd BufLeave * :call RNUBufLeave()
   autocmd BufNewFile,BufRead,BufEnter * set number
-  autocmd BufNewFile,BufRead,BufEnter *.txt set norelativenumber nonumber
 augroup end
 
 " }}}
