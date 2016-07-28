@@ -417,8 +417,8 @@ nnoremap <silent> J <c-w>-
 nnoremap <silent> H <c-w><
 nnoremap <silent> L <c-w>>
 
-" Toggle NERDTree
-nnoremap <silent> <space>j :NERDTreeToggle<ENTER>
+" Toggle NERDTree, keeping cursor in original window
+nnoremap <silent> <space>j :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
 
 " Switch buffers
 nnoremap gn :bn<CR>
