@@ -208,7 +208,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 " }}}
-" Configure Additional Plugin constants ------------ {{{
+" Plugin configuration ------------ {{{
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -293,6 +293,10 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 " bufexplorer
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSortBy='fullpath'
+
+" NERDTree
+" Toggle NERDTree, keeping cursor in original window
+nnoremap <silent> <space>j :NERDTreeToggle <CR>
 
 "  }}}
 "  Zeal --------- {{{
@@ -422,9 +426,6 @@ nnoremap <silent> K <c-w>+
 nnoremap <silent> J <c-w>-
 nnoremap <silent> H <c-w><
 nnoremap <silent> L <c-w>>
-
-" Toggle NERDTree, keeping cursor in original window
-nnoremap <silent> <space>j :NERDTreeToggle <CR>
 
 " Switch buffers
 nnoremap gn :bn<CR>
