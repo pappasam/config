@@ -150,6 +150,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'yegappan/grep'
 
 " Static checking
 Plug 'scrooloose/syntastic'
@@ -207,7 +208,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 " }}}
-" Configure syntastic ----------- {{{
+" Configure Additional Plugin constants ------------ {{{
+
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -221,8 +224,11 @@ let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
-" }}}
-" Configure Additional Plugin constants ------------ {{{
+
+" Grep
+let Grep_Default_Options = '-rnIP'
+let Grep_Skip_Dirs = 'instance venv .git build node_modules'
+let Grep_Skip_Files = '*.pyc'
 
 " Python highlighting
 let python_highlight_all = 1
