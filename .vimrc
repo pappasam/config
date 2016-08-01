@@ -150,7 +150,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'yegappan/grep'
+Plug 'dkprice/vim-easygrep'
 
 " Static checking
 Plug 'scrooloose/syntastic'
@@ -225,11 +225,6 @@ let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
 
-" Grep
-let Grep_Default_Options = '-rnIP'
-let Grep_Skip_Dirs = 'instance venv .git build node_modules'
-let Grep_Skip_Files = '*.pyc'
-
 " Python highlighting
 let python_highlight_all = 1
 
@@ -244,6 +239,12 @@ let g:jsdoc_enable_es6 = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers = 1
+
+" EasyGrep
+let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
+let g:EasyGrepMode = 2 " search only current file extension
+let g:EasyGrepRecursive = 1
+let g:EasyGrepFilesToExclude=".svn,.git,node_modules,venv,build,instance"
 
 " Ctrl p
 let g:ctrlp_working_path_mode = 'rw' " start from cwd
