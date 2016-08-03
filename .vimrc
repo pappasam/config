@@ -69,6 +69,12 @@ set t_RV=
 
 filetype plugin indent on
 
+augroup cursorline_setting
+  autocmd!
+  autocmd WinEnter,BufEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
 " }}}
 " Set number display ------------- {{{
 
