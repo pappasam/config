@@ -376,6 +376,10 @@ augroup filetype_vim
   autocmd!
   autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+augroup quick_fix_move_bottom
+  autocmd FileType qf wincmd J
+augroup END
 " }}}
 " General Key remappings ----------------------- {{{
 
