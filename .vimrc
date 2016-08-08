@@ -245,6 +245,8 @@ let g:jsdoc_enable_es6 = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers = 1
+" Toggle NERDTree, keeping cursor in original window
+nnoremap <silent> <space>j :NERDTreeToggle <CR>
 
 " EasyGrep
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
@@ -300,11 +302,6 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 " bufexplorer
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSortBy='fullpath'
-
-" NERDTree
-" Toggle NERDTree, keeping cursor in original window
-nnoremap <silent> <space>j :NERDTreeToggle <CR>
-
 "  }}}
 "  Zeal --------- {{{
 
