@@ -18,6 +18,33 @@ alias sl="ls"
 
 alias g="git status"
 
+alias regrep="grep --perl-regexp -Ir \
+--exclude=*~ \
+--exclude=*.pyc \
+--exclude=*.csv \
+--exclude=*.tsv \
+--exclude=*.md \
+--exclude-dir=.bzr \
+--exclude-dir=.git \
+--exclude-dir=.svn \
+--exclude-dir=node_modules \
+--exclude-dir=venv"
+
+# Move up n directories
+# using:  cd.. 10   cd.. dir
+function cd_up() {
+  pushd . >/dev/null
+  case $1 in
+    *[!0-9]*)                                          # if no a number
+      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
+      ;;                                               # if not found - not cd
+    *)
+      cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
+    ;;
+  esac
+}
+alias 'cd..'='cd_up'                                # can not name function 'cd..'
+
 #######################################################################
 # Set command to include git branch in my prompt
 #######################################################################
@@ -80,20 +107,3 @@ PS1_END="\[$BOLD\]\[$COLOR_SILVER\]$ \[$COLOR_RESET\]"
 PS1="${PS1_DIR} ${PS1_GIT}\
 
 ${PS1_USR} ${PS1_END}"
-
-#######################################################################
-# Move up n directories
-# using:  cd.. 10   cd.. dir
-#######################################################################
-function cd_up() {
-  pushd . >/dev/null
-  case $1 in
-    *[!0-9]*)                                          # if no a number
-      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
-      ;;                                               # if not found - not cd
-    *)
-      cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
-    ;;
-  esac
-}
-alias 'cd..'='cd_up'                                # can not name function 'cd..'
