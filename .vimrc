@@ -258,6 +258,8 @@ let g:jsdoc_enable_es6 = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers = 1
+let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
+
 " Toggle NERDTree, keeping cursor in original window
 nnoremap <silent> <space>j :NERDTreeToggle <CR>
 
