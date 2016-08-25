@@ -195,6 +195,7 @@ Plug 'vim-scripts/SAS-Syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'itchyny/vim-haskell-indent'
 
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
