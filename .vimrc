@@ -192,10 +192,10 @@ Plug 'mopp/rik_octave.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
+Plug 'neovimhaskell/haskell-vim'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'itchyny/vim-haskell-indent'
 
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
@@ -231,6 +231,14 @@ let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
 
 nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
+
+" Haskell 'neovimhaskell/haskell-vim'
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 
 " Python highlighting
 let python_highlight_all = 1
