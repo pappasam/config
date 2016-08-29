@@ -289,7 +289,7 @@ set noshowmode
 
 " Rainbow
 let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['{', '}'], ['(', ')'], ['[', ']']]
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
