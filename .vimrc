@@ -167,7 +167,8 @@ Plug 'vim-scripts/ingo-library'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'tomasr/molokai'
+Plug 'flazz/vim-colorschemes'
+" Plug 'tomasr/molokai'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -446,9 +447,7 @@ nnoremap gp :bp<CR>
 " Syntax coloring ---------------- {{{
 try
   set t_Co=256 " says terminal has 256 colors
-  let g:molokai_original = 1
-  let g:rehash256 = 1
-  colorscheme molokai
+  colorscheme Tomorrow-Night
 catch
 endtry
 " }}}
