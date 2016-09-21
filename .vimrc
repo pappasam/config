@@ -157,6 +157,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 't9md/vim-choosewin'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -171,7 +172,6 @@ Plug 'vim-scripts/ingo-library'
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'flazz/vim-colorschemes'
-" Plug 'tomasr/molokai'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -220,6 +220,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" choosewin
+nnoremap <leader>w :ChooseWin<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
