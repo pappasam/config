@@ -1,7 +1,7 @@
 # Set tmux alias
 alias tmux='tmux -2'
 
-[[ $TERM != "screen"  ]] && (exec tmux new -s SR || exec tmux attach -s SR)
+[[ $TERM != "screen"  ]] && (exec tmux new -s SR || echo "")
 
 # Set tmux alias again
 alias tmux='tmux -2'
