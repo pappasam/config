@@ -1,3 +1,11 @@
+# Set tmux alias
+alias tmux='tmux -2'
+
+[[ $TERM != "screen"  ]] && (exec tmux new -s SR || exec tmux attach -s SR)
+
+# Set tmux alias again
+alias tmux='tmux -2'
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -132,8 +140,6 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
 alias publicip='wget -qO - http://ipecho.net/plain ; echo'
-
-alias tmux='tmux -2'
 
 alias g="git status"
 
