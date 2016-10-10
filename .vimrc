@@ -158,6 +158,7 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 't9md/vim-choosewin'
+Plug 'mhinz/vim-startify'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -220,6 +221,10 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" startify
+let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
+        \ 'commands']
 
 " choosewin
 nnoremap <leader>w :ChooseWin<CR>
