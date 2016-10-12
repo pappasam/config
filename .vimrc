@@ -429,7 +429,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc set filetype=dosini
+  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,.pylintrc set filetype=dosini
 augroup END
 nnoremap <leader>jx :set filetype=javascript.jsx<CR>
 nnoremap <leader>jj :set filetype=javascript<CR>
