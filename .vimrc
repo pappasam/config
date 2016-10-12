@@ -163,13 +163,6 @@ Plug 'mhinz/vim-startify'
 " Tagbar
 Plug 'majutsushi/tagbar'
 
-" Static checking
-Plug 'scrooloose/syntastic'
-
-" Requirements for vimdeck
-Plug 'vim-scripts/SyntaxRange'
-Plug 'vim-scripts/ingo-library'
-
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'flazz/vim-colorschemes'
@@ -228,21 +221,6 @@ let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
 
 " choosewin
 nnoremap <leader>w :ChooseWin<CR>
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
-let g:syntastic_python_python_exec = '/usr/bin/env python3'
-let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
-let g:syntastic_python_flake8_args = "--ignore=E123,E124,E126,E128,E302,E731"
-
-nnoremap <leader>sc :write<CR> :SyntasticCheck<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
 
 " Haskell 'neovimhaskell/haskell-vim'
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
