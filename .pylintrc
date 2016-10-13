@@ -15,8 +15,8 @@ load-plugins=
 
 
 [MESSAGES CONTROL]
-#enable=
-disable=W0621, C0103
+# can opt to enable instead if you want
+disable=logging-format-interpolation, bad-continuation
 
 [REPORTS]
 
