@@ -474,8 +474,7 @@ nnoremap gp :bp<CR>
 " Syntax coloring ---------------- {{{
 try
   set t_Co=256 " says terminal has 256 colors
-  " colorscheme Tomorrow-Night
-  colorscheme molokai
+  colorscheme Tomorrow-Night
 catch
 endtry
 " }}}
