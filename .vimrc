@@ -284,7 +284,7 @@ augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
   autocmd BufEnter,BufRead * :RainbowParentheses
-  autocmd BufEnter,BufRead *.html,*.css :RainbowParentheses!
+  autocmd BufEnter,BufRead *.html,*.css,*.jxs,*.js :RainbowParentheses!
 augroup END
 
 " vim-fugitive
@@ -474,7 +474,8 @@ nnoremap gp :bp<CR>
 " Syntax coloring ---------------- {{{
 try
   set t_Co=256 " says terminal has 256 colors
-  colorscheme Tomorrow-Night
+  " colorscheme Tomorrow-Night
+  colorscheme molokai
 catch
 endtry
 " }}}
