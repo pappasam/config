@@ -266,10 +266,15 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_open_multiple_files = '1r'
 
 " Airline
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1 " Show buffer number
-let g:airline#extensions#tabline#fnamemod = ':t'
+function! GetSmallPath()
+  " For /a/b/c/hello, return c/hello
+  return expand('%:p:h:t') . '/' . expand('%:t')
+endfunction
+let g:airline_section_a = airline#section#create(['mode'])
+let g:airline_section_b = airline#section#create_left(['hunks'])
+let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
+let g:airline_section_x = airline#section#create(['branch', 'ffenc'])
+let g:airline_section_y = airline#section#create(['filetype'])
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 let g:airline_inactive_collapse=0
