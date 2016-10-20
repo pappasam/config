@@ -163,6 +163,7 @@ Plug 'mhinz/vim-startify'
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
+" Additional requirement - sudo npm install -g jsctags
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
