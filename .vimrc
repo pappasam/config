@@ -482,6 +482,17 @@ try
   colorscheme Tomorrow-Night
 catch
 endtry
+
+function! ToggleColorScheme()
+  if g:colors_name == 'molokai'
+    execute ':colorscheme Tomorrow-Night'
+  else
+    execute ':colorscheme molokai'
+  endif
+endfunction
+
+nnoremap <silent><leader>s :call ToggleColorScheme()<CR>
+
 " }}}
 " Trailing whitespace ------------- {{{
 augroup fix_whitespace_save
