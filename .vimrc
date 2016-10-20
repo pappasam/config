@@ -161,6 +161,7 @@ Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
 
 " Tagbar
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
 
 " Basic coloring
