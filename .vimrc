@@ -217,6 +217,9 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
+" bufexplorer
+nnoremap <silent><space>l :ToggleBufExplorer<CR>
+
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
         \ 'commands']
