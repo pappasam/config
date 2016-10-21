@@ -218,7 +218,7 @@ call plug#end()
 " Plugin configuration ------------ {{{
 
 " bufexplorer
-nnoremap <silent><space>l :ToggleBufExplorer<CR>
+nnoremap <silent><space>k :ToggleBufExplorer<CR>
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
@@ -353,7 +353,7 @@ let g:tagbar_type_haskell = {
 \ }
 
 " Toggle TagBar, keeping cursor in original window
-nnoremap <silent> <space>k :TagbarToggle <CR>
+nnoremap <silent> <space>l :TagbarToggle <CR>
 "  }}}
 "  Zeal --------- {{{
 
