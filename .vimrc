@@ -481,20 +481,10 @@ nnoremap gp :bp<CR>
 " Syntax coloring ---------------- {{{
 try
   set t_Co=256 " says terminal has 256 colors
-  colorscheme Tomorrow-Night
+  set background=dark
+  colorscheme PaperColor
 catch
 endtry
-
-function! ToggleColorScheme()
-  if g:colors_name == 'molokai'
-    execute ':colorscheme Tomorrow-Night'
-  else
-    execute ':colorscheme molokai'
-  endif
-endfunction
-
-nnoremap <silent><leader>s :call ToggleColorScheme()<CR>
-
 " }}}
 " Trailing whitespace ------------- {{{
 augroup fix_whitespace_save
