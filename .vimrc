@@ -271,11 +271,15 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_open_multiple_files = '1r'
 
 " Airline
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.paste = 'ρ:'
 function! GetSmallPath()
   " For /a/b/c/hello, return c/hello
   return expand('%:p:h:t') . '/' . expand('%:t')
 endfunction
-let g:airline_section_a = airline#section#create(['mode'])
+let g:airline_section_a = airline#section#create(['paste', 'mode'])
 let g:airline_section_b = airline#section#create_left(['hunks'])
 let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
 let g:airline_section_x = airline#section#create(['branch', 'ffenc'])
