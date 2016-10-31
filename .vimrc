@@ -205,7 +205,7 @@ Plug 'heavenshell/vim-jsdoc'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
-Plug 'edsono/vim-matchit'
+Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
