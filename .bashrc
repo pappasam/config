@@ -66,6 +66,9 @@ alias regrep="grep --perl-regexp -Ir \
 --exclude-dir=node_modules \
 --exclude-dir=venv"
 
+# upgrade
+alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+
 #######################################################################
 # Function-based aliases
 #######################################################################
