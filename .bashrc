@@ -185,19 +185,19 @@ interactive="s/^<[^>]*>/$RED&$RESET/g;"
 
 function stack_ghci() {
     stack ghci ${1+"$@"} 2>&1 |\
-      sed "$load_failed\
-	   $load_done\
-	   $no_instance\
-	   $interactive\
-	   $double_colon\
-	   $right_arrow\
-	   $right_arrow2\
-	   $parenthesis\
-	   $left_blacket\
-	   $right_blacket\
-	   $double_colon\
-	   $calc_operators\
-	   $string"
+      sed "$load_failed
+    $load_done\
+    $no_instance\
+    $interactive\
+    $double_colon\
+    $right_arrow\
+    $right_arrow2\
+    $parenthesis\
+    $left_blacket\
+    $right_blacket\
+    $double_colon\
+    $calc_operators\
+    $string"
 }
 
 #######################################################################
