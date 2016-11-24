@@ -456,11 +456,13 @@ augroup quickfix_sr
   autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END
 
-" Remap w <--> W and b <--> B because capital behavior is my normal usecase
+" Remap w <--> W, b <--> B, and e <--> E
 nnoremap w W
 nnoremap W w
 nnoremap b B
 nnoremap B b
+nnoremap e E
+nnoremap E e
 
 " }}}
 " Folding Settings --------------- {{{
