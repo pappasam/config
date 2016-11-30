@@ -261,6 +261,7 @@ nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 " EasyGrep
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepMode = 2 " search only current file extension
+let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 let g:EasyGrepRecursive = 1
 let g:EasyGrepFilesToExclude=".svn,.git,node_modules,venv,build,instance"
 
