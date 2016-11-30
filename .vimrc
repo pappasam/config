@@ -258,12 +258,11 @@ let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]
 " Toggle NERDTree with current buffer dir, keeping cursor in original window
 nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
-" EasyGrep
+" EasyGrep - use git grep
+set grepprg=git\ grep\ -n\ $*
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepMode = 2 " search only current file extension
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
-let g:EasyGrepRecursive = 1
-let g:EasyGrepFilesToExclude=".svn,.git,node_modules,venv,build,instance"
 
 " Ctrl p
 let g:ctrlp_working_path_mode = 'rw' " start from cwd
