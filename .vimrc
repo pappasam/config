@@ -453,7 +453,8 @@ set pastetoggle=fj
 " Quickfix window automatically close after selecting file
 augroup quickfix_sr
   autocmd!
-  autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
+  " did away with this option for now, typing cclose is easy
+  " autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END
 
 " }}}
