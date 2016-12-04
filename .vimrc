@@ -159,6 +159,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
+Plug 'wincent/terminus'
 
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
@@ -216,6 +217,12 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" Stupid easy motion
+map <C-O> <Leader><Leader>w
+
+" Terminus
+let g:TerminusBracketedPaste = 0  " pasting feature messes up tmux
 
 " bufexplorer
 nnoremap <silent><space>k :ToggleBufExplorer<CR>
