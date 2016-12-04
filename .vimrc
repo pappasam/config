@@ -267,7 +267,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
 
 " Toggle NERDTree with current buffer dir, keeping cursor in original window
-nnoremap <silent> <space>j :NERDTreeToggle %<CR> :wincmd p<CR>
+nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
 " EasyGrep - use git grep
 set grepprg=git\ grep\ -n\ $*
