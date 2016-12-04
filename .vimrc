@@ -219,7 +219,7 @@ call plug#end()
 " Plugin configuration ------------ {{{
 
 " Stupid easy motion
-map <C-O> <Leader><Leader>w
+nmap <C-O> <Leader><Leader>w
 
 " Terminus
 let g:TerminusBracketedPaste = 0  " pasting feature messes up tmux
