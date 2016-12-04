@@ -225,7 +225,7 @@ nmap <C-O> <Leader><Leader>w
 let g:TerminusBracketedPaste = 0  " pasting feature messes up tmux
 
 " bufexplorer
-nnoremap <silent><space>k :ToggleBufExplorer<CR>
+nnoremap <silent><space>k :TagbarClose<CR> :ToggleBufExplorer<CR>
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
