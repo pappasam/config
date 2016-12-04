@@ -260,6 +260,10 @@ let g:jsdoc_enable_es6 = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers = 1
+let NERDTreeCaseSensitiveSort = 0
+let NERDTreeWinPos = 'left'
+let NERDTreeWinSize = 37
+let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
 
 " Toggle NERDTree with current buffer dir, keeping cursor in original window
@@ -330,7 +334,12 @@ let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSortBy='fullpath'
 "  }}}
 "  Tagbar Configuration ------ {{{
-let g:tagbar_show_linenumbers=1
+let g:tagbar_show_linenumbers = -1
+let g:tagbar_indent = 1
+let g:tagbar_sort = 1
+let g:tagbar_case_insensitive = 1
+let g:tagbar_width = 37
+let g:tagbar_silent = 1
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
