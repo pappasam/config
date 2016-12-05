@@ -33,7 +33,7 @@
 let mapleader = ","
 let maplocalleader = "\\"
 " }}}
-" Display settings ------------ {{{
+" Display settings / general config ------------ {{{
 
 " Enable buffer deletion instead of having to write each buffer
 set hidden
@@ -74,6 +74,8 @@ augroup cursorline_setting
   autocmd WinEnter,BufEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+
+set spelllang=en_us
 
 " }}}
 " Set number display ------------- {{{
@@ -262,7 +264,7 @@ let g:jsdoc_enable_es6 = 1
 let NERDTreeShowLineNumbers = 1
 let NERDTreeCaseSensitiveSort = 0
 let NERDTreeWinPos = 'left'
-let NERDTreeWinSize = 37
+let NERDTreeWinSize = 31
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
 
