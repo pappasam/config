@@ -154,7 +154,6 @@ Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'joequery/Stupid-EasyMotion'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -229,9 +228,6 @@ nmap <C-O> <Leader><Leader>w
 
 " Terminus
 let g:TerminusBracketedPaste = 0  " pasting feature messes up tmux
-
-" bufexplorer
-nnoremap <silent><space>k :TagbarClose<CR> :ToggleBufExplorer<CR>
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
@@ -335,9 +331,6 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
-" bufexplorer
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerSortBy='fullpath'
 "  }}}
 "  Tagbar Configuration ------ {{{
 let g:tagbar_show_linenumbers = -1
