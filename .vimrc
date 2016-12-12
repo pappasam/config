@@ -155,6 +155,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
@@ -162,6 +163,7 @@ Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
 Plug 'wincent/terminus'
 Plug 'gcmt/taboo.vim'
+Plug 'yssl/QFEnter'
 
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
@@ -220,6 +222,11 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
+" QFEnter config
+let g:qfenter_vopen_map = ['<C-v>']
+let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_topen_map = ['<C-t>']
+
 " Taboo
 cabbrev tr TabooRename
 
@@ -269,7 +276,8 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
 
 " Toggle NERDTree with current buffer dir, keeping cursor in original window
-nnoremap <silent> <space>j :NERDTreeToggle %<CR>
+" nnoremap <silent> <space>j :NERDTreeToggle %<CR>
+nnoremap <silent> <space>j :NERDTreeTabsToggle<CR>
 
 " EasyGrep - use git grep
 set grepprg=git\ grep\ -n\ $*
