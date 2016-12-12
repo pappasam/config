@@ -162,6 +162,7 @@ Plug 'dkprice/vim-easygrep'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
 Plug 'wincent/terminus'
+Plug 'gcmt/taboo.vim'
 
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
@@ -219,6 +220,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" Taboo
+cabbrev tr TabooRename
 
 " Stupid easy motion
 nmap <C-O> <Leader><Leader>w
@@ -474,6 +478,10 @@ augroup quickfix_sr
   " did away with this option for now, typing cclose is easy
   " autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>:cclose<CR>
 augroup END
+
+" moving forward and backward with vim tabs
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
 
 " }}}
 " Folding Settings --------------- {{{
