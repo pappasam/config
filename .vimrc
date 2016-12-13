@@ -282,7 +282,6 @@ nnoremap <silent> <space>j :NERDTreeTabsToggle<CR>
 " EasyGrep - use git grep
 set grepprg=git\ grep\ -n\ $*
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
-let g:EasyGrepMode = 2 " search only current file extension
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 
 " Ctrl p
