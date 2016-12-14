@@ -164,6 +164,7 @@ Plug 'mhinz/vim-startify'
 Plug 'wincent/terminus'
 Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
+Plug 'djoshea/vim-autoread'
 
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
