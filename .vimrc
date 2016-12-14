@@ -229,6 +229,8 @@ let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_topen_map = ['<C-t>']
 
 " Taboo
+let g:taboo_tab_format = ' [tab %N]%m '
+let g:taboo_renamed_tab_format = ' [%l]%m '
 cabbrev tr TabooRename
 
 " Stupid easy motion
