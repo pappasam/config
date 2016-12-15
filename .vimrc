@@ -92,39 +92,40 @@ endfunction
 
 function! RNUInsertEnter()
   if &rnu
-    let b:line_number_state = 'rnu'
+    let w:line_number_state = 'rnu'
     set norelativenumber
   else
-    let b:line_number_state = 'nornu'
+    let w:line_number_state = 'nornu'
   endif
 endfunction
 
 function! RNUInsertLeave()
-  if b:line_number_state == 'rnu'
+  if w:line_number_state == 'rnu'
     set relativenumber
   else
     set norelativenumber
+    let w:line_number_state = 'nornu'
   endif
 endfunction
 
-function! RNUBufEnter()
-  if exists('b:line_number_state')
-    if b:line_number_state == 'rnu'
+function! RNUWinEnter()
+  if exists('w:line_number_state')
+    if w:line_number_state == 'rnu'
       set relativenumber
     else
       set norelativenumber
     endif
   else
     set relativenumber
-    let b:line_number_state = 'rnu'
+    let w:line_number_state = 'rnu'
   endif
 endfunction
 
-function! RNUBufLeave()
+function! RNUWinLeave()
   if &rnu
-    let b:line_number_state = 'rnu'
+    let w:line_number_state = 'rnu'
   else
-    let b:line_number_state = 'nornu'
+    let w:line_number_state = 'nornu'
   endif
   set norelativenumber
 endfunction
@@ -133,15 +134,21 @@ endfunction
 
 " Toggle relative number status
 nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
+
+" autocmd that will set up the w:created variable
+autocmd VimEnter * autocmd WinEnter * let w:created=1
+autocmd VimEnter * let w:created=1
+set number relativenumber
 augroup rnu_nu
   autocmd!
+  "Initial window settings
+  autocmd WinEnter * if !exists('w:created') | setlocal number relativenumber | endif
   " Don't have relative numbers during insert mode
   autocmd InsertEnter * :call RNUInsertEnter()
   autocmd InsertLeave * :call RNUInsertLeave()
   " Set and unset relative numbers when buffer is active
-  autocmd BufNew,BufEnter * :call RNUBufEnter()
-  autocmd BufLeave * :call RNUBufLeave()
-  autocmd BufNewFile,BufRead,BufEnter * set number
+  autocmd WinEnter * :call RNUWinEnter()
+  autocmd WinLeave * :call RNUWinLeave()
 augroup end
 
 " }}}
@@ -346,6 +353,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 "  }}}
 "  Tagbar Configuration ------ {{{
 let g:tagbar_show_linenumbers = -1
+let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
 let g:tagbar_sort = 0  " order by order in sort file
 let g:tagbar_case_insensitive = 1
