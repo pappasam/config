@@ -77,6 +77,8 @@ augroup END
 
 set spelllang=en_us
 
+set showtabline=2
+
 " }}}
 " Set number display ------------- {{{
 
