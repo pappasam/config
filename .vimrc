@@ -347,7 +347,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 "  Tagbar Configuration ------ {{{
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_indent = 1
-let g:tagbar_sort = 1
+let g:tagbar_sort = 0  " order by order in sort file
 let g:tagbar_case_insensitive = 1
 let g:tagbar_width = 37
 let g:tagbar_silent = 1
