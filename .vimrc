@@ -79,77 +79,7 @@ set spelllang=en_us
 
 set showtabline=2
 
-" }}}
-" Set number display ------------- {{{
-
-function! ToggleRelativeNumber()
-  if &rnu
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunction
-
-function! RNUInsertEnter()
-  if &rnu
-    let w:line_number_state = 'rnu'
-    set norelativenumber
-  else
-    let w:line_number_state = 'nornu'
-  endif
-endfunction
-
-function! RNUInsertLeave()
-  if w:line_number_state == 'rnu'
-    set relativenumber
-  else
-    set norelativenumber
-    let w:line_number_state = 'nornu'
-  endif
-endfunction
-
-function! RNUWinEnter()
-  if exists('w:line_number_state')
-    if w:line_number_state == 'rnu'
-      set relativenumber
-    else
-      set norelativenumber
-    endif
-  else
-    set relativenumber
-    let w:line_number_state = 'rnu'
-  endif
-endfunction
-
-function! RNUWinLeave()
-  if &rnu
-    let w:line_number_state = 'rnu'
-  else
-    let w:line_number_state = 'nornu'
-  endif
-  set norelativenumber
-endfunction
-
-" Set mappings for relative numbers
-
-" Toggle relative number status
-nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
-
-" autocmd that will set up the w:created variable
-autocmd VimEnter * autocmd WinEnter * let w:created=1
-autocmd VimEnter * let w:created=1
-set number relativenumber
-augroup rnu_nu
-  autocmd!
-  "Initial window settings
-  autocmd WinEnter * if !exists('w:created') | setlocal number relativenumber | endif
-  " Don't have relative numbers during insert mode
-  autocmd InsertEnter * :call RNUInsertEnter()
-  autocmd InsertLeave * :call RNUInsertLeave()
-  " Set and unset relative numbers when buffer is active
-  autocmd WinEnter * :call RNUWinEnter()
-  autocmd WinLeave * :call RNUWinLeave()
-augroup end
+set autoread
 
 " }}}
 " Plugins --------------------- {{{
@@ -170,7 +100,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
-Plug 'wincent/terminus'
 Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
@@ -244,9 +173,6 @@ cabbrev tr TabooRename
 
 " Stupid easy motion
 nmap <C-O> <Leader><Leader>w
-
-" Terminus
-let g:TerminusBracketedPaste = 0  " pasting feature messes up tmux
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
@@ -394,6 +320,79 @@ let g:tagbar_type_haskell = {
 " Toggle TagBar, keeping cursor in original window
 nnoremap <silent> <space>l :TagbarToggle <CR>
 "  }}}
+" Set number display ------------- {{{
+
+function! ToggleRelativeNumber()
+  if &rnu
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
+
+function! RNUInsertEnter()
+  if &rnu
+    let w:line_number_state = 'rnu'
+    set norelativenumber
+  else
+    let w:line_number_state = 'nornu'
+  endif
+endfunction
+
+function! RNUInsertLeave()
+  if w:line_number_state == 'rnu'
+    set relativenumber
+  else
+    set norelativenumber
+    let w:line_number_state = 'nornu'
+  endif
+endfunction
+
+function! RNUWinEnter()
+  if exists('w:line_number_state')
+    if w:line_number_state == 'rnu'
+      set relativenumber
+    else
+      set norelativenumber
+    endif
+  else
+    set relativenumber
+    let w:line_number_state = 'rnu'
+  endif
+endfunction
+
+function! RNUWinLeave()
+  if &rnu
+    let w:line_number_state = 'rnu'
+  else
+    let w:line_number_state = 'nornu'
+  endif
+  set norelativenumber
+endfunction
+
+" Set mappings for relative numbers
+
+" Toggle relative number status
+nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
+
+" autocmd that will set up the w:created variable
+autocmd VimEnter * autocmd WinEnter * let w:created=1
+autocmd VimEnter * let w:created=1
+set number relativenumber
+augroup rnu_nu
+  autocmd!
+  "Initial window settings
+  autocmd WinEnter * if !exists('w:created') | setlocal number relativenumber | endif
+  " Don't have relative numbers during insert mode
+  autocmd InsertEnter * :call RNUInsertEnter()
+  autocmd InsertLeave * :call RNUInsertLeave()
+  " Set and unset relative numbers when buffer is active
+  autocmd WinEnter * :call RNUWinEnter()
+  autocmd WinLeave * :call RNUWinLeave()
+augroup end
+
+
+" }}}
 "  Zeal --------- {{{
 
 " Zeal documentation functions to search zeal from both normal mode
