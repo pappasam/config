@@ -277,6 +277,10 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
+" indentlines
+let g:indentLine_enabled = 0  " indentlines disabled by default
+nnoremap <silent> <leader>i :IndentLinesToggle<CR>
+
 "  }}}
 "  Tagbar Configuration ------ {{{
 let g:tagbar_show_linenumbers = -1
@@ -467,6 +471,7 @@ augroup filetype_vim
 augroup END
 
 augroup quick_fix_move_bottom
+  autocmd!
   autocmd FileType qf wincmd J
 augroup END
 " }}}
@@ -536,6 +541,7 @@ endtry
 " }}}
 " Trailing whitespace ------------- {{{
 augroup fix_whitespace_save
+  autocmd!
   let blacklist = ['markdown']
   autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
 augroup END
