@@ -140,6 +140,7 @@ Plug 'neovimhaskell/haskell-vim'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'Yggdroot/indentLine'
 
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript', { 'branch': 'develop' }
