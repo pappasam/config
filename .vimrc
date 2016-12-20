@@ -92,7 +92,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
-Plug 'joequery/Stupid-EasyMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'troydm/zoomwintab.vim'
@@ -103,6 +102,7 @@ Plug 'mhinz/vim-startify'
 Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
+Plug 'justinmk/vim-sneak'
 
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
@@ -170,9 +170,6 @@ let g:qfenter_topen_map = ['<C-t>']
 " Taboo
 let g:taboo_tab_format = ' [tab %N]%m '
 let g:taboo_renamed_tab_format = ' [%l]%m '
-
-" Stupid easy motion
-nmap <C-O> <Leader><Leader>w
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
