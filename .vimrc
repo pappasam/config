@@ -508,6 +508,11 @@ cabbrev bs sbuffer
 " make it easier to type TabooRename
 cabbrev : TabooRename
 
+" fix misspelling of ls
+cabbrev LS ls
+cabbrev lS ls
+cabbrev Ls ls
+
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
