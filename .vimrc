@@ -500,7 +500,8 @@ nnoremap <S-Tab> gT
 " }}}
 " Command abbreviations ------------------------ {{{
 
-" abbreviate creating vertical buffer splits and horizontal buffer splits
+" abbreviate creating tab, vertical, and horizontal buffer splits
+cabbrev bt tab sb
 cabbrev bv vert sb
 cabbrev bs sbuffer
 
