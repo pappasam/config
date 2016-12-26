@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script sets up my configuration files
+# This script sets up my configuration dotfiles
 
 set -e
 
