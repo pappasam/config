@@ -513,6 +513,9 @@ cabbrev LS ls
 cabbrev lS ls
 cabbrev Ls ls
 
+" Plug update and upgrade
+cabbrev pu PlugUpdate <BAR> PlugUpgrade
+
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
