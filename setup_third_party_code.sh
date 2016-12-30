@@ -4,7 +4,7 @@
 
 set -e
 
-INSTALL="apt-get install -y"
+INSTALL="apt install -y"
 
 #######################################################################
 # Build, version control, and getting code for elsewhere
@@ -53,3 +53,9 @@ $INSTALL nodejs
 # Bluetooth
 #######################################################################
 $INSTALL blueman
+
+#######################################################################
+# Diagramming
+#######################################################################
+$INSTALL graphviz
+$INSTALL plantuml
