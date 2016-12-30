@@ -137,6 +137,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'aklt/plantuml-syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
