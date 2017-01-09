@@ -118,9 +118,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
-" C-syntax
-Plug 'justinmk/vim-syntax-extra'
-
 " Language-specific syntax
 Plug 'derekwyatt/vim-scala',
 Plug 'wting/rust.vim'
@@ -138,6 +135,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'aklt/plantuml-syntax'
+Plug 'NLKNguyen/c-syntax.vim'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
