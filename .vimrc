@@ -227,6 +227,7 @@ let g:ctrlp_working_path_mode = 'rw' " start from cwd
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 " open first in current window and others as hidden
 let g:ctrlp_open_multiple_files = '1r'
+let g:ctrlp_use_caching = 0
 
 " Airline
 set laststatus=2
