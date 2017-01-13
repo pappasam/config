@@ -253,6 +253,19 @@ let g:airline_section_y = airline#section#create(['ffenc'])
 let g:airline_section_z = airline#section#create(['%c'])  " just show col num
 let g:airline_powerline_fonts = 1
 let g:airline_inactive_collapse=0
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'ℕ',
+    \ 'i'  : 'ⅈ',
+    \ 'R'  : 'ℛ',
+    \ 'c'  : 'ℂ',
+    \ 'v'  : '℣',
+    \ 'V'  : '℣',
+    \ '' : '℣',
+    \ 's'  : '₷',
+    \ 'S'  : '₷',
+    \ '' : '₷',
+    \ }
 
 " Rainbow
 let g:rainbow#max_level = 16
