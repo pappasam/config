@@ -225,25 +225,29 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_open_multiple_files = '1r'
 
 " Airline
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+let g:airline_theme='powerlineish'
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_symbols.paste = 'ρ:'
+let g:airline_symbols.space = "\ua0"
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.spell = 'Ꞩ'
 function! GetSmallPath()
   " For /a/b/c/hello, return c/hello
   return expand('%:p:h:t') . '/' . expand('%:t')
 endfunction
-let g:airline_section_a = airline#section#create(['paste', 'mode'])
-let g:airline_section_b = airline#section#create_left(['hunks'])
 let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
-let g:airline_section_x = airline#section#create(['branch', 'ffenc'])
-let g:airline_section_y = airline#section#create(['filetype'])
+let g:airline_section_x = airline#section#create(['filetype'])
+let g:airline_section_y = airline#section#create(['ffenc'])
+let g:airline_section_z = airline#section#create(['%c'])  " just show col num
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
 let g:airline_inactive_collapse=0
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
 
 " Rainbow
 let g:rainbow#max_level = 16
