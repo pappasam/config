@@ -136,6 +136,7 @@ Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
@@ -160,6 +161,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" C++
+let g:cpp_experimental_simple_template_highlight = 1
 
 " QFEnter config
 let g:qfenter_vopen_map = ['<C-v>']
