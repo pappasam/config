@@ -264,7 +264,12 @@ augroup rainbow_settings
 augroup END
 
 " vim-fugitive
+" DO NOT USE THESE MAPPINGS FOR NOW
+" https://github.com/tpope/vim-fugitive/issues/648
+" fugitive and vim-airline overlap; TPope needs to fix some bugs
+" date of note: 2017-01-13
 nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>g. :Git add .<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
 nnoremap <leader>gt :Gcommit -v -q %:p<CR>
