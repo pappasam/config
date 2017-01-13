@@ -248,9 +248,9 @@ function! GetSmallPath()
   return expand('%:p:h:t') . '/' . expand('%:t')
 endfunction
 let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
-let g:airline_section_x = airline#section#create(['%c'])  " just show col num
+let g:airline_section_x = airline#section#create(['filetype'])
 let g:airline_section_y = airline#section#create(['ffenc'])
-let g:airline_section_z = airline#section#create(['filetype'])
+let g:airline_section_z = airline#section#create(['%c'])  " just show col num
 let g:airline_powerline_fonts = 1
 let g:airline_inactive_collapse=0
 let g:airline_mode_map = {
