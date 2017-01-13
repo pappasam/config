@@ -539,6 +539,9 @@ cabbrev LS ls
 cabbrev lS ls
 cabbrev Ls ls
 
+" echo current file path
+cabbrev fp echo expand('%:p')
+
 " Plug update and upgrade
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
 
