@@ -5,6 +5,7 @@
 set -e
 
 INSTALL="apt install -y"
+REMOVE="apt remove -y"
 
 #######################################################################
 # Build, version control, and getting code for elsewhere
@@ -14,9 +15,14 @@ $INSTALL build-essential
 $INSTALL curl
 
 #######################################################################
-# Vim
+# Vim 8
 #######################################################################
-$INSTALL vim
+if [ ! -f /usr/bin/vim ]; then
+  $REMOVE vim
+fi
+add-apt-repository ppa:jonathonf/vim
+apt update
+$INSTALL vim vim-nox
 # vim-plug: the best vim plugin manager as of December 25, 2016
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim curl
