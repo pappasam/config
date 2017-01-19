@@ -278,7 +278,8 @@ augroup rainbow_settings
 augroup END
 
 " vim-fugitive
-" DO NOT USE THESE MAPPINGS FOR NOW
+" DO NOT USE THESE MAPPINGS BELOW Vim version 8
+" version 8 solves some async issues
 " https://github.com/tpope/vim-fugitive/issues/648
 " fugitive and vim-airline overlap; TPope needs to fix some bugs
 " date of note: 2017-01-13
