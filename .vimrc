@@ -512,6 +512,12 @@ augroup END
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
+" placing commas one line down
+" usable with repeat operator '.'
+nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
+      \:call repeat#set("\<Plug>NewLineComma")<CR>
+nmap <leader><CR> <Plug>NewLineComma
+
 " }}}
 " Command abbreviations ------------------------ {{{
 
