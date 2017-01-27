@@ -10,7 +10,7 @@ Below are the GUI configurations for my optimal config:
 
 * Window borders: Windows 10
 * Icons: Mint-X
-* Controls: Mint-Y Dark
+* Controls: Windows 10
 * Mouse Pointer: DMZ-White
 * Desktop: Windows 10
 
