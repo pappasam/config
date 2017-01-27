@@ -540,9 +540,6 @@ cabbrev fp echo expand('%:p')
 " Plug update and upgrade
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
 
-" Cursorline
-cabbrev cl setlocal cursorline!
-
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
