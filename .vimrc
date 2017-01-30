@@ -229,43 +229,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_open_multiple_files = '1r'
 let g:ctrlp_use_caching = 0
 
-" Airline
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-let g:airline_theme='powerlineish'
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.spell = 'Ꞩ'
-function! GetSmallPath()
-  " For /a/b/c/hello, return c/hello
-  return expand('%:p:h:t') . '/' . expand('%:t')
-endfunction
-let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
-let g:airline_section_x = airline#section#create(['楹%c'])  " 楹%c = Column num
-let g:airline_section_y = airline#section#create(['ffenc'])
-let g:airline_section_z = airline#section#create(['filetype'])
-let g:airline_powerline_fonts = 1
-let g:airline_inactive_collapse=0
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'ℕ',
-    \ 'i'  : 'ⅈ',
-    \ 'R'  : 'ℛ',
-    \ 'c'  : 'ℂ',
-    \ 'v'  : '℣',
-    \ 'V'  : '℣',
-    \ '' : '℣',
-    \ 's'  : '₷',
-    \ 'S'  : '₷',
-    \ '' : '₷',
-    \ }
 
 " Rainbow
 let g:rainbow#max_level = 16
@@ -293,6 +256,44 @@ let g:indentLine_enabled = 0  " indentlines disabled by default
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
 "  }}}
+" Airline Configuration ---------------- {{{
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+let g:airline_theme='powerlineish'
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.spell = 'Ꞩ'
+function! GetSmallPath()
+  " For /a/b/c/hello, return c/hello
+  return expand('%:p:h:t') . '/' . expand('%:t')
+endfunction
+let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
+let g:airline_section_x = airline#section#create(['⛩ %c'])  " 楹%c = Column num
+let g:airline_section_y = airline#section#create(['ffenc'])
+let g:airline_section_z = airline#section#create(['filetype'])
+let g:airline_powerline_fonts = 1
+let g:airline_inactive_collapse=0
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'ℕ',
+    \ 'i'  : 'ⅈ',
+    \ 'R'  : 'ℛ',
+    \ 'c'  : 'ℂ',
+    \ 'v'  : '℣',
+    \ 'V'  : '℣',
+    \ '' : '℣',
+    \ 's'  : '₷',
+    \ 'S'  : '₷',
+    \ '' : '₷',
+    \ }
+" }}}
 "  Tagbar Configuration ------ {{{
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_autofocus = 1
