@@ -155,12 +155,18 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 
+" C and C++
+Plug 'derekwyatt/vim-fswitch'
+
 " Rainbow
 Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" fswitch - change from .c/.cpp to .h
+nnoremap <silent> <leader>h :FSHere<cr>
 
 " C++
 let g:cpp_experimental_simple_template_highlight = 1
