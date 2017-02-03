@@ -19,6 +19,11 @@ Below are the GUI configurations for my optimal config:
 
 Turn off all effects other than "Overlay scroll bars"
 
+## Workspaces
+
+Within settings, check on "Allow cycling through workspaces"
+and "Display Expo as a grid".
+
 ## Keyboard
 
 The following keyboard shortcuts and mappings make it easier
@@ -27,7 +32,10 @@ to do things without moving my hands from the home row.
 ### Shortcuts
 
 1. **General**
-  1. Troubleshooting
+  1. Main
+    * Toggle Scale : Ctrl+Alt+J
+    * Toggle Expo : Ctrl+Alt+K
+  2. Troubleshooting
     * Toggle Looking Glass : REMOVE BINDING (conflicts with Shift+Super+L)
 2. **System**
   1. Main
@@ -36,6 +44,11 @@ to do things without moving my hands from the home row.
   1. Main
     * Switch to left workspace: Ctrl+Alt+H
     * Switch to right workspace: Ctrl+Alt+L
+  2. Direct Navigation
+    * Switch to workspace 1 : Ctrl+Alt+1
+    * Switch to workspace 2 : Ctrl+Alt+2
+    * Switch to workspace 3 : Ctrl+Alt+3
+    * Switch to workspace 4 : Ctrl+Alt+4
 4. **Windows**
   1. Main
     * Toggle fullscreen state : Super+F
@@ -59,7 +72,6 @@ to do things without moving my hands from the home row.
 
 * Options
   * Ctrl key position: Caps Lock as Ctrl
-
 
 ## Date and Time
 
