@@ -111,7 +111,7 @@ Plug 'majutsushi/tagbar'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'flazz/vim-colorschemes'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Utils
 Plug 'tpope/vim-commentary'
