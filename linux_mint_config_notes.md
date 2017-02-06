@@ -19,11 +19,6 @@ Below are the GUI configurations for my optimal config:
 
 Turn off all effects other than "Overlay scroll bars"
 
-## Workspaces
-
-Within settings, check on "Allow cycling through workspaces"
-and "Display Expo as a grid".
-
 ## Keyboard
 
 The following keyboard shortcuts and mappings make it easier
