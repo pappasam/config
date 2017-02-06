@@ -177,7 +177,8 @@ let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_topen_map = ['<C-t>']
 
 " Taboo
-let g:taboo_tab_format = ' [tab %N]%m '
+" Tab format hardcoded to main for now since I often do this anyway
+let g:taboo_tab_format = ' [main %N]%m '
 let g:taboo_renamed_tab_format = ' [%l]%m '
 
 " startify

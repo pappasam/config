@@ -52,6 +52,7 @@ to do things without moving my hands from the home row.
 4. **Windows**
   1. Main
     * Toggle fullscreen state : Super+F
+    * Close window : Alt+Q
   2. Tiling and Snapping
     * Push tile left : Super+H
     * Push tile right : Super+L
