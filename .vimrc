@@ -111,7 +111,7 @@ Plug 'majutsushi/tagbar'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'pappasam/papercolor-theme', { 'branch': 'PYTHON_BUILTIN' }
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -164,6 +164,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" Papercolor
+let g:PaperColor_Python_Highlight_Builtins = 1
 
 " fswitch - change from .c/.cpp to .h
 nnoremap <silent> <leader>h :FSHere<cr>
