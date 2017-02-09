@@ -581,6 +581,11 @@ nnoremap gn :bn<CR>
 nnoremap gd :BD<CR>
 nnoremap gp :bp<CR>
 
+" Navigate within one window
+nnoremap gt H
+nnoremap gb L
+nnoremap g. M
+
 " }}}
 " Syntax coloring ---------------- {{{
 try
