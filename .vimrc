@@ -111,7 +111,7 @@ Plug 'majutsushi/tagbar'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'pappasam/papercolor-theme', { 'branch': 'PYTHON_BUILTIN' }
+Plug 'pappasam/papercolor-theme', { 'branch': 'LANGUAGE_COLOR_OVERRIDES' }
 
 " Utils
 Plug 'tpope/vim-commentary'
