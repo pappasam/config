@@ -594,6 +594,12 @@ try
   colorscheme PaperColor
 catch
 endtry
+
+" Highlight self keyword in class definitions
+augroup python
+  autocmd!
+  autocmd FileType python syn keyword Keyword self
+augroup end
 " }}}
 " Trailing whitespace ------------- {{{
 augroup fix_whitespace_save
