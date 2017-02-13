@@ -546,6 +546,14 @@ cabbrev LS ls
 cabbrev lS ls
 cabbrev Ls ls
 
+" fix misspelling of vs and sp
+cabbrev SP sp
+cabbrev sP sp
+cabbrev Sp sp
+cabbrev VS vs
+cabbrev vS vs
+cabbrev Vs vs
+
 " echo current file path
 cabbrev fp echo expand('%:p')
 
