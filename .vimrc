@@ -107,7 +107,10 @@ Plug 'justinmk/vim-sneak'
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
-" Additional requirement - sudo npm install -g jsctags
+Plug 'lvht/tagbar-markdown'
+" Additional requirements
+"   sudo npm install -g jsctags
+"   sudo apt install -y php
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
