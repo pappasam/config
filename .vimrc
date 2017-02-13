@@ -595,10 +595,11 @@ try
 catch
 endtry
 
-" Highlight self keyword in class definitions
+" Highlight self and cls keyword in class definitions
 augroup python
   autocmd!
   autocmd FileType python syn keyword pythonBuiltinObj self
+  autocmd FileType python syn keyword pythonBuiltinObj cls
 augroup end
 " }}}
 " Trailing whitespace ------------- {{{
