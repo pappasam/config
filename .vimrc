@@ -598,7 +598,7 @@ endtry
 " Highlight self keyword in class definitions
 augroup python
   autocmd!
-  autocmd FileType python syn keyword Keyword self
+  autocmd FileType python syn keyword pythonBuiltinObj self
 augroup end
 " }}}
 " Trailing whitespace ------------- {{{
