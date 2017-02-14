@@ -75,3 +75,14 @@ to do things without moving my hands from the home row.
 ## Date and Time
 
 All options off except for "Display the date"
+
+## Applets
+
+Some system configurations must be configured within the applets menu.
+
+### Main cinnamon menu
+
+1. Menu
+  1. Chrome Apps
+    * disable all of them, pinning necessary ones to panel before
+    * necessary because chrome apps are annoyingly searched when "chrome" is typed
