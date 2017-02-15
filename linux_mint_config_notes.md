@@ -62,7 +62,8 @@ to do things without moving my hands from the home row.
     * Move window to up monitor: Shift+Super+K
     * Move window to down monitor: Shift+Super+J
 5. **Launchers**
-  * Launch terminal: Ctrl+Alt+i
+  * Launch terminal : Ctrl+Alt+i
+  * Launch web browser : Ctrl+Alt+B
 6. **System**
   1. Hardware
     * Re-detect display devices: remove the Super+P shortcut (easy to hit accidentailly)
