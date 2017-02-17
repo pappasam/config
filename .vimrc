@@ -163,6 +163,9 @@ Plug 'derekwyatt/vim-fswitch'
 " Rainbow
 Plug 'junegunn/rainbow_parentheses.vim'
 
+" Writing
+Plug 'dkarter/bullets.vim'
+
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
@@ -635,6 +638,14 @@ augroup END
 " Writing ------------------ {{{
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
+
+" Bullets.vim
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
 augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
