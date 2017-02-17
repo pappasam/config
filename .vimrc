@@ -93,7 +93,6 @@ Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'troydm/zoomwintab.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dkprice/vim-easygrep'
@@ -225,10 +224,7 @@ let NERDTreeWinPos = 'left'
 let NERDTreeWinSize = 31
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
-
-" Toggle NERDTree with current buffer dir, keeping cursor in original window
-" nnoremap <silent> <space>j :NERDTreeToggle %<CR>
-nnoremap <silent> <space>j :NERDTreeTabsToggle<CR>
+nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
 " EasyGrep - use git grep
 set grepprg=git\ grep\ -n\ $*
