@@ -113,7 +113,8 @@ Plug 'lvht/tagbar-markdown'
 
 " Basic coloring
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
+Plug 'pappasam/papercolor-theme', { 'branch': 'CPP_STANDARD_LIBRARY' }
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -172,6 +173,8 @@ call plug#end()
 
 " Papercolor
 let g:PaperColor_Python_Highlight_Builtins = 1
+let g:PaperColor_CPP_Highlight_Standard_Library = 1
+let g:PaperColor_C_Highlight_Builtins = 1
 
 " fswitch - change from .c/.cpp to .h
 nnoremap <silent> <leader>h :FSHere<cr>
