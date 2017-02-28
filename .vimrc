@@ -621,6 +621,9 @@ augroup fix_whitespace_save
   autocmd!
   let blacklist = ['markdown']
   autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
+  " turn off trailing whitespace for markdown
+  autocmd FileType * unlet! g:airline#extensions#whitespace#checks
+  autocmd FileType markdown let g:airline#extensions#whitespace#checks = [ 'indent'  ]
 augroup END
 " }}}
 " Tabs versus Spaces ( Indentation )------------- {{{
