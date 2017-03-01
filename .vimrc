@@ -197,8 +197,8 @@ let g:qfenter_topen_map = ['<C-t>']
 
 " Taboo
 " Tab format hardcoded to main for now since I often do this anyway
-let g:taboo_tab_format = ' [main %N]%m '
-let g:taboo_renamed_tab_format = ' [%l]%m '
+let g:taboo_tab_format = ' [%N:tab]%m '
+let g:taboo_renamed_tab_format = ' [%N:%l]%m '
 
 " startify
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
@@ -567,6 +567,9 @@ cabbrev Sp sp
 cabbrev VS vs
 cabbrev vS vs
 cabbrev Vs vs
+
+" move tab to number
+cabbrev t tabn
 
 " echo current file path
 cabbrev fp echo expand('%:p')
