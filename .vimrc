@@ -112,8 +112,7 @@ Plug 'lvht/tagbar-markdown'
 "   sudo apt install -y php
 
 " Basic coloring
-" Plug 'NLKNguyen/papercolor-theme'
-Plug 'pappasam/papercolor-theme', { 'branch': 'REFACTOR_LANGUAGE' }
+Plug 'NLKNguyen/papercolor-theme'
 
 " Utils
 Plug 'tpope/vim-commentary'
