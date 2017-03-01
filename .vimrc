@@ -112,7 +112,6 @@ Plug 'lvht/tagbar-markdown'
 "   sudo apt install -y php
 
 " Basic coloring
-Plug 'bronson/vim-trailing-whitespace'
 " Plug 'NLKNguyen/papercolor-theme'
 Plug 'pappasam/papercolor-theme', { 'branch': 'CPP_STANDARD_LIBRARY' }
 
@@ -617,14 +616,29 @@ augroup python
 augroup end
 " }}}
 " Trailing whitespace ------------- {{{
+
+function! TrimWhitespace()
+  if &ft == 'markdown'
+    return
+  endif
+  let l:save = winsaveview()
+  %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+augroup whitespace_color
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+augroup END
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+$/
+
 augroup fix_whitespace_save
   autocmd!
-  let blacklist = ['markdown']
-  autocmd BufWritePre * if index(blacklist, &ft) < 0 | execute ':FixWhitespace'
-  " turn off trailing whitespace for markdown
+  autocmd BufWritePre * call TrimWhitespace()
   autocmd FileType * unlet! g:airline#extensions#whitespace#checks
   autocmd FileType markdown let g:airline#extensions#whitespace#checks = [ 'indent'  ]
 augroup END
+
 " }}}
 " Tabs versus Spaces ( Indentation )------------- {{{
 
