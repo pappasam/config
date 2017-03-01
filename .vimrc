@@ -113,7 +113,7 @@ Plug 'lvht/tagbar-markdown'
 
 " Basic coloring
 " Plug 'NLKNguyen/papercolor-theme'
-Plug 'pappasam/papercolor-theme', { 'branch': 'CPP_STANDARD_LIBRARY' }
+Plug 'pappasam/papercolor-theme', { 'branch': 'REFACTOR_LANGUAGE' }
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -171,9 +171,19 @@ call plug#end()
 " Plugin configuration ------------ {{{
 
 " Papercolor
-let g:PaperColor_Python_Highlight_Builtins = 1
-let g:PaperColor_CPP_Highlight_Standard_Library = 1
-let g:PaperColor_C_Highlight_Builtins = 1
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
 
 " fswitch - change from .c/.cpp to .h
 nnoremap <silent> <leader>h :FSHere<cr>
