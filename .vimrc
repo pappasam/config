@@ -627,10 +627,11 @@ function! TrimWhitespace()
 endfunction
 
 augroup whitespace_color
-  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 augroup END
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$/
+highlight EOLWS ctermbg=darkgreen guibg=darkgreen
 
 augroup fix_whitespace_save
   autocmd!
