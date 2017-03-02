@@ -103,14 +103,6 @@ Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'justinmk/vim-sneak'
 
-" Tagbar
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
-Plug 'majutsushi/tagbar'
-Plug 'lvht/tagbar-markdown'
-" Additional requirements
-"   sudo npm install -g jsctags
-"   sudo apt install -y php
-
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -128,6 +120,7 @@ Plug 'elzr/vim-json',
 Plug 'vimoutliner/vimoutliner'
 Plug 'cespare/vim-toml'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'ElmCast/elm-vim'
 Plug 'mopp/rik_octave.vim'
@@ -138,6 +131,14 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+" Tagbar
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
+Plug 'majutsushi/tagbar'
+Plug 'lvht/tagbar-markdown'
+" Additional requirements
+"   sudo npm install -g jsctags
+"   sudo apt install -y php
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
