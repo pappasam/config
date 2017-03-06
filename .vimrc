@@ -491,6 +491,7 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " Python
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 1
 " mappings
 let g:jedi#goto_command = "<leader>sd"
 let g:jedi#goto_assignments_command = "<leader>sg"
@@ -503,7 +504,7 @@ let g:tern_show_argument_hints = 1
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
-  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDef<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDefTab<CR>
   autocmd FileType javascript nnoremap <buffer> <leader>sk :TernDoc<CR>
 augroup END
 
