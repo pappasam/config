@@ -478,6 +478,21 @@ augroup quick_fix_move_bottom
   autocmd FileType qf wincmd J
 augroup END
 " }}}
+"  Code Completion Config ------------ {{{
+"  Documentation for Jedi
+" * Completion <C-Space>
+" * Goto assignments <leader>g (typical goto function)
+" * Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
+" * Show Documentation/Pydoc K (shows a popup with assignments)
+" * Renaming <leader>r
+" * Usages <leader>n (shows all the usages of a name)
+" * Open module, e.g. :Pyimport os (opens the os module)
+augroup javascript_complete
+  autocmd!
+  autocmd FileType javascript nnoremap <buffer> <leader>d :TernDef<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>K :TernDoc<CR>
+augroup END
+"  }}}
 " General Key remappings ----------------------- {{{
 
 " Move up and down visually only if count is specified before
