@@ -481,28 +481,32 @@ augroup END
 " }}}
 "  Code Completion Config ------------ {{{
 
+" NOTE: General remappings
+" 1) go to file containing definition: <leader>sd
+" 2) look at documentation: <leader>sk
+
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " Python
-"  Documentation for Jedi
-" * Completion <C-Space>
-" * Goto assignments <leader>g (typical goto function)
-" * Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
-" * Show Documentation/Pydoc K (shows a popup with assignments)
-" * Renaming <leader>r
-" * Usages <leader>n (shows all the usages of a name)
-" * Open module, e.g. :Pyimport os (opens the os module)
+" Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
+" mappings
+let g:jedi#goto_command = "<leader>sd"
+let g:jedi#goto_assignments_command = "<leader>sg"
+let g:jedi#documentation_command = "<leader>sk"
+let g:jedi#usages_command = "<leader>sn"
+let g:jedi#rename_command = "<leader>sr"
 
 " Javascript
 let g:tern_show_argument_hints = 1
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
-  autocmd FileType javascript nnoremap <buffer> <leader>d :TernDef<CR>
-  autocmd FileType javascript nnoremap <buffer> <leader>K :TernDoc<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDef<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>sk :TernDoc<CR>
 augroup END
+
 "  }}}
 " General Key remappings ----------------------- {{{
 
