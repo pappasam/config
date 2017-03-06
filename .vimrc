@@ -141,6 +141,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sunaku/vim-dasht'
 
 " Autocompletion
+Plug 'ervandew/supertab'
 Plug 'davidhalter/jedi-vim'
 
 " Tagbar
@@ -479,6 +480,11 @@ augroup quick_fix_move_bottom
 augroup END
 " }}}
 "  Code Completion Config ------------ {{{
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" Python
 "  Documentation for Jedi
 " * Completion <C-Space>
 " * Goto assignments <leader>g (typical goto function)
@@ -487,6 +493,11 @@ augroup END
 " * Renaming <leader>r
 " * Usages <leader>n (shows all the usages of a name)
 " * Open module, e.g. :Pyimport os (opens the os module)
+let g:jedi#popup_on_dot = 0
+
+" Javascript
+let g:tern_show_argument_hints = 1
+let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <leader>d :TernDef<CR>
