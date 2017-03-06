@@ -143,9 +143,9 @@ Plug 'sunaku/vim-dasht'
 " Autocompletion
 Plug 'ervandew/supertab'
 Plug 'davidhalter/jedi-vim'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 
 " Tagbar
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
 " Additional requirements
