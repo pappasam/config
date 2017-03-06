@@ -140,6 +140,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " place config file in .w3m/keymap
 Plug 'sunaku/vim-dasht'
 
+" Autocompletion
+Plug 'davidhalter/jedi-vim'
+
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
