@@ -132,6 +132,14 @@ Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+" Documentation
+" Requires dasht to be installed
+" Follow instructions at
+" https://github.com/sunaku/dasht
+" Similarly, relies on w3m
+" place config file in .w3m/keymap
+Plug 'sunaku/vim-dasht'
+
 " Tagbar
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'majutsushi/tagbar'
@@ -429,56 +437,16 @@ augroup end
 
 
 " }}}
-"  Zeal --------- {{{
+"  Dash --------- {{{
 
-" Zeal documentation functions to search zeal from both normal mode
-" and visual mode
-" Clean up these functions tomorrow to deal with more general cases
-" of zeal documentation
+" Dash documentation functions
+let g:dasht_filetype_docsets = {}
+let g:dasht_filetype_docsets['cpp'] = ['^C\+\+$']
+let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
 
-function! s:get_visual_selection()
-  " Helper function to get visual selection into a variable
-  " Why is this not a built-in Vim script function?!
-  " Taken from xolox on stackoverflow
-  " http://stackoverflow.com/questions/1533565/
-  " how-to-get-visually-selected-text-in-vimscript
-  let [lnum1, col1] = getpos("'<")[1:2]
-  let [lnum2, col2] = getpos("'>")[1:2]
-  let lines = getline(lnum1, lnum2)
-  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-  let lines[0] = lines[0][col1 - 1:]
-  return join(lines, "\n")
-endfunction
-
-function! s:ZealString(docset, query)
-  let cmd_begin = '!(pkill zeal || true) && (zeal --query '
-  let doc_escape = shellescape(a:docset)
-  let query_escape = shellescape(a:query)
-  let cmd_end = ' &) > /dev/null'
-  return cmd_begin . doc_escape . ':' . query_escape . cmd_end
-endfunction
-
-function! ZealNormal(docset)
-  call inputsave()
-  let docset = input("Zeal Docset: ", a:docset)
-  let query = input("Zeal Query: ", expand('<cword>'))
-  call inputrestore()
-  let cmd = s:ZealString(docset, query)
-  silent execute cmd
-endfunction
-
-function! ZealVisual(docset)
-  call inputsave()
-  let docset = input("Zeal Docset: ", a:docset)
-  let query = input("Zeal Query: ", s:get_visual_selection())
-  call inputrestore()
-  let cmd = s:ZealString(docset, query)
-  silent execute cmd
-endfunction
-
-" Key bindings for zeal functions
-nnoremap <leader>z :call ZealNormal(&filetype)<CR><CR><c-l><CR>
-vnoremap <leader>z :call ZealVisual(&filetype)<CR><CR><c-l><CR>
+nnoremap <silent> <Leader>z<leader> :Dasht<Space>
+nnoremap <silent> <Leader>zz :call Dasht([expand('<cWORD>'), expand('<cword>')])<Return>
+vnoremap <silent> <Leader>zz y:<C-U>call Dasht(getreg(0))<Return>
 
 "  }}}
 " Filetypes ------------ {{{
