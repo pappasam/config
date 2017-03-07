@@ -492,6 +492,8 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#auto_close_doc = 0
+
 " mappings
 let g:jedi#goto_command = "<leader>sd"
 let g:jedi#goto_assignments_command = "<leader>sg"
