@@ -102,6 +102,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'justinmk/vim-sneak'
+Plug 'simeji/winresizer'
 
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
@@ -179,6 +180,11 @@ Plug 'dkarter/bullets.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" WinResize
+let g:winresizer_start_key = '<C-E>'
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
 
 " Papercolor
 let g:PaperColor_Theme_Options = {
@@ -594,17 +600,10 @@ nnoremap z<space> zA
 
 " }}}
 " Buffers and Windows ----------------- {{{
-" Change change window thorough Control + directional movement
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
 
-" Change change window width and height with capital movement letters
-nnoremap <silent> K <c-w>+
-nnoremap <silent> J <c-w>-
-nnoremap <silent> H <c-w><
-nnoremap <silent> L <c-w>>
+" Scroll screen up and down
+nnoremap <silent> K <c-e>
+nnoremap <silent> J <c-y>
 
 " Switch buffers
 nnoremap gn :bn<CR>
