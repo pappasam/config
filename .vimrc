@@ -144,6 +144,7 @@ Plug 'sunaku/vim-dasht'
 Plug 'ervandew/supertab'
 Plug 'davidhalter/jedi-vim'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
+Plug 'Rip-Rip/clang_complete'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -479,11 +480,11 @@ augroup quick_fix_move_bottom
   autocmd FileType qf wincmd J
 augroup END
 " }}}
-"  Code Completion Config ------------ {{{
+"  AutoCompletion Config ------------ {{{
 
 " NOTE: General remappings
-" 1) go to file containing definition: <leader>sd
-" 2) look at documentation: <leader>sk
+" 1) go to file containing definition: <C-]>
+" 2) Return from file (relies on tag stack): <C-T>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -491,11 +492,11 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " Python
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#auto_close_doc = 0
 
 " mappings
-let g:jedi#goto_command = "<leader>sd"
+let g:jedi#goto_command = "<C-]>"
 let g:jedi#goto_assignments_command = "<leader>sg"
 let g:jedi#documentation_command = "<leader>sk"
 let g:jedi#usages_command = "<leader>sn"
@@ -506,9 +507,14 @@ let g:tern_show_argument_hints = 1
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
-  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDefTab<CR>
-  autocmd FileType javascript nnoremap <buffer> <leader>sk :TernDoc<CR>
+  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDefTab<CR>
 augroup END
+
+" C++
+" Jumping back defaults to <C-O> or <C-T>
+" Defaults to <C-]> for goto definition
+let g:clang_library_path='/usr/lib/llvm-3.8/lib'
+
 
 "  }}}
 " General Key remappings ----------------------- {{{
