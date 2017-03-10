@@ -490,7 +490,7 @@ augroup END
 
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
-" 2) Return from file (relies on tag stack): <C-T>
+" 2) Return from file (relies on tag stack): <C-O>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -514,7 +514,7 @@ let g:tern_show_argument_hints = 1
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
-  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDefTab<CR>
+  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
 augroup END
 
 " C++
