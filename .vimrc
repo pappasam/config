@@ -602,6 +602,12 @@ nnoremap z<space> zA
 " }}}
 " Buffers and Windows ----------------- {{{
 
+" Move from one window to another
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+
 " Scroll screen up and down
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
@@ -612,9 +618,7 @@ nnoremap gd :BD<CR>
 nnoremap gp :bp<CR>
 
 " Navigate within one window
-nnoremap gt H
-nnoremap gb L
-nnoremap g. M
+" Default shortcuts - high = H, middle = M, low = L
 
 " }}}
 " Syntax coloring ---------------- {{{
