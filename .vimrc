@@ -181,6 +181,13 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
+" QFEnter
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>']
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-s']
+let g:qfenter_keymap.topen = ['<C-t']
+
 " WinResize
 let g:winresizer_start_key = '<C-E>'
 let g:winresizer_vert_resize = 1
@@ -246,12 +253,15 @@ let g:jsx_ext_required = 0
 let g:jsdoc_enable_es6 = 1
 
 " NERDTree
-let NERDTreeShowLineNumbers = 1
-let NERDTreeCaseSensitiveSort = 0
-let NERDTreeWinPos = 'left'
-let NERDTreeWinSize = 31
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
+let g:NERDTreeMapOpenInTab = '<C-t>'
+let g:NERDTreeMapOpenSplit = '<C-s>'
+let g:NERDTreeMapOpenVSplit = '<C-v>'
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeCaseSensitiveSort = 0
+let g:NERDTreeWinPos = 'left'
+let g:NERDTreeWinSize = 31
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
 nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
 " EasyGrep - use git grep
