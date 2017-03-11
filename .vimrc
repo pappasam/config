@@ -185,6 +185,9 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
+" Easytags
+let g:easytags_python_enabled = 0
+
 " QFEnter
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
