@@ -141,6 +141,10 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " place config file in .w3m/keymap
 Plug 'sunaku/vim-dasht'
 
+" Dynamic syntax highlighting for languages supported by exuberant c-tags
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+
 " Autocompletion
 Plug 'ervandew/supertab'
 Plug 'davidhalter/jedi-vim'
