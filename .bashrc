@@ -1,10 +1,7 @@
 #######################################################################
 # Start tmux correctly on login
 #######################################################################
-
-alias tmux='tmux -2'
-[[ $TERM != "screen"  ]] && (exec tmux -2 new -s SR || echo "")
-alias tmux='tmux -2'
+tmux new -s SR &> /dev/null
 
 #######################################################################
 # Environment variables
