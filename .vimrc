@@ -185,9 +185,6 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
-" Easytags
-let g:easytags_python_enabled = 0
-
 " QFEnter
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
@@ -501,6 +498,12 @@ augroup END
 augroup quick_fix_move_bottom
   autocmd!
   autocmd FileType qf wincmd J
+augroup END
+" }}}
+" Ctags Easytags ------- {{{
+augroup disable_easytags_for_filetypes
+  autocmd!
+  autocmd FileType python let b:easytags_auto_highlight = 0
 augroup END
 " }}}
 "  AutoCompletion Config ------------ {{{
