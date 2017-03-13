@@ -708,7 +708,7 @@ augroup indentation_sr
   autocmd Filetype python,c,elm,haskell
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv
+  autocmd Filetype make,tsv,votl
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
