@@ -81,6 +81,13 @@ set showtabline=2
 
 set autoread
 
+" When you type the first tab hit will complete as much as possible,
+" the second tab hit will provide a list, the third and subsequent tabs
+" will cycle through completion options so you can complete the file
+" without further keys
+set wildmode=longest,list,full
+set wildmenu
+
 " }}}
 " Plugins --------------------- {{{
 call plug#begin('~/.vim/plugged')
@@ -602,6 +609,9 @@ cabbrev Vs vs
 
 " move tab to number
 cabbrev t tabn
+
+" close help menu
+cabbrev hc helpclose
 
 " echo current file path
 cabbrev fp echo expand('%:p')
