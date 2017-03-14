@@ -158,6 +158,10 @@ Plug 'davidhalter/jedi-vim'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
 
+" Debugging
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'idanarye/vim-vebugger'
+
 " Tagbar
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
@@ -191,6 +195,9 @@ Plug 'dkarter/bullets.vim'
 call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
+
+" Debugger
+let g:vebugger_leader='<Leader>d'
 
 " QFEnter
 let g:qfenter_keymap = {}
@@ -549,6 +556,14 @@ augroup END
 let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path'
 let g:clang_complete_auto = 0
+
+"  }}}
+"  Debugging Config ------ {{{
+
+augroup open_debugger " all mapped to <leader>ds
+  autocmd!
+  autocmd FileType python nnoremap <leader>ds :VBGstartPDB %<CR>
+augroup END
 
 "  }}}
 " General Key remappings ----------------------- {{{
