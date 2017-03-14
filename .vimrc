@@ -583,6 +583,9 @@ nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
       \:call repeat#set("\<Plug>NewLineComma")<CR>
 nmap <leader><CR> <Plug>NewLineComma
 
+" Resize window to one more than window height
+nnoremap <silent> <leader>h gg:exe "resize " . (line('$') + 1)<CR>
+
 " }}}
 " Command abbreviations ------------------------ {{{
 
