@@ -341,7 +341,7 @@ function! GetSmallPath()
   return expand('%:p:h:t') . '/' . expand('%:t')
 endfunction
 let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
-let g:airline_section_x = airline#section#create(['col %c'])
+let g:airline_section_x = airline#section#create(['%c:%L'])
 let g:airline_section_y = airline#section#create(['ffenc'])
 let g:airline_section_z = airline#section#create(['filetype'])
 let g:airline_powerline_fonts = 1
@@ -368,6 +368,7 @@ let g:tagbar_sort = 0  " order by order in sort file
 let g:tagbar_case_insensitive = 1
 let g:tagbar_width = 37
 let g:tagbar_silent = 1
+let g:tagbar_foldlevel = 0
 let g:tagbar_type_haskell = {
     \ 'ctagsbin'  : 'hasktags',
     \ 'ctagsargs' : '-x -c -o-',
