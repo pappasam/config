@@ -590,8 +590,10 @@ augroup quickfix_sr
 augroup END
 
 " moving forward and backward with vim tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
+nnoremap H gT
+nnoremap L gt
+nnoremap <C-t> :tabnew<CR>
+inoremap <C-t> <Esc>:tabnew<CR>
 
 " placing commas one line down
 " usable with repeat operator '.'
