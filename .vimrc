@@ -154,7 +154,9 @@ Plug 'xolox/vim-easytags'
 
 " Autocompletion
 Plug 'ervandew/supertab'
-Plug 'davidhalter/jedi-vim'
+" following commented out until jedi supports virtual env
+" Plug 'davidhalter/jedi-vim'
+Plug 'pappasam/jedi-vim', { 'branch': 'FIX_NO_VENV_LOOKUP' }
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
 
