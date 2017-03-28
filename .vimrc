@@ -205,8 +205,8 @@ let g:vebugger_leader='<Leader>d'
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
 let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-s']
-let g:qfenter_keymap.topen = ['<C-t']
+let g:qfenter_keymap.hopen = ['<C-s>']
+let g:qfenter_keymap.topen = ['<C-t>']
 
 " WinResize
 let g:winresizer_start_key = '<C-E>'
@@ -230,11 +230,6 @@ let g:PaperColor_Theme_Options = {
 
 " C++
 let g:cpp_experimental_simple_template_highlight = 1
-
-" QFEnter config
-let g:qfenter_vopen_map = ['<C-v>']
-let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
-let g:qfenter_topen_map = ['<C-t>']
 
 " Taboo
 " Tab format hardcoded to main for now since I often do this anyway
@@ -295,7 +290,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " open first in current window and others as hidden
 let g:ctrlp_open_multiple_files = '1r'
 let g:ctrlp_use_caching = 0
-
 
 " Rainbow
 let g:rainbow#max_level = 16
@@ -540,9 +534,8 @@ let g:jedi#auto_close_doc = 0
 
 " mappings
 let g:jedi#goto_command = "<C-]>"
-let g:jedi#goto_assignments_command = "<leader>sg"
-let g:jedi#documentation_command = "<leader>sk"
-let g:jedi#usages_command = "<leader>sn"
+let g:jedi#documentation_command = "<leader>sd"
+let g:jedi#usages_command = "<leader>su"
 let g:jedi#rename_command = "<leader>sr"
 
 " Javascript
@@ -657,6 +650,38 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
+" }}}
+" Quickfix Toggle ------ {{{
+
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nnoremap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+nnoremap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
 " }}}
 " Folding Settings --------------- {{{
 augroup fold_settings
