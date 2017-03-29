@@ -773,6 +773,8 @@ augroup END
 " Writing ------------------ {{{
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
+" note: indenting and de-indenting in insert mode are:
+"   <C-t> and <C-d>
 
 " Bullets.vim
 let g:bullets_enabled_file_types = [
