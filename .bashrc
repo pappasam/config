@@ -1,7 +1,13 @@
 #######################################################################
 # Start tmux correctly on login
 #######################################################################
-tmux new -s SR &> /dev/null
+TMUX_SESSION_NAME="SR"
+tmux new -s "$TMUX_SESSION_NAME" &> /dev/null
+if [[ "$TMUX" ]]; then
+  tmux rename-window -t 0 edit
+elif [[ $(tmux ls | cut -d ":" -f 1 | grep "^$TMUX_SESSION_NAME$") ]]; then
+  echo "session SR already exists, not entering existing session"
+fi
 
 #######################################################################
 # Environment variables
