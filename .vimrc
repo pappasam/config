@@ -193,9 +193,6 @@ call plug#end()
 " }}}
 " Plugin configuration ------------ {{{
 
-" Debugger
-let g:vebugger_leader='<Leader>d'
-
 " QFEnter
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
