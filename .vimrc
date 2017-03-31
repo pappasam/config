@@ -27,11 +27,13 @@
 " 1. use Ctrl-V ) to insert paren without trigger the plugin.
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
-"
+
 " }}}
 " Leader mappings -------------------- {{{
+
 let mapleader = ","
 let maplocalleader = "\\"
+
 " }}}
 " Display settings / general config ------------ {{{
 
@@ -90,6 +92,7 @@ set wildmenu
 
 " }}}
 " Plugins --------------------- {{{
+
 call plug#begin('~/.vim/plugged')
 
 " Basics
@@ -148,10 +151,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " place config file in .w3m/keymap
 Plug 'sunaku/vim-dasht'
 
-" Dynamic syntax highlighting for languages supported by exuberant c-tags
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
-
 " Autocompletion
 Plug 'ervandew/supertab'
 " following commented out until jedi supports virtual env
@@ -159,10 +158,6 @@ Plug 'ervandew/supertab'
 Plug 'pappasam/jedi-vim', { 'branch': 'FIX_NO_VENV_LOOKUP' }
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
-
-" Debugging
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'idanarye/vim-vebugger'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -195,6 +190,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'dkarter/bullets.vim'
 
 call plug#end()
+
 " }}}
 " Plugin configuration ------------ {{{
 
@@ -318,6 +314,7 @@ nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
 "  }}}
 " Airline Configuration ---------------- {{{
+
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
@@ -355,8 +352,10 @@ let g:airline_mode_map = {
     \ 'S'  : '₷',
     \ '' : '₷',
     \ }
+
 " }}}
 "  Tagbar Configuration ------ {{{
+
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
@@ -399,6 +398,7 @@ let g:tagbar_type_haskell = {
 
 " Toggle TagBar, keeping cursor in original window
 nnoremap <silent> <space>l :TagbarToggle <CR>
+
 "  }}}
 " Set number display ------------- {{{
 
@@ -471,7 +471,6 @@ augroup rnu_nu
   autocmd WinLeave * :call RNUWinLeave()
 augroup end
 
-
 " }}}
 "  Dash --------- {{{
 
@@ -486,6 +485,7 @@ vnoremap <silent> <Leader>zz y:<C-U>call Dasht(getreg(0))<Return>
 
 "  }}}
 " Filetypes ------------ {{{
+
 augroup filetype_recognition
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
@@ -510,12 +510,7 @@ augroup quick_fix_move_bottom
   autocmd!
   autocmd FileType qf wincmd J
 augroup END
-" }}}
-" Ctags Easytags ------- {{{
-augroup disable_easytags_for_filetypes
-  autocmd!
-  autocmd FileType python let b:easytags_auto_highlight = 0
-augroup END
+
 " }}}
 "  AutoCompletion Config ------------ {{{
 
@@ -552,14 +547,6 @@ augroup END
 let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path'
 let g:clang_complete_auto = 0
-
-"  }}}
-"  Debugging Config ------ {{{
-
-augroup open_debugger " all mapped to <leader>ds
-  autocmd!
-  autocmd FileType python nnoremap <leader>ds :VBGstartPDB %<CR>
-augroup END
 
 "  }}}
 " General Key remappings ----------------------- {{{
@@ -636,18 +623,20 @@ cabbrev pu PlugUpdate <BAR> PlugUpgrade
 " }}}
 " Visual Star Search ----------------{{{
 
-" Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
   \gvy/<C-R><C-R>=substitute(
   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 vnoremap <silent> # :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
   \gvy?<C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
+
 " }}}
 " Quickfix Toggle ------ {{{
 
@@ -680,6 +669,7 @@ endfunction
 
 nnoremap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nnoremap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
+
 " }}}
 " Folding Settings --------------- {{{
 
@@ -709,11 +699,9 @@ nnoremap gn :bn<CR>
 nnoremap gd :BD<CR>
 nnoremap gp :bp<CR>
 
-" Navigate within one window
-" Default shortcuts - high = H, middle = M, low = L
-
 " }}}
 " Syntax coloring ---------------- {{{
+
 try
   set t_Co=256 " says terminal has 256 colors
   set background=dark
@@ -727,6 +715,7 @@ augroup python
   autocmd FileType python syn keyword pythonBuiltinObj self
   autocmd FileType python syn keyword pythonBuiltinObj cls
 augroup end
+
 " }}}
 " Trailing whitespace ------------- {{{
 
@@ -770,8 +759,10 @@ augroup indentation_sr
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
 augroup END
+
 " }}}
 " Writing ------------------ {{{
+
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
 " note: indenting and de-indenting in insert mode are:
@@ -784,6 +775,7 @@ let g:bullets_enabled_file_types = [
     \ 'gitcommit',
     \ 'scratch'
     \]
+
 augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
@@ -791,4 +783,5 @@ augroup writing
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
 augroup END
+
 " }}}
