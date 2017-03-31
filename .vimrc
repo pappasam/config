@@ -152,7 +152,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sunaku/vim-dasht'
 
 " Autocompletion
-Plug 'ervandew/supertab'
 " following commented out until jedi supports virtual env
 " Plug 'davidhalter/jedi-vim'
 Plug 'pappasam/jedi-vim', { 'branch': 'FIX_NO_VENV_LOOKUP' }
@@ -518,9 +517,6 @@ augroup END
 " 1) go to file containing definition: <C-]>
 " 2) Return from file (relies on tag stack): <C-O>
 
-" Supertab
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-
 " Python
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
@@ -550,6 +546,10 @@ let g:clang_complete_auto = 0
 
 "  }}}
 " General Key remappings ----------------------- {{{
+
+" Omnicompletion: exit preview with C-c
+inoremap <C-Space> <C-x><C-o>
+inoremap <silent> <C-c> <Esc>:pclose<CR>a
 
 " Move up and down visually only if count is specified before
 " Otherwise, you want to move up lines numerically
