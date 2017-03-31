@@ -1,17 +1,19 @@
 [user]
-	email = samuel.roeca@gmail.com
-	name = Sam Roeca
+  email = samuel.roeca@gmail.com
+  name = Sam Roeca
 [core]
-	editor = vim
-	autocrlf = input
-	safecrlf = true
+  editor = vim
+  autocrlf = input
+  safecrlf = true
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
+  co = checkout
+  pu = push origin
+  c = commit -m
+  ca = commit -am
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
 [merge "ours"]
-	driver = true
+  driver = true
