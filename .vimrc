@@ -682,10 +682,11 @@ nnoremap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nnoremap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
 " }}}
 " Folding Settings --------------- {{{
+
 augroup fold_settings
   autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim setlocal foldlevelstart=0
+  autocmd FileType vim,tmux setlocal foldmethod=marker
+  autocmd FileType vim,tmux setlocal foldlevelstart=0
   autocmd FileType * setlocal foldnestmax=1
 augroup END
 nnoremap z<space> zA
