@@ -401,11 +401,14 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.spell = 'Ꞩ'
-function! GetSmallPath()
-  " For /a/b/c/hello, return c/hello
-  return expand('%:p:h:t') . '/' . expand('%:t')
+function! CustomAirlineDisplayPath()
+  " For project rooted at /home/user/src/myproject:
+  " and file at /home/user/src/myproject/lib/file.c
+  " display: 'file.c : myproject/lib'
+  return expand('%:t') . ' : ' . expand('%:h')
 endfunction
-let g:airline_section_c = airline#section#create(['%{GetSmallPath()}'])
+let g:airline_section_c = airline#section#create(
+      \['%{CustomAirlineDisplayPath()}'])
 let g:airline_section_x = airline#section#create(['%c:%L'])
 let g:airline_section_y = airline#section#create(['ffenc'])
 let g:airline_section_z = airline#section#create(['filetype'])
