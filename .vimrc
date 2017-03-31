@@ -384,7 +384,12 @@ let g:NERDTreeCaseSensitiveSort = 0
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
 let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeIgnore=['venv$[[dir]]', '__pycache__$[[dir]]', 'node_modules$[[dir]]']
+let g:NERDTreeIgnore=[
+      \'venv$[[dir]]',
+      \'__pycache__$[[dir]]',
+      \'.egg-info$[[dir]]',
+      \'node_modules$[[dir]]'
+      \]
 nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
 "  }}}
