@@ -17,11 +17,11 @@ stty -ixon
 #######################################################################
 
 # Easier directory navigation for going up a directory tree
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+alias .='cd ..'
+alias ..='cd ../..'
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
+alias .....='cd ../../../../..'
 
 # Tmux launch script
 alias t='~/tmuxlaunch.sh'
