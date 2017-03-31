@@ -16,6 +16,14 @@ stty -ixon
 # Non-function-based aliases
 #######################################################################
 
+# Easier directory navigation for going up a directory tree
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+# Tmux launch script
 alias t='~/tmuxlaunch.sh'
 
 # enable color support of ls and also add handy aliases
@@ -78,24 +86,6 @@ alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 function cats() {
   pygmentize -g $1 | less -r
 }
-
-#######################################################################
-# Change directory up
-#######################################################################
-
-# Move up n directories using:  cd.. 10   cd.. dir
-function cd_up() {
-  pushd . >/dev/null
-  case $1 in
-    *[!0-9]*)                                          # if no a number
-      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
-      ;;                                               # if not found - not cd
-    *)
-      cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
-    ;;
-  esac
-}
-alias 'cd..'='cd_up'                                # can not name function 'cd..'
 
 #######################################################################
 # Set command to include git branch in my prompt
