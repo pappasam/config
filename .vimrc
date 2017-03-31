@@ -331,14 +331,6 @@ nnoremap z<space> zA
 " }}}
 " General: Syntax highlighting ---------------- {{{
 
-" Syntax: select global syntax scheme
-try
-  set t_Co=256 " says terminal has 256 colors
-  set background=dark
-  colorscheme PaperColor
-catch
-endtry
-
 " Papercolor: options
 let g:PaperColor_Theme_Options = {
   \   'language': {
@@ -360,6 +352,16 @@ augroup python_syntax
   autocmd FileType python syn keyword pythonBuiltinObj self
   autocmd FileType python syn keyword pythonBuiltinObj cls
 augroup end
+
+" Syntax: select global syntax scheme
+" Make sure this is at end of section
+try
+  set t_Co=256 " says terminal has 256 colors
+  set background=dark
+  colorscheme PaperColor
+catch
+endtry
+
 
 " }}}
 "  Plugin: Rainbow Parentheses --- {{{
