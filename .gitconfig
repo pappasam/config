@@ -9,7 +9,7 @@
   co = checkout
   pu = push origin
   c = commit -m
-  ca = commit -am
+  ca = commit -am .
   st = status
   br = branch
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
