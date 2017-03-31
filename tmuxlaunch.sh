@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# stop script if encounter errors
+# prevents script from making changes to previously running session
+# if one already exists
+set -e
+
 SESSION=SR
 
 # Create session in detached mode
@@ -12,5 +17,5 @@ tmux send-keys 'cd ~/src; clear' C-m
 # Rename first window to 'edit'
 tmux rename-window edit
 
-# Attach to session
+# Attach to session newly-created session
 tmux attach -t $SESSION
