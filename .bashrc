@@ -17,7 +17,7 @@ stty -ixon
 #######################################################################
 
 # Easier directory navigation for going up a directory tree
-alias 'a'='cd -'
+alias 'a'='cd - &> /dev/null'
 alias .='cd ..'
 alias ..='cd ../..'
 alias ...='cd ../../..'
