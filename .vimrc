@@ -161,9 +161,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sunaku/vim-dasht'
 
 " Autocompletion
-" following commented out until jedi supports virtual env
-" Plug 'davidhalter/jedi-vim'
-Plug 'pappasam/jedi-vim', { 'branch': 'FIX_NO_VENV_LOOKUP' }
+Plug 'davidhalter/jedi-vim'
+Plug 'jmcantrell/vim-virtualenv'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
 
@@ -529,6 +528,10 @@ let g:clang_complete_auto = 0
 
 "  }}}
 " Plugin: Misc config ------------ {{{
+
+" Virtualenv
+" necessary for jedi-vim to discover virtual environments
+let g:virtualenv_auto_activate = 1
 
 " QFEnter
 let g:qfenter_keymap = {}
