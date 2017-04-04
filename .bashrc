@@ -1,20 +1,16 @@
-#######################################################################
-# Environment variables
-#######################################################################
+# Environment Variables --- {{{
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-#######################################################################
-# Commands
-#######################################################################
+# }}}
+# Executed Commands --- {{{
 
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
 stty -ixon
 
-#######################################################################
-# Non-function-based aliases
-#######################################################################
+# }}}
+# Aliases --- {{{
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
@@ -79,18 +75,16 @@ alias regrep="grep --perl-regexp -Ir \
 # upgrade
 alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 
-#######################################################################
-# Function-based aliases
-#######################################################################
+# }}}
+# Functions --- {{{
 
 # Colored cat
 function cats() {
   pygmentize -g $1 | less -r
 }
 
-#######################################################################
-# Set command to include git branch in my prompt
-#######################################################################
+# }}}
+# Command line prompt (PS1) --- {{{
 
 COLOR_BRIGHT_GREEN="\033[38;5;10m"
 COLOR_BRIGHT_BLUE="\033[38;5;115m"
@@ -150,9 +144,8 @@ PS1="${PS1_DIR} ${PS1_GIT}\
 
 ${PS1_USR} ${PS1_END}"
 
-#######################################################################
-# Stack
-#######################################################################
+# }}}
+# Haskell - stack --- {{{
 
 GREEN=`echo -e '\033[92m'`
 RED=`echo -e '\033[91m'`
@@ -192,10 +185,11 @@ function stack_ghci() {
     $string"
 }
 
-#######################################################################
-# Load sensitive commands
-#######################################################################
+# }}}
+# Imports from other files --- {{{
 
 if [ -f ~/.bash/sensitive ]; then
   source ~/.bash/sensitive
 fi
+
+# }}}
