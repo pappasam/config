@@ -396,6 +396,33 @@ let g:NERDTreeIgnore=[
 nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 
 "  }}}
+" Plugin: Ctrl p --- {{{
+
+let g:ctrlp_working_path_mode = 'rw' " start from cwd
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" open first in current window and others as hidden
+let g:ctrlp_open_multiple_files = '1r'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_switch_buffer = 0
+
+" Cycles through windows until it finds a modifiable buffer
+" it then runs ctrl-p there
+" if there are no modifiable buffers, it does not run control p
+" this prevents ctrl-p from opening in NERDTree, QuickFix, or other
+function! CtrlPCommand()
+    let current_window_number = 0
+    let total_window_number = winnr('$')
+    while !&modifiable && current_window_number < total_window_number
+        exec 'wincmd w'
+        let current_window_number = current_window_number + 1
+    endwhile
+    if current_window_number < total_window_number
+      exec 'CtrlP'
+    endif
+endfunction
+let g:ctrlp_cmd = 'call CtrlPCommand()'
+
+" }}}
 " Plugin: Airline ---------------- {{{
 
 let g:airline_theme='powerlineish'
@@ -590,12 +617,6 @@ let g:jsdoc_enable_es6 = 1
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 
-" Ctrl p
-let g:ctrlp_working_path_mode = 'rw' " start from cwd
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-" open first in current window and others as hidden
-let g:ctrlp_open_multiple_files = '1r'
-let g:ctrlp_use_caching = 0
 
 " vim-fugitive
 " DO NOT USE THESE MAPPINGS BELOW Vim version 8
