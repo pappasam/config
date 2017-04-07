@@ -387,6 +387,7 @@ let g:NERDTreeCaseSensitiveSort = 0
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
 let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeSortOrder = ['*', '\/$']
 let g:NERDTreeIgnore=[
       \'venv$[[dir]]',
       \'__pycache__$[[dir]]',
