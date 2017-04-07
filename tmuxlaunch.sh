@@ -5,7 +5,11 @@
 # if one already exists
 set -e
 
-SESSION=SR
+if [[ $# > 0 ]]; then
+  SESSION=$1
+else
+  SESSION=SR
+fi
 
 # Create session in detached mode
 tmux new-session -d -s $SESSION
