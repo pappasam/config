@@ -165,6 +165,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
+Plug 'eagletmt/neco-ghc'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -556,6 +557,15 @@ let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path'
 let g:clang_complete_auto = 0
 
+" Haskell
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+let g:necoghc_enable_detailed_browse = 1
+augroup haskell_complete
+  autocmd!
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup END
+
 "  }}}
 " Plugin: Misc config ------------ {{{
 
@@ -664,7 +674,8 @@ augroup END
 " General: Key remappings ----------------------- {{{
 
 " Omnicompletion:
-inoremap <C-Space> <C-x><C-o>
+" imap <C-space> <C-x><C-o>
+inoremap <C-@> <C-x><C-o>
 
 " Exit: Preview and Help
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
