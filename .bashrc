@@ -25,6 +25,9 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
+# Tree that ignores annoying directories
+alias itree="tree -I '__pycache__|venv'"
+
 # Tmux launch script
 alias t='~/tmuxlaunch.sh'
 
