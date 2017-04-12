@@ -70,7 +70,9 @@ to do things without moving my hands from the home row.
 7. **Custom**
   1. Panel Toggle
     * Command : ~/configsettings/panel-autohide.sh
-    * Shorcut : Ctrl+Alt+P
+    * Shortcut : Ctrl+Alt+P
+  2. Screenshot Select Area
+    * Shortcut: Ctrl+Alt+S
 
 ### Layouts
 
