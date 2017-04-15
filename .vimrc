@@ -208,7 +208,7 @@ call plug#end()
 
 augroup filetype_recognition
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
+  " autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc set filetype=json
@@ -371,6 +371,9 @@ endtry
 
 " }}}
 " Plugin: Wiki --- {{{
+
+" Wiki is only valid when in pre-defined wiki area
+let g:vimwiki_global_ext = 0
 
 " Define wikis
 let wiki_personal = {}
