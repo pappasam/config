@@ -99,6 +99,9 @@ set noshowmode
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
 set pastetoggle=<C-_>
 
+" Turn off complete vi compatibility
+set nocompatible
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
@@ -122,6 +125,7 @@ Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'justinmk/vim-sneak'
 Plug 'simeji/winresizer'
+Plug 'vimwiki/vimwiki'
 
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
@@ -366,6 +370,16 @@ endtry
 
 
 " }}}
+" Plugin: Wiki --- {{{
+
+" Define wikis
+let wiki_personal = {}
+let wiki_personal.path = '~/personal-wiki/'
+
+" Organize them in a list
+let g:vimwiki_list = [wiki_personal]
+
+" }}}
 "  Plugin: Rainbow Parentheses --- {{{
 
 let g:rainbow#max_level = 16
@@ -597,8 +611,8 @@ let g:taboo_renamed_tab_format = ' [%N:%l]%m '
 let g:startify_list_order = ['dir', 'files', 'bookmarks', 'sessions',
         \ 'commands']
 
-" choosewin
-nnoremap <leader>w :ChooseWin<CR>
+" choosewin (just like tmux)
+nnoremap <leader>q :ChooseWin<CR>
 
 " Haskell 'neovimhaskell/haskell-vim'
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
