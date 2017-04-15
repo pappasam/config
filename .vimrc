@@ -374,7 +374,9 @@ endtry
 
 " Define wikis
 let wiki_personal = {}
-let wiki_personal.path = '~/personal-wiki/'
+let wiki_personal.index = 'main'
+let wiki_personal.ext = '.md'
+let wiki_personal.path = '~/Wiki/'
 
 " Organize them in a list
 let g:vimwiki_list = [wiki_personal]
