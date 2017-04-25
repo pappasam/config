@@ -9,6 +9,9 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
 stty -ixon
 
+# run cowsay
+shuf -n 1 ~/configsettings/gre_words.txt | cowsay
+
 # }}}
 # Aliases --- {{{
 
