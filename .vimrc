@@ -127,6 +127,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 
+" Hex
+Plug 'fidian/hexmode'
+
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
 
