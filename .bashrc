@@ -17,16 +17,16 @@ shuf -n 1 ~/configsettings/gre_words.txt | cowsay
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
-alias .='cd .. && ls'
-alias ..='cd ../.. && ls'
-alias ...='cd ../../.. && ls'
-alias ....='cd ../../../.. && ls'
-alias .....='cd ../../../../.. && ls'
-alias ......='cd ../../../../../.. && ls'
-alias .......='cd ../../../../../../.. && ls'
-alias ........='cd ../../../../../../../.. && ls'
-alias .........='cd ../../../../../../../../.. && ls'
-alias ..........='cd ../../../../../../../../../.. && ls'
+alias .='cd ..'
+alias ..='cd ../..'
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
+alias .....='cd ../../../../..'
+alias ......='cd ../../../../../..'
+alias .......='cd ../../../../../../..'
+alias ........='cd ../../../../../../../..'
+alias .........='cd ../../../../../../../../..'
+alias ..........='cd ../../../../../../../../../..'
 
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv'"
@@ -92,6 +92,11 @@ alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 # Colored cat
 function cats() {
   pygmentize -g $1 | less -r
+}
+
+# override cd so it also lists directory contents
+function cd() {
+  builtin cd $1 && ls
 }
 
 # }}}
