@@ -17,16 +17,16 @@ shuf -n 1 ~/configsettings/gre_words.txt | cowsay
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
-alias .='cd ..'
-alias ..='cd ../..'
-alias ...='cd ../../..'
-alias ....='cd ../../../..'
-alias .....='cd ../../../../..'
-alias ......='cd ../../../../../..'
-alias .......='cd ../../../../../../..'
-alias ........='cd ../../../../../../../..'
-alias .........='cd ../../../../../../../../..'
-alias ..........='cd ../../../../../../../../../..'
+alias .='cd .. && ls'
+alias ..='cd ../.. && ls'
+alias ...='cd ../../.. && ls'
+alias ....='cd ../../../.. && ls'
+alias .....='cd ../../../../.. && ls'
+alias ......='cd ../../../../../.. && ls'
+alias .......='cd ../../../../../../.. && ls'
+alias ........='cd ../../../../../../../.. && ls'
+alias .........='cd ../../../../../../../../.. && ls'
+alias ..........='cd ../../../../../../../../../.. && ls'
 
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv'"
