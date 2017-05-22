@@ -679,6 +679,7 @@ function! TrimWhitespace()
 endfunction
 
 augroup whitespace_color
+  autocmd!
   autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
   autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
   autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
