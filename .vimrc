@@ -127,6 +127,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 
+" Whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
 " Hex
 Plug 'fidian/hexmode'
 
@@ -400,6 +403,21 @@ augroup rainbow_settings
 augroup END
 
 "  }}}
+"  Plugin: WhiteSpace  --- {{{
+
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+augroup Whitespace
+  autocmd!
+  autocmd FileType *
+        \autocmd BufEnter * EnableStripWhitespaceOnSave
+  autocmd FileType diff,gitcommit,unite,qf,help,markdown
+        \autocmd BufEnter diff,gitcommit,unite,qf,help,markdown DisableStripWhitespaceOnSave
+augroup END
+
+let g:better_whitespace_filetypes_blacklist  = [
+      \'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+
+"  --- }}}
 "  Plugin: NERDTree --- {{{
 
 let g:NERDTreeMapOpenInTab = '<C-t>'
@@ -669,29 +687,31 @@ nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 "  }}}
 " General: Trailing whitespace ------------- {{{
 
-function! TrimWhitespace()
-  if &ft == 'markdown'
-    return
-  endif
-  let l:save = winsaveview()
-  %s/\s\+$//e
-  call winrestview(l:save)
-endfunction
+" this section is included for now until I'm sure the commented section works
 
-augroup whitespace_color
-  autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
-  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
-augroup END
-highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+" function! TrimWhitespace()
+"   if &ft == 'markdown'
+"     return
+"   endif
+"   let l:save = winsaveview()
+"   %s/\s\+$//e
+"   call winrestview(l:save)
+" endfunction
 
-augroup fix_whitespace_save
-  autocmd!
-  autocmd BufWritePre * call TrimWhitespace()
-  autocmd FileType * unlet! g:airline#extensions#whitespace#checks
-  autocmd FileType markdown let g:airline#extensions#whitespace#checks = [ 'indent'  ]
-augroup END
+" augroup whitespace_color
+"   autocmd!
+"   autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+"   autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+"   autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+" augroup END
+" highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+
+" augroup fix_whitespace_save
+"   autocmd!
+"   autocmd BufWritePre * call TrimWhitespace()
+"   autocmd FileType * unlet! g:airline#extensions#whitespace#checks
+"   autocmd FileType markdown let g:airline#extensions#whitespace#checks = [ 'indent'  ]
+" augroup END
 
 " }}}
 " General: Key remappings ----------------------- {{{
