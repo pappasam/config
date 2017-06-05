@@ -156,6 +156,7 @@ Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-vagrant'
 
 " Documentation
 " Requires dasht to be installed
