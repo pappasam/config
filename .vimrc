@@ -155,6 +155,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'hashivim/vim-terraform'
 
 " Documentation
 " Requires dasht to be installed
@@ -240,7 +241,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell
+  autocmd Filetype python,c,elm,haskell,terraform
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl
