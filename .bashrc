@@ -68,7 +68,6 @@ alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 
 # Git
 alias g="git status"
-alias gn="gnome-open"
 
 # Regex ignore annoying directories
 alias regrep="grep --perl-regexp -Ir \
@@ -97,6 +96,11 @@ function cats() {
 # override cd so it also lists directory contents
 function cd() {
   builtin cd $1 && ls
+}
+
+# open with gnome-open
+function gn() {  # arg1: filename
+  gnome-open "$1" &> /dev/null
 }
 
 # }}}
