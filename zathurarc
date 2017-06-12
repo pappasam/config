@@ -1,1 +1,4 @@
+# soft-link file to ~/.config/zathura/zathurarc
+
+# enable copying to clipboard
 set selection-clipboard clipboard
