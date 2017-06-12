@@ -159,14 +159,6 @@ Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'lervag/vimtex'
 
-" Documentation
-" Requires dasht to be installed
-" Follow instructions at
-" https://github.com/sunaku/dasht
-" Similarly, relies on w3m
-" place config file in .w3m/keymap
-Plug 'sunaku/vim-dasht'
-
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
 Plug 'jmcantrell/vim-virtualenv'
@@ -582,18 +574,6 @@ let g:tagbar_type_haskell = {
 
 " Toggle TagBar, keeping cursor in original window
 nnoremap <silent> <space>l :TagbarToggle <CR>
-
-"  }}}
-"  Plugin: Dasht --------- {{{
-
-" Dash documentation functions
-let g:dasht_filetype_docsets = {}
-let g:dasht_filetype_docsets['cpp'] = ['^C\+\+$']
-let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
-
-nnoremap <silent> <Leader>z<leader> :Dasht<Space>
-nnoremap <silent> <Leader>zz :call Dasht([expand('<cWORD>'), expand('<cword>')])<Return>
-vnoremap <silent> <Leader>zz y:<C-U>call Dasht(getreg(0))<Return>
 
 "  }}}
 "  Plugin: AutoCompletion config, multiple plugins ------------ {{{
