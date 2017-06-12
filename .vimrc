@@ -253,7 +253,7 @@ augroup indentation_sr
 augroup END
 
 " }}}
-" Indentation navigation --- {{{
+" General: Indentation navigation --- {{{
 
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
@@ -747,6 +747,30 @@ augroup fix_whitespace_save
 augroup END
 
 " }}}
+" General: Resize Window --- {{{
+
+" WindowHeight: Resize window to one more than window height
+nnoremap <silent> <leader>h gg:exe "resize " . (line('$') + 1)<CR>
+
+" WindowWidth: Resize window to a couple more than longest line
+" modified function from:
+" https://stackoverflow.com/questions/2075276/longest-line-in-vim
+function! ResizeWidthToLongestLine()
+  let maxlength   = 0
+  let linenumber  = 1
+  while linenumber <= line("$")
+    exe ":" . linenumber
+    let linelength  = virtcol("$")
+    if maxlength < linelength
+      let maxlength = linelength
+    endif
+    let linenumber  = linenumber+1
+  endwhile
+  exe ":vertical resize " . (maxlength + 4)
+endfunction
+nnoremap <silent> <leader>v mz:call ResizeWidthToLongestLine()<CR>`z
+
+" }}}
 " General: Key remappings ----------------------- {{{
 
 " Omnicompletion:
@@ -774,9 +798,6 @@ nnoremap L gt
 nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
       \:call repeat#set("\<Plug>NewLineComma")<CR>
 nmap <leader><CR> <Plug>NewLineComma
-
-" WindowHeight: Resize window to one more than window height
-nnoremap <silent> <leader>h gg:exe "resize " . (line('$') + 1)<CR>
 
 " BuffersAndWindows:
 " Move from one window to another
