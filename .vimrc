@@ -157,6 +157,7 @@ Plug 'NLKNguyen/c-syntax.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
+Plug 'lervag/vimtex'
 
 " Documentation
 " Requires dasht to be installed
@@ -639,6 +640,9 @@ augroup END
 
 "  }}}
 " Plugin: Misc config ------------ {{{
+
+" vimtex
+let g:vimtex_compiler_latexmk = {'callback' : 0}
 
 " Virtualenv
 " necessary for jedi-vim to discover virtual environments
