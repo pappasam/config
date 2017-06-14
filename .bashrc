@@ -104,7 +104,7 @@ function gn() {  # arg1: filename
 }
 
 # dictionary
-function def() {  # arg1: word
+function definition() {  # arg1: word
   dict -d gcide $1 | less
 }
 
