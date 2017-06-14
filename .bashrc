@@ -103,6 +103,15 @@ function gn() {  # arg1: filename
   gnome-open "$1" &> /dev/null
 }
 
+# dictionary
+function def() {  # arg1: word
+  dict -d gcide $1
+}
+
+function synonym() {  # arg1: word
+  dict -d moby-thesaurus $1
+}
+
 # }}}
 # Command line prompt (PS1) --- {{{
 
