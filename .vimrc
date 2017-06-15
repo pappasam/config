@@ -727,6 +727,18 @@ augroup fix_whitespace_save
 augroup END
 
 " }}}
+" General: Dict lookup --- {{{
+
+function! ReadDictToPreview(word) range
+  let dst = tempname()
+  execute "silent ! dict -d gcide " . string(a:word) . " > " . dst
+  execute ":pedit! " . dst
+  execute ":redraw!"
+endfunction
+
+command -nargs=1 Def call ReadDictToPreview(<q-args>)
+
+" }}}
 " General: Resize Window --- {{{
 
 " WindowHeight: Resize window to one more than window height
