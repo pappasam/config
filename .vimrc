@@ -729,14 +729,28 @@ augroup END
 " }}}
 " General: Dict lookup --- {{{
 
-function! ReadDictToPreview(word) range
+" Enable looking up values in either a dictionary or a thesaurus
+" these are expected to be either:
+"   Dict: dict-gcide
+"   Thesaurus: dict-moby-thesaurus
+function! ReadDictToPreview(word, dict) range
   let dst = tempname()
-  execute "silent ! dict -d gcide " . string(a:word) . " > " . dst
-  execute ":pedit! " . dst
+  execute "silent ! dict -d " . a:dict . " " . string(a:word) . " > " . dst
+  pclose! |
+        \ execute "silent! pedit! " . dst |
+        \ wincmd P |
+        \ set modifiable noreadonly |
+        \ call append(0, 'This is a scratch buffer in a preview window') |
+        \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
+        \ setlocal nobuflisted |
+        \ wincmd p
   execute ":redraw!"
 endfunction
 
-command -nargs=1 Def call ReadDictToPreview(<q-args>)
+command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
+cabbrev def Def
+command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
+cabbrev syn Syn
 
 " }}}
 " General: Resize Window --- {{{
