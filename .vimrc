@@ -768,14 +768,10 @@ command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 cabbrev syn Syn
 
  " }}}
- " General: Resize Window --- {{{
-
-
-" }}}
 " General: Resize Window --- {{{
 
 " WindowHeight: Resize window to one more than window height
-nnoremap <silent> <leader>h gg:exe "resize " . (line('$') + 1)<CR>
+nnoremap <silent> <leader><leader>h gg:exe "resize " . (line('$') + 1)<CR>
 
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
@@ -793,7 +789,7 @@ function! ResizeWidthToLongestLine()
   endwhile
   exe ":vertical resize " . (maxlength + 4)
 endfunction
-nnoremap <silent> <leader>v mz:call ResizeWidthToLongestLine()<CR>`z
+nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
 
 " }}}
 " General: Key remappings ----------------------- {{{
