@@ -231,6 +231,10 @@ eval "$(pyenv init -)"
 # }}}
 # path appends --- {{{
 
+# Local directory
 export PATH="$PATH:~/.local/bin"
+
+# Rust
+export PATH="$PATH:~/.cargo/bin"
 
 #}}}
