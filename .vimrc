@@ -239,7 +239,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell,terraform,markdown
+  autocmd Filetype python,c,elm,haskell,terraform,markdown,rust
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl
@@ -575,6 +575,19 @@ let g:tagbar_type_haskell = {
         \ 'type'   : 't'
     \ }
 \ }
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+    \]
+    \}
 
 " Toggle TagBar, keeping cursor in original window
 nnoremap <silent> <space>l :TagbarToggle <CR>
