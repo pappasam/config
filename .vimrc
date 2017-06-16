@@ -165,6 +165,10 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
 Plug 'eagletmt/neco-ghc'
+Plug 'racer-rust/vim-racer'
+" Addional requirements:
+"   cargo install racer
+"   rustup component add rust-src
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -618,6 +622,17 @@ augroup haskell_complete
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
+" Rust
+" let g:racer_cmd = '/home/sroeca/.cargo/bin/racer'
+" let $RUST_SRC_PATH = '/home/sroeca/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let g:racer_cmd = $HOME . '/.cargo/bin/racer'
+let $RUST_SRC_PATH = $HOME . '/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let g:racer_experimental_completer = 1
+augroup rust_complete
+  autocmd!
+  autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
+augroup END
+
 "  }}}
 " Plugin: Misc config ------------ {{{
 
@@ -751,6 +766,10 @@ command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
 cabbrev def Def
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 cabbrev syn Syn
+
+ " }}}
+ " General: Resize Window --- {{{
+
 
 " }}}
 " General: Resize Window --- {{{
