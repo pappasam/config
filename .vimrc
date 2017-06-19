@@ -511,7 +511,15 @@ function! CustomAirlineDisplayPath()
   " For project rooted at /home/user/src/myproject:
   " and file at /home/user/src/myproject/lib/file.c
   " display: 'file.c : myproject/lib'
-  return expand('%:t') . ' : ' . expand('%:h')
+  " :.    Reduce file name to be relative to current directory, if
+  "       possible.  File name is unmodified if it is not below the
+  "       current directory.
+  "       For maximum shortness, use ':~:.'.
+  " The :~ is optional.
+  " It will reduce the path relative to your home folder if possible (~/...).
+  " Unfortunately that only works on your home;
+  " it won't turn /home/joey into ~joey.
+  return expand('%:t') . ' : ' . fnamemodify(expand('%:h'), ":~:.")
 endfunction
 let g:airline_section_c = airline#section#create(
       \['%{CustomAirlineDisplayPath()}'])
