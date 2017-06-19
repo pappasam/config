@@ -137,7 +137,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Language-specific syntax
 Plug 'derekwyatt/vim-scala',
-Plug 'wting/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'hdima/python-syntax',
 Plug 'autowitch/hive.vim'
 Plug 'elzr/vim-json',
