@@ -751,8 +751,6 @@ highlight EOLWS ctermbg=darkgreen guibg=darkgreen
 augroup fix_whitespace_save
   autocmd!
   autocmd BufWritePre * call TrimWhitespace()
-  autocmd FileType * unlet! g:airline#extensions#whitespace#checks
-  autocmd FileType markdown let g:airline#extensions#whitespace#checks = [ 'indent'  ]
 augroup END
 
 " }}}
