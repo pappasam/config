@@ -7,10 +7,10 @@
     "jquery"
   ],
   "plugins": {
+    "node": {},
+    "complete_strings": {},
     "modules": {},
     "es_modules": {},
-    "complete_strings": {},
-    "node": {},
     "doc_comment": {
       "fullDocs": true,
       "strong": true
