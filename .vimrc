@@ -736,6 +736,7 @@ nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>g. :Git add .<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gd :Gdiff<CR>
 
 " indentlines
 let g:indentLine_enabled = 0  " indentlines disabled by default
