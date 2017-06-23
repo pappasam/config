@@ -711,7 +711,6 @@ let python_highlight_all = 1
 let g:ragtag_global_maps = 1
 
 " Vim-javascript
-let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
 
 " JSX for .js files in addition to .jsx
