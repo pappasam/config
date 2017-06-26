@@ -183,10 +183,10 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 
 " Web Development - Javascript
-" Plug 'pangloss/vim-javascript'
-Plug 'pappasam/vim-javascript', {
-      \ 'branch':
-      \ 'FIX_FLOW_MAYBE_BREAKAGE_AND_TERNARY_WEIRDNESS'}
+Plug 'pangloss/vim-javascript', { 'branch': 'misc-flow-fixes' }
+" Plug 'pappasam/vim-javascript', {
+"       \ 'branch':
+"       \ 'FIX_FLOW_MAYBE_BREAKAGE_AND_TERNARY_WEIRDNESS'}
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'heavenshell/vim-jsdoc'
