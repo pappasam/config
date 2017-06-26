@@ -11,3 +11,5 @@
   dump = cat-file -p
 [merge "ours"]
   driver = true
+[push]
+  default = matching
