@@ -860,6 +860,14 @@ nnoremap gn :bn<CR>
 nnoremap gd :BD<CR>
 nnoremap gp :bp<CR>
 
+" MovingToRightAndLeft:
+" window key + n takes me to rightmost window (NERDTree)
+" window key + t takes me to leftmost window (TagBar)
+" <C-w>p takes me to previous window
+" the number 200 is arbitrary
+nnoremap <C-w>n <C-w>200h
+nnoremap <C-w>t <C-w>200l
+
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
