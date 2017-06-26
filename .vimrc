@@ -472,7 +472,7 @@ nnoremap <silent> <space>j :NERDTreeToggle %<CR>
 "  }}}
 " Plugin: Ctrl p --- {{{
 
-let g:ctrlp_working_path_mode = 'rw' " start from cwd
+let g:ctrlp_mruf_relative = 1 " show only MRU files in the current working directory
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 " open first in current window and others as hidden
 let g:ctrlp_open_multiple_files = '1r'
@@ -491,7 +491,7 @@ function! CtrlPCommand()
         let current_window_number = current_window_number + 1
     endwhile
     if current_window_number < total_window_number
-      exec 'CtrlP'
+      exec 'CtrlPCurWD'
     endif
 endfunction
 let g:ctrlp_cmd = 'call CtrlPCommand()'
@@ -659,6 +659,10 @@ augroup END
 
 "  }}}
 " Plugin: Misc config ------------ {{{
+
+" vim-rooter
+" note: to set root to git repository, run :Rooter
+let g:rooter_manual_only = 1
 
 " vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -858,6 +862,10 @@ nnoremap gp :bp<CR>
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
+
+" changing directories
+cabbrev root Rooter
+cabbrev here cd %:p:h
 
 " abbreviate creating tab, vertical, and horizontal buffer splits
 cabbrev bt tab sb
