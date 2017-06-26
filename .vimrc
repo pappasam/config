@@ -125,6 +125,7 @@ Plug 'djoshea/vim-autoread'
 Plug 'justinmk/vim-sneak'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
+Plug '907th/vim-auto-save'
 
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
@@ -666,6 +667,9 @@ augroup END
 
 "  }}}
 " Plugin: Misc config ------------ {{{
+
+" vim-autosave
+let g:auto_save = 1
 
 " vim-rooter
 " note: to set root to git repository, run :Rooter
