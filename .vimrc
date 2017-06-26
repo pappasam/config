@@ -649,8 +649,6 @@ augroup haskell_complete
 augroup END
 
 " Rust
-" let g:racer_cmd = '/home/sroeca/.cargo/bin/racer'
-" let $RUST_SRC_PATH = '/home/sroeca/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 let g:racer_cmd = $HOME . '/.cargo/bin/racer'
 let $RUST_SRC_PATH = $HOME . '/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 let g:racer_experimental_completer = 1
