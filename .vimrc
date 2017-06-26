@@ -864,8 +864,8 @@ nnoremap gp :bp<CR>
 " General: Command abbreviations ------------------------ {{{
 
 " changing directories
-cabbrev root Rooter
-cabbrev here cd %:p:h
+cabbrev r Rooter
+cabbrev f cd %:p:h
 
 " abbreviate creating tab, vertical, and horizontal buffer splits
 cabbrev bt tab sb
