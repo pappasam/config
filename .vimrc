@@ -412,6 +412,13 @@ augroup python_syntax
   autocmd FileType python syn keyword pythonBuiltinObj cls
 augroup end
 
+" Javascript: Highlight this keyword in object / function definitions
+augroup javascript_syntax
+  autocmd!
+  autocmd FileType javascript syn keyword jsBooleanTrue this
+  autocmd FileType javascript.jsx syn keyword jsBooleanTrue this
+augroup end
+
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 try
