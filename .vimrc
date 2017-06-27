@@ -677,6 +677,7 @@ let g:rooter_manual_only = 1
 
 " vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:tex_flavor = 'latex'
 
 " Virtualenv
 " necessary for jedi-vim to discover virtual environments
