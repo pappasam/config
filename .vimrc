@@ -232,8 +232,9 @@ augroup END
 
 augroup quick_fix_move_bottom
   autocmd!
-  " silent! ignores error messages
-  autocmd FileType qf silent! wincmd J
+  " currently latest version of vim throws error
+  " just type these commands manually for now and wait for fix
+  autocmd FileType qf wincmd J
 augroup END
 
 " }}}
