@@ -1,13 +1,10 @@
 " Notes --------- {{{
-
-" -----------------------------------------------------------
-" Text object selection
+" TextObjectSelection:
 " object-select OR text-objects
 " delete the inner (...) block where the cursor is.
 " dib ( or 'di(' )
 " -----------------------------------------------------------
-"
-" -----------------------------------------------------------
+" SystemCopy:
 " The default mapping is cp, and can be followed by any motion or text object. For instance:
 
 " cpiw => copy word into system clipboard
@@ -16,17 +13,20 @@
 
 " The sequence cv is mapped to paste the content of system clipboard to the next line.
 " -----------------------------------------------------------
-"
-" -----------------------------------------------------------
-"  Enable and disable folding
+"  Folding:
 "  zi
 " -----------------------------------------------------------
-"
-" How to insert parens purely
+" ParenInsertion:
 " There are 3 ways
 " 1. use Ctrl-V ) to insert paren without trigger the plugin.
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
+"
+" QuickfixAndLocationList:
+" ccl: close quickfix (my abbreviation: cc)
+" cw: open quickfix if there is anything to open
+" lcl: close location list (my abbreviation: lc)
+" lw: open location list if there is anything to open
 
 " }}}
 " General: Leader mappings -------------------- {{{
@@ -837,9 +837,11 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
 " imap <C-space> <C-x><C-o>
 inoremap <C-@> <C-x><C-o>
 
-" Exit: Preview and Help
+" Exit: Preview and Help && QuickFix and Location List
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
+inoremap <silent> <C-q> <Esc>:cclose <BAR> lclose<CR>a
+nnoremap <silent> <C-q> :cclose <BAR> lclose<CR>
 
 " MoveVisual: up and down visually only if count is specified before
 " Otherwise, you want to move up lines numerically
@@ -937,39 +939,6 @@ vnoremap <silent> # :<C-U>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
-
-" }}}
-" General: Quickfix Toggle ------ {{{
-
-function! GetBufferList()
-  redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
-endfunction
-
-function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
-    endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
-endfunction
-
-nnoremap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-nnoremap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
 
 " }}}
 " General: Writing (non-coding)------------------ {{{
