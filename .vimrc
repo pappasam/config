@@ -507,7 +507,7 @@ let g:airline_mode_map = {
 
 " }}}
 "  Plugin: Tagbar ------ {{{
-
+let g:tagbar_map_showproto = 't'
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
