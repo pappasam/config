@@ -232,7 +232,8 @@ augroup END
 
 augroup quick_fix_move_bottom
   autocmd!
-  autocmd FileType qf wincmd J
+  " silent! ignores error messages
+  autocmd FileType qf silent! wincmd J
 augroup END
 
 " }}}
