@@ -234,7 +234,7 @@ augroup quick_fix_move_bottom
   autocmd!
   " currently latest version of vim throws error
   " just type these commands manually for now and wait for fix
-  autocmd FileType qf wincmd J
+  " autocmd FileType qf wincmd J
 augroup END
 
 " }}}
@@ -821,18 +821,15 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 " Scroll screen up and down
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
-" Switch buffers
-nnoremap gn :bn<CR>
-nnoremap gd :BD<CR>
-nnoremap gp :bp<CR>
 
 " MovingToRightAndLeft:
-" window key + n takes me to rightmost window (NERDTree)
-" window key + t takes me to leftmost window (TagBar)
-" <C-w>p takes me to previous window
+" g + n takes me to rightmost window (NERDTree)
+" g + t takes me to leftmost window (TagBar)
+" g + p takes me to previous window
 " the number 200 is arbitrary
-nnoremap <C-w>n <C-w>200h
-nnoremap <C-w>t <C-w>200l
+nnoremap gn <C-w>200h
+nnoremap gt <C-w>200l
+nnoremap gp <C-w>p
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
