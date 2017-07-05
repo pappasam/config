@@ -700,16 +700,6 @@ let g:startify_custom_header = [
       \ '       \_)                                                       (_/',
       \]
 
-" let g:startify_custom_footer = [
-"       \ '                                 ',
-"       \ '            __                   ',
-"       \ '    __  __ /\_\    ___ ___       ',
-"       \ '   /\ \/\ \\/\ \ /'' __` __`\    ',
-"       \ '   \ \ \_/ |\ \ \/\ \/\ \/\ \    ',
-"       \ '    \ \___/  \ \_\ \_\ \_\ \_\   ',
-"       \ '     \/__/    \/_/\/_/\/_/\/_/   ',
-"       \ ]
-
 " choosewin (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
 
