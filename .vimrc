@@ -50,7 +50,7 @@ set mouse=""
 set nobackup
 set noswapfile
 
-set wrap
+set nowrap
 
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
@@ -841,8 +841,9 @@ nnoremap <silent> <C-q> :cclose <BAR> lclose<CR>
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 " Move to beginning and end of visual line
-nnoremap 0 g0
-nnoremap $ g$
+" commented out for now
+" nnoremap 0 g0
+" nnoremap $ g$
 " moving forward and backward with vim tabs
 nnoremap H gT
 nnoremap L gt
