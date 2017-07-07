@@ -848,8 +848,8 @@ nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 " nnoremap 0 g0
 " nnoremap $ g$
 " moving forward and backward with vim tabs
-nnoremap H gT
-nnoremap L gt
+nnoremap t gT
+nnoremap T gt
 
 " IndentComma: placing commas one line down
 " usable with repeat operator '.'
@@ -863,9 +863,11 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
-" Scroll screen up and down
+" Scroll screen up, down, left, and right
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
+nnoremap <silent> H zh
+nnoremap <silent> L zl
 
 " MovingToRightAndLeft:
 " g + n takes me to rightmost window (NERDTree)
