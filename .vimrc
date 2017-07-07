@@ -50,6 +50,7 @@ set mouse=""
 set nobackup
 set noswapfile
 
+" Do not wrap lines by default
 set nowrap
 
 " Set column to light grey at 80 characters
