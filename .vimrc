@@ -123,7 +123,6 @@ Plug 'mhinz/vim-startify'
 Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
-Plug 'justinmk/vim-sneak'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 
@@ -842,8 +841,8 @@ nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 " nnoremap 0 g0
 " nnoremap $ g$
 " moving forward and backward with vim tabs
-nnoremap t gT
-nnoremap T gt
+nnoremap T gT
+nnoremap t gt
 
 " IndentComma: placing commas one line down
 " usable with repeat operator '.'
@@ -869,7 +868,7 @@ nnoremap <silent> L zl
 " g + p takes me to previous window
 " the number 200 is arbitrary
 nnoremap gn <C-w>200h
-nnoremap gt <C-w>200l
+nnoremap gb <C-w>200l
 nnoremap gp <C-w>p
 
 " }}}
