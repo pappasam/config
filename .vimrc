@@ -406,7 +406,7 @@ augroup rainbow_settings
   " Section to turn on rainbow parentheses
   autocmd!
   autocmd BufEnter,BufRead * :RainbowParentheses
-  autocmd BufEnter,BufRead *.html,*.css,*.jxs,*.js :RainbowParentheses!
+  autocmd BufEnter,BufRead *.html,*.css,*.jsx,*.js :RainbowParentheses!
 augroup END
 
 "  }}}
