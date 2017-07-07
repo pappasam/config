@@ -617,41 +617,8 @@ augroup rust_complete
 augroup END
 
 "  }}}
-" Plugin: Misc config ------------ {{{
+"  Plugin: Startify ------------- {{{
 
-" vim-rooter
-" note: to set root to git repository, run :Rooter
-let g:rooter_manual_only = 1
-
-" vimtex
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:tex_flavor = 'latex'
-
-" Virtualenv
-" necessary for jedi-vim to discover virtual environments
-let g:virtualenv_auto_activate = 1
-
-" QFEnter
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.open = ['<CR>']
-let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-s>']
-let g:qfenter_keymap.topen = ['<C-t>']
-
-" WinResize
-let g:winresizer_start_key = '<C-E>'
-let g:winresizer_vert_resize = 1
-let g:winresizer_horiz_resize = 1
-
-" C++
-let g:cpp_experimental_simple_template_highlight = 1
-
-" Taboo:
-" Tab format hardcoded to main for now since I often do this anyway
-let g:taboo_tab_format = ' [%N:tab]%m '
-let g:taboo_renamed_tab_format = ' [%N:%l]%m '
-
-" startify
 let g:startify_list_order = []
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_special = 2
@@ -699,6 +666,41 @@ let g:startify_custom_header = [
       \ '      \o\                                                         /o/',
       \ '       \_)                                                       (_/',
       \]
+
+"  }}}
+"  Plugin: Misc config ------------ {{{
+
+" vim-rooter
+" note: to set root to git repository, run :Rooter
+let g:rooter_manual_only = 1
+
+" vimtex
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:tex_flavor = 'latex'
+
+" Virtualenv
+" necessary for jedi-vim to discover virtual environments
+let g:virtualenv_auto_activate = 1
+
+" QFEnter
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>']
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-s>']
+let g:qfenter_keymap.topen = ['<C-t>']
+
+" WinResize
+let g:winresizer_start_key = '<C-E>'
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
+
+" C++
+let g:cpp_experimental_simple_template_highlight = 1
+
+" Taboo:
+" Tab format hardcoded to main for now since I often do this anyway
+let g:taboo_tab_format = ' [%N:tab]%m '
+let g:taboo_renamed_tab_format = ' [%N:%l]%m '
 
 " choosewin (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
