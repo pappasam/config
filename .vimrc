@@ -126,6 +126,9 @@ Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 
+" Commands run in vim's virtual screen and don't pollute main shell
+Plug 'fcpg/vim-altscreen'
+
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
 
