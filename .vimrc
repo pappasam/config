@@ -37,6 +37,22 @@ let maplocalleader = "\\"
 " }}}
 " General: global config ------------ {{{
 
+"A comma separated list of options for Insert mode completion
+"   menuone  Use the popup menu also when there is only one match.
+"            Useful when there is additional information about the
+"            match, e.g., what file it comes from.
+
+"   longest  Only insert the longest common text of the matches.  If
+"            the menu is displayed you can use CTRL-L to add more
+"            characters.  Whether case is ignored depends on the kind
+"            of completion.  For buffer text the 'ignorecase' option is
+"            used.
+
+"   preview  Show extra information about the currently selected
+"            completion in the preview window.  Only works in
+"            combination with 'menu' or 'menuone'.
+set completeopt=menuone,longest,preview
+
 " Enable buffer deletion instead of having to write each buffer
 set hidden
 
@@ -581,6 +597,10 @@ let g:jedi#show_call_signatures = 0
 let g:jedi#auto_close_doc = 0
 
 " mappings
+" auto_vim_configuration creates space between where vim is opened and
+" closed in my bash terminal. This is annoying, so I disable and manually
+" configure. See 'set completeopt' in my global config for my settings
+let g:jedi#auto_vim_configuration = 0
 let g:jedi#goto_command = "<C-]>"
 let g:jedi#documentation_command = "<leader>sd"
 let g:jedi#usages_command = "<leader>su"
