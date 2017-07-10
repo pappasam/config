@@ -683,6 +683,14 @@ let g:startify_custom_footer = [
       \ '',
       \] + map(startify#fortune#boxed(), {idx, val -> '   ' . val})
 
+" Get nerdtree to work at startify
+autocmd VimEnter *
+  \   if !argc()
+  \ |   Startify
+  \ |   NERDTree
+  \ |   wincmd w
+  \ | endif
+
 "  }}}
 "  Plugin: Misc config ------------ {{{
 
