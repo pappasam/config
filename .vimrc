@@ -442,7 +442,7 @@ let g:NERDTreeIgnore=[
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]'
       \]
-nnoremap <silent> <space>j :NERDTreeToggle %<CR>
+nnoremap <silent> <space>j :NERDTreeToggle<CR>
 
 "  }}}
 " Plugin: Ctrl p --- {{{
@@ -523,7 +523,7 @@ let g:airline_mode_map = {
 
 " }}}
 "  Plugin: Tagbar ------ {{{
-let g:tagbar_map_showproto = 't'
+let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
@@ -682,14 +682,6 @@ let g:startify_custom_footer = [
       \ '                           LS        ~o',
       \ '',
       \] + map(startify#fortune#boxed(), {idx, val -> '   ' . val})
-
-" Get nerdtree to work at startify
-autocmd VimEnter *
-  \   if !argc()
-  \ |   Startify
-  \ |   NERDTree
-  \ |   wincmd w
-  \ | endif
 
 "  }}}
 "  Plugin: Misc config ------------ {{{
