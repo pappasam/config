@@ -141,6 +141,7 @@ Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
+Plug 'justinmk/vim-sneak'
 
 " Commands run in vim's virtual screen and don't pollute main shell
 Plug 'fcpg/vim-altscreen'
@@ -883,6 +884,10 @@ nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
 nnoremap <silent> H zh
 nnoremap <silent> L zl
+" Move cursor to top, bottom, and middle of screen
+nnoremap <silent> gJ L
+nnoremap <silent> gK H
+nnoremap <silent> gM M
 
 " MovingToRightAndLeft:
 " g + n takes me to rightmost window (NERDTree)
