@@ -6,14 +6,16 @@ as a reminder for those necessary manual steps.
 
 ## Themes
 
-I currently use the Windows 10 Light Theme.
-Below are the GUI configurations for my optimal config:
-
-* Window borders: Windows 10
-* Icons: Mint-X
-* Controls: Windows 10
-* Mouse Pointer: DMZ-White
-* Desktop: Windows 10
+* Window borders
+    * Esco
+* Icons
+    * Mint-Y
+* Controls
+    * Mint-Y-Dark
+* Mouse Pointer
+    * DMZ-White
+* Desktop
+    * Mint-Y
 
 ## Effects
 
