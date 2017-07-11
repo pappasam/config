@@ -15,7 +15,7 @@ as a reminder for those necessary manual steps.
 * Mouse Pointer
     * DMZ-White
 * Desktop
-    * Mint-Y
+    * Mint-Y-Dark
 
 ## Effects
 
