@@ -456,12 +456,17 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_switch_buffer = 0
 
 " Cycles through windows until it finds a modifiable buffer
+" First checks if startify and runs command if so
 " it then runs ctrl-p there
 " if there are no modifiable buffers, it does not run control p
 " this prevents ctrl-p from opening in NERDTree, QuickFix, or other
 function! CtrlPCommand()
     let current_window_number = 0
     let total_window_number = winnr('$')
+    if &filetype ==? 'startify'
+      exec 'CtrlPCurWD'
+      return
+    endif
     while !&modifiable && current_window_number < total_window_number
         exec 'wincmd w'
         let current_window_number = current_window_number + 1
