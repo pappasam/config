@@ -60,8 +60,6 @@ to do things without moving my hands from the home row.
         * Move window to right monitor: Shift+Super+L
         * Move window to up monitor: Shift+Super+K
         * Move window to down monitor: Shift+Super+J
-* **Launchers**
-    * Launch web browser : Ctrl+Alt+B
 * **System**
     * Hardware
         * Re-detect display devices: remove the Super+P shortcut (easy to hit accidentailly)
@@ -73,9 +71,12 @@ to do things without moving my hands from the home row.
     * Panel Toggle
         * Command : ~/configsettings/panel-autohide.sh
         * Shortcut : Ctrl+Alt+P
-    * Terminal Maxsize
+    * Terminal Maximize
         * Command : /usr/bin/gnome-terminal --maximize
         * Shortcut : Ctrl+Alt+i
+    * Browser Maximize
+        * Command : /usr/bin/gnome-www-browser --maximize
+        * Shortcut : Ctrl+Alt+b
 
 ### Layouts
 
