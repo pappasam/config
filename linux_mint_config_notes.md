@@ -55,6 +55,10 @@ to do things without moving my hands from the home row.
     * Inter-workspace
         * Move window to left workspace : Shift+Ctrl+Alt+H
         * Move window to right workspace : Shift+Ctrl+Alt+L
+        * Move window to workspace 1 : Shift+Ctrl+Alt+!
+        * Move window to workspace 2 : Shift+Ctrl+Alt+@
+        * Move window to workspace 3 : Shift+Ctrl+Alt+#
+        * Move window to workspace 4 : Shift+Ctrl+Alt+$
     * Inter-monitor
         * Move window to left monitor: Shift+Super+H
         * Move window to right monitor: Shift+Super+L
