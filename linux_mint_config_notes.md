@@ -61,7 +61,6 @@ to do things without moving my hands from the home row.
         * Move window to up monitor: Shift+Super+K
         * Move window to down monitor: Shift+Super+J
 * **Launchers**
-    * Launch terminal : Ctrl+Alt+i
     * Launch web browser : Ctrl+Alt+B
 * **System**
     * Hardware
@@ -74,6 +73,9 @@ to do things without moving my hands from the home row.
     * Panel Toggle
         * Command : ~/configsettings/panel-autohide.sh
         * Shortcut : Ctrl+Alt+P
+    * Terminal Maxsize
+        * Command : /usr/bin/gnome-terminal --maximize
+        * Shortcut : Ctrl+Alt+i
 
 ### Layouts
 
@@ -94,3 +96,8 @@ Some system configurations must be configured within the applets menu.
 1. Chrome Apps
     * disable all of them, pinning necessary ones to panel before
     * necessary because chrome apps are annoyingly searched when "chrome" is typed
+
+## Workspaces
+
+* OSD
+    * Uncheck "Enable workspace OSD". Don't want people seeing my silly workspace names
