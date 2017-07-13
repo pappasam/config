@@ -82,6 +82,11 @@ to do things without moving my hands from the home row.
 * Options
   * Ctrl key position: Caps Lock as Ctrl
 
+## Windows
+
+* Titlebar
+    * Uncheck everything under "Buttons". Don't need them, they're pure clutter.
+
 ## Date and Time
 
 All options off except for "Display the date"
