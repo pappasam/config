@@ -112,6 +112,11 @@ function Syn() {  # arg1: word
   dict -d moby-thesaurus $1 | less
 }
 
+# install
+function install() {  # arg1: word
+  apt-cache show $1 && sudo apt install $1
+}
+
 # }}}
 # Command line prompt (PS1) --- {{{
 
