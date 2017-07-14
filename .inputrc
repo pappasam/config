@@ -1,1 +1,4 @@
+# .inputrc: config file for bash readline
+
+# color output during tab completion
 set colored-stats on
