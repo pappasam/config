@@ -94,9 +94,11 @@ function cats() {
 }
 
 # override cd so it also lists directory contents
-function cd() {
-  builtin cd "$1" && ls
-}
+# keeping this here in case I want to use it again
+# ls is apparently in my fingers, so I type it anyway
+# function cd() {
+#   builtin cd "$1" && ls
+# }
 
 # open with gnome-open
 function gn() {  # arg1: filename
