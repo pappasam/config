@@ -43,7 +43,7 @@ to do things without moving my hands from the home row.
         * Switch to workspace 4 : Ctrl+Alt+4
 * **Windows**
     * Main
-        * Maximize Window : Super+F
+        * Maximize Window : Super+F AND Super+M
         * Unmaximize Window: Super+U
         * Close window : Alt+Q
     * Tiling and Snapping
