@@ -680,14 +680,14 @@ let g:startify_custom_footer = [
       \ '             ..--====--` `~-._.__()',
       \ '         o===``~~             |__()',
       \ '                    .         \   |             .',
-      \ '                               \  \',
-      \ '                                \  \     .',
-      \ '            .                    \  \            Sienar Fleet Systems',
-      \ '                     .            \  \           Lambda-class',
-      \ '                                   \_ \        . Imperial Shuttle',
+      \ '                               \  \    .',
+      \ '                                \  \     ',
+      \ '            .                    \  \   Sienar Fleet Systems',
+      \ '                     .            \  \  Lambda-class',
+      \ '                                   \_ \ Imperial Shuttle',
       \ '                           LS        ~o',
       \ '',
-      \] + map(startify#fortune#boxed(), {idx, val -> '   ' . val})
+      \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
 "  }}}
 "  Plugin: Misc config ------------ {{{
