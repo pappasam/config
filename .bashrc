@@ -17,6 +17,7 @@ shuf -n 1 ~/configsettings/gre_words.txt | cowsay
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
+alias 'cd..'='cd_up'  # can not name function 'cd..'; references cd_up below
 alias .='cd ..'
 alias ..='cd ../..'
 alias ...='cd ../../..'
@@ -96,13 +97,6 @@ function cats() {
   pygmentize -g $1 | less -r
 }
 
-# override cd so it also lists directory contents
-# keeping this here in case I want to use it again
-# ls is apparently in my fingers, so I type it anyway
-# function cd() {
-#   builtin cd "$1" && ls
-# }
-
 # open with gnome-open
 function gn() {  # arg1: filename
   gnome-open "$1" &> /dev/null
@@ -120,6 +114,19 @@ function Syn() {  # arg1: word
 # install
 function install() {  # arg1: word
   apt-cache show $1 && sudo apt install $1
+}
+
+# Move up n directories using:  cd.. 10   cd.. dir
+function cd_up() {  # arg1: number|word
+  pushd . >/dev/null
+  case $1 in
+    *[!0-9]*)                                          # if no a number
+      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
+      ;;                                               # if not found - not cd
+    *)
+      cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
+    ;;
+  esac
 }
 
 # }}}
