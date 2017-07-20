@@ -17,7 +17,7 @@ shuf -n 1 ~/configsettings/gre_words.txt | cowsay
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
-alias 'cd..'='cd_up'  # can not name function 'cd..'; references cd_up below
+alias 'cd.'='cd_up'  # can not name function 'cd..'; references cd_up below
 alias .='cd ..'
 alias ..='cd ../..'
 alias ...='cd ../../..'
