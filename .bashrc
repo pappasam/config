@@ -85,6 +85,9 @@ alias regrep="grep --perl-regexp -Ir \
 # upgrade
 alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 
+# battery
+alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
+
 # }}}
 # Functions --- {{{
 
