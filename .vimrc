@@ -215,9 +215,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 
-" Rainbow
-Plug 'junegunn/rainbow_parentheses.vim'
-
 " Writing
 Plug 'dkarter/bullets.vim'
 
@@ -414,18 +411,6 @@ let wiki_personal.path = '~/Wiki/'
 let g:vimwiki_list = [wiki_personal]
 
 " }}}
-"  Plugin: Rainbow Parentheses --- {{{
-
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
-augroup rainbow_settings
-  " Section to turn on rainbow parentheses
-  autocmd!
-  autocmd BufEnter,BufRead * :RainbowParentheses
-  autocmd BufEnter,BufRead *.html,*.css,*.jsx,*.js,*.toml :RainbowParentheses!
-augroup END
-
-"  }}}
 "  Plugin: NERDTree --- {{{
 
 let g:NERDTreeMapOpenInTab = '<C-t>'
