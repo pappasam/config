@@ -697,6 +697,7 @@ let g:startify_custom_footer = [
 
 " undotree
 let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_WindowLayout = 3
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
 " vim-rooter
