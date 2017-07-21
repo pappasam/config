@@ -414,6 +414,7 @@ let g:vimwiki_list = [wiki_personal]
 "  Plugin: NERDTree --- {{{
 
 let g:NERDTreeMapOpenInTab = '<C-t>'
+let g:NERDTreeMapOpenInTabSilent = ''
 let g:NERDTreeMapOpenSplit = '<C-s>'
 let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeShowLineNumbers = 1
