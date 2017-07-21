@@ -430,7 +430,15 @@ let g:NERDTreeIgnore=[
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]'
       \]
-nnoremap <silent> <space>j :NERDTreeToggle<CR>
+" Runs 'NERDTreeToggle %' unless current buffer is Startify
+function! NERDTreeToggleCustom()
+    if &filetype ==? 'startify'
+      exec 'NERDTreeToggle'
+    else
+      exec 'NERDTreeToggle %'
+    endif
+endfunction
+nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
 
 "  }}}
 " Plugin: Ctrl p --- {{{
