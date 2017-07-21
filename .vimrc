@@ -27,6 +27,14 @@
 " cw: open quickfix if there is anything to open
 " lcl: close location list (my abbreviation: lc)
 " lw: open location list if there is anything to open
+"
+" InsertModeEditing:
+" TLDR
+"   :help insert-index
+" CTRL-H   delete the character in front of the cursor
+" CTRL-W   delete the word in front of the cursor
+" CTRL-U   delete all characters in front of the cursor
+" CTRL-L   delete character under cursor (I create this in general remappings)
 
 " }}}
 " General: Leader mappings -------------------- {{{
@@ -901,6 +909,10 @@ nnoremap <silent> gM M
 nnoremap gn <C-w>200h
 nnoremap gb <C-w>200l
 nnoremap gp <C-w>p
+
+" InsertModeDeletion:
+" Delete character under cursor in insert mode
+inoremap <C-l> <Del>
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
