@@ -142,6 +142,7 @@ Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
+Plug 'mbbill/undotree'
 
 " Commands run in vim's virtual screen and don't pollute main shell
 Plug 'fcpg/vim-altscreen'
@@ -677,6 +678,10 @@ let g:startify_custom_footer = [
 
 "  }}}
 "  Plugin: Misc config ------------ {{{
+
+" undotree
+let g:undotree_SetFocusWhenToggle = 1
+nnoremap <silent> <space>u :UndotreeToggle<CR>
 
 " vim-rooter
 " note: to set root to git repository, run :Rooter
