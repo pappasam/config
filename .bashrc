@@ -70,6 +70,10 @@ alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 # Git
 alias g="git status"
 
+# Less with default options
+# -c: auto-clear screen
+alias less='less -c'
+
 # Regex ignore annoying directories
 alias regrep="grep --perl-regexp -Ir \
 --exclude=*~ \
@@ -94,7 +98,7 @@ alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "stat
 
 # Colored cat
 function cats() {
-  pygmentize -g $1 | less -r
+  pygmentize -g $1 | less -rc
 }
 
 # open with gnome-open
@@ -104,11 +108,11 @@ function gn() {  # arg1: filename
 
 # dictionary
 function Def() {  # arg1: word
-  dict -d gcide $1 | less
+  dict -d gcide $1 | less -c
 }
 
 function Syn() {  # arg1: word
-  dict -d moby-thesaurus $1 | less
+  dict -d moby-thesaurus $1 | less -c
 }
 
 # install
