@@ -601,6 +601,7 @@ nnoremap <silent> <space>l :TagbarToggle <CR>
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#auto_close_doc = 0
+let g:jedi#smart_auto_mappings = 0
 
 " mappings
 " auto_vim_configuration creates space between where vim is opened and
