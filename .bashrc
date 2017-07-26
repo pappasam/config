@@ -3,6 +3,9 @@
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# Configure less (de-initialization clears the screen)
+export PAGER=less
+
 # }}}
 # Executed Commands --- {{{
 
@@ -72,7 +75,7 @@ alias g="git status"
 
 # Less with default options
 # -c: auto-clear screen
-alias less='less -c'
+# alias less='less -c'
 
 # Regex ignore annoying directories
 alias regrep="grep --perl-regexp -Ir \
@@ -108,11 +111,11 @@ gn() {  # arg1: filename
 
 # dictionary lookups
 def() {  # arg1: word
-  dict -d gcide $1
+  dict -d gcide $1 | less -XF
 }
 
 syn() {  # arg1: word
-  dict -d moby-thesaurus $1
+  dict -d moby-thesaurus $1 | less -XF
 }
 
 # install
