@@ -97,31 +97,31 @@ alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "stat
 # Functions --- {{{
 
 # Colored cat
-function cats() {
+cats() {
   pygmentize -g $1 | less -rc
 }
 
 # open with gnome-open
-function gn() {  # arg1: filename
+gn() {  # arg1: filename
   gnome-open "$1" &> /dev/null
 }
 
-# dictionary
-function Def() {  # arg1: word
-  dict -d gcide $1 | less -c
+# dictionary lookups
+def() {  # arg1: word
+  dict -d gcide $1
 }
 
-function Syn() {  # arg1: word
-  dict -d moby-thesaurus $1 | less -c
+syn() {  # arg1: word
+  dict -d moby-thesaurus $1
 }
 
 # install
-function install() {  # arg1: word
+install() {  # arg1: word
   apt-cache show $1 && sudo apt install $1
 }
 
 # Move up n directories using:  cd.. dir
-function cd_up() {  # arg1: number|word
+cd_up() {  # arg1: number|word
   pushd . >/dev/null
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
