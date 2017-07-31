@@ -60,6 +60,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# diff
+# r: recursively; u: shows line number; p: shows difference in C function
+# P: if multiple files then showing complete path
+alias diff="diff -rupP"
+
 # Set copy/paste helper functions
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
