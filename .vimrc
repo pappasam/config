@@ -717,6 +717,8 @@ let g:qfenter_keymap.open = ['<CR>']
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-s>']
 let g:qfenter_keymap.topen = ['<C-t>']
+" do not copy quickfix when opened in new tab
+let g:qfenter_enable_autoquickfix = 0
 
 " WinResize
 let g:winresizer_start_key = '<C-E>'
