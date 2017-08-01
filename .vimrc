@@ -651,7 +651,6 @@ augroup END
 "  }}}
 "  Plugin: Startify ------------- {{{
 
-" MFalcon taken from: http://ascii.co.uk/art/starwars1
 let g:startify_list_order = []
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_special = 1
