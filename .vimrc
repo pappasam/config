@@ -702,7 +702,6 @@ let g:undotree_WindowLayout = 3
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
 " vim-rooter
-" note: to set root to git repository, run :Rooter
 let g:rooter_manual_only = 1
 
 " vimtex
@@ -763,13 +762,7 @@ let g:jsdoc_enable_es6 = 1
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 
-
 " vim-fugitive
-" DO NOT USE THESE MAPPINGS BELOW Vim version 8
-" version 8 solves some async issues
-" https://github.com/tpope/vim-fugitive/issues/648
-" fugitive and vim-airline overlap; TPope needs to fix some bugs
-" date of note: 2017-01-13
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>g. :Git add .<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
