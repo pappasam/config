@@ -226,6 +226,16 @@ Plug 'tpope/vim-ragtag'
 
 " Writing
 Plug 'dkarter/bullets.vim'
+function! VimMdCompBuildComp(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('VimMdCompBuildComp') }
 
 call plug#end()
 
@@ -773,6 +783,11 @@ nnoremap <leader>gd :Gdiff<CR>
 " indentlines
 let g:indentLine_enabled = 0  " indentlines disabled by default
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
+
+" vim-markdown-composer
+let g:markdown_composer_syntax_theme = 'github'
+let g:markdown_composer_open_browser = 0
+nnoremap <silent> <C-M> :ComposerOpen<CR>
 
 "  }}}
 " General: Trailing whitespace ------------- {{{
