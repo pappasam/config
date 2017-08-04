@@ -126,7 +126,6 @@ set pastetoggle=<C-_>
 
 " Turn off complete vi compatibility
 set nocompatible
-
 " }}}
 " General: Plugin Install --------------------- {{{
 
@@ -285,6 +284,20 @@ augroup indentation_sr
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
+
+  " Rust-specifc 'indentation overrides'
+  "   assumes working with rust.vim, which uses ctags
+  "     cino-m
+  "       c = c1 && (
+  "           c2 ||
+  "           c3
+  "       ) && c4;
+  autocmd Filetype rust setlocal cinoptions+='(s,m1'
+  "     cino-(
+  "        if (c1 && (c2 ||
+  "                   c3))
+  "        foo;
+  autocmd Filetype rust setlocal cinoptions+='(0'
 augroup END
 
 " }}}
@@ -648,6 +661,7 @@ augroup haskell_complete
 augroup END
 
 " Rust
+
 " rustup install racer
 let g:racer_cmd = $HOME . '/.cargo/bin/racer'
 " rustup component add rust-src
