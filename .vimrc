@@ -530,7 +530,8 @@ function! CustomAirlineDisplayPath()
   " It will reduce the path relative to your home folder if possible (~/...).
   " Unfortunately that only works on your home;
   " it won't turn /home/joey into ~joey.
-  return expand('%:t') . ' : ' . expand('%:h')
+  " return expand('%:t') . ' : ' . expand('%:h')
+  return expand('%')
 endfunction
 let g:airline_section_c = airline#section#create(
       \['%{CustomAirlineDisplayPath()}'])
