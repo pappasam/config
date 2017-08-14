@@ -126,6 +126,10 @@ set pastetoggle=<C-_>
 
 " Turn off complete vi compatibility
 set nocompatible
+
+" Enable using local vimrc
+set exrc
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
@@ -1020,5 +1024,14 @@ augroup writing
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
 augroup END
+
+" }}}
+" General: Cleanup ------------------ {{{
+" commands that need to run at the end of my vimrc
+
+" disable unsafe commands in your project-specific .vimrc files
+" This will prevent :autocmd, shell and write commands from being
+" run inside project-specific .vimrc files unless they’re owned by you.
+set secure
 
 " }}}
