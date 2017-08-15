@@ -931,15 +931,6 @@ nnoremap <silent> gJ L
 nnoremap <silent> gK H
 nnoremap <silent> gM M
 
-" MovingToRightAndLeft:
-" g + n takes me to rightmost window (NERDTree)
-" g + t takes me to leftmost window (TagBar)
-" g + p takes me to previous window
-" the number 200 is arbitrary
-nnoremap gn <C-w>200h
-nnoremap gb <C-w>200l
-nnoremap gp <C-w>p
-
 " InsertModeDeletion:
 " Delete character under cursor in insert mode
 inoremap <C-l> <Del>
