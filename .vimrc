@@ -521,20 +521,11 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.spell = 'Ꞩ'
+
 function! CustomAirlineDisplayPath()
-  " For project rooted at /home/user/src/myproject:
-  " and file at /home/user/src/myproject/lib/file.c
-  " display: 'file.c : myproject/lib'
-  " :.    Reduce file name to be relative to current directory, if
-  "       possible.  File name is unmodified if it is not below the
-  "       current directory.
-  "       For maximum shortness, use ':~:.'.
-  " The :~ is optional.
-  " It will reduce the path relative to your home folder if possible (~/...).
-  " Unfortunately that only works on your home;
-  " it won't turn /home/joey into ~joey.
-  " return expand('%:t') . ' : ' . expand('%:h')
-  return expand('%')
+  " get filepath relative to cwd
+  let cwd = getcwd()
+  return substitute(expand("%:p"), l:cwd . "/" , "", "")
 endfunction
 let g:airline_section_c = airline#section#create(
       \['%{CustomAirlineDisplayPath()}'])
