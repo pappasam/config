@@ -164,7 +164,6 @@ augroup fold_settings
   autocmd FileType vim setlocal foldlevelstart=0
   autocmd FileType * setlocal foldnestmax=1
 augroup END
-nnoremap z<space> zA
 
 " }}}
 " General: Syntax highlighting ---------------- {{{
