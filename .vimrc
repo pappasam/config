@@ -387,7 +387,6 @@ augroup fold_settings
   autocmd BufNewFile,BufRead .bashrc setlocal foldmethod=marker
   autocmd BufNewFile,BufRead .bashrc setlocal foldlevelstart=0
 augroup END
-nnoremap z<space> zA
 
 " }}}
 " General: Syntax highlighting ---------------- {{{
