@@ -464,12 +464,16 @@ let g:NERDTreeIgnore=[
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]'
       \]
-" Runs 'NERDTreeToggle %' unless current buffer is Startify
 function! NERDTreeToggleCustom()
     if &filetype ==? 'startify'
       exec 'NERDTreeToggle'
     else
-      exec 'NERDTreeToggle %'
+      if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+        " if NERDTree is open in window in current tab...
+        exec 'NERDTreeClose'
+      else
+        exec 'NERDTree %'
+      endif
     endif
 endfunction
 nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
