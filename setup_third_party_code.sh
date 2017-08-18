@@ -28,6 +28,17 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim curl
 
 #######################################################################
+# NeoVim
+#######################################################################
+add-apt-repository ppa:neovim-ppa/stable
+apt update
+apt install neovim
+apt install python-dev python-pip python3-dev python3-pip
+
+# when creating a virtual environment, run the following to get autocompletion:
+pip3 install --user --upgrade neovim
+
+#######################################################################
 # Vim dependencies
 #######################################################################
 $INSTALL exuberant-ctags
@@ -89,3 +100,10 @@ $INSTALL zathura
 # PDF Viewer with vi bindings
 #######################################################################
 $INSTALL python-pygments
+
+#######################################################################
+# PyEnv
+#######################################################################
+
+# dependencies for curses
+apt install libncurses5 libncurses5-dev libncursesw5
