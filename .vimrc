@@ -185,7 +185,6 @@ Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'lervag/vimtex'
@@ -747,9 +746,6 @@ let g:qfenter_enable_autoquickfix = 0
 let g:winresizer_start_key = '<C-E>'
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
-
-" C++
-let g:cpp_experimental_simple_template_highlight = 1
 
 " Taboo:
 " Tab format hardcoded to main for now since I often do this anyway
