@@ -256,19 +256,10 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,.pylintrc set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
 augroup END
-nnoremap <leader>jx :set filetype=javascript.jsx<CR>
-nnoremap <leader>jj :set filetype=javascript<CR>
 
 augroup filetype_vim
   autocmd!
   autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
-
-augroup quick_fix_move_bottom
-  autocmd!
-  " currently latest version of vim throws error
-  " just type these commands manually for now and wait for fix
-  " autocmd FileType qf wincmd J
 augroup END
 
 " }}}
@@ -304,6 +295,44 @@ augroup indentation_sr
 augroup END
 
 " }}}
+" General: Writing (non-coding)------------------ {{{
+
+" note: indenting and de-indenting in insert mode are:
+"   <C-t> and <C-d>
+
+augroup writing
+  autocmd!
+  autocmd FileType markdown :setlocal wrap linebreak nolist
+  autocmd FileType markdown :setlocal colorcolumn=0
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
+  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
+augroup END
+
+" }}}
+" General: Word definition and meaning lookup --- {{{
+
+" Enable looking up values in either a dictionary or a thesaurus
+" these are expected to be either:
+"   Dict: dict-gcide
+"   Thesaurus: dict-moby-thesaurus
+function! ReadDictToPreview(word, dict) range
+  let dst = tempname()
+  execute "silent ! dict -d " . a:dict . " " . string(a:word) . " > " . dst
+  pclose! |
+        \ execute "silent! pedit! " . dst |
+        \ wincmd P |
+        \ set modifiable noreadonly |
+        \ call append(0, 'This is a scratch buffer in a preview window') |
+        \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
+        \ setlocal nobuflisted |
+        \ wincmd p
+  execute ":redraw!"
+endfunction
+
+command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
+command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
+
+ " }}}
 " General: (relative) line number display ------------- {{{
 
 function! ToggleRelativeNumber()
@@ -353,11 +382,6 @@ function! RNUWinLeave()
   endif
   set norelativenumber
 endfunction
-
-" Set mappings for relative numbers
-
-" Toggle relative number status
-nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 
 " autocmd that will set up the w:created variable
 autocmd VimEnter * autocmd WinEnter * let w:created=1
@@ -430,6 +454,51 @@ endtry
 
 
 " }}}
+" General: Resize Window --- {{{
+
+" WindowWidth: Resize window to a couple more than longest line
+" modified function from:
+" https://stackoverflow.com/questions/2075276/longest-line-in-vim
+function! ResizeWidthToLongestLine()
+  let maxlength   = 0
+  let linenumber  = 1
+  while linenumber <= line("$")
+    exe ":" . linenumber
+    let linelength  = virtcol("$")
+    if maxlength < linelength
+      let maxlength = linelength
+    endif
+    let linenumber  = linenumber+1
+  endwhile
+  exe ":vertical resize " . (maxlength + 4)
+endfunction
+
+" }}}
+" General: Trailing whitespace ------------- {{{
+
+function! TrimWhitespace()
+  if &ft == 'markdown'
+    return
+  endif
+  let l:save = winsaveview()
+  %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+augroup whitespace_color
+  autocmd!
+  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+augroup END
+highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+
+augroup fix_whitespace_save
+  autocmd!
+  autocmd BufWritePre * call TrimWhitespace()
+augroup END
+
+" }}}
 " Plugin: Wiki --- {{{
 
 " Wiki is only valid when in pre-defined wiki area
@@ -475,7 +544,6 @@ function! NERDTreeToggleCustom()
       endif
     endif
 endfunction
-nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
 
 "  }}}
 " Plugin: Ctrl p --- {{{
@@ -607,69 +675,6 @@ let g:tagbar_type_rust = {
     \]
     \}
 
-" Toggle TagBar, keeping cursor in original window
-nnoremap <silent> <space>l :TagbarToggle <CR>
-
-"  }}}
-"  Plugin: AutoCompletion config, multiple plugins ------------ {{{
-
-" NOTE: General remappings
-" 1) go to file containing definition: <C-]>
-" 2) Return from file (relies on tag stack): <C-O>
-
-" Python
-" Open module, e.g. :Pyimport os (opens the os module)
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#auto_close_doc = 0
-let g:jedi#smart_auto_mappings = 0
-
-" mappings
-" auto_vim_configuration creates space between where vim is opened and
-" closed in my bash terminal. This is annoying, so I disable and manually
-" configure. See 'set completeopt' in my global config for my settings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_command = "<C-]>"
-let g:jedi#documentation_command = "<leader>sd"
-let g:jedi#usages_command = "<leader>su"
-let g:jedi#rename_command = "<leader>sr"
-
-" Javascript
-let g:tern_show_argument_hints = 1
-let g:tern_show_signature_in_pum = 1
-augroup javascript_complete
-  autocmd!
-  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
-augroup END
-
-" C++
-" Jumping back defaults to <C-O> or <C-T>
-" Defaults to <C-]> for goto definition
-let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
-let g:clang_auto_user_options = 'compile_commands.json, path'
-let g:clang_complete_auto = 0
-
-" Haskell
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-let g:necoghc_enable_detailed_browse = 1
-augroup haskell_complete
-  autocmd!
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
-
-" Rust
-
-" rustup install racer
-let g:racer_cmd = $HOME . '/.cargo/bin/racer'
-" rustup component add rust-src
-let $RUST_SRC_PATH = $HOME . '/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-let g:racer_experimental_completer = 1
-augroup rust_complete
-  autocmd!
-  autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
-augroup END
-
 "  }}}
 "  Plugin: Startify ------------- {{{
 
@@ -715,25 +720,24 @@ let g:startify_custom_footer = [
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
 "  }}}
-"  Plugin: Misc config ------------ {{{
+"  Plugin: Miscellaneous global var config ------------ {{{
 
-" undotree
+" UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 3
-nnoremap <silent> <space>u :UndotreeToggle<CR>
 
-" vim-rooter
+" VimRooter:
 let g:rooter_manual_only = 1
 
-" vimtex
+" VimTex:
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:tex_flavor = 'latex'
 
-" Virtualenv
+" PythonVirtualenv:
 " necessary for jedi-vim to discover virtual environments
 let g:virtualenv_auto_activate = 1
 
-" QFEnter
+" QFEnter:
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
 let g:qfenter_keymap.vopen = ['<C-v>']
@@ -742,7 +746,7 @@ let g:qfenter_keymap.topen = ['<C-t>']
 " do not copy quickfix when opened in new tab
 let g:qfenter_enable_autoquickfix = 0
 
-" WinResize
+" WinResize:
 let g:winresizer_start_key = '<C-E>'
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
@@ -752,10 +756,7 @@ let g:winresizer_horiz_resize = 1
 let g:taboo_tab_format = ' [%N:tab]%m '
 let g:taboo_renamed_tab_format = ' [%N:%l]%m '
 
-" choosewin (just like tmux)
-nnoremap <leader>q :ChooseWin<CR>
-
-" Haskell 'neovimhaskell/haskell-vim'
+" Haskell: 'neovimhaskell/haskell-vim'
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
 let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
@@ -763,122 +764,112 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 
-" Python highlighting
-let python_highlight_all = 1
+" Python: highlighting
+let g:python_highlight_all = 1
 
-" Ragtag on every filetype
+" Ragtag: on every filetype
 let g:ragtag_global_maps = 1
 
-" Vim-javascript
+" VimJavascript:
 let g:javascript_plugin_flow = 1
 
-" JSX for .js files in addition to .jsx
+" JSX: for .js files in addition to .jsx
 let g:jsx_ext_required = 0
 
-" js-doc
+" JsDoc:
 let g:jsdoc_enable_es6 = 1
 
-" EasyGrep - use git grep
+" EasyGrep: - use git grep
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 
-" vim-fugitive
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>g. :Git add .<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gd :Gdiff<CR>
-
-" indentlines
+" IndentLines:
 let g:indentLine_enabled = 0  " indentlines disabled by default
-nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
-" vim-markdown-composer
+" VimMarkdownComposer:
 let g:markdown_composer_syntax_theme = 'github'
 let g:markdown_composer_open_browser = 0
-nnoremap <silent> <C-M> :ComposerOpen<CR>
+
+" VimMarkdown:
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_no_default_key_mappings = 1
+
+" BulletsVim:
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
 
 "  }}}
-" General: Trailing whitespace ------------- {{{
+"  Plugin: AutoCompletion config and key remappings ------------ {{{
 
-function! TrimWhitespace()
-  if &ft == 'markdown'
-    return
-  endif
-  let l:save = winsaveview()
-  %s/\s\+$//e
-  call winrestview(l:save)
-endfunction
+" NOTE: General remappings
+" 1) go to file containing definition: <C-]>
+" 2) Return from file (relies on tag stack): <C-O>
 
-augroup whitespace_color
+" Python:
+" Open module, e.g. :Pyimport os (opens the os module)
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#auto_close_doc = 0
+let g:jedi#smart_auto_mappings = 0
+
+" mappings
+" auto_vim_configuration creates space between where vim is opened and
+" closed in my bash terminal. This is annoying, so I disable and manually
+" configure. See 'set completeopt' in my global config for my settings
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#goto_command = "<C-]>"
+let g:jedi#documentation_command = "<leader>sd"
+let g:jedi#usages_command = "<leader>su"
+let g:jedi#rename_command = "<leader>sr"
+
+" Javascript:
+let g:tern_show_argument_hints = 1
+let g:tern_show_signature_in_pum = 1
+augroup javascript_complete
   autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
-  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
 augroup END
-highlight EOLWS ctermbg=darkgreen guibg=darkgreen
 
-augroup fix_whitespace_save
+" CPP:
+" Jumping back defaults to <C-O> or <C-T>
+" Defaults to <C-]> for goto definition
+let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
+let g:clang_auto_user_options = 'compile_commands.json, path'
+let g:clang_complete_auto = 0
+
+" Haskell:
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+let g:necoghc_enable_detailed_browse = 1
+augroup haskell_complete
   autocmd!
-  autocmd BufWritePre * call TrimWhitespace()
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
-" }}}
-" General: Dict lookup --- {{{
+" Rust:
+" rustup install racer
+let g:racer_cmd = $HOME . '/.cargo/bin/racer'
+" rustup component add rust-src
+let $RUST_SRC_PATH = $HOME . '/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let g:racer_experimental_completer = 1
+augroup rust_complete
+  autocmd!
+  " needs to be nmap; does not work with nnoremap
+  autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
+augroup END
 
-" Enable looking up values in either a dictionary or a thesaurus
-" these are expected to be either:
-"   Dict: dict-gcide
-"   Thesaurus: dict-moby-thesaurus
-function! ReadDictToPreview(word, dict) range
-  let dst = tempname()
-  execute "silent ! dict -d " . a:dict . " " . string(a:word) . " > " . dst
-  pclose! |
-        \ execute "silent! pedit! " . dst |
-        \ wincmd P |
-        \ set modifiable noreadonly |
-        \ call append(0, 'This is a scratch buffer in a preview window') |
-        \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
-        \ setlocal nobuflisted |
-        \ wincmd p
-  execute ":redraw!"
-endfunction
-
-command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
-cabbrev def Def
-command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
-cabbrev syn Syn
-
- " }}}
-" General: Resize Window --- {{{
-
-" WindowHeight: Resize window to one more than window height
-nnoremap <silent> <leader><leader>h gg:exe "resize " . (line('$') + 1)<CR>
-
-" WindowWidth: Resize window to a couple more than longest line
-" modified function from:
-" https://stackoverflow.com/questions/2075276/longest-line-in-vim
-function! ResizeWidthToLongestLine()
-  let maxlength   = 0
-  let linenumber  = 1
-  while linenumber <= line("$")
-    exe ":" . linenumber
-    let linelength  = virtcol("$")
-    if maxlength < linelength
-      let maxlength = linelength
-    endif
-    let linenumber  = linenumber+1
-  endwhile
-  exe ":vertical resize " . (maxlength + 4)
-endfunction
-nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
-
-" }}}
-" General: Key remappings ----------------------- {{{
+"  }}}
+" General: Key remappings (includes Plugins) ----------------------- {{{
 
 " Omnicompletion:
-" imap <C-space> <C-x><C-o>
+" <C-@> is signal sent by terminal when pressing <C-Space>
+" Need to include <C-Space> as well for neovim sometimes
 inoremap <C-@> <C-x><C-o>
+inoremap <C-space> <C-x><C-o>
 
 " Exit: Preview and Help && QuickFix and Location List
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
@@ -925,6 +916,55 @@ nnoremap <silent> gM M
 " Delete character under cursor in insert mode
 inoremap <C-l> <Del>
 
+" VisualSearch: * and # work in visual mode too
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
+
+" QuickChangeFiletype:
+" Sometimes we want to set some filetypes due to annoying behavior of plugins
+" The following mappings make it easier to chage javascript plugin behavior
+nnoremap <leader>jx :set filetype=javascript.jsx<CR>
+nnoremap <leader>jj :set filetype=javascript<CR>
+
+" ToggleRelativeNumber: uses custom functions
+nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
+
+" TogglePluginWindows:
+nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
+nnoremap <silent> <space>l :TagbarToggle <CR>
+nnoremap <silent> <space>u :UndotreeToggle<CR>
+
+" Choosewin: (just like tmux)
+nnoremap <leader>q :ChooseWin<CR>
+
+" VimFugitive: git bindings
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>g. :Git add .<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gd :Gdiff<CR>
+
+" IndentLines: toggle if indent lines is visible
+nnoremap <silent> <leader>i :IndentLinesToggle<CR>
+
+" VimMarkdownComposer: open formatted markdown in web browser
+nnoremap <silent> <C-M> :ComposerOpen<CR>
+
+" ResizeWindow: up and down; relies on custom function
+" height
+nnoremap <silent> <leader><leader>h gg:exe "resize " . (line('$') + 1)<CR>
+" width
+nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
+
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
@@ -953,58 +993,11 @@ cabbrev VS vs
 cabbrev vS vs
 cabbrev Vs vs
 
-" move tab to number
-cabbrev t tabn
-
-" close help menu
-cabbrev hc helpclose
-
 " echo current file path
 cabbrev fp echo expand('%:p')
 
 " Plug update and upgrade
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
-
-" }}}
-" General: Visual Star Search ----------------{{{
-
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
-vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
-
-" }}}
-" General: Writing (non-coding)------------------ {{{
-
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_no_default_key_mappings=1
-" note: indenting and de-indenting in insert mode are:
-"   <C-t> and <C-d>
-
-" Bullets.vim
-let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'gitcommit',
-    \ 'scratch'
-    \]
-
-augroup writing
-  autocmd!
-  autocmd FileType markdown :setlocal wrap linebreak nolist
-  autocmd FileType markdown :setlocal colorcolumn=0
-  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
-  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
-augroup END
 
 " }}}
 " General: Cleanup ------------------ {{{
