@@ -1,26 +1,62 @@
-" Notes --------- {{{
+" Author: Samuel Roeca <samuel.roeca@gmail.com>
+"
+" This is my .vimrc. Hopefully you enjoy using it as much as me!
+" I use Linux Mint 18.X, but this will probably work with any Linux-based OS.
+" My workflow is terminal-based, so I use this with vim-nox.
+"
+" PreRequisites:
+"   To get the most out of this vimrc, please install the following
+"   system dependencies. This may not be comprehensive, but represents
+"   some basics I believe everyone should have that you might not have
+"   by default on a modern Ubuntu-based OS:
+"   * git && build-essential && curl
+"   * nodejs && npm
+"   * rust && cargo
+"   * exuberant-ctags
+"
+" Installation:
+"   1. Put file in correct place within filesystem
+"     If using Vim, soft-link this file to ~/.vimrc
+"     If using NeoVim, soft-link this file to ~/.config/nvim/init.vim
+"   2. Install Vim-Plug (a great plugin manager)
+"     As of August 20, 2017, you just need to run this command:
+"     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   3. Open vim (hint: type vim at command line and press enter :p)
+"   4. :PlugInstall
+"   5. :PlugUpdate
+"   6. :PlugUpgrade
+"
+" Notes:
+"   * To toggle sections below, scroll over a folded section and type 'za'
+"     when in Normal mode.
+" Additional Notes --------- {{{
 " TextObjectSelection:
 " object-select OR text-objects
 " delete the inner (...) block where the cursor is.
 " dib ( or 'di(' )
 " -----------------------------------------------------------
 " SystemCopy:
-" The default mapping is cp, and can be followed by any motion or text object. For instance:
+" The default mapping is cp, and can be followed by any motion or text object.
+" For instance:
 
 " cpiw => copy word into system clipboard
 " cpi' => copy inside single quotes to system clipboard
 " In addition, cP is mapped to copy the current line directly.
 
-" The sequence cv is mapped to paste the content of system clipboard to the next line.
+" The sequence cv is mapped to paste the content of system clipboard
+" to the next line.
 " -----------------------------------------------------------
 "  Folding:
-"  zi
+"  zi: toggles everything
+"  za: toggles the current section
 " -----------------------------------------------------------
 " ParenInsertion:
 " There are 3 ways
 " 1. use Ctrl-V ) to insert paren without trigger the plugin.
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
+" 4. (more recently): type <C-l> in insert mode to delete right character
 "
 " QuickfixAndLocationList:
 " ccl: close quickfix (my abbreviation: cc)
@@ -249,17 +285,22 @@ augroup filetype_recognition
   " autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
-  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc set filetype=json
+  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc
+        \set filetype=json
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,.pylintrc set filetype=dosini
+  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,.pylintrc
+        \set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
 augroup END
 
 augroup filetype_vim
   autocmd!
-  autocmd BufWritePost *vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+  autocmd BufWritePost *vimrc so $MYVIMRC |
+        \if has('gui_running') |
+        \so $MYGVIMRC |
+        \endif
 augroup END
 
 " }}}
@@ -390,7 +431,9 @@ set number relativenumber
 augroup rnu_nu
   autocmd!
   "Initial window settings
-  autocmd WinEnter * if !exists('w:created') | setlocal number relativenumber | endif
+  autocmd WinEnter * if !exists('w:created') |
+        \setlocal number relativenumber |
+        \endif
   " Don't have relative numbers during insert mode
   autocmd InsertEnter * :call RNUInsertEnter()
   autocmd InsertLeave * :call RNUInsertLeave()
@@ -488,8 +531,10 @@ endfunction
 augroup whitespace_color
   autocmd!
   autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
-  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+  autocmd InsertEnter * syn clear EOLWS |
+        \syn match EOLWS excludenl /\s\+\%#\@!$/
+  autocmd InsertLeave * syn clear EOLWS |
+        \syn match EOLWS excludenl /\s\+$/
 augroup END
 highlight EOLWS ctermbg=darkgreen guibg=darkgreen
 
@@ -548,8 +593,10 @@ endfunction
 "  }}}
 " Plugin: Ctrl p --- {{{
 
-let g:ctrlp_mruf_relative = 1 " show only MRU files in the current working directory
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_mruf_relative = 1 " show only MRU files in the cwd
+let g:ctrlp_user_command = [
+      \'.git',
+      \'cd %s && git ls-files -co --exclude-standard']
 " open first in current window and others as hidden
 let g:ctrlp_open_multiple_files = '1r'
 let g:ctrlp_use_caching = 0
@@ -757,12 +804,12 @@ let g:taboo_tab_format = ' [%N:tab]%m '
 let g:taboo_renamed_tab_format = ' [%N:%l]%m '
 
 " Haskell: 'neovimhaskell/haskell-vim'
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_enable_quantification = 1   " to highlight `forall`
+let g:haskell_enable_recursivedo = 1      " to highlight `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to highlight `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to highlight `pattern`
+let g:haskell_enable_typeroles = 1        " to highlight type roles
+let g:haskell_enable_static_pointers = 1  " to highlight `static`
 
 " Python: highlighting
 let g:python_highlight_all = 1
@@ -854,7 +901,9 @@ augroup END
 " rustup install racer
 let g:racer_cmd = $HOME . '/.cargo/bin/racer'
 " rustup component add rust-src
-let $RUST_SRC_PATH = $HOME . '/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let $RUST_SRC_PATH = $HOME .
+      \'/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/' .
+      \'lib/rustlib/src/rust/src'
 let g:racer_experimental_completer = 1
 augroup rust_complete
   autocmd!
