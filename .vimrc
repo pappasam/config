@@ -264,16 +264,6 @@ Plug 'tpope/vim-ragtag'
 
 " Writing
 Plug 'dkarter/bullets.vim'
-function! VimMdCompBuildComp(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('VimMdCompBuildComp') }
 
 call plug#end()
 
@@ -833,10 +823,6 @@ let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
 " IndentLines:
 let g:indentLine_enabled = 0  " indentlines disabled by default
 
-" VimMarkdownComposer:
-let g:markdown_composer_syntax_theme = 'github'
-let g:markdown_composer_open_browser = 0
-
 " VimMarkdown:
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_no_default_key_mappings = 1
@@ -1004,9 +990,6 @@ nnoremap <leader>gd :Gdiff<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
-
-" VimMarkdownComposer: open formatted markdown in web browser
-nnoremap <silent> <C-M> :ComposerOpen<CR>
 
 " ResizeWindow: up and down; relies on custom function
 " height
