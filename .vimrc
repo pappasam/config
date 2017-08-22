@@ -1,5 +1,10 @@
 " Author: Samuel Roeca <samuel.roeca@gmail.com>
 "
+" Notes:
+"   * To toggle sections below, scroll over a folded section and type 'za'
+"     when in Normal mode.
+" Additional Notes --------- {{{
+"
 " This is my .vimrc. Hopefully you enjoy using it as much as me!
 " I use Linux Mint 18.X, but this will probably work with any Linux-based OS.
 " My workflow is terminal-based, so I use this with vim-nox.
@@ -26,11 +31,7 @@
 "   4. :PlugInstall
 "   5. :PlugUpdate
 "   6. :PlugUpgrade
-"
-" Notes:
-"   * To toggle sections below, scroll over a folded section and type 'za'
-"     when in Normal mode.
-" Additional Notes --------- {{{
+
 " TextObjectSelection:
 " object-select OR text-objects
 " delete the inner (...) block where the cursor is.
