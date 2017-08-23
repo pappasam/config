@@ -836,6 +836,10 @@ let g:bullets_enabled_file_types = [
     \ 'scratch'
     \]
 
+" AutoPairs:
+" unmap CR due to incompatibility with clang-complete
+let g:AutoPairsMapCR = 0
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
@@ -997,6 +1001,9 @@ nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 nnoremap <silent> <leader><leader>h gg:exe "resize " . (line('$') + 1)<CR>
 " width
 nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
+
+" AutoPairs:
+imap <silent><CR> <CR><Plug>AutoPairsReturn
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
