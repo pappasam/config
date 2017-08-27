@@ -132,7 +132,7 @@ filetype plugin indent on
 
 augroup cursorline_setting
   autocmd!
-  autocmd WinEnter,BufEnter * setlocal cursorline
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
@@ -486,6 +486,7 @@ try
 catch
 endtry
 
+hi CursorLine cterm=NONE
 
 " }}}
 " General: Resize Window --- {{{
