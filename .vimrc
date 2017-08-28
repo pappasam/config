@@ -465,7 +465,8 @@ match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
   autocmd ColorScheme * highlight EOLWS ctermbg=red guibg=red
-  autocmd InsertLeave * redraw!
+  autocmd InsertEnter * match EOLWS /\s\+\%#\@<!$/
+  autocmd InsertLeave * match EOLWS /\s\+$/
 augroup END
 
 augroup fix_whitespace_save
@@ -805,6 +806,7 @@ let g:haskell_enable_typeroles = 1        " to highlight type roles
 let g:haskell_enable_static_pointers = 1  " to highlight `static`
 
 " Python: highlighting
+" Must be set to 1, otherwise TrailingWhitespace is completely messed up
 let g:python_highlight_all = 1
 
 " Ragtag: on every filetype
