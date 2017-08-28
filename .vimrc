@@ -752,7 +752,7 @@ let g:startify_custom_footer = [
       \ '         o===``~~             |__()',
       \ '                    .         \   |             .',
       \ '                               \  \    .',
-      \ '                                \  \     ',
+      \ '                                \  \',
       \ '            .                    \  \   Sienar Fleet Systems',
       \ '                     .            \  \  Lambda-class',
       \ '                                   \_ \ Imperial Shuttle',
