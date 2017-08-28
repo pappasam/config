@@ -449,7 +449,7 @@ augroup END
 " General: Trailing whitespace ------------- {{{
 
 " This section should go before syntax highlighting
-" becuase autocommands must be declared before syntax library is loaded
+" because autocommands must be declared before syntax library is loaded
 
 function! TrimWhitespace()
   if &ft == 'markdown'
@@ -460,13 +460,13 @@ function! TrimWhitespace()
   call winrestview(l:save)
 endfunction
 
+highlight EOLWS ctermbg=red guibg=red
+match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+  autocmd ColorScheme * highlight EOLWS ctermbg=red guibg=red
   autocmd InsertLeave * redraw!
 augroup END
-highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-match EOLWS /\s\+\%#\@<!$/
 
 augroup fix_whitespace_save
   autocmd!
