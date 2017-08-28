@@ -446,6 +446,34 @@ augroup fold_settings
 augroup END
 
 " }}}
+" General: Trailing whitespace ------------- {{{
+
+" This section should go before syntax highlighting
+" becuase autocommands must be declared before syntax library is loaded
+
+function! TrimWhitespace()
+  if &ft == 'markdown'
+    return
+  endif
+  let l:save = winsaveview()
+  %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+augroup whitespace_color
+  autocmd!
+  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+  autocmd InsertLeave * redraw!
+augroup END
+highlight EOLWS ctermbg=darkgreen guibg=darkgreen
+match EOLWS /\s\+\%#\@<!$/
+
+augroup fix_whitespace_save
+  autocmd!
+  autocmd BufWritePre * call TrimWhitespace()
+augroup END
+
+" }}}
 " General: Syntax highlighting ---------------- {{{
 
 " Papercolor: options
@@ -507,33 +535,6 @@ function! ResizeWidthToLongestLine()
   endwhile
   exe ":vertical resize " . (maxlength + 4)
 endfunction
-
-" }}}
-" General: Trailing whitespace ------------- {{{
-
-function! TrimWhitespace()
-  if &ft == 'markdown'
-    return
-  endif
-  let l:save = winsaveview()
-  %s/\s\+$//e
-  call winrestview(l:save)
-endfunction
-
-augroup whitespace_color
-  autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-  autocmd InsertEnter * syn clear EOLWS |
-        \syn match EOLWS excludenl /\s\+\%#\@!$/
-  autocmd InsertLeave * syn clear EOLWS |
-        \syn match EOLWS excludenl /\s\+$/
-augroup END
-highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-
-augroup fix_whitespace_save
-  autocmd!
-  autocmd BufWritePre * call TrimWhitespace()
-augroup END
 
 " }}}
 " Plugin: Wiki --- {{{
