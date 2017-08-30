@@ -1,3 +1,4 @@
+#!/bin/bash
 # Environment Variables --- {{{
 
 # colored GCC warnings and errors
@@ -113,11 +114,6 @@ cats() {
   pygmentize -g $1 | less -rc
 }
 
-# open with gnome-open
-gn() {  # arg1: filename
-  gnome-open "$1" &> /dev/null
-}
-
 # dictionary lookups
 def() {  # arg1: word
   dict -d gcide $1 | less -XF
@@ -141,6 +137,19 @@ cd_up() {  # arg1: number|word
 # Open pdf with Zathura
 pdf() {  # arg1: filename
   GDK_SCALE=0 zathura "$1" &> /dev/null
+}
+
+# Open files with gnome-open
+gn() {  # arg1: filename
+  gn_filename=$(basename "$1")
+  gn_extension="${gn_filename##*.}"
+  if [[ "$gn_extension" != "pdf" ]]; then
+    gnome-open "$1" &> /dev/null
+  elif ! type "zathura" &> /dev/null; then
+    gnome-open "$1" &> /dev/null
+  else
+    pdf "$1"
+  fi
 }
 
 # }}}
