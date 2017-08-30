@@ -265,13 +265,6 @@ if [ -f ~/.bash/sensitive ]; then
 fi
 
 # }}}
-# pyenv --- {{{
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# }}}
 # path appends --- {{{
 
 # Local directory
@@ -281,3 +274,16 @@ export PATH="$PATH:~/.local/bin"
 export PATH="$PATH:~/.cargo/bin"
 
 #}}}
+# pyenv, nodeenv, 'x'env --- {{{
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# nodeenv
+export NODEENV_ROOT="$HOME/.nodenv"
+export PATH="$NODEENV_ROOT/bin:$PATH"
+eval "$(nodenv init -)"
+
+# }}}
