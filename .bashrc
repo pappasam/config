@@ -134,8 +134,11 @@ cd_up() {  # arg1: number|word
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
 
-# Open pdf with Zathura
+# Open pdf files with Zathura
 pdf() {  # arg1: filename
+  # GDK_SCALE is set to 2 for hd monitors
+  # this environment variable makes text fuzzy on my 4k monitor
+  # setting env var to 0 fixes the problem
   GDK_SCALE=0 zathura "$1" &> /dev/null
 }
 
