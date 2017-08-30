@@ -138,6 +138,11 @@ cd_up() {  # arg1: number|word
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
 
+# Open pdf with Zathura
+pdf() {  # arg1: filename
+  GDK_SCALE=0 zathura "$1" &> /dev/null
+}
+
 # }}}
 # Command line prompt (PS1) --- {{{
 
