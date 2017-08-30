@@ -93,8 +93,12 @@ $INSTALL gthumb
 
 #######################################################################
 # PDF Viewer with vi bindings
+# uses zathura-pdf-mupdf as backend
 #######################################################################
 $INSTALL zathura
+add-apt-repository ppa:spvkgn/zathura-mupdf
+apt update
+$INSTALL zathura-pdf-mupdf
 
 #######################################################################
 # PDF Viewer with vi bindings
