@@ -1,0 +1,2 @@
+bind -f common ^U win-page-up
+bind -f common ^D win-page-down
