@@ -173,7 +173,6 @@ set exrc
 call plug#begin('~/.vim/plugged')
 
 " Basics
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-rooter'
@@ -191,6 +190,10 @@ Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'cohama/agit.vim'
 
 " Commands run in vim's virtual screen and don't pollute main shell
 Plug 'fcpg/vim-altscreen'
