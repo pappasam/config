@@ -142,6 +142,15 @@ pdf() {  # arg1: filename
   GDK_SCALE=0 zathura "$1" &> /dev/null
 }
 
+# Get the weather
+weather() {  # arg1: Optional<location>
+  if [ $# -eq 0 ]; then
+    curl wttr.in/new_york
+  else
+    curl wttr.in/$1
+  fi
+}
+
 # Open files with gnome-open
 gn() {  # arg1: filename
   gn_filename=$(basename "$1")
