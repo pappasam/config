@@ -766,6 +766,9 @@ let g:startify_custom_footer = [
 "  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
 
+" Agit:
+let g:agit_max_log_lines = 500
+
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 3
