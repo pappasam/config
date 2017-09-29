@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# Notes --- {{{
+
+# Searching for a specific man page
+#   1. apropros
+#   2. man -k
+
+# }}}
 # Environment Variables --- {{{
 
 # colored GCC warnings and errors
