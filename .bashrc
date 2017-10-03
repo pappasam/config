@@ -19,6 +19,10 @@ export PAGER=less
 export EDITOR=vim
 export SHELL=bash
 
+# environment variable controlling difference between HI-DPI / Non HI_DPI
+# turn off because it messes up my pdf tooling
+export GDK_SCALE=0
+
 # }}}
 # Executed Commands --- {{{
 
