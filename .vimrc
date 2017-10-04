@@ -365,9 +365,7 @@ function! ReadDictToPreview(word, dict) range
 endfunction
 
 command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
-command! Defc Def <cword>
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
-command! Sync Syn <cword>
 
  " }}}
 " General: (relative) line number display ------------- {{{
@@ -914,12 +912,16 @@ augroup rust_complete
   autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
 augroup END
 
-" MarkDown: writing document
+" Writing: writing document
+" currently only supports markdown
 " <C-x><C-k> = dictionary completion
-augroup markdown_complete
+augroup writing_complete
   autocmd FileType markdown :setlocal dictionary=/usr/share/dict/words
   autocmd FileType markdown inoremap <buffer> <C-@> <C-x><C-k>
   autocmd FileType markdown inoremap <buffer> <C-space> <C-x><C-k>
+  " get word definition in preview, go back to window,
+  " and extend preview window to full length for easy reading
+  autocmd FileType markdown nnoremap <buffer> <C-]> :Def <cword><CR><C-w>pgg:exe "resize " . (line('$') + 1)<CR>
 augroup END
 
 "  }}}
