@@ -360,7 +360,7 @@ function! ReadDictToPreview(word, dict) range
         \ call append(0, 'This is a scratch buffer in a preview window') |
         \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
         \ setlocal nobuflisted |
-        \ wincmd p
+        \ execute "resize " . (line('$') + 1)
   execute ":redraw!"
 endfunction
 
@@ -919,9 +919,7 @@ augroup writing_complete
   autocmd FileType markdown :setlocal dictionary=/usr/share/dict/words
   autocmd FileType markdown inoremap <buffer> <C-@> <C-x><C-k>
   autocmd FileType markdown inoremap <buffer> <C-space> <C-x><C-k>
-  " get word definition in preview, go back to window,
-  " and extend preview window to full length for easy reading
-  autocmd FileType markdown nnoremap <buffer> <C-]> :Def <cword><CR><C-w>pgg:exe "resize " . (line('$') + 1)<CR>
+  autocmd FileType markdown nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
 "  }}}
