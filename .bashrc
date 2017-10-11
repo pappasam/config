@@ -208,6 +208,15 @@ va() {  # alias for ve because I type va a lot more
   ve
 }
 
+# Clubhouse story template
+clubhouse() {
+  echo -e "## Objective\n\n## Value\n\n## Acceptance Criteria" | pbcopy
+}
+
+# Reload bashrc
+so() {
+  source ~/.bashrc
+}
 
 # }}}
 # Command line prompt (PS1) --- {{{
