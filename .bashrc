@@ -210,7 +210,7 @@ va() {  # alias for ve because I type va a lot more
 
 # Clubhouse story template
 clubhouse() {
-  echo -e "## Objective\n\n## Value\n\n## Acceptance Criteria" | pbcopy
+  echo -e "## Objective\n## Value\n## Acceptance Criteria" | pbcopy
 }
 
 # Reload bashrc
