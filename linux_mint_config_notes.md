@@ -4,6 +4,11 @@ Parts of Linux Mint are configured manually through a GUI.
 Since I cannot script these parts of setup, this document serves
 as a reminder for those necessary manual steps.
 
+## Shortcuts
+
+* Restart cinnamon
+    * Alt + F2, then type 'r' and enter
+
 ## Themes
 
 * Window borders
