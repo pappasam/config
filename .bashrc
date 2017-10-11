@@ -82,10 +82,6 @@ alias diff="diff -rupP"
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
-# Python
-alias va="source venv/bin/activate"
-alias ve="virtualenv -p python3.5 venv"
-
 # Octave
 alias octave="octave --no-gui"
 
@@ -198,6 +194,15 @@ urldecode() {  # arg1: urldecode <string>
   printf '\n'
 }
 
+# [optionally] create and activate Python virtual environment
+ve() {
+  if [ ! -d venv ]; then
+    echo "Creating new Python 3.6 virtualenv"
+    python3.6 -m venv venv
+  fi
+  source venv/bin/activate
+  echo "Activated $(python --version) virtualenv"
+}
 
 # }}}
 # Command line prompt (PS1) --- {{{
