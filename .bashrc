@@ -204,6 +204,11 @@ ve() {
   echo "Activated $(python --version) virtualenv"
 }
 
+va() {  # alias for ve because I type va a lot more
+  ve
+}
+
+
 # }}}
 # Command line prompt (PS1) --- {{{
 
