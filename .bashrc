@@ -142,14 +142,6 @@ cd_up() {  # arg1: number|word
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
 
-# Open pdf files with Zathura
-pdf() {  # arg1: filename
-  # GDK_SCALE is set to 2 for hd monitors
-  # this environment variable makes text fuzzy on my 4k monitor
-  # setting env var to 0 fixes the problem
-  GDK_SCALE=0 zathura "$1" &> /dev/null
-}
-
 # Get the weather
 weather() {  # arg1: Optional<location>
   if [ $# -eq 0 ]; then
@@ -157,6 +149,16 @@ weather() {  # arg1: Optional<location>
   else
     curl wttr.in/$1
   fi
+}
+
+# Open pdf files with Zathura
+pdf() {  # arg1: filename
+  # GDK_SCALE is set to 2 for hd monitors
+  # this environment variable makes text fuzzy on my 4k monitor
+  # setting env var to 0 fixes the problem
+  # The () communicate that the entire process should execute in a subshell,
+  # avoiding unnecessary printing to console
+  (GDK_SCALE=0 zathura "$1" &> /dev/null &)
 }
 
 # Open files with gnome-open
