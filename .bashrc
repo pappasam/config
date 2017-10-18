@@ -7,21 +7,15 @@
 #   2. man -k
 
 # }}}
-# Environment Variables --- {{{
+# Import from other Bash Files --- {{{
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+include () {
+  [[ -f "$1" ]] && source "$1"
+}
 
-# Configure less (de-initialization clears the screen)
-export PAGER=less
-
-# tmuxinator
-export EDITOR=vim
-export SHELL=bash
-
-# environment variable controlling difference between HI-DPI / Non HI_DPI
-# turn off because it messes up my pdf tooling
-export GDK_SCALE=0
+include ~/.profile
+include ~/.bashrc_local
+include ~/.bash/sensitive
 
 # }}}
 # Executed Commands --- {{{
@@ -321,34 +315,5 @@ function stack_ghci() {
     $calc_operators\
     $string"
 }
-
-# }}}
-# Imports from other files --- {{{
-
-if [ -f ~/.bash/sensitive ]; then
-  source ~/.bash/sensitive
-fi
-
-# }}}
-# path appends --- {{{
-
-# Local directory
-export PATH="$PATH:~/.local/bin"
-
-# Rust
-export PATH="$PATH:~/.cargo/bin"
-
-#}}}
-# pyenv, nodeenv, 'x'env --- {{{
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# nodeenv
-export NODEENV_ROOT="$HOME/.nodenv"
-export PATH="$NODEENV_ROOT/bin:$PATH"
-eval "$(nodenv init -)"
 
 # }}}
