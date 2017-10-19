@@ -13,3 +13,5 @@
   driver = true
 [push]
   default = matching
+[commit]
+  verbose = true
