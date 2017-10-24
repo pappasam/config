@@ -115,3 +115,26 @@ Some system configurations must be configured within the applets menu.
 
 * OSD
     * Uncheck "Enable workspace OSD". Don't want people seeing my silly workspace names
+
+
+## Headphone jack stops working
+
+Sometimes the headphone jack randomly stops working.
+To fix this, perform the following steps (in order):
+
+```bash
+# do funky stuff to reset the drivers
+sudo alsa force-reload
+sudo apt-get remove --purge alsa-base pulseaudio
+sudo apt-get install alsa-base pulseaudio
+sudo alsa force-reload
+
+# shutdown the computer
+sudo shutdown now
+
+# wait a minute, then reboot the computer
+# IMPORTANT
+#   after you plug in your headphone jack, open the "Sound"
+#   window in Linux Mint's GUI and select "Headphones built-in audio"
+#   the sound should now work
+```
