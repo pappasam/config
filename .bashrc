@@ -108,6 +108,9 @@ alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 # battery
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
 
+# dynamodb
+alias docker-dynamodb='docker run -p 8000:8000 dwmkerr/dynamodb'
+
 # }}}
 # Functions --- {{{
 
