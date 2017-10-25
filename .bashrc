@@ -24,7 +24,10 @@ include ~/.bash/sensitive
 stty -ixon
 
 # run cowsay
-shuf -n 1 ~/configsettings/gre_words.txt | cowsay
+COWSAY_WORD_MESSAGE="$(shuf -n 1 ~/configsettings/gre_words.txt)"
+COWSAY_QUOTE="Fools ignore complexity. Pragmatists suffer it. "\
+"Some can avoid it. Geniuses remove it. -Alan Perlis"
+echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
 
 # }}}
 # Aliases --- {{{
