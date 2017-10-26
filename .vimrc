@@ -1029,35 +1029,32 @@ imap <silent><CR> <CR><Plug>AutoPairsReturn
 " General: Command abbreviations ------------------------ {{{
 
 " changing directories
-cabbrev r Rooter
-cabbrev f cd %:p:h
+" cabbrev pathRoot Rooter
+" cabbrev pathThis cd %:p:h
 
 " abbreviate creating tab, vertical, and horizontal buffer splits
 cabbrev bt tab sb
 cabbrev bv vert sb
 cabbrev bs sbuffer
 
-" make it easier to type TabooRename
-cabbrev : TabooRename
-
 " fix misspelling of ls
-cabbrev LS ls
-cabbrev lS ls
-cabbrev Ls ls
+" cabbrev LS ls
+" cabbrev lS ls
+" cabbrev Ls ls
 
 " fix misspelling of vs and sp
-cabbrev SP sp
-cabbrev sP sp
-cabbrev Sp sp
-cabbrev VS vs
-cabbrev vS vs
-cabbrev Vs vs
+" cabbrev SP sp
+" cabbrev sP sp
+" cabbrev Sp sp
+" cabbrev VS vs
+" cabbrev vS vs
+" cabbrev Vs vs
 
 " echo current file path
-cabbrev fp echo expand('%:p')
+" cabbrev fp echo expand('%:p')
 
 " Plug update and upgrade
-cabbrev pu PlugUpdate <BAR> PlugUpgrade
+" cabbrev upgrade PlugUpdate <BAR> PlugUpgrade
 
 " }}}
 " General: Cleanup ------------------ {{{
