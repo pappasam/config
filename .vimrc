@@ -1054,7 +1054,7 @@ cabbrev bs sbuffer
 " cabbrev fp echo expand('%:p')
 
 " Plug update and upgrade
-" cabbrev upgrade PlugUpdate <BAR> PlugUpgrade
+cabbrev pu PlugUpdate <BAR> PlugUpgrade
 
 " }}}
 " General: Cleanup ------------------ {{{
