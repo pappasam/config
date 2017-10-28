@@ -190,6 +190,7 @@ Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
+Plug 'henrik/vim-indexed-search'
 
 " Git
 Plug 'tpope/vim-fugitive'
