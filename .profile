@@ -59,7 +59,13 @@ fi
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]
 then
-  path_ladd "$HOME/.cargo/bin"
+  path_ladd "$RUST_CARGO"
+fi
+
+HOME_BIN="$HOME/bin"
+if [ -d "$HOME_BIN" ]
+then
+  path_ladd "$HOME_BIN"
 fi
 
 # EXPORT THE FINAL, MODIFIED PATH
