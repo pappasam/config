@@ -221,6 +221,11 @@ so() {
   source ~/.bashrc
 }
 
+# git-clone keplergrp repos to src/ directory
+klone() {
+  git clone git@github.com:KeplerGroup/$1 $HOME/src/$1
+}
+
 # }}}
 # Command line prompt (PS1) --- {{{
 
