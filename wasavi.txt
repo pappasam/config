@@ -1,0 +1,6 @@
+" exrc for wasavi
+set writeas=textAndBreak
+set noerrorbells
+set nolaunchbell
+
+" remap Ctrl+Enter to Ctrl+/
