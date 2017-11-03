@@ -575,7 +575,12 @@ let g:NERDTreeIgnore=[
       \'venv$[[dir]]',
       \'__pycache__$[[dir]]',
       \'.egg-info$[[dir]]',
-      \'node_modules$[[dir]]'
+      \'node_modules$[[dir]]',
+      \'\.aux$[[file]]',
+      \'\.toc$[[file]]',
+      \'\.pdf$[[file]]',
+      \'\.out$[[file]]',
+      \'\.o$[[file]]',
       \]
 function! NERDTreeToggleCustom()
     if &filetype ==? 'startify'
@@ -782,6 +787,7 @@ let g:rooter_manual_only = 1
 " VimTex:
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:tex_flavor = 'latex'
+let g:vimtex_imaps_enabled = 0
 
 " PythonVirtualenv:
 " necessary for jedi-vim to discover virtual environments
@@ -920,6 +926,8 @@ augroup END
 " jump to word definition for several text editors (including markdown)
 augroup writing_complete
   autocmd FileType markdown,tex, nnoremap <buffer> <C-]> :Def <cword><CR>
+  " Latex complete `` with ''
+  autocmd FileType tex inoremap <buffer> `` ``''<esc>hi
 augroup END
 
 "  }}}
