@@ -772,6 +772,23 @@ let g:startify_custom_footer = [
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
 "  }}}
+"  Plugin: VimTex --- {{{
+
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:tex_flavor = 'latex'
+let g:vimtex_imaps_enabled = 0
+let g:vimtex_doc_handlers = ['MyVimTexDocHandler']
+function! MyVimTexDocHandler(context)
+  " Function called with using :VimtexDocPackage
+  " to pull up package documentation
+  call vimtex#doc#make_selection(a:context)
+  if !empty(a:context.selected)
+    execute '!texdoc' a:context.selected '&'
+  endif
+  return 1
+endfunction
+
+"  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
 
 " Agit:
@@ -783,11 +800,6 @@ let g:undotree_WindowLayout = 3
 
 " VimRooter:
 let g:rooter_manual_only = 1
-
-" VimTex:
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:tex_flavor = 'latex'
-let g:vimtex_imaps_enabled = 0
 
 " PythonVirtualenv:
 " necessary for jedi-vim to discover virtual environments
