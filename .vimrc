@@ -193,6 +193,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
 Plug 'henrik/vim-indexed-search'
+Plug 'tpope/vim-repeat'
+Plug 'machakann/vim-sandwich'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -265,8 +267,6 @@ Plug 'heavenshell/vim-jsdoc'
 " Web Development - General
 Plug 'mattn/emmet-vim'
 Plug 'tmhedberg/matchit'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 
 " Writing
@@ -956,7 +956,6 @@ inoremap <C-space> <C-x><C-o>
 " <C-x><C-k> = dictionary completion
 inoremap <C-k> <C-x><C-k>
 
-
 " Exit: Preview and Help && QuickFix and Location List
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
@@ -1050,6 +1049,10 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
 
 " AutoPairs:
 imap <silent><CR> <CR><Plug>AutoPairsReturn
+
+" VimSneak: remap f and F to the sneak command
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
