@@ -1051,8 +1051,8 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
 imap <silent><CR> <CR><Plug>AutoPairsReturn
 
 " VimSneak: remap f and F to the sneak command
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
