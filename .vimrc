@@ -136,6 +136,8 @@ augroup cursorline_setting
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+set dictionary=/usr/share/dict/words
+
 set spelllang=en_us
 
 set showtabline=2
@@ -915,12 +917,9 @@ augroup END
 
 " Writing: writing document
 " currently only supports markdown
-" <C-x><C-k> = dictionary completion
+" jump to word definition for several text editors (including markdown)
 augroup writing_complete
-  autocmd FileType markdown :setlocal dictionary=/usr/share/dict/words
-  autocmd FileType markdown inoremap <buffer> <C-@> <C-x><C-k>
-  autocmd FileType markdown inoremap <buffer> <C-space> <C-x><C-k>
-  autocmd FileType markdown nnoremap <buffer> <C-]> :Def <cword><CR>
+  autocmd FileType markdown,tex, nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
 "  }}}
@@ -931,6 +930,12 @@ augroup END
 " Need to include <C-Space> as well for neovim sometimes
 inoremap <C-@> <C-x><C-o>
 inoremap <C-space> <C-x><C-o>
+
+" EnglishWordCompletion:
+" Look up words in a dictionary
+" <C-x><C-k> = dictionary completion
+inoremap <C-k> <C-x><C-k>
+
 
 " Exit: Preview and Help && QuickFix and Location List
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
@@ -959,10 +964,12 @@ nmap <leader><CR> <Plug>NewLineComma
 
 " BuffersAndWindows:
 " Move from one window to another
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
+" decided these keybindings were too precious to waste on
+" such a silly movement like going from one split to another
+" nnoremap <silent> <C-k> :wincmd k<CR>
+" nnoremap <silent> <C-j> :wincmd j<CR>
+" nnoremap <silent> <C-l> :wincmd l<CR>
+" nnoremap <silent> <C-h> :wincmd h<CR>
 " Scroll screen up, down, left, and right
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
