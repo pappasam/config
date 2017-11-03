@@ -964,12 +964,10 @@ nmap <leader><CR> <Plug>NewLineComma
 
 " BuffersAndWindows:
 " Move from one window to another
-" decided these keybindings were too precious to waste on
-" such a silly movement like going from one split to another
-" nnoremap <silent> <C-k> :wincmd k<CR>
-" nnoremap <silent> <C-j> :wincmd j<CR>
-" nnoremap <silent> <C-l> :wincmd l<CR>
-" nnoremap <silent> <C-h> :wincmd h<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
 " Scroll screen up, down, left, and right
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
