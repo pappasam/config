@@ -154,7 +154,7 @@ set wildmenu
 " Grep: program is 'git grep'
 set grepprg=git\ grep\ -n\ $*
 
-" AirlineSettings: specifics due to airline
+" Lightline: specifics for Lightline
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
@@ -175,8 +175,7 @@ set exrc
 call plug#begin('~/.vim/plugged')
 
 " Basics
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
@@ -630,34 +629,16 @@ endfunction
 let g:ctrlp_cmd = 'call CtrlPCommand()'
 
 " }}}
-" Plugin: Airline ---------------- {{{
+" Plugin: Lightline ---------------- {{{
 
-let g:airline_theme='powerlineish'
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#virtualenv#enabled = 0
-let g:airline#extensions#whitespace#checks = []
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.spell = 'Ꞩ'
+" This is a giant section
+" that configures the status line for my vim editing.
+" It's super important, so I devote a lot of code to it.
+" Most of the functions are ported from the Lightlint documentation
 
-function! CustomAirlineDisplayPath()
-  " get filepath relative to cwd
-  let cwd = getcwd()
-  return substitute(expand("%:p"), l:cwd . "/" , "", "")
-endfunction
-let g:airline_section_c = airline#section#create(
-      \['%{CustomAirlineDisplayPath()}'])
-let g:airline_section_x = airline#section#create(['%c:%L'])
-let g:airline_section_y = airline#section#create(['ffenc'])
-let g:airline_section_z = airline#section#create(['filetype'])
-let g:airline_powerline_fonts = 1
-let g:airline_inactive_collapse=0
-let g:airline_mode_map = {
+let g:lightline = {'active': {}, 'component_function': {}}
+
+let g:lightline.mode_map = {
     \ '__' : '-',
     \ 'n'  : 'ℕ',
     \ 'i'  : 'ⅈ',
@@ -670,6 +651,129 @@ let g:airline_mode_map = {
     \ 'S'  : '₷',
     \ '' : '₷',
     \ }
+
+let g:lightline.component = {
+    \ 'mode': '%{lightline#mode()}',
+    \ 'absolutepath': '%F',
+    \ 'relativepath': '%f',
+    \ 'filename': '%t',
+    \ 'modified': '%M',
+    \ 'bufnum': '%n',
+    \ 'paste': '%{&paste?"PASTE":""}',
+    \ 'readonly': '%R',
+    \ 'charvalue': '%b',
+    \ 'charvaluehex': '%B',
+    \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+    \ 'fileformat': '%{&ff}',
+    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+    \ 'percent': '%3p%%',
+    \ 'percentwin': '%P',
+    \ 'spell': '%{&spell?&spelllang:""}',
+    \ 'lineinfo': '%c:%L',
+    \ 'line': '%l',
+    \ 'column': '%c',
+    \ 'close': '%999X X ',
+    \ 'winnr': '%{winnr()}' }
+
+let g:lightline.active.left = [
+      \[ 'mode', 'paste', 'spell' ],
+      \[ 'fugitive', 'readonly', 'filename' ],
+      \[ 'ctrlpmark' ]
+      \]
+
+let g:lightline.active.right = [
+      \[ 'filetype' ],
+      \[ 'fileformat', 'fileencoding' ],
+      \[ 'lineinfo' ]
+      \]
+
+let g:lightline.component_function.fugitive = 'LightlineFugitive'
+let g:lightline.component_function.filename = 'LightlineFilename'
+let g:lightline.component_function.mode = 'LightlineMode'
+let g:lightline.component_function.ctrlpmark = 'CtrlPMark'
+
+function! LightlineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+  let cwd = getcwd()
+  let fname = substitute(expand("%:p"), l:cwd . "/" , "", "")
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = '⎇ '
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([
+          \g:lightline.ctrlp_prev,
+          \g:lightline.ctrlp_item,
+          \g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
 
 " }}}
 "  Plugin: Tagbar ------ {{{
