@@ -207,7 +207,8 @@ ve() {
   echo "Activated $(python --version) virtualenv"
 }
 
-va() {  # alias for ve because I type va a lot more
+# alias for ve because I type va a lot more
+va() {
   ve
 }
 
@@ -221,9 +222,21 @@ so() {
   source ~/.bashrc
 }
 
-# git-clone keplergrp repos to src/ directory
+# GIT: git-clone keplergrp repos to src/ directory
 klone() {
   git clone git@github.com:KeplerGroup/$1 $HOME/src/$1
+}
+
+# GIT: push current branch from origin to current branch
+push() {
+  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  git push origin "$CURRENT_BRANCH"
+}
+
+# GIT: pull current branch from origin to current branch
+pull() {
+  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  git pull origin "$CURRENT_BRANCH"
 }
 
 # }}}
