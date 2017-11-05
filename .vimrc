@@ -636,61 +636,75 @@ let g:ctrlp_cmd = 'call CtrlPCommand()'
 " It's super important, so I devote a lot of code to it.
 " Most of the functions are ported from the Lightlint documentation
 
-let g:lightline = {'active': {}, 'component_function': {}}
+let g:lightline = {'active': {}, 'inactive': {}}
 
 let g:lightline.mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'ℕ',
-    \ 'i'  : 'ⅈ',
-    \ 'R'  : 'ℛ',
-    \ 'c'  : 'ℂ',
-    \ 'v'  : '℣',
-    \ 'V'  : '℣',
-    \ '' : '℣',
-    \ 's'  : '₷',
-    \ 'S'  : '₷',
-    \ '' : '₷',
-    \ }
+      \ '__' : '-',
+      \ 'n'  : 'ℕ',
+      \ 'i'  : 'ⅈ',
+      \ 'R'  : 'ℛ',
+      \ 'c'  : 'ℂ',
+      \ 'v'  : '℣',
+      \ 'V'  : '℣',
+      \ '' : '℣',
+      \ 's'  : '₷',
+      \ 'S'  : '₷',
+      \ '' : '₷',
+      \ }
 
 let g:lightline.component = {
-    \ 'mode': '%{lightline#mode()}',
-    \ 'absolutepath': '%F',
-    \ 'relativepath': '%f',
-    \ 'filename': '%t',
-    \ 'modified': '%M',
-    \ 'bufnum': '%n',
-    \ 'paste': '%{&paste?"PASTE":""}',
-    \ 'readonly': '%R',
-    \ 'charvalue': '%b',
-    \ 'charvaluehex': '%B',
-    \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-    \ 'fileformat': '%{&ff}',
-    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-    \ 'percent': '%3p%%',
-    \ 'percentwin': '%P',
-    \ 'spell': '%{&spell?&spelllang:""}',
-    \ 'lineinfo': '%c:%L',
-    \ 'line': '%l',
-    \ 'column': '%c',
-    \ 'close': '%999X X ',
-    \ 'winnr': '%{winnr()}' }
+      \ 'mode': '%{lightline#mode()}',
+      \ 'absolutepath': '%F',
+      \ 'relativepath': '%f',
+      \ 'filename': '%t',
+      \ 'modified': '%M',
+      \ 'bufnum': '%n',
+      \ 'paste': '%{&paste?"PASTE":""}',
+      \ 'readonly': '%R',
+      \ 'charvalue': '%b',
+      \ 'charvaluehex': '%B',
+      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+      \ 'fileformat': '%{&ff}',
+      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+      \ 'percent': '%3p%%',
+      \ 'percentwin': '%P',
+      \ 'spell': '%{&spell?&spelllang:""}',
+      \ 'lineinfo': '%c:%L',
+      \ 'line': '%l',
+      \ 'column': '%c',
+      \ 'close': '%999X X ',
+      \ 'winnr': '%{winnr()}' }
 
 let g:lightline.active.left = [
-      \[ 'mode', 'paste', 'spell' ],
-      \[ 'fugitive', 'readonly', 'filename' ],
-      \[ 'ctrlpmark' ]
-      \]
+      \ [ 'mode', 'paste', 'spell' ],
+      \ [ 'fugitive', 'readonly', 'filename' ],
+      \ [ 'ctrlpmark' ]
+      \ ]
+
+let g:lightline.inactive.left = [
+      \ [],
+      \ ['filename'],
+      \ []
+      \ ]
 
 let g:lightline.active.right = [
-      \[ 'filetype' ],
-      \[ 'fileformat', 'fileencoding' ],
-      \[ 'lineinfo' ]
-      \]
+      \ [ 'filetype' ],
+      \ [ 'fileformat', 'fileencoding' ],
+      \ [ 'lineinfo' ]
+      \ ]
 
-let g:lightline.component_function.fugitive = 'LightlineFugitive'
-let g:lightline.component_function.filename = 'LightlineFilename'
-let g:lightline.component_function.mode = 'LightlineMode'
-let g:lightline.component_function.ctrlpmark = 'CtrlPMark'
+let g:lightline.inactive.right = [
+      \ [ 'filetype' ],
+      \ [],
+      \ []
+      \ ]
+
+let g:lightline.component_function = {
+      \ 'fugitive': 'LightlineFugitive',
+      \ 'filename': 'LightlineFilename',
+      \ 'mode': 'LightlineMode',
+      \ 'ctrlpmark': 'CtrlPMark'
+      \ }
 
 function! LightlineModified()
   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -743,9 +757,9 @@ function! CtrlPMark()
   if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([
-          \g:lightline.ctrlp_prev,
-          \g:lightline.ctrlp_item,
-          \g:lightline.ctrlp_next], 0)
+          \ g:lightline.ctrlp_prev,
+          \ g:lightline.ctrlp_item,
+          \ g:lightline.ctrlp_next], 0)
   else
     return ''
   endif
