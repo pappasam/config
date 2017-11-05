@@ -154,11 +154,6 @@ set wildmenu
 " Grep: program is 'git grep'
 set grepprg=git\ grep\ -n\ $*
 
-" Lightline: specifics for Lightline
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-
 " Pasting: enable pasting without having to do 'set paste'
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
 set pastetoggle=<C-_>
@@ -1204,12 +1199,17 @@ cabbrev bs sbuffer
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
 
 " }}}
-" General: Cleanup ------------------ {{{
+" General: Global Config + Cleanup ------------------ {{{
 " commands that need to run at the end of my vimrc
 
 " disable unsafe commands in your project-specific .vimrc files
 " This will prevent :autocmd, shell and write commands from being
 " run inside project-specific .vimrc files unless they’re owned by you.
 set secure
+
+" Lightline: specifics for Lightline
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
 
 " }}}
