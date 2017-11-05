@@ -682,9 +682,9 @@ let g:lightline.active.left = [
       \ ]
 
 let g:lightline.inactive.left = [
-      \ [],
-      \ ['filename'],
-      \ []
+      \ [ 'mode', 'paste', 'spell' ],
+      \ [ 'fugitive', 'readonly', 'filename' ],
+      \ [ 'ctrlpmark' ]
       \ ]
 
 let g:lightline.active.right = [
