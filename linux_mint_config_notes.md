@@ -50,7 +50,7 @@ to do things without moving my hands from the home row.
     * Main
         * Maximize Window : Super+F AND Super+M
         * Unmaximize Window: Super+U
-        * Close window : Alt+Q
+        * Close window : Ctrl+Alt+d
     * Tiling and Snapping
         * Push tile left : Super+H
         * Push tile right : Super+L
