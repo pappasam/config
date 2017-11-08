@@ -202,8 +202,12 @@ ve() {
   if [ ! -d venv ]; then
     echo "Creating new Python 3.6 virtualenv"
     python3.6 -m venv venv
+    source venv/bin/activate
+    pip install -U pip
+    pip install neovim
+  else
+    source venv/bin/activate
   fi
-  source venv/bin/activate
   echo "Activated $(python --version) virtualenv"
 }
 
