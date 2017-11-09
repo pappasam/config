@@ -8,4 +8,4 @@ set nu
 
 " remappings
 map [noremap] j gj
-map [noremap] k gk"
+map [noremap] k gk
