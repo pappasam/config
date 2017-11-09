@@ -1,6 +1,11 @@
-" exrc for wasavi
+" annoying sounds
 set writeas=textAndBreak
 set noerrorbells
 set nolaunchbell
 
-" remap Ctrl+Enter to Ctrl+/
+" display
+set nu
+
+" remappings
+map [noremap] j gj
+map [noremap] k gk"
