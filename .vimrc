@@ -1212,4 +1212,7 @@ set laststatus=2
 set ttimeoutlen=50
 set noshowmode
 
+" ShowCommand: turn off character printing to vim status line
+set noshowcmd
+
 " }}}
