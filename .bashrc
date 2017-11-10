@@ -88,8 +88,9 @@ alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 
 # Git
 alias g="git status"
-alias gc="git commit -v"
-alias gca="git commit -av"
+alias gl="git branch --verbose --all"
+alias gm="git commit --verbose"
+alias gma="git commit --verbose --all"
 
 # Less with default options
 # -c: auto-clear screen
