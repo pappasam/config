@@ -964,6 +964,7 @@ let g:jsdoc_enable_es6 = 1
 " EasyGrep: - use git grep
 let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
 let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
+let g:EasyGrepReplaceWindowMode = 2 " overwrite existing buffer; no new tabs
 
 " IndentLines:
 let g:indentLine_enabled = 0  " indentlines disabled by default
