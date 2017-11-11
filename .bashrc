@@ -25,8 +25,7 @@ stty -ixon
 
 # run cowsay
 COWSAY_WORD_MESSAGE="$(shuf -n 1 ~/dotfiles/gre_words.txt)"
-COWSAY_QUOTE="Fools ignore complexity. Pragmatists suffer it. "\
-"Some can avoid it. Geniuses remove it. -Alan Perlis"
+COWSAY_QUOTE="$(fortune -s ~/dotfiles/fortunes/ | grep -v '\-\-' | grep .)"
 echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
 
 # }}}
