@@ -77,7 +77,7 @@ alias diff="diff -rupP"
 # Set copy/paste helper functions
 # the perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
-alias pbpaste="perl -pe 'chomp if eof' | xsel --clipboard --output"
+alias pbpaste="xsel --clipboard --output"
 
 # Octave
 alias octave="octave --no-gui"
