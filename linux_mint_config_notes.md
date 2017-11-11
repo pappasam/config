@@ -77,7 +77,7 @@ to do things without moving my hands from the home row.
         * Copy a screenshot of an area to a clipboard: Shift+Ctrl+Alt+Y
 * **Custom**
     * Panel Toggle
-        * Command : ~/configsettings/panel-autohide.sh
+        * Command : ~/dotfiles/panel-autohide.sh
         * Shortcut : Ctrl+Alt+P
     * Terminal Maximize
         * Command : /usr/bin/gnome-terminal --maximize

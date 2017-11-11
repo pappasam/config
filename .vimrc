@@ -233,7 +233,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 " Additional requirements:
-"   ln -s /home/sroeca/configsettings/.tern-project /home/sroeca/.tern-project
+"   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
 Plug 'Rip-Rip/clang_complete'
 Plug 'eagletmt/neco-ghc'
 Plug 'racer-rust/vim-racer'
