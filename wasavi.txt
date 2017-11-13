@@ -1,11 +1,12 @@
-" annoying sounds
-" set writeas=textAndBreak
+" settings
+set writeas=textAndBreak
 set noerrorbells
 set nolaunchbell
-
-" display
-set nu
+set number
+set nojkdenotative
 
 " remappings
 map [noremap] j gj
 map [noremap] k gk
+map [noremap] J j
+map [noremap] K k
