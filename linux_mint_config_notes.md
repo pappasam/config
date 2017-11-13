@@ -16,7 +16,7 @@ as a reminder for those necessary manual steps.
 * Icons
     * Mint-Y
 * Controls
-    * Mint-Y-Dark
+    * Mint-Y
 * Mouse Pointer
     * DMZ-White
 * Desktop
