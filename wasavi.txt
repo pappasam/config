@@ -1,5 +1,6 @@
 " settings
 set writeas=textAndBreak
+set theme=solarized
 set noerrorbells
 set nolaunchbell
 set number
