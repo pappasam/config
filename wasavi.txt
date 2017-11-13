@@ -1,5 +1,5 @@
 " annoying sounds
-set writeas=textAndBreak
+" set writeas=textAndBreak
 set noerrorbells
 set nolaunchbell
 
