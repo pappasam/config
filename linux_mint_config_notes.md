@@ -138,3 +138,13 @@ sudo shutdown now
 #   window in Linux Mint's GUI and select "Headphones built-in audio"
 #   the sound should now work
 ```
+
+## Esperanto keys
+
+* Compose Key, Shift + ^ + s = ŝ
+* Compose Key, Shift + ^ + g = ĝ
+* Compose Key, Shift + ^ + j = ĵ
+* Compose Key, Shift + u + u = ŭ
+
+At home, I made right Win key the compose key.
+Right Alt is useful for some stuff.
