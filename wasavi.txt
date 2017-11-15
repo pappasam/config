@@ -5,7 +5,7 @@ set noerrorbells
 set nolaunchbell
 set number
 set nojkdenotative
-set fullscreen
+set nofullscreen
 
 " remappings
 map [noremap] j gj
