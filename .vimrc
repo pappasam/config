@@ -584,7 +584,7 @@ function! NERDTreeToggleCustom()
         " if NERDTree is open in window in current tab...
         exec 'NERDTreeClose'
       else
-        exec 'silent! NERDTree %'
+        exec 'NERDTree %'
       endif
     endif
 endfunction
