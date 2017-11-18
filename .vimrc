@@ -1139,7 +1139,7 @@ nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 
 " TogglePluginWindows:
 nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
-nnoremap <silent> <space>l :TagbarToggle <CR>
+nnoremap <silent> <space>l :TagbarToggle <CR>:call ResizeWidthToLongestLine()<CR>
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
 " Choosewin: (just like tmux)
