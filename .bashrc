@@ -28,6 +28,13 @@ COWSAY_WORD_MESSAGE="$(shuf -n 1 ~/dotfiles/gre_words.txt)"
 COWSAY_QUOTE="$(fortune -s ~/dotfiles/fortunes/ | grep -v '\-\-' | grep .)"
 echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
 
+# configure "cd" so it only shows directories
+complete -d cd
+
+# make ctrl-w delete words as-defined by Vim
+stty werase undef
+bind '"\C-w": backward-kill-word'
+
 # }}}
 # Aliases --- {{{
 

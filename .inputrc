@@ -1,4 +1,20 @@
 # .inputrc: config file for bash readline
+# for documentation on .inputrc, see:
+# https://ss64.com/bash/syntax-inputrc.html
 
-# color output during tab completion
+#######################################################################
+# Variables
+#######################################################################
 set colored-stats on
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set mark-symlinked-directories on
+set visible-stats on
+set skip-completed-text on
+set print-completions-horizontally on
+
+#######################################################################
+# Key Bindings
+#######################################################################
+Control-j: menu-complete
+Control-k: menu-complete-backward
