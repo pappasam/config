@@ -146,5 +146,5 @@ sudo shutdown now
 * Compose Key, Shift + ^ + j = ĵ
 * Compose Key, Shift + u + u = ŭ
 
-At home, I made right Win key the compose key.
+At home, I made ScrollLock (fn+o on Happy Hacking) the compose key.
 Right Alt is useful for some stuff.
