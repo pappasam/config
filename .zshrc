@@ -41,7 +41,7 @@ unsetopt AUTO_REMOVE_SLASH
 # ZShell Styles --- {{{
 
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select interactive
+zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -U compinit && compinit
