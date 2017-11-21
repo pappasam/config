@@ -53,9 +53,13 @@ zmodload -i zsh/complist
 # emacs
 bindkey -e
 
-bindkey '^k' menu-complete
-bindkey -M menuselect '^n' menu-complete
-bindkey -M menuselect '^p' reverse-menu-complete
+# j selects options down, k selects options up
+bindkey -r '^j'
+bindkey -r -M menuselect '^j'
+bindkey '^j' expand-or-complete
+bindkey -M menuselect '^j' menu-complete
+
+bindkey '^k' reverse-menu-complete
 
 # delete function doesn't delete /
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
