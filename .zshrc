@@ -332,65 +332,66 @@ stopwatch(){
 
 # NOTE this is not cross-shell; zsh-specific
 
+#######################################################################
+# BEGIN: Git formatting
+#######################################################################
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr '🌊 '
 zstyle ':vcs_info:*' unstagedstr '🔥 '
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 zstyle ':vcs_info:*' formats \
-  '%F{5}[%F{2}%b%F{5}] %F{2}%c%F{3}%u%f%m'
-zstyle ':vcs_info:git*+set-message:*' \
-  hooks git-untracked git-aheadbehind git-remotebranch
+  '%F{5}[%F{2}%b%m%F{5}] %F{2}%c%F{3}%u%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
 zstyle ':vcs_info:*' enable git
 
-
-### git: Show marker (T) if there are untracked files in repository
-# Make sure you have added staged to your 'formats':  %c
+# Show untracked files
 +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
   [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
   hook_com[unstaged]+='%F{1}😱%f'
-fi
+  fi
 }
 
-### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
-# Make sure you have added misc to your 'formats':  %m
-+vi-git-aheadbehind() {
-    local ahead behind
-    local -a gitstatus
+# Show remote ref name and number of commits ahead-of or behind
++vi-git-st() {
+  local ahead behind remote
+  local -a gitstatus
 
+  # Are we on a remote-tracking branch?
+  remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+    --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+
+  if [[ -n ${remote} ]] ; then
     # for git prior to 1.7
     # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
-    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
-    (( $ahead )) && gitstatus+=( "%B%F{blue}+${ahead}%f%b" )
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "${c3}+${ahead}${c2}" )
 
     # for git prior to 1.7
     # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
-    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
-    (( $behind )) && gitstatus+=( "%B%F{red}-${behind}%f%b" )
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "${c4}-${behind}${c2}" )
 
-    hook_com[misc]+=${(j::)gitstatus}
+    # hook_com[branch]="${hook_com[branch]} [${remote} ${(j:/:)gitstatus}]"
+    hook_com[branch]="${hook_com[branch]} [🛂${(j:/:)gitstatus}]"
+  fi
 }
 
-### git: Show remote branch name for remote-tracking branches
-# Make sure you have added staged to your 'formats':  %b
-+vi-git-remotebranch() {
-    local remote
+# Show count of stashed changes
++vi-git-stash() {
+  local -a stashes
 
-    # Are we on a remote-tracking branch?
-    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
-        --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
-
-    # The first test will show a tracking branch whenever there is one. The
-    # second test, however, will only show the remote branch's name if it
-    # differs from the local one.
-    #if [[ -n ${remote} ]] ; then
-    if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
-        hook_com[branch]="${hook_com[branch]}(%F{cyan}${remote}%f)"
-    fi
+  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    hook_com[misc]+=" (💰${stashes})"
+  fi
 }
 
 precmd () { vcs_info }
+#######################################################################
+# END: Git formatting
+#######################################################################
 
 COLOR_BRIGHT_BLUE="086"
 COLOR_GOLD="184"
