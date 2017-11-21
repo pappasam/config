@@ -38,6 +38,9 @@ echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
 # enable functions to operate in PS1
 setopt PROMPT_SUBST
 
+# enable quicker completion
+setopt MENU_COMPLETE
+
 #######################################################################
 # Unset options
 #######################################################################
