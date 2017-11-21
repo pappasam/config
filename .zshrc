@@ -37,14 +37,17 @@ setopt PROMPT_SUBST
 # do not automatically remove the slash
 unsetopt AUTO_REMOVE_SLASH
 
+# allow menu completion
+unsetopt MENU_COMPLETE
+
 # }}}
 # ZShell Styles --- {{{
 
+autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select interactive
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 fpath=(/usr/local/share/zsh-completions $fpath)
-autoload -U compinit && compinit
 zmodload -i zsh/complist
 
 # }}}
@@ -52,14 +55,13 @@ zmodload -i zsh/complist
 
 # emacs
 bindkey -e
-
-# j selects options down, k selects options up
-bindkey -r '^j'
-bindkey -r -M menuselect '^j'
-bindkey '^j' expand-or-complete
-bindkey -M menuselect '^j' menu-complete
-
 bindkey '^k' reverse-menu-complete
+
+# NOTE: aboud menu-complete
+# '^o' - choose selection and execute
+# '^j' - choose selection but do NOT execute
+# '^i' - synonym to TAB
+#     tap twice to get into menu complete
 
 # delete function doesn't delete /
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -324,7 +326,7 @@ zstyle ':vcs_info:*' enable git
 +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
   [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
-  hook_com[unstaged]+='%F{1}??%f'
+  hook_com[unstaged]+='%F{1}😱%f'
 fi
 }
 
