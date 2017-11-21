@@ -31,21 +31,29 @@ echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
 # }}}
 # ZShell Options --- {{{
 
+#######################################################################
+# Set options
+#######################################################################
+
 # enable functions to operate in PS1
 setopt PROMPT_SUBST
 
+# allow menu completion
+setopt MENU_COMPLETE
+
+#######################################################################
+# Unset options
+#######################################################################
+
 # do not automatically remove the slash
 unsetopt AUTO_REMOVE_SLASH
-
-# allow menu completion
-unsetopt MENU_COMPLETE
 
 # }}}
 # ZShell Styles --- {{{
 
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select interactive
+zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
@@ -60,11 +68,15 @@ bindkey -e
 # '^i' - synonym to TAB; tap twice to get into menu complete
 # '^o' - choose selection and execute
 # '^j' - choose selection but do NOT execute
-# '^p' - cycle through options backward
-# '^n' - cycle through options forward
+# '^p' - cycle through options backward (binding below necessary)
+# '^n' - cycle through options forward (binding below necessary)
 
-# delete function doesn't delete /
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+bindkey -M menuselect '^n' expand-or-complete
+bindkey -M menuselect '^p' reverse-menu-complete
+
+# delete function characters to include
+# Omitted: /=
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}
 # Aliases --- {{{
