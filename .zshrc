@@ -281,7 +281,7 @@ clubhouse() {
 
 # Reload bashrc
 so() {
-  source ~/.bashrc
+  source ~/.zshrc
 }
 
 # GIT: git-clone keplergrp repos to src/ directory
