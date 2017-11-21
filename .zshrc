@@ -55,13 +55,13 @@ zmodload -i zsh/complist
 
 # emacs
 bindkey -e
-bindkey '^k' reverse-menu-complete
 
-# NOTE: aboud menu-complete
+# NOTE: about menu-complete
+# '^i' - synonym to TAB; tap twice to get into menu complete
 # '^o' - choose selection and execute
 # '^j' - choose selection but do NOT execute
-# '^i' - synonym to TAB
-#     tap twice to get into menu complete
+# '^p' - cycle through options backward
+# '^n' - cycle through options forward
 
 # delete function doesn't delete /
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
