@@ -76,6 +76,7 @@ bindkey -e
 # '^j' - choose selection but do NOT execute
 # '^p' - cycle through options backward (binding below necessary)
 # '^n' - cycle through options forward (binding below necessary)
+# '^z' - stop interactive tab-complete mode and go back to regular selection
 
 bindkey -M menuselect '^n' expand-or-complete
 bindkey -M menuselect '^p' reverse-menu-complete
