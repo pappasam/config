@@ -71,6 +71,7 @@ zmodload -i zsh/complist
 bindkey -e
 
 # NOTE: about menu-complete
+# '^d' - list options without selecting any of them
 # '^i' - synonym to TAB; tap twice to get into menu complete
 # '^o' - choose selection and execute
 # '^j' - choose selection but do NOT execute
