@@ -179,32 +179,32 @@ alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynam
 # Functions --- {{{
 
 # Colored cat
-cats() {
+function cats() {
   pygmentize -g $1 | less -rc
 }
 
 # dictionary lookups
-def() {  # arg1: word
+function def() {  # arg1: word
   dict -d gcide $1 | less -XF
 }
 
-syn() {  # arg1: word
+function syn() {  # arg1: word
   dict -d moby-thesaurus $1 | less -XF
 }
 
 # install
-install() {  # arg1: word
+function install() {  # arg1: word
   apt-cache show $1 && sudo apt install $1
 }
 
 # Move up n directories using:  cd.. dir
-cd_up() {  # arg1: number|word
+function cd_up() {  # arg1: number|word
   pushd . >/dev/null
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
 
 # Get the weather
-weather() {  # arg1: Optional<location>
+function weather() {  # arg1: Optional<location>
   if [ $# -eq 0 ]; then
     curl wttr.in/new_york
   else
@@ -213,7 +213,7 @@ weather() {  # arg1: Optional<location>
 }
 
 # Open pdf files with Zathura
-pdf() {  # arg1: filename
+function pdf() {  # arg1: filename
   # GDK_SCALE is set to 2 for hd monitors
   # this environment variable makes text fuzzy on my 4k monitor
   # setting env var to 0 fixes the problem
@@ -223,7 +223,7 @@ pdf() {  # arg1: filename
 }
 
 # Open files with gnome-open
-gn() {  # arg1: filename
+function gn() {  # arg1: filename
   gn_filename=$(basename "$1")
   gn_extension="${gn_filename##*.}"
   if [[ "$gn_extension" != "pdf" ]]; then
@@ -235,7 +235,7 @@ gn() {  # arg1: filename
   fi
 }
 
-urlencode() {  # arg1: urlencode <string>
+function urlencode() {  # arg1: urlencode <string>
   old_lc_collate=$LC_COLLATE
   LC_COLLATE=C
 
@@ -251,14 +251,14 @@ urlencode() {  # arg1: urlencode <string>
   printf '\n'
 }
 
-urldecode() {  # arg1: urldecode <string>
+function urldecode() {  # arg1: urldecode <string>
   local url_encoded="${1//+/ }"
   printf '%b' "${url_encoded//%/\\x}"
   printf '\n'
 }
 
 # [optionally] create and activate Python virtual environment
-ve() {
+function ve() {
   if [ ! -d venv ]; then
     echo "Creating new Python 3.6 virtualenv"
     python3.6 -m venv venv
@@ -272,39 +272,39 @@ ve() {
 }
 
 # alias for ve because I type va a lot more
-va() {
+function va() {
   ve
 }
 
 # Clubhouse story template
-clubhouse() {
+function clubhouse() {
   echo -e "## Objective\n## Value\n## Acceptance Criteria" | pbcopy
 }
 
 # Reload bashrc
-so() {
+function so() {
   source ~/.zshrc
 }
 
 # GIT: git-clone keplergrp repos to src/ directory
-klone() {
+function klone() {
   git clone git@github.com:KeplerGroup/$1 $HOME/src/$1
 }
 
 # GIT: push current branch from origin to current branch
-push() {
+function push() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   git push origin "$CURRENT_BRANCH"
 }
 
 # GIT: pull current branch from origin to current branch
-pull() {
+function pull() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   git pull origin "$CURRENT_BRANCH"
 }
 
 # Timer
-countdown-seconds(){
+function countdown-seconds(){
   date1=$((`date +%s` + $1));
   while [ "$date1" -ge `date +%s` ]; do
     ## Is this more than 24h away?
@@ -316,11 +316,11 @@ countdown-seconds(){
   spd-say "Beep, beep, beeeeeeeep. Countdown is finished"
 }
 
-countdown-minutes() {
+function countdown-minutes() {
   countdown-seconds $(($1 * 60))
 }
 
-stopwatch(){
+function stopwatch(){
   date1=`date +%s`;
   while true; do
     days=$(( $(($(date +%s) - date1)) / 86400 ))
@@ -348,7 +348,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
 zstyle ':vcs_info:*' enable git
 
 # Show untracked files
-+vi-git-untracked() {
+function +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
   [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
   hook_com[unstaged]+='%F{1}😱%f'
@@ -356,7 +356,7 @@ zstyle ':vcs_info:*' enable git
 }
 
 # Show remote ref name and number of commits ahead-of or behind
-+vi-git-st() {
+function +vi-git-st() {
   local ahead behind remote
   local -a gitstatus
 
@@ -381,7 +381,7 @@ zstyle ':vcs_info:*' enable git
 }
 
 # Show count of stashed changes
-+vi-git-stash() {
+function +vi-git-stash() {
   local -a stashes
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
@@ -390,7 +390,7 @@ zstyle ':vcs_info:*' enable git
   fi
 }
 
-precmd () { vcs_info }
+function precmd() { vcs_info }
 #######################################################################
 # END: Git formatting
 #######################################################################
