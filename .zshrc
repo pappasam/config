@@ -53,7 +53,7 @@ unsetopt AUTO_REMOVE_SLASH
 
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select interactive
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
 # Fuzzy completion
