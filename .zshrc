@@ -79,7 +79,9 @@ bindkey -e
 # '^d' - list options without selecting any of them
 # '^i' - synonym to TAB; tap twice to get into menu complete
 # '^o' - choose selection and execute
-# '^j' - choose selection but do NOT execute
+# '^j' - choose selection but do NOT execute AND leave current mode
+# '^k' - choose selection but do NOT execute AND leave all modes in menu-select
+#         useful to get out of both select and search-backward
 # '^p' - cycle through options backward (binding below necessary)
 # '^n' - cycle through options forward (binding below necessary)
 # '^z' - stop interactive tab-complete mode and go back to regular selection
