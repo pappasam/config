@@ -56,14 +56,16 @@ unsetopt AUTO_REMOVE_SLASH
 #######################################################################
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select interactive
+
+# note: chose search-backward because search crashed a lot
+zstyle ':completion:*' menu select search-backward
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
 # Fuzzy completion
 zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-}={A-Z\_}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-  'r:|?=** m:{a-z\-}={A-Z\_}'
+  'm:{a-z\-A-Z}={A-Z\_a-z}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' \
+  'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
 
