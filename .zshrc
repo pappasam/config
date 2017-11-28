@@ -48,6 +48,11 @@ setopt MENU_COMPLETE
 # do not automatically remove the slash
 unsetopt AUTO_REMOVE_SLASH
 
+#######################################################################
+# Expected parameters
+#######################################################################
+export PERIOD=1
+
 # }}}
 # ZShell Styles --- {{{
 
@@ -68,6 +73,47 @@ zstyle ':completion:*' matcher-list '' \
   'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
+
+# }}}
+# ZShell Hook Functions --- {{{
+
+# NOTE: precmd is defined within the prompt section
+
+# Executed whenever the current working directory is changed
+function chpwd() {
+  ls --color=auto
+}
+
+# Executed every $PERIOD seconds, just before a prompt.
+# NOTE: if multiple functions are defined using the array periodic_functions,
+# only  one  period  is applied to the complete set of functions, and the
+# scheduled time is not reset if the list of functions is altered.
+# Hence the set of functions is always called together.
+function periodic() {
+}
+
+# Executed just after a command has been read and is about to be executed
+#   arg1: the string that the user typed OR an empty string
+#   arg2: a single-line, size-limited version of the command
+#     (with things like function bodies elided)
+#   arg3: full text that is being executed
+function preexec() {
+  # local user_string="$1"
+  # local cmd_single_line="$2"
+  # local cmd_full="$3"
+}
+
+
+# Executed when a history line is read interactively, but before it is executed
+#   arg1: the complete history line (terminating newlines are present
+function zshaddhistory() {
+  # local history_complete="$1"
+}
+
+# Executed at the point where the main shell is about to exit normally.
+function zshexit() {
+}
+
 
 # }}}
 # ZShell Key-Bindings --- {{{
@@ -337,7 +383,7 @@ function stopwatch(){
 }
 
 # }}}
-# ZShell Command line prompt (PS1) --- {{{
+# ZShell prompt (PS1) --- {{{
 
 # NOTE this is not cross-shell; zsh-specific
 
