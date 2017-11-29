@@ -58,26 +58,29 @@ path_radd() {
 #   106 Turquoise Background
 # Parameters
 #   di 	Directory
-#   fi 	File
-#   ln 	Symbolic Link
-#   pi 	Fifo file
-#   so 	Socket file
-#   bd 	Block (buffered) special file
-#   cd 	Character (unbuffered) special file
-#   or 	Symbolic Link pointing to a non-existent file (orphan)
-#   mi 	Non-existent file pointed to by a symbolic link (visible with ls -l)
-#   ex 	File which is executable (ie. has 'x' set in permissions).
 LS_COLORS="di=1;34:"
+#   fi 	File
 LS_COLORS+="fi=0:"
+#   ln 	Symbolic Link
 LS_COLORS+="ln=1;36:"
+#   pi 	Fifo file
 LS_COLORS+="pi=5:"
+#   so 	Socket file
 LS_COLORS+="so=5:"
+#   bd 	Block (buffered) special file
 LS_COLORS+="bd=5:"
+#   cd 	Character (unbuffered) special file
 LS_COLORS+="cd=5:"
+#   or 	Symbolic Link pointing to a non-existent file (orphan)
 LS_COLORS+="or=31:"
+#   mi 	Non-existent file pointed to by a symbolic link (visible with ls -l)
 LS_COLORS+="mi=0:"
+#   ex 	File which is executable (ie. has 'x' set in permissions).
 LS_COLORS+="ex=1;92:"
+# additional file types as-defined by their extension
 LS_COLORS+="*.rpm=90"
+
+# Finally, export LS_COLORS
 export LS_COLORS
 
 # }}}
