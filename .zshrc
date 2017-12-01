@@ -343,7 +343,7 @@ function klone() {
 # GIT: push current branch from origin to current branch
 function push() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-  git push origin "$CURRENT_BRANCH"
+  git push -u origin "$CURRENT_BRANCH"
 }
 
 # GIT: pull current branch from origin to current branch
