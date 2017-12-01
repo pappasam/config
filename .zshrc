@@ -43,11 +43,8 @@ unsetopt AUTO_REMOVE_SLASH
 export PERIOD=1
 
 # }}}
-# ZShell Styles --- {{{
+# ZShell Menu Completion --- {{{
 
-#######################################################################
-# Menu Completion
-#######################################################################
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
 
@@ -62,6 +59,12 @@ zstyle ':completion:*' matcher-list '' \
   'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
+
+# }}}
+# ZShell Misc Autoloads --- {{{
+
+# Enables zshell calculator: type with zcalc
+autoload -Uz zcalc
 
 # }}}
 # ZShell Hook Functions --- {{{
