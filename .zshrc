@@ -18,17 +18,6 @@ include ~/.bashrc_local
 include ~/.bash/sensitive
 
 # }}}
-# Executed Commands --- {{{
-
-# turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-stty -ixon
-
-# run cowsay
-COWSAY_WORD_MESSAGE="$(shuf -n 1 ~/dotfiles/gre_words.txt)"
-COWSAY_QUOTE="$(fortune -s ~/dotfiles/fortunes/ | grep -v '\-\-' | grep .)"
-echo -e "$COWSAY_WORD_MESSAGE\n\n$COWSAY_QUOTE" | cowsay
-
-# }}}
 # ZShell Options --- {{{
 
 #######################################################################
@@ -273,8 +262,8 @@ function pdf() {  # arg1: filename
 
 # Open files with gnome-open
 function gn() {  # arg1: filename
-  gn_filename=$(basename "$1")
-  gn_extension="${gn_filename##*.}"
+  local gn_filename=$(basename "$1")
+  local gn_extension="${gn_filename##*.}"
   if [[ "$gn_extension" != "pdf" ]]; then
     gnome-open "$1" &> /dev/null
   elif ! type "zathura" &> /dev/null; then
@@ -282,28 +271,6 @@ function gn() {  # arg1: filename
   else
     pdf "$1"
   fi
-}
-
-function urlencode() {  # arg1: urlencode <string>
-  old_lc_collate=$LC_COLLATE
-  LC_COLLATE=C
-
-  local length="${#1}"
-  for (( i = 0; i < length; i++ )); do
-    local c="${1:i:1}"
-    case $c in
-      [a-zA-Z0-9.~_-]) printf "$c" ;;
-      *) printf '%%%02X' "'$c" ;;
-    esac
-  done
-  LC_COLLATE=$old_lc_collate
-  printf '\n'
-}
-
-function urldecode() {  # arg1: urldecode <string>
-  local url_encoded="${1//+/ }"
-  printf '%b' "${url_encoded//%/\\x}"
-  printf '\n'
 }
 
 # [optionally] create and activate Python virtual environment
@@ -342,22 +309,22 @@ function klone() {
 
 # GIT: push current branch from origin to current branch
 function push() {
-  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-  git push -u origin "$CURRENT_BRANCH"
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git push -u origin "$current_branch"
 }
 
 # GIT: pull current branch from origin to current branch
 function pull() {
-  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-  git pull origin "$CURRENT_BRANCH"
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git pull origin "$current_branch"
 }
 
 # Timer
 function countdown-seconds(){
-  date1=$((`date +%s` + $1));
+  local date1=$((`date +%s` + $1));
   while [ "$date1" -ge `date +%s` ]; do
     ## Is this more than 24h away?
-    days=$(($(($(( $date1 - $(date +%s))) * 1 ))/86400))
+    local days=$(($(($(( $date1 - $(date +%s))) * 1 ))/86400))
     echo -ne "$days day(s) and $(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
     sleep 0.1
   done
@@ -370,12 +337,18 @@ function countdown-minutes() {
 }
 
 function stopwatch(){
-  date1=`date +%s`;
+  local date1=`date +%s`;
   while true; do
-    days=$(( $(($(date +%s) - date1)) / 86400 ))
+    local days=$(( $(($(date +%s) - date1)) / 86400 ))
     echo -ne "$days day(s) and $(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
     sleep 0.1
   done
+}
+
+function quote() {
+  local cowsay_word_message="$(shuf -n 1 ~/dotfiles/gre_words.txt)"
+  local cowsay_quote="$(fortune -s ~/dotfiles/fortunes/ | grep -v '\-\-' | grep .)"
+  echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
 }
 
 # }}}
@@ -456,5 +429,14 @@ PS1_END="%B%F{$COLOR_SILVER}$ %f%b"
 PS1="${PS1_DIR} \$vcs_info_msg_0_ \
 
 ${PS1_USR} ${PS1_END}"
+
+# }}}
+# Executed Commands --- {{{
+
+# turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
+stty -ixon
+
+# get a cool quote
+quote
 
 # }}}
