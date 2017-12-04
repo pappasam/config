@@ -1169,7 +1169,7 @@ nmap ss <Plug>Sneak_s
 nmap SS <Plug>Sneak_S
 
 " Taboo
-nnoremap <leader>tr :TabooRename<space>
+nnoremap <leader>tt :TabooRename<space>
 
 " }}}
 " General: Macro repeater ---- {{{
