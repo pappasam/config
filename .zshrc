@@ -148,6 +148,10 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
+# Vim and Vi
+alias vi="nvim"
+alias vim='nvim'
+
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv'"
 
@@ -363,12 +367,13 @@ function quote() {
 # BEGIN: Git formatting
 #######################################################################
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' stagedstr '🌊 '
-zstyle ':vcs_info:*' unstagedstr '🔥 '
+zstyle ':vcs_info:*' stagedstr '%F{yellow}😕%f'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}⛑ %f'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' actionformats \
+  '%F{magenta}[%F{green}%b%F{yellow}|%F{red}%a%F{magenta}]%f '
 zstyle ':vcs_info:*' formats \
-  '%F{5}[%F{2}%b%m%F{5}] %F{2}%c%F{3}%u%f'
+  '%F{magenta}[%F{green}%b%m%F{magenta}] %F{green}%c%F{yellow}%u%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
 zstyle ':vcs_info:*' enable git
 
@@ -376,7 +381,7 @@ zstyle ':vcs_info:*' enable git
 function +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
   [[ $(git ls-files --others --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
-  hook_com[unstaged]+='%F{1}😱%f'
+  hook_com[unstaged]+='%F{red}😱 %f'
   fi
 }
 

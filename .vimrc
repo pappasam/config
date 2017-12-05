@@ -273,7 +273,6 @@ call plug#end()
 
 augroup filetype_recognition
   autocmd!
-  " autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown set filetype=markdown
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc
@@ -331,7 +330,6 @@ augroup END
 
 " note: indenting and de-indenting in insert mode are:
 "   <C-t> and <C-d>
-
 augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
@@ -450,7 +448,6 @@ augroup END
 
 " This section should go before syntax highlighting
 " because autocommands must be declared before syntax library is loaded
-
 function! TrimWhitespace()
   if &ft == 'markdown'
     return
@@ -1081,10 +1078,6 @@ nnoremap <silent> <C-q> :cclose <BAR> lclose<CR>
 " e.g. ignoring wrapped lines
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-" Move to beginning and end of visual line
-" commented out for now
-" nnoremap 0 g0
-" nnoremap $ g$
 " moving forward and backward with vim tabs
 nnoremap T gT
 nnoremap t gt
@@ -1255,30 +1248,10 @@ nmap <expr> q QStart()
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
-" changing directories
-" cabbrev pathRoot Rooter
-" cabbrev pathThis cd %:p:h
-
 " abbreviate creating tab, vertical, and horizontal buffer splits
 cabbrev bt tab sb
 cabbrev bv vert sb
 cabbrev bs sbuffer
-
-" fix misspelling of ls
-" cabbrev LS ls
-" cabbrev lS ls
-" cabbrev Ls ls
-
-" fix misspelling of vs and sp
-" cabbrev SP sp
-" cabbrev sP sp
-" cabbrev Sp sp
-" cabbrev VS vs
-" cabbrev vS vs
-" cabbrev Vs vs
-
-" echo current file path
-" cabbrev fp echo expand('%:p')
 
 " Plug update and upgrade
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
