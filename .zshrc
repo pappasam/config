@@ -369,8 +369,8 @@ function quote() {
 # BEGIN: Git formatting
 #######################################################################
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' stagedstr '%F{yellow}😕%f'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}⛑ %f'
+zstyle ':vcs_info:*' stagedstr '%F{yellow}🔒%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}🔓%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' actionformats \
   '%F{magenta}[%F{green}%b%F{yellow}|%F{red}%a%F{magenta}]%f '
@@ -383,7 +383,7 @@ zstyle ':vcs_info:*' enable git
 function +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
   [[ $(git ls-files --others --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
-  hook_com[unstaged]+='%F{red}😱 %f'
+  hook_com[unstaged]+='%F{red}🔍%f'
   fi
 }
 
