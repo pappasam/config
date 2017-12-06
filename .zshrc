@@ -27,12 +27,12 @@ include ~/.bash/sensitive
 # enable functions to operate in PS1
 setopt PROMPT_SUBST
 
-# enable quicker completion
-setopt MENU_COMPLETE
-
 #######################################################################
 # Unset options
 #######################################################################
+
+# disable quicker completion
+unsetopt MENU_COMPLETE
 
 # do not automatically remove the slash
 unsetopt AUTO_REMOVE_SLASH
@@ -48,8 +48,10 @@ export PERIOD=1
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
 
-# note: chose search-backward because search crashed a lot
-zstyle ':completion:*' menu select search-backward
+# CURRENT STATE: does not select any sort of searching
+# searching was too annoying and I didn't really use it
+# If you want it back, use "search-backward" as an option
+zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
 # Fuzzy completion
