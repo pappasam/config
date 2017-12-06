@@ -282,23 +282,34 @@ function gn() {  # arg1: filename
   fi
 }
 
+# activate virtual environment from any directory from current and up
+function va() {
+  local slashes=${PWD//[^\/]/}
+  local DIR="$PWD"
+  for (( n=${#slashes}; n>0; --n ))
+  do
+    if [ -d "$DIR/venv" ]; then
+      source "$DIR/venv/bin/activate"
+      local DIR_REL=$(realpath --relative-to='.' "$DIR/venv")
+      echo "Activated $(python --version) virtualenv in $DIR_REL"
+      return
+    fi
+    local DIR="$DIR/.."
+  done
+  echo "no venv/ found from here to OS root"
+}
+
 # [optionally] create and activate Python virtual environment
 function ve() {
   if [ ! -d venv ]; then
     echo "Creating new Python 3.6 virtualenv"
     python3.6 -m venv venv
-    source venv/bin/activate
+    va
     pip install -U pip
     pip install neovim
   else
-    source venv/bin/activate
+    va
   fi
-  echo "Activated $(python --version) virtualenv"
-}
-
-# alias for ve because I type va a lot more
-function va() {
-  ve
 }
 
 # Clubhouse story template
