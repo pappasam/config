@@ -200,10 +200,7 @@ alias g="git status"
 alias gl="git branch --verbose --all"
 alias gm="git commit --verbose"
 alias gma="git commit --verbose --all"
-
-# Less with default options
-# -c: auto-clear screen
-# alias less='less -c'
+alias gp="git remote prune origin"
 
 # Regex ignore annoying directories
 alias regrep="grep --perl-regexp -Ir \
@@ -424,17 +421,10 @@ function +vi-git-st() {
     --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
   if [[ -n ${remote} ]] ; then
-    # for git prior to 1.7
-    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
     (( $ahead )) && gitstatus+=( "${c3}+${ahead}${c2}" )
-
-    # for git prior to 1.7
-    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
     (( $behind )) && gitstatus+=( "${c4}-${behind}${c2}" )
-
-    # hook_com[branch]="${hook_com[branch]} [${remote} ${(j:/:)gitstatus}]"
     hook_com[branch]="${hook_com[branch]} [🛂${(j:/:)gitstatus}]"
   fi
 }
