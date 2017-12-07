@@ -923,6 +923,10 @@ let g:qfenter_keymap.hopen = ['<C-s>']
 let g:qfenter_keymap.topen = ['<C-t>']
 " do not copy quickfix when opened in new tab
 let g:qfenter_enable_autoquickfix = 0
+" automatically move QuickFix window to fill entire bottom screen
+augroup QuickFix
+  autocmd FileType qf wincmd J
+augroup END
 
 " WinResize:
 let g:winresizer_start_key = '<C-E>'
