@@ -288,30 +288,41 @@ function gn() {  # arg1: filename
 }
 
 # activate virtual environment from any directory from current and up
+DEFAULT_VENV_NAME=venv
+DEFAULT_PYTHON_VERSION="3.6"
 function va() {
+  if [ $# -eq 0 ]; then
+    local VENV_NAME=$DEFAULT_VENV_NAME
+  else
+    local VENV_NAME="$1"
+  fi
   local slashes=${PWD//[^\/]/}
   local DIR="$PWD"
   for (( n=${#slashes}; n>0; --n ))
   do
-    if [ -d "$DIR/venv" ]; then
-      source "$DIR/venv/bin/activate"
-      local DIR_REL=$(realpath --relative-to='.' "$DIR/venv")
-      echo "Activated $(python --version) virtualenv in $DIR_REL"
+    if [ -d "$DIR/$VENV_NAME" ]; then
+      source "$DIR/$VENV_NAME/bin/activate"
+      local DIR_REL=$(realpath --relative-to='.' "$DIR/$VENV_NAME")
+      echo "Activated $(python --version) virtualenv in $DIR_REL/"
       return
     fi
     local DIR="$DIR/.."
   done
-  echo "no venv/ found from here to OS root"
+  echo "no $VENV_NAME/ found from here to OS root"
 }
 
 # [optionally] create and activate Python virtual environment
 function ve() {
-  if [ ! -d venv ]; then
-    echo "Creating new Python 3.6 virtualenv"
-    python3.6 -m venv venv
+  if [ $# -eq 0 ]; then
+    local VENV_NAME="$DEFAULT_VENV_NAME"
+  else
+    local VENV_NAME="$1"
+  fi
+  if [ ! -d "$VENV_NAME" ]; then
+    echo "Creating new Python virtualenv in $VENV_NAME/"
+    python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
     va
-    pip install -U pip
-    pip install neovim
+    pip install -U pip neovim
   else
     va
   fi
