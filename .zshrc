@@ -27,6 +27,11 @@ include ~/.bash/sensitive
 # enable functions to operate in PS1
 setopt PROMPT_SUBST
 
+# list available directories automatically
+setopt AUTO_LIST
+setopt LIST_AMBIGUOUS
+setopt LIST_BEEP
+
 #######################################################################
 # Unset options
 #######################################################################
