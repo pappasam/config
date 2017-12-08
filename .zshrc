@@ -228,6 +228,20 @@ alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynam
 # Functions --- {{{
 
 # Colored cat
+function gitzip() {  # arg1: the git repository
+  if [ $# -eq 0 ]; then
+    local git_dir='.'
+  else
+    local git_dir="$1"
+  fi
+  pushd $git_dir > /dev/null
+  local git_root=$(git rev-parse --show-toplevel)
+  local git_name=$(basename $git_root)
+  local outfile="$git_root/../$git_name.zip"
+  git archive --format=zip --prefix="$git_name-from-zip/" HEAD -o "$outfile"
+  popd > /dev/null
+}
+
 function cats() {
   pygmentize -g $1 | less -rc
 }
