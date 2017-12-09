@@ -420,10 +420,12 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
 zstyle ':vcs_info:*' enable git
 
 # Show untracked files
+untracked_msg="Untracked files:"
 function +vi-git-untracked() {
-  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
-  [[ $(git ls-files --others --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
-  hook_com[unstaged]+='%F{red}🔍%f'
+  local in_tree=$(git rev-parse --is-inside-work-tree 2> /dev/null)
+  local untracked=$(git status | grep "$untracked_msg")
+  if [[ "$in_tree" == 'true' ]] && [[ "$untracked" == "$untracked_msg" ]]; then
+    hook_com[unstaged]+='%F{red}🔍%f'
   fi
 }
 
