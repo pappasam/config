@@ -224,6 +224,9 @@ alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "stat
 # dynamodb
 alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynamodb -dbPath $HOME/data"
 
+# alias for say
+alias say="spd-say"
+
 # }}}
 # Functions --- {{{
 
