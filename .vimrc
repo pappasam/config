@@ -930,8 +930,8 @@ augroup END
 
 " WinResize:
 let g:winresizer_start_key = '<C-E>'
-let g:winresizer_vert_resize = 1
-let g:winresizer_horiz_resize = 1
+let g:winresizer_vert_resize = 5
+let g:winresizer_horiz_resize = 5
 
 " Taboo:
 " Tab format hardcoded to main for now since I often do this anyway
