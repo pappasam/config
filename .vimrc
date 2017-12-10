@@ -1082,9 +1082,19 @@ nnoremap <silent> <C-q> :cclose <BAR> lclose<CR>
 " e.g. ignoring wrapped lines
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-" moving forward and backward with vim tabs
-nnoremap T gT
-nnoremap t gt
+
+" MoveTabs: moving forward, backward, and to number with vim tabs
+nnoremap <A-j> gT
+nnoremap <A-k> gt
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
 
 " IndentComma: placing commas one line down
 " usable with repeat operator '.'
