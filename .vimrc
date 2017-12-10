@@ -1171,9 +1171,17 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
 " AutoPairs:
 imap <silent><CR> <CR><Plug>AutoPairsReturn
 
-" VimSneak: remap f and F to the sneak command
+" VimSneak: note: ';' = goto next, '\' = goto previous
+" Remake s and S to ss and SS
 nmap ss <Plug>Sneak_s
 nmap SS <Plug>Sneak_S
+" Make f and F search one character, but highlight results like Vim-Sneak
+nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
+nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
+xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
+xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
+onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 
 " Taboo
 nnoremap <leader>tt :TabooRename<space>
