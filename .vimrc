@@ -1084,8 +1084,8 @@ nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 " MoveTabs: moving forward, backward, and to number with vim tabs
-nnoremap <A-j> gT
-nnoremap <A-k> gt
+nnoremap <silent> L gt
+nnoremap <silent> H gT
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -1109,10 +1109,9 @@ nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
 " Scroll screen up, down, left, and right
+" left: zh, right: zl
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
-nnoremap <silent> H zh
-nnoremap <silent> L zl
 " Move cursor to top, bottom, and middle of screen
 nnoremap <silent> gJ L
 nnoremap <silent> gK H
