@@ -32,6 +32,9 @@ setopt AUTO_LIST
 setopt LIST_AMBIGUOUS
 setopt LIST_BEEP
 
+# completions
+setopt COMPLETE_ALIASES
+
 #######################################################################
 # Unset options
 #######################################################################
@@ -46,6 +49,7 @@ unsetopt AUTO_REMOVE_SLASH
 # Expected parameters
 #######################################################################
 export PERIOD=1
+export LISTMAX=0
 
 # }}}
 # ZShell Menu Completion --- {{{
@@ -113,7 +117,6 @@ function zshaddhistory() {
 function zshexit() {
 }
 
-
 # }}}
 # ZShell Key-Bindings --- {{{
 
@@ -129,6 +132,8 @@ bindkey -e
 #         useful to get out of both select and search-backward
 # '^p' - cycle through options backward (binding below necessary)
 # '^n' - cycle through options forward (binding below necessary)
+# '^b' - cycle through options right -> left
+# '^f' - cycle through options left -> right
 # '^z' - stop interactive tab-complete mode and go back to regular selection
 
 bindkey -M menuselect '^n' expand-or-complete
@@ -226,6 +231,10 @@ alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynam
 
 # alias for say
 alias say="spd-say"
+compdef _dict_words say
+
+# reload zshrc
+alias so="source ~/.zshrc"
 
 # }}}
 # Functions --- {{{
@@ -253,10 +262,12 @@ function cats() {
 function def() {  # arg1: word
   dict -d gcide $1 | less -XF
 }
+compdef _dict_words def
 
 function syn() {  # arg1: word
   dict -d moby-thesaurus $1 | less -XF
 }
+compdef _dict_words syn
 
 # install
 function install() {  # arg1: word
@@ -347,11 +358,6 @@ function ve() {
 # Clubhouse story template
 function clubhouse() {
   echo -e "## Objective\n## Value\n## Acceptance Criteria" | pbcopy
-}
-
-# Reload bashrc
-function so() {
-  source ~/.zshrc
 }
 
 # GIT: git-clone keplergrp repos to src/ directory
