@@ -160,11 +160,27 @@ alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
 # Vim and Vi
-alias vi="nvim"
+alias vi='nvim'
 alias vim='nvim'
 
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv'"
+
+# Grep, but ignore annoying directories
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias igrep="grep --perl-regexp -Ir \
+--exclude='*~' \
+--exclude='*.pyc' \
+--exclude='*.csv' \
+--exclude='*.tsv' \
+--exclude='*.md' \
+--exclude-dir='.bzr' \
+--exclude-dir='.git' \
+--exclude-dir='.svn' \
+--exclude-dir='node_modules' \
+--exclude-dir='venv'"
 
 # Tmux launch script
 alias t='~/tmuxlaunch.sh'
@@ -174,10 +190,6 @@ alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
 alias sl='ls'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -186,41 +198,28 @@ alias l='ls -CF'
 # diff
 # r: recursively; u: shows line number; p: shows difference in C function
 # P: if multiple files then showing complete path
-alias diff="diff -rupP"
+alias diff='diff -rupP'
 
 # Set copy/paste helper functions
 # the perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output"
+alias pbpaste='xsel --clipboard --output'
 
 # Octave
-alias octave="octave --no-gui"
+alias octave='octave --no-gui'
 
 # Public IP
 alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 
 # Git
-alias g="git status"
-alias gl="git branch --verbose --all"
-alias gm="git commit --verbose"
-alias gma="git commit --verbose --all"
-alias gp="git remote prune origin"
-
-# Regex ignore annoying directories
-alias regrep="grep --perl-regexp -Ir \
---exclude=*~ \
---exclude=*.pyc \
---exclude=*.csv \
---exclude=*.tsv \
---exclude=*.md \
---exclude-dir=.bzr \
---exclude-dir=.git \
---exclude-dir=.svn \
---exclude-dir=node_modules \
---exclude-dir=venv"
+alias g='git status'
+alias gl='git branch --verbose --all'
+alias gm='git commit --verbose'
+alias gma='git commit --verbose --all'
+alias gp='git remote prune origin'
 
 # upgrade
-alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+alias upgrade='sudo apt-get update && sudo apt-get upgrade'
 
 # battery
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
@@ -229,11 +228,11 @@ alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "stat
 alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynamodb -dbPath $HOME/data"
 
 # alias for say
-alias say="spd-say"
+alias say='spd-say'
 compdef _dict_words say
 
 # reload zshrc
-alias so="source ~/.zshrc"
+alias so='source ~/.zshrc'
 
 # }}}
 # Functions --- {{{
