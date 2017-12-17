@@ -127,18 +127,16 @@ bindkey -e
 # '^d' - list options without selecting any of them
 # '^i' - synonym to TAB; tap twice to get into menu complete
 # '^o' - choose selection and execute
-# '^j' - choose selection but do NOT execute AND leave current mode
-# '^k' - choose selection but do NOT execute AND leave all modes in menu-select
+# '^m' - choose selection but do NOT execute AND leave all modes in menu-select
 #         useful to get out of both select and search-backward
-# '^p' - cycle through options backward (binding below necessary)
-# '^n' - cycle through options forward (binding below necessary)
-# '^b' - cycle through options right -> left
-# '^f' - cycle through options left -> right
 # '^z' - stop interactive tab-complete mode and go back to regular selection
 
-bindkey -M menuselect '^u' reverse-menu-complete
-bindkey -M menuselect '^n' forward-char
-bindkey -M menuselect '^p' backward-char
+# make vi keys do menu-expansion (eg, ^j does expansion, navigate with hjkl)
+bindkey '^j' menu-expand-or-complete
+bindkey -M menuselect '^j' menu-complete
+bindkey -M menuselect '^k' reverse-menu-complete
+bindkey -M menuselect '^h' backward-char
+bindkey -M menuselect '^l' forward-char
 
 # delete function characters to include
 # Omitted: /=
