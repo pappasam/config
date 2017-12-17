@@ -39,7 +39,7 @@ setopt COMPLETE_ALIASES
 # Unset options
 #######################################################################
 
-# disable quicker completion
+# do not automatically complete
 unsetopt MENU_COMPLETE
 
 # do not automatically remove the slash
@@ -136,8 +136,9 @@ bindkey -e
 # '^f' - cycle through options left -> right
 # '^z' - stop interactive tab-complete mode and go back to regular selection
 
-bindkey -M menuselect '^n' expand-or-complete
-bindkey -M menuselect '^p' reverse-menu-complete
+bindkey -M menuselect '^u' reverse-menu-complete
+bindkey -M menuselect '^n' forward-char
+bindkey -M menuselect '^p' backward-char
 
 # delete function characters to include
 # Omitted: /=
