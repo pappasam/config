@@ -227,6 +227,7 @@ Plug 'NLKNguyen/c-syntax.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'lervag/vimtex'
+Plug 'tomlion/vim-solidity'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
