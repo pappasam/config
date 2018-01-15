@@ -241,6 +241,9 @@ Plug 'racer-rust/vim-racer'
 " Addional requirements:
 "   cargo install racer
 "   rustup component add rust-src
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'fatih/vim-go'
+
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -306,7 +309,7 @@ augroup indentation_sr
   autocmd Filetype python,c,elm,haskell,terraform,markdown,rust
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv,votl
+  autocmd Filetype make,tsv,votl,go
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
