@@ -122,6 +122,14 @@ then
   eval "$(nodenv init -)"
 fi
 
+GOENV_ROOT="$HOME/.goenv"
+if [ -d "$GOENV_ROOT" ]
+then
+  export GOENV_ROOT
+  path_radd "$GOENV_ROOT/bin"
+  eval "$(goenv init -)"
+fi
+
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]
 then
