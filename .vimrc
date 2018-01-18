@@ -136,7 +136,7 @@ augroup cursorline_setting
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-set dictionary=/usr/share/dict/words
+set dictionary=$HOME/dotfiles/american-english-with-propcase
 
 set spelllang=en_us
 
