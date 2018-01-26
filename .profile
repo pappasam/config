@@ -114,12 +114,14 @@ then
   eval "$(pyenv init -)"
 fi
 
-NODENV_ROOT="$HOME/.nodenv"
-if [ -d "$NODENV_ROOT" ]
+NVM_DIR="$HOME/.nvm"
+if [ -d "$NVM_DIR" ]
 then
-  export NODENV_ROOT
-  path_radd "$NODENV_ROOT/bin"
-  eval "$(nodenv init -)"
+  export NVM_DIR
+  # load NVM
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  # This loads nvm bash_completion
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
 
 GOENV_ROOT="$HOME/.goenv"
