@@ -228,6 +228,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'lervag/vimtex'
 Plug 'tomlion/vim-solidity'
+Plug 'jparise/vim-graphql'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'

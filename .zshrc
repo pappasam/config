@@ -164,7 +164,7 @@ alias vi='nvim'
 alias vim='nvim'
 
 # Tree that ignores annoying directories
-alias itree="tree -I '__pycache__|venv'"
+alias itree="tree -I '__pycache__|venv|node_modules'"
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
