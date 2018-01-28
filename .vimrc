@@ -525,7 +525,7 @@ hi CursorLine cterm=NONE
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
 " https://stackoverflow.com/questions/2075276/longest-line-in-vim
-function! ResizeWidthToLongestLine()
+function! ResizeWindowWidth()
   let maxlength   = 0
   let linenumber  = 1
   while linenumber <= line("$")
@@ -537,6 +537,29 @@ function! ResizeWidthToLongestLine()
     let linenumber  = linenumber+1
   endwhile
   exe ":vertical resize " . (maxlength + 4)
+endfunction
+
+function! ResizeWindowHeight()
+  let initial = winnr()
+
+  " this duplicates code. This avoids polluting global namespace with more
+  " function names
+  wincmd k
+  if winnr() != initial
+    exe initial . "wincmd w"
+    exe ":1"
+    exe "resize " . (line('$') + 1)
+    return
+  endif
+
+  wincmd j
+  if winnr() != initial
+    exe initial . "wincmd w"
+    exe ":1"
+    exe "resize " . (line('$') + 1)
+    return
+  endif
+
 endfunction
 
 " }}}
@@ -1166,11 +1189,9 @@ nnoremap <leader>gd :Gdiff<CR>
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
-" ResizeWindow: up and down; relies on custom function
-" height
-nnoremap <silent> <leader><leader>h gg:exe "resize " . (line('$') + 1)<CR>
-" width
-nnoremap <silent> <leader><leader>w mz:call ResizeWidthToLongestLine()<CR>`z
+" ResizeWindow: up and down; relies on custom functions
+nnoremap <silent> <leader><leader>h mz:call ResizeWindowHeight()<CR>`z
+nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
 
 " AutoPairs:
 imap <silent><CR> <CR><Plug>AutoPairsReturn
