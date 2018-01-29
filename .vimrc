@@ -192,7 +192,7 @@ Plug 'machakann/vim-sandwich'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'cohama/agit.vim'
+Plug 'junegunn/gv.vim'
 
 " Commands run in vim's virtual screen and don't pollute main shell
 Plug 'fcpg/vim-altscreen'
@@ -929,7 +929,22 @@ endfunction
 "  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
 
-" Agit:
+" GvVim:
+" :GV to open commit browser
+" You can pass git log options to the command, e.g. :GV -S foobar.
+" :GV! will only list commits that affected the current file
+" :GV? fills the location list with the revisions of the current file
+
+" :GV or :GV? can be used in visual mode to track the changes in the selected lines.
+
+" o or <cr> on a commit to display the content of it
+" o or <cr> on commits to display the diff in the range
+" O opens a new tab instead
+" gb for :Gbrowse
+" ]] and [[ to move between commits
+" . to start command-line with :Git [CURSOR] SHA à la fugitive
+" q to close
+
 let g:agit_max_log_lines = 500
 
 " UndoTree:
