@@ -542,8 +542,7 @@ endfunction
 function! ResizeWindowHeight()
   let initial = winnr()
 
-  " this duplicates code. This avoids polluting global namespace with more
-  " function names
+  " this duplicates code but avoids polluting global namespace
   wincmd k
   if winnr() != initial
     exe initial . "wincmd w"
@@ -559,7 +558,6 @@ function! ResizeWindowHeight()
     exe "resize " . (line('$') + 1)
     return
   endif
-
 endfunction
 
 " }}}
@@ -1224,7 +1222,7 @@ onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
 onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 
 " Taboo
-nnoremap <leader>tt :TabooRename<space>
+nnoremap <leader><leader>t :TabooRename<space>
 
 " }}}
 " General: Macro repeater ---- {{{
