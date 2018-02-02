@@ -103,6 +103,9 @@ export SHELL=bash
 # turn off because it messes up my pdf tooling
 export GDK_SCALE=0
 
+# turn off because it messes up my pdf tooling
+export TERM="screen-256color"
+
 # }}}
 # Path appends --- {{{
 
