@@ -103,8 +103,11 @@ export SHELL=bash
 # turn off because it messes up my pdf tooling
 export GDK_SCALE=0
 
-# turn off because it messes up my pdf tooling
-export TERM="screen-256color"
+# Neovim does not change cursor shape if I set the below
+# It seems to rely on underlying terminal being xterm-256
+# and tmux being screen-256color.
+# Weird bug, I'm making this note so I'm aware of it going forward
+# export TERM="screen-256color"
 
 # }}}
 # Path appends --- {{{

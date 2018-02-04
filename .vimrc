@@ -1333,4 +1333,12 @@ set noshowmode
 " ShowCommand: turn off character printing to vim status line
 set noshowcmd
 
+" Cursor Line
+" insert mode - line
+let &t_SI .= "\<Esc>[5 q"
+"replace mode - underline
+let &t_SR .= "\<Esc>[4 q"
+"common - block
+let &t_EI .= "\<Esc>[3 q"
+
 " }}}
