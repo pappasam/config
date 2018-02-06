@@ -219,7 +219,7 @@ alias gma='git commit --verbose --all'
 alias gp='git remote prune origin'
 
 # upgrade
-alias upgrade='sudo apt-get update && sudo apt-get upgrade'
+alias upgrade='sudo mintupdate'
 
 # battery
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
