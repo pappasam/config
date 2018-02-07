@@ -15,7 +15,7 @@ fi
 tmux new-session -d -s $SESSION
 
 # Select first window
-tmux select-window -t $SESSION:0
+tmux select-window -t $SESSION:1
 
 # Rename first window to 'edit'
 tmux rename-window edit
