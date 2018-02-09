@@ -593,6 +593,7 @@ let g:NERDTreeIgnore=[
       \'__pycache__$[[dir]]',
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
+      \'elm-stuff$[[dir]]',
       \'\.aux$[[file]]',
       \'\.toc$[[file]]',
       \'\.pdf$[[file]]',
