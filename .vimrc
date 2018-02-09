@@ -1037,8 +1037,8 @@ let g:AutoPairsMapCR = 0
 " Python:
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#auto_close_doc = 0
+let g:jedi#show_call_signatures = 1
+let g:jedi#auto_close_doc = 1
 let g:jedi#smart_auto_mappings = 0
 
 " mappings
@@ -1052,12 +1052,15 @@ let g:jedi#usages_command = "<leader>su"
 let g:jedi#rename_command = "<leader>sr"
 
 " Javascript:
-let g:tern_show_argument_hints = 1
+let g:tern_show_argument_hints = 'on_move'
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
 augroup END
+
+" Elm:
+let g:elm_detailed_complete = 1
 
 " CPP:
 " Jumping back defaults to <C-O> or <C-T>
