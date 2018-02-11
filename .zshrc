@@ -491,4 +491,8 @@ stty -ixon
 # get a cool quote
 quote
 
+# Docker-Compose
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
 # }}}
