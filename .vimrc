@@ -1129,10 +1129,12 @@ inoremap <C-space> <C-x><C-o>
 inoremap <C-k> <C-x><C-k>
 
 " Exit: Preview and Help && QuickFix and Location List
-inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
-nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
-inoremap <silent> <C-q> <Esc>:cclose <BAR> lclose<CR>a
-nnoremap <silent> <C-q> :cclose <BAR> lclose<CR>
+" inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
+" nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
+" inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
+" nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
+inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
+nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
 " MoveVisual: up and down visually only if count is specified before
 " Otherwise, you want to move up lines numerically
