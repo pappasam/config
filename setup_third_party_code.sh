@@ -61,6 +61,9 @@ apt install htop tree
 apt install python3-dev
 apt install python3-virtualenv
 
+# enables pyenv to build with tkinter support
+apt install tk-dev
+
 #######################################################################
 # MySQL
 #######################################################################
