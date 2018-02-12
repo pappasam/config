@@ -262,6 +262,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'maksimr/vim-jsbeautify'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
@@ -1069,7 +1070,7 @@ augroup END
 
 " Elm:
 let g:elm_detailed_complete = 1
-let g:elm_format_autosave = 1
+let g:elm_format_autosave = 0
 augroup elm_complete
   autocmd!
   autocmd FileType elm nnoremap <buffer> <C-]> :ElmShowDocs<CR>
@@ -1115,6 +1116,19 @@ augroup writing_complete
 augroup END
 
 "  }}}
+"  Plugin: Language-specific file beautification --- {{{
+
+augroup language_specific_file_beauty
+  autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
+  autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
+  autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
+  autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
+  autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
+  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
+  autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
+augroup END
+
+" }}}
 " General: Key remappings (includes Plugins) ----------------------- {{{
 
 " Omnicompletion:
