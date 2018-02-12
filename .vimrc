@@ -245,7 +245,6 @@ Plug 'racer-rust/vim-racer'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go'
 
-
 " Tagbar
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
@@ -256,6 +255,7 @@ Plug 'lvht/tagbar-markdown'
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
+Plug 'tell-k/vim-autopep8'
 
 " Web Development - Javascript
 Plug 'pangloss/vim-javascript'
@@ -1027,6 +1027,13 @@ let g:bullets_enabled_file_types = [
 " AutoPairs:
 " unmap CR due to incompatibility with clang-complete
 let g:AutoPairsMapCR = 0
+
+" AutoPEP8
+let g:autopep8_disable_show_diff = 1
+" below turned off to make collaboration less annoying
+" augroup AutoPep8
+"   autocmd BufWritePre *.py Autopep8
+" augroup END
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{

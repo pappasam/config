@@ -345,7 +345,7 @@ function ve() {
     echo "Creating new Python virtualenv in $VENV_NAME/"
     python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
     source "$VENV_NAME/bin/activate"
-    pip install -U pip neovim bpython
+    pip install -U pip neovim bpython autopep8
     deactivate
     va
   else
