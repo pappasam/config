@@ -164,6 +164,9 @@ set nocompatible
 " Enable using local vimrc
 set exrc
 
+" Make terminal zsh
+set shell=/usr/bin/zsh
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
