@@ -1050,7 +1050,7 @@ let g:autopep8_disable_show_diff = 1
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 1
-let g:jedi#auto_close_doc = 1
+let g:jedi#auto_close_doc = 0
 let g:jedi#smart_auto_mappings = 0
 
 " mappings
