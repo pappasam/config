@@ -160,6 +160,7 @@ alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
 # Vim and Vi
+alias v="nvim"
 alias vi='nvim'
 alias vim='nvim'
 
