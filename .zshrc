@@ -13,7 +13,7 @@ include () {
   [[ -f "$1" ]] && source "$1"
 }
 
-include ~/.profile
+include ~/.zprofile
 include ~/.bashrc_local
 include ~/.bash/sensitive
 
