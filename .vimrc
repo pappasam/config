@@ -1132,6 +1132,13 @@ augroup language_specific_file_beauty
 augroup END
 
 " }}}
+" General: Neovim Terminal --- {{{
+
+augroup neovim_terminal
+  autocmd TermOpen * set nonumber norelativenumber
+augroup END
+
+" }}}
 " General: Key remappings (includes Plugins) ----------------------- {{{
 
 " Omnicompletion:
@@ -1350,6 +1357,11 @@ cabbrev bs sbuffer
 
 " Plug update and upgrade
 cabbrev pu PlugUpdate <BAR> PlugUpgrade
+
+" Terminal abbreviation
+cabbrev terms split <BAR> terminal
+cabbrev termv vsplit <BAR> terminal
+cabbrev termt tabnew <BAR> terminal
 
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
