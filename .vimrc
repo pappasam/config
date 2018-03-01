@@ -152,7 +152,8 @@ set wildmode=longest,list,full
 set wildmenu
 
 " Grep: program is 'git grep'
-set grepprg=git\ grep\ -n\ $*
+" set grepprg=git\ grep\ -n\ $*
+set grepprg=rg\ --vimgrep
 
 " Pasting: enable pasting without having to do 'set paste'
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
@@ -178,8 +179,6 @@ Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dkprice/vim-easygrep'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
 Plug 'gcmt/taboo.vim'
@@ -192,6 +191,10 @@ Plug 'mbbill/undotree'
 Plug 'henrik/vim-indexed-search'
 Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-sandwich'
+
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -618,38 +621,16 @@ function! NERDTreeToggleCustom()
 endfunction
 
 "  }}}
-" Plugin: Ctrl p --- {{{
+" Plugin: fzf --- {{{
 
-let g:ctrlp_mruf_relative = 1 " show only MRU files in the cwd
-let g:ctrlp_user_command = [
-      \'.git',
-      \'cd %s && git ls-files -co --exclude-standard']
-" open first in current window and others as hidden
-let g:ctrlp_open_multiple_files = '1r'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_switch_buffer = 0
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* FindIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
-" Cycles through windows until it finds a modifiable buffer
-" First checks if startify and runs command if so
-" it then runs ctrl-p there
-" if there are no modifiable buffers, it does not run control p
-" this prevents ctrl-p from opening in NERDTree, QuickFix, or other
-function! CtrlPCommand()
-    let current_window_number = 0
-    let total_window_number = winnr('$')
-    if &filetype ==? 'startify'
-      exec 'CtrlPCurWD'
-      return
-    endif
-    while !&modifiable && current_window_number < total_window_number
-        exec 'wincmd w'
-        let current_window_number = current_window_number + 1
-    endwhile
-    if current_window_number < total_window_number
-      exec 'CtrlPCurWD'
-    endif
-endfunction
-let g:ctrlp_cmd = 'call CtrlPCommand()'
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
 
 " }}}
 " Plugin: Lightline ---------------- {{{
@@ -1008,11 +989,6 @@ let g:jsx_ext_required = 0
 " JsDoc:
 let g:jsdoc_enable_es6 = 1
 
-" EasyGrep: - use git grep
-let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
-let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
-let g:EasyGrepReplaceWindowMode = 2 " overwrite existing buffer; no new tabs
-
 " IndentLines:
 let g:indentLine_enabled = 0  " indentlines disabled by default
 
@@ -1153,10 +1129,6 @@ inoremap <C-space> <C-x><C-o>
 inoremap <C-k> <C-x><C-k>
 
 " Exit: Preview and Help && QuickFix and Location List
-" inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
-" nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
-" inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose<CR>a
-" nnoremap <silent> <C-c> :pclose <BAR> helpclose<CR>
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
@@ -1263,8 +1235,15 @@ xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
 onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
 onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 
-" Taboo
+" Taboo: rename files smartly
 nnoremap <leader><leader>t :TabooRename<space>
+
+" FZF: create shortcuts for finding stuff
+nnoremap <silent> <C-P> :GFiles<CR>
+nnoremap <C-n> yiw:Find <C-r>"<CR>
+vnoremap <C-n> y:Find <C-r>"<CR>
+nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
+vnoremap <leader><C-n> y:FindIgnoreCase <C-r>"<CR>
 
 " }}}
 " General: Macro repeater ---- {{{
@@ -1388,4 +1367,46 @@ let &t_SR .= "\<Esc>[4 q"
 "common - block
 let &t_EI .= "\<Esc>[3 q"
 
+" }}}
+" Everything below here is deprecated, but kept for posterity
+" ----------------------------------------------------------------
+" Plugin: Ctrl p (deprecated, commented out) --- {{{
+
+" let g:ctrlp_mruf_relative = 1 " show only MRU files in the cwd
+" let g:ctrlp_user_command = [
+"       \'.git',
+"       \'cd %s && git ls-files -co --exclude-standard']
+" " open first in current window and others as hidden
+" let g:ctrlp_open_multiple_files = '1r'
+" let g:ctrlp_use_caching = 0
+" let g:ctrlp_switch_buffer = 0
+
+" " Cycles through windows until it finds a modifiable buffer
+" " First checks if startify and runs command if so
+" " it then runs ctrl-p there
+" " if there are no modifiable buffers, it does not run control p
+" " this prevents ctrl-p from opening in NERDTree, QuickFix, or other
+" function! CtrlPCommand()
+"     let current_window_number = 0
+"     let total_window_number = winnr('$')
+"     if &filetype ==? 'startify'
+"       exec 'CtrlPCurWD'
+"       return
+"     endif
+"     while !&modifiable && current_window_number < total_window_number
+"         exec 'wincmd w'
+"         let current_window_number = current_window_number + 1
+"     endwhile
+"     if current_window_number < total_window_number
+"       exec 'CtrlPCurWD'
+"     endif
+" endfunction
+" let g:ctrlp_cmd = 'call CtrlPCommand()'
+
+" }}}
+" EasyGrep: --- {{{
+" use git grep
+" let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
+" let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
+" let g:EasyGrepReplaceWindowMode = 2 " overwrite existing buffer; no new tabs
 " }}}

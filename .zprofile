@@ -109,6 +109,9 @@ export GDK_SCALE=0
 # Weird bug, I'm making this note so I'm aware of it going forward
 # export TERM="screen-256color"
 
+# FZF
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
 # }}}
 # Path appends + Misc env setup --- {{{
 

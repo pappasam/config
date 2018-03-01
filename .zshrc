@@ -496,4 +496,6 @@ quote
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # }}}
