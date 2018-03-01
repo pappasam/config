@@ -1248,7 +1248,7 @@ onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 nnoremap <leader><leader>t :TabooRename<space>
 
 " FZF: create shortcuts for finding stuff
-nnoremap <silent> <C-P> :call fzf#run(fzf#wrap({'source': 'git ls-files'}))<CR>
+nnoremap <silent> <C-P> :call fzf#run(fzf#wrap({'source': 'git ls-files', 'options': 'dir': getcwd()}))<CR>
 nnoremap <C-n> yiw:Find <C-r>"<CR>
 vnoremap <C-n> y:Find <C-r>"<CR>
 nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
