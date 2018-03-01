@@ -12,3 +12,7 @@ map [noremap] j gj
 map [noremap] k gk
 map [noremap] J j
 map [noremap] K k
+
+" remove mapping for visual mode; this crashes wasavi and I want none of it
+map [noremap] V i
+map [noremap] v i
