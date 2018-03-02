@@ -489,18 +489,18 @@ ${PS1_USR} ${PS1_END}"
 # Load zsh script
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
+# Use fd to generate the list for file and directory completion
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
 }
 
-# Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# make <C-t> do fzf fuzzy file completion, and TAB do normal stuff
+# <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
 export FZF_COMPLETION_TRIGGER=''
+export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept"
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
