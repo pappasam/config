@@ -131,6 +131,7 @@ apt install libncurses5 libncurses5-dev libncursesw5
 # https://github.com/jgm/pandoc/releases
 
 #######################################################################
-# RipGrep
+# Rust packages
 #######################################################################
 cargo install ripgrep
+cargo install fd-find
