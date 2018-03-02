@@ -484,6 +484,17 @@ PS1="${PS1_DIR} \$vcs_info_msg_0_ \
 ${PS1_USR} ${PS1_END}"
 
 # }}}
+# FZF --- {{{
+
+# Load zsh script
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# make <C-t> do fzf fuzzy file completion, and TAB do normal stuff
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# }}}
 # Executed Commands --- {{{
 
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
@@ -495,7 +506,5 @@ quote
 # Docker-Compose
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # }}}
