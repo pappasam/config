@@ -129,3 +129,8 @@ apt install libncurses5 libncurses5-dev libncursesw5
 # the available version in software repository is not latest
 # build using the provided debian package under pandoc releases
 # https://github.com/jgm/pandoc/releases
+
+#######################################################################
+# RipGrep
+#######################################################################
+cargo install ripgrep
