@@ -1243,7 +1243,7 @@ nnoremap <silent> <space>l :TagbarToggle <CR>
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
 " NERDTree: Jump to current file
-nnoremap <silent> <space>k :NERDTreeFind<cr>
+nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 
 " Choosewin: (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
