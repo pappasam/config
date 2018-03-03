@@ -235,6 +235,7 @@ Plug 'hashivim/vim-vagrant'
 Plug 'lervag/vimtex'
 Plug 'tomlion/vim-solidity'
 Plug 'jparise/vim-graphql'
+Plug 'magicalbanana/sql-syntax-vim'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -277,6 +278,9 @@ Plug 'tpope/vim-ragtag'
 
 " Writing
 Plug 'dkarter/bullets.vim'
+
+" Code prettifiers
+Plug 'b4b4r07/vim-sqlfmt'
 
 call plug#end()
 
@@ -1024,12 +1028,19 @@ let g:bullets_enabled_file_types = [
 " unmap CR due to incompatibility with clang-complete
 let g:AutoPairsMapCR = 0
 
-" AutoPEP8
+" AutoPEP8:
 let g:autopep8_disable_show_diff = 1
 " below turned off to make collaboration less annoying
 " augroup AutoPep8
 "   autocmd BufWritePre *.py Autopep8
 " augroup END
+
+" SQLFormat:
+" relies on 'pip install sqlformat'
+let g:sqlfmt_auto = 0
+let g:sqlfmt_command = "sqlformat"
+let g:sqlfmt_options = "--keywords=upper --identifiers=lower --use_space_around_operators"
+
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
@@ -1121,6 +1132,7 @@ augroup language_specific_file_beauty
   autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
   autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
+  autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
 augroup END
 
 " }}}

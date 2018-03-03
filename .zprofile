@@ -151,6 +151,13 @@ then
   eval "$(goenv init -)"
 fi
 
+GOPATH="$HOME/go"
+if [ -d "$GOPATH" ]
+then
+  export GOPATH
+  path_ladd "$GOPATH/bin"
+fi
+
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]
 then
