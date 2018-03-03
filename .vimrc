@@ -611,6 +611,7 @@ let g:NERDTreeIgnore=[
       \'\.out$[[file]]',
       \'\.o$[[file]]',
       \]
+
 function! NERDTreeToggleCustom()
     if &filetype ==? 'startify'
       exec 'NERDTreeToggle'
@@ -623,6 +624,16 @@ function! NERDTreeToggleCustom()
       endif
     endif
 endfunction
+
+augroup NerdTreeOnVimEnter
+  autocmd VimEnter *
+        \   if !argc()
+        \ |   Startify
+        \ |   NERDTreeToggle
+        \ |   wincmd w
+        \ | endif
+augroup END
+
 
 "  }}}
 " Plugin: fzf --- {{{
@@ -1230,6 +1241,9 @@ nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
 nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
 nnoremap <silent> <space>l :TagbarToggle <CR>
 nnoremap <silent> <space>u :UndotreeToggle<CR>
+
+" NERDTree: Jump to current file
+nnoremap <silent> <space>k :NERDTreeFind<cr>
 
 " Choosewin: (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
