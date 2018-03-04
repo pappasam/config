@@ -189,11 +189,12 @@ Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
 Plug 'vimwiki/vimwiki'
-Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
-Plug 'henrik/vim-indexed-search'
 Plug 'tpope/vim-repeat'
+Plug 'henrik/vim-indexed-search'
 Plug 'machakann/vim-sandwich'
+Plug 'justinmk/vim-sneak'
+Plug 'fcpg/vim-altscreen'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
@@ -206,9 +207,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
-" Commands run in vim's virtual screen and don't pollute main shell
-Plug 'fcpg/vim-altscreen'
-
 " Basic coloring
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -217,7 +215,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
-" Language-specific syntax
+" Syntax highlighting
 Plug 'derekwyatt/vim-scala',
 Plug 'rust-lang/rust.vim'
 Plug 'hdima/python-syntax',
@@ -242,6 +240,9 @@ Plug 'lervag/vimtex'
 Plug 'tomlion/vim-solidity'
 Plug 'jparise/vim-graphql'
 Plug 'magicalbanana/sql-syntax-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'groenewege/vim-less'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -265,28 +266,23 @@ Plug 'lvht/tagbar-markdown'
 "   sudo npm install -g jsctags
 "   sudo apt install -y php
 
-" Indentation
+" Indentation-only
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
-Plug 'tell-k/vim-autopep8'
-
-" Web Development - Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'groenewege/vim-less'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'maksimr/vim-jsbeautify'
 
 " Web Development - General
 Plug 'mattn/emmet-vim'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-ragtag'
+Plug 'heavenshell/vim-jsdoc'
 
-" Writing
+" Writing helpers
 Plug 'dkarter/bullets.vim'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
+Plug 'tell-k/vim-autopep8'
+Plug 'maksimr/vim-jsbeautify'
 
 call plug#end()
 
