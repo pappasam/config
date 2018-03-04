@@ -587,7 +587,6 @@ augroup CloseIfOnlyControlWinLeft
   au BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
 
-
 "  }}}
 " Plugin: fzf --- {{{
 
@@ -1010,6 +1009,16 @@ let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
 " 2) Return from file (relies on tag stack): <C-O>
+
+" VimScript:
+" Autocompletion and show definition is built in to Vim
+" Set the same shortcuts as usual to find them
+augroup vimscript_complete
+  autocmd!
+  autocmd FileType vim nnoremap <buffer> <C-]> yiw:help <C-r>"<CR>
+  autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
+  autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
+augroup END
 
 " Python:
 " Open module, e.g. :Pyimport os (opens the os module)
