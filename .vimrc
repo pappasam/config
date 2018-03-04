@@ -863,6 +863,53 @@ function! MyVimTexDocHandler(context)
 endfunction
 
 "  }}}
+"  Plugin: AutoPairs --- {{{
+
+" AutoPairs:
+" unmap CR due to incompatibility with clang-complete
+let g:AutoPairsMapCR = 0
+let g:AutoPairs = {
+      \ '(':')',
+      \ '[':']',
+      \ '{':'}',
+      \ "'":"'",
+      \ '"':'"',
+      \ '`':'`'
+      \ }
+augroup autopairs_filetype_overrides
+  autocmd FileType rust let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ '"':'"',
+        \ '`':'`'
+        \ }
+  autocmd FileType tex let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ '`': "'"
+        \ }
+augroup END
+
+"  }}}
+"  Plugin: Sandwich --- {{{
+
+" LatexNotes:
+"   textobject:
+"     replace inner text of `text' with cisl'
+"     if auto detection of nearest surrounding is fine cib
+"   add to text:
+"     saiwl' single apostrophes to get `text'
+"     The pattern of the command is sa{motion/textobject}{surrounding}
+"     means invoke operator add  surrounding on inner word and surround type
+"     is latex single quote.
+"   delete:
+"     with sdl' or with sdb
+"   change:
+"     with srl'l" or with srbl"
+
+"  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
 
 " GvVim:
@@ -955,10 +1002,6 @@ let g:bullets_enabled_file_types = [
     \ 'gitcommit',
     \ 'scratch'
     \]
-
-" AutoPairs:
-" unmap CR due to incompatibility with clang-complete
-let g:AutoPairsMapCR = 0
 
 " AutoPEP8:
 let g:autopep8_disable_show_diff = 1
@@ -1057,8 +1100,6 @@ augroup END
 " jump to word definition for several text editors (including markdown)
 augroup writing_complete
   autocmd FileType markdown,tex, nnoremap <buffer> <C-]> :Def <cword><CR>
-  " Latex complete `` with ''
-  autocmd FileType tex inoremap <buffer> `` ``''<esc>hi
 augroup END
 
 "  }}}
