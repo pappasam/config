@@ -192,6 +192,9 @@ Plug 'henrik/vim-indexed-search'
 Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-sandwich'
 
+" Relative Numbering
+Plug 'myusuf3/numbers.vim'
+
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -379,76 +382,6 @@ command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
  " }}}
-" General: (relative) line number display ------------- {{{
-
-function! ToggleRelativeNumber()
-  if &rnu
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunction
-
-function! RNUInsertEnter()
-  if &rnu
-    let w:line_number_state = 'rnu'
-    set norelativenumber
-  else
-    let w:line_number_state = 'nornu'
-  endif
-endfunction
-
-function! RNUInsertLeave()
-  if w:line_number_state == 'rnu'
-    set relativenumber
-  else
-    set norelativenumber
-    let w:line_number_state = 'nornu'
-  endif
-endfunction
-
-function! RNUWinEnter()
-  if exists('w:line_number_state')
-    if w:line_number_state == 'rnu'
-      set relativenumber
-    else
-      set norelativenumber
-    endif
-  else
-    set relativenumber
-    let w:line_number_state = 'rnu'
-  endif
-endfunction
-
-function! RNUWinLeave()
-  if &rnu
-    let w:line_number_state = 'rnu'
-  else
-    let w:line_number_state = 'nornu'
-  endif
-  set norelativenumber
-endfunction
-
-" autocmd that will set up the w:created variable
-autocmd VimEnter * autocmd WinEnter * let w:created=1
-autocmd VimEnter * let w:created=1
-set number relativenumber
-augroup rnu_nu
-  autocmd!
-  "Initial window settings
-  autocmd WinEnter * if !exists('w:created') |
-        \setlocal number relativenumber |
-        \endif
-  autocmd User Startified setlocal number relativenumber
-  " Don't have relative numbers during insert mode
-  autocmd InsertEnter * :call RNUInsertEnter()
-  autocmd InsertLeave * :call RNUInsertLeave()
-  " Set and unset relative numbers when buffer is active
-  autocmd WinEnter * :call RNUWinEnter()
-  autocmd WinLeave * :call RNUWinLeave()
-augroup end
-
-" }}}
 " General: Folding Settings --------------- {{{
 
 augroup fold_settings
@@ -631,6 +564,7 @@ augroup NerdTreeOnVimEnter
         \   if !argc()
         \ |   Startify
         \ |   NERDTreeToggle
+        \ |   set norelativenumber
         \ |   wincmd w
         \ | endif
 augroup END
@@ -669,7 +603,6 @@ function! FZFFilesAvoidNerdtree()
     exe "normal! \<c-w>\<c-w>"
   endif
   call fzf#run(fzf#wrap({'source': 'fd --type f --hidden --follow --exclude ".git"', 'dir': getcwd()}))
-  call RNUWinEnter()
 endfunction
 
 let g:fzf_action = {
@@ -1058,10 +991,6 @@ let g:AutoPairsMapCR = 0
 
 " AutoPEP8:
 let g:autopep8_disable_show_diff = 1
-" below turned off to make collaboration less annoying
-" augroup AutoPep8
-"   autocmd BufWritePre *.py Autopep8
-" augroup END
 
 " SQLFormat:
 " relies on 'pip install sqlformat'
@@ -1069,6 +998,8 @@ let g:sqlfmt_auto = 0
 let g:sqlfmt_command = "sqlformat"
 let g:sqlfmt_options = "--keywords=upper --identifiers=lower --use_space_around_operators"
 
+" Numbersvim: override default plugin settings
+let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
@@ -1252,7 +1183,7 @@ nnoremap <leader>jx :set filetype=javascript.jsx<CR>
 nnoremap <leader>jj :set filetype=javascript<CR>
 
 " ToggleRelativeNumber: uses custom functions
-nnoremap <silent><leader>r :call ToggleRelativeNumber()<CR>
+nnoremap <silent><leader>r :NumbersToggle<CR>
 
 " TogglePluginWindows:
 nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
@@ -1427,46 +1358,4 @@ let &t_SR .= "\<Esc>[4 q"
 "common - block
 let &t_EI .= "\<Esc>[3 q"
 
-" }}}
-" Everything below here is deprecated, but kept for posterity
-" ----------------------------------------------------------------
-" Plugin: Ctrl p (deprecated, commented out) --- {{{
-
-" let g:ctrlp_mruf_relative = 1 " show only MRU files in the cwd
-" let g:ctrlp_user_command = [
-"       \'.git',
-"       \'cd %s && git ls-files -co --exclude-standard']
-" " open first in current window and others as hidden
-" let g:ctrlp_open_multiple_files = '1r'
-" let g:ctrlp_use_caching = 0
-" let g:ctrlp_switch_buffer = 0
-
-" " Cycles through windows until it finds a modifiable buffer
-" " First checks if startify and runs command if so
-" " it then runs ctrl-p there
-" " if there are no modifiable buffers, it does not run control p
-" " this prevents ctrl-p from opening in NERDTree, QuickFix, or other
-" function! CtrlPCommand()
-"     let current_window_number = 0
-"     let total_window_number = winnr('$')
-"     if &filetype ==? 'startify'
-"       exec 'CtrlPCurWD'
-"       return
-"     endif
-"     while !&modifiable && current_window_number < total_window_number
-"         exec 'wincmd w'
-"         let current_window_number = current_window_number + 1
-"     endwhile
-"     if current_window_number < total_window_number
-"       exec 'CtrlPCurWD'
-"     endif
-" endfunction
-" let g:ctrlp_cmd = 'call CtrlPCommand()'
-
-" }}}
-" EasyGrep: --- {{{
-" use git grep
-" let g:EasyGrepCommand = 1 " use grep, NOT vimgrep
-" let g:EasyGrepJumpToMatch = 0 " Do not jump to the first match
-" let g:EasyGrepReplaceWindowMode = 2 " overwrite existing buffer; no new tabs
 " }}}
