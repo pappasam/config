@@ -1250,9 +1250,9 @@ fun! AtInit()
 endfun
 
 " Enable calling a function within the mapping for @
-nno <expr> <plug>@init AtInit()
+nnoremap <expr> <plug>@init AtInit()
 " A macro could, albeit unusually, end in Insert mode.
-ino <expr> <plug>@init "\<c-o>".AtInit()
+inoremap <expr> <plug>@init "\<c-o>".AtInit()
 
 fun! AtReg()
     let s:atcount = v:count1
@@ -1277,8 +1277,8 @@ fun! QStop()
     return 'g@l'
 endfun
 
-nno <expr> <plug>qstop QStop()
-ino <expr> <plug>qstop "\<c-o>".QStop()
+nnoremap <expr> <plug>qstop QStop()
+inoremap <expr> <plug>qstop "\<c-o>".QStop()
 
 let s:qrec = 0
 fun! QStart()
