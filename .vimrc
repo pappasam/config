@@ -168,6 +168,9 @@ set exrc
 " Make terminal zsh
 set shell=/usr/bin/zsh
 
+" Make sure numbering is set
+set number
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
