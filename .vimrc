@@ -439,6 +439,7 @@ augroup rnu_nu
   autocmd WinEnter * if !exists('w:created') |
         \setlocal number relativenumber |
         \endif
+  autocmd User Startified setlocal number relativenumber
   " Don't have relative numbers during insert mode
   autocmd InsertEnter * :call RNUInsertEnter()
   autocmd InsertLeave * :call RNUInsertLeave()
@@ -668,6 +669,7 @@ function! FZFFilesAvoidNerdtree()
     exe "normal! \<c-w>\<c-w>"
   endif
   call fzf#run(fzf#wrap({'source': 'fd --type f --hidden --follow --exclude ".git"', 'dir': getcwd()}))
+  call RNUWinEnter()
 endfunction
 
 let g:fzf_action = {
