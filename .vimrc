@@ -1115,9 +1115,16 @@ augroup END
 " }}}
 " General: Neovim Terminal --- {{{
 
-augroup neovim_terminal
-  autocmd TermOpen * set nonumber norelativenumber
-augroup END
+function! s:openTerm(vertical)
+  let cmd = a:vertical ? 'vnew' : 'new'
+  exec cmd
+  term
+  setlocal nonumber nornu
+  startinsert
+endfunction
+
+command! Term call s:openTerm(0)
+command! Vterm call s:openTerm(1)
 
 " }}}
 " General: Key remappings (includes Plugins) ----------------------- {{{
