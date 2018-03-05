@@ -35,6 +35,9 @@ setopt LIST_BEEP
 # completions
 setopt COMPLETE_ALIASES
 
+# automatically CD without typing cd
+setopt AUTOCD
+
 #######################################################################
 # Unset options
 #######################################################################
