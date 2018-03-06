@@ -1132,7 +1132,7 @@ command! Vterm call s:openTerm(1)
 
 " Escape:
 " Make escape also clear highlighting
-nnoremap <esc> :noh<return><esc>
+nnoremap <silent> <esc> :noh<return><esc>
 
 " Omnicompletion:
 " <C-@> is signal sent by terminal when pressing <C-Space>
