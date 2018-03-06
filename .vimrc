@@ -120,8 +120,9 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
-" Don't highlight all search results
-set nohlsearch
+" Highlight all search results,
+set hlsearch
+set incsearch
 
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
@@ -1128,6 +1129,10 @@ command! Vterm call s:openTerm(1)
 
 " }}}
 " General: Key remappings (includes Plugins) ----------------------- {{{
+
+" Escape:
+" Make escape also clear highlighting
+nnoremap <esc> :noh<return><esc>
 
 " Omnicompletion:
 " <C-@> is signal sent by terminal when pressing <C-Space>
