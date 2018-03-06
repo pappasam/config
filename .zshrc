@@ -494,16 +494,16 @@ ${PS1_USR} ${PS1_END}"
 
 # Use fd to generate the list for file and directory completion
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+  fd -c always --hidden --follow --exclude ".git" . "$1"
 }
 
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
+  fd -c always --hidden --type d --follow --exclude ".git" . "$1"
 }
 
 # <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
 export FZF_COMPLETION_TRIGGER=''
-export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept"
+export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept --ansi"
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 

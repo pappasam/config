@@ -601,7 +601,7 @@ function! FZFFilesAvoidNerdtree()
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
-  call fzf#run(fzf#wrap({'source': 'fd --type f --hidden --follow --exclude ".git"', 'dir': getcwd()}))
+  call fzf#run(fzf#wrap({'source': 'fd -c always --type f --hidden --follow --exclude ".git"', 'dir': getcwd()}))
 endfunction
 
 let g:fzf_action = {
