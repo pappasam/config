@@ -179,7 +179,6 @@ call plug#begin('~/.vim/plugged')
 
 " Basics
 Plug 'itchyny/lightline.vim'
-Plug 'airblade/vim-rooter'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
@@ -930,9 +929,6 @@ let g:agit_max_log_lines = 500
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 3
-
-" VimRooter:
-let g:rooter_manual_only = 1
 
 " PythonVirtualenv:
 " necessary for jedi-vim to discover virtual environments
