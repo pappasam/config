@@ -505,6 +505,19 @@ function! ResizeWindowHeight()
 endfunction
 
 " }}}
+" General: Avoid saving 'lcd' --- {{{
+
+augroup stay_no_lcd
+  autocmd!
+  if exists(':tcd') == 2
+    autocmd User BufStaySavePre  if haslocaldir() | let w:lcd = getcwd() | exe 'cd '.fnameescape(getcwd(-1, -1)) | endif
+  else
+    autocmd User BufStaySavePre  if haslocaldir() | let w:lcd = getcwd() | cd - | cd - | endif
+  endif
+  autocmd User BufStaySavePost if exists('w:lcd') | execute 'lcd' fnameescape(w:lcd) | unlet w:lcd | endif
+augroup END
+
+" --- }}}
 " Plugin: Wiki --- {{{
 
 " Wiki is only valid when in pre-defined wiki area
@@ -600,7 +613,8 @@ function! FZFFilesAvoidNerdtree()
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
-  call fzf#run(fzf#wrap({'source': 'fd -c always --type f --hidden --follow --exclude ".git"', 'dir': getcwd()}))
+  " getcwd(-1, -1) tells it to always use the global working directory
+  call fzf#run(fzf#wrap({'source': 'fd -c always --type f --hidden --follow --exclude ".git"', 'dir': getcwd(-1, -1)}))
 endfunction
 
 let g:fzf_action = {
