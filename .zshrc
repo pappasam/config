@@ -219,7 +219,7 @@ alias publicip='wget -qO - http://ipecho.net/plain ; echo'
 alias g='git status'
 alias gl='git branch --verbose --all'
 alias gm='git commit --verbose'
-alias gma='git commit --verbose --all'
+alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
 
 # upgrade
