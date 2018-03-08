@@ -301,6 +301,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,.pylintrc
         \ set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
+  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=Dockerfile
 augroup END
 
 augroup filetype_vim
