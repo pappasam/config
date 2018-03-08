@@ -118,6 +118,15 @@ export GDK_SCALE=0
 # Weird bug, I'm making this note so I'm aware of it going forward
 # export TERM="screen-256color"
 
+# History: How many lines of history to keep in memory
+export HISTSIZE=5000
+
+# History: Where to save history to disk
+export HISTFILE=~/.zsh_history
+
+#History: Number of history entries to save to disk
+export SAVEHIST=5000
+
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
