@@ -520,4 +520,9 @@ quote
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+# Vault completion
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+
 # }}}
+

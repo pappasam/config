@@ -1372,6 +1372,9 @@ cabbrev terms split <BAR> terminal
 cabbrev termv vsplit <BAR> terminal
 cabbrev termt tabnew <BAR> terminal
 
+" Change directory to current file
+cabbrev CD cd %:h
+
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
 " commands that need to run at the end of my vimrc
