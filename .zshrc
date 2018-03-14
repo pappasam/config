@@ -518,8 +518,10 @@ bindkey '^I' $fzf_default_completion
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
 stty -ixon
 
-# get a cool quote
-quote
+if [[ -o interactive ]]; then
+  # get a cool quote
+  quote
+fi
 
 # Docker-Compose
 fpath=(~/.zsh/completion $fpath)
