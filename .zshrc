@@ -531,4 +531,8 @@ autoload -Uz compinit && compinit -i
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
 
+# pip completion
+eval "`pip completion --zsh`"
+compctl -K _pip_completion pip3
+
 # }}}
