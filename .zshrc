@@ -171,6 +171,7 @@ alias ..........='cd ../../../../../../../../../..'
 alias v="nvim"
 alias vi='nvim'
 alias vim='nvim'
+alias nv="alias vim=\"echo 'no vim allowed here'\""
 
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv|node_modules'"
