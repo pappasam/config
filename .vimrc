@@ -618,6 +618,14 @@ function! FZFFilesAvoidNerdtree()
   call fzf#run(fzf#wrap({'source': 'fd -c always --type f --hidden --follow --exclude ".git"', 'dir': getcwd(-1, -1)}))
 endfunction
 
+function! FZFBuffersAvoidNerdtree()
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  " getcwd(-1, -1) tells it to always use the global working directory
+  execute 'Buffers'
+endfunction
+
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
       \ 'ctrl-t': 'tab split',
@@ -1271,6 +1279,7 @@ nnoremap <leader><leader>t :TabooRename<space>
 
 " FZF: create shortcuts for finding stuff
 nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
+nnoremap <silent> <C-B> :call FZFBuffersAvoidNerdtree()<CR>
 nnoremap <C-n> yiw:Find <C-r>"<CR>
 vnoremap <C-n> y:Find <C-r>"<CR>
 nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
