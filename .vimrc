@@ -278,6 +278,16 @@ Plug 'heavenshell/vim-jsdoc'
 
 " Writing helpers
 Plug 'dkarter/bullets.vim'
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
@@ -1031,6 +1041,9 @@ let g:sqlfmt_options = "--keywords=upper --identifiers=lower --use_space_around_
 " Numbersvim: override default plugin settings
 let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m']
 
+" VimMarkdownComposer: override defaults
+let g:markdown_composer_open_browser = 0
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
@@ -1284,6 +1297,12 @@ nnoremap <C-n> yiw:Find <C-r>"<CR>
 vnoremap <C-n> y:Find <C-r>"<CR>
 nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
 vnoremap <leader><C-n> y:FindIgnoreCase <C-r>"<CR>
+
+" VimMarkdownPreview: create shortcut for opening
+augroup markdown_preview
+  autocmd!
+  autocmd FileType markdown nnoremap <silent><buffer> <C-m> :ComposerOpen<CR>
+augroup END
 
 " }}}
 " General: Macro repeater ---- {{{
