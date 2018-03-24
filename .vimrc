@@ -188,7 +188,6 @@ Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
-Plug 'vimwiki/vimwiki'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-repeat'
 Plug 'henrik/vim-indexed-search'
@@ -288,6 +287,7 @@ function! BuildComposer(info)
   endif
 endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'gu-fan/riv.vim'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
@@ -529,19 +529,32 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
-" Plugin: Wiki --- {{{
+" Plugin: Riv.Vim --- {{{
 
-" Wiki is only valid when in pre-defined wiki area
-let g:vimwiki_global_ext = 0
+" Notes (because this Plugin's documentation sucks)
+"
+" Titles:
+"   <C-e>s{0,1,2,3,4,5,6} is the 7 levels of titles
+" Lists:
+"   Commands:
+"     '=' makes list re-number
+"     <C-e>l{1,2,3,4,5} sets list to different list types
+"   List Types:
+"     1) '*'
+"     2) '1.'
+"     3) 'a.'
+"     4) 'A)'
+"     5) 'i)'
+" Tables:
+"   <C-e>tc
 
-" Define wikis
-let wiki_personal = {}
-let wiki_personal.index = 'main'
-let wiki_personal.ext = '.md'
-let wiki_personal.path = '~/Wiki/'
-
-" Organize them in a list
-let g:vimwiki_list = [wiki_personal]
+let g:riv_disable_folding = 1
+let g:riv_global_leader = '<C-E>'
+let g:riv_web_browser = 'firefox'
+let g:riv_disable_indent = 0
+let g:riv_disable_del = 0
+let g:riv_auto_format_table = 1
+let g:riv_auto_rst2html = 0
 
 " }}}
 "  Plugin: NERDTree --- {{{
@@ -981,7 +994,7 @@ augroup QuickFix
 augroup END
 
 " WinResize:
-let g:winresizer_start_key = '<C-E>'
+let g:winresizer_start_key = '<C-\>'
 let g:winresizer_vert_resize = 5
 let g:winresizer_horiz_resize = 5
 
