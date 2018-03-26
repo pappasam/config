@@ -417,6 +417,25 @@ function quote() {
   echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
 }
 
+function deshake-video() {
+  # see below link for documentation
+  # https://github.com/georgmartius/vid.stab
+  if [ $# -ne 2 ]; then
+    echo "deshake-video <infile> <outfile>"
+    exit 1
+  fi
+  local infile="$1"
+  local outfile="$2"
+  local transfile="$infile.trf"
+  if [ ! -f "$transfile" ]; then
+    echo "Generating $transfile ..."
+    ffmpeg2 -i "$infile" -vf vidstabdetect=result="$transfile" -f null -
+  fi
+  ffmpeg2 -i "$infile" -vf \
+    vidstabtransform=smoothing=10:input="$transfile" \
+    "$outfile"
+}
+
 # }}}
 # ZShell prompt (PS1) --- {{{
 

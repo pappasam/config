@@ -135,3 +135,20 @@ apt install libncurses5 libncurses5-dev libncursesw5
 #######################################################################
 cargo install ripgrep
 cargo install fd-find
+
+#######################################################################
+# kdenlive (along with necessary plugins)
+#######################################################################
+add-apt-repository ppa:kdenlive/kdenlive-stable
+apt update
+apt install kdenlive
+apt install frei0r-plugins frei0r-plugins-dev frei0r-plugins-doc
+apt install dvdauthor
+
+#######################################################################
+# ffmpeg2 (ubunu 16.04-specific workaround for video stabilization)
+#######################################################################
+add-apt-repository ppa:mc3man/ffmpeg-test
+apt update
+apt install ffmpeg-static
+hash -r
