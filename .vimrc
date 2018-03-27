@@ -1077,7 +1077,7 @@ augroup END
 " Python:
 " Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 1
+let g:jedi#show_call_signatures = 0
 let g:jedi#auto_close_doc = 0
 let g:jedi#smart_auto_mappings = 0
 
