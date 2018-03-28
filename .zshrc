@@ -372,10 +372,14 @@ function pynew() {
   local dir_name="$1"
   mkdir "$dir_name"
   cd "$dir_name"
+  git init
+  # instance/
   mkdir instance
   echo "*" >> instance/.gitignore
   echo "!.gitignore" >> instance/.gitignore
+  # venv/
   ve
+  # .gitignore
   echo '# Python' >> .gitignore
   echo 'venv/' >> .gitignore
   echo '__pycache__/' >> .gitignore
@@ -393,7 +397,11 @@ function pynew() {
   echo '' >> .gitignore
   echo '# C' >> .gitignore
   echo '*.so' >> .gitignore
-  git init
+  # main.py
+  echo '#!/usr/bin/env python' >> main.py
+  echo "'''The main module'''" >> main.py
+  echo '' >> main.py
+  chmod +x main.py
 }
 
 # Clubhouse story template
