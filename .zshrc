@@ -363,6 +363,39 @@ function ve() {
   fi
 }
 
+# Create New Python Repo
+function pynew() {
+  if [ $# -ne 1 ]; then
+    echo "pynew <directory>"
+    exit 1
+  fi
+  local dir_name="$1"
+  mkdir "$dir_name"
+  cd "$dir_name"
+  mkdir instance
+  echo "*" >> instance/.gitignore
+  echo "!.gitignore" >> instance/.gitignore
+  ve
+  echo '# Python' >> .gitignore
+  echo 'venv/' >> .gitignore
+  echo '__pycache__/' >> .gitignore
+  echo '*.py[cod]' >> .gitignore
+  echo '.tox/' >> .gitignore
+  echo '.cache' >> .gitignore
+  echo '.coverage' >> .gitignore
+  echo 'docs/_build/' >> .gitignore
+  echo '*.egg-info/' >> .gitignore
+  echo '.installed.cfg' >> .gitignore
+  echo '*.egg' >> .gitignore
+  echo '' >> .gitignore
+  echo '# Vim' >> .gitignore
+  echo '*.swp' >> .gitignore
+  echo '' >> .gitignore
+  echo '# C' >> .gitignore
+  echo '*.so' >> .gitignore
+  git init
+}
+
 # Clubhouse story template
 function clubhouse() {
   echo -e "## Objective\n## Value\n## Acceptance Criteria" | pbcopy
