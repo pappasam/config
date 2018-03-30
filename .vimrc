@@ -798,14 +798,12 @@ for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
   call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
 endfor
 
+for gina_cmd in ['diff']
+  call gina#custom#command#option(gina_cmd, '--opener', 'vsplit')
+endfor
+
 call gina#custom#command#option('commit', '--verbose')
 call gina#custom#command#option('branch', '--verbose|--all')
-
-" call gina#custom#command#option('branch', '--opener', 'tabedit')
-" call gina#custom#command#option('changes', '--opener', 'tabedit')
-" call gina#custom#command#option('log', '--opener', 'tabedit')
-" call gina#custom#command#option('commit', '--opener', 'tabedit')
-
 
 " }}}
 "  Plugin: Tagbar ------ {{{
@@ -1292,11 +1290,11 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 nnoremap <leader>q :ChooseWin<CR>
 
 " VimFugitive: git bindings
-" nnoremap <leader>ga :Git add %:p<CR><CR>
-" nnoremap <leader>g. :Git add .<CR><CR>
-" nnoremap <leader>gs :Gstatus<CR>
-" nnoremap <leader>gc :Gcommit -v -q<CR>
-" nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ga :Gina add %:p<CR><CR>
+nnoremap <leader>g. :Gina add .<CR><CR>
+nnoremap <leader>gs :Gina status<CR>
+nnoremap <leader>gc :Gina commit<CR>
+nnoremap <leader>gd :Gina diff<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
