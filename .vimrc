@@ -242,6 +242,7 @@ Plug 'magicalbanana/sql-syntax-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
+Plug 'farfanoide/vim-kivy'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -331,7 +332,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell,terraform,markdown,rust,rst
+  autocmd Filetype python,c,elm,haskell,terraform,markdown,rust,rst,kv
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
@@ -1310,12 +1311,6 @@ nnoremap <C-n> yiw:Find <C-r>"<CR>
 vnoremap <C-n> y:Find <C-r>"<CR>
 nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
 vnoremap <leader><C-n> y:FindIgnoreCase <C-r>"<CR>
-
-" VimMarkdownPreview: create shortcut for opening
-augroup markdown_preview
-  autocmd!
-  autocmd FileType markdown nnoremap <silent><buffer> <C-m> :ComposerOpen<CR>
-augroup END
 
 " }}}
 " General: Macro repeater ---- {{{
