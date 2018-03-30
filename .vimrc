@@ -172,8 +172,7 @@ set shell=/usr/bin/zsh
 " Make sure numbering is set
 set number
 
-" Set split settings
-set splitbelow
+" Set split settings (options: splitright, splitbelow)
 set splitright
 
 " }}}
