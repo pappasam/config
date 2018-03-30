@@ -603,10 +603,10 @@ augroup NerdTreeOnVimEnter
   autocmd VimEnter *
         \   if !argc()
         \ |   Startify
-        \ |   NERDTreeToggle
-        \ |   set norelativenumber
-        \ |   wincmd w
         \ | endif
+        \ | NERDTreeToggle
+        \ | set norelativenumber
+        \ | wincmd w
 augroup END
 
 function! s:CloseIfOnlyControlWinLeft()
