@@ -172,6 +172,10 @@ set shell=/usr/bin/zsh
 " Make sure numbering is set
 set number
 
+" Set split settings
+set splitbelow
+set splitright
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
