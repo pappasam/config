@@ -793,6 +793,8 @@ endfunction
 
 " }}}
 " Plugin: Gina --- {{{
+" This plugin is awesome
+" Just Gina followed by whatever I'd normally type in Git
 
 for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
   call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
@@ -1289,12 +1291,11 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 " Choosewin: (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
 
-" VimFugitive: git bindings
+" Gina: git bindings
 nnoremap <leader>ga :Gina add %:p<CR><CR>
 nnoremap <leader>g. :Gina add .<CR><CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
-nnoremap <leader>gd :Gina diff<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
