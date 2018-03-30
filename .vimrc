@@ -206,7 +206,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-Plug 'tpope/vim-fugitive'
+Plug 'lambdalisue/gina.vim'
 Plug 'junegunn/gv.vim'
 
 " Basic coloring
@@ -710,13 +710,13 @@ let g:lightline.component = {
 
 let g:lightline.active.left = [
       \ [ 'mode', 'paste', 'spell' ],
-      \ [ 'fugitive', 'readonly', 'filename' ],
+      \ [ 'gina', 'readonly', 'filename' ],
       \ [ 'ctrlpmark' ]
       \ ]
 
 let g:lightline.inactive.left = [
       \ [ 'mode', 'paste', 'spell' ],
-      \ [ 'fugitive', 'readonly', 'filename' ],
+      \ [ 'gina', 'readonly', 'filename' ],
       \ [ 'ctrlpmark' ]
       \ ]
 
@@ -733,7 +733,7 @@ let g:lightline.inactive.right = [
       \ ]
 
 let g:lightline.component_function = {
-      \ 'fugitive': 'LightlineFugitive',
+      \ 'gina': 'LightlineGina',
       \ 'filename': 'LightlineFilename',
       \ 'mode': 'LightlineMode'
       \ }
@@ -760,11 +760,11 @@ function! LightlineFilename()
         \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-function! LightlineFugitive()
+function! LightlineGina()
   try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
       let mark = '⎇ '
-      let branch = fugitive#head()
+      let branch = gina#component#repo#branch()
       return branch !=# '' ? mark.branch : ''
     endif
   catch
@@ -790,6 +790,22 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
+
+" }}}
+" Plugin: Gina --- {{{
+
+for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
+  call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
+endfor
+
+call gina#custom#command#option('commit', '--verbose')
+call gina#custom#command#option('branch', '--verbose|--all')
+
+" call gina#custom#command#option('branch', '--opener', 'tabedit')
+" call gina#custom#command#option('changes', '--opener', 'tabedit')
+" call gina#custom#command#option('log', '--opener', 'tabedit')
+" call gina#custom#command#option('commit', '--opener', 'tabedit')
+
 
 " }}}
 "  Plugin: Tagbar ------ {{{
@@ -1276,11 +1292,11 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 nnoremap <leader>q :ChooseWin<CR>
 
 " VimFugitive: git bindings
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>g. :Git add .<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gd :Gdiff<CR>
+" nnoremap <leader>ga :Git add %:p<CR><CR>
+" nnoremap <leader>g. :Git add .<CR><CR>
+" nnoremap <leader>gs :Gstatus<CR>
+" nnoremap <leader>gc :Gcommit -v -q<CR>
+" nnoremap <leader>gd :Gdiff<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
