@@ -197,6 +197,7 @@ Plug 'henrik/vim-indexed-search'
 Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-sneak'
 Plug 'fcpg/vim-altscreen'
+Plug 'arithran/vim-delete-hidden-buffers'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
@@ -1329,6 +1330,10 @@ nnoremap <C-n> yiw:Find <C-r>"<CR>
 vnoremap <C-n> y:Find <C-r>"<CR>
 nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
 vnoremap <leader><C-n> y:FindIgnoreCase <C-r>"<CR>
+
+" DeleteHiddenBuffers: shortcut to make this easier
+" Note: weird stuff happens if you mess this up
+nnoremap <leader>d :DeleteHiddenBuffers<CR>
 
 " }}}
 " General: Macro repeater ---- {{{
