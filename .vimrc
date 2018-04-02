@@ -1180,6 +1180,18 @@ augroup language_specific_file_beauty
 augroup END
 
 " }}}
+" General: Clean Unicode --- {{{
+
+function! CleanUnicode()
+  " Replace unicode symbols with cleaned versions
+  silent! %s/”/"/g
+  silent! %s/“/"/g
+  silent! %s/’/'/g
+  silent! %s/‘/'/g
+endfunction()
+command CleanUnicode call CleanUnicode()
+
+" }}}
 " General: Neovim Terminal --- {{{
 
 function! s:openTerm(vertical)
