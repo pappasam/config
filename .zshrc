@@ -477,6 +477,18 @@ function deshake-video() {
     "$outfile"
 }
 
+function man() {
+  # man command that also checks for --help parameter for executable
+  # if no man page is found
+  command man $1
+  if [ $? -eq 16 ]; then
+    $1 --help | less
+  fi
+  if [ $? -ne 0 ]; then
+    echo "No man page or help page defined with $1 --help"
+  fi
+}
+
 # }}}
 # ZShell prompt (PS1) --- {{{
 
