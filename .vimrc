@@ -1326,8 +1326,8 @@ imap <silent><CR> <CR><Plug>AutoPairsReturn
 
 " VimSneak: note: ';' = goto next, '\' = goto previous
 " Remake s and S to ss and SS
-nmap ss <Plug>Sneak_s
-nmap SS <Plug>Sneak_S
+nmap sn <Plug>Sneak_s
+nmap SN <Plug>Sneak_S
 " Make f and F search one character, but highlight results like Vim-Sneak
 nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
 nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
