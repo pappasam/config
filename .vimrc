@@ -247,6 +247,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'farfanoide/vim-kivy'
+Plug 'raimon49/requirements.txt.vim'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -1078,6 +1079,9 @@ let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3
 " VimMarkdownComposer: override defaults
 let g:markdown_composer_open_browser = 0
 
+" RequirementsVim: filetype detection (begin with requirements)
+let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
@@ -1189,7 +1193,7 @@ function! CleanUnicode()
   silent! %s/’/'/g
   silent! %s/‘/'/g
 endfunction()
-command CleanUnicode call CleanUnicode()
+command! CleanUnicode call CleanUnicode()
 
 " }}}
 " General: Neovim Terminal --- {{{
