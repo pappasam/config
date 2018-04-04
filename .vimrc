@@ -364,8 +364,16 @@ augroup END
 " }}}
 " General: Writing (non-coding)------------------ {{{
 
-" note: indenting and de-indenting in insert mode are:
-"   <C-t> and <C-d>
+" Notes:
+"   indenting and de-indenting in insert mode are:
+"     <C-t> and <C-d>
+"   formatting hard line breaks
+"     NORMAL
+"       gqap => format current paragraph
+"       gq => format selection
+"     VISUAL
+"       J => join all lines
+
 augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
