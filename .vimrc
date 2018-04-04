@@ -294,6 +294,7 @@ function! BuildComposer(info)
 endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'gu-fan/riv.vim'
+Plug 'gu-fan/InstantRst'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
@@ -561,6 +562,8 @@ let g:riv_disable_indent = 0
 let g:riv_disable_del = 0
 let g:riv_auto_format_table = 1
 let g:riv_auto_rst2html = 0
+
+let g:instant_rst_localhost_only = 1
 
 " }}}
 "  Plugin: NERDTree --- {{{
