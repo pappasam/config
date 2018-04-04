@@ -578,6 +578,20 @@ let g:riv_auto_rst2html = 0
 let g:instant_rst_localhost_only = 1
 
 " }}}
+" Plugin: Preview Writing --- {{{
+
+function! _Preview()
+  if &filetype ==? 'rst'
+    exec 'InstantRst'
+  elseif &filetype ==? 'markdown'
+    exec 'ComposerOpen'
+  else
+    return
+  endif
+endfunction
+command! Preview call _Preview()
+
+" }}}
 "  Plugin: NERDTree --- {{{
 
 let g:NERDTreeMapOpenInTab = '<C-t>'
