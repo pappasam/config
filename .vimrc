@@ -553,7 +553,11 @@ augroup END
 "     4) 'A)'
 "     5) 'i)'
 " Tables:
-"   <C-e>tc
+"   <C-e>tc <- creates a table
+"   Insert Mode:
+"     typing | creates a new column
+"     Header row + new row = <Alt>Enter
+"     New row = Just type the correct columns then get into normal mode
 
 let g:riv_disable_folding = 1
 let g:riv_global_leader = '<C-E>'
