@@ -283,16 +283,7 @@ Plug 'heavenshell/vim-jsdoc'
 
 " Writing helpers
 Plug 'dkarter/bullets.vim'
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'iamcco/markdown-preview.vim'
 Plug 'gu-fan/riv.vim'
 Plug 'gu-fan/InstantRst'
 
@@ -582,11 +573,13 @@ let g:instant_rst_localhost_only = 1
 
 function! _Preview()
   if &filetype ==? 'rst'
+    " from InstantRst
     exec 'InstantRst'
   elseif &filetype ==? 'markdown'
-    exec 'ComposerOpen'
+    " from markdown-preview.vim
+    exec 'MarkdownPreview'
   else
-    return
+    echo 'Preview not supported for this filetype'
   endif
 endfunction
 command! Preview call _Preview()
