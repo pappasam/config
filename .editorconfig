@@ -6,6 +6,7 @@ root = true
 indent_style = space
 indent_size = 2
 max_char = 79
+brace_style = collapse,preserve-inline
 
 [**.json]
 indent_style = space
@@ -17,6 +18,7 @@ e4x = true
 indent_style = space
 indent_size = 2
 max_char = 79
+brace_style = collapse,preserve-inline
 
 [**.css]
 indent_style = space
