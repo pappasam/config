@@ -8,7 +8,7 @@ set -e
 if [[ $# > 0 ]]; then
   SESSION=$1
 else
-  SESSION=SR
+  SESSION=Main
 fi
 
 # Create session in detached mode

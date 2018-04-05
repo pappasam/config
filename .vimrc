@@ -831,6 +831,19 @@ endfor
 call gina#custom#command#option('commit', '--verbose')
 call gina#custom#command#option('branch', '--verbose|--all')
 
+function! _Gpush()
+  let current_branch = gina#component#repo#branch()
+  execute 'Gina push -u origin' current_branch
+endfunction
+
+function! _Gpull()
+  let current_branch = gina#component#repo#branch()
+  execute 'Gina pull origin' current_branch
+endfunction
+
+command! Gpush call _Gpush()
+command! Gpull call _Gpull()
+
 " }}}
 "  Plugin: Tagbar ------ {{{
 let g:tagbar_map_showproto = '`'
