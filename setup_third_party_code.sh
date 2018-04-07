@@ -152,3 +152,10 @@ add-apt-repository ppa:mc3man/ffmpeg-test
 apt update
 apt install ffmpeg-static
 hash -r
+
+#######################################################################
+# peek: the gif-creation program
+#######################################################################
+add-apt-repository ppa:peek-developers/stable
+apt update
+apt install peek
