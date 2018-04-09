@@ -592,8 +592,9 @@ bindkey '^I' $fzf_default_completion
 stty -ixon
 
 if [[ -o interactive ]]; then
-  # get a cool quote
-  quote
+  if [[ ! -z "$TMUX" ]]; then
+    quote
+  fi
 fi
 
 # Docker-Compose
