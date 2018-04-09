@@ -158,7 +158,9 @@ set grepprg=rg\ --vimgrep
 
 " Pasting: enable pasting without having to do 'set paste'
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
-set pastetoggle=<C-_>
+if !has("nvim")
+  set pastetoggle=<C-_>
+endif
 
 " Turn off complete vi compatibility
 set nocompatible
@@ -368,9 +370,8 @@ augroup END
 augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
-  autocmd FileType markdown :setlocal colorcolumn=0
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
-  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal colorcolumn=0
+  autocmd BufNewFile,BufRead *.html,*.txt :setlocal colorcolumn=0
 augroup END
 
 " }}}
