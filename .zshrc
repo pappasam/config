@@ -592,7 +592,8 @@ bindkey '^I' $fzf_default_completion
 stty -ixon
 
 if [[ -o interactive ]]; then
-  if [[ ! -z "$TMUX" ]]; then
+  if [[ "$TMUX_PANE" == "%0" ]]; then
+    # if you're in the first tmux pane within all of tmux
     quote
   fi
 fi
