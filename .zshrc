@@ -601,23 +601,27 @@ complete -o nospace -C /usr/local/bin/vault vault
 # }}}
 # Plugins --- {{{
 
-source ~/.zplug/init.zsh
+if [ -f ~/.zplug/init.zsh ]; then
+  source ~/.zplug/init.zsh
 
-# BEGIN: List plugins
+  # BEGIN: List plugins
 
-zplug "paulirish/git-open", as:plugin
+  zplug "paulirish/git-open", as:plugin
 
-#END: List plugins
+  #END: List plugins
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  # Install plugins if there are plugins that have not been installed
+  if ! zplug check --verbose; then
+      printf "Install? [y/N]: "
+      if read -q; then
+          echo; zplug install
+      fi
+  fi
+
+  # Then, source plugins and add commands to $PATH
+  zplug load
+else
+  echo "zplug not installed, so no plugins available"
 fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
 
 # }}}
