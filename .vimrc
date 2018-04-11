@@ -265,6 +265,7 @@ Plug 'racer-rust/vim-racer'
 "   rustup component add rust-src
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go'
+Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -579,6 +580,8 @@ function! _Preview()
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
     exec 'MarkdownPreview'
+  elseif &filetype ==? 'dot'
+    exec 'GraphvizInteractive'
   else
     echo 'Preview not supported for this filetype'
   endif
