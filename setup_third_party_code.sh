@@ -159,3 +159,8 @@ hash -r
 add-apt-repository ppa:peek-developers/stable
 apt update
 apt install peek
+
+#######################################################################
+# git-open
+# https://github.com/paulirish/git-open
+#######################################################################
