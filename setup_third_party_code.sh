@@ -164,3 +164,8 @@ apt install peek
 # git-open
 # https://github.com/paulirish/git-open
 #######################################################################
+
+#######################################################################
+# zplug
+#######################################################################
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
