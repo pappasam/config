@@ -286,9 +286,12 @@ Plug 'heavenshell/vim-jsdoc'
 
 " Writing helpers
 Plug 'dkarter/bullets.vim'
-Plug 'iamcco/markdown-preview.vim'
 Plug 'gu-fan/riv.vim'
+
+" Previewers
+Plug 'iamcco/markdown-preview.vim'
 Plug 'gu-fan/InstantRst'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
