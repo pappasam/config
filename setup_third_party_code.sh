@@ -102,6 +102,13 @@ apt install gthumb
 # graphy-easy
 apt install libgraph-easy-perl
 
+# plantuml
+if [ ! -d ~/java ]; then
+  mkdir ~/java
+fi
+wget -O ~/java/plantuml.jar \
+  http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+
 #######################################################################
 # PDF Viewer with vi bindings
 # uses zathura-pdf-mupdf as backend
@@ -169,3 +176,7 @@ apt install peek
 # zplug
 #######################################################################
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+#######################################################################
+# zplug
+#######################################################################

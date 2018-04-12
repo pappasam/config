@@ -291,6 +291,7 @@ Plug 'gu-fan/riv.vim'
 " Previewers
 Plug 'iamcco/markdown-preview.vim'
 Plug 'gu-fan/InstantRst'
+Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
