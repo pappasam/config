@@ -781,7 +781,7 @@ function! LightlineFilename()
   let cwd = getcwd()
   let fname = substitute(expand("%:p"), l:cwd . "/" , "", "")
   return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Tagbar__.*' ? '' :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft == 'unite' ? unite#get_status_string() :
@@ -805,7 +805,7 @@ endfunction
 
 function! LightlineMode()
   let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
+  return fname =~ '__Tagbar__.*' ? 'Tagbar' :
         \ fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
