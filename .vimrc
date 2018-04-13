@@ -541,6 +541,16 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
+"  Plugin: Vim-Plug --- {{{
+
+" Plug update and upgrade
+function! _PU()
+  exec 'PlugUpdate'
+  exec 'PlugUpgrade'
+endfunction
+command! PU call _PU()
+
+"  }}}
 " Plugin: Riv.Vim --- {{{
 
 " Notes (because this Plugin's documentation sucks)
@@ -855,6 +865,11 @@ endfunction
 
 command! Gpush call _Gpush()
 command! Gpull call _Gpull()
+
+augroup writing
+  autocmd!
+  autocmd FileType gitcommit :setlocal colorcolumn=51
+augroup END
 
 " }}}
 "  Plugin: Tagbar ------ {{{
@@ -1486,9 +1501,6 @@ nmap <expr> q QStart()
 cabbrev bt tab sb
 cabbrev bv vert sb
 cabbrev bs sbuffer
-
-" Plug update and upgrade
-cabbrev pu PlugUpdate <BAR> PlugUpgrade
 
 " Terminal abbreviation
 cabbrev terms split <BAR> terminal
