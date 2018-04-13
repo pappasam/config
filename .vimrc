@@ -575,7 +575,7 @@ let g:riv_auto_rst2html = 0
 let g:instant_rst_localhost_only = 1
 
 " }}}
-" Plugin: Preview Writing --- {{{
+" Plugin: Preview Compiled Stuff in Viewer --- {{{
 
 function! _Preview()
   if &filetype ==? 'rst'
@@ -585,7 +585,11 @@ function! _Preview()
     " from markdown-preview.vim
     exec 'MarkdownPreview'
   elseif &filetype ==? 'dot'
+    " from wmgraphviz.vim
     exec 'GraphvizInteractive'
+  elseif &filetype ==? 'plantuml'
+    " from plantuml-previewer.vim
+    exec 'PlantumlOpen'
   else
     echo 'Preview not supported for this filetype'
   endif
