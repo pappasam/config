@@ -1010,6 +1010,13 @@ augroup autopairs_filetype_overrides
         \ '"':'"',
         \ '`':'`'
         \ }
+  autocmd FileType plantuml let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ '"':'"',
+        \ '`':'`'
+        \ }
   autocmd FileType tex let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
