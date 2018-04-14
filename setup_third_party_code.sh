@@ -176,3 +176,9 @@ apt install peek
 # zplug
 #######################################################################
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+#######################################################################
+# Vim tagbar
+#######################################################################
+cd ~/src/lib
+git clone https://github.com/jszakmeister/rst2ctags
