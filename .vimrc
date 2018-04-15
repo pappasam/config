@@ -308,7 +308,7 @@ augroup filetype_recognition
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
-  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc
+  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc,*.slack-term
         \ set filetype=json
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
@@ -541,6 +541,14 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
+"  General: Color Column and Text Width --- {{{
+
+augroup color_column_and_text_width
+  autocmd!
+  autocmd FileType gitcommit :setlocal colorcolumn=72 textwidth=72
+augroup END
+
+"  }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
@@ -865,11 +873,6 @@ endfunction
 
 command! Gpush call _Gpush()
 command! Gpull call _Gpull()
-
-augroup writing
-  autocmd!
-  autocmd FileType gitcommit :setlocal colorcolumn=51
-augroup END
 
 " }}}
 "  Plugin: Tagbar ------ {{{

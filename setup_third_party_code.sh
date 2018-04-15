@@ -182,3 +182,10 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 #######################################################################
 cd ~/src/lib
 git clone https://github.com/jszakmeister/rst2ctags
+
+#######################################################################
+# slack-term
+#######################################################################
+go get -u github.com/erroneousboat/slack-term
+cd $GOPATH/src/github.com/erroneousboat/slack-term
+go install .
