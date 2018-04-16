@@ -244,9 +244,6 @@ compdef _dict_words say
 # reload zshrc
 alias so='source ~/.zshrc'
 
-# plantuml
-alias plantuml='java -jar ~/java/plantuml.jar'
-
 # }}}
 # Functions --- {{{
 

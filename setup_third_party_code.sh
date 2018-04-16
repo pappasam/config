@@ -108,6 +108,10 @@ if [ ! -d ~/java ]; then
 fi
 wget -O ~/java/plantuml.jar \
   http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+cd ~/bin
+# Add the following line to an executable file in ~/bin called "plantuml"
+# #!/bin/bash
+# java -jar ~/java/plantuml.jar ${@}
 
 #######################################################################
 # PDF Viewer with vi bindings
