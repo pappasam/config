@@ -290,7 +290,6 @@ Plug 'gu-fan/riv.vim'
 
 " Previewers
 Plug 'iamcco/markdown-preview.vim'
-Plug 'gu-fan/InstantRst'
 Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
@@ -598,7 +597,8 @@ let g:instant_rst_localhost_only = 1
 function! _Preview()
   if &filetype ==? 'rst'
     " from InstantRst
-    exec 'InstantRst'
+    exec 'terminal restview %'
+    exec "normal \<C-O>"
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
     exec 'MarkdownPreview'

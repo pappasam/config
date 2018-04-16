@@ -193,3 +193,9 @@ git clone https://github.com/jszakmeister/rst2ctags
 go get -u github.com/erroneousboat/slack-term
 cd $GOPATH/src/github.com/erroneousboat/slack-term
 go install .
+
+#######################################################################
+# previewing RST files
+# don't recommend using sudo with this one
+#######################################################################
+pip install restview
