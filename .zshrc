@@ -373,34 +373,42 @@ function pynew() {
   mkdir "$dir_name"
   cd "$dir_name"
   git init
-  # instance/
+
   mkdir instance
-  echo "*" >> instance/.gitignore
-  echo "!.gitignore" >> instance/.gitignore
+  cat > instance/.gitignore <<EOL
+*
+!.gitignore
+EOL
+
   # venv/
   ve
+
   # .gitignore
-  echo '# Python' >> .gitignore
-  echo 'venv/' >> .gitignore
-  echo '__pycache__/' >> .gitignore
-  echo '*.py[cod]' >> .gitignore
-  echo '.tox/' >> .gitignore
-  echo '.cache' >> .gitignore
-  echo '.coverage' >> .gitignore
-  echo 'docs/_build/' >> .gitignore
-  echo '*.egg-info/' >> .gitignore
-  echo '.installed.cfg' >> .gitignore
-  echo '*.egg' >> .gitignore
-  echo '' >> .gitignore
-  echo '# Vim' >> .gitignore
-  echo '*.swp' >> .gitignore
-  echo '' >> .gitignore
-  echo '# C' >> .gitignore
-  echo '*.so' >> .gitignore
-  # main.py
-  echo '#!/usr/bin/env python' >> main.py
-  echo "'''The main module'''" >> main.py
-  echo '' >> main.py
+  cat > .gitignore <<EOL
+# Python
+venv/
+__pycache__/
+*.py[cod]
+.tox/
+.cache
+.coverage
+docs/_build/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Vim
+*.swp
+
+# C
+*.so
+EOL
+
+  cat > main.py <<EOL
+#!/usr/bin/env python
+'''The main module'''
+
+EOL
   chmod +x main.py
 }
 
