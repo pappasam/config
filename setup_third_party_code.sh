@@ -199,3 +199,8 @@ go install .
 # don't recommend using sudo with this one
 #######################################################################
 pip install restview
+
+#######################################################################
+# vtop: the nice process viewer, simpler alternative to htop
+#######################################################################
+npm install -g vtop
