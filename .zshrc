@@ -244,6 +244,9 @@ compdef _dict_words say
 # reload zshrc
 alias so='source ~/.zshrc'
 
+# slack-term aliases
+alias slack-kepler='SLACK_TOKEN=$SLACK_TOKEN_KEPLER slack-term'
+
 # }}}
 # Functions --- {{{
 
