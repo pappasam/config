@@ -596,7 +596,6 @@ let g:instant_rst_localhost_only = 1
 
 function! _Preview()
   if &filetype ==? 'rst'
-    " from InstantRst
     exec 'terminal restview %'
     exec "normal \<C-O>"
   elseif &filetype ==? 'markdown'
