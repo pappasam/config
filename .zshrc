@@ -247,6 +247,9 @@ alias so='source ~/.zshrc'
 # slack-term aliases
 alias slack-kepler='SLACK_TOKEN=$SLACK_TOKEN_KEPLER slack-term'
 
+# my preferred top program
+alias top='gotop'
+
 # }}}
 # Functions --- {{{
 
