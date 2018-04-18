@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Functions --- {{{
 
@@ -141,24 +141,12 @@ then
   eval "$(pyenv init -)"
 fi
 
-NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; then
-  export NVM_DIR
-  export __node_commands=("nvm" "node" "npm" "yarn" "gulp" "grunt" "webpack")
-  function __init_nvm() {
-    # Defer initialization of nvm until nvm, node or a node-dependent command
-    # is run. Ensure this block is only run once if .bashrc gets sourced
-    # multiple times by checking whether __init_nvm is a function.
-    for i in $__node_commands; do
-      unalias $i
-    done
-    \. "$NVM_DIR"/nvm.sh
-    unset __node_commands
-    unset -f __init_nvm
-  }
-  for i in $__node_commands; do
-    alias $i="__init_nvm && $i"
-  done
+NODENV_ROOT="$HOME/.nodenv"
+if [ -d "$NODENV_ROOT" ]
+then
+  export NODENV_ROOT
+  path_radd "$NODENV_ROOT/bin"
+  eval "$(nodenv init -)"
 fi
 
 GOENV_ROOT="$HOME/.goenv"
