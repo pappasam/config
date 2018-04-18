@@ -5,9 +5,6 @@ git clone https://github.com/nodenv/nodenv.git ~/.nodenv
 # optionally compile source
 cd ~/.nodenv && src/configure && make -C src
 
-# initialize nodenv since we'll need it
-eval "$(nodenv init -)"
-
 # install node-build as nodenv plugin
 git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build
 
