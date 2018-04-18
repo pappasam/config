@@ -620,6 +620,11 @@ let g:NERDTreeMapOpenInTab = '<C-t>'
 let g:NERDTreeMapOpenInTabSilent = ''
 let g:NERDTreeMapOpenSplit = '<C-s>'
 let g:NERDTreeMapOpenVSplit = '<C-v>'
+let g:NERDTreeMapJumpNextSibling = '<C-n>'
+let g:NERDTreeMapJumpPrevSibling = '<C-p>'
+let g:NERDTreeMapJumpFirstChild = '<C-k>'
+let g:NERDTreeMapJumpLastChild = '<C-j>'
+
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeCaseSensitiveSort = 0
 let g:NERDTreeWinPos = 'left'
@@ -936,6 +941,7 @@ command! Gblame call _Gblame()
 
 " }}}
 "  Plugin: Tagbar ------ {{{
+
 let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_autofocus = 1
