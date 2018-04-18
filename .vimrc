@@ -860,6 +860,12 @@ endfor
 call gina#custom#command#option('commit', '--verbose')
 call gina#custom#command#option('branch', '--verbose|--all')
 
+call gina#custom#command#option('blame', '--width', '79')
+let gina#command#blame#formatter#format = '%in|%ti|%au|%su'
+let g:gina#command#blame#formatter#timestamp_months = 0
+let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
+let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
+
 function! _Gpush()
   let current_branch = gina#component#repo#branch()
   execute 'Gina push -u origin' current_branch
@@ -870,8 +876,13 @@ function! _Gpull()
   execute 'Gina pull origin' current_branch
 endfunction
 
+function! _Gblame()
+  execute 'Gina blame'
+endfunction
+
 command! Gpush call _Gpush()
 command! Gpull call _Gpull()
+command! Gblame call _Gblame()
 
 " }}}
 "  Plugin: Tagbar ------ {{{
