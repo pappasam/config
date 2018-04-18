@@ -860,8 +860,56 @@ endfor
 call gina#custom#command#option('commit', '--verbose')
 call gina#custom#command#option('branch', '--verbose|--all')
 
+let g:gina#command#blame#use_default_mappings = 0
 call gina#custom#command#option('blame', '--width', '79')
-let gina#command#blame#formatter#format = '%in|%ti|%au|%su'
+
+" Custom mappings for Gina blame buffer
+call gina#custom#mapping#nmap(
+      \ 'blame', 'j',
+      \ 'j<Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', 'k',
+      \ 'k<Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<c-d>',
+      \ '<c-d><Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<c-u>',
+      \ '<c-u><Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', 'gg',
+      \ 'gg<Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', 'G',
+      \ 'G<Plug>(gina-blame-echo)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<Backspace>',
+      \ 'G<Plug>(gina-blame-back)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<CR>',
+      \ 'G<Plug>(gina-blame-open)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<c-i>',
+      \ 'G<Plug>(gina-blame-open)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<Backspace>',
+      \ 'G<Plug>(gina-blame-back)'
+      \)
+call gina#custom#mapping#nmap(
+      \ 'blame', '<c-o>',
+      \ 'G<Plug>(gina-blame-back)'
+      \)
+
+let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
 let g:gina#command#blame#formatter#timestamp_months = 0
 let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
 let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
