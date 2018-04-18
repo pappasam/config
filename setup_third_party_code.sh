@@ -201,6 +201,6 @@ go install .
 pip install restview
 
 #######################################################################
-# vtop: the nice process viewer, simpler alternative to htop
+# gotop: the nice process viewer, simpler alternative to htop
 #######################################################################
-npm install -g vtop
+go get github.com/cjbassi/gotop
