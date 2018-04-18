@@ -146,6 +146,7 @@ apt install libncurses5 libncurses5-dev libncursesw5
 #######################################################################
 cargo install ripgrep
 cargo install fd-find
+rustup component add rustfmt-preview
 
 #######################################################################
 # kdenlive (along with necessary plugins)

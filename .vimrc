@@ -1266,6 +1266,7 @@ augroup language_specific_file_beauty
   autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
+  autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
 augroup END
 
 " }}}
