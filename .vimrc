@@ -877,7 +877,9 @@ function! _Gpull()
 endfunction
 
 function! _Gblame()
+  let current_file = expand('%:t')
   execute 'Gina blame'
+  execute 'TabooRename blame:' . current_file
 endfunction
 
 command! Gpush call _Gpush()
@@ -1410,6 +1412,7 @@ nnoremap <leader>ga :Gina add %:p<CR><CR>
 nnoremap <leader>g. :Gina add .<CR><CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
+nnoremap <leader>gb :Gblame<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
