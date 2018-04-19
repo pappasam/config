@@ -205,3 +205,8 @@ pip install restview
 # gotop: the nice process viewer, simpler alternative to htop
 #######################################################################
 go get github.com/cjbassi/gotop
+
+#######################################################################
+# pdfpc
+#######################################################################
+apt install pdf-presenter-console
