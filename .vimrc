@@ -177,6 +177,11 @@ set number
 " Set split settings (options: splitright, splitbelow)
 set splitright
 
+" Redraw window whenever I've regained focus
+augroup redraw_on_refocus
+  au FocusGained * :redraw!
+augroup END
+
 " }}}
 " General: Plugin Install --------------------- {{{
 
@@ -1482,13 +1487,20 @@ imap <silent><CR> <CR><Plug>AutoPairsReturn
 " Remake s and S to ss and SS
 nmap sn <Plug>Sneak_s
 nmap SN <Plug>Sneak_S
+
 " Make f and F search one character, but highlight results like Vim-Sneak
-nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
-nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
-xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
-xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
-onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
-onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
 
 " Taboo: rename files smartly
 nnoremap <leader><leader>t :TabooRename<space>
