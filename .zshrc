@@ -219,7 +219,7 @@ alias pbpaste='xsel --clipboard --output'
 alias octave='octave --no-gui'
 
 # Public IP
-alias publicip='wget -qO - http://ipecho.net/plain ; echo'
+alias publicip='curl -s checkip.amazonaws.com'
 
 # Git
 alias g='git status'
@@ -232,7 +232,7 @@ alias gp='git remote prune origin'
 alias upgrade='sudo mintupdate'
 
 # battery
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|to\ full|percentage"'
+alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
 # dynamodb
 alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynamodb -dbPath $HOME/data"
