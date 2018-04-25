@@ -402,6 +402,7 @@ docs/_build/
 *.egg-info/
 .installed.cfg
 *.egg
+.mypy_cache/
 
 # Vim
 *.swp
