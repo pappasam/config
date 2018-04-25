@@ -328,7 +328,7 @@ function gn() {  # arg1: filename
 
 # activate virtual environment from any directory from current and up
 DEFAULT_VENV_NAME=venv
-DEFAULT_PYTHON_VERSION="3.6"
+DEFAULT_PYTHON_VERSION="3"
 function va() {
   if [ $# -eq 0 ]; then
     local VENV_NAME=$DEFAULT_VENV_NAME
@@ -361,7 +361,7 @@ function ve() {
     echo "Creating new Python virtualenv in $VENV_NAME/"
     python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
     source "$VENV_NAME/bin/activate"
-    pip install -U pip neovim bpython autopep8 jedi restview
+    pip install -U pip pipenv neovim bpython autopep8 jedi restview
     deactivate
     va
   else

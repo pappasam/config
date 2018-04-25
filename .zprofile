@@ -130,6 +130,9 @@ export SAVEHIST=5000
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
+# pipenv
+export PIPENV_VENV_IN_PROJECT='doit'
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
