@@ -634,6 +634,7 @@ if [ -f ~/.zplug/init.zsh ]; then
   # BEGIN: List plugins
 
   zplug "paulirish/git-open", as:plugin
+  zplug "gangleri/pipenv", as:plugin
 
   #END: List plugins
 

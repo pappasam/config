@@ -1474,6 +1474,7 @@ nnoremap <leader>g. :Gina add .<CR><CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gd :Gina diff<CR>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
