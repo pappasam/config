@@ -404,6 +404,7 @@ EOL
   cat > .gitignore <<EOL
 # Python
 venv/
+.venv/
 __pycache__/
 *.py[cod]
 .tox/

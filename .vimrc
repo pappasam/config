@@ -638,6 +638,7 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeSortOrder = ['*', '\/$']
 let g:NERDTreeIgnore=[
       \'venv$[[dir]]',
+      \'.venv$[[dir]]',
       \'__pycache__$[[dir]]',
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
