@@ -60,7 +60,7 @@ export PERIOD=1
 export LISTMAX=0
 
 # }}}
-# ZShell Menu Completion --- {{{
+# ZShell Auto Completion --- {{{
 
 autoload -U compinit && compinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
@@ -78,6 +78,17 @@ zstyle ':completion:*' matcher-list '' \
   'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
+
+# Manual libraries
+
+# vault, by Hashicorp
+_vault_complete() {
+  local word completions
+  word="$1"
+  completions="$(vault --cmplt "${word}")"
+  reply=( "${(ps:\n:)completions}" )
+}
+compctl -f -K _vault_complete vault
 
 # }}}
 # ZShell Misc Autoloads --- {{{
@@ -613,18 +624,6 @@ if [[ -o interactive ]]; then
   fi
 fi
 
-# Docker-Compose
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
-# Vault completion
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/vault vault
-
-# pip completion
-# eval "`pip completion --zsh`"
-# compctl -K _pip_completion pip3
-
 # }}}
 # Plugins --- {{{
 
@@ -633,8 +632,9 @@ if [ -f ~/.zplug/init.zsh ]; then
 
   # BEGIN: List plugins
 
-  zplug "paulirish/git-open", as:plugin
-  zplug "gangleri/pipenv", as:plugin
+  zplug 'paulirish/git-open', as:plugin
+  zplug 'gangleri/pipenv', as:plugin
+  zplug 'greymd/docker-zsh-completion', as:plugin
 
   #END: List plugins
 
