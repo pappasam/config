@@ -343,7 +343,7 @@ DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
 
 function pydev() {
-  pip install -U neovim bpython autopep8 jedi restview
+  pip install -U pip neovim bpython autopep8 jedi restview
 }
 
 function va() {
@@ -368,8 +368,7 @@ function va() {
 }
 
 # [optionally] create and activate Python virtual environment
-# DEPRECATED, but keeping for now just in case I need it
-function __ve() {
+function ve() {
   if [ $# -eq 0 ]; then
     local VENV_NAME="$DEFAULT_VENV_NAME"
   else
@@ -405,11 +404,13 @@ function pynew() {
 EOL
 
   # venv/
-  pipenv install
-  va
-  pydev
-  deactivate
-  va
+  ve
+  # NOTE: not using pyenv right now
+  # pipenv install
+  # va
+  # pydev
+  # deactivate
+  # va
 
   # .gitignore
   cat > .gitignore <<EOL
@@ -633,7 +634,6 @@ if [ -f ~/.zplug/init.zsh ]; then
   # BEGIN: List plugins
 
   zplug 'paulirish/git-open', as:plugin
-  zplug 'gangleri/pipenv', as:plugin
   zplug 'greymd/docker-zsh-completion', as:plugin
 
   #END: List plugins
