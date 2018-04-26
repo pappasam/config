@@ -227,6 +227,7 @@ alias gl='git branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
+alias gd='git diff'
 
 # upgrade
 alias upgrade='sudo mintupdate'
@@ -327,8 +328,13 @@ function gn() {  # arg1: filename
 }
 
 # activate virtual environment from any directory from current and up
-DEFAULT_VENV_NAME=venv
+DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
+
+function pydev() {
+  pip install -U neovim bpython autopep8 jedi restview
+}
+
 function va() {
   if [ $# -eq 0 ]; then
     local VENV_NAME=$DEFAULT_VENV_NAME
@@ -351,7 +357,8 @@ function va() {
 }
 
 # [optionally] create and activate Python virtual environment
-function ve() {
+# DEPRECATED, but keeping for now just in case I need it
+function __ve() {
   if [ $# -eq 0 ]; then
     local VENV_NAME="$DEFAULT_VENV_NAME"
   else
@@ -361,7 +368,7 @@ function ve() {
     echo "Creating new Python virtualenv in $VENV_NAME/"
     python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
     source "$VENV_NAME/bin/activate"
-    pip install -U pip pipenv neovim bpython autopep8 jedi restview
+    pydev
     deactivate
     va
   else
@@ -387,7 +394,11 @@ function pynew() {
 EOL
 
   # venv/
-  ve
+  pipenv install
+  va
+  pydev
+  deactivate
+  va
 
   # .gitignore
   cat > .gitignore <<EOL
@@ -426,7 +437,7 @@ function clubhouse() {
 
 # GIT: git-clone keplergrp repos to src/ directory
 function klone() {
-  git clone git@github.com:KeplerGroup/$1 $HOME/src/$1
+  git clone git@github.com:KeplerGroup/$1
 }
 
 # GIT: push current branch from origin to current branch

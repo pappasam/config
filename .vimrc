@@ -1231,7 +1231,7 @@ let g:sqlfmt_command = "sqlformat"
 let g:sqlfmt_options = "--keywords=upper --identifiers=lower --use_space_around_operators"
 
 " Numbersvim: override default plugin settings
-let g:numbers_exclude = ['startify', 'gundo', 'vimshell']
+let g:numbers_exclude = ['startify', 'gundo', 'vimshell', 'gina-commit']
 
 " VimMarkdownComposer: override defaults
 let g:markdown_composer_open_browser = 0
