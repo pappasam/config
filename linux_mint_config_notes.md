@@ -85,6 +85,12 @@ to do things without moving my hands from the home row.
     * Browser Maximize
         * Command : /usr/bin/gnome-www-browser --maximize
         * Shortcut : Ctrl+Alt+b
+    * Alacritty
+        * Command: ~/bin/alacritty
+        * Ctrl+Alt+i
+    * Nothing (because Ctrl+Q sucks)
+        * Command: echo
+        * Ctrl+Q
 
 ### Layouts
 
