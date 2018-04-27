@@ -205,6 +205,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'justinmk/vim-sneak'
 Plug 'fcpg/vim-altscreen'
 Plug 'arithran/vim-delete-hidden-buffers'
+Plug 'sjl/strftimedammit.vim'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
