@@ -178,10 +178,10 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
-# Vim and Vi
-alias v="nvim"
-alias vi='nvim'
-alias vim='nvim'
+# Vim and Vi: try activate Python virtual environment then call neovim
+alias v='va && nvim'
+alias vi='va && nvim'
+alias vim='va && nvim'
 alias nv="alias vim=\"echo 'no vim allowed here'\""
 
 # Tree that ignores annoying directories
