@@ -179,9 +179,8 @@ alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
 # Vim and Vi: try activate Python virtual environment then call neovim
-alias v='va && nvim'
-alias vi='va && nvim'
-alias vim='va && nvim'
+alias v='vim'
+alias vi='vim'
 alias nv="alias vim=\"echo 'no vim allowed here'\""
 
 # Tree that ignores annoying directories
@@ -441,6 +440,12 @@ EOL
 
 EOL
   chmod +x main.py
+}
+
+# Vim, but activate python virtual environment first
+function vim() {
+  va > /dev/null
+  nvim "$@"
 }
 
 # Clubhouse story template
