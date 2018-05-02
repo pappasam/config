@@ -630,6 +630,8 @@ if [[ -o interactive ]]; then
   fi
 fi
 
+va > /dev/null
+
 # }}}
 # Plugins --- {{{
 
