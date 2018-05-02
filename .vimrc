@@ -272,6 +272,9 @@ Plug 'racer-rust/vim-racer'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go'
 Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
+" note: must run 'sudo gem install neovim' to get this to work
+" might require the neovim headers
+Plug 'juliosueiras/vim-terraform-completion'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -1329,6 +1332,11 @@ augroup writing_complete
   autocmd FileType markdown,tex, nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
+" Terraform
+augroup terraform_complete
+  autocmd FileType terraform setlocal omnifunc=terraformcomplete#Complete
+augroup END
+
 "  }}}
 "  Plugin: Language-specific file beautification --- {{{
 
@@ -1342,6 +1350,7 @@ augroup language_specific_file_beauty
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
+  autocmd Filetype terraform nnoremap <buffer> <leader>f :TerraformFmt<cr>
 augroup END
 
 " }}}
