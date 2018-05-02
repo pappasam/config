@@ -628,9 +628,8 @@ if [[ -o interactive ]]; then
     # if you're in the first tmux pane within all of tmux
     quote
   fi
+  va > /dev/null
 fi
-
-va > /dev/null
 
 # }}}
 # Plugins --- {{{
