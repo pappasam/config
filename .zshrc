@@ -426,6 +426,7 @@ docs/_build/
 .installed.cfg
 *.egg
 .mypy_cache/
+.pytest_cache/
 *.coverage*
 
 # Vim
