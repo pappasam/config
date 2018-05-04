@@ -178,6 +178,9 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
+# I type cd so much, I'll just type d instead
+alias d='cd'
+
 # Vim and Vi: try activate Python virtual environment then call neovim
 alias v='vim'
 alias vi='vim'
@@ -644,9 +647,10 @@ if [ -f ~/.zplug/init.zsh ]; then
 
   # BEGIN: List plugins
 
-  zplug 'paulirish/git-open', as:plugin
-  zplug 'greymd/docker-zsh-completion', as:plugin
-  zplug 'hejack0207/zsh-pip-plugin', as:plugin
+  # use double quotes: the plugin manager author says we must for some reason
+  zplug "paulirish/git-open", as:plugin
+  zplug "greymd/docker-zsh-completion", as:plugin
+  zplug "hejack0207/zsh-pip-plugin", as:plugin
 
   #END: List plugins
 
