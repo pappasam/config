@@ -532,8 +532,8 @@ function deshake-video() {
 # BEGIN: Git formatting
 #######################################################################
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' stagedstr '%F{yellow}🔒%f'
-zstyle ':vcs_info:*' unstagedstr '%F{red}🔓%f'
+zstyle ':vcs_info:*' stagedstr '%F{yellow}=%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' actionformats \
   '%F{magenta}[%F{green}%b%F{yellow}|%F{red}%a%F{magenta}]%f '
@@ -548,7 +548,7 @@ function +vi-git-untracked() {
   local in_tree=$(git rev-parse --is-inside-work-tree 2> /dev/null)
   local untracked=$(git status | grep "$untracked_msg")
   if [[ "$in_tree" == 'true' ]] && [[ "$untracked" == "$untracked_msg" ]]; then
-    hook_com[unstaged]+='%F{red}🔍%f'
+    hook_com[unstaged]+='%F{red}?%f'
   fi
 }
 
@@ -566,7 +566,7 @@ function +vi-git-st() {
     (( $ahead )) && gitstatus+=( "${c3}+${ahead}${c2}" )
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
     (( $behind )) && gitstatus+=( "${c4}-${behind}${c2}" )
-    hook_com[branch]="${hook_com[branch]} [🛂${(j:/:)gitstatus}]"
+    hook_com[branch]="${hook_com[branch]} [@ ${(j:/:)gitstatus}]"
   fi
 }
 
@@ -576,7 +576,7 @@ function +vi-git-stash() {
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l)
-    hook_com[misc]+=" (💰${stashes})"
+    hook_com[misc]+=" (stash ${stashes})"
   fi
 }
 
