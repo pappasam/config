@@ -622,14 +622,17 @@ bindkey '^I' $fzf_default_completion
 # }}}
 # Executed Commands --- {{{
 
-# turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-stty -ixon
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
     # if you're in the first tmux pane within all of tmux
     quote
   fi
+
+  # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
+  stty -ixon
+
+  # try activate my virtual environment
   va > /dev/null
 fi
 
@@ -643,6 +646,7 @@ if [ -f ~/.zplug/init.zsh ]; then
 
   zplug 'paulirish/git-open', as:plugin
   zplug 'greymd/docker-zsh-completion', as:plugin
+  zplug 'hejack0207/zsh-pip-plugin', as:plugin
 
   #END: List plugins
 
