@@ -101,11 +101,8 @@ set completeopt=menuone,longest,preview
 " Enable buffer deletion instead of having to write each buffer
 set hidden
 
-" Mouse: remove GUI mouse support
-" This support is actually annoying, because I may occasionally
-" use the mouse to select text or something, and don't actually
-" want the cursor to move
-set mouse=""
+" Mouse: enable GUI mouse support in all modes
+set mouse=a
 
 " SwapFiles: prevent their creation
 set nobackup
