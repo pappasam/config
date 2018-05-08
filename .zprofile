@@ -181,6 +181,11 @@ if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
 fi
 
+STACK_LOC="$HOME/.local/bin"
+if [ -d "$STACK_LOC" ]; then
+  path_ladd "$STACK_LOC"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
