@@ -18,148 +18,33 @@ include ~/.bashrc_local
 include ~/.bash/sensitive
 
 # }}}
-# ZShell Options --- {{{
+# Plugins --- {{{
 
-#######################################################################
-# Set options
-#######################################################################
+if [ -f ~/.zplug/init.zsh ]; then
+  source ~/.zplug/init.zsh
 
-# enable functions to operate in PS1
-setopt PROMPT_SUBST
+  # BEGIN: List plugins
 
-# list available directories automatically
-setopt AUTO_LIST
-setopt LIST_AMBIGUOUS
-setopt LIST_BEEP
+  # use double quotes: the plugin manager author says we must for some reason
+  zplug "paulirish/git-open", as:plugin
+  zplug "greymd/docker-zsh-completion", as:plugin
+  zplug "hejack0207/zsh-pip-plugin", as:plugin
 
-# completions
-setopt COMPLETE_ALIASES
+  #END: List plugins
 
-# automatically CD without typing cd
-setopt AUTOCD
+  # Install plugins if there are plugins that have not been installed
+  if ! zplug check --verbose; then
+      printf "Install? [y/N]: "
+      if read -q; then
+          echo; zplug install
+      fi
+  fi
 
-# Dealing with history
-setopt APPENDHISTORY
-setopt SHAREHISTORY
-setopt INCAPPENDHISTORY
-
-#######################################################################
-# Unset options
-#######################################################################
-
-# do not automatically complete
-unsetopt MENU_COMPLETE
-
-# do not automatically remove the slash
-unsetopt AUTO_REMOVE_SLASH
-
-#######################################################################
-# Expected parameters
-#######################################################################
-export PERIOD=1
-export LISTMAX=0
-
-# }}}
-# ZShell Auto Completion --- {{{
-
-autoload -U compinit && compinit
-zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-
-# CURRENT STATE: does not select any sort of searching
-# searching was too annoying and I didn't really use it
-# If you want it back, use "search-backward" as an option
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-
-# Fuzzy completion
-zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-A-Z}={A-Z\_a-z}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' \
-  'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
-fpath=(/usr/local/share/zsh-completions $fpath)
-zmodload -i zsh/complist
-
-# Manual libraries
-
-# vault, by Hashicorp
-_vault_complete() {
-  local word completions
-  word="$1"
-  completions="$(vault --cmplt "${word}")"
-  reply=( "${(ps:\n:)completions}" )
-}
-compctl -f -K _vault_complete vault
-
-# }}}
-# ZShell Misc Autoloads --- {{{
-
-# Enables zshell calculator: type with zcalc
-autoload -Uz zcalc
-
-# }}}
-# ZShell Hook Functions --- {{{
-
-# NOTE: precmd is defined within the prompt section
-
-# Executed whenever the current working directory is changed
-function chpwd() {
-  ls --color=auto
-}
-
-# Executed every $PERIOD seconds, just before a prompt.
-# NOTE: if multiple functions are defined using the array periodic_functions,
-# only  one  period  is applied to the complete set of functions, and the
-# scheduled time is not reset if the list of functions is altered.
-# Hence the set of functions is always called together.
-function periodic() {
-}
-
-# Executed just after a command has been read and is about to be executed
-#   arg1: the string that the user typed OR an empty string
-#   arg2: a single-line, size-limited version of the command
-#     (with things like function bodies elided)
-#   arg3: full text that is being executed
-function preexec() {
-  # local user_string="$1"
-  # local cmd_single_line="$2"
-  # local cmd_full="$3"
-}
-
-
-# Executed when a history line is read interactively, but before it is executed
-#   arg1: the complete history line (terminating newlines are present
-function zshaddhistory() {
-  # local history_complete="$1"
-}
-
-# Executed at the point where the main shell is about to exit normally.
-function zshexit() {
-}
-
-# }}}
-# ZShell Key-Bindings --- {{{
-
-# emacs
-bindkey -e
-
-# NOTE: about menu-complete
-# '^d' - list options without selecting any of them
-# '^i' - synonym to TAB; tap twice to get into menu complete
-# '^o' - choose selection and execute
-# '^m' - choose selection but do NOT execute AND leave all modes in menu-select
-#         useful to get out of both select and search-backward
-# '^z' - stop interactive tab-complete mode and go back to regular selection
-
-# make vi keys do menu-expansion (eg, ^j does expansion, navigate with hjkl)
-bindkey '^j' menu-expand-or-complete
-bindkey -M menuselect '^j' menu-complete
-bindkey -M menuselect '^k' reverse-menu-complete
-bindkey -M menuselect '^h' backward-char
-bindkey -M menuselect '^l' forward-char
-
-# delete function characters to include
-# Omitted: /=
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+  # Then, source plugins and add commands to $PATH
+  zplug load
+else
+  echo "zplug not installed, so no plugins available"
+fi
 
 # }}}
 # Aliases --- {{{
@@ -623,6 +508,154 @@ bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
 # }}}
+# ZShell Options --- {{{
+
+#######################################################################
+# Set options
+#######################################################################
+
+# enable functions to operate in PS1
+setopt PROMPT_SUBST
+
+# list available directories automatically
+setopt AUTO_LIST
+setopt LIST_AMBIGUOUS
+setopt LIST_BEEP
+
+# completions
+setopt COMPLETE_ALIASES
+
+# automatically CD without typing cd
+setopt AUTOCD
+
+# Dealing with history
+setopt APPENDHISTORY
+setopt SHAREHISTORY
+setopt INCAPPENDHISTORY
+
+#######################################################################
+# Unset options
+#######################################################################
+
+# do not automatically complete
+unsetopt MENU_COMPLETE
+
+# do not automatically remove the slash
+unsetopt AUTO_REMOVE_SLASH
+
+#######################################################################
+# Expected parameters
+#######################################################################
+export PERIOD=1
+export LISTMAX=0
+
+# }}}
+# ZShell Misc Autoloads --- {{{
+
+# Enables zshell calculator: type with zcalc
+autoload -Uz zcalc
+
+# }}}
+# ZShell Hook Functions --- {{{
+
+# NOTE: precmd is defined within the prompt section
+
+# Executed whenever the current working directory is changed
+function chpwd() {
+  ls --color=auto
+}
+
+# Executed every $PERIOD seconds, just before a prompt.
+# NOTE: if multiple functions are defined using the array periodic_functions,
+# only  one  period  is applied to the complete set of functions, and the
+# scheduled time is not reset if the list of functions is altered.
+# Hence the set of functions is always called together.
+function periodic() {
+}
+
+# Executed just after a command has been read and is about to be executed
+#   arg1: the string that the user typed OR an empty string
+#   arg2: a single-line, size-limited version of the command
+#     (with things like function bodies elided)
+#   arg3: full text that is being executed
+function preexec() {
+  # local user_string="$1"
+  # local cmd_single_line="$2"
+  # local cmd_full="$3"
+}
+
+
+# Executed when a history line is read interactively, but before it is executed
+#   arg1: the complete history line (terminating newlines are present
+function zshaddhistory() {
+  # local history_complete="$1"
+}
+
+# Executed at the point where the main shell is about to exit normally.
+function zshexit() {
+}
+
+# }}}
+# ZShell Auto Completion --- {{{
+
+autoload -U compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
+
+# CURRENT STATE: does not select any sort of searching
+# searching was too annoying and I didn't really use it
+# If you want it back, use "search-backward" as an option
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
+# Fuzzy completion
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-A-Z}={A-Z\_a-z}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' \
+  'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
+fpath=(/usr/local/share/zsh-completions $fpath)
+zmodload -i zsh/complist
+
+# Manual libraries
+
+# vault, by Hashicorp
+_vault_complete() {
+  local word completions
+  word="$1"
+  completions="$(vault --cmplt "${word}")"
+  reply=( "${(ps:\n:)completions}" )
+}
+compctl -f -K _vault_complete vault
+
+# stack
+eval "$(stack --bash-completion-script stack)"
+
+# }}}
+# ZShell Key-Bindings --- {{{
+
+# emacs
+bindkey -e
+
+# NOTE: about menu-complete
+# '^d' - list options without selecting any of them
+# '^i' - synonym to TAB; tap twice to get into menu complete
+# '^o' - choose selection and execute
+# '^m' - choose selection but do NOT execute AND leave all modes in menu-select
+#         useful to get out of both select and search-backward
+# '^z' - stop interactive tab-complete mode and go back to regular selection
+
+# make vi keys do menu-expansion (eg, ^j does expansion, navigate with hjkl)
+bindkey '^j' menu-expand-or-complete
+bindkey -M menuselect '^j' menu-complete
+bindkey -M menuselect '^k' reverse-menu-complete
+bindkey -M menuselect '^h' backward-char
+bindkey -M menuselect '^l' forward-char
+
+# delete function characters to include
+# Omitted: /=
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# }}}
 # Executed Commands --- {{{
 
 
@@ -637,35 +670,6 @@ if [[ -o interactive ]]; then
 
   # try activate my virtual environment
   va > /dev/null
-fi
-
-# }}}
-# Plugins --- {{{
-
-if [ -f ~/.zplug/init.zsh ]; then
-  source ~/.zplug/init.zsh
-
-  # BEGIN: List plugins
-
-  # use double quotes: the plugin manager author says we must for some reason
-  zplug "paulirish/git-open", as:plugin
-  zplug "greymd/docker-zsh-completion", as:plugin
-  zplug "hejack0207/zsh-pip-plugin", as:plugin
-
-  #END: List plugins
-
-  # Install plugins if there are plugins that have not been installed
-  if ! zplug check --verbose; then
-      printf "Install? [y/N]: "
-      if read -q; then
-          echo; zplug install
-      fi
-  fi
-
-  # Then, source plugins and add commands to $PATH
-  zplug load
-else
-  echo "zplug not installed, so no plugins available"
 fi
 
 # }}}
