@@ -3,9 +3,9 @@
 # http://docs.haskellstack.org/en/stable/yaml_configuration/
 #
 templates:
-  params:
-    author-name: Samuel Roeca
-    author-email: samuel.roeca@gmail.com
-    category: Learning
-    copyright: 'Copyright: (c) 2016 Samuel Roeca'
-    github-username: pappasam
+    params:
+        author-email: samuel.roeca@gmail.com
+        author-name: Samuel Roeca
+        category: Learning
+        copyright: 'Copyright: (c) 2016 Samuel Roeca'
+        github-username: pappasam
