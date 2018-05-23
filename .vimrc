@@ -256,7 +256,6 @@ Plug 'raimon49/requirements.txt.vim'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 " Additional requirements:
 "   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
@@ -1156,10 +1155,6 @@ let g:agit_max_log_lines = 500
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 3
-
-" PythonVirtualenv:
-" necessary for jedi-vim to discover virtual environments
-let g:virtualenv_auto_activate = 1
 
 " QFEnter:
 let g:qfenter_keymap = {}
