@@ -203,6 +203,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'fcpg/vim-altscreen'
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
+Plug 'wincent/ferret'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
