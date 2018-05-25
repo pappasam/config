@@ -303,6 +303,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'tell-k/vim-autopep8'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'alx741/vim-stylishask'
 
 call plug#end()
 
@@ -1334,6 +1335,8 @@ augroup END
 "  }}}
 "  Plugin: Language-specific file beautification --- {{{
 
+let g:stylishask_on_save = 0
+
 augroup language_specific_file_beauty
   autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
   autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
@@ -1345,6 +1348,7 @@ augroup language_specific_file_beauty
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
   autocmd Filetype terraform nnoremap <buffer> <leader>f :TerraformFmt<cr>
+  autocmd Filetype haskell nnoremap <buffer> <leader>f :Stylishask<cr>
 augroup END
 
 " }}}
