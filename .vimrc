@@ -128,11 +128,11 @@ set t_RV=
 
 filetype plugin indent on
 
-augroup cursorline_setting
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
+" augroup cursorline_setting
+"   autocmd!
+"   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"   autocmd WinLeave * setlocal nocursorline
+" augroup END
 
 set dictionary=$HOME/dotfiles/american-english-with-propcase
 
