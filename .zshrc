@@ -68,7 +68,7 @@ alias ..........='cd ../../../../../../../../../..'
 alias d='cd'
 
 # Vim and Vi: try activate Python virtual environment then call neovim
-alias v='vim'
+alias f='vim'
 alias vi='vim'
 alias nv="alias vim=\"echo 'no vim allowed here'\""
 
