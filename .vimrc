@@ -255,6 +255,7 @@ Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'farfanoide/vim-kivy'
 Plug 'raimon49/requirements.txt.vim'
+Plug 'chr4/nginx.vim'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -342,7 +343,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,yaml
+  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,yaml,nginx
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
