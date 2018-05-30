@@ -12,6 +12,8 @@ set -e
 #######################################################################
 # Build, version control, and getting code for elsewhere
 #######################################################################
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
 apt install git
 apt install build-essential
 apt install curl
