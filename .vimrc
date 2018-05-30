@@ -694,8 +694,8 @@ augroup END
 "  }}}
 " Plugin: fzf --- {{{
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-command! -bang -nargs=* FindIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Grep call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* GrepIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
@@ -1520,10 +1520,10 @@ nnoremap <leader><leader>t :TabooRename<space>
 " FZF: create shortcuts for finding stuff
 nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
 nnoremap <silent> <C-B> :call FZFBuffersAvoidNerdtree()<CR>
-nnoremap <C-n> yiw:Find <C-r>"<CR>
-vnoremap <C-n> y:Find <C-r>"<CR>
-nnoremap <leader><C-n> yiw:FindIgnoreCase <C-r>"<CR>
-vnoremap <leader><C-n> y:FindIgnoreCase <C-r>"<CR>
+nnoremap <C-n> yiw:Grep <C-r>"<CR>
+vnoremap <C-n> y:Grep <C-r>"<CR>
+nnoremap <leader><C-n> yiw:GrepIgnoreCase <C-r>"<CR>
+vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
 
 " DeleteHiddenBuffers: shortcut to make this easier
 " Note: weird stuff happens if you mess this up
