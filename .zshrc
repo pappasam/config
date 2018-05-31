@@ -274,6 +274,11 @@ function ve() {
   fi
 }
 
+# deactivate virtual environment
+function vd() {
+  deactivate
+}
+
 # Create New Python Repo
 function pynew() {
   if [ $# -ne 1 ]; then
