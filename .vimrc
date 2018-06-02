@@ -128,12 +128,6 @@ set t_RV=
 
 filetype plugin indent on
 
-" augroup cursorline_setting
-"   autocmd!
-"   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"   autocmd WinLeave * setlocal nocursorline
-" augroup END
-
 set dictionary=$HOME/dotfiles/american-english-with-propcase
 
 set spelllang=en_us
@@ -496,6 +490,12 @@ catch
 endtry
 
 hi CursorLine cterm=NONE
+
+augroup cursorline_setting
+  autocmd!
+  autocmd FileType tagbar setlocal cursorline
+augroup END
+
 
 " }}}
 " General: Resize Window --- {{{
