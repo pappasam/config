@@ -1617,18 +1617,21 @@ nmap <expr> q QStart()
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
-" abbreviate creating tab, vertical, and horizontal buffer splits
-cabbrev bt tab sb
-cabbrev bv vert sb
-cabbrev bs sbuffer
+" creating tab, vertical, and horizontal buffer splits
+" command! BT tab sb
+" command! BV vert sb
+" command! BS sbuffer
 
 " Terminal abbreviation
-cabbrev terms split <BAR> terminal
-cabbrev termv vsplit <BAR> terminal
-cabbrev termt tabnew <BAR> terminal
+command! Terms split <BAR> terminal
+command! Termv vsplit <BAR> terminal
+command! Termt tabnew <BAR> terminal
 
 " Change directory to current file
-cabbrev CD cd %:h
+command! CD cd %:h
+
+" Execute current file
+command! Run !./%
 
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
