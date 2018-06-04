@@ -194,7 +194,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'henrik/vim-indexed-search'
 Plug 'machakann/vim-sandwich'
-Plug 'justinmk/vim-sneak'
+Plug 'unblevable/quick-scope'
 Plug 'fcpg/vim-altscreen'
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
@@ -479,6 +479,12 @@ augroup javascript_syntax
   autocmd FileType javascript syn keyword jsBooleanTrue this
   autocmd FileType javascript.jsx syn keyword jsBooleanTrue this
 augroup end
+
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
 
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
@@ -1244,6 +1250,9 @@ let g:markdown_composer_open_browser = 0
 " RequirementsVim: filetype detection (begin with requirements)
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 
+" QuickScope: great plugin helping with f and t
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
@@ -1498,25 +1507,6 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
 
 " AutoPairs:
 imap <silent><CR> <CR><Plug>AutoPairsReturn
-
-" VimSneak: note: ';' = goto next, '\' = goto previous
-" Remake s and S to ss and SS
-nmap sn <Plug>Sneak_s
-nmap SN <Plug>Sneak_S
-
-" Make f and F search one character, but highlight results like Vim-Sneak
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
 
 " Taboo: rename files smartly
 nnoremap <leader><leader>t :TabooRename<space>
