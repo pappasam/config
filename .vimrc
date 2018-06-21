@@ -6,8 +6,8 @@
 " Additional Notes --------- {{{
 "
 " This is my .vimrc. Hopefully you enjoy using it as much as me!
-" I use Linux Mint 18.X, but this will probably work with any Linux-based OS.
-" My workflow is terminal-based, so I use this with vim-nox.
+" I use the latest Linux Mint, but this will probably work with any Linux-based
+" OS. My workflow is terminal-based and I now use Neovim
 "
 " PreRequisites:
 "   To get the most out of this vimrc, please install the following
