@@ -300,6 +300,9 @@ Plug 'tell-k/vim-autopep8'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'alx741/vim-stylishask'
 
+" C Programming
+Plug 'ericcurtin/CurtineIncSw.vim'
+
 call plug#end()
 
 " }}}
@@ -1522,6 +1525,9 @@ vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
 " DeleteHiddenBuffers: shortcut to make this easier
 " Note: weird stuff happens if you mess this up
 nnoremap <leader>d :DeleteHiddenBuffers<CR>
+
+" Jumping to header file
+nnoremap gh :call CurtineIncSw()<CR>
 
 " }}}
 " General: Macro repeater ---- {{{
