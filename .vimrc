@@ -1312,8 +1312,10 @@ augroup END
 " Jumping back defaults to <C-O> or <C-T>
 " Defaults to <C-]> for goto definition
 let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
-let g:clang_auto_user_options = 'compile_commands.json, path'
+let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
+let g:clang_complete_macros = 1
+let g:clang_jumpto_declaration_key = "<C-]>"
 
 " Haskell:
 " Disable haskell-vim omnifunc
