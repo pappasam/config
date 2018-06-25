@@ -10,6 +10,11 @@
 set -e
 
 #######################################################################
+# Man pages for Linux Systems Programming
+#######################################################################
+sudo apt install manpages-dev manpages-posix-dev
+
+#######################################################################
 # Build, version control, and getting code for elsewhere
 #######################################################################
 sudo add-apt-repository ppa:git-core/ppa
