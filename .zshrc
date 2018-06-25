@@ -64,9 +64,6 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
-# I type cd so much, I'll just type d instead
-alias d='cd'
-
 # Vim and Vi: try activate Python virtual environment then call neovim
 alias f='vim'
 alias vi='vim'
@@ -167,6 +164,7 @@ function gitzip() {  # arg1: the git repository
   git archive --format=zip --prefix="$git_name-from-zip/" HEAD -o "$outfile"
   popd > /dev/null
 }
+compdef _dirs gitzip
 
 function cats() {
   pygmentize -g $1 | less -rc
@@ -183,10 +181,11 @@ function syn() {  # arg1: word
 }
 compdef _dict_words syn
 
-# install
-function install() {  # arg1: word
-  apt-cache show $1 && sudo apt install $1
+# I type cd so much, I'll just type d instead
+function d() { #arg1: directory
+  cd $1
 }
+compdef _dirs d
 
 # Move up n directories using:  cd.. dir
 function cd_up() {  # arg1: number|word
