@@ -257,6 +257,8 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 " Additional requirements:
 "   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
 Plug 'Rip-Rip/clang_complete'
+" for C header filename completion:
+Plug 'xaizek/vim-inccomplete'
 Plug 'eagletmt/neco-ghc'
 Plug 'racer-rust/vim-racer'
 " Addional requirements:
@@ -1308,9 +1310,10 @@ augroup elm_complete
   autocmd FileType elm nnoremap <buffer> <C-]> :ElmShowDocs<CR>
 augroup END
 
-" CPP:
-" Jumping back defaults to <C-O> or <C-T>
+" C_CPP:
+" Jumping back defaults to <C-O> or <C-T> (in is <C-I> per usual)
 " Defaults to <C-]> for goto definition
+" Additionally, jumping to Header file under cursor: gd
 let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
