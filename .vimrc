@@ -1660,4 +1660,9 @@ let &t_SR .= "\<Esc>[4 q"
 "common - block
 let &t_EI .= "\<Esc>[3 q"
 
+" Configure updatetime
+" This is the amount of time vim waits to do something after you stop
+" acting. Default is 4000, this works well for my fast system
+set updatetime=750
+
 " }}}
