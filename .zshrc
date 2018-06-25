@@ -172,12 +172,12 @@ function cats() {
 
 # dictionary lookups
 function def() {  # arg1: word
-  dict -d gcide $1 | less -XF
+  dict -d gcide $1
 }
 compdef _dict_words def
 
 function syn() {  # arg1: word
-  dict -d moby-thesaurus $1 | less -XF
+  dict -d moby-thesaurus $1
 }
 compdef _dict_words syn
 
