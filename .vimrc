@@ -1665,4 +1665,7 @@ let &t_EI .= "\<Esc>[3 q"
 " acting. Default is 4000, this works well for my fast system
 set updatetime=750
 
+" Update path for Linux-specific libraries
+set path+=/usr/include/x86_64-linux-gnu/
+
 " }}}
