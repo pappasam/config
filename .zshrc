@@ -30,6 +30,7 @@ if [ -f ~/.zplug/init.zsh ]; then
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "hejack0207/zsh-pip-plugin", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
+  zplug "zsh-users/zsh-syntax-highlighting", as:plugin
 
   #END: List plugins
 
