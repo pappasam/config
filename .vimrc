@@ -895,48 +895,24 @@ call gina#custom#command#option('blame', '--width', '79')
 
 " Custom mappings for Gina blame buffer
 call gina#custom#mapping#nmap(
-      \ 'blame', 'j',
-      \ 'j<Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', 'k',
-      \ 'k<Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', '<c-d>',
-      \ '<c-d><Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', '<c-u>',
-      \ '<c-u><Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', 'gg',
-      \ 'gg<Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', 'G',
-      \ 'G<Plug>(gina-blame-echo)'
-      \)
-call gina#custom#mapping#nmap(
-      \ 'blame', '<Backspace>',
-      \ 'G<Plug>(gina-blame-back)'
+      \ 'blame', 'c',
+      \ '<Plug>(gina-blame-echo)'
       \)
 call gina#custom#mapping#nmap(
       \ 'blame', '<CR>',
-      \ 'G<Plug>(gina-blame-open)'
+      \ '<Plug>(gina-blame-open)'
       \)
 call gina#custom#mapping#nmap(
       \ 'blame', '<c-i>',
-      \ 'G<Plug>(gina-blame-open)'
+      \ '<Plug>(gina-blame-open)'
       \)
 call gina#custom#mapping#nmap(
       \ 'blame', '<Backspace>',
-      \ 'G<Plug>(gina-blame-back)'
+      \ '<Plug>(gina-blame-back)'
       \)
 call gina#custom#mapping#nmap(
       \ 'blame', '<c-o>',
-      \ 'G<Plug>(gina-blame-back)'
+      \ '<Plug>(gina-blame-back)'
       \)
 
 let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
