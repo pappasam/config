@@ -28,7 +28,6 @@ if [ -f ~/.zplug/init.zsh ]; then
   # use double quotes: the plugin manager author says we must for some reason
   zplug "paulirish/git-open", as:plugin
   zplug "greymd/docker-zsh-completion", as:plugin
-  zplug "hejack0207/zsh-pip-plugin", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zsh-users/zsh-syntax-highlighting", as:plugin
 
@@ -634,7 +633,7 @@ _vault_complete() {
 compctl -f -K _vault_complete vault
 
 # stack
-eval "$(stack --bash-completion-script stack)"
+# eval "$(stack --bash-completion-script stack)"
 
 # }}}
 # ZShell Key-Bindings --- {{{
