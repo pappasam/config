@@ -2,3 +2,6 @@
 
 # enable copying to clipboard
 set selection-clipboard clipboard
+
+# remove q mapping
+unmap q
