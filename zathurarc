@@ -1,7 +1,6 @@
 # soft-link file to ~/.config/zathura/zathurarc
 
-# enable copying to clipboard
 set selection-clipboard clipboard
+set first-page-column 1
 
-# remove q mapping
 unmap q
