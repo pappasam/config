@@ -267,7 +267,7 @@ Plug 'racer-rust/vim-racer'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go'
 Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
-" note: must run 'sudo gem install neovim' to get this to work
+" note: must run 'gem install neovim' to get this to work
 " might require the neovim headers
 Plug 'juliosueiras/vim-terraform-completion'
 
@@ -275,7 +275,7 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
 " Additional requirements
-"   sudo npm install -g jsctags
+"   npm install -g jsctags
 "   sudo apt install -y php
 
 " Indentation-only
@@ -1290,7 +1290,7 @@ augroup END
 " Jumping back defaults to <C-O> or <C-T> (in is <C-I> per usual)
 " Defaults to <C-]> for goto definition
 " Additionally, jumping to Header file under cursor: gd
-let g:clang_library_path = '/usr/lib/llvm-3.8/lib'
+let g:clang_library_path = '/usr/lib/llvm-6.0/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
 let g:clang_complete_macros = 1

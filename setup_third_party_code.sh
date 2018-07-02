@@ -24,17 +24,9 @@ apt install build-essential
 apt install curl
 
 #######################################################################
-# Vim 8
+# Install more C Stuff
 #######################################################################
-if [ ! -f /usr/bin/vim ]; then
-  apt remove vim
-fi
-add-apt-repository ppa:jonathonf/vim
-apt update
-apt install vim vim-nox
-# vim-plug: the best vim plugin manager as of December 25, 2016
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim curl
+apt install cmake llvm-6.0 llvm-6.0-dev
 
 #######################################################################
 # NeoVim

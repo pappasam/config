@@ -209,7 +209,7 @@ function pdf() {  # arg1: filename
   # setting env var to 0 fixes the problem
   # The () communicate that the entire process should execute in a subshell,
   # avoiding unnecessary printing to console
-  (GDK_SCALE=0 zathura "$1" &> /dev/null &)
+  (zathura "$1" &> /dev/null &)
 }
 
 # Open files with gnome-open
@@ -217,9 +217,9 @@ function gn() {  # arg1: filename
   local gn_filename=$(basename "$1")
   local gn_extension="${gn_filename##*.}"
   if [[ "$gn_extension" != "pdf" ]]; then
-    gnome-open "$1" &> /dev/null
+    gio open "$1" &> /dev/null
   elif ! type "zathura" &> /dev/null; then
-    gnome-open "$1" &> /dev/null
+    gio open "$1" &> /dev/null
   else
     pdf "$1"
   fi
