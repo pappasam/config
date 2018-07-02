@@ -12,7 +12,15 @@ set -e
 #######################################################################
 # Man pages for Linux Systems Programming
 #######################################################################
-sudo apt install manpages-dev manpages-posix-dev
+apt install manpages-dev manpages-posix-dev
+
+#######################################################################
+# keepass
+#######################################################################
+apt install keepass2
+add-apt-repository ppa:dlech/keepass2-plugins
+apt update
+apt install keepass2-plugin-application-indicator
 
 #######################################################################
 # Build, version control, and getting code for elsewhere
@@ -53,7 +61,6 @@ gem install neovim
 # for ctags
 npm install -g jsctags
 apt install -y php
-
 
 #######################################################################
 # Vim dependencies
