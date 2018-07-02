@@ -24,9 +24,19 @@ apt install build-essential
 apt install curl
 
 #######################################################################
+# Copy functionality
+#######################################################################
+apt install xsel xclip
+
+#######################################################################
+# Fun stuff
+#######################################################################
+apt install fortune cowsay bsdgames bsdgames-nonfree
+
+#######################################################################
 # Install more C Stuff
 #######################################################################
-apt install cmake llvm-6.0 llvm-6.0-dev
+apt install cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
 
 #######################################################################
 # NeoVim
@@ -37,7 +47,13 @@ apt install neovim
 apt install python-dev python-pip python3-dev python3-pip
 
 # when creating a virtual environment, run the following to get autocompletion:
-pip3 install --user --upgrade neovim
+pip install neovim
+gem install neovim
+
+# for ctags
+npm install -g jsctags
+apt install -y php
+
 
 #######################################################################
 # Vim dependencies
@@ -81,25 +97,10 @@ apt install libmysqlclient-dev
 apt install texlive-full
 
 #######################################################################
-# Nodejs
-#######################################################################
-apt install python-software-properties
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-apt install nodejs
-
-#######################################################################
-# Bluetooth
-#######################################################################
-apt install blueman
-
-#######################################################################
 # Diagramming
 #######################################################################
 apt install graphviz
 apt install gthumb
-
-# graphy-easy
-apt install libgraph-easy-perl
 
 # plantuml
 if [ ! -d ~/java ]; then
@@ -116,6 +117,8 @@ cd ~/bin
 # PDF Viewer with vi bindings
 # uses zathura-pdf-mupdf as backend
 #######################################################################
+
+# MIGHT UPDATE TO JUST ZATHURA
 add-apt-repository ppa:spvkgn/zathura-mupdf
 apt update
 apt install mupdf
@@ -145,7 +148,9 @@ apt install libncurses5 libncurses5-dev libncursesw5
 #######################################################################
 cargo install ripgrep
 cargo install fd-find
+cargo install racer
 rustup component add rustfmt-preview
+rustup component add rust-src
 
 #######################################################################
 # kdenlive (along with necessary plugins)
@@ -216,3 +221,10 @@ apt install pdf-presenter-console
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo apt update && sudo apt install signal-desktop
+
+#######################################################################
+# zshell
+#######################################################################
+sudo apt install zsh
+# without sudo (makes zsh default shell):
+chsh -s $(which zsh)
