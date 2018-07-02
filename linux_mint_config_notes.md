@@ -12,7 +12,7 @@ as a reminder for those necessary manual steps.
 ## Themes
 
 * Window borders
-    * Esco
+    * Cinnamox-Willow-Grove
 * Icons
     * Mint-Y
 * Controls
@@ -20,7 +20,7 @@ as a reminder for those necessary manual steps.
 * Mouse Pointer
     * DMZ-White
 * Desktop
-    * Mint-Y-Dark
+    * Linux Mint
 
 ## Effects
 
@@ -35,8 +35,8 @@ to do things without moving my hands from the home row.
 
 * **General**
     * Main
-        * Toggle Scale : Ctrl+Alt+J
-        * Toggle Expo : Ctrl+Alt+K
+        * Show the window selection screen : Ctrl+Alt+J
+        * Show the workspace selection screen : Ctrl+Alt+K
 * **Workspaces**
     * Main
         * Switch to left workspace: Ctrl+Alt+H
