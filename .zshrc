@@ -202,27 +202,9 @@ function weather() {  # arg1: Optional<location>
   fi
 }
 
-# Open pdf files with Zathura
-function pdf() {  # arg1: filename
-  # GDK_SCALE is set to 2 for hd monitors
-  # this environment variable makes text fuzzy on my 4k monitor
-  # setting env var to 0 fixes the problem
-  # The () communicate that the entire process should execute in a subshell,
-  # avoiding unnecessary printing to console
-  (zathura "$1" &> /dev/null &)
-}
-
 # Open files with gnome-open
 function gn() {  # arg1: filename
-  local gn_filename=$(basename "$1")
-  local gn_extension="${gn_filename##*.}"
-  if [[ "$gn_extension" != "pdf" ]]; then
-    gio open "$1" &> /dev/null
-  elif ! type "zathura" &> /dev/null; then
-    gio open "$1" &> /dev/null
-  else
-    pdf "$1"
-  fi
+  gio open $1
 }
 
 # activate virtual environment from any directory from current and up

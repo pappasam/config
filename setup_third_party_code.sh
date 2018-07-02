@@ -122,17 +122,11 @@ cd ~/bin
 
 #######################################################################
 # PDF Viewer with vi bindings
-# uses zathura-pdf-mupdf as backend
 #######################################################################
-
-# MIGHT UPDATE TO JUST ZATHURA
-add-apt-repository ppa:spvkgn/zathura-mupdf
-apt update
-apt install mupdf
-apt install zathura zathura-pdf-mupdf
+apt install zathura
 
 #######################################################################
-# PDF Viewer with vi bindings
+# Colorize cats output
 #######################################################################
 apt install python-pygments
 
@@ -184,11 +178,6 @@ apt update
 apt install peek
 
 #######################################################################
-# git-open
-# https://github.com/paulirish/git-open
-#######################################################################
-
-#######################################################################
 # zplug
 #######################################################################
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -198,13 +187,6 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 #######################################################################
 cd ~/src/lib
 git clone https://github.com/jszakmeister/rst2ctags
-
-#######################################################################
-# slack-term
-#######################################################################
-go get -u github.com/erroneousboat/slack-term
-cd $GOPATH/src/github.com/erroneousboat/slack-term
-go install .
 
 #######################################################################
 # previewing RST files
