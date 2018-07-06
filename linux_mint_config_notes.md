@@ -79,12 +79,6 @@ to do things without moving my hands from the home row.
     * Panel Toggle
         * Command : ~/dotfiles/panel-autohide.sh
         * Shortcut : Ctrl+Alt+P
-    * Terminal Maximize
-        * Command : /usr/bin/gnome-terminal --maximize
-        * Shortcut : Ctrl+Alt+i
-    * Browser Maximize
-        * Command : /usr/bin/gnome-www-browser --maximize
-        * Shortcut : Ctrl+Alt+b
     * Alacritty
         * Command: ~/bin/alacritty
         * Ctrl+Alt+i
