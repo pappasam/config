@@ -164,6 +164,11 @@ if [ -d "$RBENV_ROOT" ]; then
   eval "$(rbenv init -)"
 fi
 
+TFENV_ROOT="$HOME/.tfenv"
+if [ -d "$TFENV_ROOT" ]; then
+  export TFENV_ROOT
+  path_radd "$TFENV_ROOT/bin"
+fi
 
 GOPATH="$HOME/go"
 if [ -d "$GOPATH" ]; then
