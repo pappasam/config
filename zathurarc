@@ -1,6 +1,16 @@
 # soft-link file to ~/.config/zathura/zathurarc
 
+# Global options
 set selection-clipboard clipboard
-set first-page-column 1
+set first-page-column 1:1
+set smooth-scroll true
+set guioptions hv
+set font "Hack normal 12"
 
+# Key Unmappings
 unmap q
+
+# Key Remappings
+map D toggle_page_mode
+map d scroll half-down
+map u scroll half-up
