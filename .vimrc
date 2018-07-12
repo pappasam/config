@@ -670,27 +670,13 @@ let g:NERDTreeIgnore=[
       \]
 
 function! NERDTreeToggleCustom()
-    if &filetype ==? 'startify'
-      exec 'NERDTreeToggle'
-    else
-      if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
-        " if NERDTree is open in window in current tab...
-        exec 'NERDTreeClose'
-      else
-        exec 'NERDTree %'
-      endif
-    endif
+  if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+    " if NERDTree is open in window in current tab...
+    exec 'NERDTreeClose'
+  else
+    exec 'NERDTree %'
+  endif
 endfunction
-
-" augroup NerdTreeOnVimEnter
-"   autocmd VimEnter *
-"         \   if !argc()
-"         \ |   Startify
-"         \ | endif
-"         \ | NERDTreeToggle
-"         \ | set norelativenumber
-"         \ | wincmd w
-" augroup END
 
 function! s:CloseIfOnlyControlWinLeft()
   if winnr("$") != 1
@@ -1465,7 +1451,8 @@ nnoremap <leader>jj :set filetype=javascript<CR>
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
 " TogglePluginWindows:
-nnoremap <silent> <space>j :call NERDTreeToggleCustom()<CR>
+nnoremap <silent> <space>j :NERDTreeToggle<CR>
+nnoremap <silent> <space>J :call NERDTreeToggleCustom()<CR>
 nnoremap <silent> <space>l :TagbarToggle <CR>
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
