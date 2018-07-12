@@ -129,7 +129,7 @@ alias gd='git diff'
 alias upgrade='sudo mintupdate'
 
 # battery
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
+alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
 # dynamodb
 alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynamodb -dbPath $HOME/data"
@@ -661,6 +661,11 @@ if [[ -o interactive ]]; then
 
   # try activate my virtual environment
   va > /dev/null
+
+  # kubectl autocompletion
+  if [ $commands[kubectl] ]; then
+    source <(kubectl completion zsh)
+  fi
 fi
 
 # }}}

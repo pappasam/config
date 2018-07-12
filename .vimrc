@@ -682,15 +682,15 @@ function! NERDTreeToggleCustom()
     endif
 endfunction
 
-augroup NerdTreeOnVimEnter
-  autocmd VimEnter *
-        \   if !argc()
-        \ |   Startify
-        \ | endif
-        \ | NERDTreeToggle
-        \ | set norelativenumber
-        \ | wincmd w
-augroup END
+" augroup NerdTreeOnVimEnter
+"   autocmd VimEnter *
+"         \   if !argc()
+"         \ |   Startify
+"         \ | endif
+"         \ | NERDTreeToggle
+"         \ | set norelativenumber
+"         \ | wincmd w
+" augroup END
 
 function! s:CloseIfOnlyControlWinLeft()
   if winnr("$") != 1
