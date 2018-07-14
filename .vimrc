@@ -117,9 +117,13 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
-" Highlight all search results,
-set hlsearch
+" Search result highlighting
 set incsearch
+augroup sroeca_incsearch_highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
 
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
@@ -352,18 +356,20 @@ augroup indentation_sr
   autocmd Filetype yaml setlocal indentkeys-=<:>
 
   " Rust-specifc 'indentation overrides'
+  " This is no longer necessary, but keeping in case I need
+  " to do something with ctags again
   "   assumes working with rust.vim, which uses ctags
   "     cino-m
   "       c = c1 && (
   "           c2 ||
   "           c3
   "       ) && c4;
-  autocmd Filetype rust setlocal cinoptions+='(s,m1'
+  " autocmd Filetype rust setlocal cinoptions+='(s,m1'
   "     cino-(
   "        if (c1 && (c2 ||
   "                   c3))
   "        foo;
-  autocmd Filetype rust setlocal cinoptions+='(0'
+  " autocmd Filetype rust setlocal cinoptions+='(0'
 augroup END
 
 " }}}
