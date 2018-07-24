@@ -1504,6 +1504,9 @@ nnoremap <leader>d :DeleteHiddenBuffers<CR>
 " Jumping to header file
 nnoremap gh :call CurtineIncSw()<CR>
 
+" Open split for writing (80 character window width for wrap)
+nnoremap <leader>v :vnew <bar> wincmd p <bar> vertical res 80<CR>
+
 " }}}
 " General: Macro repeater ---- {{{
 
