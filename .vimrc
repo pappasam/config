@@ -153,9 +153,7 @@ set grepprg=rg\ --vimgrep
 
 " Pasting: enable pasting without having to do 'set paste'
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
-if !has("nvim")
-  set pastetoggle=<C-_>
-endif
+set pastetoggle=<C-_>
 
 " Turn off complete vi compatibility
 set nocompatible
