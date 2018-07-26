@@ -156,6 +156,13 @@ apt install libncurses5 libncurses5-dev libncursesw5
 # https://github.com/jgm/pandoc/releases
 
 #######################################################################
+# Hovercraft! (an impress generator)
+# both steps are included to have the latest version AND the man page
+#######################################################################
+apt install hovercraft
+pip install hovercraft
+
+#######################################################################
 # Rust packages
 #######################################################################
 cargo install ripgrep
