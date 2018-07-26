@@ -1367,6 +1367,20 @@ command! Term call s:openTerm(0)
 command! Vterm call s:openTerm(1)
 
 " }}}
+" General: Number width to 80 (including special characters)---- {{{
+
+function! ResizeTo80()
+  let cols = 80
+  if &number ==# 1 || &relativenumber ==# 1
+    let numberwidth = float2nr(log10(line("$"))) + 2
+    let columns = &numberwidth + cols
+    execute 'vertical res ' columns
+  else
+    execute 'vertical res ' cols
+  endif
+endfunction
+
+" }}}
 " General: Key remappings (includes Plugins) ----------------------- {{{
 
 " Escape:
@@ -1503,7 +1517,7 @@ nnoremap <leader>d :DeleteHiddenBuffers<CR>
 nnoremap gh :call CurtineIncSw()<CR>
 
 " Open split for writing (80 character window width for wrap)
-nnoremap <leader>v :vnew <bar> wincmd p <bar> vertical res 80<CR>
+nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
 " }}}
 " General: Macro repeater ---- {{{
