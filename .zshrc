@@ -5,6 +5,9 @@
 # Searching for a specific man page
 #   1. apropros
 #   2. man -k
+#
+# Clearning "less" search results
+#   Alt-u
 
 # }}}
 # Import from other Bash Files --- {{{
