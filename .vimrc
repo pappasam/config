@@ -973,19 +973,6 @@ let g:tagbar_type_haskell = {
         \ 'type'   : 't'
     \ }
 \ }
-let g:tagbar_type_rust = {
-    \ 'ctagstype' : 'rust',
-    \ 'kinds' : [
-        \'T:types,type definitions',
-        \'f:functions,function definitions',
-        \'g:enum,enumeration names',
-        \'s:structure names',
-        \'m:modules,module names',
-        \'c:consts,static constants',
-        \'t:traits,traits',
-        \'i:impls,trait implementations',
-    \]
-    \}
 let g:tagbar_type_rst = {
       \ 'ctagstype': 'rst',
       \ 'ctagsbin' : '~/src/lib/rst2ctags/rst2ctags.py',
