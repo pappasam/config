@@ -4,8 +4,8 @@
 " Date: August 15, 2017
 " TLDR: vimrc minimum viable product for Python programming
 "
-" I've noticed that many vim beginners have trouble creating a useful vimrc.
-" This file is intended to get a Python programmer who is new to vim
+" I've noticed that many vim/neovim beginners have trouble creating a useful
+" vimrc. This file is intended to get a Python programmer who is new to vim
 " set up with a vimrc that will enable the following:
 "   1. Sane editing of Python files
 "   2. Sane defaults for vim itself
@@ -16,9 +16,8 @@
 "       this toggles the folded section
 "
 " Initialization:
-"   1. At the command line, execute the following command:
-"     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   1. Follow instructions at https://github.com/junegunn/vim-plug to install
+"      vim-plug for either Vim or Neovim
 "   2. Open vim (hint: type vim at command line and press enter :p)
 "   3. :PlugInstall
 "   4. :PlugUpdate
@@ -56,11 +55,8 @@ set completeopt=menuone,longest,preview
 " Enable buffer deletion instead of having to write each buffer
 set hidden
 
-" Mouse: remove GUI mouse support
-" This support is actually annoying, because I may occasionally
-" use the mouse to select text or something, and don't actually
-" want the cursor to move
-set mouse=""
+" Mouse: enable GUI mouse support in all modes
+set mouse=a
 
 " SwapFiles: prevent their creation
 set nobackup
@@ -75,8 +71,13 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
-" Don't highlight all search results
-set nohlsearch
+" Search result highlighting
+set incsearch
+augroup sroeca_incsearch_highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
 
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
@@ -104,9 +105,6 @@ set autoread
 set wildmode=longest,list,full
 set wildmenu
 
-" Grep: program is 'git grep'
-set grepprg=git\ grep\ -n\ $*
-
 " AirlineSettings: specifics due to airline
 set laststatus=2
 set ttimeoutlen=50
@@ -121,6 +119,17 @@ set nocompatible
 
 " Enable using local vimrc
 set exrc
+
+" Make sure numbering is set
+set number
+
+" Set split settings (options: splitright, splitbelow)
+set splitright
+
+" Redraw window whenever I've regained focus
+augroup redraw_on_refocus
+  au FocusGained * :redraw!
+augroup END
 
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -138,7 +147,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " Language-specific syntax
-Plug 'hdima/python-syntax',
+Plug 'hdima/python-syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
@@ -166,16 +175,49 @@ augroup fold_settings
 augroup END
 
 " }}}
+" General: Trailing whitespace ------------- {{{
+
+" This section should go before syntax highlighting
+" because autocommands must be declared before syntax library is loaded
+function! TrimWhitespace()
+  if &ft == 'markdown'
+    return
+  endif
+  let l:save = winsaveview()
+  %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+highlight EOLWS ctermbg=red guibg=red
+match EOLWS /\s\+$/
+augroup whitespace_color
+  autocmd!
+  autocmd ColorScheme * highlight EOLWS ctermbg=red guibg=red
+  autocmd InsertEnter * highlight EOLWS NONE
+  autocmd InsertLeave * highlight EOLWS ctermbg=red guibg=red
+augroup END
+
+augroup fix_whitespace_save
+  autocmd!
+  autocmd BufWritePre * call TrimWhitespace()
+augroup END
+
+" }}}
 " General: Syntax highlighting ---------------- {{{
 
 " Papercolor: options
+let g:PaperColor_Theme_Options['theme'] = {
+      \     'default': {
+      \       'transparent_background': 1
+      \     }
+      \ }
 let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
+      \   'language': {
+      \     'python': {
+      \       'highlight_builtins' : 1
+      \     }
+      \   }
+      \ }
 
 " Python: Highlight self and cls keyword in class definitions
 augroup python_syntax
@@ -197,38 +239,15 @@ endtry
 "  Plugin: Configure ------------ {{{
 
 " Python highlighting
-let python_highlight_all = 1
+let g:python_highlight_space_errors = 0
+let g:python_highlight_all = 1
 
 "  }}}
-" General: Trailing whitespace ------------- {{{
-
-" This section automatically trims whitespace on all files
-" trailing whitespace is a HUGE pet peeve of mine
-" so I force it on beginners by default (for free :p)
-function! TrimWhitespace()
-  if &ft == 'markdown'
-    return
-  endif
-  let l:save = winsaveview()
-  %s/\s\+$//e
-  call winrestview(l:save)
-endfunction
-
-augroup whitespace_color
-  autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
-  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
-augroup END
-highlight EOLWS ctermbg=darkgreen guibg=darkgreen
-
-augroup fix_whitespace_save
-  autocmd!
-  autocmd BufWritePre * call TrimWhitespace()
-augroup END
-
-" }}}
 " General: Key remappings ----------------------- {{{
+
+" Escape:
+" Make escape also clear highlighting
+nnoremap <silent> <esc> :noh<return><esc>
 
 " MoveVisual: up and down visually only if count is specified before
 " Otherwise, you want to move up lines numerically
@@ -236,9 +255,18 @@ augroup END
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
-" moving forward and backward with vim tabs
-nnoremap T gT
-nnoremap t gt
+" MoveTabs: moving forward, backward, and to number with vim tabs
+nnoremap <silent> L gt
+nnoremap <silent> H gT
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
 
 " BuffersAndWindows:
 " Move from one window to another
@@ -247,30 +275,13 @@ nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
 " Scroll screen up, down, left, and right
+" left: zh, right: zl
 nnoremap <silent> K <c-e>
 nnoremap <silent> J <c-y>
-nnoremap <silent> H zh
-nnoremap <silent> L zl
 " Move cursor to top, bottom, and middle of screen
 nnoremap <silent> gJ L
 nnoremap <silent> gK H
 nnoremap <silent> gM M
-
-" }}}
-" General: Command abbreviations ------------------------ {{{
-
-" fix misspelling of ls
-cabbrev LS ls
-cabbrev lS ls
-cabbrev Ls ls
-
-" fix misspelling of vs and sp
-cabbrev SP sp
-cabbrev sP sp
-cabbrev Sp sp
-cabbrev VS vs
-cabbrev vS vs
-cabbrev Vs vs
 
 " }}}
 " General: Cleanup ------------------ {{{
@@ -280,5 +291,8 @@ cabbrev Vs vs
 " This will prevent :autocmd, shell and write commands from being
 " run inside project-specific .vimrc files unless they’re owned by you.
 set secure
+
+" ShowCommand: turn off character printing to vim status line
+set noshowcmd
 
 " }}}
