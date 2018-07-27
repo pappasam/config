@@ -95,6 +95,9 @@ to do things without moving my hands from the home row.
 
 * Titlebar
     * Uncheck everything under "Buttons". Don't need them, they're pure clutter.
+* Behavior
+    * "Special Key to move and resize windows": change to "Super"
+        * Necessary to enable important Inkscape shortcut
 
 ## Date and Time
 
