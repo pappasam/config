@@ -271,7 +271,7 @@ function vd() {
 function pynew() {
   if [ $# -ne 1 ]; then
     echo "pynew <directory>"
-    exit 1
+    return 1
   fi
   local dir_name="$1"
   mkdir "$dir_name"
