@@ -1300,7 +1300,7 @@ augroup END
 " currently only supports markdown
 " jump to word definition for several text editors (including markdown)
 augroup writing_complete
-  autocmd FileType markdown,tex, nnoremap <buffer> <C-]> :Def <cword><CR>
+  autocmd FileType markdown,tex,rst,txt nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
 " Terraform
