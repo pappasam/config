@@ -206,17 +206,22 @@ augroup END
 " General: Syntax highlighting ---------------- {{{
 
 " Papercolor: options
+let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options['theme'] = {
       \     'default': {
       \       'transparent_background': 1
       \     }
       \ }
-let g:PaperColor_Theme_Options = {
-      \   'language': {
+let g:PaperColor_Theme_Options['language'] = {
       \     'python': {
       \       'highlight_builtins' : 1
+      \     },
+      \     'cpp': {
+      \       'highlight_standard_library': 1
+      \     },
+      \     'c': {
+      \       'highlight_builtins' : 1
       \     }
-      \   }
       \ }
 
 " Python: Highlight self and cls keyword in class definitions
