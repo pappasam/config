@@ -12,58 +12,58 @@ set -e
 #######################################################################
 # Alternative package managers
 #######################################################################
-apt install snapd
+sudo apt install snapd
 
 #######################################################################
 # Man pages for Linux Systems Programming
 #######################################################################
-apt install manpages-dev manpages-posix-dev
+sudo apt install manpages-dev manpages-posix-dev
 
 #######################################################################
 # Offline dictionary
 #######################################################################
-apt install dict
-apt dict-gcide dict-moby-thesaurus
+sudo apt install dict
+sudo apt dict-gcide dict-moby-thesaurus
 
 #######################################################################
 # keepass
 #######################################################################
-apt install keepass2
-add-apt-repository ppa:dlech/keepass2-plugins
-apt update
-apt install keepass2-plugin-application-indicator
+sudo apt install keepass2
+sudo add-apt-repository ppa:dlech/keepass2-plugins
+sudo apt update
+sudo apt install keepass2-plugin-application-indicator
 
 #######################################################################
 # Build, version control, and getting code for elsewhere
 #######################################################################
 sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
-apt install git
-apt install build-essential
-apt install curl
+sudo apt install git
+sudo apt install build-essential
+sudo apt install curl
 
 #######################################################################
 # Copy functionality
 #######################################################################
-apt install xsel xclip
+sudo apt install xsel xclip
 
 #######################################################################
 # Fun stuff
 #######################################################################
-apt install fortune cowsay bsdgames bsdgames-nonfree
+sudo apt install fortune cowsay bsdgames bsdgames-nonfree
 
 #######################################################################
 # Install more C Stuff
 #######################################################################
-apt install cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
+sudo apt install cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
 
 #######################################################################
 # NeoVim
 #######################################################################
-add-apt-repository ppa:neovim-ppa/stable
-apt update
-apt install neovim
-apt install python-dev python-pip python3-dev python3-pip
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+sudo apt install neovim
+sudo apt install python-dev python-pip python3-dev python3-pip
 
 # when creating a virtual environment, run the following to get autocompletion:
 pip install neovim
@@ -71,54 +71,60 @@ gem install neovim
 
 # for ctags
 npm install -g jsctags
-apt install -y php
+sudo apt install -y php
 
 #######################################################################
 # Vim dependencies
 #######################################################################
-apt install exuberant-ctags
+sudo apt install exuberant-ctags
 
 #######################################################################
 # Fonts
 #######################################################################
 
 # Installs the "Hack" font
-apt install fonts-hack-ttf
+sudo apt install fonts-hack-ttf
 
 #######################################################################
 # Tmux
 #######################################################################
-apt install tmux
+sudo apt install tmux
 
 #######################################################################
 # System monitoring
 #######################################################################
-apt install htop tree
+sudo apt install htop tree
 
 #######################################################################
 # Python 3
 #######################################################################
-apt install python3-dev
-apt install python3-virtualenv
+sudo apt install python3-dev
+sudo apt install python3-virtualenv
 
 # enables pyenv to build with tkinter support
-apt install tk-dev
+sudo apt install tk-dev
 
 #######################################################################
 # MySQL
 #######################################################################
-apt install libmysqlclient-dev
+sudo apt install libmysqlclient-dev
 
 #######################################################################
 # Latex
 #######################################################################
-apt install texlive-full
+sudo apt install texlive-full
+
+# getting tlmgr (the texlive package manager) to work
+sudo apt install xzdec
+
+# font used for "metropolis" theme
+sudo apt install fonts-firacode
 
 #######################################################################
 # Diagramming
 #######################################################################
-apt install graphviz
-apt install gthumb
+sudo apt install graphviz
+sudo apt install gthumb
 
 # plantuml
 if [ ! -d ~/java ]; then
@@ -134,19 +140,19 @@ cd ~/bin
 #######################################################################
 # PDF Viewer with vi bindings
 #######################################################################
-apt install zathura
+sudo apt install zathura
 
 #######################################################################
 # Colorize cats output
 #######################################################################
-apt install python-pygments
+sudo apt install python-pygments
 
 #######################################################################
 # PyEnv
 #######################################################################
 
 # dependencies for curses
-apt install libncurses5 libncurses5-dev libncursesw5
+sudo apt install libncurses5 libncurses5-dev libncursesw5
 
 #######################################################################
 # Pandoc
@@ -159,7 +165,7 @@ apt install libncurses5 libncurses5-dev libncursesw5
 # Hovercraft! (an impress generator)
 # both steps are included to have the latest version AND the man page
 #######################################################################
-apt install hovercraft
+sudo apt install hovercraft
 pip install hovercraft
 
 #######################################################################
@@ -174,26 +180,26 @@ rustup component add rust-src
 #######################################################################
 # kdenlive (along with necessary plugins)
 #######################################################################
-add-apt-repository ppa:kdenlive/kdenlive-stable
-apt update
-apt install kdenlive
-apt install frei0r-plugins frei0r-plugins-dev frei0r-plugins-doc
-apt install dvdauthor
+sudo add-apt-repository ppa:kdenlive/kdenlive-stable
+sudo apt update
+sudo apt install kdenlive
+sudo apt install frei0r-plugins frei0r-plugins-dev frei0r-plugins-doc
+sudo apt install dvdauthor
 
 #######################################################################
 # ffmpeg2 (ubunu 16.04-specific workaround for video stabilization)
 #######################################################################
-add-apt-repository ppa:mc3man/ffmpeg-test
-apt update
-apt install ffmpeg-static
+sudo add-apt-repository ppa:mc3man/ffmpeg-test
+sudo apt update
+sudo apt install ffmpeg-static
 hash -r
 
 #######################################################################
 # peek: the gif-creation program
 #######################################################################
-add-apt-repository ppa:peek-developers/stable
-apt update
-apt install peek
+sudo add-apt-repository ppa:peek-developers/stable
+sudo apt update
+sudo apt install peek
 
 #######################################################################
 # zplug
@@ -220,12 +226,12 @@ go get github.com/cjbassi/gotop
 #######################################################################
 # pdfpc
 #######################################################################
-apt install pdf-presenter-console
+sudo apt install pdf-presenter-console
 
 #######################################################################
 # Inkscape (a great svg drawing program)
 #######################################################################
-snap install inkscape
+sudo snap install inkscape
 
 #######################################################################
 # zshell
