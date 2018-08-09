@@ -33,7 +33,7 @@ if [ -f ~/.zplug/init.zsh ]; then
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zsh-users/zsh-syntax-highlighting", as:plugin
-
+  zplug "nobeans/zsh-sdkman", as:plugin
   #END: List plugins
 
   # Install plugins if there are plugins that have not been installed

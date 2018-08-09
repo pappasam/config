@@ -239,3 +239,8 @@ sudo snap install inkscape
 sudo apt install zsh
 # without sudo (makes zsh default shell):
 chsh -s $(which zsh)
+
+#######################################################################
+# sdkman: manage Java versions and sdks
+#######################################################################
+curl -s "https://get.sdkman.io" | bash

@@ -143,6 +143,13 @@ if [ -d "$PYENV_ROOT" ]; then
   eval "$(pyenv init -)"
 fi
 
+SDKMAN_DIR="$HOME/.sdkman"
+if [ -d "$SDKMAN_DIR" ]; then
+  export SDKMAN_DIR
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && \
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
+
 NODENV_ROOT="$HOME/.nodenv"
 if [ -d "$NODENV_ROOT" ]; then
   export NODENV_ROOT

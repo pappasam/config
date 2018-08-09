@@ -201,6 +201,7 @@ Plug 'fcpg/vim-altscreen'
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
 Plug 'wincent/ferret'
+Plug 'bronson/vim-visual-star-search'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
@@ -1432,19 +1433,6 @@ nnoremap <silent> gM M
 " InsertModeDeletion:
 " Delete character under cursor in insert mode
 inoremap <C-l> <Del>
-
-" VisualSearch: * and # work in visual mode too
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <expr> // 'y/\V'.escape(@",'\').'<CR>'
 
 " QuickChangeFiletype:
 " Sometimes we want to set some filetypes due to annoying behavior of plugins
