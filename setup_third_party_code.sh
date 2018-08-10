@@ -219,11 +219,6 @@ git clone https://github.com/jszakmeister/rst2ctags
 pip install restview
 
 #######################################################################
-# gotop: the nice process viewer, simpler alternative to htop
-#######################################################################
-go get github.com/cjbassi/gotop
-
-#######################################################################
 # pdfpc
 #######################################################################
 sudo apt install pdf-presenter-console

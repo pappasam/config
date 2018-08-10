@@ -147,9 +147,6 @@ alias so='source ~/.zshrc'
 # slack-term aliases
 alias slack-kepler='SLACK_TOKEN=$SLACK_TOKEN_KEPLER slack-term'
 
-# my preferred top program
-alias top='gotop'
-
 # pipe previous command to less
 # this differs from bash and doesn't seem POSIX-compliant: is zshell-specific
 alias s='fc -e - | less'
