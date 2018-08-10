@@ -244,3 +244,13 @@ chsh -s $(which zsh)
 # sdkman: manage Java versions and sdks
 #######################################################################
 curl -s "https://get.sdkman.io" | bash
+
+#######################################################################
+# Jenkins
+#######################################################################
+wget -O ~/java/jenkins.war \
+  http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+cd ~/bin
+# Add the following line to an executable file in ~/bin called "jenkins"
+# #!/bin/bash
+# java -jar ~/java/jenkins.war ${@}
