@@ -58,26 +58,11 @@ set hidden
 " Mouse: enable GUI mouse support in all modes
 set mouse=a
 
-" SwapFiles: prevent their creation
-set nobackup
-set noswapfile
-
-" Do not wrap lines by default
-set nowrap
-
 " Set column to light grey at 80 characters
 if (exists('+colorcolumn'))
   set colorcolumn=80
   highlight ColorColumn ctermbg=9
 endif
-
-" Search result highlighting
-set incsearch
-augroup sroeca_incsearch_highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? :set hlsearch
-  autocmd CmdlineLeave /,\? :set nohlsearch
-augroup END
 
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
@@ -85,12 +70,6 @@ augroup END
 set t_RV=
 
 filetype plugin indent on
-
-augroup cursorline_setting
-  autocmd!
-  autocmd WinEnter,BufEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
 
 set spelllang=en_us
 
@@ -105,15 +84,6 @@ set autoread
 set wildmode=longest,list,full
 set wildmenu
 
-" AirlineSettings: specifics due to airline
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-
-" Pasting: enable pasting without having to do 'set paste'
-" NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
-set pastetoggle=<C-_>
-
 " Turn off complete vi compatibility
 set nocompatible
 
@@ -122,9 +92,6 @@ set exrc
 
 " Make sure numbering is set
 set number
-
-" Set split settings (options: splitright, splitbelow)
-set splitright
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
@@ -250,43 +217,8 @@ let g:python_highlight_all = 1
 "  }}}
 " General: Key remappings ----------------------- {{{
 
-" Escape:
-" Make escape also clear highlighting
-nnoremap <silent> <esc> :noh<return><esc>
-
-" MoveVisual: up and down visually only if count is specified before
-" Otherwise, you want to move up lines numerically
-" e.g. ignoring wrapped lines
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-
-" MoveTabs: moving forward, backward, and to number with vim tabs
-nnoremap <silent> L gt
-nnoremap <silent> H gT
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
-
-" BuffersAndWindows:
-" Move from one window to another
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
-" Scroll screen up, down, left, and right
-" left: zh, right: zl
-nnoremap <silent> K <c-e>
-nnoremap <silent> J <c-y>
-" Move cursor to top, bottom, and middle of screen
-nnoremap <silent> gJ L
-nnoremap <silent> gK H
-nnoremap <silent> gM M
+" Put your key remappings here
+" Prefer nnoremap to nmap, inoremap to imap, and vnoremap to vmap
 
 " }}}
 " General: Cleanup ------------------ {{{
