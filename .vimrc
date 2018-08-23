@@ -254,6 +254,7 @@ Plug 'farfanoide/vim-kivy'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'chr4/nginx.vim'
 Plug 'othree/html5.vim'
+Plug 'pearofducks/ansible-vim'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
