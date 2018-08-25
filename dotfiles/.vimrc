@@ -132,7 +132,7 @@ set t_RV=
 
 filetype plugin indent on
 
-set dictionary=$HOME/dotfiles/american-english-with-propcase
+set dictionary=$HOME/.american-english-with-propcase.txt
 
 set spelllang=en_us
 

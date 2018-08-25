@@ -92,7 +92,7 @@ alias igrep="grep --perl-regexp -Ir \
 --exclude-dir='venv'"
 
 # Tmux launch script
-alias t='~/tmuxlaunch.sh'
+alias t='~/.tmuxlaunch.sh'
 
 # enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
@@ -378,8 +378,8 @@ function stopwatch(){
 }
 
 function quote() {
-  local cowsay_word_message="$(shuf -n 1 ~/dotfiles/gre_words.txt)"
-  local cowsay_quote="$(fortune -s ~/dotfiles/fortunes/ | grep -v '\-\-' | grep .)"
+  local cowsay_word_message="$(shuf -n 1 ~/.gre_words.txt)"
+  local cowsay_quote="$(fortune -s ~/.fortunes/ | grep -v '\-\-' | grep .)"
   echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
 }
 
