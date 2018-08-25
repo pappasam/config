@@ -8,11 +8,11 @@ help: ## Show this help.
 		sed -e 's/##//'
 
 .PHONY: dotfiles
-dotfiles: directories ## Place dotfiles in home folder, replacing all owned by stow
+dotfiles: config_directories ## Place dotfiles in home folder, replacing all owned by stow
 	stow -R dotfiles/
 
-.PHONY: directories
-directories: $(CONFIG_DIRS_HOME)
+.PHONY: config_directories
+config_directories: $(CONFIG_DIRS_HOME)  ## Create directories in ~/.config. Useful because these directories might not exist yet
 
 ~/.config/%: dotfiles/.config/%
 	-mkdir -p $@
