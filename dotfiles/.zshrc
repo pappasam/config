@@ -92,7 +92,7 @@ alias igrep="grep --perl-regexp -Ir \
 --exclude-dir='venv'"
 
 # Tmux launch script
-alias t='~/tmuxlaunch.sh'
+alias t='~/.tmuxlaunch.sh'
 
 # enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
