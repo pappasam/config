@@ -98,6 +98,8 @@ to do things without moving my hands from the home row.
 * Behavior
     * "Special Key to move and resize windows": change to "Super"
         * Necessary to enable important Inkscape shortcut
+    * Edge resistance with other windows: uncheck
+        * Moving windows with mouse increases CPU usage a lot
 
 ## Date and Time
 
