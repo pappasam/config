@@ -154,4 +154,5 @@ Right Alt is useful for some stuff.
 
 ## Fix Nvidia Performance
 
-* Add FX support for Nvidia chips
+* To make video performance good, enable FXAA in Nvidia settings
+* Disable this when using alacritty for now (2018-08-25)
