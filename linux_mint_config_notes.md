@@ -151,3 +151,7 @@ sudo shutdown now
 
 At home, I made ScrollLock (fn+o on Happy Hacking) the compose key.
 Right Alt is useful for some stuff.
+
+## Fix Nvidia Performance
+
+* Add FX support for Nvidia chips
