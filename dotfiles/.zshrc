@@ -171,7 +171,7 @@ function gitzip() {  # arg1: the git repository
 compdef _dirs gitzip
 
 function cats() {
-  pygmentize -g $1 | less -rc
+  pygmentize -g $1
 }
 
 # dictionary lookups
