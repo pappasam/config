@@ -647,21 +647,22 @@ command! Preview call _Preview()
 " }}}
 "  Plugin: NERDTree --- {{{
 
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeCaseSensitiveSort = 0
+let g:NERDTreeMapJumpFirstChild = '<C-k>'
+let g:NERDTreeMapJumpLastChild = '<C-j>'
+let g:NERDTreeMapJumpNextSibling = '<C-n>'
+let g:NERDTreeMapJumpPrevSibling = '<C-p>'
 let g:NERDTreeMapOpenInTab = '<C-t>'
 let g:NERDTreeMapOpenInTabSilent = ''
 let g:NERDTreeMapOpenSplit = '<C-s>'
 let g:NERDTreeMapOpenVSplit = '<C-v>'
-let g:NERDTreeMapJumpNextSibling = '<C-n>'
-let g:NERDTreeMapJumpPrevSibling = '<C-p>'
-let g:NERDTreeMapJumpFirstChild = '<C-k>'
-let g:NERDTreeMapJumpLastChild = '<C-j>'
-
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeShowLineNumbers = 1
-let g:NERDTreeCaseSensitiveSort = 0
+let g:NERDTreeSortOrder = ['*', '\/$']
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeSortOrder = ['*', '\/$']
+
 let g:NERDTreeIgnore=[
       \'venv$[[dir]]',
       \'.venv$[[dir]]',
