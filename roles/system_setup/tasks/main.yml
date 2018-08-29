@@ -1,3 +1,11 @@
-- name: Install apt packages for mint 19
-  include_tasks: mint19.yml
-  when: "'tara' in ansible_lsb.codename"
+- name: apt install programs
+  become: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop: "{{ programs_apt }}"
+
+- name: snap install programs
+  become: yes
+  command: snap install "{{ item }}" --classic
+  loop: "{{ programs_snap }}"
