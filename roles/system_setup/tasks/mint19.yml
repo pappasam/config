@@ -1,5 +1,11 @@
-- name: Update repositories cache and install foo package
+- name: apt install programs
   become: yes
   apt:
-    name: foo
+    name: "{{ item }}"
     update_cache: yes
+  loop: "{{ programs_apt }}"
+
+- name: snap install programs
+  become: yes
+  command: snap install "{{ item }}" --classic
+  loop: "{{ programs_snap }}"

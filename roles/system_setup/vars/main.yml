@@ -1,0 +1,39 @@
+programs_apt:
+  - bsdgames
+  - bsdgames-nonfree
+  - cowsay
+  - exuberant-ctags
+  - fonts-hack-ttf
+  - fortune
+  - graphviz
+  - gthumb
+  - hovercraft
+  - htop
+  - jq
+  - libbz2-dev
+  - libncurses5
+  - libncurses5-dev
+  - libncursesw5
+  - libreadline-dev
+  - libsqlite3-dev
+  - manpages-dev
+  - manpages-posix-dev
+  - nodejs
+  - openresolv
+  - openvpn-systemd-resolved
+  - pdf-presenter-console
+  - python-pygments
+  - snapd
+  - texlive-full
+  - tk-dev
+  - tmux
+  - tree
+  - xclip
+  - xsel
+  - zathura
+  - zlib1g-dev
+  - zsh
+
+programs_snap:
+  - slack
+  - inkscape
