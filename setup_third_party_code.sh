@@ -24,6 +24,8 @@ sudo apt install manpages-dev manpages-posix-dev
 #######################################################################
 sudo apt install stow
 
+sudo apt install shellcheck
+
 #######################################################################
 # Typing
 #######################################################################
@@ -262,7 +264,7 @@ sudo snap install inkscape
 #######################################################################
 sudo apt install zsh
 # without sudo (makes zsh default shell):
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 #######################################################################
 # Jenkins
