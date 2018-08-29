@@ -1,0 +1,25 @@
+- name: apt install programs
+  become: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop: "{{ programs_apt }}"
+
+- name: snap install programs
+  become: yes
+  command: snap install "{{ item }}" --classic
+  loop: "{{ programs_snap }}"
+
+- name: add public ppas
+  become: yes
+  apt_repository:
+    repo: "{{ item.repo }}"
+    codename: "{{ item.codename }}"
+  loop: "{{ programs_ppa }}"
+
+- name: install from public ppas
+  become: yes
+  apt:
+    name: "{{ item.program }}"
+    update_cache: yes
+  loop: "{{ programs_ppa }}"

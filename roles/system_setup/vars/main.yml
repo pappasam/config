@@ -42,7 +42,7 @@ programs_apt:
   - shellcheck
   - snapd
   - stow
-  - texlive-full
+  # - texlive-full
   - tk-dev
   - tmux
   - tree
@@ -55,3 +55,17 @@ programs_apt:
 programs_snap:
   - slack
   - inkscape
+
+programs_ppa:
+  - { repo: "ppa:dlech/keepass2-plugins", codename: "bionic", program: "keepass2-plugin-application-indicator" }
+  - { repo: "ppa:neovim-ppa/stable", codename: "bionic", program: "neovim" }
+  - { repo: "ppa:peek-developers/stable", codename: "bionic", program: "peek" }
+
+programs_rustup:
+  - rustfmt-preview
+  - rust-src
+
+programs_cargo:
+  - ripgrep
+  - fd-find
+  - racer

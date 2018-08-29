@@ -1,11 +1,11 @@
-- name: apt install programs
-  become: yes
-  apt:
-    name: "{{ item }}"
-    update_cache: yes
-  loop: "{{ programs_apt }}"
+- name: Install system packages
+  include_tasks: system_packages.yml
 
-- name: snap install programs
-  become: yes
-  command: snap install "{{ item }}" --classic
-  loop: "{{ programs_snap }}"
+- name: install rust, cargo programs, and rustup components
+  include_tasks: rust.yml
+
+- name: install program environment version managers
+  include_tasks: langenv.yml
+
+- name: setup zshell
+  include_tasks: zsh.yml
