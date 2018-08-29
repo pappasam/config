@@ -1,0 +1,5 @@
+- name: Update repositories cache and install foo package
+  become: yes
+  apt:
+    name: foo
+    update_cache: yes
