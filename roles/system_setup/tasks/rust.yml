@@ -3,8 +3,8 @@
 
 - name: Installing rust programs
   command: cargo install {{ item }}
-  loop: {{ programs_cargo }}
+  loop: "{{ programs_cargo }}"
 
 - name: Adding rustup components
   command: rustup component add {{ item }}
-  loop: {{ programs_rustup }}
+  loop: "{{ programs_rustup }}"
