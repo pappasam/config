@@ -242,6 +242,12 @@ if [ -f ~/.zplug/init.zsh ]; then
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zsh-users/zsh-syntax-highlighting", as:plugin
   zplug "nobeans/zsh-sdkman", as:plugin
+  zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf
+
+
   #END: List plugins
 
   # Install plugins if there are plugins that have not been installed

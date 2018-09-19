@@ -238,6 +238,11 @@ sudo apt install peek
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 #######################################################################
+# tpm: Tmux Plugin Manager
+#######################################################################
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+#######################################################################
 # Vim tagbar
 #######################################################################
 cd ~/src/lib
