@@ -1217,6 +1217,9 @@ let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 " QuickScope: great plugin helping with f and t
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+" Go: random stuff
+let g:go_version_warning = 0
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
