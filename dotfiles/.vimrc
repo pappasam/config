@@ -1220,6 +1220,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Go: random stuff
 let g:go_version_warning = 0
 
+" ChooseWin: options
+let g:choosewin_overlay_enable = 1
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
