@@ -29,8 +29,8 @@ window:
     y: 2
 
   # Window decorations
-  # Setting this to false will result in window without borders and title bar.
-  decorations: true
+  # Setting this to none will result in window without borders and title bar.
+  decorations: full
 
 # The FreeType rasterizer needs to know the device DPI for best results
 # (changes require restart)
