@@ -255,6 +255,7 @@ Plug 'raimon49/requirements.txt.vim'
 Plug 'chr4/nginx.vim'
 Plug 'othree/html5.vim'
 Plug 'pearofducks/ansible-vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Autocompletion
 Plug 'davidhalter/jedi-vim'
@@ -1229,6 +1230,7 @@ let g:choosewin_overlay_enable = 1
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
 " 2) Return from file (relies on tag stack): <C-O>
+" 3) Print the documentation of something under the cursor: <leader>gd
 
 " VimScript:
 " Autocompletion and show definition is built in to Vim
@@ -1264,6 +1266,7 @@ let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>gd :TernDoc<CR>
 augroup END
 
 " Elm:
@@ -1305,6 +1308,7 @@ augroup rust_complete
   autocmd!
   " needs to be nmap; does not work with nnoremap
   autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
+  autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 augroup END
 
 " Writing: writing document
