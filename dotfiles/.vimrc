@@ -1388,6 +1388,13 @@ endfunction
 " Make escape also clear highlighting
 nnoremap <silent> <esc> :noh<return><esc>
 
+" ScrollDropdown:
+" Enable scrolling dropdown menu with the mouse
+" Additionally, make clicking select the highlighted item
+inoremap <expr> <ScrollWheelUp> pumvisible() ? "<C-p>" : "<Esc><ScrollWheelUp>"
+inoremap <expr> <ScrollWheelDown> pumvisible() ? "<C-n>" : "<Esc><ScrollWheelDown>"
+inoremap <expr> <LeftMouse> pumvisible() ? "<CR><Backspace>" : "<Esc><LeftMouse>"
+
 " Omnicompletion:
 " <C-@> is signal sent by terminal when pressing <C-Space>
 " Need to include <C-Space> as well for neovim sometimes
