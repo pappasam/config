@@ -304,7 +304,8 @@ Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
-Plug 'tell-k/vim-autopep8'
+" Python
+Plug 'ambv/black'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'alx741/vim-stylishask'
 
@@ -1196,9 +1197,6 @@ let g:bullets_enabled_file_types = [
     \ 'scratch'
     \]
 
-" AutoPEP8:
-let g:autopep8_disable_show_diff = 1
-
 " SQLFormat:
 " relies on 'pip install sqlformat'
 let g:sqlfmt_auto = 0
@@ -1335,7 +1333,7 @@ augroup language_specific_file_beauty
   autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
   autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
   autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
+  autocmd Filetype python nnoremap <buffer> <leader>f :Black<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
