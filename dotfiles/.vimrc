@@ -298,7 +298,16 @@ Plug 'dkarter/bullets.vim'
 Plug 'gu-fan/riv.vim'
 
 " Previewers
-Plug 'iamcco/markdown-preview.vim'
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
@@ -634,7 +643,7 @@ function! _Preview()
     exec "normal \<C-O>"
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
-    exec 'MarkdownPreview'
+    exec 'ComposerOpen'
   elseif &filetype ==? 'dot'
     " from wmgraphviz.vim
     exec 'GraphvizInteractive'
