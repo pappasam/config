@@ -134,7 +134,8 @@ export GDK_SCALE=0
 # History: How many lines of history to keep in memory
 export HISTSIZE=5000
 
-# History: Where to save history to disk
+# History: ignore leading space, where to save history to disk
+export HISTCONTROL=ignorespace
 export HISTFILE=~/.zsh_history
 
 #History: Number of history entries to save to disk
@@ -734,6 +735,7 @@ setopt COMPLETE_ALIASES
 setopt AUTOCD
 
 # Dealing with history
+setopt HIST_IGNORE_SPACE
 setopt APPENDHISTORY
 setopt SHAREHISTORY
 setopt INCAPPENDHISTORY
