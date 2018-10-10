@@ -219,6 +219,7 @@ Plug 'NLKNguyen/papercolor-theme'
 
 " Utils
 Plug 'tpope/vim-commentary'
+" Convert to snakecase/camelcase/etc
 Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
