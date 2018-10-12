@@ -202,6 +202,7 @@ Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
 Plug 'wincent/ferret'
 Plug 'bronson/vim-visual-star-search'
+Plug 'romainl/vim-devdocs'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
