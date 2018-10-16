@@ -1613,11 +1613,6 @@ nmap <expr> q QStart()
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
-" creating tab, vertical, and horizontal buffer splits
-" command! BT tab sb
-" command! BV vert sb
-" command! BS sbuffer
-
 " Terminal abbreviation
 command! Terms split <BAR> terminal
 command! Termv vsplit <BAR> terminal
@@ -1628,6 +1623,9 @@ command! CD cd %:h
 
 " Execute current file
 command! Run !./%
+
+" Fix highlighting
+command! FixHighlight syntax sync fromstart
 
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
