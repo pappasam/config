@@ -1,5 +1,6 @@
 CONFIG_DIRS_DOTFILES := $(wildcard dotfiles/.config/*)
 CONFIG_DIRS_HOME := $(subst dotfiles, ~, $(CONFIG_DIRS_DOTFILES))
+HOME_DIRS_MKDIR = ~/.stack/
 
 help: ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | \
@@ -16,6 +17,7 @@ system_setup:
 
 .PHONY: dotfiles
 dotfiles: config_directories ## Place dotfiles in home folder, replacing all owned by stow
+	-mkdir $(HOME_DIRS_MKDIR)
 	stow -t ~ -R $@/
 
 .PHONY: config_directories
