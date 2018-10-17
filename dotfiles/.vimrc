@@ -279,6 +279,10 @@ Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
 " note: must run 'gem install neovim' to get this to work
 " might require the neovim headers
 Plug 'juliosueiras/vim-terraform-completion'
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -1260,6 +1264,14 @@ let g:black_skip_string_normalization = 1
 " 2) Return from file (relies on tag stack): <C-O>
 " 3) Print the documentation of something under the cursor: <leader>gd
 
+" LanguageClientServer: configure it for relevant languages
+set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
+let g:LanguageClient_serverCommands = { 'haskell': ['stack', 'exec', 'hie-wrapper'] }
+let g:LanguageClient_autoStart = 1
+augroup langserverLanguages
+  autocmd FileType haskell nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+augroup END
+
 " VimScript:
 " Autocompletion and show definition is built in to Vim
 " Set the same shortcuts as usual to find them
@@ -1314,16 +1326,6 @@ let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
 let g:clang_complete_macros = 1
 let g:clang_jumpto_declaration_key = "<C-]>"
-
-" Haskell:
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-let g:necoghc_enable_detailed_browse = 1
-let g:necoghc_use_stack = 1
-augroup haskell_complete
-  autocmd!
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
 
 " Rust:
 " rustup install racer
