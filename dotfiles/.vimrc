@@ -185,6 +185,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
 Plug 'gcmt/taboo.vim'
@@ -714,6 +715,19 @@ augroup CloseIfOnlyControlWinLeft
   au!
   au BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
+
+let g:NERDTreeIndicatorMapCustom = {
+      \ "Modified"  : "!",
+      \ "Staged"    : "=",
+      \ "Untracked" : "?",
+      \ "Renamed"   : "%",
+      \ "Unmerged"  : "=",
+      \ "Deleted"   : "!",
+      \ "Dirty"     : "^",
+      \ "Clean"     : "%",
+      \ 'Ignored'   : "%",
+      \ "Unknown"   : "?"
+      \ }
 
 "  }}}
 " Plugin: fzf --- {{{
@@ -1305,6 +1319,7 @@ let g:clang_jumpto_declaration_key = "<C-]>"
 " Disable haskell-vim omnifunc
 let g:haskellmode_completion_ghc = 0
 let g:necoghc_enable_detailed_browse = 1
+let g:necoghc_use_stack = 1
 augroup haskell_complete
   autocmd!
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
