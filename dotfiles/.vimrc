@@ -204,6 +204,7 @@ Plug 'sjl/strftimedammit.vim'
 Plug 'wincent/ferret'
 Plug 'bronson/vim-visual-star-search'
 Plug 'romainl/vim-devdocs'
+Plug 'chrisbra/Colorizer'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
@@ -1253,8 +1254,8 @@ let g:choosewin_overlay_enable = 1
 let g:black_linelength = 79
 let g:black_skip_string_normalization = 1
 
-" Brittany: Haskell Formatting
-let g:brittany_on_save = 0
+" Colorizer: css color code highlighting
+let g:colorizer_auto_filetype='css,html'
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
