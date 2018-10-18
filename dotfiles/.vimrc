@@ -1334,7 +1334,7 @@ augroup rust_complete
   autocmd!
   " needs to be nmap; does not work with nnoremap
   autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
-  autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
+  autocmd FileType rust nmap <leader>sd <Plug>(rust-doc)
 augroup END
 
 " Writing: writing document
