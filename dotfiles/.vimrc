@@ -323,7 +323,6 @@ Plug 'b4b4r07/vim-sqlfmt'
 " Python
 Plug 'ambv/black'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'alx741/vim-stylishask'
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -1256,6 +1255,9 @@ let g:choosewin_overlay_enable = 1
 let g:black_linelength = 79
 let g:black_skip_string_normalization = 1
 
+" Brittany: Haskell Formatting
+let g:brittany_on_save = 0
+
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
@@ -1359,8 +1361,6 @@ augroup END
 "  }}}
 "  Plugin: Language-specific file beautification --- {{{
 
-let g:stylishask_on_save = 0
-
 augroup language_specific_file_beauty
   autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
   autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
@@ -1372,7 +1372,7 @@ augroup language_specific_file_beauty
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
   autocmd Filetype terraform nnoremap <buffer> <leader>f :TerraformFmt<cr>
-  autocmd Filetype haskell nnoremap <buffer> <leader>f :Stylishask<cr>
+  autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
 augroup END
 
 " }}}
