@@ -1268,8 +1268,10 @@ let g:black_skip_string_normalization = 1
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = { 'haskell': ['stack', 'exec', 'hie-wrapper'] }
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_hoverPreview = 'auto'
 augroup langserverLanguages
   autocmd FileType haskell nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
 augroup END
 
 " VimScript:
@@ -1296,9 +1298,9 @@ let g:jedi#force_py_version = 3
 " configure. See 'set completeopt' in my global config for my settings
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#goto_command = "<C-]>"
-let g:jedi#documentation_command = "<leader>sd"
-let g:jedi#usages_command = "<leader>su"
-let g:jedi#rename_command = "<leader>sr"
+let g:jedi#documentation_command = "<leader>gd"
+let g:jedi#usages_command = "<leader>gu"
+let g:jedi#rename_command = "<leader>gr"
 
 " Javascript:
 let g:tern_show_argument_hints = 'on_move'
