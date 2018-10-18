@@ -267,7 +267,6 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 Plug 'Rip-Rip/clang_complete'
 " for C header filename completion:
 Plug 'xaizek/vim-inccomplete'
-Plug 'eagletmt/neco-ghc'
 Plug 'racer-rust/vim-racer'
 " Addional requirements:
 "   cargo install racer
