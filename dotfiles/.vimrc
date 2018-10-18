@@ -1271,6 +1271,7 @@ set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = { 'haskell': ['stack', 'exec', 'hie-wrapper'] }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
+let g:LanguageClient_diagnosticsEnable = 0
 augroup langserverLanguages
   autocmd FileType haskell nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
