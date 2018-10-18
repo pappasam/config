@@ -261,7 +261,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Autocompletion
-Plug 'davidhalter/jedi-vim'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
 " Additional requirements:
 "   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
@@ -1268,13 +1267,22 @@ let g:brittany_on_save = 0
 
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
-let g:LanguageClient_serverCommands = { 'haskell': ['stack', 'exec', 'hie-wrapper'] }
+let g:LanguageClient_serverCommands = {
+      \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
+      \ 'python': ['pyls']
+      \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = 0
+function! ConfigureLanguageClient()
+  nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
+endfunction
+
 augroup langserverLanguages
-  autocmd FileType haskell nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
-  autocmd FileType haskell nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
+  autocmd FileType python,haskell call ConfigureLanguageClient()
 augroup END
 
 " VimScript:
@@ -1286,24 +1294,6 @@ augroup vimscript_complete
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
 augroup END
-
-" Python:
-" Open module, e.g. :Pyimport os (opens the os module)
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#auto_close_doc = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#force_py_version = 3
-
-" mappings
-" auto_vim_configuration creates space between where vim is opened and
-" closed in my bash terminal. This is annoying, so I disable and manually
-" configure. See 'set completeopt' in my global config for my settings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_command = "<C-]>"
-let g:jedi#documentation_command = "<leader>gd"
-let g:jedi#usages_command = "<leader>gu"
-let g:jedi#rename_command = "<leader>gr"
 
 " Javascript:
 let g:tern_show_argument_hints = 'on_move'
