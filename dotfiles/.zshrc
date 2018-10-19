@@ -613,6 +613,15 @@ function deshake-video() {
     "$outfile"
 }
 
+function dat(){
+  if [ $# -ne 1 ]; then
+    echo "dat <file_name>"
+    return 1
+  fi
+  local file_name="$1"
+  strfile -c % "$file_name" "$file_name.dat"
+}
+
 # }}}
 # ZShell prompt (PS1) --- {{{
 
