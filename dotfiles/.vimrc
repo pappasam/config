@@ -912,6 +912,7 @@ for gina_cmd in ['diff']
 endfor
 
 call gina#custom#command#option('commit', '--verbose')
+call gina#custom#command#option('commit', '--quiet')
 call gina#custom#command#option('branch', '--verbose|--all')
 
 let g:gina#command#blame#use_default_mappings = 0
