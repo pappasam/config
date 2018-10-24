@@ -234,6 +234,7 @@ Plug 'autowitch/hive.vim'
 Plug 'elzr/vim-json',
 Plug 'vimoutliner/vimoutliner'
 Plug 'cespare/vim-toml'
+Plug 'maralla/vim-toml-enhance'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
