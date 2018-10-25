@@ -368,6 +368,12 @@ alias so='source ~/.zshrc'
 # Cookiecutter
 alias setup_reveal='cookiecutter gh:keimlink/cookiecutter-reveal.js'
 
+# Rust
+
+# need cargo install cargo-update
+alias cargo-update='cargo +nightly install-update -a'
+alias cargo-doc='cargo doc --open'
+
 # }}}
 # Functions --- {{{
 
