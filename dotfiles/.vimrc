@@ -111,12 +111,6 @@ set noswapfile
 " Do not wrap lines by default
 set nowrap
 
-" Set column to light grey at 80 characters
-if (exists('+colorcolumn'))
-  set colorcolumn=80
-  highlight ColorColumn ctermbg=9
-endif
-
 " Search result highlighting
 set incsearch
 augroup sroeca_incsearch_highlight
@@ -320,8 +314,6 @@ Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
 Plug 'b4b4r07/vim-sqlfmt'
-" Python
-Plug 'ambv/black'
 Plug 'maksimr/vim-jsbeautify'
 
 " C Programming
@@ -392,6 +384,18 @@ augroup indentation_sr
 augroup END
 
 " }}}
+" ColorColumn: different widths for different filetypes --- {{{
+
+highlight ColorColumn ctermbg=9
+set colorcolumn=80
+augroup colorcolumn_configuration
+  autocmd!
+  autocmd Filetype python set colorcolumn=88
+  autocmd FileType gitcommit set colorcolumn=72 textwidth=72
+  autocmd Filetype html,text set colorcolumn=0
+augroup END
+
+" }}}
 " General: Writing (non-coding)------------------ {{{
 
 " Notes:
@@ -408,7 +412,6 @@ augroup writing
   autocmd!
   autocmd FileType markdown :setlocal wrap linebreak nolist
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
-  autocmd BufNewFile,BufRead *.html,*.txt :setlocal colorcolumn=0
 augroup END
 
 " }}}
@@ -589,14 +592,6 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
-"  General: Color Column and Text Width --- {{{
-
-augroup color_column_and_text_width
-  autocmd!
-  autocmd FileType gitcommit :setlocal colorcolumn=72 textwidth=72
-augroup END
-
-"  }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
@@ -1360,7 +1355,7 @@ augroup language_specific_file_beauty
   autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
   autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
   autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-  autocmd Filetype python nnoremap <buffer> <leader>f :Black<cr>
+  autocmd Filetype python nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>

@@ -439,7 +439,8 @@ DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
 
 function pydev() {
-  pip install -U pip neovim bpython jedi restview python-language-server
+  pip install -U \
+    pip neovim bpython jedi restview black python-language-server pyls-black
 }
 
 function va() {
