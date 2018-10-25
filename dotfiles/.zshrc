@@ -440,8 +440,11 @@ DEFAULT_PYTHON_VERSION="3"
 
 function pydev() {
   pip install -U \
-    pip neovim bpython jedi restview black python-language-server pyls-black
+    pip neovim bpython restview \
+    jedi black isort python-language-server pyls-black pyls-isort \
+    pre-commit
 }
+
 
 function va() {
   if [ $# -eq 0 ]; then

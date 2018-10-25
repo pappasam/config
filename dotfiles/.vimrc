@@ -390,7 +390,7 @@ highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
-  autocmd Filetype python set colorcolumn=88
+  autocmd Filetype python set colorcolumn=89
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
   autocmd Filetype html,text set colorcolumn=0
 augroup END
