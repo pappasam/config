@@ -675,7 +675,8 @@ let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeSortOrder = ['*', '\/$']
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
-
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore=[
       \'venv$[[dir]]',
       \'.venv$[[dir]]',
