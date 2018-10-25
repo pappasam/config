@@ -330,3 +330,8 @@ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 # Terraform: TfEnv
 #######################################################################
 git clone https://github.com/kamatama41/tfenv.git ~/.tfenv
+
+# Poetry: python dependency management
+curl -sSL \
+  https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | \
+  python

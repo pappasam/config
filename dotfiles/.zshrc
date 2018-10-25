@@ -212,6 +212,12 @@ if [ -d "$STACK_LOC" ]; then
   path_ladd "$STACK_LOC"
 fi
 
+POETRY_LOC="$HOME/.poetry/bin"
+if [ -d "$POETRY_LOC" ]; then
+  path_ladd "$POETRY_LOC"
+  source $HOME/.poetry/env
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
