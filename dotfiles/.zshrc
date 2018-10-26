@@ -438,6 +438,10 @@ function gn() {  # arg1: filename
 DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
 
+function cargodev() {
+  cargo install cargo-edit
+}
+
 function pydev() {
   pip install -U \
     pip neovim bpython restview \

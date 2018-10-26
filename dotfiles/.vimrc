@@ -223,6 +223,7 @@ Plug 'jiangmiao/auto-pairs'
 " Syntax highlighting
 Plug 'derekwyatt/vim-scala',
 Plug 'rust-lang/rust.vim'
+Plug 'ron-rs/ron.vim'
 Plug 'hdima/python-syntax',
 Plug 'autowitch/hive.vim'
 Plug 'elzr/vim-json',
@@ -366,21 +367,12 @@ augroup indentation_sr
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
 
-  " Rust-specifc 'indentation overrides'
-  " This is no longer necessary, but keeping in case I need
-  " to do something with ctags again
-  "   assumes working with rust.vim, which uses ctags
-  "     cino-m
-  "       c = c1 && (
-  "           c2 ||
-  "           c3
-  "       ) && c4;
-  " autocmd Filetype rust setlocal cinoptions+='(s,m1'
-  "     cino-(
-  "        if (c1 && (c2 ||
-  "                   c3))
-  "        foo;
-  " autocmd Filetype rust setlocal cinoptions+='(0'
+  autocmd Filetype ron setlocal cindent
+        \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
+        \ cinoptions+='(s,m2'
+        \ cinoptions+='(s,U1'
+        \ cinoptions+='j1'
+        \ cinoptions+='J1'
 augroup END
 
 " }}}
@@ -390,7 +382,8 @@ highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
-  autocmd Filetype python,rust set colorcolumn=89
+  autocmd Filetype python set colorcolumn=89
+  autocmd Filetype rust set colorcolumn=100
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
   autocmd Filetype html,text set colorcolumn=0
 augroup END
