@@ -314,6 +314,7 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
+Plug 'pappasam/black', { 'branch': 'feature/issue-414' }
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'maksimr/vim-jsbeautify'
 
@@ -1444,6 +1445,10 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
+
+" Substitute: file replace word under cursor
+" Places user in the vim command line
+vnoremap sc y:%s/<C-R>0//gc<C-F>$hhi
 
 " IndentComma: placing commas one line down
 " usable with repeat operator '.'
