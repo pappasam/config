@@ -421,13 +421,15 @@ function cd_up() {  # arg1: number|word
 }
 
 # Get the weather
-function weather() {  # arg1: Optional<location>
-  if [ $# -eq 0 ]; then
-    curl wttr.in/new_york
-  else
-    curl wttr.in/$1
-  fi
-}
+# go get github.com/genuinetools/weather
+# I have my old weather function below
+# function weather() {  # arg1: Optional<location>
+#   if [ $# -eq 0 ]; then
+#     curl wttr.in/new_york
+#   else
+#     curl wttr.in/$1
+#   fi
+# }
 
 # Open files with gnome-open
 function gn() {  # arg1: filename
