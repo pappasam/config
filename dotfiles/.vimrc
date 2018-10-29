@@ -385,7 +385,7 @@ highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
-  autocmd Filetype python set colorcolumn=89
+  autocmd Filetype python set colorcolumn=80
   autocmd Filetype rust set colorcolumn=101
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
   autocmd Filetype html,text set colorcolumn=0
@@ -479,11 +479,14 @@ augroup END
 
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
-let g:PaperColor_Theme_Options['theme'] = {
-      \     'default': {
-      \       'transparent_background': 1
-      \     }
-      \ }
+" Below enables using terminal background color for vim background
+" After giving this my best shot, it turns out to hurt my eyes /
+" is confusing when working with vim near other terminals
+" let g:PaperColor_Theme_Options['theme'] = {
+"       \     'default': {
+"       \       'transparent_background': 1
+"       \     }
+"       \ }
 let g:PaperColor_Theme_Options['language'] = {
       \     'python': {
       \       'highlight_builtins' : 1
@@ -531,7 +534,6 @@ augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
 augroup END
-
 
 " }}}
 " General: Resize Window --- {{{
