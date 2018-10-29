@@ -384,7 +384,7 @@ highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
-  autocmd Filetype python set colorcolumn=79
+  autocmd Filetype python set colorcolumn=89
   autocmd Filetype rust set colorcolumn=100
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
   autocmd Filetype html,text set colorcolumn=0
@@ -1244,8 +1244,8 @@ let g:go_version_warning = 0
 let g:choosewin_overlay_enable = 1
 
 " BlackVim: Python formatting
-let g:black_linelength = 79
-let g:black_skip_string_normalization = 1
+let g:black_linelength = 88
+let g:black_skip_string_normalization = 0
 
 " Colorizer: css color code highlighting
 let g:colorizer_auto_filetype='css,html'
