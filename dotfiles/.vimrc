@@ -385,7 +385,7 @@ set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
   autocmd Filetype python set colorcolumn=89
-  autocmd Filetype rust set colorcolumn=100
+  autocmd Filetype rust set colorcolumn=101
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
   autocmd Filetype html,text set colorcolumn=0
 augroup END
