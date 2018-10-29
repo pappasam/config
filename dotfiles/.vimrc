@@ -315,7 +315,8 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
-Plug 'pappasam/black', { 'branch': 'feature/issue-414' }
+" Plug 'pappasam/black', { 'branch': 'feature/issue-414' }
+Plug 'tell-k/vim-autopep8'
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'maksimr/vim-jsbeautify'
 
@@ -1243,9 +1244,9 @@ let g:go_version_warning = 0
 " ChooseWin: options
 let g:choosewin_overlay_enable = 1
 
-" BlackVim: Python formatting
-let g:black_linelength = 88
-let g:black_skip_string_normalization = 0
+" Autopep8: options
+let g:autopep8_disable_show_diff = 1
+let g:autopep8_on_save = 0
 
 " Colorizer: css color code highlighting
 let g:colorizer_auto_filetype='css,html'
@@ -1367,7 +1368,7 @@ augroup language_specific_file_beauty
   autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
   autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
   autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-  autocmd Filetype python nnoremap <buffer> <leader>f :Black<cr>
+  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>

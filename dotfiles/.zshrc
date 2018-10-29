@@ -446,7 +446,7 @@ function cargodev() {
 
 function pydev() {
   pip install -U \
-    pip neovim bpython restview jedi black pre-commit
+    pip neovim bpython restview jedi autopep8 pre-commit
 }
 
 
