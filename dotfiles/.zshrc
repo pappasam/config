@@ -447,7 +447,8 @@ function cargodev() {
 function pydev() {
   pip install -U \
     pip neovim bpython restview \
-    jedi black isort python-language-server pyls-black pyls-isort \
+    # jedi black python-language-server pyls-black \
+    jedi python-language-server \
     pre-commit
 }
 
