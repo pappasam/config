@@ -259,6 +259,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Autocompletion
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install'  }  " for javascript
+Plug 'davidhalter/jedi-vim'
 " Additional requirements:
 "   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
 Plug 'Rip-Rip/clang_complete'
@@ -1260,8 +1261,7 @@ let g:colorizer_auto_filetype='css,html'
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
-      \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
-      \ 'python': ['pyls']
+      \ 'haskell': ['stack', 'exec', 'hie-wrapper']
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1274,7 +1274,7 @@ function! ConfigureLanguageClient()
 endfunction
 
 augroup langserverLanguages
-  autocmd FileType python,haskell call ConfigureLanguageClient()
+  autocmd FileType haskell call ConfigureLanguageClient()
 augroup END
 
 " VimScript:
@@ -1286,6 +1286,23 @@ augroup vimscript_complete
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
 augroup END
+
+" Python:
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#auto_close_doc = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#force_py_version = 3
+
+" mappings
+" auto_vim_configuration creates space between where vim is opened and
+" closed in my bash terminal. This is annoying, so I disable and manually
+" configure. See 'set completeopt' in my global config for my settings
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#goto_command = "<C-]>"
+let g:jedi#documentation_command = "<leader>sd"
+let g:jedi#usages_command = "<leader>su"
+let g:jedi#rename_command = "<leader>sr"
 
 " Javascript:
 let g:tern_show_argument_hints = 'on_move'
@@ -1350,7 +1367,7 @@ augroup language_specific_file_beauty
   autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
   autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
   autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-  autocmd Filetype python nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
+  autocmd Filetype python nnoremap <buffer> <leader>f :Black<cr>
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
