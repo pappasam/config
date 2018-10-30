@@ -755,6 +755,7 @@ function! FZFBuffersAvoidNerdtree()
   execute 'Buffers'
 endfunction
 
+let g:fzf_height = 12
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
       \ 'ctrl-t': 'tab split',
@@ -1062,6 +1063,9 @@ let g:startify_custom_footer = [
       \ '',
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
+augroup startify_test
+  autocmd Filetype startify call FZFFilesAvoidNerdtree()
+augroup END
 "  }}}
 "  Plugin: VimTex --- {{{
 
