@@ -908,7 +908,6 @@ for gina_cmd in ['diff']
 endfor
 
 call gina#custom#command#option('commit', '--verbose')
-call gina#custom#command#option('commit', '--quiet')
 call gina#custom#command#option('branch', '--verbose|--all')
 
 let g:gina#command#blame#use_default_mappings = 0
@@ -1540,7 +1539,8 @@ nnoremap <leader>q :ChooseWin<CR>
 nnoremap <leader>ga :Gina add %:p<CR><CR>
 nnoremap <leader>g. :Gina add .<CR><CR>
 nnoremap <leader>gs :Gina status<CR>
-nnoremap <leader>gc :Gina commit<CR>i
+" The below feature doesn't work well with commit hooks
+" nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gina diff<CR>
 
