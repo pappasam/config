@@ -447,7 +447,7 @@ function ve() {
   else
     local pkg=$@
   fi
-  venv_name=$pkg-venv
+  venv_name=$pkg
   pyenv virtualenv $venv_name
   pyenv activate $venv_name
   $(pyenv which pip) install --upgrade pip $PYTHON_DEV_PACKAGES
