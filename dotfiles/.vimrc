@@ -1063,9 +1063,12 @@ let g:startify_custom_footer = [
       \ '',
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
-augroup startify_test
-  autocmd Filetype startify call FZFFilesAvoidNerdtree()
+" The following opens Startify AND FZF search window on startup
+let g:startify_disable_at_vimenter = 1
+augroup startify_config
+  autocmd VimEnter * Startify | call FZFFilesAvoidNerdtree()
 augroup END
+
 "  }}}
 "  Plugin: VimTex --- {{{
 
@@ -1525,7 +1528,7 @@ nnoremap <leader>q :ChooseWin<CR>
 nnoremap <leader>ga :Gina add %:p<CR><CR>
 nnoremap <leader>g. :Gina add .<CR><CR>
 nnoremap <leader>gs :Gina status<CR>
-nnoremap <leader>gc :Gina commit<CR>
+nnoremap <leader>gc :Gina commit<CR>i
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gina diff<CR>
 
