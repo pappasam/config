@@ -323,6 +323,7 @@ sudo apt install \
 
 # move pyenv into repository
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 
 # example command to list all available python versions for pyenv
 # pyenv global system 3.6.1
