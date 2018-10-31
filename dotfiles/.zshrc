@@ -155,6 +155,9 @@ if [ -d "$PYENV_ROOT" ]; then
   export PYENV_ROOT
   path_radd "$PYENV_ROOT/bin"
   eval "$(pyenv init -)"
+  if [ -d "$PYENV_ROOT/plugins/pyenv-virtualenv" ]; then
+    eval "$(pyenv virtualenv-init -)"
+  fi
 fi
 
 SDKMAN_DIR="$HOME/.sdkman"
@@ -420,17 +423,6 @@ function cd_up() {  # arg1: number|word
   cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
 }
 
-# Get the weather
-# go get github.com/genuinetools/weather
-# I have my old weather function below
-# function weather() {  # arg1: Optional<location>
-#   if [ $# -eq 0 ]; then
-#     curl wttr.in/new_york
-#   else
-#     curl wttr.in/$1
-#   fi
-# }
-
 # Open files with gnome-open
 function gn() {  # arg1: filename
   gio open $1
@@ -444,55 +436,23 @@ function cargodev() {
   cargo install cargo-edit
 }
 
-function pydev() {
-  pip install -U \
-    pip neovim bpython restview jedi autopep8 pre-commit
-}
-
-
-function va() {
-  if [ $# -eq 0 ]; then
-    local VENV_NAME=$DEFAULT_VENV_NAME
-  else
-    local VENV_NAME="$1"
-  fi
-  local slashes=${PWD//[^\/]/}
-  local DIR="$PWD"
-  for (( n=${#slashes}; n>0; --n ))
-  do
-    if [ -d "$DIR/$VENV_NAME" ]; then
-      source "$DIR/$VENV_NAME/bin/activate"
-      local DIR_REL=$(realpath --relative-to='.' "$DIR/$VENV_NAME")
-      echo "Activated $(python --version) virtualenv in $DIR_REL/"
-      return
-    fi
-    local DIR="$DIR/.."
-  done
-  echo "no $VENV_NAME/ found from here to OS root"
-}
+PYTHON_DEV_PACKAGES=(neovim bpython restview jedi autopep8 pre-commit)
 
 # [optionally] create and activate Python virtual environment
 function ve() {
-  if [ $# -eq 0 ]; then
-    local VENV_NAME="$DEFAULT_VENV_NAME"
+  if [ ${#} -ne 1 ]; then
+    local pkg_base=$(basename $PWD)
+    local pkg_hashval=$(pwd | sha1sum | base32 | cut -c1-5)
+    local pkg="$pkg_base-$pkg_hashval"
   else
-    local VENV_NAME="$1"
+    local pkg=$@
   fi
-  if [ ! -d "$VENV_NAME" ]; then
-    echo "Creating new Python virtualenv in $VENV_NAME/"
-    python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
-    source "$VENV_NAME/bin/activate"
-    pydev
-    deactivate
-    va
-  else
-    va
-  fi
-}
-
-# deactivate virtual environment
-function vd() {
-  deactivate
+  venv_name=$pkg-venv
+  pyenv virtualenv $venv_name
+  pyenv activate $venv_name
+  $(pyenv which pip) install --upgrade pip $PYTHON_DEV_PACKAGES
+  pyenv deactivate
+  echo $venv_name > .python-version
 }
 
 # Create New Python Repo
@@ -512,14 +472,7 @@ function pynew() {
 !.gitignore
 EOL
 
-  # venv/
   ve
-  # NOTE: not using pyenv right now
-  # pipenv install
-  # va
-  # pydev
-  # deactivate
-  # va
 
   # .gitignore
   cat > .gitignore <<EOL
@@ -538,6 +491,7 @@ docs/_build/
 .mypy_cache/
 .pytest_cache/
 *.coverage*
+.python-version
 
 # Vim
 *.swp
@@ -552,12 +506,6 @@ EOL
 
 EOL
   chmod +x main.py
-}
-
-# Vim, but activate python virtual environment first
-function vim() {
-  va > /dev/null
-  nvim "$@"
 }
 
 # Clubhouse story template
@@ -890,7 +838,6 @@ WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 # }}}
 # Executed Commands --- {{{
 
-
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
     # if you're in the first tmux pane within all of tmux
@@ -899,9 +846,6 @@ if [[ -o interactive ]]; then
 
   # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
   stty -ixon
-
-  # try activate my virtual environment
-  va > /dev/null
 
   # kubectl autocompletion
   if [ $commands[kubectl] ]; then
