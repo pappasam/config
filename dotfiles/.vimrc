@@ -288,6 +288,7 @@ Plug 'lvht/tagbar-markdown'
 "   sudo apt install -y php
 
 " Indentation-only
+Plug 'vim-scripts/groovyindent-unix'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 
