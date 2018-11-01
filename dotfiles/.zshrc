@@ -442,7 +442,12 @@ PYTHON_DEV_PACKAGES=(neovim bpython restview jedi autopep8 pre-commit)
 function ve() {
   if [ ${#} -ne 1 ]; then
     local pkg_base=$(basename $PWD)
-    local pkg_hashval=$(pwd | sha1sum | base32 | cut -c1-5)
+    local pkg_hashval=$(\
+      pwd |\
+      sha1sum |\
+      base32 |\
+      cut -c1-5 |\
+      tr '[:upper:]' '[:lower:]')
     local pkg="$pkg_base-$pkg_hashval"
   else
     local pkg=$@
@@ -655,13 +660,28 @@ function precmd() { vcs_info }
 COLOR_BRIGHT_BLUE="086"
 COLOR_GOLD="184"
 COLOR_SILVER="250"
+COLOR_PYTHON_GREEN="047"
 
 # Set Bash PS1
 PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
 PS1_USR="%B%F{$COLOR_GOLD}%n@%M%b%f"
 PS1_END="%B%F{$COLOR_SILVER}$ %f%b"
 
-PS1="${PS1_DIR} \$vcs_info_msg_0_ \
+# Configure Python virtualenv prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+function virtualenv_info(){
+  # Get Virtual Env
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    # Strip out the path and just leave the env name
+    venv="${VIRTUAL_ENV##*/}"
+  else
+    # In case you don't have one activated
+    venv=''
+  fi
+  [[ -n "$venv" ]] && echo "<$venv> "
+}
+
+PS1="${PS1_DIR} \$vcs_info_msg_0_ %F{$COLOR_PYTHON_GREEN}\$(virtualenv_info)%f \
 
 ${PS1_USR} ${PS1_END}"
 
