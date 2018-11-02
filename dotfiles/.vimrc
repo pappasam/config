@@ -221,12 +221,12 @@ Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
 " Syntax highlighting
-Plug 'derekwyatt/vim-scala',
+Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
-Plug 'hdima/python-syntax',
+Plug 'hdima/python-syntax'
 Plug 'autowitch/hive.vim'
-Plug 'elzr/vim-json',
+Plug 'elzr/vim-json'
 Plug 'vimoutliner/vimoutliner'
 Plug 'cespare/vim-toml'
 Plug 'maralla/vim-toml-enhance'
