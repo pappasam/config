@@ -1674,6 +1674,9 @@ command! Run !./%
 " Fix highlighting
 command! FixHighlight syntax sync fromstart
 
+" Go to vim wiki
+command! Wiki cd ~/Dropbox/Wiki/
+
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
 " commands that need to run at the end of my vimrc
