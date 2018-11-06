@@ -1394,7 +1394,7 @@ augroup language_specific_file_beauty
   autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
   autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
-  autocmd Filetype terraform nnoremap <buffer> <leader>f :TerraformFmt<cr>
+  autocmd Filetype terraform nnoremap <buffer> <leader>f :call terraform#fmt()<cr>
   autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
 augroup END
 
