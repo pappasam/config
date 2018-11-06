@@ -1327,7 +1327,7 @@ let g:jedi#usages_command = "<leader>su"
 let g:jedi#rename_command = "<leader>sr"
 
 " Javascript:
-let g:tern#command = [$HOME . "/.nodenv/shims/tern"]
+let g:tern#command = ["npx", "tern"]
 let g:tern_show_argument_hints = 'on_move'
 let g:tern_show_signature_in_pum = 1
 augroup javascript_complete
