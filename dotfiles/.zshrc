@@ -830,6 +830,9 @@ compctl -f -K _vault_complete vault
 # stack
 # eval "$(stack --bash-completion-script stack)"
 
+# Add autocompletion path
+fpath+=~/.zfunc
+
 # }}}
 # ZShell Key-Bindings --- {{{
 
