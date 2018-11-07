@@ -1461,7 +1461,6 @@ inoremap <C-space> <C-x><C-o>
 " EnglishWordCompletion:
 " Look up words in a dictionary
 " <C-x><C-k> = dictionary completion
-inoremap <C-k> <C-x><C-k>
 
 " Exit: Preview and Help && QuickFix and Location List
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
