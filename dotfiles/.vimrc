@@ -1063,24 +1063,6 @@ let g:startify_custom_footer = [
       \ '',
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
-" The following opens Startify AND FZF search window on startup
-let g:startify_disable_at_vimenter = 1
-function! StartifyIfEmpty()
-  if @% == ""
-    " No filename for current buffer
-    Startify
-    call FZFFilesAvoidNerdtree()
-  elseif filereadable(@%) == 0
-    " File doesn't exist yet
-  elseif line('$') == 1 && col('$') == 1
-    " File is empty
-  endif
-endfunction
-
-augroup startify_config
-  autocmd VimEnter * call StartifyIfEmpty()
-augroup END
-
 "  }}}
 "  Plugin: VimTex --- {{{
 
