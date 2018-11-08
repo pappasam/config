@@ -1283,7 +1283,8 @@ let g:colorizer_auto_filetype='css,html'
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
-      \ 'haskell': ['stack', 'exec', 'hie-wrapper']
+      \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
+      \ 'ruby': ['solargraph', 'stdio']
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1293,10 +1294,11 @@ function! ConfigureLanguageClient()
   nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
+  setlocal omnifunc=LanguageClient#complete
 endfunction
 
 augroup langserverLanguages
-  autocmd FileType haskell call ConfigureLanguageClient()
+  autocmd FileType haskell,ruby call ConfigureLanguageClient()
 augroup END
 
 " VimScript:
