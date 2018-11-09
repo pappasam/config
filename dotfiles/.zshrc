@@ -460,26 +460,7 @@ function ve() {
   echo $venv_name > .python-version
 }
 
-# Create New Python Repo
-function pynew() {
-  if [ $# -ne 1 ]; then
-    echo "pynew <directory>"
-    return 1
-  fi
-  local dir_name="$1"
-  mkdir "$dir_name"
-  cd "$dir_name"
-  git init
-
-  mkdir instance
-  cat > instance/.gitignore <<EOL
-*
-!.gitignore
-EOL
-
-  ve
-
-  # .gitignore
+function pygitignore() {
   cat > .gitignore <<EOL
 # Python
 venv/
@@ -504,6 +485,29 @@ docs/_build/
 # C
 *.so
 EOL
+}
+
+# Create New Python Repo
+function pynew() {
+  if [ $# -ne 1 ]; then
+    echo "pynew <directory>"
+    return 1
+  fi
+  local dir_name="$1"
+  mkdir "$dir_name"
+  cd "$dir_name"
+  git init
+
+  # .gitignore
+  pygitignore
+
+  mkdir instance
+  cat > instance/.gitignore <<EOL
+*
+!.gitignore
+EOL
+
+  ve
 
   cat > main.py <<EOL
 #!/usr/bin/env python
