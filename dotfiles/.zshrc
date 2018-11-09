@@ -478,6 +478,7 @@ docs/_build/
 .pytest_cache/
 *.coverage*
 .python-version
+dist/
 
 # Vim
 *.swp
