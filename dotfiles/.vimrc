@@ -1559,6 +1559,10 @@ nnoremap gh :call CurtineIncSw()<CR>
 " Open split for writing (80 character window width for wrap)
 nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
+" MouseCopy: system copy mouse characteristics
+vmap <RightMouse> <Plug>SystemCopy<CR>
+imap <MiddleMouse> <Plug>SystemPaste<CR>
+
 " }}}
 " General: Macro repeater ---- {{{
 
