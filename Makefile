@@ -17,7 +17,7 @@ system_setup:
 
 .PHONY: dotfiles
 dotfiles: config_directories ## Place dotfiles in home folder, replacing all owned by stow
-	-mkdir $(HOME_DIRS_MKDIR)
+	-mkdir -p $(HOME_DIRS_MKDIR)
 	stow -t ~ -R $@/
 
 .PHONY: config_directories
