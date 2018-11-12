@@ -336,3 +336,6 @@ git clone https://github.com/kamatama41/tfenv.git ~/.tfenv
 curl -sSL \
   https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | \
   python
+
+# Tools to open URLs
+sudo apt install urlview

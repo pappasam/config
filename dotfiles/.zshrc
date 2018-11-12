@@ -147,6 +147,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 # pipenv
 export PIPENV_VENV_IN_PROJECT='doit'
 
+# Default browser for some programs (eg, urlview)
+export BROWSER='/usr/bin/firefox'
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
