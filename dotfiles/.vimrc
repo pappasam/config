@@ -1561,6 +1561,9 @@ nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 vmap <RightMouse> <Plug>SystemCopy<CR>
 imap <MiddleMouse> <Plug>SystemPaste<CR>
 
+" SearchBackward: remap comma to single quote
+nnoremap ' ,
+
 " }}}
 " General: Macro repeater ---- {{{
 
