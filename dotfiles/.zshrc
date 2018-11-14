@@ -349,7 +349,7 @@ alias publicip='curl -s checkip.amazonaws.com'
 
 # Git
 alias g='git status'
-alias gl='git branch --verbose --all'
+alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
