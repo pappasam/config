@@ -130,6 +130,10 @@ set dictionary=$HOME/.american-english-with-propcase.txt
 
 set spelllang=en_us
 
+" Do not add two spaces after '.', '!', and '?'
+" Useful when doing :%j (the opposite of gq)
+set nojoinspaces
+
 set showtabline=2
 
 set autoread
