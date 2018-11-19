@@ -150,6 +150,9 @@ export PIPENV_VENV_IN_PROJECT='doit'
 # Default browser for some programs (eg, urlview)
 export BROWSER='/usr/bin/firefox'
 
+# Enable editor to scale with monitor's DPI
+export WINIT_HIDPI_FACTOR=1.0
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
