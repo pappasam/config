@@ -466,33 +466,51 @@ function ve() {
   echo $venv_name > .python-version
 }
 
-function pygitignore() {
-  cat > .gitignore <<EOL
-# Python
-venv/
-.venv/
-__pycache__/
-*.py[cod]
-.tox/
-.cache
-.coverage
-docs/_build/
-*.egg-info/
-.installed.cfg
-*.egg
-.mypy_cache/
-.pytest_cache/
-*.coverage*
-.python-version
-dist/
+export GITIGNORE_DIR=$HOME/src/lib/gitignore
 
-# Vim
-*.swp
-
-# C
-*.so
-EOL
+# Print out the Github-recommended gitignore
+function gitignore() {
+  if [ ! -d "$GITIGNORE_DIR" ]; then
+    mkdir -p $HOME/src/lib
+    git clone https://github.com/github/gitignore $GITIGNORE_DIR
+    return 1
+  fi
+  if [ $# -ne 1 ]; then
+    echo "Usage: gitignore <file>"
+    return 1
+  else
+    cat "$GITIGNORE_DIR/$1"
+  fi
 }
+compdef "_files -W $GITIGNORE_DIR/" gitignore
+
+# function pygitignore() {
+#   cat > .gitignore <<EOL
+# # Python
+# venv/
+# .venv/
+# __pycache__/
+# *.py[cod]
+# .tox/
+# .cache
+# .coverage
+# docs/_build/
+# *.egg-info/
+# .installed.cfg
+# *.egg
+# .mypy_cache/
+# .pytest_cache/
+# *.coverage*
+# .python-version
+# dist/
+
+# # Vim
+# *.swp
+
+# # C
+# *.so
+# EOL
+# }
 
 # Create New Python Repo
 function pynew() {
@@ -506,7 +524,7 @@ function pynew() {
   git init
 
   # .gitignore
-  pygitignore
+  gitignore Python.gitignore > .gitignore
 
   mkdir instance
   cat > instance/.gitignore <<EOL
