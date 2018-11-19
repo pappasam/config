@@ -630,7 +630,7 @@ function gitignore() {
     return 1
   else
     # print all the files
-    count=0
+    local count=0
     for filevalue in $@; do
       echo "#################################################################"
       echo "# $filevalue"
