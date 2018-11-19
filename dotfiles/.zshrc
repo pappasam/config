@@ -484,34 +484,6 @@ function gitignore() {
 }
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 
-# function pygitignore() {
-#   cat > .gitignore <<EOL
-# # Python
-# venv/
-# .venv/
-# __pycache__/
-# *.py[cod]
-# .tox/
-# .cache
-# .coverage
-# docs/_build/
-# *.egg-info/
-# .installed.cfg
-# *.egg
-# .mypy_cache/
-# .pytest_cache/
-# *.coverage*
-# .python-version
-# dist/
-
-# # Vim
-# *.swp
-
-# # C
-# *.so
-# EOL
-# }
-
 # Create New Python Repo
 function pynew() {
   if [ $# -ne 1 ]; then
