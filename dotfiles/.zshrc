@@ -153,6 +153,10 @@ export BROWSER='/usr/bin/firefox'
 # Enable editor to scale with monitor's DPI
 export WINIT_HIDPI_FACTOR=1.0
 
+# Rust (for racer) (rustup component add rust-src)
+export RUST_TOOLCHAIN_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu"
+export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
