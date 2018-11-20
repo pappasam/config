@@ -539,6 +539,10 @@ alias setup_reveal='cookiecutter gh:keimlink/cookiecutter-reveal.js'
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
 
+# Python
+# Enable things like "pip install 'requests[security]'"
+alias pip='noglob pip'
+
 # }}}
 # Functions --- {{{
 
