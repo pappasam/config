@@ -454,9 +454,9 @@ alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
 # Vim and Vi: try activate Python virtual environment then call neovim
-alias f='vim'
-alias vi='vim'
-alias nv="alias vim=\"echo 'no vim allowed here'\""
+alias f='nvim'
+alias vi='nvim'
+alias vim='nvim'
 
 # Tree that ignores annoying directories
 alias itree="tree -I '__pycache__|venv|node_modules'"
