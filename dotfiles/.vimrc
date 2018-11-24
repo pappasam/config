@@ -367,7 +367,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx
+  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
