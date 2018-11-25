@@ -1260,7 +1260,7 @@ let g:colorizer_auto_filetype='css,html'
 " HexMode: configure hex editing
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-let g:hexmode_xxd_options = '-g 1'
+let g:hexmode_xxd_options = '-g 2'
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
