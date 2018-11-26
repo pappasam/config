@@ -341,6 +341,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc,*.slack-term
         \ set filetype=json
+  autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
@@ -369,7 +370,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm
+  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm,nasm
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
