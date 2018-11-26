@@ -1505,11 +1505,19 @@ nnoremap <silent> gM M
 " Delete character under cursor in insert mode
 inoremap <C-l> <Del>
 
-" QuickChangeFiletype:
-" Sometimes we want to set some filetypes due to annoying behavior of plugins
-" The following mappings make it easier to chage javascript plugin behavior
-nnoremap <leader>jx :set filetype=javascript.jsx<CR>
-nnoremap <leader>jj :set filetype=javascript<CR>
+" Jinja2Toggle:
+" The following mapping toggles jinja2 for any filetype
+function! Jinja2Toggle()
+  let jinja2 = '.jinja2'
+  let jinja2_pattern = '\' . jinja2
+  if matchstr(&ft, jinja2_pattern) == ""
+    let new_filetype = &ft . jinja2
+  else
+    let new_filetype = substitute(&ft, jinja2_pattern, "", "")
+  endif
+  execute "set filetype=" . new_filetype
+endfunction
+nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
 " ToggleRelativeNumber: uses custom functions
 nnoremap <silent><leader>r :NumbersToggle<CR>
