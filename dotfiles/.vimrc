@@ -261,6 +261,7 @@ Plug 'chr4/nginx.vim'
 Plug 'othree/html5.vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'mattn/vim-xxdcursor'
 
 " Autocompletion
 Plug 'marijnh/tern_for_vim'
