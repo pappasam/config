@@ -594,6 +594,13 @@ function gn() {  # arg1: filename
   gio open $1
 }
 
+# Open documentation files
+export DOC_DIR="$HOME/Documents/reference"
+function doc() {  # arg1: filename
+  gio open "$DOC_DIR/$1"
+}
+compdef "_files -W $DOC_DIR" doc
+
 # activate virtual environment from any directory from current and up
 DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
