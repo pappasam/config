@@ -113,6 +113,7 @@ set nowrap
 
 " Search result highlighting
 set incsearch
+set inccommand=nosplit
 augroup sroeca_incsearch_highlight
   autocmd!
   autocmd CmdlineEnter /,\? :set hlsearch
