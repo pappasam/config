@@ -70,6 +70,11 @@ sudo apt install fortune cowsay bsdgames bsdgames-nonfree
 sudo apt install cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
 
 #######################################################################
+# Apache stuff (htpasswd)
+#######################################################################
+sudo apt install apache2-utils
+
+#######################################################################
 # NeoVim
 #######################################################################
 sudo add-apt-repository ppa:neovim-ppa/stable
