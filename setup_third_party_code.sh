@@ -40,10 +40,11 @@ sudo apt dict-gcide dict-moby-thesaurus
 #######################################################################
 # keepass
 #######################################################################
-sudo apt install keepass2
-sudo add-apt-repository ppa:dlech/keepass2-plugins
-sudo apt update
-sudo apt install keepass2-plugin-application-indicator
+# sudo apt install keepass2
+# sudo add-apt-repository ppa:dlech/keepass2-plugins
+# sudo apt update
+# sudo apt install keepass2-plugin-application-indicator
+# Ignore above, install this: https://keeweb.info/
 
 #######################################################################
 # Build, version control, and getting code for elsewhere
