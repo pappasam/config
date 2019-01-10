@@ -712,6 +712,14 @@ function pull() {
   git pull origin "$current_branch"
 }
 
+# GITHUB: list all of an organization's Repositories
+function github-list {
+  local username=$1
+  local organization=$2
+  local page=$3
+  curl -u $username "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
+}
+
 # Timer
 function countdown-seconds(){
   local date1=$((`date +%s` + $1));
