@@ -397,7 +397,7 @@ set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
   autocmd FileType gitcommit set colorcolumn=72 textwidth=72
-  autocmd Filetype html,text set colorcolumn=0
+  autocmd Filetype html,text,markdown set colorcolumn=0
 augroup END
 
 " }}}
