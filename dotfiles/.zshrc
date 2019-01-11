@@ -609,7 +609,7 @@ function cargodev() {
   cargo install cargo-edit
 }
 
-PYTHON_DEV_PACKAGES=(neovim bpython restview jedi autopep8 pre-commit)
+PYTHON_DEV_PACKAGES=(pynvim bpython restview jedi autopep8 pre-commit)
 
 # [optionally] create and activate Python virtual environment
 function ve() {
