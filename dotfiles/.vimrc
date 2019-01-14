@@ -72,6 +72,9 @@
 " CTRL-W   delete the word in front of the cursor
 " CTRL-U   delete all characters in front of the cursor
 " CTRL-L   delete character under cursor (I create this in general remappings)
+"
+" CommandMode:
+" q: -> open the command editing window
 
 " }}}
 " General: Leader mappings -------------------- {{{
