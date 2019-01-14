@@ -75,6 +75,10 @@
 "
 " CommandMode:
 " q: -> open the command editing window
+"
+" ExMode:
+" Q -> opens ex mode
+" To lean more about the ex editor, type 'man ex'
 
 " }}}
 " General: Leader mappings -------------------- {{{
