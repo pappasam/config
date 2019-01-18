@@ -14,3 +14,4 @@ unmap q
 map D toggle_page_mode
 map d scroll half-down
 map u scroll half-up
+map ` mark_evaluate
