@@ -1110,14 +1110,24 @@ let g:AutoPairs = {
       \ '`':'`'
       \ }
 augroup autopairs_filetype_overrides
-  autocmd FileType rust let b:AutoPairs = {
+  autocmd FileType plantuml let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
         \ '"':'"',
         \ '`':'`'
         \ }
-  autocmd FileType plantuml let b:AutoPairs = {
+  autocmd FileType python let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ "'":"'",
+        \ '"':'"',
+        \ '`':'`',
+        \ '"""': '"""',
+        \ "'''": "'''"
+        \ }
+  autocmd FileType rust let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
@@ -1129,6 +1139,13 @@ augroup autopairs_filetype_overrides
         \ '[':']',
         \ '{':'}',
         \ '`': "'"
+        \ }
+  autocmd FileType vim let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ "'":"'",
+        \ '`':'`'
         \ }
 augroup END
 
