@@ -495,14 +495,12 @@ augroup END
 
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
-" Below enables using terminal background color for vim background
-" After giving this my best shot, it turns out to hurt my eyes /
-" is confusing when working with vim near other terminals
-" let g:PaperColor_Theme_Options['theme'] = {
-"       \     'default': {
-"       \       'transparent_background': 1
-"       \     }
-"       \ }
+let g:PaperColor_Theme_Options['theme'] = {
+      \     'default': {
+      \       'allow_bold': 1,
+      \       'allow_italic': 1
+      \     }
+      \ }
 let g:PaperColor_Theme_Options['language'] = {
       \     'python': {
       \       'highlight_builtins' : 1
