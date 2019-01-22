@@ -1224,6 +1224,9 @@ let g:haskell_enable_static_pointers = 1  " to highlight `static`
 let g:python_highlight_space_errors = 0
 let g:python_highlight_all = 1
 
+" Json: highlighting
+let g:vim_json_syntax_conceal = 0
+
 " Ragtag: on every filetype
 let g:ragtag_global_maps = 1
 
