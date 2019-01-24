@@ -660,6 +660,15 @@ function gitignore() {
 }
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 
+# Create instance folder with only .gitignore ignored
+function mkinstance() {
+  mkdir instance
+  cat > instance/.gitignore <<EOL
+*
+!.gitignore
+EOL
+}
+
 # Create New Python Repo
 function pynew() {
   if [ $# -ne 1 ]; then
@@ -674,14 +683,8 @@ function pynew() {
   # .gitignore
   gitignore Python.gitignore > .gitignore
 
-  mkdir instance
-  cat > instance/.gitignore <<EOL
-*
-!.gitignore
-EOL
-
+  mkinstance
   ve
-
   cat > main.py <<EOL
 #!/usr/bin/env python
 '''The main module'''
