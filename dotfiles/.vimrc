@@ -253,7 +253,10 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'aklt/plantuml-syntax'
+" Plug 'aklt/plantuml-syntax'
+Plug 'pappasam/plantuml-syntax', {
+      \ 'branch': 'type-keyword-proper-indent'
+      \ }
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
