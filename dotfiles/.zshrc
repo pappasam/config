@@ -669,20 +669,13 @@ function mkinstance() {
 EOL
 }
 
-# Create New Python Repo
-function pynew() {
-  if [ $# -ne 1 ]; then
-    echo "pynew <directory>"
+# Initialize Python Repo
+function pyinit() {
+  if [ $# -ne 0 ]; then
+    echo "pyinit takes no arguments"
     return 1
   fi
-  local dir_name="$1"
-  mkdir "$dir_name"
-  cd "$dir_name"
-  git init
-
-  # .gitignore
   gitignore Python.gitignore > .gitignore
-
   mkinstance
   ve
   cat > main.py <<EOL
@@ -691,6 +684,22 @@ function pynew() {
 
 EOL
   chmod +x main.py
+  poetry init --no-interaction
+}
+
+# Create New Python Repo
+function pynew() {
+  if [ $# -ne 1 ]; then
+    echo "pynew <directory>"
+    return 1
+  fi
+  local dir_name="$1"
+  if [ -d "$dir_name" ]; then
+    echo "$dir_name already exists"
+    return 1
+  fi
+  git init "$dir_name" && cd "$dir_name"
+  pyinit
 }
 
 # Clubhouse story template
