@@ -1111,6 +1111,17 @@ let g:AutoPairs = {
       \ '`':'`'
       \ }
 augroup autopairs_filetype_overrides
+  autocmd FileType markdown let b:AutoPairs = {
+        \ '(':')',
+        \ '[':']',
+        \ '{':'}',
+        \ "'":"'",
+        \ '"':'"',
+        \ '`':'`',
+        \ '"""': '"""',
+        \ "'''": "'''",
+        \ '```': '```'
+        \ }
   autocmd FileType plantuml let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
