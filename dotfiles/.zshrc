@@ -630,7 +630,10 @@ function ve() {
   pyenv activate $venv_name
   $(pyenv which pip) install --upgrade pip $PYTHON_DEV_PACKAGES
   pyenv deactivate
+  # Write the current virtual environment into python-version,
+  # followed by your default environments (which are useful for tox)
   echo $venv_name > .python-version
+  cat ~/.pyenv/version >> .python-version
 }
 
 # Print out the Github-recommended gitignore
