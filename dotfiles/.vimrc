@@ -254,9 +254,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
 " Plug 'aklt/plantuml-syntax'
-Plug 'pappasam/plantuml-syntax', {
-      \ 'branch': 'type-keyword-proper-indent'
-      \ }
+Plug 'pappasam/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
@@ -318,6 +316,13 @@ Plug 'heavenshell/vim-jsdoc'
 " Writing helpers
 Plug 'dkarter/bullets.vim'
 Plug 'gu-fan/riv.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'reedes/vim-textobj-sentence'
+Plug 'reedes/vim-wordy'
+Plug 'reedes/vim-litecorrect'
+Plug 'tommcdo/vim-exchange'
 
 " Previewers
 function! BuildComposer(info)
@@ -425,7 +430,10 @@ augroup END
 
 augroup writing
   autocmd!
-  autocmd FileType markdown :setlocal wrap linebreak nolist
+  autocmd FileType markdown
+        \ setlocal wrap linebreak nolist spell
+        \ | call textobj#sentence#init()
+        \ | call litecorrect#init()
   autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
 augroup END
 
@@ -1177,6 +1185,19 @@ augroup END
 "     with sdl' or with sdb
 "   change:
 "     with srl'l" or with srbl"
+let g:textobj_sandwich_no_default_key_mappings = 1
+
+" Below mappings address the issue raised here:
+" https://github.com/machakann/vim-sandwich/issues/62
+xmap ib <Plug>(textobj-sandwich-auto-i)
+omap ib <Plug>(textobj-sandwich-auto-i)
+xmap ab <Plug>(textobj-sandwich-auto-a)
+omap ab <Plug>(textobj-sandwich-auto-a)
+
+xmap iq <Plug>(textobj-sandwich-query-i)
+omap iq <Plug>(textobj-sandwich-query-i)
+xmap aq <Plug>(textobj-sandwich-query-a)
+omap aq <Plug>(textobj-sandwich-query-a)
 
 "  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
