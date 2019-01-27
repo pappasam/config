@@ -470,7 +470,8 @@ augroup fold_settings
   autocmd!
   autocmd FileType vim,tmux setlocal foldmethod=marker
   autocmd FileType vim,tmux setlocal foldlevelstart=0
-  autocmd FileType * setlocal foldnestmax=1
+  autocmd FileType vim,tmux setlocal foldnestmax=1
+  autocmd FileType ledger setlocal foldmethod=syntax
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldmethod=marker
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldlevelstart=0
 augroup END
@@ -1205,7 +1206,8 @@ omap aq <Plug>(textobj-sandwich-query-a)
 "  Plugin: Ledger --- {{{
 
 let g:ledger_maxwidth = 80
-let g:ledger_fold_blanks = 1
+let g:ledger_fillstring = ' - -'
+let g:ledger_fold_blanks = 2
 
 " Code formatter function for the ledger filetype
 " Depends on ledger/vim-ledger
@@ -1227,9 +1229,11 @@ function! _LedgerFmt()
     echo results
   endif
 endfunction
-augroup ledger_formatter
+augroup ledger_settings
   autocmd!
   autocmd FileType ledger command! -buffer LedgerFmt call _LedgerFmt()
+  autocmd FileType ledger noremap { ?^\d<CR>
+  autocmd FileType ledger noremap } /^\d<CR>
 augroup END
 
 "  }}}
@@ -1483,7 +1487,7 @@ augroup language_specific_file_beauty
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
   autocmd Filetype terraform nnoremap <buffer> <leader>f :call terraform#fmt()<cr>
   autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
-  autocmd FileType ledger nnoremap <buffer> <leader>f :LedgerFmt<cr>
+  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
 augroup END
 
 " }}}
