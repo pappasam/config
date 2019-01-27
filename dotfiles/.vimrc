@@ -253,7 +253,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/SAS-Syntax'
 Plug 'neovimhaskell/haskell-vim'
-" Plug 'aklt/plantuml-syntax'
 Plug 'pappasam/plantuml-syntax'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'hashivim/vim-terraform'
@@ -272,6 +271,9 @@ Plug 'othree/html5.vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/vim-xxdcursor'
+
+" Accounting
+Plug 'ledger/vim-ledger'
 
 " Autocompletion
 Plug 'marijnh/tern_for_vim'
@@ -1200,6 +1202,37 @@ xmap aq <Plug>(textobj-sandwich-query-a)
 omap aq <Plug>(textobj-sandwich-query-a)
 
 "  }}}
+"  Plugin: Ledger --- {{{
+
+let g:ledger_maxwidth = 80
+let g:ledger_fold_blanks = 1
+
+" Code formatter function for the ledger filetype
+" Depends on ledger/vim-ledger
+function! _LedgerFmt()
+  let filepath = expand('%')
+  let results = system(
+        \ 'ledger -f ' . filepath . ' print --sort "date, amount"')
+  if !v:shell_error
+    " Delete all lines in the buffer
+    execute 'normal!ggdG'
+    " Place the value in the 'script' variable in the buffer
+    put =results
+    " Delete the unnecessarily-created first line
+    1delete _
+    " Run the LedgerAlign command on all lines in the script
+    %LedgerAlign
+  else
+    echo 'LedgerSort encountered an error:'
+    echo results
+  endif
+endfunction
+augroup ledger_formatter
+  autocmd!
+  autocmd FileType ledger command! -buffer LedgerFmt call _LedgerFmt()
+augroup END
+
+"  }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
 
 " GvVim:
@@ -1450,6 +1483,7 @@ augroup language_specific_file_beauty
   autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
   autocmd Filetype terraform nnoremap <buffer> <leader>f :call terraform#fmt()<cr>
   autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
+  autocmd FileType ledger nnoremap <buffer> <leader>f :LedgerFmt<cr>
 augroup END
 
 " }}}
@@ -1467,16 +1501,16 @@ command! CleanUnicode call CleanUnicode()
 " }}}
 " General: Neovim Terminal --- {{{
 
-function! s:openTerm(vertical)
-  let cmd = a:vertical ? 'vnew' : 'new'
-  exec cmd
-  term
+function! s:openTerm(view_type)
+  exec a:view_type
+  terminal
   setlocal nonumber nornu
   startinsert
 endfunction
 
-command! Term call s:openTerm(0)
-command! Vterm call s:openTerm(1)
+command! Term call s:openTerm('split')
+command! Termv call s:openTerm('vsplit')
+command! Vtert call s:openTerm('tabnew')
 
 " }}}
 " General: Number width to 80 (including special characters)---- {{{
@@ -1728,11 +1762,6 @@ nmap <expr> q QStart()
 " }}}
 " General: Command abbreviations ------------------------ {{{
 
-" Terminal abbreviation
-command! Terms split <BAR> terminal
-command! Termv vsplit <BAR> terminal
-command! Termt tabnew <BAR> terminal
-
 " Change directory to current file
 command! CD cd %:h
 
@@ -1741,9 +1770,6 @@ command! Run !./%
 
 " Fix highlighting
 command! FixHighlight syntax sync fromstart
-
-" Go to vim wiki
-command! Wiki cd ~/Dropbox/Wiki/
 
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
