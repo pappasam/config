@@ -344,6 +344,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tell-k/vim-autopep8'
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'pappasam/vim-black'
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -669,17 +670,6 @@ function! _UDFCodeFormat(function_name, system_call, std_in)
 endfunction
 
 "  }}}
-"  UDF: Black autoformat --- {{{
-
-function! _BlackFmt()
-  call _UDFCodeFormat('BlackFmt', 'black -q -', 1)
-endfunction
-augroup black_settings
-  autocmd!
-  autocmd FileType python command! -buffer BlackFmt call _BlackFmt()
-augroup END
-
-" }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
