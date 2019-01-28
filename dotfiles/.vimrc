@@ -341,7 +341,6 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
-" Plug 'pappasam/black', { 'branch': 'feature/issue-414' }
 Plug 'tell-k/vim-autopep8'
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'maksimr/vim-jsbeautify'
