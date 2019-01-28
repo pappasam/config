@@ -623,20 +623,28 @@ augroup END
 " Code formatter function general purpose function
 " WrittenBy: Samuel Roeca
 " Assumes you're using a POSIX-compliant system
-" and a command whose stdout contains the formatter
-" code you want to use.
+" with a relevant formatting command installed.
+"
+" Input can either come from on disk or the current buffer,
+" as specified with the std_in parameter
 " Parameters:
 "   function_name: str : the name of the calling function
 "   system_call: str : the string value of the system call to be performed
-function! _UDFCodeFormat(function_name, system_call)
-  " save the contents of the buffer to disk
-  silent write
+"   std_in: bool : should the vimscript command take buffer as stdin?
+function! _UDFCodeFormat(function_name, system_call, std_in)
+  if a:std_in
+    let results_raw = execute('write !' . a:system_call)
+  else
+    " save the contents of the buffer to disk
+    silent write
+    " Get the stdout from the system call
+    let results_raw = system(a:system_call)
+  endif
+  let results = substitute(results_raw, '\v^\n*(.{-})\n*$', '\1', '')
   " Save the current location
-  " Get the stdout from the system call
-  let results = system(a:system_call)
+  let current_row = line('.')
+  let total_rows_original = line('$')
   if !v:shell_error
-    let current_row = line('.')
-    let total_rows_original = line('$')
     " 1. Place the value in the 'script' variable in the buffer
     " 2. Delete last lines in buffer
     " 3. Place the script contents at the bottom of the buffer
@@ -659,17 +667,13 @@ function! _UDFCodeFormat(function_name, system_call)
     echo a:function_name . ' encountered an error:'
     echo results
   endif
-  return results
 endfunction
 
 "  }}}
 "  UDF: Black autoformat --- {{{
 
 function! _BlackFmt()
-  let filepath = expand('%')
-  " Write black output to stdout, not stdin
-  let command = 'black -q - < ' . filepath
-  call _UDFCodeFormat('BlackFmt', command)
+  call _UDFCodeFormat('BlackFmt', 'black -q -', 1)
 endfunction
 augroup black_settings
   autocmd!
@@ -1272,22 +1276,10 @@ let g:ledger_fold_blanks = 2
 " Depends on ledger/vim-ledger
 function! _LedgerFmt()
   let filepath = expand('%')
-  let results = system(
-        \ 'ledger -f ' . filepath . ' print --sort "date, amount"')
-  if !v:shell_error
-    " Delete all lines in the buffer
-    execute 'normal!ggdG'
-    " Place the value in the 'script' variable in the buffer
-    put =results
-    " Delete the unnecessarily-created first line
-    1delete _
-    " Run the LedgerAlign command on all lines in the script
-    %LedgerAlign
-  else
-    echo 'LedgerSort encountered an error:'
-    echo results
-  endif
+  let command = 'ledger -f ' . filepath . ' print --sort "date, amount"'
+  call _UDFCodeFormat('LedgerFmt', command, 0)
 endfunction
+
 augroup ledger_settings
   autocmd!
   autocmd FileType ledger command! -buffer LedgerFmt call _LedgerFmt()
