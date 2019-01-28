@@ -618,6 +618,65 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
+"  UDF: Generic helper functions --- {{{
+
+" Code formatter function general purpose function
+" WrittenBy: Samuel Roeca
+" Assumes you're using a POSIX-compliant system
+" and a command whose stdout contains the formatter
+" code you want to use.
+" Parameters:
+"   function_name: str : the name of the calling function
+"   system_call: str : the string value of the system call to be performed
+function! _UDFCodeFormat(function_name, system_call)
+  " save the contents of the buffer to disk
+  silent write
+  " Save the current location
+  " Get the stdout from the system call
+  let results = system(a:system_call)
+  if !v:shell_error
+    let current_row = line('.')
+    let total_rows_original = line('$')
+    " 1. Place the value in the 'script' variable in the buffer
+    " 2. Delete last lines in buffer
+    " 3. Place the script contents at the bottom of the buffer
+    " 4. Go to the line above the original row
+    " 5. Delete it, and everything above it
+    " 6. Figure out how many rows there are in the file
+    " 7. Compute the ideal new row
+    " 8. Set that row, accounting for min of 0 and max of number lines
+    " 9. Make the view centered to simplify viewing
+    silent! undojoin
+          \ | silent execute 'normal!dG'
+          \ | silent put =results
+          \ | silent execute current_row - 1
+          \ | silent execute 'normal!dgg'
+          \ | let total_rows_new = line('$')
+          \ | let new_row = current_row + total_rows_new - total_rows_original
+          \ | execute min([ total_rows_new, max( [0, new_row] ) ])
+          \ | silent execute 'normal!z.'
+  else
+    echo a:function_name . ' encountered an error:'
+    echo results
+  endif
+  return results
+endfunction
+
+"  }}}
+"  UDF: Black autoformat --- {{{
+
+function! _BlackFmt()
+  let filepath = expand('%')
+  " Write black output to stdout, not stdin
+  let command = 'black -q - < ' . filepath
+  call _UDFCodeFormat('BlackFmt', command)
+endfunction
+augroup black_settings
+  autocmd!
+  autocmd FileType python command! -buffer BlackFmt call _BlackFmt()
+augroup END
+
+" }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
