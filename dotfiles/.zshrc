@@ -538,6 +538,7 @@ alias setup_reveal='cookiecutter gh:keimlink/cookiecutter-reveal.js'
 # need cargo install cargo-update
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
+# NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
 
 # Python
 # Enable things like "pip install 'requests[security]'"
