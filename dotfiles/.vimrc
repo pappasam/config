@@ -345,6 +345,7 @@ Plug 'tell-k/vim-autopep8'
 Plug 'b4b4r07/vim-sqlfmt'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'pappasam/vim-black'
+Plug 'Chiel92/vim-autoformat'
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -1529,6 +1530,26 @@ augroup language_specific_file_beauty
   autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
   autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
 augroup END
+
+" }}}
+" Plugin: Vim-autoformat --- {{{
+
+let g:autoformat_verbosemode = 1
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+
+" Python
+let g:formatdef_black = '"black -q -"'
+let g:formatters_python = [ 'black' ]
+
+" Rust
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = [ 'rustfmt' ]
+
+" Terraform
+let g:formatdef_tffmt = '"terraform fmt -"'
+let g:formatters_terraform = [ 'tffmt' ]
 
 " }}}
 " General: Clean Unicode --- {{{
