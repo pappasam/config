@@ -341,10 +341,6 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
-Plug 'tell-k/vim-autopep8'
-Plug 'b4b4r07/vim-sqlfmt'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'pappasam/vim-black'
 Plug 'Chiel92/vim-autoformat'
 
 " C Programming
@@ -1266,135 +1262,6 @@ augroup ledger_settings
 augroup END
 
 "  }}}
-"  Plugin: Miscellaneous global var config ------------ {{{
-
-" GvVim:
-" :GV to open commit browser
-" You can pass git log options to the command, e.g. :GV -S foobar.
-" :GV! will only list commits that affected the current file
-" :GV? fills the location list with the revisions of the current file
-
-" :GV or :GV? can be used in visual mode to track the changes in the selected lines.
-
-" o or <cr> on a commit to display the content of it
-" o or <cr> on commits to display the diff in the range
-" O opens a new tab instead
-" gb for :Gbrowse
-" ]] and [[ to move between commits
-" . to start command-line with :Git [CURSOR] SHA à la fugitive
-" q to close
-
-let g:agit_max_log_lines = 500
-
-" UndoTree:
-let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_WindowLayout = 3
-
-" QFEnter:
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.open = ['<CR>']
-let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-s>']
-let g:qfenter_keymap.topen = ['<C-t>']
-" do not copy quickfix when opened in new tab
-let g:qfenter_enable_autoquickfix = 0
-" automatically move QuickFix window to fill entire bottom screen
-augroup QuickFix
-  autocmd FileType qf wincmd J
-augroup END
-
-" WinResize:
-let g:winresizer_start_key = '<C-\>'
-let g:winresizer_vert_resize = 1
-let g:winresizer_horiz_resize = 1
-
-" Taboo:
-" Tab format hardcoded to main for now since I often do this anyway
-let g:taboo_tab_format = ' [%N:tab]%m '
-let g:taboo_renamed_tab_format = ' [%N:%l]%m '
-
-" Haskell: 'neovimhaskell/haskell-vim'
-let g:haskell_enable_quantification = 1   " to highlight `forall`
-let g:haskell_enable_recursivedo = 1      " to highlight `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to highlight `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to highlight `pattern`
-let g:haskell_enable_typeroles = 1        " to highlight type roles
-let g:haskell_enable_static_pointers = 1  " to highlight `static`
-
-" Python: highlighting
-let g:python_highlight_space_errors = 0
-let g:python_highlight_all = 1
-
-" Json: highlighting
-let g:vim_json_syntax_conceal = 0
-
-" Ragtag: on every filetype
-let g:ragtag_global_maps = 1
-
-" VimJavascript:
-let g:javascript_plugin_flow = 1
-
-" JSX: for .js files in addition to .jsx
-let g:jsx_ext_required = 0
-
-" JsDoc:
-let g:jsdoc_enable_es6 = 1
-
-" IndentLines:
-let g:indentLine_enabled = 0  " indentlines disabled by default
-
-" VimMarkdown:
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_folding_style_pythonic = 1
-
-" BulletsVim:
-let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'gitcommit',
-    \ 'scratch'
-    \]
-
-" SQLFormat:
-" relies on 'pip install sqlformat'
-let g:sqlfmt_auto = 0
-let g:sqlfmt_command = "sqlformat"
-let g:sqlfmt_options = "--keywords=upper --identifiers=lower --use_space_around_operators"
-
-" Numbersvim: override default plugin settings
-let g:numbers_exclude = ['startify', 'gundo', 'vimshell', 'gina-commit',
-      \ 'gitcommit']
-
-" VimMarkdownComposer: override defaults
-let g:markdown_composer_open_browser = 0
-
-" RequirementsVim: filetype detection (begin with requirements)
-let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
-
-" QuickScope: great plugin helping with f and t
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_max_chars = 10000
-
-" Go: random stuff
-let g:go_version_warning = 0
-
-" ChooseWin: options
-let g:choosewin_overlay_enable = 1
-
-" Autopep8: options
-let g:autopep8_disable_show_diff = 1
-let g:autopep8_on_save = 0
-
-" Colorizer: css color code highlighting
-let g:colorizer_auto_filetype='css,html'
-
-" HexMode: configure hex editing
-" relevant command: Hexmode
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-let g:hexmode_xxd_options = '-g 2'
-
-"  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
 " NOTE: General remappings
@@ -1502,25 +1369,7 @@ augroup terraform_complete
 augroup END
 
 "  }}}
-"  Plugin: Language-specific file beautification --- {{{
-
-augroup language_specific_file_beauty
-  autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
-  autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
-  autocmd FileType javascript.jsx,jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
-  autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
-  autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
-  autocmd Filetype elm nnoremap <buffer> <leader>f :ElmFormat<cr>
-  autocmd Filetype sql nnoremap <buffer> <leader>f :SQLFmt<cr>
-  autocmd Filetype rust nnoremap <buffer> <leader>f :RustFmt<cr>
-  autocmd Filetype terraform nnoremap <buffer> <leader>f :call terraform#fmt()<cr>
-  autocmd Filetype haskell nnoremap <buffer> <leader>f :call LanguageClient#textDocument_formatting()<cr>
-  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
-augroup END
-
-" }}}
-" Plugin: Vim-autoformat --- {{{
+" Plugin: Vim-autoformat and autoformatting --- {{{
 
 let g:autoformat_verbosemode = 1
 let g:autoformat_autoindent = 0
@@ -1539,7 +1388,115 @@ let g:formatters_rust = [ 'rustfmt' ]
 let g:formatdef_tffmt = '"terraform fmt -"'
 let g:formatters_terraform = [ 'tffmt' ]
 
+" Key mappings (leader-f)
+augroup language_specific_file_beauty
+  autocmd FileType python,rust,terraform
+        \ nnoremap <buffer> <leader>f :Autoformat<cr>
+  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
+augroup END
+
 " }}}
+"  Plugin: Miscellaneous global var config ------------ {{{
+
+" UndoTree:
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_WindowLayout = 3
+
+" QFEnter:
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>']
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-s>']
+let g:qfenter_keymap.topen = ['<C-t>']
+" do not copy quickfix when opened in new tab
+let g:qfenter_enable_autoquickfix = 0
+" automatically move QuickFix window to fill entire bottom screen
+augroup QuickFix
+  autocmd FileType qf wincmd J
+augroup END
+
+" WinResize:
+let g:winresizer_start_key = '<C-\>'
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
+
+" Taboo:
+" Tab format hardcoded to main for now since I often do this anyway
+let g:taboo_tab_format = ' [%N:tab]%m '
+let g:taboo_renamed_tab_format = ' [%N:%l]%m '
+
+" Haskell: 'neovimhaskell/haskell-vim'
+let g:haskell_enable_quantification = 1   " to highlight `forall`
+let g:haskell_enable_recursivedo = 1      " to highlight `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to highlight `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to highlight `pattern`
+let g:haskell_enable_typeroles = 1        " to highlight type roles
+let g:haskell_enable_static_pointers = 1  " to highlight `static`
+
+" Python: highlighting
+let g:python_highlight_space_errors = 0
+let g:python_highlight_all = 1
+
+" Json: highlighting
+let g:vim_json_syntax_conceal = 0
+
+" Ragtag: on every filetype
+let g:ragtag_global_maps = 1
+
+" VimJavascript:
+let g:javascript_plugin_flow = 1
+
+" JSX: for .js files in addition to .jsx
+let g:jsx_ext_required = 0
+
+" JsDoc:
+let g:jsdoc_enable_es6 = 1
+
+" IndentLines:
+let g:indentLine_enabled = 0  " indentlines disabled by default
+
+" VimMarkdown:
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_folding_style_pythonic = 1
+
+" BulletsVim:
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
+
+" Numbersvim: override default plugin settings
+let g:numbers_exclude = ['startify', 'gundo', 'vimshell', 'gina-commit',
+      \ 'gitcommit']
+
+" VimMarkdownComposer: override defaults
+let g:markdown_composer_open_browser = 0
+
+" RequirementsVim: filetype detection (begin with requirements)
+let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
+
+" QuickScope: great plugin helping with f and t
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_max_chars = 10000
+
+" Go: random stuff
+let g:go_version_warning = 0
+
+" ChooseWin: options
+let g:choosewin_overlay_enable = 1
+
+" Colorizer: css color code highlighting
+let g:colorizer_auto_filetype='css,html'
+
+" HexMode: configure hex editing
+" relevant command: Hexmode
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+let g:hexmode_xxd_options = '-g 2'
+
+"  }}}
 " General: Clean Unicode --- {{{
 
 function! CleanUnicode()
