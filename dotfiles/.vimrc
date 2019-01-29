@@ -1021,24 +1021,12 @@ let g:gina#command#blame#formatter#timestamp_months = 0
 let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
 let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 
-function! _Gpush()
-  let current_branch = gina#component#repo#branch()
-  execute 'Gina push -u origin' current_branch
-endfunction
-
-function! _Gpull()
-  let current_branch = gina#component#repo#branch()
-  execute 'Gina pull origin' current_branch
-endfunction
-
 function! _Gblame()
   let current_file = expand('%:t')
   execute 'Gina blame'
   execute 'TabooRename blame:' . current_file
 endfunction
 
-command! Gpush call _Gpush()
-command! Gpull call _Gpull()
 command! Gblame call _Gblame()
 
 " }}}
