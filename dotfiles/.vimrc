@@ -1371,10 +1371,13 @@ augroup END
 "  }}}
 " Plugin: Vim-autoformat and autoformatting --- {{{
 
-let g:autoformat_verbosemode = 1
+" let g:autoformat_verbosemode = 1
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+
+" This plugin does some annoying things by default
+" I think I'll code mine from scratch
 
 " Python
 let g:formatdef_black = '"black -q -"'
@@ -1391,7 +1394,7 @@ let g:formatters_terraform = [ 'tffmt' ]
 " Key mappings (leader-f)
 augroup language_specific_file_beauty
   autocmd FileType python,rust,terraform
-        \ nnoremap <buffer> <leader>f :Autoformat<cr>
+        \ nnoremap <buffer> <leader>f :call AutoFormatCustom()<cr>
   autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
 augroup END
 
