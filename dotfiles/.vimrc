@@ -1210,6 +1210,33 @@ augroup ledger_settings
 augroup END
 
 "  }}}
+"  Plugin: Goyo --- {{{
+
+function! s:goyo_enter()
+  setlocal number relativenumber
+  " Quit Vim if this is the only remaining buffer
+  let b:quitting = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+endfunction
+
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    qa
+  endif
+  execute 'NumbersEnable'
+endfunction
+
+function! s:goyo_launch()
+  execute 'NumbersDisable'
+  set nonumber norelativenumber
+  execute 'Goyo'
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
 " NOTE: General remappings
@@ -1579,14 +1606,8 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 " Choosewin: (just like tmux)
 nnoremap <leader>q :ChooseWin<CR>
 
-" Gina: git bindings
-nnoremap <leader>ga :Gina add %:p<CR><CR>
-nnoremap <leader>g. :Gina add .<CR><CR>
-nnoremap <leader>gs :Gina status<CR>
-" The below feature doesn't work well with commit hooks
-" nnoremap <leader>gc :Gina commit<CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gd :Gina diff<CR>
+" Goyo
+nnoremap <leader>gg :call <SID>goyo_launch()<cr>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
