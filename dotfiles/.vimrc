@@ -194,7 +194,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 't9md/vim-choosewin'
 Plug 'mhinz/vim-startify'
-Plug 'gcmt/taboo.vim'
 Plug 'yssl/QFEnter'
 Plug 'djoshea/vim-autoread'
 Plug 'simeji/winresizer'
@@ -968,7 +967,6 @@ let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 function! _Gblame()
   let current_file = expand('%:t')
   execute 'Gina blame'
-  execute 'TabooRename blame:' . current_file
 endfunction
 
 command! Gblame call _Gblame()
@@ -1385,11 +1383,6 @@ let g:winresizer_start_key = '<C-\>'
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
 
-" Taboo:
-" Tab format hardcoded to main for now since I often do this anyway
-let g:taboo_tab_format = ' [%N:tab]%m '
-let g:taboo_renamed_tab_format = ' [%N:%l]%m '
-
 " Haskell: 'neovimhaskell/haskell-vim'
 let g:haskell_enable_quantification = 1   " to highlight `forall`
 let g:haskell_enable_recursivedo = 1      " to highlight `mdo` and `rec`
@@ -1618,9 +1611,6 @@ nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
 
 " AutoPairs:
 imap <silent><CR> <CR><Plug>AutoPairsReturn
-
-" Taboo: rename files smartly
-nnoremap <leader><leader>t :TabooRename<space>
 
 " FZF: create shortcuts for finding stuff
 nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
