@@ -684,7 +684,7 @@ function pyinit() {
   ve
   cat > main.py <<EOL
 #!/usr/bin/env python
-'''The main module'''
+"""The main module"""
 
 EOL
   chmod +x main.py
