@@ -326,16 +326,7 @@ Plug 'reedes/vim-litecorrect'
 Plug 'tommcdo/vim-exchange'
 
 " Previewers
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
@@ -658,6 +649,47 @@ let g:riv_auto_rst2html = 0
 let g:instant_rst_localhost_only = 1
 
 " }}}
+" Plugin: markdown-preview.vim --- {{{
+
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 0
+
+" set to 1, the vim will just refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it just can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle'
+    \ }
+
+" }}}
 " Plugin: Preview Compiled Stuff in Viewer --- {{{
 
 function! _Preview()
@@ -666,7 +698,7 @@ function! _Preview()
     exec "normal \<C-O>"
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
-    exec 'ComposerOpen'
+    exec 'MarkdownPreview'
   elseif &filetype ==? 'dot'
     " from wmgraphviz.vim
     exec 'GraphvizInteractive'
