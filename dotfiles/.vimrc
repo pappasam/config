@@ -341,7 +341,7 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " Code prettifiers
-Plug 'Chiel92/vim-autoformat'
+Plug 'pappasam/vim-filetype-formatter'
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -615,58 +615,6 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
-"  UDF: Generic helper functions --- {{{
-
-" Code formatter function general purpose function
-" WrittenBy: Samuel Roeca
-" Assumes you're using a POSIX-compliant system
-" with a relevant formatting command installed.
-"
-" Input can either come from on disk or the current buffer,
-" as specified with the std_in parameter
-" Parameters:
-"   function_name: str : the name of the calling function
-"   system_call: str : the string value of the system call to be performed
-"   std_in: bool : should the vimscript command take buffer as stdin?
-function! _UDFCodeFormat(function_name, system_call, std_in)
-  if a:std_in
-    let results_raw = execute('write !' . a:system_call)
-  else
-    " save the contents of the buffer to disk
-    silent write
-    " Get the stdout from the system call
-    let results_raw = system(a:system_call)
-  endif
-  let results = substitute(results_raw, '\v^\n*(.{-})\n*$', '\1', '')
-  " Save the current location
-  let current_row = line('.')
-  let total_rows_original = line('$')
-  if !v:shell_error
-    " 1. Place the value in the 'script' variable in the buffer
-    " 2. Delete last lines in buffer
-    " 3. Place the script contents at the bottom of the buffer
-    " 4. Go to the line above the original row
-    " 5. Delete it, and everything above it
-    " 6. Figure out how many rows there are in the file
-    " 7. Compute the ideal new row
-    " 8. Set that row, accounting for min of 0 and max of number lines
-    " 9. Make the view centered to simplify viewing
-    silent! undojoin
-          \ | silent execute 'normal!dG'
-          \ | silent put =results
-          \ | silent execute current_row - 1
-          \ | silent execute 'normal!dgg'
-          \ | let total_rows_new = line('$')
-          \ | let new_row = current_row + total_rows_new - total_rows_original
-          \ | execute min([ total_rows_new, max( [0, new_row] ) ])
-          \ | silent execute 'normal!z.'
-  else
-    echo a:function_name . ' encountered an error:'
-    echo results
-  endif
-endfunction
-
-"  }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
@@ -1369,32 +1317,19 @@ augroup terraform_complete
 augroup END
 
 "  }}}
-" Plugin: Vim-autoformat and autoformatting --- {{{
+" Plugin: vim-filetype-formatter and autoformatting --- {{{
 
-" let g:autoformat_verbosemode = 1
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-
-" This plugin does some annoying things by default
-" I think I'll code mine from scratch
-
-" Python
-let g:formatdef_black = '"black -q -"'
-let g:formatters_python = [ 'black' ]
-
-" Rust
-let g:formatdef_rustfmt = '"rustfmt"'
-let g:formatters_rust = [ 'rustfmt' ]
-
-" Terraform
-let g:formatdef_tffmt = '"terraform fmt -"'
-let g:formatters_terraform = [ 'tffmt' ]
+let g:vim_filetype_formatter_verbose = 0
+let g:vim_filetype_formatter_commands = {
+      \ 'python': 'black -q -',
+      \ 'rust': 'rustfmt',
+      \ 'terraform': 'terraform fmt -'
+      \}
 
 " Key mappings (leader-f)
 augroup language_specific_file_beauty
   autocmd FileType python,rust,terraform
-        \ nnoremap <buffer> <leader>f :call AutoFormatCustom()<cr>
+        \ nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
   autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
 augroup END
 

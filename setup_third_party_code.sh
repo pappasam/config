@@ -215,6 +215,12 @@ rustup component add rustfmt-preview
 rustup component add rust-src
 
 #######################################################################
+# Go programs
+#######################################################################
+# license: license -year=2013 -name=Alice mit
+go get -u github.com/nishanths/license
+
+#######################################################################
 # kdenlive (along with necessary plugins)
 #######################################################################
 sudo add-apt-repository ppa:kdenlive/kdenlive-stable
