@@ -923,6 +923,18 @@ if [[ -o interactive ]]; then
   if [ $commands[kubectl] ]; then
     source <(kubectl completion zsh)
   fi
+
+  # tty mode:
+  # Set consolefonts to appropriate size based on monitor resolution
+  # For each new monitor, you'll need to do this manually
+  # Console fonts found here: /usr/share/consolefonts
+  if [[ "$TERM" == "linux" ]]; then
+    echo "Getting window dimensions..."
+    MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | fgrep '*')
+    if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
+      setfont Uni3-Terminus32x16.psf.gz
+    fi
+  fi
 fi
 
 # }}}
