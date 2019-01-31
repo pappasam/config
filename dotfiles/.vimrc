@@ -419,7 +419,7 @@ augroup END
 
 augroup writing
   autocmd!
-  autocmd FileType markdown
+  autocmd FileType markdown,rst
         \ setlocal wrap linebreak nolist spell
         \ | call textobj#sentence#init()
         \ | call litecorrect#init()
