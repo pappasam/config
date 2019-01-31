@@ -129,7 +129,6 @@ export GDK_SCALE=0
 # It seems to rely on underlying terminal being xterm-256
 # and tmux being screen-256color.
 # Weird bug, I'm making this note so I'm aware of it going forward
-# export TERM="screen-256color"
 
 # History: How many lines of history to keep in memory
 export HISTSIZE=5000
@@ -859,10 +858,11 @@ function precmd() { vcs_info }
 #######################################################################
 
 # Set Terminal settings
-COLOR_BRIGHT_BLUE="086"
-COLOR_GOLD="184"
-COLOR_SILVER="250"
-COLOR_PYTHON_GREEN="047"
+# https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+COLOR_BRIGHT_BLUE="6"
+COLOR_GOLD="3"
+COLOR_SILVER="7"
+COLOR_PYTHON_GREEN="2"
 
 # Set Bash PS1
 PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
@@ -930,13 +930,13 @@ if [[ -o interactive ]]; then
   # For each new monitor, you'll need to do this manually
   # Console fonts found here: /usr/share/consolefonts
   if [[ "$TERM" == "linux" ]]; then
-    echo "Getting window dimensions..."
-    MONITOR_RESOLUTIONS=$(xrandr -d :0 | grep '*')
-    if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
-      setfont Uni3-Terminus32x16.psf.gz
+    if [ ! -n "$TMUX" ]; then
+      echo "Getting window dimensions..."
+      MONITOR_RESOLUTIONS=$(xrandr -d :0 | grep '*')
+      if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
+        setfont Uni3-Terminus32x16.psf.gz
+      fi
     fi
-    # Make terminal colors better
-    export TERM="xterm-256color"
   fi
 fi
 

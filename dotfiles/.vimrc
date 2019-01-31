@@ -1784,9 +1784,17 @@ set noshowmode
 " ShowCommand: turn off character printing to vim status line
 set noshowcmd
 
-" Cursor Line
-" Turn off the cursor that changes based on modethis cursor
-set guicursor=
+" CursorLine:
+" insert mode - line
+let &t_SI .= "\<Esc>[5 q"
+"replace mode - underline
+let &t_SR .= "\<Esc>[4 q"
+"common - block
+let &t_EI .= "\<Esc>[3 q"
+" Turn off GUI cursor changes in console mode (tty)
+if $TERM == 'linux'
+  set guicursor=
+endif
 
 " Configure updatetime
 " This is the amount of time vim waits to do something after you stop
