@@ -629,7 +629,6 @@ function ve() {
   pyenv virtualenv $venv_name
   pyenv activate $venv_name
   $(pyenv which pip) install --upgrade pip $PYTHON_DEV_PACKAGES
-  pyenv deactivate
   # Write the current virtual environment into python-version,
   # followed by your default environments (which are useful for tox)
   echo $venv_name > .python-version
