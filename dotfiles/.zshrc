@@ -858,6 +858,7 @@ function precmd() { vcs_info }
 # END: Git formatting
 #######################################################################
 
+# Set Terminal settings
 COLOR_BRIGHT_BLUE="086"
 COLOR_GOLD="184"
 COLOR_SILVER="250"
@@ -934,6 +935,8 @@ if [[ -o interactive ]]; then
     if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
       setfont Uni3-Terminus32x16.psf.gz
     fi
+    # Make terminal colors better
+    export TERM="xterm-256color"
   fi
 fi
 

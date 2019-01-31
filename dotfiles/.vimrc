@@ -1785,12 +1785,8 @@ set noshowmode
 set noshowcmd
 
 " Cursor Line
-" insert mode - line
-let &t_SI .= "\<Esc>[5 q"
-"replace mode - underline
-let &t_SR .= "\<Esc>[4 q"
-"common - block
-let &t_EI .= "\<Esc>[3 q"
+" Turn off the cursor that changes based on modethis cursor
+set guicursor=
 
 " Configure updatetime
 " This is the amount of time vim waits to do something after you stop
