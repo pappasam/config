@@ -1637,7 +1637,7 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 nnoremap <leader>q :ChooseWin<CR>
 
 " Goyo
-nnoremap <leader>gg :call <SID>goyo_launch()<cr>
+nnoremap <leader><leader>g :call <SID>goyo_launch()<cr>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
