@@ -930,7 +930,7 @@ if [[ -o interactive ]]; then
   # Console fonts found here: /usr/share/consolefonts
   if [[ "$TERM" == "linux" ]]; then
     echo "Getting window dimensions..."
-    MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | fgrep '*')
+    MONITOR_RESOLUTIONS=$(xrandr -d :0 | grep '*')
     if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
       setfont Uni3-Terminus32x16.psf.gz
     fi
