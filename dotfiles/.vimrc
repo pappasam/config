@@ -1540,6 +1540,11 @@ inoremap <expr> <ScrollWheelUp> pumvisible() ? "<C-p>" : "<Esc><ScrollWheelUp>"
 inoremap <expr> <ScrollWheelDown> pumvisible() ? "<C-n>" : "<Esc><ScrollWheelDown>"
 inoremap <expr> <LeftMouse> pumvisible() ? "<CR><Backspace>" : "<Esc><LeftMouse>"
 
+" InsertModeHelpers:
+" Insert one line above after enter (useful for ``` in markdown)
+" Key code = Alt+Enter
+inoremap <M-CR> <CR><C-o>O
+
 " Omnicompletion:
 " <C-@> is signal sent by terminal when pressing <C-Space>
 " Need to include <C-Space> as well for neovim sometimes
