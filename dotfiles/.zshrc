@@ -934,6 +934,8 @@ if [[ -o interactive ]]; then
       MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | grep '*')
       if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
         setfont Uni3-Terminus32x16.psf.gz
+      elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
+        setfont Uni3-Terminus24x12.psf.gz
       fi
     fi
   fi

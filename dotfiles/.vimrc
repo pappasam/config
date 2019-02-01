@@ -1468,7 +1468,11 @@ let g:markdown_composer_open_browser = 0
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 
 " QuickScope: great plugin helping with f and t
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+if $TERM == 'linux'
+  let g:qs_highlight_on_keys = []
+else
+  let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+endif
 let g:qs_max_chars = 10000
 
 " Go: random stuff
