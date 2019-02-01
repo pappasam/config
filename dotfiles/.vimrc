@@ -519,6 +519,8 @@ augroup python_syntax
   autocmd!
   autocmd FileType python syn keyword pythonBuiltinObj self
   autocmd FileType python syn keyword pythonBuiltinObj cls
+  autocmd FileType python syn keyword pythonBuiltinObj args
+  autocmd FileType python syn keyword pythonBuiltinObj kwargs
 augroup end
 
 " Javascript: Highlight this keyword in object / function definitions
@@ -1377,7 +1379,7 @@ augroup END
 
 let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -q -',
+      \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -'
       \}
