@@ -496,22 +496,32 @@ augroup END
 
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
-let g:PaperColor_Theme_Options['theme'] = {
-      \     'default': {
-      \       'allow_bold': 1,
-      \       'allow_italic': 1
-      \     }
+let g:PaperColor_Theme_Options.theme = {}
+
+" Bold and italics are enabled by default
+let g:PaperColor_Theme_Options.theme.default = {
+      \ 'allow_bold': 1,
+      \ 'allow_italic': 1
       \ }
-let g:PaperColor_Theme_Options['language'] = {
-      \     'python': {
-      \       'highlight_builtins' : 1
-      \     },
-      \     'cpp': {
-      \       'highlight_standard_library': 1
-      \     },
-      \     'c': {
-      \       'highlight_builtins' : 1
-      \     }
+
+" For dark theme, make folds grey
+let g:PaperColor_Theme_Options.theme['default.dark'] = {}
+let g:PaperColor_Theme_Options.theme['default.dark'].override = {
+      \ 'folded_fg' : ['#0087af', '249'],
+      \ 'folded_bg' : ['#afd7ff', '237']
+      \ }
+
+" Enable language-specific overrides
+let g:PaperColor_Theme_Options.language = {
+      \    'python': {
+      \      'highlight_builtins' : 1
+      \    },
+      \    'cpp': {
+      \      'highlight_standard_library': 1
+      \    },
+      \    'c': {
+      \      'highlight_builtins' : 1
+      \    }
       \ }
 
 " Python: Highlight self and cls keyword in class definitions
@@ -539,7 +549,11 @@ augroup END
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 try
-  set t_Co=256 " says terminal has 256 colors
+  if $TERM == 'linux'
+    set t_Co=88 " Linux terminals only support 88 colors
+  else
+    set t_Co=256 " says terminal has 256 colors
+  endif
   set background=dark
   colorscheme PaperColor
 catch
@@ -830,21 +844,40 @@ let g:fzf_action = {
 " It's super important, so I devote a lot of code to it.
 " Most of the functions are ported from the Lightlint documentation
 
-let g:lightline = {'active': {}, 'inactive': {}}
+let g:lightline = {}
+let g:lightline.active = {}
+let g:lightline.inactive = {}
+let g:lightline.colorscheme = 'PaperColor'
 
-let g:lightline.mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'ℕ',
-      \ 'i'  : 'ⅈ',
-      \ 'R'  : 'ℛ',
-      \ 'c'  : 'ℂ',
-      \ 'v'  : '℣',
-      \ 'V'  : '℣',
-      \ '' : '℣',
-      \ 's'  : '₷',
-      \ 'S'  : '₷',
-      \ '' : '₷',
-      \ }
+if $TERM == 'linux'
+  let g:lightline.mode_map = {
+        \ '__' : '-',
+        \ 'n'  : 'N',
+        \ 'i'  : 'I',
+        \ 'R'  : 'R',
+        \ 'c'  : 'C',
+        \ 'v'  : 'V',
+        \ 'V'  : 'V',
+        \ '' : 'V',
+        \ 's'  : 'S',
+        \ 'S'  : 'S',
+        \ '' : 'S',
+        \ }
+else
+  let g:lightline.mode_map = {
+        \ '__' : '-',
+        \ 'n'  : 'ℕ',
+        \ 'i'  : 'ⅈ',
+        \ 'R'  : 'ℛ',
+        \ 'c'  : 'ℂ',
+        \ 'v'  : '℣',
+        \ 'V'  : '℣',
+        \ '' : '℣',
+        \ 's'  : '₷',
+        \ 'S'  : '₷',
+        \ '' : '₷',
+        \ }
+endif
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
@@ -924,7 +957,11 @@ endfunction
 function! LightlineGina()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
-      let mark = '⎇ '
+      if $TERM == 'linux'
+        let mark = 'Git::'
+      else
+        let mark = '⎇ '
+      endif
       let branch = gina#component#repo#branch()
       return branch !=# '' ? mark.branch : ''
     endif
