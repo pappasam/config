@@ -81,6 +81,22 @@
 " To lean more about the ex editor, type 'man ex'
 
 " }}}
+" General: Terminal eumlator difference functions --- {{{
+
+" s:is_console::
+" Checks to see if Vim is running in console mode
+function! IsConsole()
+  return $TERM == 'linux'
+endfunction
+
+" s:if_console::
+" The 88-bit ASCII/Not full unicode console is different than alacritty
+" Return different value the console is true
+function! IfConsole(lambda_true, lambda_false)
+  return IsConsole() ? a:lambda_true() : a:lambda_false()
+endfunction
+
+" }}}
 " General: Leader mappings -------------------- {{{
 
 let mapleader = ","
@@ -549,14 +565,14 @@ augroup END
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 try
-  if $TERM == 'linux'
-    set t_Co=88 " Linux terminals only support 88 colors
-  else
-    set t_Co=256 " says terminal has 256 colors
-  endif
+  call IfConsole(
+        \ {-> execute('set t_Co=88')},
+        \ {-> execute('set t_Co=256')}
+        \ )
   set background=dark
   colorscheme PaperColor
 catch
+  echo 'An error occured while configuring PaperColor'
 endtry
 
 hi CursorLine cterm=NONE
@@ -848,36 +864,34 @@ let g:lightline = {}
 let g:lightline.active = {}
 let g:lightline.inactive = {}
 let g:lightline.colorscheme = 'PaperColor'
-
-if $TERM == 'linux'
-  let g:lightline.mode_map = {
-        \ '__' : '-',
-        \ 'n'  : 'N',
-        \ 'i'  : 'I',
-        \ 'R'  : 'R',
-        \ 'c'  : 'C',
-        \ 'v'  : 'V',
-        \ 'V'  : 'V',
-        \ '' : 'V',
-        \ 's'  : 'S',
-        \ 'S'  : 'S',
-        \ '' : 'S',
-        \ }
-else
-  let g:lightline.mode_map = {
-        \ '__' : '-',
-        \ 'n'  : 'ℕ',
-        \ 'i'  : 'ⅈ',
-        \ 'R'  : 'ℛ',
-        \ 'c'  : 'ℂ',
-        \ 'v'  : '℣',
-        \ 'V'  : '℣',
-        \ '' : '℣',
-        \ 's'  : '₷',
-        \ 'S'  : '₷',
-        \ '' : '₷',
-        \ }
-endif
+let g:lightline.mode_map = IfConsole(
+      \ {-> {
+      \   '__' : '-',
+      \   'n'  : 'N',
+      \   'i'  : 'I',
+      \   'R'  : 'R',
+      \   'c'  : 'C',
+      \   'v'  : 'V',
+      \   'V'  : 'V',
+      \   '' : 'V',
+      \   's'  : 'S',
+      \   'S'  : 'S',
+      \   '' : 'S',
+      \ }},
+      \ {-> {
+      \   '__' : '-',
+      \   'n'  : 'ℕ',
+      \   'i'  : 'ⅈ',
+      \   'R'  : 'ℛ',
+      \   'c'  : 'ℂ',
+      \   'v'  : '℣',
+      \   'V'  : '℣',
+      \   '' : '℣',
+      \   's'  : '₷',
+      \   'S'  : '₷',
+      \   '' : '₷',
+      \ }}
+      \ )
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
@@ -957,11 +971,7 @@ endfunction
 function! LightlineGina()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
-      if $TERM == 'linux'
-        let mark = 'Git::'
-      else
-        let mark = '⎇ '
-      endif
+      let mark = IfConsole({-> 'Git::'}, {-> '⎇ '})
       let branch = gina#component#repo#branch()
       return branch !=# '' ? mark.branch : ''
     endif
@@ -1507,11 +1517,7 @@ let g:markdown_composer_open_browser = 0
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 
 " QuickScope: great plugin helping with f and t
-if $TERM == 'linux'
-  let g:qs_highlight_on_keys = []
-else
-  let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-endif
+let g:qs_highlight_on_keys = IfConsole({-> []}, {-> ['f', 'F', 't', 'T']})
 let g:qs_max_chars = 10000
 
 " Go: random stuff
@@ -1834,9 +1840,7 @@ let &t_SR .= "\<Esc>[4 q"
 "common - block
 let &t_EI .= "\<Esc>[3 q"
 " Turn off GUI cursor changes in console mode (tty)
-if $TERM == 'linux'
-  set guicursor=
-endif
+call IfConsole({-> execute('set guicursor=')}, {-> 0})
 
 " Configure updatetime
 " This is the amount of time vim waits to do something after you stop
