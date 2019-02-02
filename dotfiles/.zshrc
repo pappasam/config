@@ -939,6 +939,10 @@ if [[ -o interactive ]]; then
       elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
         setfont Uni3-Terminus24x12.psf.gz
       fi
+      # suppress all messages from the kernel (and its drivers) except panic
+      # messages from appearing on the console.
+      echo "Enter password to disable kernel from sending console messages..."
+      sudo dmesg -n 1
     fi
   fi
 fi
