@@ -520,11 +520,15 @@ let g:PaperColor_Theme_Options.theme.default = {
       \ 'allow_italic': 1
       \ }
 
-" For dark theme, make folds grey
+" Terminal Changes:
+" folds: grey + green
+" visual: light blue background, black foreground
 let g:PaperColor_Theme_Options.theme['default.dark'] = {}
 let g:PaperColor_Theme_Options.theme['default.dark'].override = {
-      \ 'folded_fg' : ['#0087af', '249'],
-      \ 'folded_bg' : ['#afd7ff', '237']
+      \ 'folded_fg' : ['#d787ff', '10'],
+      \ 'folded_bg' : ['#5f005f', '239'],
+      \ 'visual_fg' : ['#000000', '0'],
+      \ 'visual_bg' : ['#8787af', '6'],
       \ }
 
 " Enable language-specific overrides
@@ -566,7 +570,7 @@ augroup END
 " Make sure this is at end of section
 try
   call IfConsole(
-        \ {-> execute('set t_Co=88')},
+        \ {-> execute('set t_Co=16')},
         \ {-> execute('set t_Co=256')}
         \ )
   set background=dark
