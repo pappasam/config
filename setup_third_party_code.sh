@@ -96,6 +96,9 @@ sudo apt install -y php
 #######################################################################
 sudo apt install exuberant-ctags
 
+# Show key presses in the terminal
+sudo apt install screenkey
+
 #######################################################################
 # Fonts
 #######################################################################
