@@ -1296,23 +1296,27 @@ augroup END
 "  Plugin: Goyo --- {{{
 
 function! s:goyo_enter()
+  let b:goyo_is_on = 1
   setlocal number relativenumber
-  " Quit Vim if this is the only remaining buffer
-  let b:quitting = 0
-  autocmd QuitPre <buffer> let b:quitting = 1
 endfunction
 
 function! s:goyo_leave()
-  " Quit Vim if this is the only remaining buffer
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    qa
-  endif
-  execute 'NumbersEnable'
+  let b:goyo_is_on = 0
+  setlocal number relativenumber
 endfunction
 
-function! s:goyo_launch()
-  execute 'NumbersDisable'
-  set nonumber norelativenumber
+function! GoyoToggleCustom()
+  if !exists('b:goyo_is_on')
+    let b:goyo_is_on = 0
+  endif
+
+  if b:goyo_is_on
+    execute 'NumbersEnable'
+    setlocal nonumber norelativenumber
+  else
+    execute 'NumbersDisable'
+  endif
+
   execute 'Goyo'
 endfunction
 
@@ -1689,7 +1693,7 @@ nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 nnoremap <leader>q :ChooseWin<CR>
 
 " Goyo
-nnoremap <leader><leader>g :call <SID>goyo_launch()<cr>
+nnoremap <leader><leader>g :call GoyoToggleCustom()<cr>
 
 " IndentLines: toggle if indent lines is visible
 nnoremap <silent> <leader>i :IndentLinesToggle<CR>
