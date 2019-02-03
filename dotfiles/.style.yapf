@@ -1,127 +1,12 @@
+# See: https://github.com/google/yapf#knobs
 [style]
-# align_closing_bracket_with_visual_indent=True
-# allow_multiline_dictionary_keys=False
-# allow_multiline_lambdas=False
-# allow_split_before_default_or_named_assigns=True
-# allow_split_before_dict_value=True
-# blank_line_before_class_docstring=False
-# blank_line_before_module_docstring=False
-# blank_line_before_nested_class_or_def=False
-# blank_lines_around_top_level_definition=2
-# coalesce_brackets=False
-# column_limit=79
-# continuation_align_style='SPACE'
-# continuation_indent_width=4
-# dedent_closing_brackets=False
-# disable_ending_comma_heuristic=False
-# each_dict_entry_on_separate_line=True
-# i18n_comment=''
-# i18n_function_call=''
-# indent_blank_lines=False
-# indent_dictionary_value=False
-# indent_width=4
-# join_multiple_lines=True
-# no_spaces_around_selected_binary_operators=set()
-# space_between_ending_comma_and_closing_bracket=True
-# spaces_around_default_or_named_assign=False
-# spaces_around_power_operator=False
-# spaces_before_comment=2
-# split_all_comma_separated_values=False
-# split_arguments_when_comma_terminated=False
-# split_before_bitwise_operator=True
-# split_before_closing_bracket=True
-# split_before_dict_set_generator=True
-# split_before_dot=False
-# split_before_expression_after_opening_paren=False
-# split_before_first_argument=False
-# split_before_logical_operator=True
-# split_before_named_assigns=True
-# split_complex_comprehension=False
-# split_penalty_after_opening_bracket=30
-# split_penalty_after_unary_operator=10000
-# split_penalty_before_if_expr=0
-# split_penalty_bitwise_operator=300
-# split_penalty_comprehension=80
-# split_penalty_excess_character=7000
-# split_penalty_for_added_line_split=30
-# split_penalty_import_names=0
-# split_penalty_logical_operator=300
-# use_tabs=False
 based_on_style = pep8
-
-# Do not split consecutive brackets. Only relevant when
-# dedent_closing_brackets is set. For example:
-#
-#    call_func_that_takes_a_dict(
-#        {
-#            'key1': 'value1',
-#            'key2': 'value2',
-#        }
-#    )
-#
-# would reformat to:
-#
-#    call_func_that_takes_a_dict({
-#        'key1': 'value1',
-#        'key2': 'value2',
-#    })
 coalesce_brackets=True
-
-# Put closing brackets on a separate line, dedented, if the bracketed
-# expression can't fit in a single line. Applies to all kinds of brackets,
-# including function definitions and calls. For example:
-#
-#   config = {
-#       'key1': 'value1',
-#       'key2': 'value2',
-#   }        # <--- this bracket is dedented and on a separate line
-#
-#   time_series = self.remote_client.query_entity_counters(
-#       entity='dev3246.region1',
-#       key='dns.query_latency_tcp',
-#       transform=Transformation.AVERAGE(window=timedelta(seconds=60)),
-#       start_ts=now()-timedelta(days=3),
-#       end_ts=now(),
-#   )        # <--- this bracket is dedented and on a separate line
 dedent_closing_brackets=True
-
-# Disable the heuristic which places each list element on a separate line
-# if the list is comma-terminated.
 disable_ending_comma_heuristic=False
-
-# Join short lines into one line. E.g., single line 'if' statements.
 join_multiple_lines=False
-
-# The number of spaces required before a trailing comment.
-spaces_before_comment=2
-
-# Split before arguments
 split_all_comma_separated_values=True
-
-# Split before arguments if the argument list is terminated by a
-# comma.
 split_arguments_when_comma_terminated=True
-
-# Split after the opening paren which surrounds an expression if it doesn't
-# fit on a single line.
 split_before_expression_after_opening_paren=True
-
-# If an argument / parameter list is going to be split, then split before
-# the first argument.
 split_before_first_argument=True
-
-# Set to True to split list comprehensions and generators that have
-# non-trivial expressions and multiple clauses before each of these
-# clauses. For example:
-#
-#   result = [
-#       a_long_var + 100 for a_long_var in xrange(1000)
-#       if a_long_var % 10]
-#
-# would reformat to something like:
-#
-#   result = [
-#       a_long_var + 100
-#       for a_long_var in xrange(1000)
-#       if a_long_var % 10]
 split_complex_comprehension=True
