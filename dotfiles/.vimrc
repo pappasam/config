@@ -573,6 +573,24 @@ augroup qs_colors
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 
+augroup spelling_options
+  autocmd!
+  autocmd ColorScheme * highlight clear SpellBad
+  autocmd ColorScheme * highlight clear SpellRare
+  autocmd ColorScheme * highlight clear SpellCap
+  autocmd ColorScheme * highlight clear SpellLocal
+  autocmd ColorScheme * highlight SpellBad ctermfg=1    " Red
+  autocmd ColorScheme * highlight SpellRare ctermfg=2   " Green
+  autocmd ColorScheme * highlight SpellCap ctermfg=11    " Yellow
+  autocmd ColorScheme * highlight SpellLocal ctermfg=5  " Purple
+  if !IsConsole()
+    autocmd ColorScheme * highlight SpellBad cterm=underline,italic
+    autocmd ColorScheme * highlight SpellRare cterm=underline,italic
+    autocmd ColorScheme * highlight SpellCap cterm=underline,italic
+    autocmd ColorScheme * highlight SpellLocal cterm=underline,italic
+  endif
+augroup END
+
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 try
