@@ -489,14 +489,19 @@ augroup END
 " }}}
 " General: Trailing whitespace ------------- {{{
 
-" This section should go before syntax highlighting
-" because autocommands must be declared before syntax library is loaded
 function! TrimWhitespace()
-  if &ft == 'markdown'
-    return
-  endif
   let l:save = winsaveview()
-  %s/\s\+$//e
+  if &ft == 'markdown'
+    " Replace lines with only trailing spaces
+    %s/^\s\+$//e
+    " Replace lines with exactly one trailing space with no trailing spaces
+    %g/\S\s$/s/\s$//g
+    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
+    %s/\s\s\s\+$/  /e
+  else
+    " Remove all trailing spaces
+    %s/\s\+$//e
+  endif
   call winrestview(l:save)
 endfunction
 
