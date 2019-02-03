@@ -156,6 +156,9 @@ export WINIT_HIDPI_FACTOR=1.0
 export RUST_TOOLCHAIN_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu"
 export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 
+# Bat
+export BAT_PAGER=''
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
