@@ -11,6 +11,12 @@ else
   SESSION=Main
 fi
 
+# NOTE: I use the option "-2" to force Tmux to accept 256 colors This is
+# necessary for proper Vim support in the Linux Console. My Vim colorscheme,
+# PaperColor, does a lot of smart translation for Color values between 256 and
+# terminal 16 color support, and this translation is lost when Tmux assumes too
+# much
+
 # Create session in detached mode
 tmux -2 new-session -d -s $SESSION
 
