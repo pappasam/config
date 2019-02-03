@@ -549,7 +549,20 @@ alias pip='noglob pip'
 # }}}
 # Functions --- {{{
 
-# Colored cat
+# Fix window dimensions: tty mode
+# Set consolefonts to appropriate size based on monitor resolution
+# For each new monitor, you'll need to do this manually
+# Console fonts found here: /usr/share/consolefonts
+function fixwindow() {
+  echo "Getting window dimensions, waiting 5 seconds..."
+  MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | grep '*')
+  if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
+    setfont Uni3-Terminus32x16.psf.gz
+  elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
+    setfont Uni3-Terminus24x12.psf.gz
+  fi
+}
+
 function gitzip() {  # arg1: the git repository
   if [ $# -eq 0 ]; then
     local git_dir='.'
@@ -925,22 +938,11 @@ if [[ -o interactive ]]; then
     source <(kubectl completion zsh)
   fi
 
-  # tty mode:
-  # Set consolefonts to appropriate size based on monitor resolution
-  # For each new monitor, you'll need to do this manually
-  # Console fonts found here: /usr/share/consolefonts
   if [[ "$TERM" == "linux" ]]; then
     if [ ! -n "$TMUX" ]; then
-      echo "Getting window dimensions, waiting 5 seconds..."
-      MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | grep '*')
-      if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
-        setfont Uni3-Terminus32x16.psf.gz
-      elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
-        setfont Uni3-Terminus24x12.psf.gz
-      fi
       # suppress all messages from the kernel (and its drivers) except panic
       # messages from appearing on the console.
-      echo "Enter password to disable kernel from sending console messages..."
+      echo "Enter sudo password to disable kernel from sending console messages..."
       sudo dmesg -n 1
     fi
   fi

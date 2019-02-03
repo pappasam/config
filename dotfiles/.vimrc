@@ -500,15 +500,6 @@ function! TrimWhitespace()
   call winrestview(l:save)
 endfunction
 
-highlight EOLWS ctermbg=red guibg=red
-match EOLWS /\s\+$/
-augroup whitespace_color
-  autocmd!
-  autocmd ColorScheme * highlight EOLWS ctermbg=red guibg=red
-  autocmd InsertEnter * highlight EOLWS NONE
-  autocmd InsertLeave * highlight EOLWS ctermbg=red guibg=red
-augroup END
-
 augroup fix_whitespace_save
   autocmd!
   autocmd BufWritePre * call TrimWhitespace()
@@ -589,6 +580,21 @@ augroup spelling_options
     autocmd ColorScheme * highlight SpellCap cterm=underline,italic
     autocmd ColorScheme * highlight SpellLocal cterm=underline,italic
   endif
+augroup END
+
+" 6 == relaxing blue
+highlight EOLWS ctermbg=6 guibg=6
+match EOLWS /\s\+$/
+augroup whitespace_color
+  autocmd!
+  autocmd ColorScheme * highlight mkdLineBreak ctermbg=6 guibg=6
+  autocmd ColorScheme * highlight EOLWS ctermbg=6 guibg=6
+
+  autocmd InsertEnter * highlight EOLWS NONE
+  autocmd InsertLeave * highlight EOLWS ctermbg=6 guibg=6
+
+  autocmd InsertEnter * highlight mkdLineBreak NONE
+  autocmd InsertLeave * highlight mkdLineBreak ctermbg=6 guibg=6
 augroup END
 
 " Syntax: select global syntax scheme
