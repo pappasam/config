@@ -806,14 +806,20 @@ let g:NERDTreeIgnore=[
       \'\.o$[[file]]',
       \]
 
-function! NERDTreeToggleCustom()
+function! _CD(...)  " Like args in Python
+  let a:directory = get(a:, 1, expand('%:p:h'))
+  execute 'cd ' . a:directory
   if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
-    " if NERDTree is open in window in current tab...
-    exec 'NERDTreeClose'
+    execute 'NERDTreeCWD'
+    execute "normal! \<c-w>\<c-p>"
   else
-    exec 'NERDTree %'
+    execute 'NERDTreeCWD'
+    execute 'NERDTreeClose'
+    execute "normal! \<c-w>="
   endif
 endfunction
+
+command! -nargs=? CD call _CD(<f-args>)
 
 function! s:CloseIfOnlyControlWinLeft()
   if winnr("$") != 1
@@ -1711,8 +1717,7 @@ nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
 " TogglePluginWindows:
-nnoremap <silent> <space>j :NERDTreeToggle<CR>
-nnoremap <silent> <space>J :call NERDTreeToggleCustom()<CR>
+nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
 nnoremap <silent> <space>l :TagbarToggle <CR>
 nnoremap <silent> <space>u :UndotreeToggle<CR>
 
@@ -1843,9 +1848,6 @@ nmap <expr> q QStart()
 
 " }}}
 " General: Command abbreviations ------------------------ {{{
-
-" Change directory to current file
-command! CD cd %:h
 
 " Execute current file
 command! Run !./%
