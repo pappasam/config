@@ -183,11 +183,6 @@ cd ~/bin
 sudo apt install zathura
 
 #######################################################################
-# Colorize cats output
-#######################################################################
-sudo apt install python-pygments
-
-#######################################################################
 # PyEnv
 #######################################################################
 
@@ -214,6 +209,7 @@ pip install hovercraft
 cargo install ripgrep
 cargo install fd-find
 cargo install racer
+cargo install bat
 rustup component add rustfmt-preview
 rustup component add rust-src
 

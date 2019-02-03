@@ -562,10 +562,6 @@ function gitzip() {  # arg1: the git repository
 }
 compdef _dirs gitzip
 
-function cats() {
-  pygmentize -g $1
-}
-
 # dictionary lookups
 function def() {  # arg1: word
   dict -d gcide $1
