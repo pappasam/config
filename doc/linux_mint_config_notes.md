@@ -77,14 +77,14 @@ to do things without moving my hands from the home row.
         * Copy a screenshot of an area to a clipboard: Shift+Ctrl+Alt+Y
 * **Custom**
     * Panel Toggle
-        * Command : ~/dotfiles/panel-autohide.sh
+        * Command : ~/.panel-autohide.sh
         * Shortcut : Ctrl+Alt+P
     * Alacritty
-        * Command: ~/bin/alacritty
+        * Command: /usr/bin/alacritty
         * Ctrl+Alt+i
-    * Nothing (because Ctrl+Q sucks)
-        * Command: echo
-        * Ctrl+Q
+    * Screenkey Toggle
+        * Command: ~/bin/sk-toggle
+        * Ctrl+Alt+,
 
 ### Layouts
 
