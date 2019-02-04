@@ -1478,15 +1478,9 @@ let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
-      \ 'terraform': 'terraform fmt -'
+      \ 'terraform': 'terraform fmt -',
+      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"',
       \}
-
-" Key mappings (leader-f)
-augroup language_specific_file_beauty
-  autocmd FileType python,rust,terraform
-        \ nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
-augroup END
 
 " }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
@@ -1775,6 +1769,12 @@ imap <MiddleMouse> <Plug>SystemPaste<CR>
 
 " SearchBackward: remap comma to single quote
 nnoremap ' ,
+
+" FiletypeFormat: remap leader f to do filetype formatting
+nnoremap <leader>f :FiletypeFormat<cr>
+augroup language_specific_file_beauty
+  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
+augroup END
 
 " }}}
 " General: Macro repeater ---- {{{

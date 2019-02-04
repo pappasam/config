@@ -535,9 +535,10 @@ alias setup_reveal='cookiecutter gh:keimlink/cookiecutter-reveal.js'
 # Rust
 
 # need cargo install cargo-update
+# NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
-# NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
+alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
