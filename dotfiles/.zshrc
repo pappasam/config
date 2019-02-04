@@ -557,16 +557,20 @@ alias pip='noglob pip'
 # 3. Rename first window to 'edit'
 # 4. Attach to session newly-created session
 function t() {
-  set -e
   if [[ $# > 0 ]]; then
     SESSION=$1
   else
     SESSION=Main
   fi
-  tmux -2 new-session -d -s $SESSION
-  tmux -2 select-window -t $SESSION:1
-  tmux -2 rename-window edit
-  tmux -2 attach -t $SESSION
+  HAS_SESSION=$(tmux has-session -t $SESSION 2>/dev/null)
+  if [ $HAS_SESSION ]; then
+    tmux attach -t $SESSION
+  else
+    tmux -2 new-session -d -s $SESSION
+    tmux -2 select-window -t $SESSION:1
+    tmux -2 rename-window edit
+    tmux -2 attach -t $SESSION
+  fi
 }
 
 # Fix window dimensions: tty mode
