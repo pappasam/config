@@ -479,9 +479,6 @@ alias igrep="grep --perl-regexp -Ir \
 --exclude-dir='node_modules' \
 --exclude-dir='venv'"
 
-# Tmux launch script
-alias t='~/.tmuxlaunch.sh'
-
 # enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
@@ -548,6 +545,29 @@ alias pip='noglob pip'
 
 # }}}
 # Functions --- {{{
+
+# Tmux Launch
+# NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
+# necessary for proper Vim support in the Linux Console. My Vim colorscheme,
+# PaperColor, does a lot of smart translation for Color values between 256 and
+# terminal 16 color support, and this translation is lost otherwise.
+# Steps (assuming index of 1, which requires tmux config):
+# 1. Create session in detached mode
+# 2. Select first window
+# 3. Rename first window to 'edit'
+# 4. Attach to session newly-created session
+function t() {
+  set -e
+  if [[ $# > 0 ]]; then
+    SESSION=$1
+  else
+    SESSION=Main
+  fi
+  tmux -2 new-session -d -s $SESSION
+  tmux -2 select-window -t $SESSION:1
+  tmux -2 rename-window edit
+  tmux -2 attach -t $SESSION
+}
 
 # Fix window dimensions: tty mode
 # Set consolefonts to appropriate size based on monitor resolution
