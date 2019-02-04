@@ -1,12 +1,20 @@
-# See: https://github.com/google/yapf#knobs
 [style]
+
+## Default
 based_on_style = pep8
-coalesce_brackets=True
+
+## Overrides: https://github.com/google/yapf#knobs
+
+# Toggles
 dedent_closing_brackets=True
 disable_ending_comma_heuristic=False
 join_multiple_lines=False
-split_all_comma_separated_values=True
 split_arguments_when_comma_terminated=True
 split_before_expression_after_opening_paren=True
 split_before_first_argument=True
 split_complex_comprehension=True
+
+# Penalties
+split_penalty_after_opening_bracket=0
+split_penalty_comprehension=0
+split_penalty_for_added_line_split=0
