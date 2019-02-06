@@ -916,8 +916,7 @@ let g:lightline = {}
 let g:lightline.active = {}
 let g:lightline.inactive = {}
 let g:lightline.colorscheme = 'PaperColor'
-let g:lightline.mode_map = IfConsole(
-      \ {-> {
+let g:lightline.mode_map = {
       \   '__' : '-',
       \   'n'  : 'N',
       \   'i'  : 'I',
@@ -929,21 +928,21 @@ let g:lightline.mode_map = IfConsole(
       \   's'  : 'S',
       \   'S'  : 'S',
       \   '' : 'S',
-      \ }},
-      \ {-> {
-      \   '__' : '-',
-      \   'n'  : 'ℕ',
-      \   'i'  : 'ⅈ',
-      \   'R'  : 'ℛ',
-      \   'c'  : 'ℂ',
-      \   'v'  : '℣',
-      \   'V'  : '℣',
-      \   '' : '℣',
-      \   's'  : '₷',
-      \   'S'  : '₷',
-      \   '' : '₷',
-      \ }}
-      \ )
+      \ }
+" {
+" \   '__' : '-',
+" \   'n'  : 'ℕ',
+" \   'i'  : 'ⅈ',
+" \   'R'  : 'ℛ',
+" \   'c'  : 'ℂ',
+" \   'v'  : '℣',
+" \   'V'  : '℣',
+" \   '' : '℣',
+" \   's'  : '₷',
+" \   'S'  : '₷',
+" \   '' : '₷',
+" \ }}
+" \ )
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
