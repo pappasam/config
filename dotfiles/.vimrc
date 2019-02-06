@@ -192,6 +192,9 @@ set number
 " Set split settings (options: splitright, splitbelow)
 set splitright
 
+" Set textwidth to 79 characters
+set textwidth=79
+
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
   au FocusGained * :redraw!
@@ -417,7 +420,7 @@ highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
-  autocmd FileType gitcommit set colorcolumn=72 textwidth=72
+  autocmd FileType gitcommit setlocal colorcolumn=72 textwidth=72
   autocmd Filetype html,text,markdown set colorcolumn=0
 augroup END
 
@@ -1341,6 +1344,9 @@ augroup END
 
 "  }}}
 "  Plugin: Goyo --- {{{
+
+" Set width a bit wider to account for line numbers
+let g:goyo_width = 84
 
 function! s:goyo_enter()
   let b:goyo_is_on = 1
