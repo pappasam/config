@@ -218,7 +218,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'henrik/vim-indexed-search'
 Plug 'machakann/vim-sandwich'
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
+Plug 'pappasam/quick-scope', { 'branch': 'FIX_CHANGING_CURSOR' }
 Plug 'fcpg/vim-altscreen'
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
@@ -563,10 +564,15 @@ augroup javascript_syntax
   autocmd FileType javascript.jsx syn keyword jsBooleanTrue this
 augroup end
 
+" QuickScope: Primary green, secondary blue
 augroup qs_colors
   autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+  autocmd ColorScheme * highlight QuickScopePrimary ctermfg=10
+  autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=14
+  if !IsConsole()
+    autocmd ColorScheme * highlight QuickScopePrimary cterm=underline
+    autocmd ColorScheme * highlight QuickScopeSecondary cterm=underline
+  endif
 augroup END
 
 augroup spelling_options
@@ -592,14 +598,14 @@ highlight EOLWS ctermbg=6 guibg=6
 match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
-  autocmd ColorScheme * highlight mkdLineBreak ctermbg=6 guibg=6
-  autocmd ColorScheme * highlight EOLWS ctermbg=6 guibg=6
+  autocmd ColorScheme * highlight mkdLineBreak ctermbg=6
+  autocmd ColorScheme * highlight EOLWS ctermbg=6
 
   autocmd InsertEnter * highlight EOLWS NONE
-  autocmd InsertLeave * highlight EOLWS ctermbg=6 guibg=6
+  autocmd InsertLeave * highlight EOLWS ctermbg=6
 
   autocmd InsertEnter * highlight mkdLineBreak NONE
-  autocmd InsertLeave * highlight mkdLineBreak ctermbg=6 guibg=6
+  autocmd InsertLeave * highlight mkdLineBreak ctermbg=6
 augroup END
 
 " Syntax: select global syntax scheme
@@ -1566,7 +1572,7 @@ let g:markdown_composer_open_browser = 0
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 
 " QuickScope: great plugin helping with f and t
-let g:qs_highlight_on_keys = IfConsole({-> []}, {-> ['f', 'F', 't', 'T']})
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars = 10000
 
 " Go: random stuff
