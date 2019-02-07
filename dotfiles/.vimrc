@@ -192,9 +192,6 @@ set number
 " Set split settings (options: splitright, splitbelow)
 set splitright
 
-" Set textwidth to 79 characters
-set textwidth=79
-
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
   au FocusGained * :redraw!
