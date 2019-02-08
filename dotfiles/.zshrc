@@ -559,7 +559,10 @@ alias poetry-clean='poetry cache:clear --all pypi'
 # 3. Rename first window to 'edit'
 # 4. Attach to session newly-created session
 function t() {
-  if [[ $# > 0 ]]; then
+  if [ -n "$TMUX" ]; then
+    echo 'Cannot run t() in tmux session'
+    return 1
+  elif [[ $# > 0 ]]; then
     SESSION=$1
   else
     SESSION=Main
