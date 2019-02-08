@@ -543,6 +543,7 @@ alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 # Python
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
+alias poetry-clean='poetry cache:clear --all pypi'
 
 # }}}
 # Functions --- {{{
