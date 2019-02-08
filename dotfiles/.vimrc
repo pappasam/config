@@ -221,7 +221,6 @@ Plug 'machakann/vim-sandwich'
 " Plug 'unblevable/quick-scope'
 Plug 'pappasam/quick-scope', { 'branch': 'FIX_CHANGING_CURSOR' }
 Plug 'fcpg/vim-altscreen'
-Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'sjl/strftimedammit.vim'
 Plug 'wincent/ferret'
 Plug 'bronson/vim-visual-star-search'
@@ -683,6 +682,32 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
+"  General: Delete hidden buffers --- {{{
+
+" From: https://stackoverflow.com/a/7321131
+function! DeleteInactiveBuffers()
+  "From tabpagebuflist() help, get a list of all buffers in all tabs
+  let tablist = []
+  for i in range(tabpagenr('$'))
+    call extend(tablist, tabpagebuflist(i + 1))
+  endfor
+
+  "Below originally inspired by Hara Krishna Dara and Keith Roberts
+  "http://tech.groups.yahoo.com/group/vim/message/56425
+  let nWipeouts = 0
+  for i in range(1, bufnr('$'))
+    if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+      " bufno exists AND isn't modified
+      " AND isn't in the list of buffers open in windows and tabs
+      " Force buffer deletion (even for terminals)
+      silent exec 'bwipeout!' i
+      let nWipeouts = nWipeouts + 1
+    endif
+  endfor
+  echomsg nWipeouts . ' buffer(s) wiped out'
+endfunction
+
+"  }}}
 "  Plugin: Vim-Plug --- {{{
 
 " Plug update and upgrade
@@ -716,15 +741,16 @@ command! PU call _PU()
 "     Header row + new row = <Alt>Enter
 "     New row = Just type the correct columns then get into normal mode
 
-let g:riv_global_leader = '<leader>e'
+let g:riv_global_leader = '<C-E>'
 let g:riv_disable_folding = 1
-let g:riv_disable_indent = 0
+let g:riv_disable_indent = 1
 let g:riv_disable_del = 1
-let g:riv_web_browser = 'firefox'
 let g:riv_ignored_imaps = '<Tab>,<S-Tab>'
+let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
+let g:riv_ignored_vmaps = '<Tab>,<S-Tab>'
 let g:riv_auto_format_table = 1
 let g:riv_auto_rst2html = 0
-let g:instant_rst_localhost_only = 1
+let g:riv_web_browser = 'firefox'
 
 " }}}
 " Plugin: markdown-preview.vim --- {{{
@@ -1764,7 +1790,7 @@ vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
 
 " DeleteHiddenBuffers: shortcut to make this easier
 " Note: weird stuff happens if you mess this up
-nnoremap <leader>d :DeleteHiddenBuffers<CR>
+nnoremap <leader>d :call DeleteInactiveBuffers()<CR>
 
 " Jumping to header file
 nnoremap gh :call CurtineIncSw()<CR>
