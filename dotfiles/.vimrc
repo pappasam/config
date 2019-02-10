@@ -933,10 +933,9 @@ let g:fzf_action = {
 " }}}
 " Plugin: Lightline ---------------- {{{
 
-" This is a giant section
-" that configures the status line for my vim editing.
+" This is a giant section that configures the status line for my vim editing.
 " It's super important, so I devote a lot of code to it.
-" Most of the functions are ported from the Lightlint documentation
+" Many of the functions are ported from the Lightlint documentation
 
 let g:lightline = {}
 let g:lightline.active = {}
