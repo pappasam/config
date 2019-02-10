@@ -1509,10 +1509,11 @@ augroup END
 
 let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
+      \ 'go': 'gofmt',
+      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"',
       \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -',
-      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"',
       \}
 
 " }}}
