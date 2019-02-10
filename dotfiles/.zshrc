@@ -529,8 +529,8 @@ compdef _dict_words say
 # reload zshrc
 alias so='source ~/.zshrc'
 
-# Cookiecutter
-alias setup_reveal='cookiecutter gh:keimlink/cookiecutter-reveal.js'
+# Cookiecutter (project boilerplate generator)
+alias cookiecutter-hovercraft='cookiecutter gh:pappasam/cookiecutter-hovercraft'
 
 # Rust
 
