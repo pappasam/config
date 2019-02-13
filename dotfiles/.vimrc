@@ -275,7 +275,7 @@ Plug 'lervag/vimtex'
 Plug 'tomlion/vim-solidity'
 Plug 'jparise/vim-graphql'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'groenewege/vim-less'
 Plug 'farfanoide/vim-kivy'
 Plug 'raimon49/requirements.txt.vim'
@@ -364,7 +364,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript.jsx
+  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
   autocmd BufNewFile,BufRead,BufEnter *.gs set filetype=javascript
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
         \ set filetype=dosini
@@ -558,7 +558,6 @@ augroup end
 augroup javascript_syntax
   autocmd!
   autocmd FileType javascript syn keyword jsBooleanTrue this
-  autocmd FileType javascript.jsx syn keyword jsBooleanTrue this
 augroup end
 
 " QuickScope: Primary green, secondary blue
@@ -1560,8 +1559,8 @@ let g:ragtag_global_maps = 1
 " VimJavascript:
 let g:javascript_plugin_flow = 1
 
-" JSX: for .js files in addition to .jsx
-let g:jsx_ext_required = 0
+" JSX: configure jsx-pretty
+let g:vim_jsx_pretty_colorful_config = 1
 
 " JsDoc:
 let g:jsdoc_enable_es6 = 1
