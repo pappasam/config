@@ -555,9 +555,37 @@ augroup python_syntax
 augroup end
 
 " Javascript: Highlight this keyword in object / function definitions
+" 0	    0	    Black
+" 1	    4	    DarkBlue
+" 2	    2	    DarkGreen
+" 3	    6	    DarkCyan
+" 4	    1	    DarkRed
+" 5	    5	    DarkMagenta
+" 6	    3	    Brown, DarkYellow
+" 7	    7	    LightGray, LightGrey, Gray, Grey
+" 8	    0*	    DarkGray, DarkGrey
+" 9	    4*	    Blue, LightBlue
+" 10	    2*	    Green, LightGreen
+" 11	    6*	    Cyan, LightCyan
+" 12	    1*	    Red, LightRed
+" 13	    5*	    Magenta, LightMagenta
+" 14	    3*	    Yellow, LightYellow
+" 15	    7*	    White
 augroup javascript_syntax
   autocmd!
   autocmd FileType javascript syn keyword jsBooleanTrue this
+  autocmd FileType javascript highlight jsxElement ctermfg=Green
+  autocmd FileType javascript highlight jsxTag ctermfg=Blue
+  autocmd FileType javascript highlight jsxTagName ctermfg=Cyan
+  autocmd FileType javascript highlight jsxComponentName ctermfg=DarkBlue
+  autocmd FileType javascript highlight jsxAttrib ctermfg=Green
+  autocmd FileType javascript highlight jsxEqual ctermfg=Yellow
+  autocmd FileType javascript highlight jsxCloseTag ctermfg=Green
+  " autocmd FileType javascript highlight jsxCloseString ctermfg=
+  " autocmd FileType javascript highlight jsxDot ctermfg=
+  " autocmd FileType javascript highlight jsxNamespace ctermfg=
+  " autocmd FileType javascript highlight jsxPunct ctermfg=
+  " autocmd FileType javascript highlight jsxString ctermfg=
 augroup end
 
 " QuickScope: Primary green, secondary blue
@@ -1396,6 +1424,17 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "  }}}
+"  Plugin: RagTag --- {{{
+
+" Load mappings on every filetype
+let g:ragtag_global_maps = 1
+
+" Additional files for whice ragtag will initialize
+augroup ragtag_config
+  autocmd FileType javascript call RagtagInit()
+augroup end
+
+"  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
 " NOTE: General remappings
@@ -1452,8 +1491,8 @@ let g:jedi#rename_command = "<leader>sr"
 
 " Javascript:
 let g:tern#command = ["npx", "tern"]
-let g:tern_show_argument_hints = 'on_move'
-let g:tern_show_signature_in_pum = 1
+let g:tern_show_argument_hints = 'no'
+let g:tern_show_signature_in_pum = 0
 augroup javascript_complete
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
@@ -1552,9 +1591,6 @@ let g:python_highlight_all = 1
 
 " Json: highlighting
 let g:vim_json_syntax_conceal = 0
-
-" Ragtag: on every filetype
-let g:ragtag_global_maps = 1
 
 " VimJavascript:
 let g:javascript_plugin_flow = 1
