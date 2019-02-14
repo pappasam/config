@@ -635,7 +635,7 @@ augroup END
 
 " Number doesn't matter which color is used to start highlight group.
 " It gets overridden in the whitespace color section below
-highlight EOLWS ctermbg=0
+highlight EOLWS ctermbg=DarkCyan
 match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
@@ -1413,6 +1413,8 @@ let g:goyo_width = 84
 function! s:goyo_enter()
   let b:goyo_is_on = 1
   setlocal number relativenumber
+  " Repeat whitespace match
+  match EOLWS /\s\+$/
 endfunction
 
 function! s:goyo_leave()
