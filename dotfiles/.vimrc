@@ -511,6 +511,38 @@ augroup END
 " }}}
 " General: Syntax highlighting ---------------- {{{
 
+"NR-16   NR-8    COLOR NAME ~
+"0	    0	    Black
+"1	    4	    DarkBlue
+"2	    2	    DarkGreen
+"3	    6	    DarkCyan
+"4	    1	    DarkRed
+"5	    5	    DarkMagenta
+"6	    3	    Brown, DarkYellow
+"7	    7	    LightGray, LightGrey, Gray, Grey
+"8	    0*	    DarkGray, DarkGrey
+"9	    4*	    Blue, LightBlue
+"10	    2*	    Green, LightGreen
+"11	    6*	    Cyan, LightCyan
+"12	    1*	    Red, LightRed
+"13	    5*	    Magenta, LightMagenta
+"14	    3*	    Yellow, LightYellow
+"15	    7*	    White
+
+"The number under NR-16 is used for 16-color terminals ('t_Co'
+"greater than or equal to 16).  The number under NR-8 is used for
+"8-color terminals ('t_Co' less than 16).  The '*' indicates that the
+"bold attribute is set for ctermfg.  In many 8-color terminals (e.g.,
+""linux"), this causes the bright colors to appear.  This doesn't work
+"for background colors!	Without the '*' the bold attribute is removed.
+"If you want to set the bold attribute in a different way, put a
+""cterm=" argument AFTER the ctermfg= or ctermbg= argument.	Or use
+"a number instead of a color name.
+
+"Note that for 16 color ansi style terminals (including xterms), the
+"numbers in the NR-8 column is used.  Here '*' means 'add 8' so that Blue
+"is 12, DarkGray is 8 etc.
+
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options.theme = {}
@@ -555,22 +587,6 @@ augroup python_syntax
 augroup end
 
 " Javascript: Highlight this keyword in object / function definitions
-" 0	    0	    Black
-" 1	    4	    DarkBlue
-" 2	    2	    DarkGreen
-" 3	    6	    DarkCyan
-" 4	    1	    DarkRed
-" 5	    5	    DarkMagenta
-" 6	    3	    Brown, DarkYellow
-" 7	    7	    LightGray, LightGrey, Gray, Grey
-" 8	    0*	    DarkGray, DarkGrey
-" 9	    4*	    Blue, LightBlue
-" 10	    2*	    Green, LightGreen
-" 11	    6*	    Cyan, LightCyan
-" 12	    1*	    Red, LightRed
-" 13	    5*	    Magenta, LightMagenta
-" 14	    3*	    Yellow, LightYellow
-" 15	    7*	    White
 augroup javascript_syntax
   autocmd!
   autocmd FileType javascript syn keyword jsBooleanTrue this
@@ -588,11 +604,11 @@ augroup javascript_syntax
   " autocmd FileType javascript highlight jsxString ctermfg=
 augroup end
 
-" QuickScope: Primary green, secondary blue
+" QuickScope: choose primary and secondary colors
 augroup qs_colors
   autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary ctermfg=10
-  autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=14
+  autocmd ColorScheme * highlight QuickScopePrimary ctermfg=Green
+  autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=Cyan
   if !IsConsole()
     autocmd ColorScheme * highlight QuickScopePrimary cterm=underline
     autocmd ColorScheme * highlight QuickScopeSecondary cterm=underline
@@ -605,10 +621,10 @@ augroup spelling_options
   autocmd ColorScheme * highlight clear SpellRare
   autocmd ColorScheme * highlight clear SpellCap
   autocmd ColorScheme * highlight clear SpellLocal
-  autocmd ColorScheme * highlight SpellBad ctermfg=1    " Red
-  autocmd ColorScheme * highlight SpellRare ctermfg=2   " Green
-  autocmd ColorScheme * highlight SpellCap ctermfg=11    " Yellow
-  autocmd ColorScheme * highlight SpellLocal ctermfg=5  " Purple
+  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed
+  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen
+  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow
+  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta
   if !IsConsole()
     autocmd ColorScheme * highlight SpellBad cterm=underline,italic
     autocmd ColorScheme * highlight SpellRare cterm=underline,italic
@@ -617,19 +633,18 @@ augroup spelling_options
   endif
 augroup END
 
-" 6 == relaxing blue
-highlight EOLWS ctermbg=6 guibg=6
+" Number doesn't matter which color is used to start highlight group.
+" It gets overridden in the whitespace color section below
+highlight EOLWS ctermbg=0
 match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
-  autocmd ColorScheme * highlight mkdLineBreak ctermbg=6
-  autocmd ColorScheme * highlight EOLWS ctermbg=6
+  " mkdLineBreak is a link group; special 'link' syntax required here
+  autocmd ColorScheme * highlight link mkdLineBreak NONE
+  autocmd ColorScheme * highlight EOLWS ctermbg=DarkCyan
 
-  autocmd InsertEnter * highlight EOLWS NONE
-  autocmd InsertLeave * highlight EOLWS ctermbg=6
-
-  autocmd InsertEnter * highlight mkdLineBreak NONE
-  autocmd InsertLeave * highlight mkdLineBreak ctermbg=6
+  autocmd InsertEnter * highlight clear EOLWS
+  autocmd InsertLeave * highlight EOLWS ctermbg=DarkCyan
 augroup END
 
 " Syntax: select global syntax scheme
