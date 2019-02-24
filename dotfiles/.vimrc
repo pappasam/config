@@ -1413,6 +1413,7 @@ let g:goyo_width = 84
 function! s:goyo_enter()
   let b:goyo_is_on = 1
   setlocal number relativenumber
+  execute 'NumbersEnable'
   " Repeat whitespace match
   match EOLWS /\s\+$/
 endfunction
