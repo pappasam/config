@@ -572,7 +572,7 @@ function t() {
   fi
   HAS_SESSION=$(tmux has-session -t $SESSION 2>/dev/null)
   if [ $HAS_SESSION ]; then
-    tmux attach -t $SESSION
+    tmux -2 attach -t $SESSION
   else
     tmux -2 new-session -d -s $SESSION
     tmux -2 select-window -t $SESSION:1
