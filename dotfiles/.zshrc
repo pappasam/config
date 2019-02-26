@@ -118,7 +118,7 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Configure man pager
-export MANPAGER='nvim -c "set ft=man" -'
+export MANPAGER='nvim --noplugin -c "set ft=man" -'
 
 # tmuxinator
 export EDITOR=/usr/bin/nvim
