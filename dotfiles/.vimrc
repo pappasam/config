@@ -240,7 +240,7 @@ Plug 'lambdalisue/gina.vim'
 Plug 'junegunn/gv.vim'
 
 " Basic coloring
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'pappasam/papercolor-theme', { 'branch': 'SUPPORT_JSX' }
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -590,18 +590,6 @@ augroup end
 augroup javascript_syntax
   autocmd!
   autocmd FileType javascript syn keyword jsBooleanTrue this
-  autocmd FileType javascript highlight jsxElement ctermfg=Green
-  autocmd FileType javascript highlight jsxTag ctermfg=Blue
-  autocmd FileType javascript highlight jsxTagName ctermfg=Cyan
-  autocmd FileType javascript highlight jsxComponentName ctermfg=DarkBlue
-  autocmd FileType javascript highlight jsxAttrib ctermfg=Green
-  autocmd FileType javascript highlight jsxEqual ctermfg=Yellow
-  autocmd FileType javascript highlight jsxCloseTag ctermfg=Green
-  " autocmd FileType javascript highlight jsxCloseString ctermfg=
-  " autocmd FileType javascript highlight jsxDot ctermfg=
-  " autocmd FileType javascript highlight jsxNamespace ctermfg=
-  " autocmd FileType javascript highlight jsxPunct ctermfg=
-  " autocmd FileType javascript highlight jsxString ctermfg=
 augroup end
 
 " QuickScope: choose primary and secondary colors
