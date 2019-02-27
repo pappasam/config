@@ -156,7 +156,8 @@ export BROWSER='/usr/bin/firefox'
 export WINIT_HIDPI_FACTOR=1.0
 
 # Rust (for racer) (rustup component add rust-src)
-export RUST_TOOLCHAIN_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu"
+RUST_TOOLCHAIN=$(rustup toolchain list | grep default | awk '{print $1;}')
+export RUST_TOOLCHAIN_PATH="$HOME/.multirust/toolchains/$RUST_TOOLCHAIN"
 export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 
 # Bat
