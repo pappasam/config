@@ -1602,7 +1602,7 @@ let g:vim_json_syntax_conceal = 0
 let g:javascript_plugin_flow = 1
 
 " JSX: configure jsx-pretty
-let g:vim_jsx_pretty_colorful_config = 1
+let g:vim_jsx_pretty_colorful_config = 0
 
 " JsDoc:
 let g:jsdoc_enable_es6 = 1
