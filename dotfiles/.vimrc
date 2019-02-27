@@ -240,7 +240,7 @@ Plug 'lambdalisue/gina.vim'
 Plug 'junegunn/gv.vim'
 
 " Basic coloring
-Plug 'pappasam/papercolor-theme', { 'branch': 'SUPPORT_JSX' }
+Plug 'NLKNguyen/papercolor-theme'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -1600,9 +1600,6 @@ let g:vim_json_syntax_conceal = 0
 
 " VimJavascript:
 let g:javascript_plugin_flow = 1
-
-" JSX: configure jsx-pretty
-let g:vim_jsx_pretty_colorful_config = 0
 
 " JsDoc:
 let g:jsdoc_enable_es6 = 1
