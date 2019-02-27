@@ -252,7 +252,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
-Plug 'hdima/python-syntax'
+Plug 'vim-python/python-syntax'
 Plug 'autowitch/hive.vim'
 Plug 'elzr/vim-json'
 Plug 'vimoutliner/vimoutliner'
@@ -577,11 +577,9 @@ let g:PaperColor_Theme_Options.language = {
       \    }
       \ }
 
-" Python: Highlight self and cls keyword in class definitions
+" Python: Highlight args and kwargs, since they are conventionally special
 augroup python_syntax
   autocmd!
-  autocmd FileType python syn keyword pythonBuiltinObj self
-  autocmd FileType python syn keyword pythonBuiltinObj cls
   autocmd FileType python syn keyword pythonBuiltinObj args
   autocmd FileType python syn keyword pythonBuiltinObj kwargs
 augroup end
