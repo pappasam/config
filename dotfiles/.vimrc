@@ -181,6 +181,12 @@ set pastetoggle=<C-_>
 set nocompatible
 
 " Enable using local vimrc
+" If the 'exrc' option is on (which is NOT the default), the current directory
+" is searched for three files.  The first that exists is used, the others are
+" ignored.
+"   * The file '.nvimrc' (for Unix)
+"   * The file '_nvimrc' (for Unix)
+"   * The file '.exrc'  (for Unix)
 set exrc
 
 " Make terminal zsh
@@ -980,20 +986,6 @@ let g:lightline.mode_map = {
       \   'S'  : 'S',
       \   '' : 'S',
       \ }
-" {
-" \   '__' : '-',
-" \   'n'  : 'ℕ',
-" \   'i'  : 'ⅈ',
-" \   'R'  : 'ℛ',
-" \   'c'  : 'ℂ',
-" \   'v'  : '℣',
-" \   'V'  : '℣',
-" \   '' : '℣',
-" \   's'  : '₷',
-" \   'S'  : '₷',
-" \   '' : '₷',
-" \ }}
-" \ )
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
