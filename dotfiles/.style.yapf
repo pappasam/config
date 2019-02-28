@@ -5,6 +5,9 @@ based_on_style = pep8
 
 ## Overrides: https://github.com/google/yapf#knobs
 
+# Allowals / Disallowals
+allow_split_before_dict_value=False
+
 # Toggles
 dedent_closing_brackets=True
 disable_ending_comma_heuristic=False
