@@ -396,9 +396,13 @@ augroup END
 " }}}
 " General: Comment Strings --- {{{
 
+" Notes:
+" commentstring: read by vim-commentary; must be one template
+" comments: csv of comments.
 augroup custom_comment_strings
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s
+  autocmd FileType dosini setlocal comments=:#,:;
 augroup END
 
 " }}}
