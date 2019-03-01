@@ -234,6 +234,11 @@ Plug 'chrisbra/Colorizer'
 Plug 'fidian/hexmode'
 Plug 'wellle/targets.vim'
 
+" EditorConfig: https://editorconfig.org/
+" Overrides default Vim settings when an editorconfig file is found
+" I have one at the moment (in dotfiles)
+Plug 'editorconfig/editorconfig-vim'
+
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
 
@@ -386,6 +391,14 @@ augroup filetype_vim
         \if has('gui_running') |
         \so $MYGVIMRC |
         \endif
+augroup END
+
+" }}}
+" General: Comment Strings --- {{{
+
+augroup custom_comment_strings
+  autocmd!
+  autocmd FileType dosini setlocal commentstring=#\ %s
 augroup END
 
 " }}}
