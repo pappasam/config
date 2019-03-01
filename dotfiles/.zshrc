@@ -724,12 +724,12 @@ function pyinit() {
     echo "pyinit takes no arguments"
     return 1
   fi
-  gitignore Python.gitignore > .gitignore
+  gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
   cat > main.py <<EOL
 #!/usr/bin/env python
-"""The main module"""
+'''The main module'''
 
 EOL
   chmod +x main.py
