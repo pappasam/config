@@ -513,7 +513,8 @@ alias publicip='curl -s checkip.amazonaws.com'
 alias g='git status'
 alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
-alias gma='git add --all && git commit --verbose'
+# NOTE: --patch forces interactive consideration of all hunks
+alias gma='git add --all --patch && git commit --verbose'
 alias gp='git remote prune origin'
 alias gd='git diff'
 
