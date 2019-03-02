@@ -433,7 +433,7 @@ augroup END
 " }}}
 " General: colorColumn different widths for different filetypes --- {{{
 
-highlight ColorColumn ctermbg=9
+" highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
@@ -573,30 +573,33 @@ let g:PaperColor_Theme_Options.theme = {}
 " Bold and italics are enabled by default
 let g:PaperColor_Theme_Options.theme.default = {
       \ 'allow_bold': 1,
-      \ 'allow_italic': 1
+      \ 'allow_italic': 1,
       \ }
 
-" Terminal Changes:
+" GuiTerminal:
+" folds: dark grey + light grey
+" visual: light grey + dark grey
+" Regular Terminal Changes:
 " folds: grey + green
 " visual: light blue background, black foreground
 let g:PaperColor_Theme_Options.theme['default.dark'] = {}
 let g:PaperColor_Theme_Options.theme['default.dark'].override = {
-      \ 'folded_fg' : ['#d787ff', '10'],
-      \ 'folded_bg' : ['#5f005f', '239'],
-      \ 'visual_fg' : ['#000000', '0'],
-      \ 'visual_bg' : ['#8787af', '6'],
+      \ 'folded_bg' : ['#383838', '0'],
+      \ 'folded_fg' : ['#b0b0b0', '6'],
+      \ 'visual_fg' : ['#505050', '0'],
+      \ 'visual_bg' : ['#bebebe', '6'],
       \ }
 
 " Enable language-specific overrides
 let g:PaperColor_Theme_Options.language = {
       \    'python': {
-      \      'highlight_builtins' : 1
+      \      'highlight_builtins' : 1,
       \    },
       \    'cpp': {
-      \      'highlight_standard_library': 1
+      \      'highlight_standard_library': 1,
       \    },
       \    'c': {
-      \      'highlight_builtins' : 1
+      \      'highlight_builtins' : 1,
       \    }
       \ }
 
@@ -616,8 +619,8 @@ augroup end
 " QuickScope: choose primary and secondary colors
 augroup qs_colors
   autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary ctermfg=Green
-  autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=Cyan
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' ctermfg=Green gui=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' ctermfg=Cyan gui=underline
   if !IsConsole()
     autocmd ColorScheme * highlight QuickScopePrimary cterm=underline
     autocmd ColorScheme * highlight QuickScopeSecondary cterm=underline
@@ -630,10 +633,10 @@ augroup spelling_options
   autocmd ColorScheme * highlight clear SpellRare
   autocmd ColorScheme * highlight clear SpellCap
   autocmd ColorScheme * highlight clear SpellLocal
-  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed
-  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen
-  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow
-  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta
+  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg='#f00c00' gui=underline,italic
+  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='#53f502' gui=underline,italic
+  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='#eef200' gui=underline,italic
+  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='#ff00d0' gui=underline,italic
   if !IsConsole()
     autocmd ColorScheme * highlight SpellBad cterm=underline,italic
     autocmd ColorScheme * highlight SpellRare cterm=underline,italic
@@ -650,31 +653,30 @@ augroup whitespace_color
   autocmd!
   " mkdLineBreak is a link group; special 'link' syntax required here
   autocmd ColorScheme * highlight link mkdLineBreak NONE
-  autocmd ColorScheme * highlight EOLWS ctermbg=DarkCyan
+  autocmd ColorScheme * highlight EOLWS guibg='#02c6d4' ctermbg=DarkCyan
 
   autocmd InsertEnter * highlight clear EOLWS
-  autocmd InsertLeave * highlight EOLWS ctermbg=DarkCyan
+  autocmd InsertLeave * highlight EOLWS guibg='#02c6d4' ctermbg=DarkCyan
 augroup END
 
-" Syntax: select global syntax scheme
-" Make sure this is at end of section
-try
-  call IfConsole(
-        \ {-> execute('set t_Co=16')},
-        \ {-> execute('set t_Co=256')}
-        \ )
-  set background=dark
-  colorscheme PaperColor
-catch
-  echo 'An error occured while configuring PaperColor'
-endtry
-
+" Disable cursorline, then override if necessary
 hi CursorLine cterm=NONE
-
 augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
 augroup END
+
+" Make sure this is at end of section
+call IfConsole(
+      \ {-> execute('set t_Co=16')},
+      \ {-> execute('set termguicolors')}
+      \ )
+set background=dark
+try
+  colorscheme PaperColor
+catch
+  echo 'An error occured while configuring PaperColor'
+endtry
 
 " }}}
 " General: Resize Window --- {{{
@@ -966,7 +968,6 @@ function! FZFBuffersAvoidNerdtree()
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
   endif
-  " getcwd(-1, -1) tells it to always use the global working directory
   execute 'Buffers'
 endfunction
 
@@ -1961,13 +1962,7 @@ set noshowmode
 " ShowCommand: turn off character printing to vim status line
 set noshowcmd
 
-" CursorLine:
-" insert mode - line
-let &t_SI .= "\<Esc>[5 q"
-"replace mode - underline
-let &t_SR .= "\<Esc>[4 q"
-"common - block
-let &t_EI .= "\<Esc>[3 q"
+" Cursor:
 " Turn off GUI cursor changes in console mode (tty)
 call IfConsole({-> execute('set guicursor=')}, {-> 0})
 

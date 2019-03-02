@@ -464,24 +464,8 @@ alias f='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
-# Tree that ignores annoying directories
-alias itree="tree -I '__pycache__|venv|node_modules'"
-
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias igrep="grep --perl-regexp -Ir \
---exclude='*~' \
---exclude='*.pyc' \
---exclude='*.csv' \
---exclude='*.tsv' \
---exclude='*.md' \
---exclude-dir='.bzr' \
---exclude-dir='.git' \
---exclude-dir='.svn' \
---exclude-dir='node_modules' \
---exclude-dir='venv'"
 
 # enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
@@ -510,11 +494,11 @@ alias octave='octave --no-gui'
 alias publicip='curl -s checkip.amazonaws.com'
 
 # Git
+# NOTE: git add --patch forces interactive consideration of all hunks; useful
 alias g='git status'
 alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
-# NOTE: --patch forces interactive consideration of all hunks
-alias gma='git add --all --patch && git commit --verbose'
+alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
 alias gd='git diff'
 
