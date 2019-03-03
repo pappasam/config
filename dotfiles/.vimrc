@@ -433,7 +433,6 @@ augroup END
 " }}}
 " General: colorColumn different widths for different filetypes --- {{{
 
-" highlight ColorColumn ctermbg=9
 set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
