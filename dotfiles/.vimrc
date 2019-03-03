@@ -1400,6 +1400,10 @@ augroup ledger_settings
   autocmd FileType ledger noremap } /^\d<CR>
 augroup END
 
+augroup language_specific_file_beauty
+  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
+augroup END
+
 "  }}}
 "  Plugin: Goyo --- {{{
 
@@ -1703,7 +1707,7 @@ function! ResizeTo80()
 endfunction
 
 " }}}
-" General: Key remappings (includes Plugins) ----------------------- {{{
+" General: Global key remappings (includes Plugins) ----------------------- {{{
 
 " Escape:
 " Make escape also clear highlighting
@@ -1844,16 +1848,17 @@ nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
 " MouseCopy: system copy mouse characteristics
 vmap <RightMouse> <Plug>SystemCopy<CR>
-imap <MiddleMouse> <Plug>SystemPaste<CR>
+
+" Mouse Open Close Folds: open folds with the mouse
+" taken from: https://stackoverflow.com/a/13924974
+nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
+nnoremap <MiddleMouse> zc
 
 " SearchBackward: remap comma to single quote
 nnoremap ' ,
 
 " FiletypeFormat: remap leader f to do filetype formatting
 nnoremap <leader>f :FiletypeFormat<cr>
-augroup language_specific_file_beauty
-  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
-augroup END
 
 " }}}
 " General: Macro repeater ---- {{{
