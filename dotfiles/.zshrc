@@ -144,10 +144,12 @@ export HISTFILE=~/.zsh_history
 export SAVEHIST=5000
 
 # FZF
+export FZF_COMPLETION_TRIGGER=''
+export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept --ansi"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-# pipenv
-export PIPENV_VENV_IN_PROJECT='doit'
+# Python virtualenv (disable the prompt so I can configure it myself below)
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Default browser for some programs (eg, urlview)
 export BROWSER='/usr/bin/firefox'
@@ -900,8 +902,6 @@ PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
 PS1_USR="%B%F{$COLOR_GOLD}%n@%M%b%f"
 PS1_END="%B%F{$COLOR_SILVER}$ %f%b"
 
-# Configure Python virtualenv prompt
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 function virtualenv_info(){
   # Get Virtual Env
   if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -934,8 +934,6 @@ _fzf_compgen_dir() {
 }
 
 # <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
-export FZF_COMPLETION_TRIGGER=''
-export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept --ansi"
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
