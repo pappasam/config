@@ -189,19 +189,39 @@ set nocompatible
 "   * The file '.exrc'  (for Unix)
 set exrc
 
-" Make terminal zsh
-set shell=/usr/bin/zsh
+" Shell Is Default: make terminal the same terminal you're working with
+set shell=$SHELL
 
-" Make sure numbering is set
+" Numbering: make sure numbering is set
 set number
 
-" Set split settings (options: splitright, splitbelow)
+" Window Splitting: Set split settings (options: splitright, splitbelow)
 set splitright
 
-" Redraw window whenever I've regained focus
+" Redraw Window: need to redraw whenever I've regained focus
 augroup redraw_on_refocus
   au FocusGained * :redraw!
 augroup END
+
+" Lightline: specifics for Lightline
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+
+" ShowCommand: turn off character printing to vim status line
+set noshowcmd
+
+" Cursor:
+" Turn off GUI cursor changes in console mode (tty)
+call IfConsole({-> execute('set guicursor=')}, {-> 0})
+
+" Configure updatetime
+" This is the amount of time vim waits to do something after you stop
+" acting. Default is 4000, this works well for my fast system
+set updatetime=750
+
+" Update path for Linux-specific libraries
+set path+=/usr/include/x86_64-linux-gnu/
 
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -362,6 +382,13 @@ Plug 'pappasam/vim-filetype-formatter'
 Plug 'ericcurtin/CurtineIncSw.vim'
 
 call plug#end()
+
+" Plug update and upgrade
+function! _PU()
+  execute 'PlugUpdate'
+  execute 'PlugUpgrade'
+endfunction
+command! PU call _PU()
 
 " }}}
 " General: Filetype specification ------------ {{{
@@ -551,19 +578,19 @@ augroup END
 "14	    3*	    Yellow, LightYellow
 "15	    7*	    White
 
-"The number under NR-16 is used for 16-color terminals ('t_Co'
-"greater than or equal to 16).  The number under NR-8 is used for
-"8-color terminals ('t_Co' less than 16).  The '*' indicates that the
-"bold attribute is set for ctermfg.  In many 8-color terminals (e.g.,
-""linux"), this causes the bright colors to appear.  This doesn't work
-"for background colors!	Without the '*' the bold attribute is removed.
-"If you want to set the bold attribute in a different way, put a
-""cterm=" argument AFTER the ctermfg= or ctermbg= argument.	Or use
-"a number instead of a color name.
+" The number under NR-16 is used for 16-color terminals ('t_Co'
+" greater than or equal to 16). The number under NR-8 is used for
+" 8-color terminals ('t_Co' less than 16). The '*' indicates that the
+" bold attribute is set for ctermfg. In many 8-color terminals (e.g.,
+" 'linux'), this causes the bright colors to appear.  This doesn't work
+" for background colors! Without the '*' the bold attribute is removed.
+" If you want to set the bold attribute in a different way, put a
+" 'cterm=' argument AFTER the ctermfg= or ctermbg= argument. Or use
+" a number instead of a color name.
 
-"Note that for 16 color ansi style terminals (including xterms), the
-"numbers in the NR-8 column is used.  Here '*' means 'add 8' so that Blue
-"is 12, DarkGray is 8 etc.
+" Note that for 16 color ansi style terminals (including xterms), the
+" numbers in the NR-8 column is used.  Here '*' means 'add 8' so that Blue
+" is 12, DarkGray is 8 etc.
 
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
@@ -724,11 +751,24 @@ endfunction
 augroup stay_no_lcd
   autocmd!
   if exists(':tcd') == 2
-    autocmd User BufStaySavePre  if haslocaldir() | let w:lcd = getcwd() | exe 'cd '.fnameescape(getcwd(-1, -1)) | endif
+    autocmd User BufStaySavePre
+          \ if haslocaldir() |
+          \ let w:lcd = getcwd() |
+          \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
+          \ endif
   else
-    autocmd User BufStaySavePre  if haslocaldir() | let w:lcd = getcwd() | cd - | cd - | endif
+    autocmd User BufStaySavePre
+          \ if haslocaldir() |
+          \ let w:lcd = getcwd() |
+          \ cd - |
+          \ cd - |
+          \ endif
   endif
-  autocmd User BufStaySavePost if exists('w:lcd') | execute 'lcd' fnameescape(w:lcd) | unlet w:lcd | endif
+  autocmd User BufStaySavePost
+        \ if exists('w:lcd') |
+        \ execute 'lcd' fnameescape(w:lcd) |
+        \ unlet w:lcd |
+        \ endif
 augroup END
 
 " --- }}}
@@ -756,16 +796,6 @@ function! DeleteInactiveBuffers()
   endfor
   echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
-
-"  }}}
-"  Plugin: Vim-Plug --- {{{
-
-" Plug update and upgrade
-function! _PU()
-  exec 'PlugUpdate'
-  exec 'PlugUpgrade'
-endfunction
-command! PU call _PU()
 
 "  }}}
 " Plugin: Riv.Vim --- {{{
@@ -835,13 +865,13 @@ let g:mkdp_browserfunc = ''
 "   top: mean the vim top viewport alway show at the top of the preview page
 "   relative: mean the cursor position alway show at the relative positon of the preview page
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle'
-    \ }
+      \ 'mkit': {},
+      \ 'katex': {},
+      \ 'uml': {},
+      \ 'maid': {},
+      \ 'disable_sync_scroll': 0,
+      \ 'sync_scroll_type': 'middle'
+      \ }
 
 " }}}
 " Plugin: Preview Compiled Stuff in Viewer --- {{{
@@ -885,19 +915,19 @@ let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
 let g:NERDTreeMouseMode = 2
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore=[
-      \'venv$[[dir]]',
-      \'.venv$[[dir]]',
-      \'__pycache__$[[dir]]',
-      \'.egg-info$[[dir]]',
-      \'node_modules$[[dir]]',
-      \'elm-stuff$[[dir]]',
-      \'\.aux$[[file]]',
-      \'\.toc$[[file]]',
-      \'\.pdf$[[file]]',
-      \'\.out$[[file]]',
-      \'\.o$[[file]]',
-      \]
+let g:NERDTreeIgnore = [
+      \ 'venv$[[dir]]',
+      \ '.venv$[[dir]]',
+      \ '__pycache__$[[dir]]',
+      \ '.egg-info$[[dir]]',
+      \ 'node_modules$[[dir]]',
+      \ 'elm-stuff$[[dir]]',
+      \ '\.aux$[[file]]',
+      \ '\.toc$[[file]]',
+      \ '\.pdf$[[file]]',
+      \ '\.out$[[file]]',
+      \ '\.o$[[file]]',
+      \ ]
 
 function! _CD(...)  " Like args in Python
   let a:directory = get(a:, 1, expand('%:p:h'))
@@ -920,13 +950,13 @@ function! s:CloseIfOnlyControlWinLeft()
   endif
   if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
         \ || &buftype == 'quickfix'
-    q
+    quit
   endif
 endfunction
 
 augroup CloseIfOnlyControlWinLeft
-  au!
-  au BufEnter * call s:CloseIfOnlyControlWinLeft()
+  autocmd!
+  autocmd BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
 
 let g:NERDTreeIndicatorMapCustom = {
@@ -977,7 +1007,7 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-l': function('s:build_quickfix_list'),
-      \}
+      \ }
 
 " }}}
 " Plugin: Lightline ---------------- {{{
@@ -991,17 +1021,17 @@ let g:lightline.active = {}
 let g:lightline.inactive = {}
 let g:lightline.colorscheme = 'PaperColor'
 let g:lightline.mode_map = {
-      \   '__' : '-',
-      \   'n'  : 'N',
-      \   'i'  : 'I',
-      \   'R'  : 'R',
-      \   'c'  : 'C',
-      \   'v'  : 'V',
-      \   'V'  : 'V',
-      \   '' : 'V',
-      \   's'  : 'S',
-      \   'S'  : 'S',
-      \   '' : 'S',
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
       \ }
 
 let g:lightline.component = {
@@ -1025,36 +1055,37 @@ let g:lightline.component = {
       \ 'line': '%l',
       \ 'column': '%c',
       \ 'close': '%999X X ',
-      \ 'winnr': '%{winnr()}' }
+      \ 'winnr': '%{winnr()}',
+      \ }
 
 let g:lightline.active.left = [
       \ [ 'mode', 'paste', 'spell' ],
       \ [ 'gina', 'readonly', 'filename' ],
-      \ [ 'ctrlpmark' ]
+      \ [ 'ctrlpmark' ],
       \ ]
 
 let g:lightline.inactive.left = [
       \ [ 'mode', 'paste', 'spell' ],
       \ [ 'gina', 'readonly', 'filename' ],
-      \ [ 'ctrlpmark' ]
+      \ [ 'ctrlpmark' ],
       \ ]
 
 let g:lightline.active.right = [
       \ [ 'filetype' ],
       \ [ 'fileformat', 'fileencoding' ],
-      \ [ 'lineinfo' ]
+      \ [ 'lineinfo' ],
       \ ]
 
 let g:lightline.inactive.right = [
       \ [ 'filetype' ],
       \ [],
-      \ []
+      \ [],
       \ ]
 
 let g:lightline.component_function = {
       \ 'gina': 'LightlineGina',
       \ 'filename': 'LightlineFilename',
-      \ 'mode': 'LightlineMode'
+      \ 'mode': 'LightlineMode',
       \ }
 
 function! LightlineModified()
@@ -1068,7 +1099,8 @@ endfunction
 function! LightlineFilename()
   let cwd = getcwd()
   let fname = substitute(expand("%:p"), l:cwd . "/" , "", "")
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ?
+        \ g:lightline.ctrlp_item :
         \ fname =~ '__Tagbar__.*' ? '' :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
@@ -1100,7 +1132,8 @@ function! LightlineMode()
         \ &ft == 'unite' ? 'Unite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+        \ winwidth(0) > 60 ? lightline#mode() :
+        \ ''
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
@@ -1132,24 +1165,24 @@ call gina#custom#command#option('blame', '--width', '79')
 " Custom mappings for Gina blame buffer
 call gina#custom#mapping#nmap(
       \ 'blame', 'c',
-      \ '<Plug>(gina-blame-echo)'
-      \)
+      \ '<Plug>(gina-blame-echo)',
+      \ )
 call gina#custom#mapping#nmap(
       \ 'blame', '<CR>',
-      \ '<Plug>(gina-blame-open)'
-      \)
+      \ '<Plug>(gina-blame-open)',
+      \ )
 call gina#custom#mapping#nmap(
       \ 'blame', '<c-i>',
-      \ '<Plug>(gina-blame-open)'
-      \)
+      \ '<Plug>(gina-blame-open)',
+      \ )
 call gina#custom#mapping#nmap(
       \ 'blame', '<Backspace>',
-      \ '<Plug>(gina-blame-back)'
-      \)
+      \ '<Plug>(gina-blame-back)',
+      \ )
 call gina#custom#mapping#nmap(
       \ 'blame', '<c-o>',
-      \ '<Plug>(gina-blame-back)'
-      \)
+      \ '<Plug>(gina-blame-back)',
+      \ )
 
 let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
 let g:gina#command#blame#formatter#timestamp_months = 0
@@ -1176,47 +1209,47 @@ let g:tagbar_width = 37
 let g:tagbar_silent = 1
 let g:tagbar_foldlevel = 0
 let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
+    \ 'ctagsbin': 'hasktags',
+    \ 'ctagsargs': '-x -c -o-',
+    \ 'kinds': [
+        \ 'm:modules:0:1',
+        \ 'd:data: 0:1',
+        \ 'd_gadt: data gadt:0:1',
+        \ 't:type names:0:1',
+        \ 'nt:new types:0:1',
+        \ 'c:classes:0:1',
+        \ 'cons:constructors:1:1',
+        \ 'c_gadt:constructor gadt:1:1',
+        \ 'c_a:constructor accessors:1:1',
+        \ 'ft:function types:1:1',
+        \ 'fi:function implementations:0:1',
+        \ 'o:others:0:1',
     \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
+    \ 'sro': '.',
+    \ 'kind2scope': {
+        \ 'm': 'module',
+        \ 'c': 'class',
+        \ 'd': 'data',
+        \ 't': 'type',
     \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
+    \ 'scope2kind': {
+        \ 'module': 'm',
+        \ 'class': 'c',
+        \ 'data': 'd',
+        \ 'type': 't',
+    \ },
 \ }
 let g:tagbar_type_rst = {
       \ 'ctagstype': 'rst',
       \ 'ctagsbin' : '~/src/lib/rst2ctags/rst2ctags.py',
       \ 'ctagsargs' : '-f - --sort=yes',
       \ 'kinds' : [
-      \ 's:sections',
-      \ 'i:images'
+        \ 's:sections',
+        \ 'i:images',
       \ ],
       \ 'sro' : '|',
       \ 'kind2scope' : {
-      \ 's' : 'section',
+        \ 's' : 'section',
       \ },
       \ 'sort': 0,
       \ }
@@ -1294,7 +1327,7 @@ let g:AutoPairs = {
       \ '{':'}',
       \ "'":"'",
       \ '"':'"',
-      \ '`':'`'
+      \ '`':'`',
       \ }
 augroup autopairs_filetype_overrides
   autocmd FileType markdown let b:AutoPairs = {
@@ -1306,14 +1339,14 @@ augroup autopairs_filetype_overrides
         \ '`':'`',
         \ '"""': '"""',
         \ "'''": "'''",
-        \ '```': '```'
+        \ '```': '```',
         \ }
   autocmd FileType plantuml let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
         \ '"':'"',
-        \ '`':'`'
+        \ '`':'`',
         \ }
   autocmd FileType python let b:AutoPairs = {
         \ '(':')',
@@ -1323,27 +1356,27 @@ augroup autopairs_filetype_overrides
         \ '"':'"',
         \ '`':'`',
         \ '"""': '"""',
-        \ "'''": "'''"
+        \ "'''": "'''",
         \ }
   autocmd FileType rust let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
         \ '"':'"',
-        \ '`':'`'
+        \ '`':'`',
         \ }
   autocmd FileType tex let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
-        \ '`': "'"
+        \ '`': "'",
         \ }
   autocmd FileType vim let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
         \ "'":"'",
-        \ '`':'`'
+        \ '`':'`',
         \ }
 augroup END
 
@@ -1567,7 +1600,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -',
-      \}
+      \ }
 
 " }}}
 "  Plugin: Miscellaneous global var config ------------ {{{
@@ -1630,16 +1663,21 @@ let g:vim_markdown_new_list_item_indent = 0
 
 " BulletsVim:
 let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'gitcommit',
-    \ 'scratch',
-    \ 'rst',
-    \]
+      \ 'markdown',
+      \ 'text',
+      \ 'gitcommit',
+      \ 'scratch',
+      \ 'rst',
+      \ ]
 
 " Numbersvim: override default plugin settings
-let g:numbers_exclude = ['startify', 'gundo', 'vimshell', 'gina-commit',
-      \ 'gitcommit']
+let g:numbers_exclude = [
+      \ 'startify',
+      \ 'gundo',
+      \ 'vimshell',
+      \ 'gina-commit',
+      \ 'gitcommit',
+      \ ]
 
 " VimMarkdownComposer: override defaults
 let g:markdown_composer_open_browser = 0
@@ -1681,7 +1719,7 @@ command! CleanUnicode call CleanUnicode()
 " General: Neovim Terminal --- {{{
 
 function! s:openTerm(view_type)
-  exec a:view_type
+  execute a:view_type
   terminal
   setlocal nonumber nornu
   startinsert
@@ -1868,7 +1906,7 @@ nnoremap <leader>f :FiletypeFormat<cr>
 " SR took it from GitHub: ckarnell/Antonys-macro-repeater
 "
 " When . repeats g@, repeat the last macro.
-fun! AtRepeat(_)
+function! AtRepeat(_)
   " If no count is supplied use the one saved in s:atcount.
   " Otherwise save the new count in s:atcount, so it will be
   " applied to repeats.
@@ -1877,54 +1915,53 @@ fun! AtRepeat(_)
   " mode, should the macro do that. @@ is remapped, so 'opfunc'
   " will be correct, even if the macro changes it.
   call feedkeys(s:atcount.'@@')
-endfun
+endfunction
 
-fun! AtSetRepeat(_)
+function! AtSetRepeat(_)
   set operatorfunc=AtRepeat
-endfun
+endfunction
 
 " Called by g@ being invoked directly for the first time. Sets
 " 'opfunc' ready for repeats with . by calling AtSetRepeat().
-fun! AtInit()
+function! AtInit()
   " Make sure setting 'opfunc' happens here, after initial playback
   " of the macro recording, in case 'opfunc' is set there.
   set operatorfunc=AtSetRepeat
   return 'g@l'
-endfun
+endfunction
 
 " Enable calling a function within the mapping for @
 nnoremap <expr> <plug>@init AtInit()
 " A macro could, albeit unusually, end in Insert mode.
 inoremap <expr> <plug>@init "\<c-o>".AtInit()
 
-fun! AtReg()
+function! AtReg()
   let s:atcount = v:count1
   let l:c = nr2char(getchar())
   return '@'.l:c."\<plug>@init"
-endfun
-
+endfunction
 
 " The following code allows pressing . immediately after
 " recording a macro to play it back.
 nmap <expr> @ AtReg()
-fun! QRepeat(_)
+function! QRepeat(_)
   call feedkeys('@'.s:qreg)
-endfun
+endfunction
 
-fun! QSetRepeat(_)
+function! QSetRepeat(_)
   set operatorfunc=QRepeat
-endfun
+endfunction
 
-fun! QStop()
+function! QStop()
   set operatorfunc=QSetRepeat
   return 'g@l'
-endfun
+endfunction
 
 nnoremap <expr> <plug>qstop QStop()
 inoremap <expr> <plug>qstop "\<c-o>".QStop()
 
 let s:qrec = 0
-fun! QStart()
+function! QStart()
   if s:qrec == 1
     let s:qrec = 0
     return "q\<plug>qstop"
@@ -1934,7 +1971,7 @@ fun! QStart()
     let s:qrec = 1
   endif
   return 'q'.s:qreg
-endfun
+endfunction
 
 " Finally, remap q! Recursion is actually useful here I think,
 " otherwise I would use 'nnoremap'.
@@ -1957,25 +1994,5 @@ command! FixHighlight syntax sync fromstart
 " This will prevent :autocmd, shell and write commands from being
 " run inside project-specific .vimrc files unless they’re owned by you.
 set secure
-
-" Lightline: specifics for Lightline
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-
-" ShowCommand: turn off character printing to vim status line
-set noshowcmd
-
-" Cursor:
-" Turn off GUI cursor changes in console mode (tty)
-call IfConsole({-> execute('set guicursor=')}, {-> 0})
-
-" Configure updatetime
-" This is the amount of time vim waits to do something after you stop
-" acting. Default is 4000, this works well for my fast system
-set updatetime=750
-
-" Update path for Linux-specific libraries
-set path+=/usr/include/x86_64-linux-gnu/
 
 " }}}
