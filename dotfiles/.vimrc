@@ -1849,10 +1849,10 @@ nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 " MouseCopy: system copy mouse characteristics
 vmap <RightMouse> <Plug>SystemCopy<CR>
 
-" Mouse Open Close Folds: open folds with the mouse
-" taken from: https://stackoverflow.com/a/13924974
+" Mouse Open Close Folds: open folds with the mouse, and close the folds
+" open operation taken from: https://stackoverflow.com/a/13924974
 nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
-nnoremap <MiddleMouse> zc
+nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
 " SearchBackward: remap comma to single quote
 nnoremap ' ,
