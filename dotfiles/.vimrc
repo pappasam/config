@@ -911,6 +911,17 @@ nmap <expr> q QStart()
 " }}}
 " General: Language builder / runner --- {{{
 
+" Build source code (does not run the code)
+function! Build()
+  if &filetype ==# 'rust'
+    terminal cargo build
+
+  else
+    echo 'Build not configured for filetype ' . &filetype
+  endif
+endfunction
+
+" Run source code (may also build, depending on the language)
 function! Run()
   if executable(expand('%:p')) == 1
     terminal %:p
@@ -922,10 +933,11 @@ function! Run()
     terminal python %:p
 
   else
-    echo 'filetype ' &filetype . ' not configured for Run'
+    echo 'Run not configured for filetype ' . &filetype
   endif
 endfunction
 
+command! Build call Build()
 command! Run call Run()
 
 " }}}
