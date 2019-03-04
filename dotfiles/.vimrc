@@ -399,6 +399,8 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=Dockerfile
   autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
   autocmd BufNewFile,BufRead,BufEnter poetry.lock set filetype=toml
+  autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
+        \ set filetype=conf
 augroup END
 
 augroup filetype_vim
