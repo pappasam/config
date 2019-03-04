@@ -909,10 +909,27 @@ endfunction
 nmap <expr> q QStart()
 
 " }}}
-" General: Command abbreviations ------------------------ {{{
+" General: Language builder / runner --- {{{
 
-" Execute current file
-command! Run !./%
+function! Run()
+  if executable(expand('%:p')) == 1
+    terminal %:p
+
+  elseif &filetype ==# 'rust'
+    terminal cargo run
+
+  elseif &filetype ==# 'python'
+    terminal python %:p
+
+  else
+    echo 'filetype ' &filetype . ' not configured for Run'
+  endif
+endfunction
+
+command! Run call Run()
+
+" }}}
+" General: Command abbreviations ------------------------ {{{
 
 " Fix highlighting
 command! FixHighlight syntax sync fromstart
