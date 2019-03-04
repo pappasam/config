@@ -1941,11 +1941,18 @@ vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
 " Note: weird stuff happens if you mess this up
 nnoremap <leader>d :call DeleteInactiveBuffers()<CR>
 
-" Jumping to header file
+" Jumping To Header File:
 nnoremap gh :call CurtineIncSw()<CR>
 
-" Open split for writing (80 character window width for wrap)
+" Open Split: for writing (80 character window width for wrap)
 nnoremap <silent> <leader>v :call ResizeTo80()<CR>
+
+" Clipboard Copy Paste:
+" Visual mode copy is pretty simple
+" Normal mode paste checks whether the current line has text
+" if yes, insert new line, if no, start paste on the current line
+vnoremap <leader>y "+y
+nnoremap <expr> <leader>p len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
 " MouseCopy: system copy mouse characteristics
 vmap <RightMouse> <Plug>SystemCopy<CR>

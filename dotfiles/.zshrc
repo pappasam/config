@@ -103,12 +103,15 @@ export LS_COLORS
 export REACT_EDITOR='less'
 
 # colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01"
+GCC_COLORS="$GCC_COLORS;32:locus=01:quote=01"
+export GCC_COLORS
 
 # Configure less (de-initialization clears the screen)
 # Gives nicely-colored man pages
-export PAGER=less
-export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --clear-screen'
+LESS="--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS"
+LESS="$LESS --HILITE-UNREAD --tabs=4 --clear-screen"
+export LESS
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
@@ -116,9 +119,17 @@ export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export PAGER=less
 
 # Configure man pager
-export MANPAGER='nvim --noplugin -c "set ft=man" -'
+MANPAGER="nvim --noplugin"
+MANPAGER="$MANPAGER -c 'set ft=man' "
+MANPAGER="$MANPAGER -c 'nnoremap d <C-d>'"
+MANPAGER="$MANPAGER -c 'nnoremap u <C-u>'"
+MANPAGER="$MANPAGER -c 'nnoremap y \"*y'"
+MANPAGER="$MANPAGER -c 'vnoremap y \"*y'"
+MANPAGER="$MANPAGER -"
+export MANPAGER
 
 # tmuxinator
 export EDITOR=/usr/bin/nvim
@@ -146,7 +157,8 @@ export SAVEHIST=5000
 # FZF
 export FZF_COMPLETION_TRIGGER=''
 export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept --ansi"
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND
 
 # Python virtualenv (disable the prompt so I can configure it myself below)
 export VIRTUAL_ENV_DISABLE_PROMPT=1
