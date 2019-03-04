@@ -361,7 +361,8 @@ Plug 'heavenshell/vim-jsdoc'
 
 " Writing helpers
 Plug 'dkarter/bullets.vim'
-Plug 'gu-fan/riv.vim'
+Plug 'matthew-brett/vim-rst-sections'
+Plug 'nvie/vim-rst-tables'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'kana/vim-textobj-user'
@@ -798,8 +799,11 @@ function! DeleteInactiveBuffers()
 endfunction
 
 "  }}}
-" Plugin: Riv.Vim --- {{{
+" Plugin: Riv.Vim (deprecated) --- {{{
 
+" NOTE: I'm no longer using this plugin. Leaving these notes here in case I
+" return to it someday
+" -----------------------------------------------------------------------
 " Notes (because this Plugin's documentation sucks)
 "
 " Titles:
@@ -821,16 +825,76 @@ endfunction
 "     Header row + new row = <Alt>Enter
 "     New row = Just type the correct columns then get into normal mode
 
-let g:riv_global_leader = '<C-E>'
-let g:riv_disable_folding = 1
-let g:riv_disable_indent = 1
-let g:riv_disable_del = 1
-let g:riv_ignored_imaps = '<Tab>,<S-Tab>'
-let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
-let g:riv_ignored_vmaps = '<Tab>,<S-Tab>'
-let g:riv_auto_format_table = 1
-let g:riv_auto_rst2html = 0
-let g:riv_web_browser = 'firefox'
+" let g:riv_global_leader = '<C-E>'
+" let g:riv_disable_folding = 1
+" let g:riv_disable_indent = 1
+" let g:riv_disable_del = 1
+" let g:riv_ignored_imaps = '<Tab>,<S-Tab>'
+" let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
+" let g:riv_ignored_vmaps = '<Tab>,<S-Tab>'
+" let g:riv_auto_format_table = 1
+" let g:riv_auto_rst2html = 0
+" let g:riv_web_browser = 'firefox'
+
+" }}}
+" Plugin: vim-rst-sections AND vim-rst-tables documentation --- {{{
+
+" Shortcuts:
+" ,,d: create a section, or advance down hierarchy if section already defined
+" ,,u: create a section, or advance up hierarchy if section already defined
+" ,,r: reformat existing section
+" ,,c: create a new table from a table example
+" ,,f: re-flow the table
+
+" Vim Rst Tables: documentation
+" -----------------------------------------------------------------------
+" Conventional Markup Hierarchy:
+"   # with overline, for parts
+"   * with overline, for chapters
+"   =, for sections
+"   -, for subsections
+"   ^, for subsubsections
+"   ", for paragraphs
+
+" Vim Rst Tables: documentation
+" -----------------------------------------------------------------------
+" Create New Table:
+"   1. Open a reStructuredText file
+"   2. Create some kind of table outline:
+"
+"     This is paragraph text *before* the table.
+"
+"     Column 1  Column 2
+"     Foo  Put two (or more) spaces as a field separator.
+"     Bar  Even long lines are fine if you do not put in line endings here.
+"     Qux  This is the last line.
+"
+"     This is paragraph text *after* the table.
+"   3. Put your cursor somewhere in the table.
+"   4. To create the table, press ,,c (or \c if vim's <Leader> is set to the
+"      default value). The output will look something like this:
+"
+"     This is paragraph text *before* the table.
+"
+"     +----------+---------------------------------------------------------+
+"     | Column 1 | Column 2                                                |
+"     +==========+=========================================================+
+"     | Foo      | Put two (or more) spaces as a field separator.          |
+"     +----------+---------------------------------------------------------+
+"     | Bar      | Even very very long lines like these are fine, as long  |
+"     |          | as you do not put in line endings here.                 |
+"     +----------+---------------------------------------------------------+
+"     | Qux      | This is the last line.                                  |
+"     +----------+---------------------------------------------------------+
+"
+"     This is paragraph text *after* the table.
+"
+" Update Existing Table:
+"   1. Change the number of '---' signs in the top row of your table to match
+"      the column widths you would prefer.
+"   2. Put your cursor somewhere in the table.
+"   3. Press ,,f to re-flow the table (or \f if vim's <Leader> is set to the
+"      default value; see also the :map command).
 
 " }}}
 " Plugin: markdown-preview.vim --- {{{
