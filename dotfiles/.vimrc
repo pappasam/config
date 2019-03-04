@@ -37,17 +37,6 @@
 " delete the inner (...) block where the cursor is.
 " dib ( or 'di(' )
 " -----------------------------------------------------------
-" SystemCopy:
-" The default mapping is cp, and can be followed by any motion or text object.
-" For instance:
-
-" cpiw => copy word into system clipboard
-" cpi' => copy inside single quotes to system clipboard
-" In addition, cP is mapped to copy the current line directly.
-
-" The sequence cv is mapped to paste the content of system clipboard
-" to the next line.
-" -----------------------------------------------------------
 "  Folding:
 "  zi: toggles everything
 "  za: toggles the current section
@@ -231,7 +220,6 @@ call plug#begin('~/.vim/plugged')
 " Basics
 Plug 'itchyny/lightline.vim'
 Plug 'qpkorr/vim-bufkill'
-Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 't9md/vim-choosewin'
