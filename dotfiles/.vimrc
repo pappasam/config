@@ -1945,7 +1945,7 @@ vnoremap <leader>y "+y
 nnoremap <expr> <leader>p len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
 " MouseCopy: system copy mouse characteristics
-vmap <RightMouse> <Plug>SystemCopy<CR>
+vnoremap <RightMouse> "+y
 
 " Mouse Open Close Folds: open folds with the mouse, and close the folds
 " open operation taken from: https://stackoverflow.com/a/13924974
