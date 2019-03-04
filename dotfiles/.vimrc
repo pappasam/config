@@ -930,7 +930,7 @@ function! Run()
     terminal cargo run
 
   elseif &filetype ==# 'python'
-    terminal python %:p
+    terminal python %
 
   else
     echo 'Run not configured for filetype ' . &filetype
