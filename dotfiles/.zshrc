@@ -131,6 +131,9 @@ MANPAGER="$MANPAGER -c 'vnoremap y \"*y'"
 MANPAGER="$MANPAGER -"
 export MANPAGER
 
+# Git
+export GIT_PAGER=''
+
 # tmuxinator
 export EDITOR=/usr/bin/nvim
 export SHELL=/usr/bin/zsh
@@ -151,7 +154,7 @@ export HISTSIZE=5000
 export HISTCONTROL=ignorespace
 export HISTFILE=~/.zsh_history
 
-#History: Number of history entries to save to disk
+# History: Number of history entries to save to disk
 export SAVEHIST=5000
 
 # FZF
