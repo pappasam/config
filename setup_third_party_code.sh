@@ -204,14 +204,18 @@ sudo apt install hovercraft
 pip install hovercraft
 
 #######################################################################
-# Rust packages
+# Rust packages / rustup components
 #######################################################################
-cargo install ripgrep
+cargo install bat
 cargo install fd-find
 cargo install racer
-cargo install bat
-rustup component add rustfmt-preview
+cargo install ripgrep
+
+rustup component add cargo
+rustup component add clippy
+rustup component add rust-docs
 rustup component add rust-src
+rustup component add rustfmt
 
 #######################################################################
 # Go programs
