@@ -122,14 +122,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
 # Configure man pager
-MANPAGER="nvim --noplugin"
-MANPAGER="$MANPAGER -c 'set ft=man' "
-MANPAGER="$MANPAGER -c 'nnoremap d <C-d>'"
-MANPAGER="$MANPAGER -c 'nnoremap u <C-u>'"
-MANPAGER="$MANPAGER -c 'nnoremap y \"*y'"
-MANPAGER="$MANPAGER -c 'vnoremap y \"*y'"
-MANPAGER="$MANPAGER -"
-export MANPAGER
+export MANPAGER="nvim -c 'set ft=man' -"
 
 # Git
 export GIT_PAGER=''

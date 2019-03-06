@@ -2076,6 +2076,14 @@ nnoremap ' ,
 " FiletypeFormat: remap leader f to do filetype formatting
 nnoremap <leader>f :FiletypeFormat<cr>
 
+" ManPager:
+augroup man_page_custom
+  autocmd!
+  autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
+  autocmd FileType man nnoremap <buffer> d <C-d>
+  autocmd FileType man nnoremap <buffer> u <C-u>
+augroup END
+
 " }}}
 " General: Global Config + Cleanup ------------------ {{{
 " commands that need to run at the end of my vimrc
