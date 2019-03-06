@@ -1697,6 +1697,18 @@ augroup ragtag_config
 augroup end
 
 "  }}}
+"  Plugin: vim-markdown --- {{{
+
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+"  }}}
 "  Plugin: AutoCompletion config and key remappings ------------ {{{
 
 " NOTE: General remappings
@@ -1862,16 +1874,6 @@ let g:jsdoc_enable_es6 = 1
 
 " IndentLines:
 let g:indentLine_enabled = 0  " indentlines disabled by default
-
-" VimMarkdown:
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
 
 " BulletsVim:
 let g:bullets_enabled_file_types = [
@@ -2075,6 +2077,7 @@ nnoremap ' ,
 
 " FiletypeFormat: remap leader f to do filetype formatting
 nnoremap <leader>f :FiletypeFormat<cr>
+vnoremap <leader>f :FiletypeFormat<cr>
 
 " ManPager:
 augroup man_page_custom
