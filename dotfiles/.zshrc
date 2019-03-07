@@ -511,7 +511,7 @@ alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
-alias gd='git diff'
+alias gd='git diff --word-diff'
 
 # upgrade
 alias upgrade='sudo mintupdate'
@@ -751,7 +751,7 @@ function pynew() {
 function _md_template() {  # arg1: template
   local current_date=$(date +'%Y-%m-%d_%H:%M:%S')
   local calling_func=$funcstack[2]
-  local filepath="/tmp/${call_func}_$current_date.md"
+  local filepath="/tmp/${calling_func}_$current_date.md"
   echo -e $1 > $filepath
   nvim $filepath
 }

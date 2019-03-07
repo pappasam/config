@@ -950,6 +950,20 @@ command! Run call Run()
 command! FixHighlight syntax sync fromstart
 
 " }}}
+" Plugin: Jinja2 --- {{{
+
+function! Jinja2Toggle()
+  let jinja2 = '.jinja2'
+  let jinja2_pattern = '\' . jinja2
+  if matchstr(&ft, jinja2_pattern) == ""
+    let new_filetype = &ft . jinja2
+  else
+    let new_filetype = substitute(&ft, jinja2_pattern, "", "")
+  endif
+  execute "set filetype=" . new_filetype
+endfunction
+
+" }}}
 " Plugin: (builtin) Man pager --- {{{
 
 augroup man_page_custom
@@ -1933,7 +1947,7 @@ let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 
 "  }}}
-" General: Global key remappings (includes Plugins) ----------------------- {{{
+" General: Global key remappings ----------------------- {{{
 
 " Escape:
 " Make escape also clear highlighting
@@ -2013,18 +2027,7 @@ nnoremap <silent> gM M
 " Delete character under cursor in insert mode
 inoremap <C-l> <Del>
 
-" Jinja2Toggle:
-" The following mapping toggles jinja2 for any filetype
-function! Jinja2Toggle()
-  let jinja2 = '.jinja2'
-  let jinja2_pattern = '\' . jinja2
-  if matchstr(&ft, jinja2_pattern) == ""
-    let new_filetype = &ft . jinja2
-  else
-    let new_filetype = substitute(&ft, jinja2_pattern, "", "")
-  endif
-  execute "set filetype=" . new_filetype
-endfunction
+" Jinja2Toggle: the following mapping toggles jinja2 for any filetype
 nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
 " ToggleRelativeNumber: uses custom functions
@@ -2074,9 +2077,9 @@ nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
 " Clipboard Copy Paste:
 " Visual mode copy is pretty simple
+vnoremap <leader>y "+y
 " Normal mode paste checks whether the current line has text
 " if yes, insert new line, if no, start paste on the current line
-vnoremap <leader>y "+y
 nnoremap <expr> <leader>p len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
 " MouseCopy: system copy mouse characteristics
