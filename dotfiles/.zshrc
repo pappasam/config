@@ -747,9 +747,21 @@ function pynew() {
   pyinit
 }
 
-# Clubhouse story template
+# Templates for nvim
+function _md_template() {  # arg1: template
+  local current_date=$(date +'%Y-%m-%d_%H:%M:%S')
+  local calling_func=$funcstack[2]
+  local filepath="/tmp/${call_func}_$current_date.md"
+  echo -e $1 > $filepath
+  nvim $filepath
+}
+
 function clubhouse() {
-  echo -e "## Objective\n## Value\n## Acceptance Criteria" | pbcopy
+  _md_template "## Objective\n## Value\n## Acceptance Criteria"
+}
+
+function standup() {
+  _md_template "*Yesterday?*\n*Today?*\n*Blockers?*"
 }
 
 # GIT: git-clone keplergrp repos to src/ directory

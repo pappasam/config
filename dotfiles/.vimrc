@@ -522,6 +522,9 @@ augroup fold_settings
   autocmd FileType ledger setlocal foldmethod=syntax
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldmethod=marker
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldlevelstart=0
+
+  " Disable folding for files shorter than 50 lines; it's distracting
+  autocmd FileType * :if line('$') < 50 | set nofoldenable | endif
 augroup END
 
 " }}}
