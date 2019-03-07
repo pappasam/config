@@ -122,6 +122,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
 # Configure man pager
+export MANWIDTH=79
 export MANPAGER="nvim -c 'set ft=man' -"
 
 # Git
