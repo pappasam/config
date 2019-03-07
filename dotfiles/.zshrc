@@ -650,7 +650,7 @@ function cargodev() {
   cargo install cargo-edit
 }
 
-PYTHON_DEV_PACKAGES=(pynvim bpython restview jedi yapf pre-commit)
+PYTHON_DEV_PACKAGES=(pynvim bpython restview jedi yapf pre-commit pudb)
 
 # [optionally] create and activate Python virtual environment
 function ve() {
