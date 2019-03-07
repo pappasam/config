@@ -1838,6 +1838,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -',
+      \ 'html': 'prettier --parser=html --stdin',
       \ }
 
 " }}}
