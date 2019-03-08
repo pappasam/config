@@ -183,13 +183,6 @@ cd ~/bin
 sudo apt install zathura
 
 #######################################################################
-# PyEnv
-#######################################################################
-
-# dependencies for curses
-sudo apt install libncurses5 libncurses5-dev libncursesw5
-
-#######################################################################
 # Pandoc
 #######################################################################
 # the available version in software repository is not latest
@@ -204,8 +197,9 @@ sudo apt install hovercraft
 pip install hovercraft
 
 #######################################################################
-# Ncurses documentation
+# Ncurses
 #######################################################################
+sudo apt install libncurses5 libncurses5-dev libncursesw5
 sudo apt install ncurses-doc
 
 #######################################################################
