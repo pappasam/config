@@ -123,19 +123,8 @@ set grepprg=rg\ --vimgrep
 " Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
 set pastetoggle=<C-_>
 
-" Terminal Color Support:
-execute 'set t_Co=' . system('tput colors')
-if $COLORTERM ==# 'truecolor'
-  set termguicolors
-endif
-
-" Cursor: determine how and whether Cursor should NOT change between modes
-if &t_Co < 256
-  set guicursor=
-endif
-
-" Default Background:
-set background=dark
+set notimeout   " don't timeout on mappings
+set ttimeout    " do timeout on terminal key codes
 
 " Local Vimrc: If exrc is set, the current directory is searched for 3 files
 " in order (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
@@ -155,6 +144,16 @@ augroup redraw_on_refocus
   autocmd!
   autocmd FocusGained * redraw!
 augroup END
+
+" Terminal Color Support: only let guicursor if truecolor
+if $COLORTERM ==# 'truecolor'
+  set termguicolors
+else
+  set guicursor=
+endif
+
+" Default Background:
+set background=dark
 
 " Lightline: specifics for Lightline
 set laststatus=2
@@ -509,38 +508,6 @@ augroup END
 " }}}
 " General: Syntax highlighting {{{
 
-"NR-16   NR-8    COLOR NAME ~
-"0	    0	    Black
-"1	    4	    DarkBlue
-"2	    2	    DarkGreen
-"3	    6	    DarkCyan
-"4	    1	    DarkRed
-"5	    5	    DarkMagenta
-"6	    3	    Brown, DarkYellow
-"7	    7	    LightGray, LightGrey, Gray, Grey
-"8	    0*	    DarkGray, DarkGrey
-"9	    4*	    Blue, LightBlue
-"10	    2*	    Green, LightGreen
-"11	    6*	    Cyan, LightCyan
-"12	    1*	    Red, LightRed
-"13	    5*	    Magenta, LightMagenta
-"14	    3*	    Yellow, LightYellow
-"15	    7*	    White
-
-" The number under NR-16 is used for 16-color terminals ('t_Co'
-" greater than or equal to 16). The number under NR-8 is used for
-" 8-color terminals ('t_Co' less than 16). The '*' indicates that the
-" bold attribute is set for ctermfg. In many 8-color terminals (e.g.,
-" 'linux'), this causes the bright colors to appear.  This doesn't work
-" for background colors! Without the '*' the bold attribute is removed.
-" If you want to set the bold attribute in a different way, put a
-" 'cterm=' argument AFTER the ctermfg= or ctermbg= argument. Or use
-" a number instead of a color name.
-
-" Note that for 16 color ansi style terminals (including xterms), the
-" numbers in the NR-8 column is used.  Here '*' means 'add 8' so that Blue
-" is 12, DarkGray is 8 etc.
-
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options.theme = {}
@@ -596,10 +563,6 @@ augroup qs_colors
   autocmd!
   autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' ctermfg=Green gui=underline
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' ctermfg=Cyan gui=underline
-  if &t_Co < 256
-    autocmd ColorScheme * highlight QuickScopePrimary cterm=underline
-    autocmd ColorScheme * highlight QuickScopeSecondary cterm=underline
-  endif
 augroup END
 
 augroup spelling_options
@@ -612,12 +575,6 @@ augroup spelling_options
   autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='#53f502' gui=underline,italic
   autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='#eef200' gui=underline,italic
   autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='#ff00d0' gui=underline,italic
-  if &t_Co < 256
-    autocmd ColorScheme * highlight SpellBad cterm=underline,italic
-    autocmd ColorScheme * highlight SpellRare cterm=underline,italic
-    autocmd ColorScheme * highlight SpellCap cterm=underline,italic
-    autocmd ColorScheme * highlight SpellLocal cterm=underline,italic
-  endif
 augroup END
 
 " Number doesn't matter which color is used to start highlight group.
@@ -635,7 +592,7 @@ augroup whitespace_color
 augroup END
 
 " Disable cursorline, then override if necessary
-hi CursorLine cterm=NONE
+highlight CursorLine cterm=NONE
 augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
