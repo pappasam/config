@@ -964,14 +964,14 @@ function! Jinja2Toggle()
 endfunction
 
 " }}}
-" Plugin: (builtin) Man pager --- {{{
+" Plugin: (builtin) Man pager / help --- {{{
 
 augroup man_page_custom
   autocmd!
   autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
-  autocmd FileType man nnoremap <buffer> d <C-d>
-  autocmd FileType man nnoremap <buffer> u <C-u>
   autocmd FileType man set number relativenumber
+  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
+  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
 augroup END
 
 " }}}
@@ -1956,9 +1956,9 @@ nnoremap <silent> <esc> :noh<return><esc>
 " ScrollDropdown:
 " Enable scrolling dropdown menu with the mouse
 " Additionally, make clicking select the highlighted item
-inoremap <expr> <ScrollWheelUp> pumvisible() ? "<C-p>" : "<Esc><ScrollWheelUp>"
-inoremap <expr> <ScrollWheelDown> pumvisible() ? "<C-n>" : "<Esc><ScrollWheelDown>"
-inoremap <expr> <LeftMouse> pumvisible() ? "<CR><Backspace>" : "<Esc><LeftMouse>"
+inoremap <expr> <ScrollWheelUp> pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
+inoremap <expr> <ScrollWheelDown> pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
+inoremap <expr> <LeftMouse> pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
 " InsertModeHelpers:
 " Insert one line above after enter (useful for ``` in markdown)
@@ -2087,7 +2087,7 @@ vnoremap <RightMouse> "+y
 
 " Mouse Open Close Folds: open folds with the mouse, and close the folds
 " open operation taken from: https://stackoverflow.com/a/13924974
-nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
+nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? '\<2-LeftMouse>' : 'zo'
 nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
 " SearchBackward: remap comma to single quote
