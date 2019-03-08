@@ -506,7 +506,8 @@ alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
-alias gd='git diff --word-diff'
+alias gd='git diff'
+alias gdw='git diff --word-diff'
 
 # upgrade
 alias upgrade='sudo mintupdate'
