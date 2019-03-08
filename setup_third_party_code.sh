@@ -205,16 +205,22 @@ sudo apt install ncurses-doc
 #######################################################################
 # Rust packages / rustup components
 #######################################################################
-cargo install bat
-cargo install fd-find
-cargo install racer
-cargo install ripgrep
 
+# rust toolchains
 rustup component add cargo
 rustup component add clippy
 rustup component add rust-docs
 rustup component add rust-src
 rustup component add rustfmt
+
+# cargo libraries
+cargo install bat
+cargo install fd-find
+cargo install racer
+cargo install ripgrep
+
+# supports the following: cargo add; cargo rm ;cargo upgrade
+cargo install cargo-edit
 
 #######################################################################
 # Go programs
