@@ -516,15 +516,8 @@ command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
 augroup fold_settings
   autocmd!
-  autocmd FileType vim,tmux setlocal foldmethod=marker
-  autocmd FileType vim,tmux setlocal foldlevelstart=0
-  autocmd FileType vim,tmux setlocal foldnestmax=1
-  autocmd FileType ledger setlocal foldmethod=syntax
-  autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldmethod=marker
-  autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldlevelstart=0
-
-  " Disable folding for files shorter than 50 lines; it's distracting
-  autocmd FileType * :if line('$') < 50 | set nofoldenable | endif
+  autocmd FileType vim,tmux,bash,zsh
+        \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
 augroup END
 
 " }}}
