@@ -174,7 +174,7 @@ export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 # Bat
 export BAT_PAGER=''
 
-# Terminal colors
+# Terminal colors (used by my vimrc for t_Co, in turn used by papercolor)
 export TERMINAL_COLORS=$(tput colors)
 
 # }}}
