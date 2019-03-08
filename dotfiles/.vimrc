@@ -354,6 +354,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
         \ set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
+  autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
   autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=Dockerfile
   autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
   autocmd BufNewFile,BufRead,BufEnter poetry.lock set filetype=toml
