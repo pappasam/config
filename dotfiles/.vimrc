@@ -70,22 +70,6 @@
 " To lean more about the ex editor, type 'man ex'
 
 " }}}
-" General: Terminal eumlator difference functions --- {{{
-
-" s:is_console::
-" Checks to see if Vim is running in console mode
-function! IsConsole()
-  return $TERM == 'linux'
-endfunction
-
-" s:if_console::
-" The 88-bit ASCII/Not full unicode console is different than alacritty
-" Return different value the console is true
-function! IfConsole(lambda_true, lambda_false)
-  return IsConsole() ? a:lambda_true() : a:lambda_false()
-endfunction
-
-" }}}
 " General: Leader mappings -------------------- {{{
 
 let mapleader = ","
@@ -159,14 +143,20 @@ set wildmode=longest,list,full
 set wildmenu
 
 " Grep: program is 'git grep'
-" set grepprg=git\ grep\ -n\ $*
 set grepprg=rg\ --vimgrep
 
 " Pasting: enable pasting without having to do 'set paste'
 " NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
 set pastetoggle=<C-_>
 
-" Turn off complete vi compatibility
+" Set appropriate color variables (t_Co is for PaperColor)
+set t_Co=$TERMINAL_COLORS
+set background=dark
+if $COLORTERM ==# 'truecolor'
+  set termguicolors
+endif
+
+" Turn off complete vi compatibility (not necessary for nvim)
 set nocompatible
 
 " Enable using local vimrc
@@ -187,7 +177,7 @@ set number
 " Window Splitting: Set split settings (options: splitright, splitbelow)
 set splitright
 
-" Redraw Window: need to redraw whenever I've regained focus
+" Redraw Window: should redraw whenever I've regained focus
 augroup redraw_on_refocus
   au FocusGained * :redraw!
 augroup END
@@ -202,7 +192,9 @@ set noshowcmd
 
 " Cursor:
 " Turn off GUI cursor changes in console mode (tty)
-call IfConsole({-> execute('set guicursor=')}, {-> 0})
+if &t_Co < 256
+  set guicursor=
+endif
 
 " Configure updatetime
 " This is the amount of time vim waits to do something after you stop
@@ -634,7 +626,7 @@ augroup qs_colors
   autocmd!
   autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' ctermfg=Green gui=underline
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' ctermfg=Cyan gui=underline
-  if !IsConsole()
+  if &t_Co < 256
     autocmd ColorScheme * highlight QuickScopePrimary cterm=underline
     autocmd ColorScheme * highlight QuickScopeSecondary cterm=underline
   endif
@@ -650,7 +642,7 @@ augroup spelling_options
   autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='#53f502' gui=underline,italic
   autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='#eef200' gui=underline,italic
   autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='#ff00d0' gui=underline,italic
-  if !IsConsole()
+  if &t_Co < 256
     autocmd ColorScheme * highlight SpellBad cterm=underline,italic
     autocmd ColorScheme * highlight SpellRare cterm=underline,italic
     autocmd ColorScheme * highlight SpellCap cterm=underline,italic
@@ -679,12 +671,7 @@ augroup cursorline_setting
   autocmd FileType tagbar setlocal cursorline
 augroup END
 
-" Make sure this is at end of section
-call IfConsole(
-      \ {-> execute('set t_Co=16')},
-      \ {-> execute('set termguicolors')}
-      \ )
-set background=dark
+" Load the actual colorscheme
 try
   colorscheme PaperColor
 catch
@@ -1347,7 +1334,7 @@ endfunction
 function! LightlineGina()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
-      let mark = IfConsole({-> 'Git::'}, {-> '⎇ '})
+      let mark = 'git::'
       let branch = gina#component#repo#branch()
       return branch !=# '' ? mark.branch : ''
     endif

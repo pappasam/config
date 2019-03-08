@@ -174,6 +174,9 @@ export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 # Bat
 export BAT_PAGER=''
 
+# Terminal colors
+export TERMINAL_COLORS=$(tput colors)
+
 # }}}
 # Path appends + Misc env setup --- {{{
 
