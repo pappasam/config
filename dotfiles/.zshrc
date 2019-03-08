@@ -13,7 +13,7 @@
 # Environment Setup
 #######################################################################
 
-# Functions --- {{{
+# Functions {{{
 
 path_ladd() {
   # Takes 1 argument and adds it to the beginning of the PATH
@@ -30,7 +30,7 @@ path_radd() {
 }
 
 # }}}
-# Exported variable: LS_COLORS --- {{{
+# Exported variable: LS_COLORS {{{
 
 # Colors when using the LS command
 # NOTE:
@@ -97,7 +97,7 @@ LS_COLORS+="*.rpm=90"
 export LS_COLORS
 
 # }}}
-# Exported variables: General --- {{{
+# Exported variables: General {{{
 
 # React
 export REACT_EDITOR='less'
@@ -178,7 +178,7 @@ export BAT_PAGER=''
 export TERMINAL_COLORS=$(tput colors)
 
 # }}}
-# Path appends + Misc env setup --- {{{
+# Path appends + Misc env setup {{{
 
 PYENV_ROOT="$HOME/.pyenv"
 if [ -d "$PYENV_ROOT" ]; then
@@ -260,7 +260,7 @@ export PATH
 # Interactive session setup
 #######################################################################
 
-# Import from other Bash Files --- {{{
+# Import from other Bash Files {{{
 
 include () {
   [[ -f "$1" ]] && source "$1"
@@ -269,7 +269,7 @@ include () {
 include ~/.bash/sensitive
 
 # }}}
-# Plugins --- {{{
+# Plugins {{{
 
 if [ -f ~/.zplug/init.zsh ]; then
   source ~/.zplug/init.zsh
@@ -305,7 +305,7 @@ else
 fi
 
 # }}}
-# ZShell Options --- {{{
+# ZShell Options {{{
 
 #######################################################################
 # Set options
@@ -348,13 +348,13 @@ export PERIOD=1
 export LISTMAX=0
 
 # }}}
-# ZShell Misc Autoloads --- {{{
+# ZShell Misc Autoloads {{{
 
 # Enables zshell calculator: type with zcalc
 autoload -Uz zcalc
 
 # }}}
-# ZShell Hook Functions --- {{{
+# ZShell Hook Functions {{{
 
 # NOTE: precmd is defined within the prompt section
 
@@ -394,7 +394,7 @@ function zshexit() {
 }
 
 # }}}
-# ZShell Auto Completion --- {{{
+# ZShell Auto Completion {{{
 
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -432,7 +432,7 @@ compctl -f -K _vault_complete vault
 fpath+=~/.zfunc
 
 # }}}
-# ZShell Key-Bindings --- {{{
+# ZShell Key-Bindings {{{
 
 # emacs
 bindkey -e
@@ -457,7 +457,7 @@ bindkey -M menuselect '^l' forward-char
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}
-# Aliases --- {{{
+# Aliases {{{
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
@@ -549,7 +549,7 @@ alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
 
 # }}}
-# Functions --- {{{
+# Functions {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
@@ -853,7 +853,7 @@ function dat(){
 }
 
 # }}}
-# ZShell prompt (PS1) --- {{{
+# ZShell prompt (PS1) {{{
 
 # NOTE this is not cross-shell; zsh-specific
 
@@ -943,7 +943,7 @@ PS1="${PS1_DIR} \$vcs_info_msg_0_ %F{$COLOR_PYTHON_GREEN}\$(virtualenv_info)%f \
 ${PS1_USR} ${PS1_END}"
 
 # }}}
-# FZF --- {{{
+# FZF {{{
 
 # Load zsh script
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -962,7 +962,7 @@ bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 
 # }}}
-# Executed Commands --- {{{
+# Executed Commands {{{
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
