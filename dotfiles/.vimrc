@@ -78,23 +78,12 @@ let maplocalleader = "\\"
 " }}}
 " General: global config {{{
 
-"A comma separated list of options for Insert mode completion
-"   menuone  Use the popup menu also when there is only one match.
-"            Useful when there is additional information about the
-"            match, e.g., what file it comes from.
-
-"   longest  Only insert the longest common text of the matches.  If
-"            the menu is displayed you can use CTRL-L to add more
-"            characters.  Whether case is ignored depends on the kind
-"            of completion.  For buffer text the 'ignorecase' option is
-"            used.
-
-"   preview  Show extra information about the currently selected
-"            completion in the preview window.  Only works in
-"            combination with 'menu' or 'menuone'.
+" Code Completion:
 set completeopt=menuone,longest,preview
+set wildmode=longest,list,full
+set wildmenu
 
-" Enable buffer deletion instead of having to write each buffer
+" Hidden Buffer: enable instead of having to write each buffer
 set hidden
 
 " Mouse: enable GUI mouse support in all modes
@@ -104,82 +93,67 @@ set mouse=a
 set nobackup
 set noswapfile
 
-" Do not wrap lines by default
+" Line Wrapping: do not wrap lines by default
 set nowrap
 
-" Search result highlighting
+" Highlight Search:
 set incsearch
 set inccommand=nosplit
 augroup sroeca_incsearch_highlight
   autocmd!
-  autocmd CmdlineEnter /,\? :set hlsearch
-  autocmd CmdlineLeave /,\? :set nohlsearch
+  autocmd CmdlineEnter /,\? set hlsearch
+  autocmd CmdlineLeave /,\? set nohlsearch
 augroup END
-
-" Remove query for terminal version
-" This prevents un-editable garbage characters from being printed
-" after the 80 character highlight line
-set t_RV=
 
 filetype plugin indent on
 
+" Spell Checking:
 set dictionary=$HOME/.american-english-with-propcase.txt
-
 set spelllang=en_us
 
-" Do not add two spaces after '.', '!', and '?'
-" Useful when doing :%j (the opposite of gq)
+" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
 set nojoinspaces
 
 set showtabline=2
 
 set autoread
 
-" When you type the first tab hit will complete as much as possible,
-" the second tab hit will provide a list, the third and subsequent tabs
-" will cycle through completion options so you can complete the file
-" without further keys
-set wildmode=longest,list,full
-set wildmenu
-
-" Grep: program is 'git grep'
 set grepprg=rg\ --vimgrep
 
-" Pasting: enable pasting without having to do 'set paste'
-" NOTE: this is actually typed <C-/>, but vim thinks this is <C-_>
+" Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
 set pastetoggle=<C-_>
 
-" Set appropriate color variables (t_Co is for PaperColor)
-set t_Co=$TERMINAL_COLORS
-set background=dark
+" Terminal Color Support:
+execute 'set t_Co=' . system('tput colors')
 if $COLORTERM ==# 'truecolor'
   set termguicolors
 endif
 
-" Turn off complete vi compatibility (not necessary for nvim)
-set nocompatible
+" Cursor: determine how and whether Cursor should NOT change between modes
+if &t_Co < 256
+  set guicursor=
+endif
 
-" Enable using local vimrc
-" If the 'exrc' option is on (which is NOT the default), the current directory
-" is searched for three files.  The first that exists is used, the others are
-" ignored.
-"   * The file '.nvimrc' (for Unix)
-"   * The file '_nvimrc' (for Unix)
-"   * The file '.exrc'  (for Unix)
+" Default Background:
+set background=dark
+
+" Local Vimrc: If exrc is set, the current directory is searched for 3 files
+" in order (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
 set exrc
 
-" Shell Is Default: make terminal the same terminal you're working with
+" Default Shell:
 set shell=$SHELL
 
-" Numbering: make sure numbering is set
+" Numbering:
 set number
 
 " Window Splitting: Set split settings (options: splitright, splitbelow)
 set splitright
 
-" Redraw Window: should redraw whenever I've regained focus
+" Redraw Window:
 augroup redraw_on_refocus
-  au FocusGained * :redraw!
+  autocmd!
+  autocmd FocusGained * redraw!
 augroup END
 
 " Lightline: specifics for Lightline
@@ -190,18 +164,10 @@ set noshowmode
 " ShowCommand: turn off character printing to vim status line
 set noshowcmd
 
-" Cursor:
-" Turn off GUI cursor changes in console mode (tty)
-if &t_Co < 256
-  set guicursor=
-endif
-
-" Configure updatetime
-" This is the amount of time vim waits to do something after you stop
-" acting. Default is 4000, this works well for my fast system
+" Configure Updatetime: time Vim waits to do something after I stop moving
 set updatetime=750
 
-" Update path for Linux-specific libraries
+" Linux Dev Path: system libraries
 set path+=/usr/include/x86_64-linux-gnu/
 
 " }}}
@@ -421,9 +387,9 @@ augroup END
 " Note -> apparently BufRead, BufNewFile trumps Filetype
 " Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
 " This is why default settings are chosen with Filetype *
+set expandtab shiftwidth=2 softtabstop=2 tabstop=8
 augroup indentation_sr
   autocmd!
-  autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
   autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm,nasm
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
@@ -447,7 +413,7 @@ set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=72 textwidth=72
-  autocmd Filetype html,text,markdown set colorcolumn=0
+  autocmd Filetype html,text,markdown setlocal colorcolumn=0
 augroup END
 
 " }}}
@@ -949,7 +915,7 @@ endfunction
 augroup man_page_custom
   autocmd!
   autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
-  autocmd FileType man set number relativenumber
+  autocmd FileType man setlocal number relativenumber
   autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
 augroup END
@@ -1761,7 +1727,7 @@ let g:jedi#show_call_signatures = 0
 let g:jedi#auto_close_doc = 0
 let g:jedi#smart_auto_mappings = 0
 
-" mappings
+" key mappings:
 " auto_vim_configuration creates space between where vim is opened and
 " closed in my bash terminal. This is annoying, so I disable and manually
 " configure. See 'set completeopt' in my global config for my settings

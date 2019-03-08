@@ -136,11 +136,6 @@ export SHELL=/usr/bin/zsh
 # turn off because it messes up my pdf tooling
 export GDK_SCALE=0
 
-# Neovim does not change cursor shape if I set the below
-# It seems to rely on underlying terminal being xterm-256
-# and tmux being screen-256color.
-# Weird bug, I'm making this note so I'm aware of it going forward
-
 # History: How many lines of history to keep in memory
 export HISTSIZE=5000
 
@@ -173,9 +168,6 @@ export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 
 # Bat
 export BAT_PAGER=''
-
-# Terminal colors (used by my vimrc for t_Co, in turn used by papercolor)
-export TERMINAL_COLORS=$(tput colors)
 
 # }}}
 # Path appends + Misc env setup {{{
