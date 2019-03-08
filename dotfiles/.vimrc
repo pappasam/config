@@ -1108,11 +1108,13 @@ let g:NERDTreeIgnore = [
       \ '.egg-info$[[dir]]',
       \ 'node_modules$[[dir]]',
       \ 'elm-stuff$[[dir]]',
+      \ 'target$[[dir]]',
       \ '\.aux$[[file]]',
       \ '\.toc$[[file]]',
       \ '\.pdf$[[file]]',
       \ '\.out$[[file]]',
       \ '\.o$[[file]]',
+      \ '\.pyc$[[file]]',
       \ ]
 
 function! _CD(...)  " Like args in Python
