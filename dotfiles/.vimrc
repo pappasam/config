@@ -3,7 +3,7 @@
 " Notes:
 "   * To toggle sections below, scroll over a folded section and type 'za'
 "     when in Normal mode.
-" Additional Notes --------- {{{
+" Additional Notes {{{
 "
 " This is my .vimrc. Hopefully you enjoy using it as much as me!
 " I use the latest Linux Mint, but this will probably work with any Linux-based
@@ -70,13 +70,13 @@
 " To lean more about the ex editor, type 'man ex'
 
 " }}}
-" General: Leader mappings -------------------- {{{
+" General: Leader mappings {{{
 
 let mapleader = ","
 let maplocalleader = "\\"
 
 " }}}
-" General: global config ------------ {{{
+" General: global config {{{
 
 "A comma separated list of options for Insert mode completion
 "   menuone  Use the popup menu also when there is only one match.
@@ -205,7 +205,7 @@ set updatetime=750
 set path+=/usr/include/x86_64-linux-gnu/
 
 " }}}
-" General: Plugin Install --------------------- {{{
+" General: Plugin Install {{{
 
 call plug#begin('~/.vim/plugged')
 
@@ -372,7 +372,7 @@ endfunction
 command! PU call _PU()
 
 " }}}
-" General: Filetype specification ------------ {{{
+" General: Filetype specification {{{
 
 augroup filetype_recognition
   autocmd!
@@ -404,7 +404,7 @@ augroup filetype_vim
 augroup END
 
 " }}}
-" General: Comment Strings --- {{{
+" General: Comment Strings {{{
 
 " Notes:
 " commentstring: read by vim-commentary; must be one template
@@ -416,7 +416,7 @@ augroup custom_comment_strings
 augroup END
 
 " }}}
-" General: Indentation (tabs, spaces, width, etc)------------- {{{
+" General: Indentation (tabs, spaces, width, etc) {{{
 
 " Note -> apparently BufRead, BufNewFile trumps Filetype
 " Eg, if BufRead,BufNewFile * ignores any Filetype overwrites
@@ -441,7 +441,7 @@ augroup indentation_sr
 augroup END
 
 " }}}
-" General: colorColumn different widths for different filetypes --- {{{
+" General: colorColumn different widths for different filetypes {{{
 
 set colorcolumn=80
 augroup colorcolumn_configuration
@@ -451,7 +451,7 @@ augroup colorcolumn_configuration
 augroup END
 
 " }}}
-" General: Writing (non-coding)------------------ {{{
+" General: Writing (non-coding) {{{
 
 " Notes:
 "   indenting and de-indenting in insert mode are:
@@ -480,7 +480,7 @@ augroup writing
 augroup END
 
 " }}}
-" General: Word definition and meaning lookup --- {{{
+" General: Word definition and meaning lookup {{{
 
 " Enable looking up values in either a dictionary or a thesaurus
 " these are expected to be either:
@@ -504,7 +504,7 @@ command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
  " }}}
-" General: Folding Settings --------------- {{{
+" General: Folding Settings {{{
 
 augroup fold_settings
   autocmd!
@@ -513,7 +513,7 @@ augroup fold_settings
 augroup END
 
 " }}}
-" General: Trailing whitespace ------------- {{{
+" General: Trailing whitespace {{{
 
 function! TrimWhitespace()
   let l:save = winsaveview()
@@ -537,7 +537,7 @@ augroup fix_whitespace_save
 augroup END
 
 " }}}
-" General: Syntax highlighting ---------------- {{{
+" General: Syntax highlighting {{{
 
 "NR-16   NR-8    COLOR NAME ~
 "0	    0	    Black
@@ -679,7 +679,7 @@ catch
 endtry
 
 " }}}
-" General: Resize Window --- {{{
+" General: Resize Window {{{
 
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
@@ -720,7 +720,7 @@ function! ResizeWindowHeight()
 endfunction
 
 " }}}
-" General: Avoid saving 'lcd' --- {{{
+" General: Avoid saving 'lcd' {{{
 
 augroup stay_no_lcd
   autocmd!
@@ -746,7 +746,7 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
-"  General: Delete hidden buffers --- {{{
+"  General: Delete hidden buffers {{{
 
 " From: https://stackoverflow.com/a/7321131
 function! DeleteInactiveBuffers()
@@ -772,7 +772,7 @@ function! DeleteInactiveBuffers()
 endfunction
 
 "  }}}
-" General: Clean Unicode --- {{{
+" General: Clean Unicode {{{
 
 function! CleanUnicode()
   " Replace unicode symbols with cleaned versions
@@ -784,7 +784,7 @@ endfunction()
 command! CleanUnicode call CleanUnicode()
 
 " }}}
-" General: Neovim Terminal --- {{{
+" General: Neovim Terminal {{{
 
 function! s:openTerm(view_type)
   execute a:view_type
@@ -798,7 +798,7 @@ command! Termv call s:openTerm('vsplit')
 command! Vtert call s:openTerm('tabnew')
 
 " }}}
-" General: Number width to 80 (including special characters)---- {{{
+" General: Number width to 80 (including special characters) {{{
 
 function! ResizeTo80()
   let cols = 80
@@ -812,7 +812,7 @@ function! ResizeTo80()
 endfunction
 
 " }}}
-" General: Macro repeater ---- {{{
+" General: Macro repeater {{{
 
 " Allow '.' to repeat macros. Finally!
 " Taken from here:
@@ -892,7 +892,7 @@ endfunction
 nmap <expr> q QStart()
 
 " }}}
-" General: Language builder / runner --- {{{
+" General: Language builder / runner {{{
 
 " Build source code (does not run the code)
 function! Build()
@@ -924,13 +924,13 @@ command! Build call Build()
 command! Run call Run()
 
 " }}}
-" General: Command abbreviations ------------------------ {{{
+" General: Command abbreviations {{{
 
 " Fix highlighting
 command! FixHighlight syntax sync fromstart
 
 " }}}
-" Plugin: Jinja2 --- {{{
+" Plugin: Jinja2 {{{
 
 function! Jinja2Toggle()
   let jinja2 = '.jinja2'
@@ -944,7 +944,7 @@ function! Jinja2Toggle()
 endfunction
 
 " }}}
-" Plugin: (builtin) Man pager / help --- {{{
+" Plugin: (builtin) Man pager / help {{{
 
 augroup man_page_custom
   autocmd!
@@ -955,7 +955,7 @@ augroup man_page_custom
 augroup END
 
 " }}}
-" Plugin: Riv.Vim (deprecated) --- {{{
+" Plugin: Riv.Vim (deprecated) {{{
 
 " NOTE: I'm no longer using this plugin. Leaving these notes here in case I
 " return to it someday
@@ -993,7 +993,7 @@ augroup END
 " let g:riv_web_browser = 'firefox'
 
 " }}}
-" Plugin: vim-rst-sections AND vim-rst-tables documentation --- {{{
+" Plugin: vim-rst-sections AND vim-rst-tables documentation {{{
 
 " Shortcuts:
 " ,,d: create a section, or advance down hierarchy if section already defined
@@ -1053,7 +1053,7 @@ augroup END
 "      default value; see also the :map command).
 
 " }}}
-" Plugin: markdown-preview.vim --- {{{
+" Plugin: markdown-preview.vim {{{
 
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
@@ -1094,7 +1094,7 @@ let g:mkdp_preview_options = {
       \ }
 
 " }}}
-" Plugin: Preview Compiled Stuff in Viewer --- {{{
+" Plugin: Preview Compiled Stuff in Viewer {{{
 
 function! _Preview()
   if &filetype ==? 'rst'
@@ -1116,7 +1116,7 @@ endfunction
 command! Preview call _Preview()
 
 " }}}
-"  Plugin: NERDTree --- {{{
+"  Plugin: NERDTree {{{
 
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCaseSensitiveSort = 0
@@ -1193,7 +1193,7 @@ let g:NERDTreeIndicatorMapCustom = {
       \ }
 
 "  }}}
-" Plugin: fzf --- {{{
+" Plugin: fzf {{{
 
 command! -bang -nargs=* Grep call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* GrepIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
@@ -1230,7 +1230,7 @@ let g:fzf_action = {
       \ }
 
 " }}}
-" Plugin: Lightline ---------------- {{{
+" Plugin: Lightline {{{
 
 " This is a giant section that configures the status line for my vim editing.
 " It's super important, so I devote a lot of code to it.
@@ -1364,7 +1364,7 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
 endfunction
 
 " }}}
-" Plugin: Gina --- {{{
+" Plugin: Gina {{{
 " This plugin is awesome
 " Just Gina followed by whatever I'd normally type in Git
 
@@ -1417,7 +1417,7 @@ endfunction
 command! Gblame call _Gblame()
 
 " }}}
-"  Plugin: Tagbar ------ {{{
+"  Plugin: Tagbar {{{
 
 let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
@@ -1475,7 +1475,7 @@ let g:tagbar_type_rst = {
       \ }
 
 "  }}}
-"  Plugin: Startify ------------- {{{
+"  Plugin: Startify {{{
 
 let g:startify_list_order = []
 let g:startify_fortune_use_unicode = 1
@@ -1519,7 +1519,7 @@ let g:startify_custom_footer = [
       \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
 "  }}}
-"  Plugin: VimTex --- {{{
+"  Plugin: VimTex {{{
 
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:tex_flavor = 'latex'
@@ -1536,7 +1536,7 @@ function! MyVimTexDocHandler(context)
 endfunction
 
 "  }}}
-"  Plugin: AutoPairs --- {{{
+"  Plugin: AutoPairs {{{
 
 " AutoPairs:
 " unmap CR due to incompatibility with clang-complete
@@ -1601,7 +1601,7 @@ augroup autopairs_filetype_overrides
 augroup END
 
 "  }}}
-"  Plugin: Sandwich --- {{{
+"  Plugin: Sandwich {{{
 
 " LatexNotes:
 "   textobject:
@@ -1631,7 +1631,7 @@ xmap aq <Plug>(textobj-sandwich-query-a)
 omap aq <Plug>(textobj-sandwich-query-a)
 
 "  }}}
-"  Plugin: Ledger --- {{{
+"  Plugin: Ledger {{{
 
 let g:ledger_maxwidth = 80
 let g:ledger_fillstring = ' - -'
@@ -1657,7 +1657,7 @@ augroup language_specific_file_beauty
 augroup END
 
 "  }}}
-"  Plugin: Goyo --- {{{
+"  Plugin: Goyo {{{
 
 " Set width a bit wider to account for line numbers
 let g:goyo_width = 84
@@ -1694,7 +1694,7 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "  }}}
-"  Plugin: RagTag --- {{{
+"  Plugin: RagTag {{{
 
 " Load mappings on every filetype
 let g:ragtag_global_maps = 1
@@ -1705,7 +1705,7 @@ augroup ragtag_config
 augroup end
 
 "  }}}
-"  Plugin: vim-markdown --- {{{
+"  Plugin: vim-markdown {{{
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
@@ -1717,7 +1717,7 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 "  }}}
-"  Plugin: AutoCompletion config and key remappings ------------ {{{
+"  Plugin: AutoCompletion config and key remappings {{{
 
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
@@ -1823,7 +1823,7 @@ augroup terraform_complete
 augroup END
 
 "  }}}
-" Plugin: vim-filetype-formatter and autoformatting --- {{{
+" Plugin: vim-filetype-formatter and autoformatting {{{
 
 let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
@@ -1832,11 +1832,11 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -',
-      \ 'html': 'prettier --parser=html --stdin',
+      \ 'html': 'npx prettier --parser=html --stdin',
       \ }
 
 " }}}
-"  Plugin: Miscellaneous global var config ------------ {{{
+"  Plugin: Miscellaneous global var config {{{
 
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
@@ -1927,7 +1927,7 @@ let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 
 "  }}}
-" General: Global key remappings ----------------------- {{{
+" General: Global key remappings {{{
 
 " Escape:
 " Make escape also clear highlighting
@@ -2078,7 +2078,7 @@ nnoremap <leader>f :FiletypeFormat<cr>
 vnoremap <leader>f :FiletypeFormat<cr>
 
 " }}}
-" General: Global Config + Cleanup ------------------ {{{
+" General: Global Config + Cleanup {{{
 " commands that need to run at the end of my vimrc
 
 " disable unsafe commands in your project-specific .vimrc files
