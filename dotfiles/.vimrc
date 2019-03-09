@@ -145,7 +145,7 @@ augroup redraw_on_refocus
   autocmd FocusGained * redraw!
 augroup END
 
-" Terminal Color Support: only let guicursor if truecolor
+" Terminal Color Support: only set guicursor if truecolor
 if $COLORTERM ==# 'truecolor'
   set termguicolors
 else
