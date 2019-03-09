@@ -224,9 +224,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
-" Rainbow
-Plug 'luochen1990/rainbow'
-
 " Syntax highlighting
 Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
@@ -578,7 +575,7 @@ let g:PaperColor_Theme_Options.theme['default.dark'] = {}
 let g:PaperColor_Theme_Options.theme['default.dark'].override = {
       \ 'folded_bg' : ['gray22', '0'],
       \ 'folded_fg' : ['gray69', '6'],
-      \ 'visual_fg' : ['gray2', '0'],
+      \ 'visual_fg' : ['gray12', '0'],
       \ 'visual_bg' : ['gray', '6'],
       \ }
 
@@ -902,47 +899,6 @@ function! VimColors()
 endfunction
 
 command! VimColors silent call VimColors()
-
-" }}}
-" Plugin: rainbow {{{
-
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-      \   'guifgs': ['violet', 'darkorange3', 'seagreen3', 'firebrick'],
-      \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-      \   'guis': ['', 'bold'],
-      \   'cterms': [''],
-      \   'operators': '_,_',
-      \   'parentheses': [
-      \     'start=/(/ end=/)/ fold',
-      \     'start=/\[/ end=/\]/ fold',
-      \     'start=/{/ end=/}/ fold',
-      \   ],
-      \   'separately': {
-      \     '*': {},
-      \     'javascript': {
-      \       'parentheses': [
-      \         'start=/(/ end=/)/ fold',
-      \         'start=/\[/ end=/\]/ fold',
-      \       ],
-      \     },
-      \	    'vim': {
-      \	      'parentheses': [
-      \         'start=/(/ end=/)/',
-      \         'start=/\[/ end=/\]/',
-      \         'start=/{/ end=/}/ fold',
-      \         'start=/(/ end=/)/ containedin=vimFuncBody',
-      \         'start=/\[/ end=/\]/ containedin=vimFuncBody',
-      \         'start=/{/ end=/}/ fold containedin=vimFuncBody',
-      \       ],
-      \	    },
-      \     'css': 0,
-      \     'html': 0,
-      \     'markdown': 0,
-      \     'rst': 0,
-      \     'txt': 0,
-      \   }
-      \ }
 
 " }}}
 " Plugin: Jinja2 {{{
