@@ -868,7 +868,7 @@ command! FixHighlight syntax sync fromstart
 " - Delete 'grey' lines (duplicate 'gray'; there are a few more 'gray').
 " Add syntax so each color name is highlighted in its color.
 function! VimColors()
-  new
+  vnew
   setlocal buftype=nofile bufhidden=hide noswapfile
   0read $VIMRUNTIME/rgb.txt
   let find_color = '^\s*\(\d\+\s*\)\{3}\zs\w*$'
@@ -902,6 +902,8 @@ function! VimColors()
 
   1
   nohlsearch
+  set nomodifiable
+  file Vim Colors
 endfunction
 
 command! VimColors silent call VimColors()
