@@ -508,43 +508,6 @@ augroup END
 " }}}
 " General: Syntax highlighting {{{
 
-" Papercolor: options
-let g:PaperColor_Theme_Options = {}
-let g:PaperColor_Theme_Options.theme = {}
-
-" Bold and italics are enabled by default
-let g:PaperColor_Theme_Options.theme.default = {
-      \ 'allow_bold': 1,
-      \ 'allow_italic': 1,
-      \ }
-
-" GuiTerminal:
-" folds: dark grey + light grey
-" visual: light grey + dark grey
-" Regular Terminal Changes:
-" folds: grey + green
-" visual: light blue background, black foreground
-let g:PaperColor_Theme_Options.theme['default.dark'] = {}
-let g:PaperColor_Theme_Options.theme['default.dark'].override = {
-      \ 'folded_bg' : ['#383838', '0'],
-      \ 'folded_fg' : ['#b0b0b0', '6'],
-      \ 'visual_fg' : ['#505050', '0'],
-      \ 'visual_bg' : ['#bebebe', '6'],
-      \ }
-
-" Enable language-specific overrides
-let g:PaperColor_Theme_Options.language = {
-      \    'python': {
-      \      'highlight_builtins' : 1,
-      \    },
-      \    'cpp': {
-      \      'highlight_standard_library': 1,
-      \    },
-      \    'c': {
-      \      'highlight_builtins' : 1,
-      \    }
-      \ }
-
 " Python: Highlight args and kwargs, since they are conventionally special
 augroup python_syntax
   autocmd!
@@ -561,44 +524,78 @@ augroup end
 " QuickScope: choose primary and secondary colors
 augroup qs_colors
   autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' ctermfg=Green gui=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' ctermfg=Cyan gui=underline
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='LimeGreen' ctermfg=Green gui=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='turquoise1' ctermfg=Cyan gui=underline
 augroup END
 
+" Spell Checking:
 augroup spelling_options
   autocmd!
   autocmd ColorScheme * highlight clear SpellBad
   autocmd ColorScheme * highlight clear SpellRare
   autocmd ColorScheme * highlight clear SpellCap
   autocmd ColorScheme * highlight clear SpellLocal
-  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg='#f00c00' gui=underline,italic
-  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='#53f502' gui=underline,italic
-  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='#eef200' gui=underline,italic
-  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='#ff00d0' gui=underline,italic
+  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg='red1' gui=underline,italic
+  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='ForestGreen' gui=underline,italic
+  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='yellow' gui=underline,italic
+  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='magenta' gui=underline,italic
 augroup END
 
-" Number doesn't matter which color is used to start highlight group.
-" It gets overridden in the whitespace color section below
+" Trailing Whitespace: (initial highlight below doesn't matter)
 highlight EOLWS ctermbg=DarkCyan
 match EOLWS /\s\+$/
 augroup whitespace_color
   autocmd!
   " mkdLineBreak is a link group; special 'link' syntax required here
   autocmd ColorScheme * highlight link mkdLineBreak NONE
-  autocmd ColorScheme * highlight EOLWS guibg='#02c6d4' ctermbg=DarkCyan
+  autocmd ColorScheme * highlight EOLWS guibg='CornflowerBlue' ctermbg=DarkCyan
 
   autocmd InsertEnter * highlight clear EOLWS
-  autocmd InsertLeave * highlight EOLWS guibg='#02c6d4' ctermbg=DarkCyan
+  autocmd InsertLeave * highlight EOLWS guibg='CornflowerBlue' ctermbg=DarkCyan
 augroup END
 
-" Disable cursorline, then override if necessary
+" Cursorline: disable, then override if necessary
 highlight CursorLine cterm=NONE
 augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
 augroup END
 
-" Load the actual colorscheme
+" ********************************************************************
+" Papercolor: options
+" ********************************************************************
+let g:PaperColor_Theme_Options = {}
+let g:PaperColor_Theme_Options.theme = {}
+
+" Bold And Italics:
+let g:PaperColor_Theme_Options.theme.default = {
+      \ 'allow_bold': 1,
+      \ 'allow_italic': 1,
+      \ }
+
+" Folds And Highlights:
+let g:PaperColor_Theme_Options.theme['default.dark'] = {}
+let g:PaperColor_Theme_Options.theme['default.dark'].override = {
+      \ 'folded_bg' : ['gray22', '0'],
+      \ 'folded_fg' : ['gray69', '6'],
+      \ 'visual_fg' : ['gray2', '0'],
+      \ 'visual_bg' : ['gray', '6'],
+      \ }
+
+" Language Specific Overrides:
+let g:PaperColor_Theme_Options.language = {
+      \    'python': {
+      \      'highlight_builtins' : 1,
+      \    },
+      \    'cpp': {
+      \      'highlight_standard_library': 1,
+      \    },
+      \    'c': {
+      \      'highlight_builtins' : 1,
+      \    }
+      \ }
+
+" Load:
 try
   colorscheme PaperColor
 catch
@@ -902,8 +899,6 @@ function! VimColors()
 
   1
   nohlsearch
-  set nomodifiable
-  file Vim Colors
 endfunction
 
 command! VimColors silent call VimColors()
@@ -931,6 +926,16 @@ let g:rainbow_conf = {
       \         'start=/\[/ end=/\]/ fold',
       \       ],
       \     },
+      \	    'vim': {
+      \	      'parentheses': [
+      \         'start=/(/ end=/)/',
+      \         'start=/\[/ end=/\]/',
+      \         'start=/{/ end=/}/ fold',
+      \         'start=/(/ end=/)/ containedin=vimFuncBody',
+      \         'start=/\[/ end=/\]/ containedin=vimFuncBody',
+      \         'start=/{/ end=/}/ fold containedin=vimFuncBody',
+      \       ],
+      \	    },
       \     'css': 0,
       \     'html': 0,
       \     'markdown': 0,
