@@ -76,7 +76,7 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " }}}
-" General: global config {{{
+" General: Global config {{{
 
 " Code Completion:
 set completeopt=menuone,longest,preview
@@ -407,7 +407,7 @@ augroup indentation_sr
 augroup END
 
 " }}}
-" General: colorColumn different widths for different filetypes {{{
+" General: ColorColumn different widths for different filetypes {{{
 
 set colorcolumn=80
 augroup colorcolumn_configuration
@@ -922,7 +922,7 @@ function! Jinja2Toggle()
 endfunction
 
 " }}}
-" Plugin: (builtin) Man pager / help {{{
+" Plugin: Man pager / help (builtins) {{{
 
 augroup man_page_custom
   autocmd!
@@ -933,45 +933,7 @@ augroup man_page_custom
 augroup END
 
 " }}}
-" Plugin: Riv.Vim (deprecated) {{{
-
-" NOTE: I'm no longer using this plugin. Leaving these notes here in case I
-" return to it someday
-" -----------------------------------------------------------------------
-" Notes (because this Plugin's documentation sucks)
-"
-" Titles:
-"   <C-e>s{0,1,2,3,4,5,6} is the 7 levels of titles
-" Lists:
-"   Commands:
-"     '=' makes list re-number
-"     <C-e>l{1,2,3,4,5} sets list to different list types
-"   List Types:
-"     1) '*'
-"     2) '1.'
-"     3) 'a.'
-"     4) 'A)'
-"     5) 'i)'
-" Tables:
-"   <C-e>tc <- creates a table
-"   Insert Mode:
-"     typing | creates a new column
-"     Header row + new row = <Alt>Enter
-"     New row = Just type the correct columns then get into normal mode
-
-" let g:riv_global_leader = '<C-E>'
-" let g:riv_disable_folding = 1
-" let g:riv_disable_indent = 1
-" let g:riv_disable_del = 1
-" let g:riv_ignored_imaps = '<Tab>,<S-Tab>'
-" let g:riv_ignored_nmaps = '<Tab>,<S-Tab>'
-" let g:riv_ignored_vmaps = '<Tab>,<S-Tab>'
-" let g:riv_auto_format_table = 1
-" let g:riv_auto_rst2html = 0
-" let g:riv_web_browser = 'firefox'
-
-" }}}
-" Plugin: vim-rst-sections AND vim-rst-tables documentation {{{
+" Plugin: Vim-rst-sections AND vim-rst-tables documentation {{{
 
 " Shortcuts:
 " ,,d: create a section, or advance down hierarchy if section already defined
@@ -1031,7 +993,7 @@ augroup END
 "      default value; see also the :map command).
 
 " }}}
-" Plugin: markdown-preview.vim {{{
+" Plugin: Markdown-preview.vim {{{
 
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
@@ -1173,7 +1135,7 @@ let g:NERDTreeIndicatorMapCustom = {
       \ }
 
 "  }}}
-" Plugin: fzf {{{
+" Plugin: Fzf {{{
 
 command! -bang -nargs=* Grep call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 command! -bang -nargs=* GrepIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
@@ -1684,7 +1646,7 @@ augroup ragtag_config
 augroup end
 
 "  }}}
-"  Plugin: vim-markdown {{{
+"  Plugin: Vim-markdown {{{
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
@@ -1802,7 +1764,7 @@ augroup terraform_complete
 augroup END
 
 "  }}}
-" Plugin: vim-filetype-formatter and autoformatting {{{
+" Plugin: Vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
