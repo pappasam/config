@@ -562,7 +562,7 @@ augroup END
 augroup matchgroup_custom
   autocmd!
   autocmd ColorScheme * highlight MatchParen gui=underline
-  autocmd ColorScheme * highlight MatchWord guifg= guibg= gui=underline
+  autocmd ColorScheme * highlight MatchWord gui=underline
 augroup END
 
 " ********************************************************************
