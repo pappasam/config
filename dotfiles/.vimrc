@@ -558,6 +558,13 @@ augroup cursorline_setting
   autocmd FileType tagbar setlocal cursorline
 augroup END
 
+" MatchGroup:
+augroup matchgroup_custom
+  autocmd!
+  autocmd ColorScheme * highlight MatchParen gui=underline
+  autocmd ColorScheme * highlight MatchWord guifg= guibg= gui=underline
+augroup END
+
 " ********************************************************************
 " Papercolor: options
 " ********************************************************************
@@ -1900,8 +1907,6 @@ let g:hexmode_xxd_options = '-g 2'
 
 " Matchup: make sure parenthese match up appropriately
 let g:matchup_matchparen_enabled = 1
-let g:matchup_matchparen_deferred = 1
-let g:matchup_matchparen_hi_surround_always = 1
 
 "  }}}
 " General: Global key remappings {{{
