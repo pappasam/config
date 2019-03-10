@@ -1901,8 +1901,6 @@ let g:hexmode_xxd_options = '-g 2'
 " Matchup: make sure parenthese match up appropriately
 let g:matchup_matchparen_enabled = 1
 let g:matchup_matchparen_deferred = 1
-let g:matchup_matchparen_deferred_show_delay = 10
-let g:matchup_matchparen_deferred_hide_delay = 700
 let g:matchup_matchparen_hi_surround_always = 1
 
 "  }}}
