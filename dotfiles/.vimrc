@@ -198,6 +198,7 @@ Plug 'romainl/vim-devdocs'
 Plug 'chrisbra/Colorizer'
 Plug 'fidian/hexmode'
 Plug 'wellle/targets.vim'
+Plug 'andymass/vim-matchup'
 
 " EditorConfig: https://editorconfig.org/
 " Overrides default Vim settings when an editorconfig file is found
@@ -300,7 +301,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 
 " Web Development - General
-Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-ragtag'
 Plug 'heavenshell/vim-jsdoc'
 
@@ -1897,6 +1897,13 @@ let g:colorizer_auto_filetype='css,html'
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
+
+" Matchup: make sure parenthese match up appropriately
+let g:matchup_matchparen_enabled = 1
+let g:matchup_matchparen_deferred = 1
+let g:matchup_matchparen_deferred_show_delay = 10
+let g:matchup_matchparen_deferred_hide_delay = 700
+let g:matchup_matchparen_hi_surround_always = 1
 
 "  }}}
 " General: Global key remappings {{{
