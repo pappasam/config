@@ -361,14 +361,6 @@ augroup filetype_recognition
         \ set filetype=conf
 augroup END
 
-augroup filetype_vim
-  autocmd!
-  autocmd BufWritePost *vimrc so $MYVIMRC |
-        \if has('gui_running') |
-        \so $MYGVIMRC |
-        \endif
-augroup END
-
 " }}}
 " General: Comment Strings {{{
 
