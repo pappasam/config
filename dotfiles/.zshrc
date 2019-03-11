@@ -757,7 +757,7 @@ function _md_template() {  # arg1: template
   local calling_func=$funcstack[2]
   local filepath="/tmp/${calling_func}_$current_date.md"
   echo -e $1 > $filepath
-  nvim $filepath
+  nvim -c 'set nofoldenable' $filepath
 }
 
 function clubhouse() {
