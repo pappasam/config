@@ -198,7 +198,6 @@ Plug 'romainl/vim-devdocs'
 Plug 'chrisbra/Colorizer'
 Plug 'fidian/hexmode'
 Plug 'wellle/targets.vim'
-Plug 'andymass/vim-matchup'
 
 " EditorConfig: https://editorconfig.org/
 " Overrides default Vim settings when an editorconfig file is found
@@ -548,12 +547,6 @@ highlight CursorLine cterm=NONE
 augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
-augroup END
-
-" MatchGroup:
-augroup matchgroup_custom
-  autocmd!
-  autocmd ColorScheme * highlight MatchWord gui=underline
 augroup END
 
 " ********************************************************************
@@ -1858,9 +1851,6 @@ let g:colorizer_auto_filetype='css,html'
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
-
-" Matchup: make sure parenthese match up appropriately
-let g:matchup_matchparen_enabled = 1
 
 "  }}}
 " General: Global key remappings {{{
