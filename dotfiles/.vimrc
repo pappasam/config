@@ -1074,6 +1074,7 @@ let g:NERDTreeIgnore = [
       \ 'node_modules$[[dir]]',
       \ 'elm-stuff$[[dir]]',
       \ 'target$[[dir]]',
+      \ 'pip-wheel-metadata$[[dir]]',
       \ '\.aux$[[file]]',
       \ '\.toc$[[file]]',
       \ '\.pdf$[[file]]',
