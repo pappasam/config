@@ -1508,6 +1508,7 @@ augroup autopairs_filetype_overrides
   autocmd FileType rust let b:AutoPairs = {
         \ '[':']',
         \ '{':'}',
+        \ '(':')',
         \ '"':'"',
         \ '`':'`',
         \ }
@@ -1728,6 +1729,7 @@ let g:clang_jumpto_declaration_key = "<C-]>"
 " Rust:
 " rustup install racer
 let g:racer_cmd = $HOME . '/.cargo/bin/racer'
+let g:racer_insert_paren = 0
 let g:racer_experimental_completer = 1
 augroup rust_complete
   autocmd!
