@@ -854,9 +854,8 @@ command! FixHighlight syntax sync fromstart
 " Add syntax so each color name is highlighted in its color.
 function! VimColors()
   vnew
-  set filetype=vimcolors
-  setlocal buftype=nofile bufhidden=hide noswapfile
-  file VimColors
+  set modifiable
+  setlocal filetype=vimcolors buftype=nofile bufhidden=delete noswapfile
   0read $VIMRUNTIME/rgb.txt
   let find_color = '^\s*\(\d\+\s*\)\{3}\zs\w*$'
   silent execute 'v/'.find_color.'/d'
@@ -880,6 +879,7 @@ function! VimColors()
   nohlsearch
   nnoremap <buffer> d <C-d>
   nnoremap <buffer> u <C-u>
+  file VimColors
   set nomodifiable
 endfunction
 
