@@ -574,11 +574,21 @@ function t() {
   fi
 }
 
+# Supports bold/underline/etc
+# See https://stackoverflow.com/a/4233818/9782020
+# requires 'sudo apt-get install expect-dev'
+function man {
+  unbuffer man -P cat "$@" | eval $MANPAGER
+}
+compdef _man man
+
 # Fix window dimensions: tty mode
 # Set consolefonts to appropriate size based on monitor resolution
 # For each new monitor, you'll need to do this manually
 # Console fonts found here: /usr/share/consolefonts
-function fixwindow() {
+# Finally, suppress all messages from the kernel (and its drivers) except panic
+# messages from appearing on the console.
+function fix-console-window() {
   echo "Getting window dimensions, waiting 5 seconds..."
   MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | grep '*')
   if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
@@ -586,6 +596,8 @@ function fixwindow() {
   elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
     setfont Uni3-Terminus24x12.psf.gz
   fi
+  echo "Enter sudo password to disable kernel from sending console messages..."
+  sudo dmesg -n 1
 }
 
 function gitzip() {  # arg1: the git repository
@@ -977,15 +989,6 @@ if [[ -o interactive ]]; then
   # kubectl autocompletion
   if [ $commands[kubectl] ]; then
     source <(kubectl completion zsh)
-  fi
-
-  if [[ "$TERM" == "linux" ]]; then
-    if [ ! -n "$TMUX" ]; then
-      # suppress all messages from the kernel (and its drivers) except panic
-      # messages from appearing on the console.
-      echo "Enter sudo password to disable kernel from sending console messages..."
-      sudo dmesg -n 1
-    fi
   fi
 fi
 
