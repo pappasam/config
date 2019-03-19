@@ -220,8 +220,8 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
   url:
-    launcher: "gio open"
-    # modifiers: Shift
+    launcher: xdg-open
+    modifiers: Shift
   hide_when_typing: false
 
 
