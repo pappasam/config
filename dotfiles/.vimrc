@@ -1763,6 +1763,9 @@ let g:vim_filetype_formatter_commands = {
 " }}}
 "  Plugin: Miscellaneous global var config {{{
 
+" Netrw: disable netrw's gx mapping, prefer tyru/open-browser.vim
+let g:netrw_nogx = 1
+
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_WindowLayout = 3
@@ -2001,6 +2004,10 @@ nnoremap ' ,
 " FiletypeFormat: remap leader f to do filetype formatting
 nnoremap <leader>f :FiletypeFormat<cr>
 vnoremap <leader>f :FiletypeFormat<cr>
+
+" Open Browser: override netrw
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 
 " }}}
 " General: Global Config + Cleanup {{{

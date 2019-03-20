@@ -574,11 +574,20 @@ function t() {
   fi
 }
 
-# Supports bold/underline/etc
+# Override man
+# Temporarily fixes copy/paste bug with neovim, specifically
 # See https://stackoverflow.com/a/4233818/9782020
 # requires 'sudo apt-get install expect-dev'
 function man {
-  unbuffer man -P cat "$@" | eval $MANPAGER
+  local result
+  if result=$(unbuffer man -P cat $@); then
+    echo $result | eval $MANPAGER
+    return 0
+  else
+    local exit_code=$?
+    echo $result
+    return $exit_code
+  fi
 }
 compdef _man man
 
