@@ -361,15 +361,18 @@ augroup filetype_recognition
 augroup END
 
 " }}}
-" General: Comment Strings {{{
+" General: Comment / Text Format Options {{{
 
 " Notes:
 " commentstring: read by vim-commentary; must be one template
 " comments: csv of comments.
-augroup custom_comment_strings
+" formatoptions: influences how Vim formats text
+"   ':help fo-table' will get the desired result
+augroup custom_comment_config
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s
   autocmd FileType dosini setlocal comments=:#,:;
+  autocmd FileType sh setlocal formatoptions=jcroql
 augroup END
 
 " }}}

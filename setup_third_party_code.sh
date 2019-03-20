@@ -19,6 +19,12 @@ sudo apt install snapd
 #######################################################################
 sudo apt install manpages-dev manpages-posix-dev
 
+# to obtain 'unbuffer', "disables the output buffering that occurs when program
+# output is redirected from non-interactive programs."
+# tl;dr this makes system
+# copy / url opening operations work when using neovim as a man pager
+sudo apt install expect-dev
+
 #######################################################################
 # Install packages
 #######################################################################
