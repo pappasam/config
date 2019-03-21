@@ -695,6 +695,7 @@ function! CleanUnicode()
   silent! %s/“/"/g
   silent! %s/’/'/g
   silent! %s/‘/'/g
+  silent! %s/—/-/g
 endfunction()
 command! CleanUnicode call CleanUnicode()
 
