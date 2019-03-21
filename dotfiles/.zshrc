@@ -874,6 +874,31 @@ function dat(){
   strfile -c % "$file_name" "$file_name.dat"
 }
 
+# Lint Jenkinsfile
+function jenkinsfilelint() {  # [arg1]: path to Jenkinsfile
+  if [ $# -eq 0 ]; then
+    local jenkinsfile_path='Jenkinsfile'
+  elif [ $# -eq 1 ]; then
+    local jenkinsfile_path=$1
+  else
+    echo 'lint-jenkinsfile [<path-to-jenkinsfile>|default is Jenkinsfile]'
+    return 1
+  fi
+  local result=$(curl -s -X POST -F "jenkinsfile=<$jenkinsfile_path" \
+    localhost:8080/pipeline-model-converter/validate )
+  if [[ $result == 'Jenkinsfile successfully validated.' ]]; then
+    echo $result
+    return 0
+  else
+    echo "error processing Jenkinsfile at '$jenkinsfile_path'"
+    if [[ $result != '' ]]; then
+      echo 'error message:'
+      echo $result
+    fi
+    return 1
+  fi
+}
+
 # }}}
 # ZShell prompt (PS1) {{{
 
