@@ -1885,8 +1885,8 @@ inoremap <C-space> <C-x><C-o>
 " <C-x><C-k> = dictionary completion
 
 " Exit: Preview and Help && QuickFix and Location List
-inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
-nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
+inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose<CR>a
+nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose<CR>
 
 " MoveVisual: up and down visually only if count is specified before
 " Otherwise, you want to move up lines numerically
