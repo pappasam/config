@@ -1,6 +1,6 @@
 CONFIG_DIRS_DOTFILES := $(wildcard dotfiles/.config/*)
 CONFIG_DIRS_HOME := $(subst dotfiles, ~, $(CONFIG_DIRS_DOTFILES))
-HOME_DIRS_MKDIR = ~/.stack/ ~/bin/
+HOME_DIRS_MKDIR = ~/.stack/ ~/bin/ ~/.ptpython
 
 .PHONY: help
 help:
