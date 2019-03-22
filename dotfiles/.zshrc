@@ -675,7 +675,7 @@ function cargodoc() {  # arg1: packagename
 DEFAULT_VENV_NAME=.venv
 DEFAULT_PYTHON_VERSION="3"
 
-PYTHON_DEV_PACKAGES=(pynvim bpython restview jedi yapf pre-commit pudb)
+PYTHON_DEV_PACKAGES=(pynvim ptpython restview jedi yapf pre-commit)
 
 # [optionally] create and activate Python virtual environment
 function ve() {
