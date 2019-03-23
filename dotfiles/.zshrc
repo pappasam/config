@@ -121,7 +121,10 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
-# Configure man pager
+# Configure Man Pager
+# NOTE: neovim + debian + mandb has a bug where copy/paste does not work when
+# invoking man from shell. I've decided this is acceptable for now; if I need
+# to have a long, interactive session, I'll simply open Man from inside neovim
 export MANWIDTH=79
 export MANPAGER="nvim -c 'set ft=man' -"
 
@@ -573,23 +576,6 @@ function t() {
     tmux -2 attach -t $SESSION
   fi
 }
-
-# Override man
-# Temporarily fixes copy/paste bug with neovim, specifically
-# See https://stackoverflow.com/a/4233818/9782020
-# requires 'sudo apt-get install expect-dev'
-function man {
-  local result
-  if result=$(unbuffer man -P cat $@); then
-    echo $result | eval $MANPAGER
-    return 0
-  else
-    local exit_code=$?
-    echo $result
-    return $exit_code
-  fi
-}
-compdef _man man
 
 # Fix window dimensions: tty mode
 # Set consolefonts to appropriate size based on monitor resolution
