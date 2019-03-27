@@ -912,6 +912,7 @@ augroup man_page_custom
   autocmd FileType man setlocal number relativenumber
   autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
+  autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
 augroup END
 
 " }}}
@@ -1593,11 +1594,18 @@ function! s:goyo_enter()
   execute 'NumbersEnable'
   " Repeat whitespace match
   match EOLWS /\s\+$/
+
+  " Disable key mappings
+  nunmap <silent> <space>j
+  nunmap <silent> <space>l
+  nunmap <silent> <space>u
+  nunmap <silent> <space>k
 endfunction
 
 function! s:goyo_leave()
   let b:goyo_is_on = 0
   setlocal number relativenumber
+  call GlobalKeyMappings()
 endfunction
 
 function! GoyoToggleCustom()
@@ -1858,157 +1866,143 @@ let g:hexmode_xxd_options = '-g 2'
 "  }}}
 " General: Global key remappings {{{
 
-" Escape:
-" Make escape also clear highlighting
-nnoremap <silent> <esc> :noh<return><esc>
+" This is defined as a function to allow me to reset all my key remappings
+" without needing to repeate myself. Useful with Goyo for now
+function! GlobalKeyMappings()
 
-" ScrollDropdown:
-" Enable scrolling dropdown menu with the mouse
-" Additionally, make clicking select the highlighted item
-inoremap <expr> <ScrollWheelUp> pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
-inoremap <expr> <ScrollWheelDown> pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
-inoremap <expr> <LeftMouse> pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
+  " Escape: also clears highlighting
+  nnoremap <silent> <esc> :noh<return><esc>
 
-" InsertModeHelpers:
-" Insert one line above after enter (useful for ``` in markdown)
-" Key code = Alt+Enter
-inoremap <M-CR> <CR><C-o>O
+  " InsertModeHelpers: Insert one line above after enter
+  " Useful for ``` in markdown. Key code = Alt+Enter
+  inoremap <M-CR> <CR><C-o>O
 
-" Omnicompletion:
-" <C-@> is signal sent by terminal when pressing <C-Space>
-" Need to include <C-Space> as well for neovim sometimes
-inoremap <C-@> <C-x><C-o>
-inoremap <C-space> <C-x><C-o>
+  " Omnicompletion: <C-@> is signal sent by some terms when pressing <C-Space>
+  inoremap <C-@> <C-x><C-o>
+  inoremap <C-space> <C-x><C-o>
 
-" EnglishWordCompletion:
-" Look up words in a dictionary
-" <C-x><C-k> = dictionary completion
+  " Exit: Preview, Help, QuickFix, and Location List
+  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose<CR>a
+  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose<CR>
 
-" Exit: Preview and Help && QuickFix and Location List
-inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose<CR>a
-nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose<CR>
+  " MoveVisual: up and down visually only if count is specified before
+  " Otherwise, you want to move up lines numerically e.g. ignore wrapped lines
+  nnoremap <expr> k
+        \ v:count == 0 ? 'gk' : 'k'
+  nnoremap <expr> j
+        \ v:count == 0 ? 'gj' : 'j'
 
-" MoveVisual: up and down visually only if count is specified before
-" Otherwise, you want to move up lines numerically
-" e.g. ignoring wrapped lines
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  " MoveTabs: goto tab number. Same as Firefox
+  nnoremap <A-1> 1gt
+  nnoremap <A-2> 2gt
+  nnoremap <A-3> 3gt
+  nnoremap <A-4> 4gt
+  nnoremap <A-5> 5gt
+  nnoremap <A-6> 6gt
+  nnoremap <A-7> 7gt
+  nnoremap <A-8> 8gt
+  nnoremap <A-9> 9gt
 
-" MoveTabs: moving forward, backward, and to number with vim tabs
-nnoremap <silent> L gt
-nnoremap <silent> H gT
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
+  " Substitute: replace word under cursor
+  nnoremap <leader>R yiw:%s/<C-R>0//gc<Left><Left><Left>
+  vnoremap <leader>R y:%s/<C-R>0//gc<Left><Left><Left>
 
-" Substitute: file replace word under cursor
-" Places user in the vim command line
-vnoremap sc y:%s/<C-R>0//gc<C-F>$hhi
+  " IndentComma: placing commas one line down; usable with repeat operator '.'
+  nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
+        \:call repeat#set("\<Plug>NewLineComma")<CR>
+  nmap <leader><CR> <Plug>NewLineComma
 
-" IndentComma: placing commas one line down
-" usable with repeat operator '.'
-nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
-      \:call repeat#set("\<Plug>NewLineComma")<CR>
-nmap <leader><CR> <Plug>NewLineComma
+  " InsertModeDeletion:
+  " Delete character under cursor in insert mode
+  inoremap <C-l> <Del>
 
-" BuffersAndWindows:
-" Move from one window to another
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
-" Scroll screen up, down, left, and right
-" left: zh, right: zl
-nnoremap <silent> K <c-e>
-nnoremap <silent> J <c-y>
-" Move cursor to top, bottom, and middle of screen
-nnoremap <silent> gJ L
-nnoremap <silent> gK H
-nnoremap <silent> gM M
+  " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
+  nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
-" InsertModeDeletion:
-" Delete character under cursor in insert mode
-inoremap <C-l> <Del>
+  " ToggleRelativeNumber: uses custom functions
+  nnoremap <silent><leader>r :NumbersToggle<CR>
 
-" Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
+  " TogglePluginWindows:
+  nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
+  nnoremap <silent> <space>l :TagbarToggle <CR>
+  nnoremap <silent> <space>u :UndotreeToggle<CR>
+  nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 
-" ToggleRelativeNumber: uses custom functions
-nnoremap <silent><leader>r :NumbersToggle<CR>
+  " Choosewin: (just like tmux)
+  nnoremap <leader>q :ChooseWin<CR>
 
-" TogglePluginWindows:
-nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
-nnoremap <silent> <space>l :TagbarToggle <CR>
-nnoremap <silent> <space>u :UndotreeToggle<CR>
+  " Goyo
+  nnoremap <leader><leader>g :call GoyoToggleCustom()<cr>
 
-" NERDTree: Jump to current file
-nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
+  " IndentLines: toggle if indent lines is visible
+  nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
-" Choosewin: (just like tmux)
-nnoremap <leader>q :ChooseWin<CR>
+  " ResizeWindow: up and down; relies on custom functions
+  nnoremap <silent> <leader><leader>h mz:call ResizeWindowHeight()<CR>`z
+  nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
 
-" Goyo
-nnoremap <leader><leader>g :call GoyoToggleCustom()<cr>
+  " AutoPairs:
+  imap <silent><CR> <CR><Plug>AutoPairsReturn
 
-" IndentLines: toggle if indent lines is visible
-nnoremap <silent> <leader>i :IndentLinesToggle<CR>
+  " FZF: create shortcuts for finding stuff
+  nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
+  nnoremap <silent> <C-B> :call FZFBuffersAvoidNerdtree()<CR>
+  nnoremap <C-n> yiw:Grep <C-r>"<CR>
+  vnoremap <C-n> y:Grep <C-r>"<CR>
+  nnoremap <leader><C-n> yiw:GrepIgnoreCase <C-r>"<CR>
+  vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
 
-" ResizeWindow: up and down; relies on custom functions
-nnoremap <silent> <leader><leader>h mz:call ResizeWindowHeight()<CR>`z
-nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
+  " DeleteHiddenBuffers: shortcut to make this easier
+  " Note: weird stuff happens if you mess this up
+  nnoremap <leader>d :call DeleteInactiveBuffers()<CR>
 
-" AutoPairs:
-imap <silent><CR> <CR><Plug>AutoPairsReturn
+  " Jumping To Header File:
+  nnoremap gh :call CurtineIncSw()<CR>
 
-" FZF: create shortcuts for finding stuff
-nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
-nnoremap <silent> <C-B> :call FZFBuffersAvoidNerdtree()<CR>
-nnoremap <C-n> yiw:Grep <C-r>"<CR>
-vnoremap <C-n> y:Grep <C-r>"<CR>
-nnoremap <leader><C-n> yiw:GrepIgnoreCase <C-r>"<CR>
-vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
+  " Open Split: for writing (80 character window width for wrap)
+  nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
-" DeleteHiddenBuffers: shortcut to make this easier
-" Note: weird stuff happens if you mess this up
-nnoremap <leader>d :call DeleteInactiveBuffers()<CR>
+  " SearchBackward: remap comma to single quote
+  nnoremap ' ,
 
-" Jumping To Header File:
-nnoremap gh :call CurtineIncSw()<CR>
+  " FiletypeFormat: remap leader f to do filetype formatting
+  nnoremap <leader>f :FiletypeFormat<cr>
+  vnoremap <leader>f :FiletypeFormat<cr>
 
-" Open Split: for writing (80 character window width for wrap)
-nnoremap <silent> <leader>v :call ResizeTo80()<CR>
+  " Open Browser: override netrw
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
 
-" Clipboard Copy Paste:
-" Visual mode copy is pretty simple
-vnoremap <leader>y "+y
-" Normal mode paste checks whether the current line has text
-" if yes, insert new line, if no, start paste on the current line
-nnoremap <expr> <leader>p len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Mouse Configuration: remaps mouse to work better in terminal
 
-" MouseCopy: system copy mouse characteristics
-vnoremap <RightMouse> "+y
+  " Clipboard Copy Paste: Visual mode copy is pretty simple
+  vnoremap <leader>y "+y
+  " Normal mode paste checks whether the current line has text
+  " if yes, insert new line, if no, start paste on the current line
+  nnoremap <expr> <leader>p
+        \ len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
-" Mouse Open Close Folds: open folds with the mouse, and close the folds
-" open operation taken from: https://stackoverflow.com/a/13924974
-nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? '\<2-LeftMouse>' : 'zo'
-nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
+  " MouseCopy: system copy mouse characteristics
+  vnoremap <RightMouse> "+y
 
-" SearchBackward: remap comma to single quote
-nnoremap ' ,
+  " Mouse Open Close Folds: open folds with the mouse, and close the folds
+  " open operation taken from: https://stackoverflow.com/a/13924974
+  nnoremap <expr> <2-LeftMouse>
+        \ foldclosed(line('.')) == -1 ? '\<2-LeftMouse>' : 'zo'
+  nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
-" FiletypeFormat: remap leader f to do filetype formatting
-nnoremap <leader>f :FiletypeFormat<cr>
-vnoremap <leader>f :FiletypeFormat<cr>
+  " Scrolling Dropdown: dropdown scrollable + click to select highlighted
+  inoremap <expr> <ScrollWheelUp>
+        \ pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
+  inoremap <expr> <ScrollWheelDown>
+        \ pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
+  inoremap <expr> <LeftMouse>
+        \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
-" Open Browser: override netrw
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+endfunction
+
+call GlobalKeyMappings()
 
 " }}}
 " General: Global Config + Cleanup {{{
