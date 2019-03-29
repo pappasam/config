@@ -329,6 +329,11 @@ Plug 'w0rp/ale'
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
 
+" Moving arguments around
+Plug 'kana/vim-submode'
+Plug 'tek/vim-fieldtrip'
+Plug 'AndrewRadev/sideways.vim'
+
 call plug#end()
 
 " Plug update and upgrade
@@ -1885,6 +1890,9 @@ let g:colorizer_auto_filetype='css,html'
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
+
+" Moving Fields: vim-submode, vim-fieldtrip, sideways.vim
+let g:fieldtrip_start_map = '<leader><leader>f'
 
 "  }}}
 " General: Global key remappings {{{
