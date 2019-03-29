@@ -323,6 +323,9 @@ Plug 'weirongxu/plantuml-previewer.vim'
 " Code prettifiers
 Plug 'pappasam/vim-filetype-formatter'
 
+" Linting
+Plug 'w0rp/ale'
+
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
 
@@ -1650,6 +1653,26 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 "  }}}
+"  Plugin: Ale {{{
+
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_text_changed = 'never'
+
+let g:ale_lint_delay = 0
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+      \ 'python': ['pylint'],
+      \}
+
+"  }}}
 "  Plugin: AutoCompletion config and key remappings {{{
 
 " NOTE: General remappings
@@ -1882,8 +1905,8 @@ function! GlobalKeyMappings()
   inoremap <C-space> <C-x><C-o>
 
   " Exit: Preview, Help, QuickFix, and Location List
-  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose<CR>a
-  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose<CR>
+  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
+  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
 
   " MoveVisual: up and down visually only if count is specified before
   " Otherwise, you want to move up lines numerically e.g. ignore wrapped lines
@@ -1968,6 +1991,8 @@ function! GlobalKeyMappings()
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
+  nnoremap <leader>a :write <BAR> ALELint<cr>
+  nnoremap <leader>A :ALEReset<cr>
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
