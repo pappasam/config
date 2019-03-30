@@ -1268,7 +1268,7 @@ endfunction
 function! LightlineGina()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
-      let mark = 'git::'
+      let mark = 'g:'
       let branch = gina#component#repo#branch()
       return branch !=# '' ? mark.branch : ''
     endif
