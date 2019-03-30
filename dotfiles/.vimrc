@@ -1779,9 +1779,14 @@ augroup writing_complete
   autocmd FileType markdown,tex,rst,txt nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
-" Terraform
+" Terraform:
 augroup terraform_complete
   autocmd FileType terraform setlocal omnifunc=terraformcomplete#Complete
+augroup END
+
+" Syntaxfile Completion: if you can't get good autocompletion, hack it :p
+augroup syntaxfile_complete
+  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
 "  }}}
