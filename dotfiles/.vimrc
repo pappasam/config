@@ -2022,7 +2022,7 @@ function! GlobalKeyMappings()
   " Mouse Open Close Folds: open folds with the mouse, and close the folds
   " open operation taken from: https://stackoverflow.com/a/13924974
   nnoremap <expr> <2-LeftMouse>
-        \ foldclosed(line('.')) == -1 ? '\<2-LeftMouse>' : 'zo'
+        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'
   nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
   " Scrolling Dropdown: dropdown scrollable + click to select highlighted
