@@ -260,6 +260,7 @@ Plug 'othree/html5.vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/vim-xxdcursor'
+Plug 'calviken/vim-gdscript3'
 
 " Accounting
 Plug 'ledger/vim-ledger'
@@ -392,7 +393,7 @@ augroup END
 set expandtab shiftwidth=2 softtabstop=2 tabstop=8
 augroup indentation_sr
   autocmd!
-  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm,nasm
+  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm,nasm,gdscript3
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
