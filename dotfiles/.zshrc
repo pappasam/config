@@ -772,7 +772,7 @@ function clubhouse() {
 }
 
 function standup() {
-  _md_template "*Yesterday?*\n*Today?*\n*Blockers?*"
+  _md_template "*Yesterday?*\n*Today?*\n*Blockers/Reminders?*"
 }
 
 # GIT: git-clone keplergrp repos to src/ directory
