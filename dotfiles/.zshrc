@@ -544,11 +544,6 @@ alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
 
-# Tmux
-
-# rename the current window to be the basename of the current directory
-alias ,='tmux rename-window $(basename `pwd`)'
-
 # }}}
 # Functions {{{
 
