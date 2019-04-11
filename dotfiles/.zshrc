@@ -571,8 +571,8 @@ function t() {
     tmux -2 attach -t $SESSION
   else
     tmux -2 new-session -d -s $SESSION
-    tmux -2 select-window -t $SESSION:1
-    tmux -2 rename-window edit
+    # tmux -2 select-window -t $SESSION:1
+    # tmux -2 rename-window edit
     tmux -2 attach -t $SESSION
   fi
 }
