@@ -18,6 +18,7 @@ sudo apt install snapd
 # Man pages for Linux Systems Programming
 #######################################################################
 sudo apt install manpages-dev manpages-posix-dev
+sudo apt install libx11-doc
 
 # to obtain 'unbuffer', "disables the output buffering that occurs when program
 # output is redirected from non-interactive programs."
