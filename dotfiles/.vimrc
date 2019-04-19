@@ -210,6 +210,7 @@ Plug 'myusuf3/numbers.vim'
 " Fuzzy finder
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'maxjacobson/vim-fzf-coauthorship'
 
 " Git
 Plug 'lambdalisue/gina.vim'
