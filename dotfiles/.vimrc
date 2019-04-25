@@ -1917,14 +1917,14 @@ function! GlobalKeyMappings()
 
   " MoveVisual: up and down visually only if count is specified before
   " Otherwise, you want to move up lines numerically e.g. ignore wrapped lines
-  nnoremap <expr> k
-        \ v:count == 0 ? 'gk' : 'k'
-  vnoremap <expr> k
-        \ v:count == 0 ? 'gk' : 'k'
-  nnoremap <expr> j
-        \ v:count == 0 ? 'gj' : 'j'
-  vnoremap <expr> j
-        \ v:count == 0 ? 'gj' : 'j'
+  " nnoremap <expr> k
+  "       \ v:count == 0 ? 'gk' : 'k'
+  " vnoremap <expr> k
+  "       \ v:count == 0 ? 'gk' : 'k'
+  " nnoremap <expr> j
+  "       \ v:count == 0 ? 'gj' : 'j'
+  " vnoremap <expr> j
+  "       \ v:count == 0 ? 'gj' : 'j'
 
   " MoveTabs: goto tab number. Same as Firefox
   nnoremap <A-1> 1gt
