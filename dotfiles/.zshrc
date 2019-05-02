@@ -543,6 +543,7 @@ alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
+alias p='ptpython'
 
 # }}}
 # Functions {{{
@@ -731,15 +732,6 @@ function pyinit() {
     echo "pyinit takes no arguments"
     return 1
   fi
-  gitignore Python.gitignore | grep -v instance/ > .gitignore
-  mkinstance
-  ve
-  cat > main.py <<EOL
-#!/usr/bin/env python
-'''The main module'''
-
-EOL
-  chmod +x main.py
   poetry init --no-interaction
 }
 
@@ -754,8 +746,19 @@ function pynew() {
     echo "$dir_name already exists"
     return 1
   fi
-  git init "$dir_name" && cd "$dir_name"
-  pyinit
+  poetry new "$dir_name"
+  cd "$dir_name"
+  git init
+  gitignore Python.gitignore | grep -v instance/ > .gitignore
+  mkinstance
+  ve
+  cat > main.py <<EOL
+#!/usr/bin/env python
+'''The main module'''
+
+EOL
+  chmod +x main.py
+  mv README.rst README.md
 }
 
 # Templates for nvim
