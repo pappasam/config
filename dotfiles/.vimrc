@@ -202,7 +202,8 @@ Plug 'wellle/targets.vim'
 " EditorConfig: https://editorconfig.org/
 " Overrides default Vim settings when an editorconfig file is found
 " I have one at the moment (in dotfiles)
-Plug 'editorconfig/editorconfig-vim'
+" Not the official plugin, but written in pure vimscript so faster Vim startup
+Plug 'sgur/vim-editorconfig'
 
 " Relative Numbering
 Plug 'myusuf3/numbers.vim'
