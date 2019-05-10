@@ -659,10 +659,8 @@ function cargodoc() {  # arg1: packagename
 }
 
 # activate virtual environment from any directory from current and up
-DEFAULT_VENV_NAME=.venv
-DEFAULT_PYTHON_VERSION="3"
-
-PYTHON_DEV_PACKAGES=(pynvim ptpython restview jedi yapf pre-commit)
+PYTHON_ENV_PACKAGES=(pynvim ptpython restview jedi)
+PYTHON_DEV_PACKAGES=(yapf pylint mypy pre-commit)
 
 # [optionally] create and activate Python virtual environment
 function ve() {
@@ -681,7 +679,8 @@ function ve() {
   venv_name=$pkg
   pyenv virtualenv $venv_name
   pyenv activate $venv_name
-  $(pyenv which pip) install --upgrade pip $PYTHON_DEV_PACKAGES
+  $(pyenv which pip) install --upgrade \
+    pip $PYTHON_ENV_PACKAGES $PYTHON_DEV_PACKAGES
   # Deactive the current virtual environment to enable python-version reading
   pyenv deactivate
   # Write the current virtual environment into python-version,
@@ -752,6 +751,7 @@ function pynew() {
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
+  poetry add -D $PYTHON_DEV_PACKAGES
   cat > main.py <<EOL
 #!/usr/bin/env python
 '''The main module'''
