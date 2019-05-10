@@ -476,6 +476,8 @@ augroup fold_settings
   autocmd!
   autocmd FileType vim,tmux,bash,zsh
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
+  autocmd FileType markdown
+        \ setlocal nofoldenable
 augroup END
 
 " }}}
