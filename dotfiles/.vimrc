@@ -1891,7 +1891,7 @@ let g:qs_max_chars = 10000
 let g:go_version_warning = 0
 
 " ChooseWin: options
-let g:choosewin_overlay_enable = 1
+let g:choosewin_overlay_enable = 0
 
 " Colorizer: css color code highlighting
 let g:colorizer_auto_filetype='css,html'
@@ -1971,7 +1971,7 @@ function! GlobalKeyMappings()
   nnoremap <silent> <space>k :NERDTreeFind<cr><C-w>w
 
   " Choosewin: (just like tmux)
-  nnoremap <leader>q :ChooseWin<CR>
+  nnoremap <C-w>q :ChooseWin<CR>
 
   " Goyo
   nnoremap <leader><leader>g :call GoyoToggleCustom()<cr>
@@ -2047,6 +2047,12 @@ function! GlobalKeyMappings()
 endfunction
 
 call GlobalKeyMappings()
+
+" }}}
+" General: Abbreviations --- {{{
+
+" Make typing 'vertical help' faster
+cabbrev vhelp vertical help
 
 " }}}
 " General: Global Config + Cleanup {{{
