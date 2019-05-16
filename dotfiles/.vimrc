@@ -510,14 +510,14 @@ augroup END
 " Python: Highlight args and kwargs, since they are conventionally special
 augroup python_syntax
   autocmd!
-  autocmd FileType python syn keyword pythonBuiltinObj args
-  autocmd FileType python syn keyword pythonBuiltinObj kwargs
+  autocmd FileType python syntax keyword pythonBuiltinObj args
+  autocmd FileType python syntax keyword pythonBuiltinObj kwargs
 augroup end
 
 " Javascript: Highlight this keyword in object / function definitions
 augroup javascript_syntax
   autocmd!
-  autocmd FileType javascript syn keyword jsBooleanTrue this
+  autocmd FileType javascript syntax keyword jsBooleanTrue this
 augroup end
 
 " QuickScope: choose primary and secondary colors
