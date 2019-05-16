@@ -544,6 +544,7 @@ alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
 alias p='ptpython'
+alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
 # Functions {{{
