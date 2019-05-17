@@ -198,6 +198,7 @@ Plug 'romainl/vim-devdocs'
 Plug 'chrisbra/Colorizer'
 Plug 'fidian/hexmode'
 Plug 'wellle/targets.vim'
+Plug 'tpope/vim-scriptease'
 
 " EditorConfig: https://editorconfig.org/
 " Overrides default Vim settings when an editorconfig file is found
