@@ -349,7 +349,7 @@ augroup filetype_recognition
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
   autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
-  autocmd BufNewFile,BufRead,BufEnter *.bowerrc,*.babelrc,*.eslintrc,*.slack-term
+  autocmd BufNewFile,BufRead,BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term
         \ set filetype=json
   autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
@@ -1632,6 +1632,8 @@ function! GoyoToggleCustom()
 
   execute 'Goyo'
 endfunction
+
+command! GoyoToggleCustom call GoyoToggleCustom()
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
