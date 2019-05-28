@@ -206,9 +206,6 @@ Plug 'tpope/vim-scriptease'
 " Not the official plugin, but written in pure vimscript so faster Vim startup
 Plug 'sgur/vim-editorconfig'
 
-" Relative Numbering
-Plug 'myusuf3/numbers.vim'
-
 " Fuzzy finder
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -898,6 +895,28 @@ function! VimColors()
 endfunction
 
 command! VimColors silent call VimColors()
+
+" }}}
+" General: Toggle numbers {{{
+
+function! s:toggle_number()
+  if &number == 0
+    set number
+  else
+    set nonumber
+  endif
+endfunction
+
+function! s:toggle_relative_number()
+  if &relativenumber == 0
+    set relativenumber
+  else
+    set norelativenumber
+  endif
+endfunction
+
+command! ToggleNumber call <SID>toggle_number()
+command! ToggleRelativeNumber call <SID>toggle_relative_number()
 
 " }}}
 " Plugin: Jinja2 {{{
@@ -1601,9 +1620,6 @@ augroup END
 let g:goyo_width = 84
 
 function! s:goyo_enter()
-  let b:goyo_is_on = 1
-  setlocal number relativenumber
-  execute 'NumbersEnable'
   " Repeat whitespace match
   match EOLWS /\s\+$/
 
@@ -1615,27 +1631,8 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  let b:goyo_is_on = 0
-  setlocal number relativenumber
   call GlobalKeyMappings()
 endfunction
-
-function! GoyoToggleCustom()
-  if !exists('b:goyo_is_on')
-    let b:goyo_is_on = 0
-  endif
-
-  if b:goyo_is_on
-    execute 'NumbersEnable'
-    setlocal nonumber norelativenumber
-  else
-    execute 'NumbersDisable'
-  endif
-
-  execute 'Goyo'
-endfunction
-
-command! GoyoToggleCustom call GoyoToggleCustom()
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
@@ -1873,15 +1870,6 @@ let g:bullets_enabled_file_types = [
       \ 'rst',
       \ ]
 
-" Numbersvim: override default plugin settings
-let g:numbers_exclude = [
-      \ 'startify',
-      \ 'gundo',
-      \ 'vimshell',
-      \ 'gina-commit',
-      \ 'gitcommit',
-      \ ]
-
 " VimMarkdownComposer: override defaults
 let g:markdown_composer_open_browser = 0
 
@@ -1967,7 +1955,8 @@ function! GlobalKeyMappings()
   nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
   " ToggleRelativeNumber: uses custom functions
-  nnoremap <silent><leader>r :NumbersToggle<CR>
+  nnoremap <silent> <leader>R :ToggleNumber<CR>
+  nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
   nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
@@ -1979,7 +1968,7 @@ function! GlobalKeyMappings()
   nnoremap <C-w>q :ChooseWin<CR>
 
   " Goyo
-  nnoremap <leader><leader>g :call GoyoToggleCustom()<cr>
+  nnoremap <leader><leader>g :Goyo<CR>
 
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i :IndentLinesToggle<CR>
