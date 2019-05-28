@@ -477,7 +477,7 @@ augroup fold_settings
   autocmd!
   autocmd FileType vim,tmux,bash,zsh
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
-  autocmd FileType markdown
+  autocmd FileType markdown,rst
         \ setlocal nofoldenable
 augroup END
 
@@ -984,6 +984,8 @@ augroup END
 "   2. Put your cursor somewhere in the table.
 "   3. Press ,,f to re-flow the table (or \f if vim's <Leader> is set to the
 "      default value; see also the :map command).
+
+let g:rst_prefer_python_version = 3
 
 " }}}
 " Plugin: Markdown-preview.vim {{{
