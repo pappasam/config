@@ -432,6 +432,7 @@ let g:litecorrect_custom_user_dict = {
       \ 'maybe': ['mabye'],
       \ 'medieval': ['medival', 'mediaeval', 'medevil'],
       \ 'then': ['hten'],
+      \ 'environment': ['environemnt'],
       \ }
 
 augroup writing
