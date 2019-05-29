@@ -436,11 +436,11 @@ let g:litecorrect_custom_user_dict = {
 
 augroup writing
   autocmd!
-  autocmd FileType markdown,rst,gitcommit
+  autocmd FileType markdown,rst,text,gitcommit
         \ setlocal wrap linebreak nolist spell
         \ | call textobj#sentence#init()
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
-  autocmd BufNewFile,BufRead *.html,*.txt,*.tex :setlocal wrap linebreak nolist
+  autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup END
 
 " }}}
