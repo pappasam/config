@@ -261,6 +261,7 @@ Plug 'pearofducks/ansible-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/vim-xxdcursor'
 Plug 'calviken/vim-gdscript3'
+Plug 'marshallward/vim-restructuredtext'
 
 " Accounting
 Plug 'ledger/vim-ledger'
@@ -411,7 +412,7 @@ set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=72 textwidth=72
-  autocmd Filetype html,text,markdown setlocal colorcolumn=0
+  autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
 augroup END
 
 " }}}
