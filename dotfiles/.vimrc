@@ -1929,6 +1929,9 @@ function! GlobalKeyMappings()
   vnoremap <expr> j
         \ v:count == 0 ? 'gj' : 'j'
 
+  " InsertOkina:
+  inoremap <C-b> ʻ
+
   " MoveTabs: goto tab number. Same as Firefox
   nnoremap <A-1> 1gt
   nnoremap <A-2> 2gt
