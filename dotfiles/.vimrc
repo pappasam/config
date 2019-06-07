@@ -442,6 +442,7 @@ augroup writing
         \ setlocal wrap linebreak nolist spell
         \ | call textobj#sentence#init()
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
+  autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup END
 
@@ -1929,8 +1930,9 @@ function! GlobalKeyMappings()
   vnoremap <expr> j
         \ v:count == 0 ? 'gj' : 'j'
 
-  " InsertOkina:
+  " Okina: Insert, Replace, and possibly other
   inoremap <C-b> ʻ
+  nnoremap r<C-b> rʻ
 
   " MoveTabs: goto tab number. Same as Firefox
   nnoremap <A-1> 1gt
