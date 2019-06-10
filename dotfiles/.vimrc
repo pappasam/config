@@ -297,7 +297,7 @@ Plug 'lvht/tagbar-markdown'
 
 " Indentation-only
 Plug 'vim-scripts/groovyindent-unix'
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 
 " Web Development - General
