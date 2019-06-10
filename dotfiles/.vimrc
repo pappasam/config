@@ -77,7 +77,6 @@ let maplocalleader = "\\"
 
 " }}}
 " General: Global config {{{
-
 " Code Completion:
 set completeopt=menuone,longest,preview
 set wildmode=longest,list,full
@@ -1635,6 +1634,10 @@ endfunction
 
 function! s:goyo_leave()
   call GlobalKeyMappings()
+
+  " Necessary for preserve italics and bold for restructuredtext
+  syntax off
+  syntax on
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
