@@ -452,7 +452,7 @@ alias p='ptpython'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
-venv_name# Functions {{{
+# Functions {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
