@@ -657,7 +657,6 @@ function pynew() {
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
-  poetry add -D $PYTHON_DEV_PACKAGES
   cat > main.py <<EOL
 #!/usr/bin/env python
 '''The main module'''
