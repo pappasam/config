@@ -260,7 +260,7 @@ autoload -Uz zcalc
 
 # Executed whenever the current working directory is changed
 function chpwd() {
-  ls --color=auto
+  # ls --color=auto
 }
 
 # Executed every $PERIOD seconds, just before a prompt.

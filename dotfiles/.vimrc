@@ -1805,7 +1805,7 @@ let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_commands = {
       \ 'go': 'gofmt',
       \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
-      \ 'python': 'yapf',
+      \ 'python': 'black -q -',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -',
       \ 'html': 'npx prettier --parser=html --stdin',
