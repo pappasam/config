@@ -35,9 +35,6 @@ if [ -d "$PYENV_ROOT" ]; then
   export PYENV_ROOT
   path_radd "$PYENV_ROOT/bin"
   eval "$(pyenv init -)"
-  if [ -d "$PYENV_ROOT/plugins/pyenv-virtualenv" ]; then
-    eval "$(pyenv virtualenv-init -)"
-  fi
 fi
 
 SDKMAN_DIR="$HOME/.sdkman"

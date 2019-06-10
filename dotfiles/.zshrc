@@ -452,7 +452,7 @@ alias p='ptpython'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
-# Functions {{{
+venv_name# Functions {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
@@ -568,31 +568,31 @@ function cargodoc() {  # arg1: packagename
 PYTHON_ENV_PACKAGES=(pynvim ptpython restview jedi)
 PYTHON_DEV_PACKAGES=(yapf pylint mypy pre-commit)
 
-# [optionally] create and activate Python virtual environment
+# Name of virtualenv
+VIRTUAL_ENV_DEFAULT=.venv
+
+function va() {
+  local slashes=${PWD//[^\/]/}
+  local DIR="$PWD"
+  for (( n=${#slashes}; n>0; --n ))
+  do
+    if [ -d "$DIR/$VIRTUAL_ENV_DEFAULT" ]; then
+      source "$DIR/$VIRTUAL_ENV_DEFAULT/bin/activate"
+      local DIR_REL=$(realpath --relative-to='.' "$DIR/$VIRTUAL_ENV_DEFAULT")
+      echo "Activated $(python --version) virtualenv in $DIR_REL"
+      return
+    fi
+    local DIR="$DIR/.."
+  done
+  echo "no venv/ found from here to OS root"
+}
+
 function ve() {
-  if [ ${#} -ne 1 ]; then
-    local pkg_base=$(basename $PWD)
-    local pkg_hashval=$(\
-      pwd |\
-      sha1sum |\
-      base32 |\
-      cut -c1-5 |\
-      tr '[:upper:]' '[:lower:]')
-    local pkg="$pkg_base-$pkg_hashval"
-  else
-    local pkg=$@
-  fi
-  venv_name=$pkg
-  pyenv virtualenv $venv_name
-  pyenv activate $venv_name
-  $(pyenv which pip) install --upgrade \
-    pip $PYTHON_ENV_PACKAGES $PYTHON_DEV_PACKAGES
-  # Deactive the current virtual environment to enable python-version reading
-  pyenv deactivate
-  # Write the current virtual environment into python-version,
-  # followed by your default environments (which are useful for tox)
-  echo $venv_name > .python-version
-  cat ~/.pyenv/version >> .python-version
+  python -m venv $VIRTUAL_ENV_DEFAULT
+  source $VIRTUAL_ENV_DEFAULT/bin/activate
+  pip install --upgrade pip $PYTHON_ENV_PACKAGES
+  deactivate
+  source $VIRTUAL_ENV_DEFAULT/bin/activate
 }
 
 # Print out the Github-recommended gitignore
