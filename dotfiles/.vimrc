@@ -475,7 +475,7 @@ command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
 augroup fold_settings
   autocmd!
-  autocmd FileType vim,tmux,bash,zsh
+  autocmd FileType vim,tmux,bash,zsh,sh
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
   autocmd FileType markdown,rst
         \ setlocal nofoldenable
