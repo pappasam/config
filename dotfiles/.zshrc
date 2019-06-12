@@ -260,7 +260,8 @@ autoload -Uz zcalc
 
 # Executed whenever the current working directory is changed
 function chpwd() {
-  # ls --color=auto
+  # Magically find Python's virtual environment based on name
+  va
 }
 
 # Executed every $PERIOD seconds, just before a prompt.
@@ -571,20 +572,32 @@ PYTHON_DEV_PACKAGES=(yapf pylint mypy pre-commit)
 # Name of virtualenv
 VIRTUAL_ENV_DEFAULT=.venv
 
-function va() {
+function va() {  # arg1: virtual environment path (optional)
+  if [ $# -eq 0 ]; then
+    local venv_name="$VIRTUAL_ENV_DEFAULT"
+  else
+    local venv_name="$1"
+  fi
+  local old_venv=$VIRTUAL_ENV
   local slashes=${PWD//[^\/]/}
-  local DIR="$PWD"
+  local current_directory="$PWD"
   for (( n=${#slashes}; n>0; --n ))
   do
-    if [ -d "$DIR/$VIRTUAL_ENV_DEFAULT" ]; then
-      source "$DIR/$VIRTUAL_ENV_DEFAULT/bin/activate"
-      local DIR_REL=$(realpath --relative-to='.' "$DIR/$VIRTUAL_ENV_DEFAULT")
-      echo "Activated $(python --version) virtualenv in $DIR_REL"
+    if [ -d "$current_directory/$venv_name" ]; then
+      source "$current_directory/$venv_name/bin/activate"
+      if [[ "$old_venv" != "$VIRTUAL_ENV" ]]; then
+        echo "Activated $(python --version) virtualenv in $VIRTUAL_ENV"
+      fi
       return
     fi
-    local DIR="$DIR/.."
+    local current_directory="$current_directory/.."
   done
-  echo "no venv/ found from here to OS root"
+  # If reached this step, no virtual environment found from here to root
+  if [[ -z $VIRTUAL_ENV ]]; then
+  else
+    deactivate
+    echo "Disabled existing virtualenv $old_venv"
+  fi
 }
 
 function ve() {
@@ -876,16 +889,11 @@ PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
 PS1_USR="%B%F{$COLOR_GOLD}%n@%M%b%f"
 PS1_END="%B%F{$COLOR_SILVER}$ %f%b"
 
+# Figure out if a Python virtualenv is active
 function virtualenv_info(){
-  # Get Virtual Env
   if [[ -n "$VIRTUAL_ENV" ]]; then
-    # Strip out the path and just leave the env name
-    venv="${VIRTUAL_ENV##*/}"
-  else
-    # In case you don't have one activated
-    venv=''
+    echo "<venv-active>"
   fi
-  [[ -n "$venv" ]] && echo "<$venv> "
 }
 
 PS1="${PS1_DIR} \$vcs_info_msg_0_ %F{$COLOR_PYTHON_GREEN}\$(virtualenv_info)%f \
@@ -927,6 +935,10 @@ if [[ -o interactive ]]; then
   if [ $commands[kubectl] ]; then
     source <(kubectl completion zsh)
   fi
+
+  # Try activate virtual environment, don't worry about console output
+  va &> /dev/null
+
 fi
 
 # }}}
