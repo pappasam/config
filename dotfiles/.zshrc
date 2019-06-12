@@ -793,6 +793,15 @@ function jenkinsfilelint() {  # [arg1]: path to Jenkinsfile
   fi
 }
 
+# Zoom
+function zoomy {
+  if [ -z $1 ]; then
+    echo "Conference room number needed! 'zoomy 1234567890'"
+  else
+    gio open "zoommtg://zoom.us/join?action=join&confno=$1"
+  fi
+}
+
 # }}}
 # ZShell prompt (PS1) {{{
 
