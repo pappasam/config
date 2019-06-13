@@ -1,8 +1,6 @@
 # Linux Mint Configuration Notes
 
-Parts of Linux Mint are configured manually through a GUI.
-Since I cannot script these parts of setup, this document serves
-as a reminder for those necessary manual steps.
+Parts of Linux Mint are configured manually through a GUI. Since I cannot script these parts of setup, this document serves as a reminder for those necessary manual steps.
 
 ## Shortcuts
 
@@ -11,16 +9,18 @@ as a reminder for those necessary manual steps.
 
 ## Themes
 
+I'm using Jade-1 + Adapta now. Jade-1 provides window borders that make the currently active window easy to identify.
+
 * Window borders
-    * Cinnamox-Willow-Grove
+    * Jade-1
 * Icons
     * Mint-Y
 * Controls
-    * Mint-Y
+    * Adapta
 * Mouse Pointer
     * DMZ-White
 * Desktop
-    * Linux Mint
+    * Adapta-Nokto
 
 ## Effects
 
@@ -28,8 +28,7 @@ Turn off all effects other than "Overlay scroll bars"
 
 ## Keyboard
 
-The following keyboard shortcuts and mappings make it easier
-to do things without moving my hands from the home row.
+The following keyboard shortcuts and mappings make it easier to do things without moving my hands from the home row.
 
 ### Shortcuts
 
@@ -89,7 +88,8 @@ to do things without moving my hands from the home row.
 ### Layouts
 
 * Options
-  * Ctrl key position: Caps Lock as Ctrl
+  * Ctrl position: Caps Lock as Ctrl
+  * Position of Compose key: Right Win
 
 ## Windows
 
@@ -124,8 +124,7 @@ Some system configurations must be configured within the applets menu.
 
 ## Headphone jack stops working
 
-Sometimes the headphone jack randomly stops working.
-To fix this, perform the following steps (in order):
+Sometimes the headphone jack randomly stops working. To fix this, perform the following steps (in order):
 
 ```bash
 # do funky stuff to reset the drivers
@@ -144,15 +143,12 @@ sudo shutdown now
 #   the sound should now work
 ```
 
-## Esperanto keys
+## Foreign language keys
 
 * Compose Key, Shift + ^ + s = ŝ
 * Compose Key, Shift + ^ + g = ĝ
 * Compose Key, Shift + ^ + j = ĵ
 * Compose Key, Shift + u + u = ŭ
-
-At home, I made ScrollLock (fn+o on Happy Hacking) the compose key.
-Right Alt is useful for some stuff.
 
 ## Fix Nvidia Performance
 
