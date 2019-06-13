@@ -9,18 +9,18 @@ Parts of Linux Mint are configured manually through a GUI. Since I cannot script
 
 ## Themes
 
-I'm using Jade-1 + Adapta now. Jade-1 provides window borders that make the currently active window easy to identify.
+I'm using Jade-1 + Mint-Y. Jade-1 provides window borders that make the currently active window easy to identify.
 
 * Window borders
     * Jade-1
 * Icons
     * Mint-Y
 * Controls
-    * Adapta
+    * Mint-Y
 * Mouse Pointer
     * DMZ-White
 * Desktop
-    * Adapta-Nokto
+    * Mint-Y
 
 ## Effects
 
