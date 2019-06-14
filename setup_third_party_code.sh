@@ -195,6 +195,7 @@ sudo apt install zathura
 # the available version in software repository is not latest
 # build using the provided debian package under pandoc releases
 # https://github.com/jgm/pandoc/releases
+sudo apt install librsvg2-bin
 
 #######################################################################
 # Hovercraft! (an impress generator)
