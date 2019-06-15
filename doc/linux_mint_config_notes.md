@@ -94,12 +94,15 @@ The following keyboard shortcuts and mappings make it easier to do things withou
 ## Windows
 
 * Titlebar
-    * Uncheck everything under "Buttons". Don't need them, they're pure clutter.
+    * Left side title bar buttons: [Close], [], [], []
+    * Right side title bar buttons: [Minimize], [Maximize]
 * Behavior
     * "Special Key to move and resize windows": change to "Super"
         * Necessary to enable important Inkscape shortcut
     * Edge resistance with other windows: uncheck
         * Moving windows with mouse increases CPU usage a lot
+* Alt-Tab
+    * Alt-Tab switcher style: Icons and window preview
 
 ## Date and Time
 
