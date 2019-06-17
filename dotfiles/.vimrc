@@ -1634,10 +1634,14 @@ endfunction
 
 function! s:goyo_leave()
   call GlobalKeyMappings()
-
-  " Necessary for preserve italics and bold for restructuredtext
-  syntax off
-  syntax on
+  if &filetype == 'markdown'
+    " Preserve code highlighting
+    doautocmd Mkd BufWinEnter
+  elseif &filetype == 'rst'
+    " Preserve italics and bold
+    syntax off
+    syntax on
+  endif
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -1802,7 +1806,9 @@ augroup END
 " Plugin: Vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = 0
-let g:vim_filetype_formatter_ft_no_defaults = ['markdown']
+let g:vim_filetype_formatter_ft_no_defaults = [
+      \ 'markdown',
+      \ ]
 let g:vim_filetype_formatter_commands = {
       \ }
 
