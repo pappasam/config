@@ -374,6 +374,9 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
+# Restart Xserver (go to a tty to run, if necessary)
+alias restart-xserver='sudo systemctl restart display-manager'
+
 # Vim and Vi: try activate Python virtual environment then call neovim
 alias f='nvim'
 alias vi='nvim'
