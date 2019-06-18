@@ -1807,7 +1807,6 @@ augroup END
 
 let g:vim_filetype_formatter_verbose = 0
 let g:vim_filetype_formatter_ft_no_defaults = [
-      \ 'markdown',
       \ ]
 let g:vim_filetype_formatter_commands = {
       \ }
