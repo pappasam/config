@@ -1973,9 +1973,9 @@ function! DefaultKeyMappings()
   imap <silent><CR> <CR><Plug>AutoPairsReturn
 
   " Slime:
-  xmap <leader>cc <Plug>SlimeRegionSend
-  nmap <leader>cc <Plug>SlimeParagraphSend
-  nmap <leader>cv <Plug>SlimeConfig
+  xmap <CR> <Plug>SlimeRegionSend
+  nmap <CR> <Plug>SlimeParagraphSend
+  nmap <leader><leader>c <Plug>SlimeConfig
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
