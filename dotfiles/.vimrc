@@ -261,6 +261,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'mattn/vim-xxdcursor'
 Plug 'calviken/vim-gdscript3'
 Plug 'marshallward/vim-restructuredtext'
+Plug 'leafgarland/typescript-vim'
 
 " Accounting
 Plug 'ledger/vim-ledger'
@@ -1702,7 +1703,8 @@ let g:ale_linters = {
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
-      \ 'ruby': ['solargraph', 'stdio']
+      \ 'ruby': ['solargraph', 'stdio'],
+      \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1716,7 +1718,8 @@ function! ConfigureLanguageClient()
 endfunction
 
 augroup langserverLanguages
-  autocmd FileType haskell,ruby call ConfigureLanguageClient()
+  autocmd FileType haskell,ruby,typescript
+        \ call ConfigureLanguageClient()
 augroup END
 
 " VimScript:
