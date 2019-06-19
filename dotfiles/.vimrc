@@ -263,9 +263,6 @@ Plug 'calviken/vim-gdscript3'
 Plug 'marshallward/vim-restructuredtext'
 Plug 'leafgarland/typescript-vim'
 
-" Accounting
-Plug 'ledger/vim-ledger'
-
 " Autocompletion
 Plug 'marijnh/tern_for_vim'
 Plug 'davidhalter/jedi-vim'
@@ -330,6 +327,9 @@ Plug 'w0rp/ale'
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
+
+" Repl Integration
+Plug 'jpalardy/vim-slime'
 
 call plug#end()
 
@@ -781,9 +781,6 @@ function! AtReg()
   return '@'.l:c."\<plug>@init"
 endfunction
 
-" The following code allows pressing . immediately after
-" recording a macro to play it back.
-nmap <expr> @ AtReg()
 function! QRepeat(_)
   call feedkeys('@'.s:qreg)
 endfunction
@@ -812,10 +809,6 @@ function! QStart()
   endif
   return 'q'.s:qreg
 endfunction
-
-" Finally, remap q! Recursion is actually useful here I think,
-" otherwise I would use 'nnoremap'.
-nmap <expr> q QStart()
 
 " }}}
 " General: Language builder / runner {{{
@@ -1576,45 +1569,9 @@ augroup END
 "     with sdl' or with sdb
 "   change:
 "     with srl'l" or with srbl"
+
+" Keymappings set in keymappings section
 let g:textobj_sandwich_no_default_key_mappings = 1
-
-" Below mappings address the issue raised here:
-" https://github.com/machakann/vim-sandwich/issues/62
-xmap ib <Plug>(textobj-sandwich-auto-i)
-omap ib <Plug>(textobj-sandwich-auto-i)
-xmap ab <Plug>(textobj-sandwich-auto-a)
-omap ab <Plug>(textobj-sandwich-auto-a)
-
-xmap iq <Plug>(textobj-sandwich-query-i)
-omap iq <Plug>(textobj-sandwich-query-i)
-xmap aq <Plug>(textobj-sandwich-query-a)
-omap aq <Plug>(textobj-sandwich-query-a)
-
-"  }}}
-"  Plugin: Ledger {{{
-
-let g:ledger_maxwidth = 80
-let g:ledger_fillstring = ' - -'
-let g:ledger_fold_blanks = 2
-
-" Code formatter function for the ledger filetype
-" Depends on ledger/vim-ledger
-function! _LedgerFmt()
-  let filepath = expand('%')
-  let command = 'ledger -f ' . filepath . ' print --sort "date, amount"'
-  call _UDFCodeFormat('LedgerFmt', command, 0)
-endfunction
-
-augroup ledger_settings
-  autocmd!
-  autocmd FileType ledger command! -buffer LedgerFmt call _LedgerFmt()
-  autocmd FileType ledger noremap { ?^\d<CR>
-  autocmd FileType ledger noremap } /^\d<CR>
-augroup END
-
-augroup language_specific_file_beauty
-  autocmd FileType ledger nnoremap <buffer> <leader>f :%LedgerAlign<cr>
-augroup END
 
 "  }}}
 "  Plugin: Goyo {{{
@@ -1634,7 +1591,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  call GlobalKeyMappings()
+  call DefaultKeyMappings()
   if &filetype == 'markdown'
     " Preserve code highlighting
     doautocmd Mkd BufWinEnter
@@ -1690,6 +1647,20 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
       \ 'python': ['pylint'],
       \}
+
+"  }}}
+"  Plugin: Slime --- {{{
+
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
+let g:slime_default_config = {
+      \ "socket_name": "default",
+      \ "target_pane": "{right-of}",
+      \ }
+let g:slime_dont_ask_default = 0
+
+" Set key mappings in GlobalKeyMappings
+let g:slime_no_mappings = 1
 
 "  }}}
 "  Plugin: AutoCompletion config and key remappings {{{
@@ -1908,7 +1879,7 @@ let g:hexmode_xxd_options = '-g 2'
 
 " This is defined as a function to allow me to reset all my key remappings
 " without needing to repeate myself. Useful with Goyo for now
-function! GlobalKeyMappings()
+function! DefaultKeyMappings()
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
@@ -1939,6 +1910,14 @@ function! GlobalKeyMappings()
   " Okina: Insert, Replace, and possibly other
   inoremap <C-b> ʻ
   nnoremap r<C-b> rʻ
+
+  " Macro Repeater:
+  " The following code allows pressing . immediately after
+  " recording a macro to play it back.
+  nmap <expr> @ AtReg()
+  " Finally, remap q! Recursion is actually useful here I think,
+  " otherwise I would use 'nnoremap'.
+  nmap <expr> q QStart()
 
   " MoveTabs: goto tab number. Same as Firefox
   nnoremap <A-1> 1gt
@@ -1980,7 +1959,7 @@ function! GlobalKeyMappings()
   " Choosewin: (just like tmux)
   nnoremap <C-w>q :ChooseWin<CR>
 
-  " Goyo
+  " Goyo:
   nnoremap <leader><leader>g :Goyo<CR>
 
   " IndentLines: toggle if indent lines is visible
@@ -1992,6 +1971,23 @@ function! GlobalKeyMappings()
 
   " AutoPairs:
   imap <silent><CR> <CR><Plug>AutoPairsReturn
+
+  " Slime:
+  xmap <leader>cc <Plug>SlimeRegionSend
+  nmap <leader>cc <Plug>SlimeParagraphSend
+  nmap <leader>cv <Plug>SlimeConfig
+
+  " Sandwich: below mappings address the issue raised here:
+  " https://github.com/machakann/vim-sandwich/issues/62
+  xmap ib <Plug>(textobj-sandwich-auto-i)
+  omap ib <Plug>(textobj-sandwich-auto-i)
+  xmap ab <Plug>(textobj-sandwich-auto-a)
+  omap ab <Plug>(textobj-sandwich-auto-a)
+
+  xmap iq <Plug>(textobj-sandwich-query-i)
+  omap iq <Plug>(textobj-sandwich-query-i)
+  xmap aq <Plug>(textobj-sandwich-query-a)
+  omap aq <Plug>(textobj-sandwich-query-a)
 
   " FZF: create shortcuts for finding stuff
   nnoremap <silent> <C-P> :call FZFFilesAvoidNerdtree()<CR>
@@ -2053,7 +2049,7 @@ function! GlobalKeyMappings()
 
 endfunction
 
-call GlobalKeyMappings()
+call DefaultKeyMappings()
 
 " }}}
 " General: Abbreviations --- {{{
