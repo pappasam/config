@@ -4,7 +4,6 @@
 "   * To toggle sections below, scroll over a folded section and type 'za'
 "     when in Normal mode.
 " Additional Notes {{{
-"
 " This is my .vimrc. Hopefully you enjoy using it as much as me!
 " I use the latest Linux Mint, but this will probably work with any Linux-based
 " OS. My workflow is terminal-based and I now use Neovim
@@ -264,10 +263,11 @@ Plug 'marshallward/vim-restructuredtext'
 Plug 'leafgarland/typescript-vim'
 
 " Autocompletion
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 Plug 'marijnh/tern_for_vim'
-Plug 'davidhalter/jedi-vim'
-" Additional requirements:
-"   ln -s /home/sroeca/dotfiles/.tern-project /home/sroeca/.tern-project
 Plug 'Rip-Rip/clang_complete'
 " for C header filename completion:
 Plug 'xaizek/vim-inccomplete'
@@ -281,10 +281,6 @@ Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
 " note: must run 'gem install neovim' to get this to work
 " might require the neovim headers
 Plug 'juliosueiras/vim-terraform-completion'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
 
 " Tagbar
 Plug 'majutsushi/tagbar'
@@ -471,10 +467,7 @@ command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
  " }}}
-" General: Folding Settings {{{
-
-augroup fold_settings
-  autocmd!
+" General: Folding Settings {{{ augroup fold_settings autocmd!
   autocmd FileType vim,tmux,bash,zsh,sh
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
   autocmd FileType markdown,rst
@@ -1676,6 +1669,7 @@ let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
+      \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1689,7 +1683,7 @@ function! ConfigureLanguageClient()
 endfunction
 
 augroup langserverLanguages
-  autocmd FileType haskell,ruby,typescript
+  autocmd FileType haskell,ruby,typescript,python
         \ call ConfigureLanguageClient()
 augroup END
 
@@ -1702,22 +1696,6 @@ augroup vimscript_complete
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
 augroup END
-
-" Python:
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#auto_close_doc = 0
-let g:jedi#smart_auto_mappings = 0
-
-" key mappings:
-" auto_vim_configuration creates space between where vim is opened and
-" closed in my bash terminal. This is annoying, so I disable and manually
-" configure. See 'set completeopt' in my global config for my settings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_command = "<C-]>"
-let g:jedi#documentation_command = "<leader>sd"
-let g:jedi#usages_command = "<leader>su"
-let g:jedi#rename_command = "<leader>sr"
 
 " Javascript:
 let g:tern#command = ["npx", "tern"]
@@ -1973,9 +1951,8 @@ function! DefaultKeyMappings()
   imap <silent><CR> <CR><Plug>AutoPairsReturn
 
   " Slime:
-  xmap <CR> <Plug>SlimeRegionSend
-  nmap <CR> <Plug>SlimeParagraphSend
-  nmap <leader><leader>c <Plug>SlimeConfig
+  xmap <leader>e <Plug>SlimeRegionSend
+  nmap <leader>e <Plug>SlimeParagraphSend
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62

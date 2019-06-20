@@ -452,7 +452,7 @@ alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
-alias p='ptpython'
+alias p='python'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
@@ -569,8 +569,8 @@ function cargodoc() {  # arg1: packagename
 }
 
 # activate virtual environment from any directory from current and up
-PYTHON_ENV_PACKAGES=(pynvim ptpython restview jedi)
-PYTHON_DEV_PACKAGES=(yapf pylint mypy pre-commit)
+PYTHON_ENV_PACKAGES=(pynvim restview jedi python-language-server rope)
+PYTHON_DEV_PACKAGES=(black pylint mypy pre-commit)
 
 # Name of virtualenv
 VIRTUAL_ENV_DEFAULT=.venv
