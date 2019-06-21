@@ -453,7 +453,7 @@ alias cookiecutter-hovercraft='cookiecutter gh:pappasam/cookiecutter-hovercraft'
 # NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
-alias alacritty-deb-install='CARGO_INCREMENTAL=0 cargo deb --install'
+alias alacritty-deb-install='cargo deb --install --manifest-path alacritty/Cargo.toml'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
