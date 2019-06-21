@@ -1698,7 +1698,7 @@ augroup vimscript_complete
 augroup END
 
 " Javascript:
-let g:tern#command = ["npx", "tern"]
+let g:tern#command = ['npx', '--no-install', 'tern']
 let g:tern_show_argument_hints = 'no'
 let g:tern_show_signature_in_pum = 0
 augroup javascript_complete
