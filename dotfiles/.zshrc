@@ -267,6 +267,16 @@ function chpwd() {
 # scheduled time is not reset if the list of functions is altered.
 # Hence the set of functions is always called together.
 function periodic() {
+  # Magically find Python's virtual environment based on name
+  va
+}
+
+# Executed before each prompt. Note that precommand functions are not
+# re-executed simply because the command line is redrawn, as happens, for
+# example, when a notification about an exiting job is displayed.
+function precmd() {
+  # Gather information about the version control system
+  vcs_info
 }
 
 # Executed just after a command has been read and is about to be executed
@@ -452,6 +462,12 @@ alias poetry-clean='poetry cache:clear --all pypi'
 alias p='python'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
+# Language-env helpers
+alias pyenv-init='eval "$(pyenv init -)"'
+alias nodenv-init='eval "$(nodenv init -)"'
+alias goenv-init='eval "$(goenv init -)"'
+alias rbenv-init='eval "$(rbenv init -)"'
+
 # }}}
 # Functions {{{
 
@@ -576,19 +592,26 @@ function cargodoc() {  # arg1: packagename
   fi
 }
 
-# activate virtual environment from any directory from current and up
-PYTHON_ENV_PACKAGES=(pynvim restview python-language-server rope)
-PYTHON_DEV_PACKAGES=(black pylint mypy pre-commit)
+# pydev-install: install only env dependencies
+# pydev-install dev: install only dev dependencies
+# pydev-install all: install all deps
+function pydev-install() {  ## Install default python dependencies
+  local env=(pynvim restview 'python-language-server[rope]' black)
+  local dev=(pylint mypy pre-commit)
+  if [[ "$1" == 'all' ]]; then
+    pip install -U $env $dev
+  elif [[ "$1" == 'dev' ]]; then
+    pip install -U $dev
+  else
+    pip install -U $env
+  fi
+}
 
+# activate virtual environment from any directory from current and up
 # Name of virtualenv
 VIRTUAL_ENV_DEFAULT=.venv
-
-function va() {  # arg1: virtual environment path (optional)
-  if [ $# -eq 0 ]; then
-    local venv_name="$VIRTUAL_ENV_DEFAULT"
-  else
-    local venv_name="$1"
-  fi
+function va() {  # No arguments
+  local venv_name="$VIRTUAL_ENV_DEFAULT"
   local old_venv=$VIRTUAL_ENV
   local slashes=${PWD//[^\/]/}
   local current_directory="$PWD"
@@ -611,13 +634,32 @@ function va() {  # arg1: virtual environment path (optional)
   fi
 }
 
-function ve() {
-  python -m venv $VIRTUAL_ENV_DEFAULT
-  source $VIRTUAL_ENV_DEFAULT/bin/activate
-  pip install --upgrade pip $PYTHON_ENV_PACKAGES
-  deactivate
-  source $VIRTUAL_ENV_DEFAULT/bin/activate
+# Create and activate a virtual environment with all Python dependencies
+# installed. Optionally change Python interpreter.
+function ve() {  # Optional arg: python interpreter name
+  local venv_name="$VIRTUAL_ENV_DEFAULT"
+  if [ -z "$1" ]; then
+    local python_name='python'
+  else
+    local python_name="$1"
+  fi
+  if [ ! -d "$venv_name" ]; then
+    $python_name -m venv "$venv_name"
+    if [ $? -ne 0 ]; then
+      local error_code=$?
+      echo "Virtualenv creation failed, aborting"
+      return error_code
+    fi
+    source "$venv_name/bin/activate"
+    pip install -U pip
+    pydev-install  # install dependencies for editing
+    deactivate
+  else
+    echo "$venv_name already exists, activating"
+  fi
+  source $venv_name/bin/activate
 }
+compdef _command ve
 
 # Print out the Github-recommended gitignore
 export GITIGNORE_DIR=$HOME/src/lib/gitignore
@@ -656,12 +698,15 @@ EOL
 }
 
 # Initialize Python Repo
-function pyinit() {
-  if [ $# -ne 0 ]; then
-    echo "pyinit takes no arguments"
+function poetry-init() {
+  if [ -f pyproject.toml ]; then
+    echo "pyproject.toml exists, aborting"
     return 1
   fi
-  poetry init --no-interaction
+  poetry init --no-interaction &> /dev/null
+  sed -i '1s/^/[tool.black]\nline-length = 79\n\n/' pyproject.toml
+  touch README.md
+  echo "Python poetry project initialized!"
 }
 
 # Create New Python Repo
@@ -675,19 +720,18 @@ function pynew() {
     echo "$dir_name already exists"
     return 1
   fi
-  poetry new "$dir_name"
+  git init "$dir_name"
   cd "$dir_name"
-  git init
+  poetry-init
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
   cat > main.py <<EOL
 #!/usr/bin/env python
-'''The main module'''
+"""The main module"""
 
 EOL
   chmod +x main.py
-  mv README.rst README.md
 }
 
 # Templates for nvim
@@ -883,7 +927,6 @@ function +vi-git-stash() {
   fi
 }
 
-function precmd() { vcs_info }
 #######################################################################
 # END: Git formatting
 #######################################################################
