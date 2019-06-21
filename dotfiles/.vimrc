@@ -1704,7 +1704,7 @@ let g:tern_show_signature_in_pum = 0
 augroup javascript_complete
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
-  autocmd FileType javascript nnoremap <buffer> <leader>gd :TernDoc<CR>
+  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDoc<CR>
 augroup END
 
 " Elm:
