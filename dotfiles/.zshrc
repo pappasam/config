@@ -105,11 +105,8 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
 # Configure Man Pager
-# NOTE: neovim + debian + mandb has a bug where copy/paste does not work when
-# invoking man from shell. I've decided this is acceptable for now; if I need
-# to have a long, interactive session, I'll simply open Man from inside neovim
 export MANWIDTH=79
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="less -+--quit-if-one-screen -+--no-init"
 
 # Git
 export GIT_PAGER=less
@@ -520,6 +517,17 @@ function gitzip() {  # arg1: the git repository
   popd > /dev/null
 }
 compdef _dirs gitzip
+
+# Pipe man stuff to neovim
+function m() {
+  man --location $@ &> /dev/null
+  if [ $? -eq 0 ]; then
+    man --pager=cat $@ | nvim -c 'set ft=man' -
+  else
+    man $@
+  fi
+}
+compdef _man m
 
 # dictionary lookups
 function def() {  # arg1: word
