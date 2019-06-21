@@ -1910,8 +1910,8 @@ function! DefaultKeyMappings()
   nnoremap <A-9> 9gt
 
   " Substitute: replace word under cursor
-  nnoremap <leader>R yiw:%s/<C-R>0//gc<Left><Left><Left>
-  vnoremap <leader>R y:%s/<C-R>0//gc<Left><Left><Left>
+  nnoremap <leader>r yiw:%s/<C-R>0//gc<Left><Left><Left>
+  vnoremap <leader>r y:%s/<C-R>0//gc<Left><Left><Left>
 
   " IndentComma: placing commas one line down; usable with repeat operator '.'
   nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
@@ -1926,8 +1926,8 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
   " ToggleRelativeNumber: uses custom functions
-  nnoremap <silent> <leader>R :ToggleNumber<CR>
-  nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
+  nnoremap <silent> <leader>N :ToggleNumber<CR>
+  nnoremap <silent> <leader>n :ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
   nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
