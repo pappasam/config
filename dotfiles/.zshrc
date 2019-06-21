@@ -577,7 +577,7 @@ function cargodoc() {  # arg1: packagename
 }
 
 # activate virtual environment from any directory from current and up
-PYTHON_ENV_PACKAGES=(pynvim restview jedi python-language-server rope)
+PYTHON_ENV_PACKAGES=(pynvim restview python-language-server rope)
 PYTHON_DEV_PACKAGES=(black pylint mypy pre-commit)
 
 # Name of virtualenv

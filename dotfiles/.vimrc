@@ -2018,6 +2018,14 @@ function! DefaultKeyMappings()
   nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
   " Scrolling Dropdown: dropdown scrollable + click to select highlighted
+  inoremap <expr> <S-ScrollWheelUp>
+        \ pumvisible() ?
+        \ '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' :
+        \ '<Esc><S-ScrollWheelUp>'
+  inoremap <expr> <S-ScrollWheelDown>
+        \ pumvisible() ?
+        \ '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' :
+        \ '<Esc><S-ScrollWheelDown>'
   inoremap <expr> <ScrollWheelUp>
         \ pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
   inoremap <expr> <ScrollWheelDown>
