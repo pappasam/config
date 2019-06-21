@@ -192,11 +192,11 @@ Plug 'fcpg/vim-altscreen'
 Plug 'sjl/strftimedammit.vim'
 Plug 'wincent/ferret'
 Plug 'bronson/vim-visual-star-search'
-Plug 'romainl/vim-devdocs'
 Plug 'chrisbra/Colorizer'
 Plug 'fidian/hexmode'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-scriptease'
+Plug 'romainl/vim-devdocs'
 
 " EditorConfig: https://editorconfig.org/
 " Overrides default Vim settings when an editorconfig file is found
@@ -1642,6 +1642,17 @@ let g:ale_linters = {
       \}
 
 "  }}}
+"  Plugin: DevDocs {{{
+
+" Map DevDocs command to the keyword program for select programs
+" Enables 'K' for said programs
+augroup devdocs-custom
+  autocmd!
+  autocmd FileType javascript setlocal keywordprg=:DD!
+  autocmd FileType rust setlocal keywordprg=:DD
+augroup END
+
+"  }}}
 "  Plugin: Slime --- {{{
 
 let g:slime_target = "tmux"
@@ -1683,16 +1694,15 @@ function! ConfigureLanguageClient()
 endfunction
 
 augroup langserverLanguages
+  autocmd!
   autocmd FileType haskell,ruby,typescript,python
         \ call ConfigureLanguageClient()
 augroup END
 
 " VimScript:
-" Autocompletion and show definition is built in to Vim
-" Set the same shortcuts as usual to find them
+" Autocompletion is built into Vim. Get defintions with 'K'
 augroup vimscript_complete
   autocmd!
-  autocmd FileType vim nnoremap <buffer> <C-]> yiw:help <C-r>"<CR>
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
 augroup END
@@ -1741,16 +1751,19 @@ augroup END
 " currently only supports markdown
 " jump to word definition for several text editors (including markdown)
 augroup writing_complete
+  autocmd!
   autocmd FileType markdown,tex,rst,txt nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
 " Terraform:
 augroup terraform_complete
+  autocmd!
   autocmd FileType terraform setlocal omnifunc=terraformcomplete#Complete
 augroup END
 
 " Syntaxfile Completion: if you can't get good autocompletion, hack it :p
 augroup syntaxfile_complete
+  autocmd!
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
