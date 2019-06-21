@@ -1200,6 +1200,12 @@ let g:lightline.mode_map = {
       \ '' : 'S',
       \ }
 
+" Simpler tabs (removes the 'close' key from right)
+let g:lightline.tabline = {
+      \ 'left': [[ 'tabs' ]],
+      \ 'right': []
+      \ }
+
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
       \ 'absolutepath': '%F',
