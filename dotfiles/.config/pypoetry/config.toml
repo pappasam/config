@@ -1,0 +1,3 @@
+[settings]
+[settings.virtualenvs]
+in-project = true
