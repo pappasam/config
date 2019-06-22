@@ -432,6 +432,26 @@ let g:litecorrect_custom_user_dict = {
       \ 'environment': ['environemnt'],
       \ }
 
+" Replace some replacement character with spaces
+" https://vi.stackexchange.com/a/2214
+function! s:complete_space(replacement_character)
+  " Save cursor position
+  let l:save_cursor = getpos(".")
+
+  " Get word we just completed
+  " ('borrowed' from: http://stackoverflow.com/a/23541748/660921)
+  let l:word = matchstr(strpart(getline('.'), 0, col('.') - 1), '\k\+$')
+
+  " Replace _ with space
+  let l:new = substitute(l:word, a:replacement_character, " ", "g")
+
+  " Run :s
+  execute "s/" . l:word . "/" . l:new . "/e"
+
+  " Restore cursor
+  call setpos(".", l:save_cursor)
+endfunction
+
 augroup writing
   autocmd!
   autocmd FileType markdown,rst,text,gitcommit
@@ -440,6 +460,11 @@ augroup writing
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
+
+  " EXAMPLE BELOW: add custom word list for autocompletion on all markdown
+  " files
+  autocmd CompleteDone *.md call <SID>complete_space('_')
+  autocmd FileType markdown,text setlocal complete+=kwords.txt
 augroup END
 
 " }}}
