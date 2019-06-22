@@ -440,9 +440,6 @@ augroup writing
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
-
-  " EXAMPLE BELOW: add custom completion without opening unnecessary buffer
-  autocmd FileType markdownsetlocal complete+=kwords.txt
 augroup END
 
 " }}}
@@ -911,6 +908,21 @@ command! ToggleNumber call <SID>toggle_number()
 command! ToggleRelativeNumber call <SID>toggle_relative_number()
 
 " }}}
+"  General: keywordprg {{{
+
+" Map DevDocs command to the keyword program for select programs
+" Enables 'K' for said programs
+augroup keywordprogram-overrides
+  autocmd!
+  " DevDocs: all
+  autocmd FileType javascript setlocal keywordprg=:DD!
+  " DevDocs: specific filetype
+  autocmd FileType rust setlocal keywordprg=:DD
+  " Dictioary: my custom Def function
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
+augroup END
+
+"  }}}
 " Plugin: Jinja2 {{{
 
 function! Jinja2Toggle()
@@ -1509,8 +1521,8 @@ augroup autopairs_filetype_overrides
         \ '(':')',
         \ '[':']',
         \ '{':'}',
-        \ "'":"'",
         \ '"':'"',
+        \ "'":"'",
         \ '`':'`',
         \ '"""': '"""',
         \ "'''": "'''",
@@ -1651,17 +1663,6 @@ let g:ale_linters = {
       \}
 
 "  }}}
-"  Plugin: DevDocs {{{
-
-" Map DevDocs command to the keyword program for select programs
-" Enables 'K' for said programs
-augroup devdocs-custom
-  autocmd!
-  autocmd FileType javascript setlocal keywordprg=:DD!
-  autocmd FileType rust setlocal keywordprg=:DD
-augroup END
-
-"  }}}
 "  Plugin: Slime --- {{{
 
 let g:slime_target = "tmux"
@@ -1751,17 +1752,8 @@ let g:racer_insert_paren = 0
 let g:racer_experimental_completer = 1
 augroup rust_complete
   autocmd!
-  " needs to be nmap; does not work with nnoremap
   autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
   autocmd FileType rust nmap <leader>sd <Plug>(rust-doc)
-augroup END
-
-" Writing: writing document
-" currently only supports markdown
-" jump to word definition for several text editors (including markdown)
-augroup writing_complete
-  autocmd!
-  autocmd FileType markdown,tex,rst,txt nnoremap <buffer> <C-]> :Def <cword><CR>
 augroup END
 
 " Terraform:
@@ -1771,9 +1763,12 @@ augroup terraform_complete
 augroup END
 
 " Syntaxfile Completion: if you can't get good autocompletion, hack it :p
+" Note: Only completes keywords prefixed by the language name itself.
+" For example: markdownYolo, markdownHello, but NOT mkdHello
 augroup syntaxfile_complete
   autocmd!
-  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
+  autocmd FileType markdown,rst,plantuml
+        \ setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
 "  }}}
@@ -1912,6 +1907,9 @@ function! DefaultKeyMappings()
   inoremap <C-b> ʻ
   nnoremap r<C-b> rʻ
 
+  " Keyword Program: when calling the keyword program, go to top of result
+  nnoremap K Kg
+
   " Macro Repeater:
   " The following code allows pressing . immediately after
   " recording a macro to play it back.
@@ -1932,8 +1930,8 @@ function! DefaultKeyMappings()
   nnoremap <A-9> 9gt
 
   " Substitute: replace word under cursor
-  nnoremap <leader>r yiw:%s/<C-R>0//gc<Left><Left><Left>
-  vnoremap <leader>r y:%s/<C-R>0//gc<Left><Left><Left>
+  nnoremap <leader><leader>s yiw:%s/<C-R>0//gc<Left><Left><Left>
+  vnoremap <leader><leader>s y:%s/<C-R>0//gc<Left><Left><Left>
 
   " IndentComma: placing commas one line down; usable with repeat operator '.'
   nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
@@ -1948,8 +1946,8 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
 
   " ToggleRelativeNumber: uses custom functions
-  nnoremap <silent> <leader>N :ToggleNumber<CR>
-  nnoremap <silent> <leader>n :ToggleRelativeNumber<CR>
+  nnoremap <silent> <leader>R :ToggleNumber<CR>
+  nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
   nnoremap <silent> <space>j :NERDTreeToggle<CR><c-w>=
