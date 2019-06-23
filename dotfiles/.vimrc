@@ -467,7 +467,10 @@ command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
 command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
 
  " }}}
-" General: Folding Settings {{{ augroup fold_settings autocmd!
+" General: Folding Settings {{{
+
+augroup fold_settings
+  autocmd!
   autocmd FileType vim,tmux,bash,zsh,sh
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
   autocmd FileType markdown,rst
@@ -1869,6 +1872,10 @@ let g:colorizer_auto_filetype='css,html'
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
+
+" Syntax Omni Completion:
+let g:omni_syntax_use_single_byte = 0
+let g:omni_syntax_use_iskeyword_numeric = 0
 
 "  }}}
 " General: Global key remappings {{{
