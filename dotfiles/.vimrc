@@ -187,7 +187,6 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'henrik/vim-indexed-search'
-Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
 Plug 'fcpg/vim-altscreen'
 Plug 'sjl/strftimedammit.vim'
@@ -299,14 +298,24 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-ragtag'
 Plug 'heavenshell/vim-jsdoc'
 
+" Text Objects
+Plug 'machakann/vim-sandwich'
+Plug 'kana/vim-textobj-user'
+" al/il for the current line
+Plug 'kana/vim-textobj-line'
+" as/is for a sentence of prose (overrides hard-coded native object & motion)
+Plug 'reedes/vim-textobj-sentence'
+" az/iz for a block of folded lines; iz does not include fold marker lines
+Plug 'somini/vim-textobj-fold'
+" ao/io for a block of indentation (i.e. spaces)
+Plug 'glts/vim-textobj-indblock'
+
 " Writing helpers
 Plug 'dkarter/bullets.vim'
 Plug 'matthew-brett/vim-rst-sections'
 Plug 'nvie/vim-rst-tables'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'kana/vim-textobj-user'
-Plug 'reedes/vim-textobj-sentence'
 Plug 'reedes/vim-wordy'
 Plug 'reedes/vim-litecorrect'
 Plug 'tommcdo/vim-exchange'
@@ -2035,6 +2044,7 @@ function! DefaultKeyMappings()
 
   " Clipboard Copy Paste: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
+  nnoremap <leader>y "+y
   " Normal mode paste checks whether the current line has text
   " if yes, insert new line, if no, start paste on the current line
   nnoremap <expr> <leader>p
