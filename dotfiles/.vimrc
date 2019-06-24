@@ -310,6 +310,7 @@ Plug 'reedes/vim-textobj-sentence'
 Plug 'reedes/vim-wordy'
 Plug 'reedes/vim-litecorrect'
 Plug 'tommcdo/vim-exchange'
+Plug 'dbmrq/vim-ditto'
 
 " Previewers
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
