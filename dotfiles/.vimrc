@@ -277,7 +277,7 @@ Plug 'racer-rust/vim-racer'
 "   cargo install racer
 "   rustup component add rust-src
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go', { 'tag': 'v1.20' }
+Plug 'fatih/vim-go'
 Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
 " note: must run 'gem install neovim' to get this to work
 " might require the neovim headers
