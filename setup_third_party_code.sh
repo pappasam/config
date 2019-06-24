@@ -218,6 +218,8 @@ wget -O ~/Downloads/ngrams-en-20150817.zip \
 
 # ~/bin/languagetool
 # java -jar ~/java/LanguageTool-4.5/languagetool-commandline.jar \
+#   --disable EN_QUOTES \
+#   --language en \
 #   --languagemodel ~/Data/ngrams \
 #   ${@}
 
