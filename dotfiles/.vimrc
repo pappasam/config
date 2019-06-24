@@ -173,6 +173,7 @@ set path+=/usr/include/x86_64-linux-gnu/
 call plug#begin('~/.vim/plugged')
 
 " Basics
+Plug 'junegunn/vader.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'scrooloose/nerdtree'
@@ -319,7 +320,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'pappasam/vim-filetype-formatter'
 
 " Linting
-Plug 'w0rp/ale'
+Plug 'pappasam/ale', { 'branch': 'languagetool_autodetect_breaks_ngrams' }
 
 " C Programming
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -1662,8 +1663,11 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
+      \ 'markdown': ['write-good', 'languagetool'],
       \ 'python': ['pylint'],
-      \}
+      \ 'rst': ['write-good'],
+      \ 'text': ['write-good', 'languagetool'],
+      \ }
 
 "  }}}
 "  Plugin: Slime --- {{{

@@ -153,6 +153,16 @@ export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
 export BAT_PAGER=''
 
 # }}}
+# Exported language-env that need to run here {{{
+
+SDKMAN_DIR="$HOME/.sdkman"
+if [ -d "$SDKMAN_DIR" ]; then
+  export SDKMAN_DIR
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && \
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
+
+# }}}
 
 #######################################################################
 # Interactive session setup

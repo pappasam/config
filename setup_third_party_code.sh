@@ -180,7 +180,8 @@ fi
 wget -O ~/java/plantuml.jar \
   http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
 cd ~/bin
-# Add the following line to an executable file in ~/bin called "plantuml"
+
+# ~/bin/plantuml
 # #!/bin/bash
 # java -jar ~/java/plantuml.jar ${@}
 
@@ -203,6 +204,22 @@ sudo apt install librsvg2-bin
 #######################################################################
 sudo apt install hovercraft
 pip install hovercraft
+
+#######################################################################
+# Writing
+#######################################################################
+npm install -g write-good
+
+wget -O ~/Downloads/LanguageTool-stable.zip \
+  https://www.languagetool.org/download/LanguageTool-stable.zip
+
+wget -O ~/Downloads/ngrams-en-20150817.zip \
+  https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
+
+# ~/bin/languagetool
+# java -jar ~/java/LanguageTool-4.5/languagetool-commandline.jar \
+#   --languagemodel ~/Data/ngrams \
+#   ${@}
 
 #######################################################################
 # Ncurses
@@ -305,7 +322,8 @@ chsh -s "$(which zsh)"
 wget -O ~/java/jenkins.war \
   http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 cd ~/bin
-# Add the following line to an executable file in ~/bin called "jenkins"
+
+# ~/bin/jenkins
 # #!/bin/bash
 # java -jar ~/java/jenkins.war ${@}
 
