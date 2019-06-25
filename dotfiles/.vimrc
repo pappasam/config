@@ -1784,47 +1784,7 @@ augroup END
 " For example: markdownYolo, markdownHello, but NOT mkdHello
 augroup syntaxfile_complete
   autocmd!
-  autocmd FileType markdown,rst,plantuml
-        \ setlocal omnifunc=syntaxcomplete#Complete
-augroup END
-
-" Toml:
-let g:matches = [
-      \ { 'word': 'YOLO', 'menu': 'A great phrase', 'info': 'wan that avril' },
-      \ { 'word': 'HELLO', 'menu': 'A beter phrase', 'info': 'More info' },
-      \ ]
-
-function! CompleteToml(findstart, base)
-  if a:findstart
-    " This part taken from SyntaxComplete
-    " Locate the start of the item, including "."
-    let line = getline('.')
-    let start = col('.') - 1
-    let lastword = -1
-    while start > 0
-      if line[start - 1] =~ '\k'
-        let start -= 1
-        let lastword = a:findstart
-      else
-        break
-      endif
-    endwhile
-    return start
-  else
-    " find classes matching "a:base"
-    let response = []
-    for match_value in g:matches
-      if match_value.word =~ '^' . a:base
-        call add(response, match_value)
-      endif
-    endfor
-    return response
-  endif
-endfunction
-
-augroup TOML_COMPLETE
-  autocmd!
-  autocmd FileType toml set omnifunc=CompleteToml
+  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
 "  }}}
