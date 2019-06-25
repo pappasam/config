@@ -1549,7 +1549,7 @@ augroup autopairs_filetype_overrides
         \ '"':'"',
         \ '`':'`',
         \ }
-  autocmd FileType python let b:AutoPairs = {
+  autocmd FileType python,toml let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
