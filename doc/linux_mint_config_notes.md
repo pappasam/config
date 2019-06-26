@@ -84,6 +84,9 @@ The following keyboard shortcuts and mappings make it easier to do things withou
     * Screenkey Toggle
         * Command: ~/bin/sk-toggle
         * Ctrl+Alt+,
+    * Firefox
+        * Command: firefox
+        * Ctrl+Alt+b
 
 ### Layouts
 
