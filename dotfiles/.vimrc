@@ -938,6 +938,16 @@ augroup keywordprogram-overrides
 augroup END
 
 "  }}}
+"  General: UpdateRemotePlugins {{{
+
+" Always update remote plugins on Vim start
+" It's not very difficult and will help me not pay attention
+augroup AutoUpdatePlugins
+  autocmd!
+  autocmd VimEnter * silent UpdateRemotePlugins
+augroup END
+
+"  }}}
 " Plugin: Jinja2 {{{
 
 function! Jinja2Toggle()
