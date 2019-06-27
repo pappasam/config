@@ -167,6 +167,9 @@ set updatetime=750
 " Linux Dev Path: system libraries
 set path+=/usr/include/x86_64-linux-gnu/
 
+" Vim history for command line; can't imagine that more than 100 is needed
+set history=100
+
 " }}}
 " General: Plugin Install {{{
 
@@ -2096,12 +2099,22 @@ call DefaultKeyMappings()
 " }}}
 " General: Abbreviations --- {{{
 
-" Make typing 'vertical help' faster
-cabbrev vhelp vertical help
+" If in command is at beginning of line, return out_command. Otherwise,
+" return in_line.
+function! s:abbr_help(in_command, out_command)
+  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
+    return a:out_command
+  else
+    return a:in_command
+  endif
+endfunction
+
+" Help menu simpler
+cnoreabbrev <expr> vhelp <SID>abbr_help('vhelp', 'vertical help')
 
 " Using Ack and Acks brings up quickfix automatically
-cabbrev Ack Ack<C-f>i
-cabbrev Acks Acks<C-f>i
+cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
+cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 
 " }}}
 " General: Global Config + Cleanup {{{
