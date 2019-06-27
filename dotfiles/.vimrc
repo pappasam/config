@@ -2099,6 +2099,10 @@ call DefaultKeyMappings()
 " Make typing 'vertical help' faster
 cabbrev vhelp vertical help
 
+" Using Ack and Acks brings up quickfix automatically
+cabbrev Ack Ack<C-f>i
+cabbrev Acks Acks<C-f>i
+
 " }}}
 " General: Global Config + Cleanup {{{
 " commands that need to run at the end of my vimrc
