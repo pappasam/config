@@ -275,9 +275,10 @@ Plug 'racer-rust/vim-racer'
 " Addional requirements:
 "   cargo install racer
 "   rustup component add rust-src
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go'
-Plug 'wannesm/wmgraphviz.vim'  " dotlanguage
+" After, run GoUpdateBinaries
+Plug 'fatih/vim-go', { 'tag': '*' }
+" dotlanguage
+Plug 'wannesm/wmgraphviz.vim'
 " note: must run 'gem install neovim' to get this to work
 " might require the neovim headers
 Plug 'juliosueiras/vim-terraform-completion'
