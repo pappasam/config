@@ -1127,6 +1127,7 @@ let g:NERDTreeIgnore = [
       \ 'elm-stuff$[[dir]]',
       \ 'target$[[dir]]',
       \ 'pip-wheel-metadata$[[dir]]',
+      \ 'fonts$[[dir]]',
       \ '\.aux$[[file]]',
       \ '\.toc$[[file]]',
       \ '\.pdf$[[file]]',
@@ -1134,6 +1135,18 @@ let g:NERDTreeIgnore = [
       \ '\.o$[[file]]',
       \ '\.pyc$[[file]]',
       \ ]
+let g:NERDTreeIndicatorMapCustom = {
+      \ 'Modified'  : '!',
+      \ 'Staged'    : '=',
+      \ 'Untracked' : '?',
+      \ 'Renamed'   : '%',
+      \ 'Unmerged'  : '=',
+      \ 'Deleted'   : '!',
+      \ 'Dirty'     : '^',
+      \ 'Clean'     : '%',
+      \ 'Ignored'   : '%',
+      \ 'Unknown'   : '?',
+      \ }
 
 function! _CD(...)  " Like args in Python
   let a:directory = get(a:, 1, expand('%:p:h'))
@@ -1144,17 +1157,17 @@ function! _CD(...)  " Like args in Python
   else
     execute 'NERDTreeCWD'
     execute 'NERDTreeClose'
-    execute "normal! \<c-w>="
+    execute 'normal! \<c-w>='
   endif
 endfunction
 
 command! -nargs=? CD call _CD(<f-args>)
 
 function! s:CloseIfOnlyControlWinLeft()
-  if winnr("$") != 1
+  if winnr('$') != 1
     return
   endif
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
         \ || &buftype == 'quickfix'
     quit
   endif
@@ -1164,19 +1177,6 @@ augroup CloseIfOnlyControlWinLeft
   autocmd!
   autocmd BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
-
-let g:NERDTreeIndicatorMapCustom = {
-      \ "Modified"  : "!",
-      \ "Staged"    : "=",
-      \ "Untracked" : "?",
-      \ "Renamed"   : "%",
-      \ "Unmerged"  : "=",
-      \ "Deleted"   : "!",
-      \ "Dirty"     : "^",
-      \ "Clean"     : "%",
-      \ 'Ignored'   : "%",
-      \ "Unknown"   : "?"
-      \ }
 
 "  }}}
 " Plugin: Fzf {{{
