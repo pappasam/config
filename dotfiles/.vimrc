@@ -1855,6 +1855,10 @@ let g:python_highlight_all = 1
 " Json: highlighting
 let g:vim_json_syntax_conceal = 0
 
+" Ferret:
+" disable default mappings
+let g:FerretMap = 0
+
 " VimJavascript:
 let g:javascript_plugin_flow = 1
 
