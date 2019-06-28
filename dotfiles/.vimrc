@@ -1820,6 +1820,8 @@ let g:vim_filetype_formatter_commands = {
 " Python: configure python paths
 " let g:python3_host_prog = system('which python3')
 " let g:python_host_prog = system('which python2')
+" Disable python 2 support
+let g:loaded_python_provider = 1
 
 " Netrw: disable netrw's gx mapping, prefer tyru/open-browser.vim
 let g:netrw_nogx = 1
