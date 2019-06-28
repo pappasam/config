@@ -824,34 +824,43 @@ endfunction
 " }}}
 " General: Language builder / runner {{{
 
-" Build source code (does not run the code)
-function! Build()
-  if &filetype ==# 'rust'
-    terminal cargo build
+let s:language_builders = {
+      \ 'rust': 'rustc %',
+      \ 'go': 'go build %',
+      \ }
 
-  else
-    echo 'Build not configured for filetype ' . &filetype
-  endif
+let s:language_runners = {
+      \ 'rust': '%:p:r',
+      \ 'go': 'go run %',
+      \ 'python': 'python3 %',
+      \ }
+
+function! s:code_term_cmd(str_command)
+  execute 'vsplit | terminal ' . a:str_command
 endfunction
 
-" Run source code (may also build, depending on the language)
-function! Run()
+" Build source code
+function! s:code_build()
+  if !has_key(s:language_builders, &filetype)
+    echo 'Build not configured for filetype "' . &filetype . '"'
+    return
+  endif
+  call s:code_term_cmd(s:language_builders[&filetype])
+endfunction
+
+" Run source code
+function! s:code_run()
   if executable(expand('%:p')) == 1
-    terminal %:p
-
-  elseif &filetype ==# 'rust'
-    terminal cargo run
-
-  elseif &filetype ==# 'python'
-    terminal python %
-
-  else
-    echo 'Run not configured for filetype ' . &filetype
+    vsplit | terminal %:p
+  elseif !has_key(s:language_runners, &filetype)
+    echo 'Run not configured for filetype "' . &filetype . '"'
+    return
   endif
+  call s:code_term_cmd(s:language_runners[&filetype])
 endfunction
 
-command! Build call Build()
-command! Run call Run()
+command! Build call <SID>code_build()
+command! Run call <SID>code_run()
 
 " }}}
 " General: Command abbreviations {{{
