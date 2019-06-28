@@ -835,7 +835,10 @@ let s:language_runners = {
       \ }
 
 function! s:code_term_cmd(str_command)
-  execute 'vsplit | terminal ' . a:str_command
+  vsplit
+  execute 'terminal ' . a:str_command
+  nnoremap <buffer> q :bd!<CR>
+  cnoremap <buffer> q bd!
 endfunction
 
 " Build source code
