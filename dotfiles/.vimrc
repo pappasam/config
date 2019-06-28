@@ -694,7 +694,8 @@ augroup END
 "  General: Delete hidden buffers {{{
 
 " From: https://stackoverflow.com/a/7321131
-function! DeleteInactiveBuffers()
+
+function! s:delete_inactive_buffers()
   "From tabpagebuflist() help, get a list of all buffers in all tabs
   let tablist = []
   for i in range(tabpagenr('$'))
@@ -716,11 +717,13 @@ function! DeleteInactiveBuffers()
   echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
 
+command! DeleteInactiveBuffers call <SID>delete_inactive_buffers()
+
 "  }}}
 " General: Clean Unicode {{{
 
 " Replace unicode symbols with cleaned, ascii versions
-function! CleanUnicode()
+function! s:clean_unicode()
   silent! %s/”/"/g
   silent! %s/“/"/g
   silent! %s/’/'/g
@@ -728,35 +731,21 @@ function! CleanUnicode()
   silent! %s/—/-/g
   silent! %s/…/.../g
 endfunction()
-command! CleanUnicode call CleanUnicode()
+command! CleanUnicode call <SID>clean_unicode()
 
 " }}}
 " General: Neovim Terminal {{{
 
-function! s:openTerm(view_type)
+function! s:open_term(view_type)
   execute a:view_type
   terminal
   setlocal nonumber nornu
   startinsert
 endfunction
 
-command! Term call s:openTerm('split')
-command! Termv call s:openTerm('vsplit')
-command! Vtert call s:openTerm('tabnew')
-
-" }}}
-" General: Number width to 80 (including special characters) {{{
-
-function! ResizeTo80()
-  let cols = 80
-  if &number ==# 1 || &relativenumber ==# 1
-    let numberwidth = float2nr(log10(line("$"))) + 2
-    let columns = &numberwidth + cols
-    execute 'vertical res ' columns
-  else
-    execute 'vertical res ' cols
-  endif
-endfunction
+command! Term call s:open_term('split')
+command! Termv call s:open_term('vsplit')
+command! Vtert call s:open_term('tabnew')
 
 " }}}
 " General: Macro repeater {{{
@@ -889,7 +878,7 @@ command! FixHighlight syntax sync fromstart
 " - Delete lines where color name is not a single word (duplicates).
 " - Delete 'grey' lines (duplicate 'gray'; there are a few more 'gray').
 " Add syntax so each color name is highlighted in its color.
-function! VimColors()
+function! s:vim_colors()
   vnew
   set modifiable
   setlocal filetype=vimcolors buftype=nofile bufhidden=delete noswapfile
@@ -920,7 +909,7 @@ function! VimColors()
   set nomodifiable
 endfunction
 
-command! VimColors silent call VimColors()
+command! VimColors silent call <SID>vim_colors()
 
 " }}}
 " General: Toggle numbers {{{
@@ -972,7 +961,7 @@ augroup END
 "  }}}
 " Plugin: Jinja2 {{{
 
-function! Jinja2Toggle()
+function! s:jinja2_toggle()
   let jinja2 = '.jinja2'
   let jinja2_pattern = '\' . jinja2
   if matchstr(&ft, jinja2_pattern) == ""
@@ -982,6 +971,8 @@ function! Jinja2Toggle()
   endif
   execute "set filetype=" . new_filetype
 endfunction
+
+command! Jinja2Toggle call <SID>jinja2_toggle()
 
 " }}}
 " Plugin: Man pager / help (builtins) {{{
@@ -1101,7 +1092,7 @@ let g:mkdp_preview_options = {
 " }}}
 " Plugin: Preview Compiled Stuff in Viewer {{{
 
-function! _Preview()
+function! s:preview()
   if &filetype ==? 'rst'
     exec 'terminal restview %'
     exec "normal \<C-O>"
@@ -1118,7 +1109,8 @@ function! _Preview()
     echo 'Preview not supported for this filetype'
   endif
 endfunction
-command! Preview call _Preview()
+
+command! Preview call <SID>preview()
 
 " }}}
 "  Plugin: NERDTree {{{
@@ -1170,7 +1162,7 @@ let g:NERDTreeIndicatorMapCustom = {
       \ 'Unknown'   : '?',
       \ }
 
-function! _CD(...)  " Like args in Python
+function! s:cd_func(...)  " Like args in Python
   let a:directory = get(a:, 1, expand('%:p:h'))
   execute 'cd ' . a:directory
   if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
@@ -1183,9 +1175,9 @@ function! _CD(...)  " Like args in Python
   endif
 endfunction
 
-command! -nargs=? CD call _CD(<f-args>)
+command! -nargs=? CD call <SID>cd_func(<f-args>)
 
-function! s:CloseIfOnlyControlWinLeft()
+function! s:close_if_only_control_win_left()
   if winnr('$') != 1
     return
   endif
@@ -1197,7 +1189,7 @@ endfunction
 
 augroup CloseIfOnlyControlWinLeft
   autocmd!
-  autocmd BufEnter * call s:CloseIfOnlyControlWinLeft()
+  autocmd BufEnter * call <SID>close_if_only_control_win_left()
 augroup END
 
 "  }}}
@@ -1423,12 +1415,12 @@ let g:gina#command#blame#formatter#timestamp_months = 0
 let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
 let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 
-function! _Gblame()
+function! s:gblame()
   let current_file = expand('%:t')
   execute 'Gina blame'
 endfunction
 
-command! Gblame call _Gblame()
+command! Gblame call <SID>gblame()
 
 " }}}
 "  Plugin: Tagbar {{{
@@ -2008,7 +2000,7 @@ function! DefaultKeyMappings()
   inoremap <C-l> <Del>
 
   " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-  nnoremap <silent> <leader>j :call Jinja2Toggle()<CR>
+  nnoremap <silent> <leader>j :Jinja2Toggle<CR>
 
   " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R :ToggleNumber<CR>
@@ -2062,13 +2054,10 @@ function! DefaultKeyMappings()
 
   " DeleteHiddenBuffers: shortcut to make this easier
   " Note: weird stuff happens if you mess this up
-  nnoremap <leader>d :call DeleteInactiveBuffers()<CR>
+  nnoremap <leader>d :DeleteInactiveBuffers<CR>
 
   " Jumping To Header File:
   nnoremap gh :call CurtineIncSw()<CR>
-
-  " Open Split: for writing (80 character window width for wrap)
-  nnoremap <silent> <leader>v :call ResizeTo80()<CR>
 
   " SearchBackward: remap comma to single quote
   nnoremap ' ,
