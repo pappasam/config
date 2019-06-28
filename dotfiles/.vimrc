@@ -1923,6 +1923,9 @@ function! DefaultKeyMappings()
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
 
+  " J: basically, unmap in normal mode unless range explicitly specified
+  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
+
   " InsertModeHelpers: Insert one line above after enter
   " Useful for ``` in markdown. Key code = Alt+Enter
   inoremap <M-CR> <CR><C-o>O
