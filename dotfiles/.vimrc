@@ -1563,7 +1563,7 @@ augroup autopairs_filetype_overrides
         \ '"':'"',
         \ '`':'`',
         \ }
-  autocmd FileType python,toml let b:AutoPairs = {
+  autocmd FileType *.jinja2,python,toml let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
         \ '{':'}',
@@ -1572,6 +1572,8 @@ augroup autopairs_filetype_overrides
         \ '`':'`',
         \ '"""': '"""',
         \ "'''": "'''",
+        \ '{%':'%}',
+        \ '{{':'}}',
         \ }
   autocmd FileType rust let b:AutoPairs = {
         \ '[':']',
@@ -1722,6 +1724,7 @@ let g:LanguageClient_serverCommands = {
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
       \ 'python': ['pyls'],
+      \ 'python.jinja2': ['pyls'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
