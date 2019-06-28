@@ -345,11 +345,11 @@ Plug 'jpalardy/vim-slime'
 call plug#end()
 
 " Plug update and upgrade
-function! _PU()
+function! s:plug_update_upgrade()
   execute 'PlugUpdate'
   execute 'PlugUpgrade'
 endfunction
-command! PU call _PU()
+command! PU call <SID>plug_update_upgrade()
 
 " }}}
 " General: Filetype specification {{{
@@ -464,7 +464,7 @@ augroup END
 " these are expected to be either:
 "   Dict: dict-gcide
 "   Thesaurus: dict-moby-thesaurus
-function! ReadDictToPreview(word, dict) range
+function! s:read_dict_to_preview(word, dict) range
   let dst = tempname()
   execute "silent ! dict -d " . a:dict . " " . string(a:word) . " > " . dst
   pclose! |
@@ -478,8 +478,8 @@ function! ReadDictToPreview(word, dict) range
   execute ":redraw!"
 endfunction
 
-command! -nargs=1 Def call ReadDictToPreview(<q-args>, "gcide")
-command! -nargs=1 Syn call ReadDictToPreview(<q-args>, "moby-thesaurus")
+command! -nargs=1 Def call <SID>read_dict_to_preview(<q-args>, "gcide")
+command! -nargs=1 Syn call <SID>read_dict_to_preview(<q-args>, "moby-thesaurus")
 
  " }}}
 " General: Folding Settings {{{
@@ -495,7 +495,7 @@ augroup END
 " }}}
 " General: Trailing whitespace {{{
 
-function! TrimWhitespace()
+function! s:trim_whitespace()
   let l:save = winsaveview()
   if &ft == 'markdown'
     " Replace lines with only trailing spaces
@@ -511,9 +511,11 @@ function! TrimWhitespace()
   call winrestview(l:save)
 endfunction
 
+command! TrimWhitespace call <SID>trim_whitespace()
+
 augroup fix_whitespace_save
   autocmd!
-  autocmd BufWritePre * call TrimWhitespace()
+  autocmd BufWritePre * TrimWhitespace
 augroup END
 
 " }}}
@@ -619,40 +621,48 @@ endtry
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
 " https://stackoverflow.com/questions/2075276/longest-line-in-vim
-function! ResizeWindowWidth()
+function! s:resize_window_width()
+  normal! m`
   let maxlength   = 0
   let linenumber  = 1
-  while linenumber <= line("$")
-    exe ":" . linenumber
-    let linelength  = virtcol("$")
+  while linenumber <= line('$')
+    exe ':' . linenumber
+    let linelength  = virtcol('$')
     if maxlength < linelength
       let maxlength = linelength
     endif
     let linenumber  = linenumber+1
   endwhile
-  exe ":vertical resize " . (maxlength + 4)
+  exe ':vertical resize ' . (maxlength + 4)
+  normal! ``
 endfunction
 
-function! ResizeWindowHeight()
+function! s:resize_window_height()
+  normal! m`
   let initial = winnr()
 
   " this duplicates code but avoids polluting global namespace
   wincmd k
   if winnr() != initial
-    exe initial . "wincmd w"
-    exe ":1"
-    exe "resize " . (line('$') + 1)
+    execute initial . 'wincmd w'
+    1
+    execute 'resize ' . (line('$') + 1)
+    normal! ``
     return
   endif
 
   wincmd j
   if winnr() != initial
-    exe initial . "wincmd w"
-    exe ":1"
-    exe "resize " . (line('$') + 1)
+    execute initial . 'wincmd w'
+    1
+    execute 'resize ' . (line('$') + 1)
+    normal! ``
     return
   endif
 endfunction
+
+command! ResizeWindowWidth call <SID>resize_window_width()
+command! ResizeWindowHeight call <SID>resize_window_height()
 
 " }}}
 " General: Avoid saving 'lcd' {{{
@@ -2020,8 +2030,8 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
   " ResizeWindow: up and down; relies on custom functions
-  nnoremap <silent> <leader><leader>h mz:call ResizeWindowHeight()<CR>`z
-  nnoremap <silent> <leader><leader>w mz:call ResizeWindowWidth()<CR>`z
+  nnoremap <silent> <leader><leader>h :ResizeWindowHeight<CR>
+  nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " AutoPairs:
   imap <silent><CR> <CR><Plug>AutoPairsReturn
