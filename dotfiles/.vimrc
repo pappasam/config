@@ -1206,6 +1206,23 @@ augroup CloseIfOnlyControlWinLeft
   autocmd BufEnter * call <SID>close_if_only_control_win_left()
 augroup END
 
+" https://stackoverflow.com/a/16378375
+function! NERDTreeYankCurrentNode()
+  let n = g:NERDTreeFileNode.GetSelected()
+  if n != {}
+    call setreg('"', './' . fnamemodify(n.path.str(), ':.'))
+  endif
+endfunction
+
+if s:plugin_exists('nerdtree')
+  autocmd VimEnter * call NERDTreeAddKeyMap({
+        \ 'key': 'yy',
+        \ 'callback': 'NERDTreeYankCurrentNode',
+        \ 'quickhelpText':
+        \   'put relative path of current node into the default register'
+        \ })
+endif
+
 "  }}}
 " Plugin: Fzf {{{
 
