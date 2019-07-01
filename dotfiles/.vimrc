@@ -173,7 +173,13 @@ set history=100
 " }}}
 " General: Plugin Install {{{
 
+let g:plug_url_format = 'git@github.com:%s.git'
+let g:plug_shallow = 0
+
 call plug#begin('~/.vim/plugged')
+
+" Help for vim-plug
+Plug 'junegunn/vim-plug'
 
 " Basics
 Plug 'junegunn/vader.vim'
