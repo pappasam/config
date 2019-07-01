@@ -171,7 +171,7 @@ set path+=/usr/include/x86_64-linux-gnu/
 set history=100
 
 " }}}
-" General: Plugin Install {{{
+" General: Vim-Plug {{{
 
 let g:plug_url_format = 'git@github.com:%s.git'
 let g:plug_shallow = 0
@@ -356,6 +356,11 @@ function! s:plug_update_upgrade()
   execute 'PlugUpgrade'
 endfunction
 command! PU call <SID>plug_update_upgrade()
+
+" Check if plugin exists
+function! s:plugin_exists(name)
+  return &rtp =~ a:name
+endfunction
 
 " }}}
 " General: Filetype specification {{{
@@ -1383,53 +1388,55 @@ endfunction
 " This plugin is awesome
 " Just Gina followed by whatever I'd normally type in Git
 
-for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
-  call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
-endfor
+if s:plugin_exists('gina.vim')
+  for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
+    call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
+  endfor
 
-for gina_cmd in ['diff']
-  call gina#custom#command#option(gina_cmd, '--opener', 'vsplit')
-endfor
+  for gina_cmd in ['diff']
+    call gina#custom#command#option(gina_cmd, '--opener', 'vsplit')
+  endfor
 
-call gina#custom#command#option('commit', '--verbose')
-call gina#custom#command#option('branch', '--verbose|--all')
+  call gina#custom#command#option('commit', '--verbose')
+  call gina#custom#command#option('branch', '--verbose|--all')
 
-let g:gina#command#blame#use_default_mappings = 0
-call gina#custom#command#option('blame', '--width', '79')
+  let g:gina#command#blame#use_default_mappings = 0
+  call gina#custom#command#option('blame', '--width', '79')
 
-" Custom mappings for Gina blame buffer
-call gina#custom#mapping#nmap(
-      \ 'blame', 'c',
-      \ '<Plug>(gina-blame-echo)',
-      \ )
-call gina#custom#mapping#nmap(
-      \ 'blame', '<CR>',
-      \ '<Plug>(gina-blame-open)',
-      \ )
-call gina#custom#mapping#nmap(
-      \ 'blame', '<c-i>',
-      \ '<Plug>(gina-blame-open)',
-      \ )
-call gina#custom#mapping#nmap(
-      \ 'blame', '<Backspace>',
-      \ '<Plug>(gina-blame-back)',
-      \ )
-call gina#custom#mapping#nmap(
-      \ 'blame', '<c-o>',
-      \ '<Plug>(gina-blame-back)',
-      \ )
+  " Custom mappings for Gina blame buffer
+  call gina#custom#mapping#nmap(
+        \ 'blame', 'c',
+        \ '<Plug>(gina-blame-echo)',
+        \ )
+  call gina#custom#mapping#nmap(
+        \ 'blame', '<CR>',
+        \ '<Plug>(gina-blame-open)',
+        \ )
+  call gina#custom#mapping#nmap(
+        \ 'blame', '<c-i>',
+        \ '<Plug>(gina-blame-open)',
+        \ )
+  call gina#custom#mapping#nmap(
+        \ 'blame', '<Backspace>',
+        \ '<Plug>(gina-blame-back)',
+        \ )
+  call gina#custom#mapping#nmap(
+        \ 'blame', '<c-o>',
+        \ '<Plug>(gina-blame-back)',
+        \ )
 
-let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
-let g:gina#command#blame#formatter#timestamp_months = 0
-let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
-let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
+  let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
+  let g:gina#command#blame#formatter#timestamp_months = 0
+  let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
+  let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 
-function! s:gblame()
-  let current_file = expand('%:t')
-  execute 'Gina blame'
-endfunction
+  function! s:gblame()
+    let current_file = expand('%:t')
+    execute 'Gina blame'
+  endfunction
 
-command! Gblame call <SID>gblame()
+  command! Gblame call <SID>gblame()
+endif
 
 " }}}
 "  Plugin: Tagbar {{{
@@ -1509,29 +1516,32 @@ let g:startify_list_order = []
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_special = 1
 let g:startify_custom_header = []
-let g:startify_custom_footer = [
-      \ '                                            .',
-      \ '                                  .-o',
-      \ '                     .           /  |',
-      \ '            .                 . /   |   .',
-      \ '                               /    |',
-      \ '                      .       /     |',
-      \ '      .                      /      /         .',
-      \ '                 .          /    _./   .',
-      \ '                       _.---~-.=:_',
-      \ '                      (_.-=() <~`-`-.',
-      \ '                     _/ _() ~`-==-._,>',
-      \ '             ..--====--` `~-._.__()',
-      \ '         o===``~~             |__()',
-      \ '                    .         \   |             .',
-      \ '                               \  \    .',
-      \ '                                \  \',
-      \ '            .                    \  \   Sienar Fleet Systems',
-      \ '                     .            \  \  Lambda-class',
-      \ '                                   \_ \ Imperial Shuttle',
-      \ '                           LS        ~o',
-      \ '',
-      \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
+
+if s:plugin_exists('vim-startify')
+  let g:startify_custom_footer = [
+        \ '                                            .',
+        \ '                                  .-o',
+        \ '                     .           /  |',
+        \ '            .                 . /   |   .',
+        \ '                               /    |',
+        \ '                      .       /     |',
+        \ '      .                      /      /         .',
+        \ '                 .          /    _./   .',
+        \ '                       _.---~-.=:_',
+        \ '                      (_.-=() <~`-`-.',
+        \ '                     _/ _() ~`-==-._,>',
+        \ '             ..--====--` `~-._.__()',
+        \ '         o===``~~             |__()',
+        \ '                    .         \   |             .',
+        \ '                               \  \    .',
+        \ '                                \  \',
+        \ '            .                    \  \   Sienar Fleet Systems',
+        \ '                     .            \  \  Lambda-class',
+        \ '                                   \_ \ Imperial Shuttle',
+        \ '                           LS        ~o',
+        \ '',
+        \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
+endif
 
 "  }}}
 "  Plugin: VimTex {{{
@@ -2036,7 +2046,9 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " AutoPairs:
-  imap <silent><CR> <CR><Plug>AutoPairsReturn
+  if s:plugin_exists('auto-pairs')
+    imap <silent><CR> <CR><Plug>AutoPairsReturn
+  endif
 
   " Slime:
   xmap <leader>e <Plug>SlimeRegionSend
