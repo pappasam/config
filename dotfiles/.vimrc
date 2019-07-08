@@ -150,15 +150,21 @@ else
   set guicursor=
 endif
 
-" Default Background: useful for Papercolor
-let g:alacritty_background = system('alacritty-which-colorscheme')
-if !v:shell_error
-  let &background = g:alacritty_background
-else
-  echo 'error calling "alacritty-which-colorscheme"'
-  echo 'default to set background=dark'
-  set background=dark
-endif
+" Set Background: for PaperColor, also sets handler
+function! AlacrittySetBackground()
+  let g:alacritty_background = system('alacritty-which-colorscheme')
+  if !v:shell_error
+    let &background = g:alacritty_background
+  else
+    echo 'error calling "alacritty-which-colorscheme"'
+    echo 'default to set background=dark'
+    set background=dark
+  endif
+endfunction
+call AlacrittySetBackground()
+call jobstart(
+      \ 'tail -n 0 -f ' . $HOME . '/.alacritty.yml',
+      \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }})
 
 " Status Line: specifics for custom status line
 set laststatus=2
