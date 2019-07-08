@@ -138,6 +138,18 @@ sudo apt install tk-dev
 sudo apt install libmysqlclient-dev
 
 #######################################################################
+# Wine
+#######################################################################
+# https://wiki.winehq.org/Ubuntu
+sudo apt install libasound2-plugins:i386
+sudo dpkg --add-architecture i386
+wget -nc https://dl.winehq.org/wine-builds/winehq.key
+sudo apt-key add winehq.key
+sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+sudo apt update
+sudo apt install --install-recommends winehq-stable
+
+#######################################################################
 # Latex
 #######################################################################
 sudo apt install texlive-full
