@@ -150,8 +150,15 @@ else
   set guicursor=
 endif
 
-" Default Background:
-set background=dark
+" Default Background: useful for Papercolor
+let g:alacritty_background = system('alacritty-which-colorscheme')
+if !v:shell_error
+  let &background = g:alacritty_background
+else
+  echo 'error calling "alacritty-which-colorscheme"'
+  echo 'default to set background=dark'
+  set background=dark
+endif
 
 " Lightline: specifics for Lightline
 set laststatus=2

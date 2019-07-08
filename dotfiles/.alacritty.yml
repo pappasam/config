@@ -93,16 +93,13 @@ cursor:
   unfocused_hollow: true
 
 # color_start
+# /home/sroeca/src/lib/alacritty-theme/themes/tomorrow_night_bright.yaml
+# Colors (Tomorrow Night Bright)
 colors:
   # Default colors
   primary:
     background: '0x000000'
     foreground: '0xeaeaea'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x000000'
-    cursor: '0xffffff'
 
   # Normal colors
   normal:
@@ -113,7 +110,7 @@ colors:
     blue:    '0x7aa6da'
     magenta: '0xc397d8'
     cyan:    '0x70c0ba'
-    white:   '0xffffff'
+    white:   '0x424242'
 
   # Bright colors
   bright:
@@ -124,7 +121,7 @@ colors:
     blue:    '0x7aa6da'
     magenta: '0xb77ee0'
     cyan:    '0x54ced6'
-    white:   '0xffffff'
+    white:   '0x2a2a2a'
 # color_end
 
 # Visual Bell

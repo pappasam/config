@@ -1,0 +1,5 @@
+#!/bin/bash
+
+alacritty-colorscheme \
+  -c $HOME/.alacritty.yml \
+  -a "$HOME/src/lib/alacritty-theme/themes/tomorrow_night_bright.yaml"

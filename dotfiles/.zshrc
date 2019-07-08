@@ -463,7 +463,11 @@ alias cookiecutter-hovercraft='cookiecutter gh:pappasam/cookiecutter-hovercraft'
 # NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
+
+# Alacritty helpers
 alias alacritty-deb-install='cargo deb --install --manifest-path alacritty/Cargo.toml'
+alias dark='alacritty-dark'
+alias light='alacritty-light'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
@@ -947,11 +951,13 @@ COLOR_BRIGHT_BLUE="6"
 COLOR_GOLD="3"
 COLOR_SILVER="7"
 COLOR_PYTHON_GREEN="2"
+COLOR_WHITE="15"
+COLOR_BLACK="0"
 
 # Set Bash PS1
 PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
 PS1_USR="%B%F{$COLOR_GOLD}%n@%M%b%f"
-PS1_END="%B%F{$COLOR_SILVER}$ %f%b"
+PS1_END="%B%F{$COLOR_BLACK}$ %f%b"
 
 # Figure out if a Python virtualenv is active
 function virtualenv_info(){

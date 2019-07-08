@@ -280,6 +280,14 @@ sudo apt update
 sudo apt install peek
 
 #######################################################################
+# Alacritty
+#######################################################################
+cd src/lib
+git clone git@github.com:eendroroy/alacritty-theme.git
+git clone git@github.com:toggle-corp/alacritty-colorscheme.git
+ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
+
+#######################################################################
 # zplug
 #######################################################################
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
