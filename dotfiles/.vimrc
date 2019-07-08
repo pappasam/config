@@ -163,7 +163,7 @@ function! AlacrittySetBackground()
 endfunction
 call AlacrittySetBackground()
 call jobstart(
-      \ 'tail -n 0 -f ' . $HOME . '/.alacritty.yml',
+      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
       \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }})
 
 " Status Line: specifics for custom status line
