@@ -92,7 +92,7 @@ cursor:
   # window is not focused.
   unfocused_hollow: true
 
-# Colors (Tomorrow Night Bright)
+# color_start
 colors:
   # Default colors
   primary:
@@ -125,6 +125,7 @@ colors:
     magenta: '0xb77ee0'
     cyan:    '0x54ced6'
     white:   '0xffffff'
+# color_end
 
 # Visual Bell
 #
