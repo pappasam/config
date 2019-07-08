@@ -160,7 +160,7 @@ else
   set background=dark
 endif
 
-" Lightline: specifics for Lightline
+" Status Line: specifics for custom status line
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
@@ -190,7 +190,7 @@ Plug 'junegunn/vim-plug'
 
 " Basics
 Plug 'junegunn/vader.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'kh3phr3n/tabline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -368,6 +368,69 @@ command! PU call <SID>plug_update_upgrade()
 function! s:plugin_exists(name)
   return &rtp =~ a:name
 endfunction
+
+" }}}
+" General: Status Line {{{
+
+set laststatus=2
+set statusline=
+set statusline+=[%{StatuslineMode()}]
+set statusline+=\ %{b:gitbranch}
+set statusline+=%t
+set statusline+=%=
+set statusline+=\ %L
+set statusline+=\ %y
+set statusline+=\ %{&ff}
+set statusline+=\ %{strlen(&fenc)?&fenc:'none'}
+
+set tabline=%t
+
+function! StatuslineMode()
+  let l:mode=mode()
+  if l:mode==#"n"
+    return "N"
+  elseif l:mode==?"v"
+    return "V"
+  elseif l:mode==#"i"
+    return "I"
+  elseif l:mode==#"R"
+    return "R"
+  elseif l:mode==?"s"
+    return "S"
+  elseif l:mode==#"t"
+    return "T"
+  elseif l:mode==#"c"
+    return "C"
+  elseif l:mode==#"!"
+    return "SH"
+  endif
+endfunction
+
+function! StripNewlines(instring)
+  " Strip newlines from a string
+  return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
+endfunction
+
+function! StatuslineGitBranch()
+  let b:gitbranch=""
+  if &modifiable
+    try
+      let l:dir=expand('%:p:h')
+      let l:gitrevparse = system(
+            \ 'git -C ' . l:dir . ' rev-parse --abbrev-ref HEAD')
+      if !v:shell_error
+        let b:gitbranch=
+              \ '(' . StripNewlines(substitute(l:gitrevparse, '', '', 'g')) . ') '
+      endif
+    catch
+    endtry
+  endif
+endfunction
+
+augroup GetGitBranch
+  autocmd!
+  autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
+augroup END
 
 " }}}
 " General: Filetype specification {{{
@@ -1266,146 +1329,6 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-l': function('s:build_quickfix_list'),
       \ }
-
-" }}}
-" Plugin: Lightline {{{
-
-" This is a giant section that configures the status line for my vim editing.
-" It's super important, so I devote a lot of code to it.
-" Many of the functions are ported from the Lightlint documentation
-
-let g:lightline = {}
-let g:lightline.active = {}
-let g:lightline.inactive = {}
-let g:lightline.colorscheme = 'PaperColor'
-let g:lightline.mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
-
-" Simpler tabs (removes the 'close' key from right)
-let g:lightline.tabline = {
-      \ 'left': [[ 'tabs' ]],
-      \ 'right': []
-      \ }
-
-let g:lightline.component = {
-      \ 'mode': '%{lightline#mode()}',
-      \ 'absolutepath': '%F',
-      \ 'relativepath': '%f',
-      \ 'filename': '%t',
-      \ 'modified': '%M',
-      \ 'bufnum': '%n',
-      \ 'paste': '%{&paste?"PASTE":""}',
-      \ 'readonly': '%R',
-      \ 'charvalue': '%b',
-      \ 'charvaluehex': '%B',
-      \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-      \ 'fileformat': '%{&ff}',
-      \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-      \ 'percent': '%3p%%',
-      \ 'percentwin': '%P',
-      \ 'spell': '%{&spell?&spelllang:""}',
-      \ 'lineinfo': '%c:%L',
-      \ 'line': '%l',
-      \ 'column': '%c',
-      \ 'close': '%999X X ',
-      \ 'winnr': '%{winnr()}',
-      \ }
-
-let g:lightline.active.left = [
-      \ [ 'mode', 'paste', 'spell' ],
-      \ [ 'gina', 'readonly', 'filename' ],
-      \ [ 'ctrlpmark' ],
-      \ ]
-
-let g:lightline.inactive.left = [
-      \ [ 'mode', 'paste', 'spell' ],
-      \ [ 'gina', 'readonly', 'filename' ],
-      \ [ 'ctrlpmark' ],
-      \ ]
-
-let g:lightline.active.right = [
-      \ [ 'filetype' ],
-      \ [ 'fileformat', 'fileencoding' ],
-      \ [ 'lineinfo' ],
-      \ ]
-
-let g:lightline.inactive.right = [
-      \ [ 'filetype' ],
-      \ [],
-      \ [],
-      \ ]
-
-let g:lightline.component_function = {
-      \ 'gina': 'LightlineGina',
-      \ 'filename': 'LightlineFilename',
-      \ 'mode': 'LightlineMode',
-      \ }
-
-function! LightlineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightlineFilename()
-  let cwd = getcwd()
-  let fname = substitute(expand("%:p"), l:cwd . "/" , "", "")
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ?
-        \ g:lightline.ctrlp_item :
-        \ fname =~ '__Tagbar__.*' ? '' :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-
-function! LightlineGina()
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler'
-      let mark = 'g:'
-      let branch = gina#component#repo#branch()
-      return branch !=# '' ? mark.branch : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-
-function! LightlineMode()
-  let fname = expand('%:t')
-  return fname =~ '__Tagbar__.*' ? 'Tagbar' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() :
-        \ ''
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
 
 " }}}
 " Plugin: Gina {{{
