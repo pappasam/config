@@ -672,6 +672,12 @@ let g:PaperColor_Theme_Options.theme.default = {
       \ 'allow_italic': 1,
       \ }
 
+" Light Theme Sanity Moves:
+let g:PaperColor_Theme_Options.theme['default.light'] = {}
+let g:PaperColor_Theme_Options.theme['default.light'].override = {
+      \ 'color00' : ['#f2e7e6', '255'],
+      \ }
+
 " Folds And Highlights:
 let g:PaperColor_Theme_Options.theme['default.dark'] = {}
 let g:PaperColor_Theme_Options.theme['default.dark'].override = {
@@ -680,7 +686,6 @@ let g:PaperColor_Theme_Options.theme['default.dark'].override = {
       \ 'visual_fg' : ['gray12', '0'],
       \ 'visual_bg' : ['gray', '6'],
       \ }
-
 " Language Specific Overrides:
 let g:PaperColor_Theme_Options.language = {
       \    'python': {
