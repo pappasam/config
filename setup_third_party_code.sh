@@ -62,6 +62,9 @@ sudo apt install git
 sudo apt install build-essential
 sudo apt install curl
 
+# Tool to respond to file changes
+sudo apt install entr
+
 #######################################################################
 # Copy functionality
 #######################################################################
