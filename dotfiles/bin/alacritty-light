@@ -2,4 +2,4 @@
 
 alacritty-colorscheme \
   -c $HOME/.alacritty.yml \
-  -a "$HOME/src/lib/alacritty-theme/themes/gruvbox_light.yaml"
+  -a "$HOME/src/lib/alacritty-theme/themes/papercolor_light.yaml"
