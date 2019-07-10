@@ -375,57 +375,53 @@ function! s:plugin_exists(name)
 endfunction
 
 " }}}
-" General: Status Line {{{
+" General: Status Line and Tab Line {{{
 
-set laststatus=2
-set statusline=
-set statusline+=[%{StatuslineMode()}]
-set statusline+=\ %{b:gitbranch}
-set statusline+=%t
-set statusline+=%=
-set statusline+=\ %L
-set statusline+=\ %y
-set statusline+=\ %{&ff}
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}
-
+" Tab Line
 set tabline=%t
 
+" Status Line
+set laststatus=2
+set statusline=
+set statusline+=[%{mode()}]
+set statusline+=\ %{get(b:,'gitbranch','')}
+set statusline+=\ %t
+set statusline+=%=
+set statusline+=%L
+set statusline+=\ %y
+set statusline+=\ %{&ff}
+set statusline+=\ (%{strlen(&fenc)?&fenc:'none'})
+
+let g:status_mode_map = {
+      \ 'n': 'NO',
+      \ 'v': 'VI',
+      \ 'V': 'VI',
+      \ 'i': 'IN',
+      \ 'R': 'RE',
+      \ 's': 'SU',
+      \ 't': 'TR',
+      \ 'c': 'CM',
+      \ '!': 'SH',
+      \ }
 function! StatuslineMode()
-  let l:mode=mode()
-  if l:mode==#"n"
-    return "N"
-  elseif l:mode==?"v"
-    return "V"
-  elseif l:mode==#"i"
-    return "I"
-  elseif l:mode==#"R"
-    return "R"
-  elseif l:mode==?"s"
-    return "S"
-  elseif l:mode==#"t"
-    return "T"
-  elseif l:mode==#"c"
-    return "C"
-  elseif l:mode==#"!"
-    return "SH"
-  endif
+  return get(g:status_mode_map, mode(), '??')
 endfunction
 
+" Strip newlines from a string
 function! StripNewlines(instring)
-  " Strip newlines from a string
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
 endfunction
 
 function! StatuslineGitBranch()
-  let b:gitbranch=""
+  let b:gitbranch = ''
   if &modifiable
     try
-      let l:dir=expand('%:p:h')
-      let l:gitrevparse = system(
-            \ 'git -C ' . l:dir . ' rev-parse --abbrev-ref HEAD')
+      let gitrevparse = StripNewlines(system(
+            \ 'git -C ' .
+            \ expand('%:p:h') .
+            \ ' rev-parse --abbrev-ref HEAD'))
       if !v:shell_error
-        let b:gitbranch=
-              \ '(' . StripNewlines(substitute(l:gitrevparse, '', '', 'g')) . ') '
+        let b:gitbranch = '^' . gitrevparse
       endif
     catch
     endtry
