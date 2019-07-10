@@ -385,7 +385,7 @@ set laststatus=2
 set statusline=
 set statusline+=[%{mode()}]
 set statusline+=\ %{get(b:,'gitbranch','')}
-set statusline+=\ %t
+set statusline+=%t
 set statusline+=%=
 set statusline+=%L
 set statusline+=\ %y
@@ -416,12 +416,12 @@ function! StatuslineGitBranch()
   let b:gitbranch = ''
   if &modifiable
     try
-      let gitrevparse = StripNewlines(system(
+      let branch_name = StripNewlines(system(
             \ 'git -C ' .
             \ expand('%:p:h') .
             \ ' rev-parse --abbrev-ref HEAD'))
       if !v:shell_error
-        let b:gitbranch = '^' . gitrevparse
+        let b:gitbranch = '^' . branch_name . ':'
       endif
     catch
     endtry
