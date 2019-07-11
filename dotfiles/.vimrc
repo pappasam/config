@@ -1223,6 +1223,7 @@ let g:NERDTreeIgnore = [
       \ '.egg-info$[[dir]]',
       \ 'node_modules$[[dir]]',
       \ 'elm-stuff$[[dir]]',
+      \ 'build$[[dir]]',
       \ 'target$[[dir]]',
       \ 'pip-wheel-metadata$[[dir]]',
       \ 'fonts$[[dir]]',
