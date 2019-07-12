@@ -76,6 +76,7 @@ let maplocalleader = "\\"
 
 " }}}
 " General: Global config {{{
+
 " Code Completion:
 set completeopt=menuone,longest,preview
 set wildmode=longest,list,full
@@ -544,6 +545,11 @@ augroup writing
 augroup END
 
 " }}}
+" General: Digraphs {{{
+
+digraph `` 699  " Hawaiian character ʻ
+
+" }}}
 " General: Word definition and meaning lookup {{{
 
 " Enable looking up values in either a dictionary or a thesaurus
@@ -776,7 +782,7 @@ augroup stay_no_lcd
 augroup END
 
 " --- }}}
-"  General: Delete hidden buffers {{{
+" General: Delete hidden buffers {{{
 
 " From: https://stackoverflow.com/a/7321131
 
@@ -804,7 +810,7 @@ endfunction
 
 command! DeleteInactiveBuffers call <SID>delete_inactive_buffers()
 
-"  }}}
+" }}}
 " General: Clean Unicode {{{
 
 " Replace unicode symbols with cleaned, ascii versions
@@ -1022,7 +1028,7 @@ command! ToggleNumber call <SID>toggle_number()
 command! ToggleRelativeNumber call <SID>toggle_relative_number()
 
 " }}}
-"  General: keywordprg {{{
+" General: keywordprg {{{
 
 " Map DevDocs command to the keyword program for select programs
 " Enables 'K' for said programs
@@ -1036,8 +1042,8 @@ augroup keywordprogram-overrides
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
 augroup END
 
-"  }}}
-"  General: UpdateRemotePlugins {{{
+" }}}
+" General: UpdateRemotePlugins {{{
 
 " Always update remote plugins on Vim start
 " It's not very difficult and will help me not pay attention
@@ -1046,7 +1052,7 @@ augroup AutoUpdatePlugins
   autocmd VimEnter * silent UpdateRemotePlugins
 augroup END
 
-"  }}}
+" }}}
 " Plugin: Jinja2 {{{
 
 function! s:jinja2_toggle()
@@ -1336,62 +1342,7 @@ let g:fzf_action = {
       \ }
 
 " }}}
-" Plugin: Gina {{{
-" This plugin is awesome
-" Just Gina followed by whatever I'd normally type in Git
-
-if s:plugin_exists('gina.vim')
-  for gina_cmd in ['branch', 'changes', 'log', 'commit', 'status']
-    call gina#custom#command#option(gina_cmd, '--opener', 'tabedit')
-  endfor
-
-  for gina_cmd in ['diff']
-    call gina#custom#command#option(gina_cmd, '--opener', 'vsplit')
-  endfor
-
-  call gina#custom#command#option('commit', '--verbose')
-  call gina#custom#command#option('branch', '--verbose|--all')
-
-  let g:gina#command#blame#use_default_mappings = 0
-  call gina#custom#command#option('blame', '--width', '79')
-
-  " Custom mappings for Gina blame buffer
-  call gina#custom#mapping#nmap(
-        \ 'blame', 'c',
-        \ '<Plug>(gina-blame-echo)',
-        \ )
-  call gina#custom#mapping#nmap(
-        \ 'blame', '<CR>',
-        \ '<Plug>(gina-blame-open)',
-        \ )
-  call gina#custom#mapping#nmap(
-        \ 'blame', '<c-i>',
-        \ '<Plug>(gina-blame-open)',
-        \ )
-  call gina#custom#mapping#nmap(
-        \ 'blame', '<Backspace>',
-        \ '<Plug>(gina-blame-back)',
-        \ )
-  call gina#custom#mapping#nmap(
-        \ 'blame', '<c-o>',
-        \ '<Plug>(gina-blame-back)',
-        \ )
-
-  let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
-  let g:gina#command#blame#formatter#timestamp_months = 0
-  let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
-  let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
-
-  function! s:gblame()
-    let current_file = expand('%:t')
-    execute 'Gina blame'
-  endfunction
-
-  command! Gblame call <SID>gblame()
-endif
-
-" }}}
-"  Plugin: Tagbar {{{
+" Plugin: Tagbar {{{
 
 let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
@@ -1448,8 +1399,8 @@ let g:tagbar_type_rst = {
       \ 'sort': 0,
       \ }
 
-"  }}}
-"  Plugin: Startify {{{
+" }}}
+" Plugin: Startify {{{
 " \ '                _______.     ___      .___  ___.',
 " \ '               /       |    /   \     |   \/   |',
 " \ '              |   (----`   /  ^  \    |  \  /  |',
@@ -1495,8 +1446,8 @@ if s:plugin_exists('vim-startify')
         \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 endif
 
-"  }}}
-"  Plugin: VimTex {{{
+" }}}
+" Plugin: VimTex {{{
 
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:tex_flavor = 'latex'
@@ -1512,8 +1463,8 @@ function! MyVimTexDocHandler(context)
   return 1
 endfunction
 
-"  }}}
-"  Plugin: AutoPairs {{{
+" }}}
+" Plugin: AutoPairs {{{
 
 " AutoPairs:
 " unmap CR due to incompatibility with clang-complete
@@ -1580,8 +1531,8 @@ augroup autopairs_filetype_overrides
         \ }
 augroup END
 
-"  }}}
-"  Plugin: Sandwich {{{
+" }}}
+" Plugin: Sandwich {{{
 
 " LatexNotes:
 "   textobject:
@@ -1600,8 +1551,8 @@ augroup END
 " Keymappings set in keymappings section
 let g:textobj_sandwich_no_default_key_mappings = 1
 
-"  }}}
-"  Plugin: Goyo {{{
+" }}}
+" Plugin: Goyo {{{
 
 " Set width a bit wider to account for line numbers
 let g:goyo_width = 84
@@ -1632,8 +1583,8 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-"  }}}
-"  Plugin: RagTag {{{
+" }}}
+" Plugin: RagTag {{{
 
 " Load mappings on every filetype
 let g:ragtag_global_maps = 1
@@ -1643,8 +1594,8 @@ augroup ragtag_config
   autocmd FileType javascript call RagtagInit()
 augroup end
 
-"  }}}
-"  Plugin: Vim-markdown {{{
+" }}}
+" Plugin: Vim-markdown {{{
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
@@ -1655,8 +1606,8 @@ let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
-"  }}}
-"  Plugin: Ale {{{
+" }}}
+" Plugin: Ale {{{
 
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_filetype_changed = 0
@@ -1678,8 +1629,8 @@ let g:ale_linters = {
       \ 'text': ['write-good', 'languagetool'],
       \ }
 
-"  }}}
-"  Plugin: Slime --- {{{
+" }}}
+" Plugin: Slime --- {{{
 
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
@@ -1692,8 +1643,8 @@ let g:slime_dont_ask_default = 0
 " Set key mappings in GlobalKeyMappings
 let g:slime_no_mappings = 1
 
-"  }}}
-"  Plugin: AutoCompletion config and key remappings {{{
+" }}}
+" Plugin: AutoCompletion config and key remappings {{{
 
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
@@ -1787,7 +1738,7 @@ augroup syntaxfile_complete
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
-"  }}}
+" }}}
 " Plugin: Vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = 0
@@ -1798,7 +1749,7 @@ let g:vim_filetype_formatter_commands = {
       \ }
 
 " }}}
-"  Plugin: Miscellaneous global var config {{{
+" Plugin: Miscellaneous global var config {{{
 
 " Python: configure python paths
 " let g:python3_host_prog = system('which python3')
@@ -1896,7 +1847,7 @@ let g:hexmode_xxd_options = '-g 2'
 let g:omni_syntax_use_single_byte = 0
 let g:omni_syntax_use_iskeyword_numeric = 0
 
-"  }}}
+" }}}
 " General: Global key remappings {{{
 
 " This is defined as a function to allow me to reset all my key remappings
@@ -1931,10 +1882,6 @@ function! DefaultKeyMappings()
         \ v:count == 0 ? 'gj' : 'j'
   vnoremap <expr> j
         \ v:count == 0 ? 'gj' : 'j'
-
-  " Okina: Insert, Replace, and possibly other
-  inoremap <C-b> ʻ
-  nnoremap r<C-b> rʻ
 
   " Keyword Program: when calling the keyword program, go to top of result
   nnoremap K Kg
@@ -2045,6 +1992,9 @@ function! DefaultKeyMappings()
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
   vmap gx <Plug>(openbrowser-smart-search)
+
+  " Run code
+  nnoremap <C-k> :Run<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
