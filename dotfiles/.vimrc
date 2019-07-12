@@ -187,6 +187,9 @@ set history=100
 " }}}
 " General: Vim-Plug {{{
 
+" Notes:
+" To use tags: , { 'tag': '*' }
+
 let g:plug_url_format = 'git@github.com:%s.git'
 let g:plug_shallow = 0
 
@@ -298,7 +301,7 @@ Plug 'racer-rust/vim-racer'
 "   cargo install racer
 "   rustup component add rust-src
 " After, run GoUpdateBinaries
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'fatih/vim-go'
 " dotlanguage
 Plug 'wannesm/wmgraphviz.vim'
 " note: must run 'gem install neovim' to get this to work
