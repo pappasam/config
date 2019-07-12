@@ -391,6 +391,10 @@ set statusline+=%L
 set statusline+=\ %y
 set statusline+=\ %{&ff}
 set statusline+=\ (%{strlen(&fenc)?&fenc:'none'})
+augroup statusline_local_overrides
+  autocmd!
+  autocmd FileType nerdtree setlocal statusline=NERDTree
+augroup END
 
 let g:status_mode_map = {
       \ 'n': 'NO',
@@ -428,7 +432,7 @@ function! StatuslineGitBranch()
   endif
 endfunction
 
-augroup GetGitBranch
+augroup get_git_branch
   autocmd!
   autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
 augroup END
