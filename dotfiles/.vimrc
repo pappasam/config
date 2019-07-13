@@ -1662,6 +1662,7 @@ let g:LanguageClient_serverCommands = {
       \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
       \ 'python': ['pyls'],
       \ 'python.jinja2': ['pyls'],
+      \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet']
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1676,7 +1677,7 @@ endfunction
 
 augroup langserverLanguages
   autocmd!
-  autocmd FileType haskell,ruby,typescript,python
+  autocmd FileType haskell,ruby,typescript,python,java
         \ call ConfigureLanguageClient()
 augroup END
 

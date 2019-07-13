@@ -239,6 +239,14 @@ wget -O ~/Downloads/ngrams-en-20150817.zip \
 #   ${@}
 
 #######################################################################
+# Java Language Server
+#######################################################################
+cd ~/java
+git clone git@github.com:georgewfraser/java-language-server.git
+cd java-language-server
+./scripts/link_mac.sh
+
+#######################################################################
 # Ncurses
 #######################################################################
 sudo apt install libncurses5 libncurses5-dev libncursesw5
