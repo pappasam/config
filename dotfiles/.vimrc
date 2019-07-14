@@ -1999,8 +1999,8 @@ function! DefaultKeyMappings()
   nmap gx <Plug>(openbrowser-smart-search)
   vmap gx <Plug>(openbrowser-smart-search)
 
-  " Run code
-  nnoremap <C-k> :Run<CR>
+  " Run Or Build:
+  nnoremap <leader><leader>r :Run<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
