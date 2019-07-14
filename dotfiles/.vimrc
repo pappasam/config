@@ -286,6 +286,7 @@ Plug 'mattn/vim-xxdcursor'
 Plug 'calviken/vim-gdscript3'
 Plug 'marshallward/vim-restructuredtext'
 Plug 'leafgarland/typescript-vim'
+Plug 'killphi/vim-ebnf'
 
 " Autocompletion
 Plug 'autozimu/LanguageClient-neovim', {
@@ -946,13 +947,14 @@ endfunction
 
 " Run source code
 function! s:code_run()
-  if executable(expand('%:p')) == 1
-    vsplit | terminal %:p
+  let filepath = expand('%:p')
+  if executable(filepath) == 1
+    call s:code_term_cmd(filepath)
   elseif !has_key(s:language_runners, &filetype)
     echo 'Run not configured for filetype "' . &filetype . '"'
-    return
+  else
+    call s:code_term_cmd(s:language_runners[&filetype])
   endif
-  call s:code_term_cmd(s:language_runners[&filetype])
 endfunction
 
 command! Build call <SID>code_build()
