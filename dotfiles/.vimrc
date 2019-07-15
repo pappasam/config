@@ -398,10 +398,63 @@ set statusline+=%L
 set statusline+=\ %y
 set statusline+=\ %{&ff}
 set statusline+=\ (%{strlen(&fenc)?&fenc:'none'})
+
+" Slide number for Hovercraft presentation
+set statusline+=\ %{&filetype=='rst'?'Slide\ '.LineMatchCount('^----$',1,line('.')):''}
 augroup statusline_local_overrides
   autocmd!
   autocmd FileType nerdtree setlocal statusline=NERDTree
 augroup END
+
+" Source: https://stackoverflow.com/a/30772902
+function! LineMatchCount(pat,...)
+  " searches for pattern matches in the active buffer, with optional start and
+  " end line number specifications
+
+  " useful command-line for testing against last-used pattern within last-used
+  " visual selection: echo LineMatchCount(@/,getpos("'<")[1],getpos("'>")[1])
+
+  if (a:0 > 2) | echoerr 'too many arguments for function: LineMatchCount()'
+        \ | return| endif
+  let start = a:0 >= 1 ? a:000[0] : 1
+  let end = a:0 >= 2 ? a:000[1] : line('$')
+  "" validate args
+  if (type(start) != type(0))
+        \ | echoerr 'invalid type of argument: start' | return | endif
+  if (type(end) != type(0))
+        \ | echoerr 'invalid type of argument: end' | return | endif
+  if (end < start)| echoerr 'invalid arguments: end < start'| return | endif
+  "" save current cursor position
+  let wsv = winsaveview()
+  "" set cursor position to start (defaults to start-of-buffer)
+  call setpos('.',[0,start,1,0])
+  "" accumulate line count in local var
+  let lineCount = 0
+  "" keep searching until we hit end-of-buffer
+  let ret = search(a:pat,'cW')
+  while (ret != 0)
+    " break if the latest match was past end; must do this prior to
+    " incrementing lineCount for it, because if the match start is past end,
+    " it's not a valid match for the caller
+    if (ret > end)
+      break
+    endif
+    let lineCount += 1
+    " always move the cursor to the start of the line following the latest
+    " match; also, break if we're already at end; otherwise next search would
+    " be unnecessary, and could get stuck in an infinite loop if end ==
+    " line('$')
+    if (ret == end)
+      break
+    endif
+    call setpos('.',[0,ret+1,1,0])
+    let ret = search(a:pat,'cW')
+  endwhile
+  "" restore original cursor position
+  call winrestview(wsv)
+  "" return result
+  return lineCount
+endfunction
 
 " Strip newlines from a string
 function! StripNewlines(instring)
