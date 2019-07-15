@@ -388,8 +388,10 @@ set tabline=%t
 " Status Line
 set laststatus=2
 set statusline=
-set statusline+=[%{mode()}]
-set statusline+=\ %{get(b:,'gitbranch','')}
+set statusline+=[%{mode()}]\  " spaces after mode
+set statusline+=%{&paste?'PASTE\ ':''}
+set statusline+=%{&spell?'SPELL\ ':''}
+set statusline+=%{get(b:,'gitbranch','')}
 set statusline+=%t
 set statusline+=%=
 set statusline+=%L
@@ -400,21 +402,6 @@ augroup statusline_local_overrides
   autocmd!
   autocmd FileType nerdtree setlocal statusline=NERDTree
 augroup END
-
-let g:status_mode_map = {
-      \ 'n': 'NO',
-      \ 'v': 'VI',
-      \ 'V': 'VI',
-      \ 'i': 'IN',
-      \ 'R': 'RE',
-      \ 's': 'SU',
-      \ 't': 'TR',
-      \ 'c': 'CM',
-      \ '!': 'SH',
-      \ }
-function! StatuslineMode()
-  return get(g:status_mode_map, mode(), '??')
-endfunction
 
 " Strip newlines from a string
 function! StripNewlines(instring)
