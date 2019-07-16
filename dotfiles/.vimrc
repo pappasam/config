@@ -1689,7 +1689,7 @@ let g:slime_default_config = {
       \ "socket_name": "default",
       \ "target_pane": "{right-of}",
       \ }
-let g:slime_dont_ask_default = 0
+let g:slime_dont_ask_default = 1
 
 " Set key mappings in GlobalKeyMappings
 let g:slime_no_mappings = 1
