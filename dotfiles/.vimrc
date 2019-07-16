@@ -417,7 +417,7 @@ function! StatuslineGitBranch()
             \ expand('%:p:h') .
             \ ' rev-parse --abbrev-ref HEAD'))
       if !v:shell_error
-        let b:gitbranch = '^' . branch_name . ':'
+        let b:gitbranch = '<' . branch_name . '> '
       endif
     catch
     endtry
