@@ -1758,7 +1758,7 @@ augroup END
 " C_CPP:
 " Jumping back defaults to <C-O> or <C-T> (in is <C-I> per usual)
 " Defaults to <C-]> for goto definition
-" Additionally, jumping to Header file under cursor: gd
+" Additionally, jumping to Header file under cursor: gf
 let g:clang_library_path = '/usr/lib/llvm-6.0/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
