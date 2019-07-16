@@ -388,19 +388,27 @@ set tabline=%t
 " Status Line
 set laststatus=2
 set statusline=
-set statusline+=[%{mode()}]\  " spaces after mode
-set statusline+=%{&paste?'PASTE\ ':''}
-set statusline+=%{&spell?'SPELL\ ':''}
+set statusline+=\ %{mode()}\  " spaces after mode
+set statusline+=%#CursorLine#
+set statusline+=\   " space
+set statusline+=%{&paste?'[PASTE]':''}
+set statusline+=%{&spell?'[SPELL]':''}
+set statusline+=%r
+set statusline+=%m
 set statusline+=%{get(b:,'gitbranch','')}
-set statusline+=%t
+set statusline+=\   " space
+set statusline+=%*  " Default color
+set statusline+=\ %f
 set statusline+=%=
-set statusline+=%L
-set statusline+=\ %y
-set statusline+=\ %{&ff}
-set statusline+=\ (%{strlen(&fenc)?&fenc:'none'})
+set statusline+=%n  " buffer number
+set statusline+=\ %y\  " File type
+set statusline+=%#CursorLine#
+set statusline+=\ %{&ff}\  " Unix or Dos
+set statusline+=%*  " Default color
+set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 augroup statusline_local_overrides
   autocmd!
-  autocmd FileType nerdtree setlocal statusline=NERDTree
+  autocmd FileType nerdtree setlocal statusline=\ NERDTree\ %#CursorLine#
 augroup END
 
 " Strip newlines from a string
@@ -417,7 +425,7 @@ function! StatuslineGitBranch()
             \ expand('%:p:h') .
             \ ' rev-parse --abbrev-ref HEAD'))
       if !v:shell_error
-        let b:gitbranch = '<' . branch_name . '> '
+        let b:gitbranch = '[git::' . branch_name . ']'
       endif
     catch
     endtry
