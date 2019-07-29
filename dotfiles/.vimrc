@@ -1721,10 +1721,14 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = 0
 function! ConfigureLanguageClient()
+  nnoremap <buffer> <leader>ld :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
+  nnoremap <buffer> <leader>lr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <buffer> <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <buffer> <leader>lu :call LanguageClient#textDocument_references()<CR>
+  nnoremap <buffer> <leader>la :call LanguageClient#textDocument_codeAction()<CR>
+  nnoremap <buffer> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <buffer> <leader>lc :call LanguageClient_contextMenu()<CR>
   setlocal omnifunc=LanguageClient#complete
 endfunction
 

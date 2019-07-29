@@ -885,6 +885,47 @@ function zoomy {
 }
 
 # }}}
+# Compdef Test {{{
+
+# Example from:
+# https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
+
+function _hello {
+  local line
+
+  _arguments -C \
+    "-h [Show help information]" \
+    "--help[Show help information]" \
+    "-v[Print verbose message]" \
+    "--verbose[Print verbose message]" \
+    "1: :(quietly loudly)" \
+    "*::arg:->args"
+
+  case $line[1] in
+    loudly)
+      _hello_loudly
+      ;;
+    quietly)
+      _hello_quietly
+      ;;
+  esac
+}
+
+function _hello_quietly {
+  _arguments "--silent[Dont output anything]"
+}
+
+function _hello_loudly {
+  _arguments "--repeat=[Repat the <message> any number of times]"
+}
+
+function hello() {
+  echo "world"
+}
+compdef _hello hello
+
+
+# }}}
 # ZShell prompt (PS1) {{{
 
 # NOTE this is not cross-shell; zsh-specific
