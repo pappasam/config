@@ -259,6 +259,8 @@ sudo apt install ncurses-doc
 # rust toolchains
 rustup component add cargo
 rustup component add clippy
+rustup component add rls
+rustup component add rust-analysis
 rustup component add rust-docs
 rustup component add rust-src
 rustup component add rustfmt
