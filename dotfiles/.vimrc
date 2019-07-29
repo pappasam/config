@@ -297,11 +297,7 @@ Plug 'marijnh/tern_for_vim'
 Plug 'Rip-Rip/clang_complete'
 " for C header filename completion:
 Plug 'xaizek/vim-inccomplete'
-Plug 'racer-rust/vim-racer'
-" Addional requirements:
-"   cargo install racer
-"   rustup component add rust-src
-" After, run GoUpdateBinaries
+" After vim-go, run GoUpdateBinaries
 Plug 'fatih/vim-go'
 " dotlanguage
 Plug 'wannesm/wmgraphviz.vim'
@@ -1714,11 +1710,12 @@ let g:slime_no_mappings = 1
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
-      \ 'ruby': ['solargraph', 'stdio'],
-      \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
+      \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
       \ 'python': ['pyls'],
       \ 'python.jinja2': ['pyls'],
-      \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet']
+      \ 'ruby': ['solargraph', 'stdio'],
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1773,17 +1770,6 @@ let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
 let g:clang_complete_auto = 0
 let g:clang_complete_macros = 1
 let g:clang_jumpto_declaration_key = "<C-]>"
-
-" Rust:
-" rustup install racer
-let g:racer_cmd = $HOME . '/.cargo/bin/racer'
-let g:racer_insert_paren = 0
-let g:racer_experimental_completer = 1
-augroup rust_complete
-  autocmd!
-  autocmd FileType rust nmap <buffer> <C-]> <Plug>(rust-def)
-  autocmd FileType rust nmap <leader>sd <Plug>(rust-doc)
-augroup END
 
 " Terraform:
 augroup terraform_complete
