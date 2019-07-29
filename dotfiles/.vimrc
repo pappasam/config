@@ -1733,8 +1733,9 @@ endfunction
 
 augroup langserverLanguages
   autocmd!
-  autocmd FileType haskell,ruby,typescript,python,java
-        \ call ConfigureLanguageClient()
+  execute 'autocmd FileType '
+        \ . join(keys(g:LanguageClient_serverCommands), ',')
+        \ . ' call ConfigureLanguageClient()'
 augroup END
 
 " VimScript:
