@@ -439,7 +439,7 @@ augroup END
 augroup filetype_recognition
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
-  autocmd BufNewFile,BufRead,BufEnter *.config set filetype=yaml
+  autocmd BufNewFile,BufRead,BufEnter *.config,.cookiecutterrc set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term
         \ set filetype=json
   autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
