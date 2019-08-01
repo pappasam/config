@@ -289,6 +289,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'killphi/vim-ebnf'
 
 " Autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
@@ -1708,6 +1709,7 @@ let g:slime_no_mappings = 1
 
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
+let g:deoplete#enable_at_startup = 1
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
@@ -1720,15 +1722,16 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = 0
+
 function! ConfigureLanguageClient()
-  nnoremap <buffer> <leader>ld :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer> <leader>lr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <buffer> <leader>lu :call LanguageClient#textDocument_references()<CR>
-  nnoremap <buffer> <leader>la :call LanguageClient#textDocument_codeAction()<CR>
-  nnoremap <buffer> <leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <buffer> <leader>lc :call LanguageClient_contextMenu()<CR>
+  nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <buffer> <leader>sf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
+  nnoremap <buffer> <leader>sa :call LanguageClient#textDocument_codeAction()<CR>
+  nnoremap <buffer> <leader>ss :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <buffer> <leader>sc :call LanguageClient_contextMenu()<CR>
   setlocal omnifunc=LanguageClient#complete
 endfunction
 
