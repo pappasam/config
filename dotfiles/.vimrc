@@ -290,6 +290,7 @@ Plug 'killphi/vim-ebnf'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
@@ -1710,6 +1711,11 @@ let g:slime_no_mappings = 1
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+      \ 'auto_complete_delay': 300,
+      \ })
+call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
+call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
@@ -1919,8 +1925,9 @@ function! DefaultKeyMappings()
   inoremap <M-CR> <CR><C-o>O
 
   " Omnicompletion: <C-@> is signal sent by some terms when pressing <C-Space>
-  inoremap <C-@> <C-x><C-o>
-  inoremap <C-space> <C-x><C-o>
+  " Disable below for now; I'm using deoplete to get this automatically
+  " inoremap <C-@> <C-x><C-o>
+  " inoremap <C-space> <C-x><C-o>
 
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
