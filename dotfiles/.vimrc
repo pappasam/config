@@ -1047,7 +1047,9 @@ augroup END
 " It's not very difficult and will help me not pay attention
 augroup AutoUpdatePlugins
   autocmd!
-  autocmd VimEnter * silent UpdateRemotePlugins
+  if has('nvim')
+    autocmd VimEnter,VimLeave * silent UpdateRemotePlugins
+  endif
 augroup END
 
 " }}}
