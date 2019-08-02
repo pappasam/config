@@ -1043,12 +1043,12 @@ augroup END
 " }}}
 " General: UpdateRemotePlugins {{{
 
-" Always update remote plugins on Vim start
+" Always update remote plugins when leaving Vim
 " It's not very difficult and will help me not pay attention
 augroup AutoUpdatePlugins
   autocmd!
   if has('nvim')
-    autocmd VimEnter,VimLeave * silent UpdateRemotePlugins
+    autocmd VimLeavePre * silent UpdateRemotePlugins
   endif
 augroup END
 
