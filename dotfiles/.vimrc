@@ -1718,6 +1718,7 @@ call deoplete#custom#option({
       \ })
 call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
 call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
+call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
