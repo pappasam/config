@@ -1677,7 +1677,7 @@ let g:ale_linters = {
       \ }
 
 " }}}
-" Plugin: Slime --- {{{
+" Plugin: Slime {{{
 
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
@@ -1703,7 +1703,7 @@ set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
       \ 'auto_complete': 1,
-      \ 'auto_complete_delay': 0,
+      \ 'auto_complete_delay': 300,
       \ 'max_list': 500,
       \ 'num_processes': 8,
       \ })
@@ -1719,11 +1719,6 @@ call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
 call deoplete#custom#option('ignore_sources', {
       \ '_': ['buffer', 'around'],
       \ })
-
-augroup deoplete_disable
-  autocmd!
-  autocmd FileType markdown, toml let b:deoplete_disable_auto_complete = 1
-augroup END
 
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
