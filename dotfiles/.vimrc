@@ -1815,6 +1815,7 @@ let g:vim_filetype_formatter_ft_no_defaults = [
       \ 'markdown',
       \ ]
 let g:vim_filetype_formatter_commands = {
+      \ 'toml': 'toml-sort --ignore-non-tables',
       \ }
 
 " }}}
