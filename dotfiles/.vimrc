@@ -1708,7 +1708,7 @@ set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
       \ 'auto_complete': 1,
-      \ 'auto_complete_delay': 300,
+      \ 'auto_complete_delay': 0,
       \ 'max_list': 500,
       \ 'num_processes': 8,
       \ })
