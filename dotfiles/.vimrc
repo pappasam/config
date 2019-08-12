@@ -1041,6 +1041,12 @@ augroup keywordprogram-overrides
 augroup END
 
 " }}}
+" Plugin: Gina {{{
+
+let g:gina#command#blame#formatter#format = '(%au) %su%=on %ti %ma%in'
+command! Gblame Gina blame --width=80
+
+" }}}
 " Plugin: Jinja2 {{{
 
 function! s:jinja2_toggle()
