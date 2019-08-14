@@ -274,6 +274,7 @@ Plug 'lervag/vimtex'
 Plug 'tomlion/vim-solidity'
 Plug 'jparise/vim-graphql'
 Plug 'pangloss/vim-javascript'
+Plug 'evanleck/vim-svelte'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'groenewege/vim-less'
 Plug 'farfanoide/vim-kivy'
@@ -295,7 +296,6 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
-Plug 'marijnh/tern_for_vim'
 Plug 'Rip-Rip/clang_complete'
 " for C header filename completion:
 Plug 'xaizek/vim-inccomplete'
@@ -1644,7 +1644,7 @@ let g:ragtag_global_maps = 1
 
 " Additional files for whice ragtag will initialize
 augroup ragtag_config
-  autocmd FileType javascript call RagtagInit()
+  autocmd FileType svelte,javascript call RagtagInit()
 augroup end
 
 " }}}
@@ -1734,11 +1734,13 @@ call deoplete#custom#option('ignore_sources', {
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
+      \ 'javascript': ['npx', '--no-install', 'flow', 'lsp'],
+      \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
       \ 'python': ['pyls'],
       \ 'python.jinja2': ['pyls'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ 'typescript': ['npx', '-q', 'typescript-language-server', '--stdio'],
+      \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
@@ -1769,16 +1771,6 @@ augroup vimscript_complete
   autocmd!
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
-augroup END
-
-" Javascript:
-let g:tern#command = ['npx', '--no-install', 'tern']
-let g:tern_show_argument_hints = 'no'
-let g:tern_show_signature_in_pum = 0
-augroup javascript_complete
-  autocmd!
-  autocmd FileType javascript nnoremap <buffer> <C-]> :TernDef<CR>
-  autocmd FileType javascript nnoremap <buffer> <leader>sd :TernDoc<CR>
 augroup END
 
 " Elm:
