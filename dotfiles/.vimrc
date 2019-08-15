@@ -289,6 +289,9 @@ Plug 'marshallward/vim-restructuredtext'
 Plug 'leafgarland/typescript-vim'
 Plug 'killphi/vim-ebnf'
 
+" Folding
+Plug 'matze/vim-ini-fold'
+
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
@@ -334,6 +337,8 @@ Plug 'reedes/vim-textobj-sentence'
 Plug 'somini/vim-textobj-fold'
 " ao/io for a block of indentation (i.e. spaces)
 Plug 'glts/vim-textobj-indblock'
+" ay/iy for a syntax group
+Plug 'kana/vim-textobj-syntax'
 
 " Writing helpers
 Plug 'dkarter/bullets.vim'
@@ -579,7 +584,14 @@ augroup fold_settings
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
   autocmd FileType markdown,rst
         \ setlocal nofoldenable
+  autocmd FileType gitconfig,dosini,toml call IniFoldActivate()
 augroup END
+
+let g:ini_fold_enabled_filetypes = {
+      \ 'gitconfig': 1,
+      \ 'dosini': 1,
+      \ 'toml': 1,
+      \ }
 
 " }}}
 " General: Trailing whitespace {{{
