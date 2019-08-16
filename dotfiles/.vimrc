@@ -1718,7 +1718,7 @@ call deoplete#custom#option({
       \ 'auto_complete': 1,
       \ 'auto_complete_delay': 0,
       \ 'max_list': 500,
-      \ 'num_processes': 8,
+      \ 'num_processes': 1,
       \ })
 call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
 call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
