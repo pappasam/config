@@ -536,7 +536,7 @@ let g:litecorrect_custom_user_dict = {
 augroup writing
   autocmd!
   autocmd FileType markdown,rst,text,gitcommit
-        \ setlocal wrap linebreak nolist spell
+        \ setlocal wrap linebreak nolist
         \ | call textobj#sentence#init()
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
   autocmd FileType requirements setlocal nospell
