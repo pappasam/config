@@ -290,12 +290,12 @@ Plug 'leafgarland/typescript-vim'
 Plug 'killphi/vim-ebnf'
 
 " Autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+
 Plug 'Rip-Rip/clang_complete'
 " for C header filename completion:
 Plug 'xaizek/vim-inccomplete'
@@ -1711,61 +1711,47 @@ let g:slime_no_mappings = 1
 " 2) Return from file (relies on tag stack): <C-O>
 " 3) Print the documentation of something under the cursor: <leader>gd
 
-" LanguageClientServer: configure it for relevant languages
-set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-      \ 'auto_complete': 1,
-      \ 'auto_complete_delay': 0,
-      \ 'max_list': 500,
-      \ 'num_processes': 1,
-      \ })
-call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
-call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
-call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
-call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
+let g:asyncomplete_auto_completeopt = 1
+let g:lsp_diagnostics_enabled = 0
 
-" Deoplete, never insert bracket
-call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-
-" Sources to ignore (I don't want buffers to auto complete)
-call deoplete#custom#option('ignore_sources', {
-      \ '_': ['buffer', 'around'],
-      \ })
-
-let g:LanguageClient_serverCommands = {
-      \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
-      \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
-      \ 'javascript': ['npx', '--no-install', 'flow', 'lsp'],
-      \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
-      \ 'python': ['jedi-language-server'],
-      \ 'python.jinja2': ['jedi-language-server'],
-      \ 'ruby': ['solargraph', 'stdio'],
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
-      \ 'text': ['custom-lsp'],
-      \ }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_hoverPreview = 'auto'
-let g:LanguageClient_diagnosticsEnable = 0
-
-function! ConfigureLanguageClient()
-  nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>sf :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
-  nnoremap <buffer> <leader>sa :call LanguageClient#textDocument_codeAction()<CR>
-  nnoremap <buffer> <leader>ss :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <buffer> <leader>sc :call LanguageClient_contextMenu()<CR>
-  setlocal omnifunc=LanguageClient#complete
-endfunction
-
-augroup langserverLanguages
+augroup language_servers
   autocmd!
-  execute 'autocmd FileType '
-        \ . join(keys(g:LanguageClient_serverCommands), ',')
-        \ . ' call ConfigureLanguageClient()'
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['haskell'],
+        \ 'name': 'haskell-ide-engine',
+        \ 'cmd': {server_info -> ['stack', 'exec', 'hie-wrapper']},
+        \ })
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['java'],
+        \ 'name': 'java-language-server',
+        \ 'cmd': {server_info -> [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet']},
+        \ })
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['javascript', 'javascript.jsx'],
+        \ 'name': 'flow',
+        \ 'cmd': {server_info -> ['npx', '--no-install', 'flow', 'lsp']},
+        \ })
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['python', 'pytyhon.jinja2'],
+        \ 'name': 'jedi-language-server',
+        \ 'cmd': {server_info -> ['jedi-language-server']},
+        \ })
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['rust'],
+        \ 'name': 'rls',
+        \ 'cmd': {server_info -> ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']},
+        \ })
+  autocmd User lsp_setup call lsp#register_server({'whitelist': ['typescript'],
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info -> ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio']},
+        \ })
+augroup END
+
+augroup async_completion
+  autocmd!
+  autocmd User asyncomplete_setup call asyncomplete#register_source(
+        \ asyncomplete#sources#file#get_source_options({
+        \ 'name': 'file',
+        \ 'whitelist': ['*'],
+        \ 'priority': 10,
+        \ 'completor': function('asyncomplete#sources#file#completor')
+        \ })
+        \ )
 augroup END
 
 " VimScript:
@@ -1936,8 +1922,18 @@ function! DefaultKeyMappings()
 
   " Omnicompletion: <C-@> is signal sent by some terms when pressing <C-Space>
   " Disable below for now; I'm using deoplete to get this automatically
-  inoremap <C-@> <C-x><C-o>
-  inoremap <C-space> <C-x><C-o>
+  " inoremap <C-@> <C-x><C-o>
+  " inoremap <C-space> <C-x><C-o>
+  imap <C-space> <Plug>(asyncomplete_force_refresh)
+
+  " LSP: make language server commands default
+  nnoremap <C-]> :LspDefinition<CR>
+  nnoremap <leader>sd :LspHover<CR>
+  nnoremap <leader>sr :LspRename<CR>
+  nnoremap <leader>sf :LspFormat<CR>
+  nnoremap <leader>su :LspReferences<CR>
+  nnoremap <leader>sa :LspCodeAction<CR>
+  nnoremap <leader>ss :LspDocumentSymbol<CR>
 
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
