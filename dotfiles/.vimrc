@@ -1738,11 +1738,12 @@ let g:LanguageClient_serverCommands = {
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
       \ 'javascript': ['npx', '--no-install', 'flow', 'lsp'],
       \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
-      \ 'python': ['pyls'],
-      \ 'python.jinja2': ['pyls'],
+      \ 'python': ['jedi-language-server'],
+      \ 'python.jinja2': ['jedi-language-server'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
+      \ 'text': ['custom-lsp'],
       \ }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_hoverPreview = 'auto'
