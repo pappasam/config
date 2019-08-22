@@ -370,6 +370,14 @@ cd ~/bin
 # java -jar ~/java/jenkins.war ${@}
 
 #######################################################################
+# Less
+#######################################################################
+sudo apt remove less
+# Download latest recommended version from:
+# www.greenwoodsoftware.com/less/download.html
+# Follow installation instructions to compile from source
+
+#######################################################################
 # Install language binary managers
 #######################################################################
 

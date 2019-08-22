@@ -92,9 +92,6 @@ export GCC_COLORS
 
 # Configure less (de-initialization clears the screen)
 # Gives nicely-colored man pages
-LESS="--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS"
-LESS="$LESS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --no-init"
-export LESS
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
@@ -106,7 +103,7 @@ export PAGER=less
 
 # Configure Man Pager
 export MANWIDTH=79
-export MANPAGER="less -+--quit-if-one-screen -+--no-init"
+export MANPAGER=less
 
 # Git
 export GIT_PAGER=less
