@@ -117,9 +117,16 @@ sudo apt install screenkey
 sudo apt install fonts-hack-ttf
 
 #######################################################################
-# Tmux
+# Tmux - install from source to get latest version
 #######################################################################
-sudo apt install tmux
+sudo apt install autoconf automake pkg-config libevent-dev
+cd ~/src/lib
+git clone git@github.com:tmux/tmux.git
+cd tmux
+sh autogen.sh
+./configure
+make
+sudo make install
 
 #######################################################################
 # System monitoring
