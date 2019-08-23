@@ -546,7 +546,7 @@ augroup END
 " }}}
 " General: Digraphs {{{
 
-digraph `` 699  " Hawaiian character ʻ
+digraph jj 699  " Hawaiian character ʻ
 
 " }}}
 " General: Word definition and meaning lookup {{{
