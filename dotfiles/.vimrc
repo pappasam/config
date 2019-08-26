@@ -1067,6 +1067,8 @@ command! Jinja2Toggle call <SID>jinja2_toggle()
 " }}}
 " Plugin: Man pager / help (builtins) {{{
 
+let g:man_hardwrap = v:true
+
 augroup man_page_custom
   autocmd!
   autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
