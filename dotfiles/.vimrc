@@ -292,6 +292,8 @@ Plug 'killphi/vim-ebnf'
 " Autocompletion And IDE Features:
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
@@ -1723,18 +1725,13 @@ call deoplete#custom#option({
       \ 'max_list': 500,
       \ 'num_processes': 1,
       \ })
+call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
 call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
 call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
 call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
-
-" Deoplete, never insert bracket
+call deoplete#custom#source('neosnippet', 'min_pattern_length', 1)
 call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-
-" Sources to ignore (I don't want buffers to auto complete)
-call deoplete#custom#option('ignore_sources', {
-      \ '_': ['buffer', 'around'],
-      \ })
 
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
@@ -2063,6 +2060,11 @@ function! DefaultKeyMappings()
 
   " Ale: shortcuts
   nnoremap <leader>a :ALEToggleBuffer<cr>
+
+  " NeoSnippet:
+  imap <C-i> <Plug>(neosnippet_expand_or_jump)
+  smap <C-i> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-i> <Plug>(neosnippet_expand_target)
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
