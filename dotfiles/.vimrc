@@ -195,10 +195,10 @@ let g:plug_shallow = 0
 
 call plug#begin('~/.vim/plugged')
 
-" Help for vim-plug
+" Vim Plug:
 Plug 'junegunn/vim-plug'
 
-" Basics
+" Basics:
 Plug 'junegunn/vader.vim'
 Plug 'kh3phr3n/tabline'
 Plug 'qpkorr/vim-bufkill'
@@ -230,25 +230,25 @@ Plug 'romainl/vim-devdocs'
 " Not the official plugin, but written in pure vimscript so faster Vim startup
 Plug 'sgur/vim-editorconfig'
 
-" Fuzzy finder
+" Fuzzy Finder:
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'maxjacobson/vim-fzf-coauthorship'
 
-" Git
+" Git:
 Plug 'lambdalisue/gina.vim'
 Plug 'junegunn/gv.vim'
 
-" Basic coloring
+" Syntax Theme:
 Plug 'NLKNguyen/papercolor-theme'
 
-" Utils
+" Utilities:
 Plug 'tpope/vim-commentary'
 " Convert to snakecase/camelcase/etc
 Plug 'tpope/vim-abolish'
 Plug 'jiangmiao/auto-pairs'
 
-" Syntax highlighting
+" Syntax Highlighting:
 Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 Plug 'ron-rs/ron.vim'
@@ -289,7 +289,7 @@ Plug 'marshallward/vim-restructuredtext'
 Plug 'leafgarland/typescript-vim'
 Plug 'killphi/vim-ebnf'
 
-" Autocompletion
+" Autocompletion And IDE Features:
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', {
@@ -307,23 +307,23 @@ Plug 'wannesm/wmgraphviz.vim'
 " might require the neovim headers
 Plug 'juliosueiras/vim-terraform-completion'
 
-" Tagbar
+" Tagbar:
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
 " Additional requirements
 "   npm install -g jsctags
 "   sudo apt install -y php
 
-" Indentation-only
+" Indentation Only:
 Plug 'vim-scripts/groovyindent-unix'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 
-" Web Development - General
+" Web Development General:
 Plug 'tpope/vim-ragtag'
 Plug 'heavenshell/vim-jsdoc'
 
-" Text Objects
+" Text Objects:
 Plug 'machakann/vim-sandwich'
 Plug 'kana/vim-textobj-user'
 " al/il for the current line
@@ -337,7 +337,7 @@ Plug 'glts/vim-textobj-indblock'
 " ay/iy for a syntax group
 Plug 'kana/vim-textobj-syntax'
 
-" Writing helpers
+" Writing:
 Plug 'dkarter/bullets.vim'
 Plug 'matthew-brett/vim-rst-sections'
 Plug 'nvie/vim-rst-tables'
@@ -348,21 +348,21 @@ Plug 'reedes/vim-litecorrect'
 Plug 'tommcdo/vim-exchange'
 Plug 'dbmrq/vim-ditto'
 
-" Previewers
+" Previewers:
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
-" Code prettifiers
+" Code Formatters:
 Plug 'pappasam/vim-filetype-formatter'
 
-" Linting
+" Linting:
 Plug 'pappasam/ale', { 'branch': 'languagetool_autodetect_breaks_ngrams' }
 
-" C Programming
+" C:
 Plug 'ericcurtin/CurtineIncSw.vim'
 
-" Repl Integration
+" Repl Integration:
 Plug 'jpalardy/vim-slime'
 
 call plug#end()
