@@ -291,7 +291,6 @@ Plug 'killphi/vim-ebnf'
 
 " Autocompletion And IDE Features:
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-dictionary', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -1726,9 +1725,6 @@ call deoplete#custom#option({
       \ 'num_processes': 1,
       \ })
 call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
-call deoplete#custom#source('dictionary', 'matchers', ['matcher_head'])
-call deoplete#custom#source('dictionary', 'filetypes', ['markdown'])
-call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
 call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
 call deoplete#custom#source('neosnippet', 'min_pattern_length', 1)
 call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
