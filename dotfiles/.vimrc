@@ -2079,8 +2079,11 @@ function! DefaultKeyMappings()
   nnoremap <expr> <leader>p
         \ len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
-  " MouseCopy: system copy mouse characteristics
+  " Mouse Copy: system copy mouse characteristics
   vnoremap <RightMouse> "+y
+
+  " Mouse Paste: make it come from the system register
+  nnoremap <MiddleMouse> "+<MiddleMouse>
 
   " Mouse Open Close Folds: open folds with the mouse, and close the folds
   " open operation taken from: https://stackoverflow.com/a/13924974
