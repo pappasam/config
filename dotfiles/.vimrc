@@ -1202,19 +1202,19 @@ augroup END
 " }}}
 " Plugin: Markdown-preview.vim {{{
 
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 0
+let g:mkdp_auto_start = v:false
+let g:mkdp_auto_close = v:false
 
 " set to 1, the vim will just refresh markdown when save the buffer or
 " leave from insert mode, default 0 is auto refresh markdown as you edit or
 " move the cursor
 " default: 0
-let g:mkdp_refresh_slow = 0
+let g:mkdp_refresh_slow = v:false
 
 " set to 1, the MarkdownPreview command can be use for all files,
 " by default it just can be use in markdown file
 " default: 0
-let g:mkdp_command_for_global = 0
+let g:mkdp_command_for_global = v:false
 
 " a custom vim function name to open preview page
 " this function will receive url as param
@@ -1266,8 +1266,8 @@ command! Preview call <SID>preview()
 " }}}
 "  Plugin: NERDTree {{{
 
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeCaseSensitiveSort = 0
+let g:NERDTreeAutoDeleteBuffer = v:true
+let g:NERDTreeCaseSensitiveSort = v:false
 let g:NERDTreeMapJumpFirstChild = '<C-k>'
 let g:NERDTreeMapJumpLastChild = '<C-j>'
 let g:NERDTreeMapJumpNextSibling = '<C-n>'
@@ -1276,13 +1276,13 @@ let g:NERDTreeMapOpenInTab = '<C-t>'
 let g:NERDTreeMapOpenInTabSilent = ''
 let g:NERDTreeMapOpenSplit = '<C-s>'
 let g:NERDTreeMapOpenVSplit = '<C-v>'
-let g:NERDTreeShowHidden = 0
-let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeShowHidden = v:false
+let g:NERDTreeShowLineNumbers = v:true
 let g:NERDTreeSortOrder = ['*', '\/$']
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
 let g:NERDTreeMouseMode = 2
-let g:NERDTreeMinimalUI = 1
+let g:NERDTreeMinimalUI = v:true
 let g:NERDTreeIgnore = [
       \ 'venv$[[dir]]',
       \ '.venv$[[dir]]',
@@ -1403,12 +1403,12 @@ let g:fzf_action = {
 
 let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
-let g:tagbar_autofocus = 1
+let g:tagbar_autofocus = v:true
 let g:tagbar_indent = 1
-let g:tagbar_sort = 0  " order by order in sort file
-let g:tagbar_case_insensitive = 1
+let g:tagbar_sort = v:false  " order by order in sort file
+let g:tagbar_case_insensitive = v:true
 let g:tagbar_width = 37
-let g:tagbar_silent = 1
+let g:tagbar_silent = v:true
 let g:tagbar_foldlevel = 0
 let g:tagbar_type_haskell = {
     \ 'ctagsbin': 'hasktags',
@@ -1473,8 +1473,8 @@ let g:tagbar_type_rst = {
 " \ '',
 
 let g:startify_list_order = []
-let g:startify_fortune_use_unicode = 1
-let g:startify_enable_special = 1
+let g:startify_fortune_use_unicode = v:true
+let g:startify_enable_special = v:true
 let g:startify_custom_header = []
 
 if s:plugin_exists('vim-startify')
@@ -1506,9 +1506,9 @@ endif
 " }}}
 " Plugin: VimTex {{{
 
-let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:vimtex_compiler_latexmk = {'callback' : v:false}
 let g:tex_flavor = 'latex'
-let g:vimtex_imaps_enabled = 0
+let g:vimtex_imaps_enabled = v:false
 let g:vimtex_doc_handlers = ['MyVimTexDocHandler']
 function! MyVimTexDocHandler(context)
   " Function called with using :VimtexDocPackage
@@ -1525,7 +1525,7 @@ endfunction
 
 " AutoPairs:
 " unmap CR due to incompatibility with clang-complete
-let g:AutoPairsMapCR = 0
+let g:AutoPairsMapCR = v:false
 let g:AutoPairs = {
       \ '(':')',
       \ '[':']',
@@ -1606,7 +1606,7 @@ augroup END
 "     with srl'l" or with srbl"
 
 " Keymappings set in keymappings section
-let g:textobj_sandwich_no_default_key_mappings = 1
+let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " }}}
 " Plugin: Goyo {{{
@@ -1644,7 +1644,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " Plugin: RagTag {{{
 
 " Load mappings on every filetype
-let g:ragtag_global_maps = 1
+let g:ragtag_global_maps = v:true
 
 " Additional files for whice ragtag will initialize
 augroup ragtag_config
@@ -1654,31 +1654,32 @@ augroup end
 " }}}
 " Plugin: Vim-markdown {{{
 
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_frontmatter = v:true
+let g:vim_markdown_toml_frontmatter = v:true
+let g:vim_markdown_json_frontmatter = v:true
+let g:vim_markdown_no_default_key_mappings = v:true
+let g:vim_markdown_strikethrough = v:true
+let g:vim_markdown_folding_style_pythonic = v:true
+
+let g:vim_markdown_auto_insert_bullets = v:false
+let g:vim_markdown_new_list_item_indent = v:false
 
 " }}}
 " Plugin: Ale {{{
 
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_filetype_changed = 1
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = v:true
+let g:ale_lint_on_filetype_changed = v:true
+let g:ale_lint_on_insert_leave = v:false
+let g:ale_lint_on_save = v:true
 let g:ale_lint_on_text_changed = 'normal'
 
 let g:ale_lint_delay = 0
-let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_warn_about_trailing_whitespace = v:false
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_languagetool_options = ''
-let g:ale_linters_explicit = 1
+let g:ale_linters_explicit = v:true
 let g:ale_linters = {
       \ 'markdown': ['write-good', 'languagetool'],
       \ 'python': ['pylint'],
@@ -1700,10 +1701,10 @@ let g:slime_default_config = {
       \ "socket_name": "default",
       \ "target_pane": "{right-of}",
       \ }
-let g:slime_dont_ask_default = 1
+let g:slime_dont_ask_default = v:true
 
 " Set key mappings in GlobalKeyMappings
-let g:slime_no_mappings = 1
+let g:slime_no_mappings = v:true
 
 " }}}
 " Plugin: AutoCompletion config and key remappings {{{
@@ -1717,7 +1718,7 @@ let g:slime_no_mappings = 1
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
-      \ 'auto_complete': 1,
+      \ 'auto_complete': v:true,
       \ 'auto_complete_delay': 0,
       \ 'max_list': 500,
       \ 'num_processes': 1,
@@ -1747,9 +1748,9 @@ let g:LanguageClient_serverCommands = {
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
       \ 'text': ['custom-lsp'],
       \ }
-let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'auto'
-let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_diagnosticsEnable = v:false
 
 function! ConfigureLanguageClient()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
@@ -1779,8 +1780,8 @@ augroup vimscript_complete
 augroup END
 
 " Elm:
-let g:elm_detailed_complete = 1
-let g:elm_format_autosave = 0
+let g:elm_detailed_complete = v:true
+let g:elm_format_autosave = v:false
 augroup elm_complete
   autocmd!
   autocmd FileType elm nnoremap <buffer> <C-]> :ElmShowDocs<CR>
@@ -1792,8 +1793,8 @@ augroup END
 " Additionally, jumping to Header file under cursor: gf
 let g:clang_library_path = '/usr/lib/llvm-6.0/lib'
 let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
-let g:clang_complete_auto = 0
-let g:clang_complete_macros = 1
+let g:clang_complete_auto = v:false
+let g:clang_complete_macros = v:true
 let g:clang_jumpto_declaration_key = "<C-]>"
 
 " Terraform:
@@ -1813,7 +1814,7 @@ augroup END
 " }}}
 " Plugin: Vim-filetype-formatter {{{
 
-let g:vim_filetype_formatter_verbose = 0
+let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = [
       \ 'markdown',
       \ ]
@@ -1827,13 +1828,13 @@ let g:vim_filetype_formatter_commands = {
 " let g:python3_host_prog = system('which python3')
 " let g:python_host_prog = system('which python2')
 " Disable python 2 support
-let g:loaded_python_provider = 1
+let g:loaded_python_provider = v:true
 
 " Netrw: disable netrw's gx mapping, prefer tyru/open-browser.vim
-let g:netrw_nogx = 1
+let g:netrw_nogx = v:true
 
 " UndoTree:
-let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_SetFocusWhenToggle = v:true
 let g:undotree_WindowLayout = 3
 
 " QFEnter:
@@ -1843,7 +1844,7 @@ let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-s>']
 let g:qfenter_keymap.topen = ['<C-t>']
 " do not copy quickfix when opened in new tab
-let g:qfenter_enable_autoquickfix = 0
+let g:qfenter_enable_autoquickfix = v:false
 " automatically move QuickFix window to fill entire bottom screen
 augroup QuickFix
   autocmd FileType qf wincmd J
@@ -1855,32 +1856,32 @@ let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
 
 " Haskell: 'neovimhaskell/haskell-vim'
-let g:haskell_enable_quantification = 1   " to highlight `forall`
-let g:haskell_enable_recursivedo = 1      " to highlight `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to highlight `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to highlight `pattern`
-let g:haskell_enable_typeroles = 1        " to highlight type roles
-let g:haskell_enable_static_pointers = 1  " to highlight `static`
+let g:haskell_enable_quantification = v:true   " to highlight `forall`
+let g:haskell_enable_recursivedo = v:true      " to highlight `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = v:true      " to highlight `proc`
+let g:haskell_enable_pattern_synonyms = v:true " to highlight `pattern`
+let g:haskell_enable_typeroles = v:true        " to highlight type roles
+let g:haskell_enable_static_pointers = v:true  " to highlight `static`
 
 " Python: highlighting
-let g:python_highlight_space_errors = 0
-let g:python_highlight_all = 1
+let g:python_highlight_space_errors = v:false
+let g:python_highlight_all = v:true
 
 " Json: highlighting
-let g:vim_json_syntax_conceal = 0
+let g:vim_json_syntax_conceal = v:false
 
 " Ferret:
 " disable default mappings
-let g:FerretMap = 0
+let g:FerretMap = v:false
 
 " VimJavascript:
-let g:javascript_plugin_flow = 1
+let g:javascript_plugin_flow = v:true
 
 " JsDoc:
-let g:jsdoc_enable_es6 = 1
+let g:jsdoc_enable_es6 = v:true
 
 " IndentLines:
-let g:indentLine_enabled = 0  " indentlines disabled by default
+let g:indentLine_enabled = v:false  " indentlines disabled by default
 
 " BulletsVim:
 let g:bullets_enabled_file_types = [
@@ -1892,7 +1893,7 @@ let g:bullets_enabled_file_types = [
       \ ]
 
 " VimMarkdownComposer: override defaults
-let g:markdown_composer_open_browser = 0
+let g:markdown_composer_open_browser = v:false
 
 " RequirementsVim: filetype detection (begin with requirements)
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
@@ -1902,10 +1903,10 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars = 10000
 
 " Go: random stuff
-let g:go_version_warning = 0
+let g:go_version_warning = v:false
 
 " ChooseWin: options
-let g:choosewin_overlay_enable = 0
+let g:choosewin_overlay_enable = v:false
 
 " Colorizer: css color code highlighting
 let g:colorizer_auto_filetype='css,html'
@@ -1916,8 +1917,8 @@ let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 
 " Syntax Omni Completion:
-let g:omni_syntax_use_single_byte = 0
-let g:omni_syntax_use_iskeyword_numeric = 0
+let g:omni_syntax_use_single_byte = v:false
+let g:omni_syntax_use_iskeyword_numeric = v:false
 
 " }}}
 " General: Global key remappings {{{
