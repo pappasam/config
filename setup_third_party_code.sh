@@ -379,60 +379,17 @@ sudo apt remove less
 # Follow installation instructions to compile from source
 
 #######################################################################
-# Install language binary managers
+# ASDF
 #######################################################################
 
-# Java: SKD-Manager
-#######################################################################
-curl -s "https://get.sdkman.io" | bash
-
-# Go: GoEnv
-#######################################################################
-git clone https://github.com/syndbg/goenv.git ~/.goenv
-
-# Javascript (Node): NodeEnv
-#######################################################################
-git clone https://github.com/nodenv/nodenv.git ~/.nodenv
-
-# optionally compile source
-cd ~/.nodenv && src/configure && make -C src
-
-# install node-build as nodenv plugin
-# git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build
-
-# install nodeenv-package-rehash (so I don't need to run rehash manually)
-# git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
-# nodenv package-hooks install --all
-
-# Ruby: RbEnv
-#######################################################################
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-cd ~/.rbenv && src/configure && make -C src
-
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-
-# Python: PyEnv
-#######################################################################
 # install dependencies
 sudo apt install \
-  git python-pip make build-essential libssl-dev \
-  zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev
+  automake autoconf libreadline-dev \
+  libncurses-dev libssl-dev libyaml-dev \
+  libxslt-dev libffi-dev libtool unixodbc-dev \
+  unzip curl
 
-# move pyenv into repository
-git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+# Download (verify version)
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
 
-# example command to list all available python versions for pyenv
-# pyenv global system 3.6.1
-
-# Terraform: TfEnv
-#######################################################################
-git clone https://github.com/kamatama41/tfenv.git ~/.tfenv
-
-# Poetry: python dependency management
-curl -sSL \
-  https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | \
-  python
-
-# Tools to open URLs
-sudo apt install urlview
+# asdf-update: update to latest version
