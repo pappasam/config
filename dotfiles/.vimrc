@@ -366,6 +366,9 @@ Plug 'ericcurtin/CurtineIncSw.vim'
 " Repl Integration:
 Plug 'jpalardy/vim-slime'
 
+" Presentation:
+Plug 'dhruvasagar/vim-marp'
+
 call plug#end()
 
 " Plug update and upgrade
