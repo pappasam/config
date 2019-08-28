@@ -1711,7 +1711,7 @@ let g:slime_dont_ask_default = v:true
 let g:slime_no_mappings = v:true
 
 " }}}
-" Plugin: AutoCompletion config and key remappings {{{
+" Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
 
 " NOTE: General remappings
 " 1) go to file containing definition: <C-]>
@@ -1723,7 +1723,7 @@ set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
       \ 'auto_complete': v:true,
-      \ 'auto_complete_delay': 250,
+      \ 'auto_complete_delay': 300,
       \ 'max_list': 500,
       \ 'num_processes': 1,
       \ })
@@ -2062,9 +2062,9 @@ function! DefaultKeyMappings()
   nnoremap <leader>a :ALEToggleBuffer<cr>
 
   " NeoSnippet:
-  imap <C-b> <Plug>(neosnippet_expand_or_jump)
-  smap <C-b> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-b> <Plug>(neosnippet_expand_target)
+  imap <C-s> <Plug>(neosnippet_expand_or_jump)
+  smap <C-s> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-s> <Plug>(neosnippet_expand_target)
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
