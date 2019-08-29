@@ -172,53 +172,6 @@ export BAT_PAGER=''
 # }}}
 # Path appends + Misc env setup {{{
 
-# PYENV_ROOT="$HOME/.pyenv"
-# if [ -d "$PYENV_ROOT" ]; then
-#   export PYENV_ROOT
-#   path_radd "$PYENV_ROOT/bin"
-#   eval "$(pyenv init -)"
-# fi
-
-# NODENV_ROOT="$HOME/.nodenv"
-# if [ -d "$NODENV_ROOT" ]; then
-#   export NODENV_ROOT
-#   path_radd "$NODENV_ROOT/bin"
-#   eval "$(nodenv init -)"
-# fi
-
-# GOENV_ROOT="$HOME/.goenv"
-# if [ -d "$GOENV_ROOT" ]; then
-#   export GOENV_ROOT
-#   path_radd "$GOENV_ROOT/bin"
-#   eval "$(goenv init -)"
-# fi
-
-# RBENV_ROOT="$HOME/.rbenv"
-# if [ -d "$RBENV_ROOT" ]; then
-#   export RBENV_ROOT
-#   path_radd "$RBENV_ROOT/bin"
-#   eval "$(rbenv init -)"
-# fi
-
-# TFENV_ROOT="$HOME/.tfenv"
-# if [ -d "$TFENV_ROOT" ]; then
-#   export TFENV_ROOT
-#   path_radd "$TFENV_ROOT/bin"
-# fi
-
-# GOPATH="$HOME/go"
-# if [ -d "$GOPATH" ]; then
-#   export GOPATH
-#   path_ladd "$GOPATH/bin"
-# fi
-
-# SDKMAN_DIR="$HOME/.sdkman"
-# if [ -d "$SDKMAN_DIR" ]; then
-#   export SDKMAN_DIR
-#   [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && \
-#     source "$SDKMAN_DIR/bin/sdkman-init.sh"
-# fi
-
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]; then
   path_ladd "$RUST_CARGO"
@@ -227,11 +180,6 @@ fi
 HOME_BIN="$HOME/bin"
 if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
-fi
-
-STACK_LOC="$HOME/.local/bin"
-if [ -d "$STACK_LOC" ]; then
-  path_ladd "$STACK_LOC"
 fi
 
 POETRY_LOC="$HOME/.poetry/bin"
