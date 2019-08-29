@@ -1,4 +1,0 @@
-- hosts: localhost
-  connection: local
-  tasks:
-    - import_role: name=system_setup

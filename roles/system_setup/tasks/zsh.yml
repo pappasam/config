@@ -1,5 +1,0 @@
-- name: install zplug
-  command: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
-- name: Make zshell default shell
-  command: chsh -s "$(which zsh)"
