@@ -252,7 +252,6 @@ function PackInit() abort
   call minpac#add('Glench/Vim-Jinja2-Syntax')
   call minpac#add('godlygeek/tabular')
   call minpac#add('plasticboy/vim-markdown')
-  call minpac#add('ElmCast/elm-vim')
   call minpac#add('mopp/rik_octave.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
   call minpac#add('StanAngeloff/php.vim')
@@ -287,7 +286,7 @@ function PackInit() abort
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
-        \ 'do': {-> system('bash install.sh')},
+        \ 'do': {-> system('./install.sh')},
         \ })
   call minpac#add('Rip-Rip/clang_complete')
   " for C header filename completion:
@@ -493,7 +492,7 @@ augroup END
 set expandtab shiftwidth=2 softtabstop=2 tabstop=8
 augroup indentation_sr
   autocmd!
-  autocmd Filetype python,c,elm,haskell,markdown,rust,rst,kv,nginx,asm,nasm,gdscript3
+  autocmd Filetype python,c,haskell,markdown,rust,rst,kv,nginx,asm,nasm,gdscript3
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go
@@ -1296,7 +1295,6 @@ let g:NERDTreeIgnore = [
       \ '__pycache__$[[dir]]',
       \ '.egg-info$[[dir]]',
       \ 'node_modules$[[dir]]',
-      \ 'elm-stuff$[[dir]]',
       \ 'build$[[dir]]',
       \ 'target$[[dir]]',
       \ 'pip-wheel-metadata$[[dir]]',
@@ -1717,24 +1715,26 @@ let g:slime_no_mappings = v:true
 " 2) Return from file (relies on tag stack): <C-O>
 " 3) Print the documentation of something under the cursor: <leader>gd
 
-" LanguageClientServer: configure it for relevant languages
-set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
+" Deoplete:
 let g:deoplete#enable_at_startup = 1
-autocmd VimEnter * call deoplete#custom#option({
-      \ 'auto_complete': v:true,
-      \ 'auto_complete_delay': 300,
-      \ 'max_list': 500,
-      \ 'num_processes': 1,
-      \ })
-autocmd VimEnter * call deoplete#custom#option('ignore_sources',
-      \ {'_': ['buffer', 'around']})
-autocmd VimEnter * call deoplete#custom#source('LanguageClient',
-      \ 'min_pattern_length', 1)
-autocmd VimEnter * call deoplete#custom#source('neosnippet',
-      \ 'min_pattern_length', 1)
-autocmd VimEnter * call deoplete#custom#source('_',
-      \ 'converters', ['converter_remove_paren'])
+function! CustomDeopleteConfig()
+  call deoplete#custom#option({
+        \ 'auto_complete': v:true,
+        \ 'auto_complete_delay': 300,
+        \ 'max_list': 500,
+        \ 'num_processes': 1,
+        \ })
+  call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
+  call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
+  call deoplete#custom#source('neosnippet', 'min_pattern_length', 1)
+  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+endfunction
+augroup deoplete_on_vim_startup
+  autocmd!
+  autocmd VimEnter * call CustomDeopleteConfig()
+augroup END
 
+" LSP LanguageClient:
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
@@ -1751,8 +1751,7 @@ let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'quickfix'
-
-function! ConfigureLanguageClient()
+function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
@@ -1763,12 +1762,11 @@ function! ConfigureLanguageClient()
   nnoremap <buffer> <leader>sc :call LanguageClient_contextMenu()<CR>
   setlocal omnifunc=LanguageClient#complete
 endfunction
-
-augroup langserverLanguages
+augroup languageclient_on_vim_startup
   autocmd!
   execute 'autocmd FileType '
         \ . join(keys(g:LanguageClient_serverCommands), ',')
-        \ . ' call ConfigureLanguageClient()'
+        \ . ' call CustomLanguageClientConfig()'
 augroup END
 
 " VimScript:
@@ -1777,14 +1775,6 @@ augroup vimscript_complete
   autocmd!
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
-augroup END
-
-" Elm:
-let g:elm_detailed_complete = v:true
-let g:elm_format_autosave = v:false
-augroup elm_complete
-  autocmd!
-  autocmd FileType elm nnoremap <buffer> <C-]> :ElmShowDocs<CR>
 augroup END
 
 " C_CPP:
