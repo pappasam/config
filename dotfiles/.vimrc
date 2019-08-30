@@ -2061,9 +2061,9 @@ function! DefaultKeyMappings()
   nnoremap <leader>a :ALEToggleBuffer<cr>
 
   " NeoSnippet:
-  imap <C-s> <Plug>(neosnippet_expand_or_jump)
-  smap <C-s> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-s> <Plug>(neosnippet_expand_target)
+  imap <C-b> <Plug>(neosnippet_expand_or_jump)
+  smap <C-b> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-b> <Plug>(neosnippet_expand_target)
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
