@@ -374,10 +374,12 @@ endfunction
 " the information of plugins, then performs the task.
 command! PackUpdate call PackInit() |
       \ call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  call PackInit() |
-      \ call minpac#clean()
 command! PackStatus call PackInit() |
       \ call minpac#status()
+command! PackClean  call PackInit() |
+      \ call minpac#clean()
+command! -nargs=1 -complete=custom,PackList PackRemove call PackInit() |
+      \ call minpac#clean(<q-args>)
 command! -nargs=1 -complete=custom,PackList PackOpen call PackInit() |
       \ execute 'tabe ' . minpac#getpluginfo(<q-args>).dir |
       \ execute 'lcd ' . minpac#getpluginfo(<q-args>).dir
