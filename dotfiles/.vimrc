@@ -284,6 +284,7 @@ function PackInit() abort
   call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
   call minpac#add('Shougo/neosnippet.vim')
   call minpac#add('Shougo/neosnippet-snippets')
+  call minpac#add('Shougo/neco-vim')
   call minpac#add('autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': {-> system('./install.sh')},
@@ -1718,16 +1719,22 @@ let g:slime_no_mappings = v:true
 " Deoplete:
 let g:deoplete#enable_at_startup = 1
 function! CustomDeopleteConfig()
+  " Deoplete Defaults:
   call deoplete#custom#option({
         \ 'auto_complete': v:true,
         \ 'auto_complete_delay': 300,
         \ 'max_list': 500,
         \ 'num_processes': 1,
         \ })
+
+  " Source Defaults:
   call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
-  call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
-  call deoplete#custom#source('neosnippet', 'min_pattern_length', 1)
+  call deoplete#custom#source('_', 'min_pattern_length', 1)
   call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+
+  " Source Overrides: examples below
+  " call deoplete#custom#source('LanguageClient', 'min_pattern_length', 4)
+  " call deoplete#custom#source('neosnippet', 'min_pattern_length', 2)
 endfunction
 augroup deoplete_on_vim_startup
   autocmd!
@@ -1738,14 +1745,13 @@ augroup END
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
-      \ 'javascript': ['npx', '--no-install', 'flow', 'lsp'],
+      \ 'javascript': ['npx', '--no-install', '-q', 'flow', 'lsp'],
       \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
       \ 'python': ['jedi-language-server'],
       \ 'python.jinja2': ['jedi-language-server'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
-      \ 'text': ['custom-lsp'],
       \ }
 let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'auto'
