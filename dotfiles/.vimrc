@@ -95,7 +95,7 @@ set noswapfile
 " Line Wrapping: do not wrap lines by default
 set nowrap
 
-" Highlight Search:
+" Highlight Search: do that
 set incsearch
 set inccommand=nosplit
 augroup sroeca_incsearch_highlight
@@ -185,203 +185,204 @@ set path+=/usr/include/x86_64-linux-gnu/
 set history=100
 
 " }}}
-" General: Vim-Plug {{{
+" General: Vim packages: minpac {{{
 
-" Notes:
-" To use tags: , { 'tag': '*' }
+function PackInit() abort
+  packadd minpac
+  call minpac#init()
+  call minpac#add('k-takata/minpac', { 'type': 'opt' })
+  call minpac#add('junegunn/vader.vim')
+  call minpac#add('kh3phr3n/tabline')
+  call minpac#add('qpkorr/vim-bufkill')
+  call minpac#add('scrooloose/nerdtree')
+  call minpac#add('Xuyuanp/nerdtree-git-plugin')
+  call minpac#add('t9md/vim-choosewin')
+  call minpac#add('mhinz/vim-startify')
+  call minpac#add('yssl/QFEnter')
+  call minpac#add('djoshea/vim-autoread')
+  call minpac#add('simeji/winresizer')
+  call minpac#add('mbbill/undotree')
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('tpope/vim-eunuch')
+  call minpac#add('henrik/vim-indexed-search')
+  call minpac#add('unblevable/quick-scope')
+  call minpac#add('fcpg/vim-altscreen')
+  call minpac#add('sjl/strftimedammit.vim')
+  call minpac#add('wincent/ferret')
+  call minpac#add('bronson/vim-visual-star-search')
+  call minpac#add('chrisbra/Colorizer')
+  call minpac#add('fidian/hexmode')
+  call minpac#add('wellle/targets.vim')
+  call minpac#add('tpope/vim-scriptease')
+  call minpac#add('romainl/vim-devdocs')
 
-let g:plug_url_format = 'git@github.com:%s.git'
-let g:plug_shallow = 0
+  " EditorConfig: https://editorconfig.org/
+  " Overrides default Vim settings when an editorconfig file is found
+  " I have one at the moment (in dotfiles)
+  " Not the official plugin, but written in pure vimscript so faster Vim startup
+  call minpac#add('sgur/vim-editorconfig')
 
-call plug#begin('~/.vim/plugged')
+  " Fuzzy Finder:
+  call minpac#add('junegunn/fzf')
+  call minpac#add('junegunn/fzf.vim')
+  call minpac#add('maxjacobson/vim-fzf-coauthorship')
 
-" Vim Plug:
-Plug 'junegunn/vim-plug'
+  " Git:
+  call minpac#add('lambdalisue/gina.vim')
+  call minpac#add('junegunn/gv.vim')
 
-" Basics:
-Plug 'junegunn/vader.vim'
-Plug 'kh3phr3n/tabline'
-Plug 'qpkorr/vim-bufkill'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 't9md/vim-choosewin'
-Plug 'mhinz/vim-startify'
-Plug 'yssl/QFEnter'
-Plug 'djoshea/vim-autoread'
-Plug 'simeji/winresizer'
-Plug 'mbbill/undotree'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-eunuch'
-Plug 'henrik/vim-indexed-search'
-Plug 'unblevable/quick-scope'
-Plug 'fcpg/vim-altscreen'
-Plug 'sjl/strftimedammit.vim'
-Plug 'wincent/ferret'
-Plug 'bronson/vim-visual-star-search'
-Plug 'chrisbra/Colorizer'
-Plug 'fidian/hexmode'
-Plug 'wellle/targets.vim'
-Plug 'tpope/vim-scriptease'
-Plug 'romainl/vim-devdocs'
+  " Syntax Theme:
+  call minpac#add('NLKNguyen/papercolor-theme')
 
-" EditorConfig: https://editorconfig.org/
-" Overrides default Vim settings when an editorconfig file is found
-" I have one at the moment (in dotfiles)
-" Not the official plugin, but written in pure vimscript so faster Vim startup
-Plug 'sgur/vim-editorconfig'
+  " Utilities:
+  call minpac#add('tpope/vim-commentary')
+  " Convert to snakecase/camelcase/etc
+  call minpac#add('tpope/vim-abolish')
+  call minpac#add('jiangmiao/auto-pairs')
 
-" Fuzzy Finder:
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'maxjacobson/vim-fzf-coauthorship'
+  " Syntax Highlighting:
+  call minpac#add('derekwyatt/vim-scala')
+  call minpac#add('rust-lang/rust.vim')
+  call minpac#add('ron-rs/ron.vim')
+  call minpac#add('vim-python/python-syntax')
+  call minpac#add('autowitch/hive.vim')
+  call minpac#add('elzr/vim-json')
+  call minpac#add('vimoutliner/vimoutliner')
+  call minpac#add('cespare/vim-toml')
+  call minpac#add('Glench/Vim-Jinja2-Syntax')
+  call minpac#add('godlygeek/tabular')
+  call minpac#add('plasticboy/vim-markdown')
+  call minpac#add('ElmCast/elm-vim')
+  call minpac#add('mopp/rik_octave.vim')
+  call minpac#add('ekalinin/Dockerfile.vim')
+  call minpac#add('StanAngeloff/php.vim')
+  call minpac#add('vim-scripts/SAS-Syntax')
+  call minpac#add('neovimhaskell/haskell-vim')
+  call minpac#add('pappasam/plantuml-syntax')
+  call minpac#add('NLKNguyen/c-syntax.vim')
+  call minpac#add('hashivim/vim-terraform')
+  call minpac#add('hashivim/vim-vagrant')
+  call minpac#add('lervag/vimtex')
+  call minpac#add('tomlion/vim-solidity')
+  call minpac#add('jparise/vim-graphql')
+  call minpac#add('pangloss/vim-javascript')
+  call minpac#add('evanleck/vim-svelte')
+  call minpac#add('MaxMEllon/vim-jsx-pretty')
+  call minpac#add('groenewege/vim-less')
+  call minpac#add('farfanoide/vim-kivy')
+  call minpac#add('raimon49/requirements.txt.vim')
+  call minpac#add('chr4/nginx.vim')
+  call minpac#add('othree/html5.vim')
+  call minpac#add('pearofducks/ansible-vim')
+  call minpac#add('martinda/Jenkinsfile-vim-syntax')
+  call minpac#add('mattn/vim-xxdcursor')
+  call minpac#add('calviken/vim-gdscript3')
+  call minpac#add('marshallward/vim-restructuredtext')
+  call minpac#add('leafgarland/typescript-vim')
+  call minpac#add('killphi/vim-ebnf')
 
-" Git:
-Plug 'lambdalisue/gina.vim'
-Plug 'junegunn/gv.vim'
+  " Autocompletion And IDE Features:
+  call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
+  call minpac#add('Shougo/neosnippet.vim')
+  call minpac#add('Shougo/neosnippet-snippets')
+  call minpac#add('autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': {-> system('bash install.sh')},
+        \ })
+  call minpac#add('Rip-Rip/clang_complete')
+  " for C header filename completion:
+  call minpac#add('xaizek/vim-inccomplete')
+  " After vim-go, run GoUpdateBinaries
+  call minpac#add('fatih/vim-go')
+  " dotlanguage
+  call minpac#add('wannesm/wmgraphviz.vim')
+  " note: must run 'gem install neovim' to get this to work
+  " might require the neovim headers
+  call minpac#add('juliosueiras/vim-terraform-completion')
 
-" Syntax Theme:
-Plug 'NLKNguyen/papercolor-theme'
+  " Tagbar:
+  call minpac#add('majutsushi/tagbar')
+  call minpac#add('lvht/tagbar-markdown')
+  " Additional requirements
+  "   npm install -g jsctags
+  "   sudo apt install -y php
 
-" Utilities:
-Plug 'tpope/vim-commentary'
-" Convert to snakecase/camelcase/etc
-Plug 'tpope/vim-abolish'
-Plug 'jiangmiao/auto-pairs'
+  " Indentation Only:
+  call minpac#add('vim-scripts/groovyindent-unix')
+  call minpac#add('Vimjas/vim-python-pep8-indent')
+  call minpac#add('Yggdroot/indentLine')
 
-" Syntax Highlighting:
-Plug 'derekwyatt/vim-scala'
-Plug 'rust-lang/rust.vim'
-Plug 'ron-rs/ron.vim'
-Plug 'vim-python/python-syntax'
-Plug 'autowitch/hive.vim'
-Plug 'elzr/vim-json'
-Plug 'vimoutliner/vimoutliner'
-Plug 'cespare/vim-toml'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'ElmCast/elm-vim'
-Plug 'mopp/rik_octave.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'StanAngeloff/php.vim'
-Plug 'vim-scripts/SAS-Syntax'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'pappasam/plantuml-syntax'
-Plug 'NLKNguyen/c-syntax.vim'
-Plug 'hashivim/vim-terraform'
-Plug 'hashivim/vim-vagrant'
-Plug 'lervag/vimtex'
-Plug 'tomlion/vim-solidity'
-Plug 'jparise/vim-graphql'
-Plug 'pangloss/vim-javascript'
-Plug 'evanleck/vim-svelte'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'groenewege/vim-less'
-Plug 'farfanoide/vim-kivy'
-Plug 'raimon49/requirements.txt.vim'
-Plug 'chr4/nginx.vim'
-Plug 'othree/html5.vim'
-Plug 'pearofducks/ansible-vim'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'mattn/vim-xxdcursor'
-Plug 'calviken/vim-gdscript3'
-Plug 'marshallward/vim-restructuredtext'
-Plug 'leafgarland/typescript-vim'
-Plug 'killphi/vim-ebnf'
+  " Web Development General:
+  call minpac#add('tpope/vim-ragtag')
+  call minpac#add('heavenshell/vim-jsdoc')
 
-" Autocompletion And IDE Features:
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-Plug 'Rip-Rip/clang_complete'
-" for C header filename completion:
-Plug 'xaizek/vim-inccomplete'
-" After vim-go, run GoUpdateBinaries
-Plug 'fatih/vim-go'
-" dotlanguage
-Plug 'wannesm/wmgraphviz.vim'
-" note: must run 'gem install neovim' to get this to work
-" might require the neovim headers
-Plug 'juliosueiras/vim-terraform-completion'
+  " Text Objects:
+  call minpac#add('machakann/vim-sandwich')
+  call minpac#add('kana/vim-textobj-user')
+  " al/il for the current line
+  call minpac#add('kana/vim-textobj-line')
+  " as/is for a sentence of prose (overrides hard-coded native object & motion)
+  call minpac#add('reedes/vim-textobj-sentence')
+  " az/iz for a block of folded lines; iz does not include fold marker lines
+  call minpac#add('somini/vim-textobj-fold')
+  " ao/io for a block of indentation (i.e. spaces)
+  call minpac#add('glts/vim-textobj-indblock')
+  " ay/iy for a syntax group
+  call minpac#add('kana/vim-textobj-syntax')
 
-" Tagbar:
-Plug 'majutsushi/tagbar'
-Plug 'lvht/tagbar-markdown'
-" Additional requirements
-"   npm install -g jsctags
-"   sudo apt install -y php
+  " Writing:
+  call minpac#add('dkarter/bullets.vim')
+  call minpac#add('matthew-brett/vim-rst-sections')
+  call minpac#add('nvie/vim-rst-tables')
+  call minpac#add('junegunn/goyo.vim')
+  call minpac#add('junegunn/limelight.vim')
+  call minpac#add('reedes/vim-wordy')
+  call minpac#add('reedes/vim-litecorrect')
+  call minpac#add('tommcdo/vim-exchange')
+  call minpac#add('dbmrq/vim-ditto')
 
-" Indentation Only:
-Plug 'vim-scripts/groovyindent-unix'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'Yggdroot/indentLine'
+  " Previewers:
+  call minpac#add('iamcco/markdown-preview.nvim',
+        \ { 'do': {-> system('cd app & yarn install')} })
+  call minpac#add('tyru/open-browser.vim')
+  call minpac#add('weirongxu/plantuml-previewer.vim')
 
-" Web Development General:
-Plug 'tpope/vim-ragtag'
-Plug 'heavenshell/vim-jsdoc'
+  " Code Formatters:
+  call minpac#add('pappasam/vim-filetype-formatter')
 
-" Text Objects:
-Plug 'machakann/vim-sandwich'
-Plug 'kana/vim-textobj-user'
-" al/il for the current line
-Plug 'kana/vim-textobj-line'
-" as/is for a sentence of prose (overrides hard-coded native object & motion)
-Plug 'reedes/vim-textobj-sentence'
-" az/iz for a block of folded lines; iz does not include fold marker lines
-Plug 'somini/vim-textobj-fold'
-" ao/io for a block of indentation (i.e. spaces)
-Plug 'glts/vim-textobj-indblock'
-" ay/iy for a syntax group
-Plug 'kana/vim-textobj-syntax'
+  " Linting:
+  call minpac#add('pappasam/ale',
+        \ { 'branch': 'languagetool_autodetect_breaks_ngrams' })
 
-" Writing:
-Plug 'dkarter/bullets.vim'
-Plug 'matthew-brett/vim-rst-sections'
-Plug 'nvie/vim-rst-tables'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'reedes/vim-wordy'
-Plug 'reedes/vim-litecorrect'
-Plug 'tommcdo/vim-exchange'
-Plug 'dbmrq/vim-ditto'
+  " C:
+  call minpac#add('ericcurtin/CurtineIncSw.vim')
 
-" Previewers:
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'tyru/open-browser.vim'
-Plug 'weirongxu/plantuml-previewer.vim'
+  " Repl Integration:
+  call minpac#add('jpalardy/vim-slime')
 
-" Code Formatters:
-Plug 'pappasam/vim-filetype-formatter'
-
-" Linting:
-Plug 'pappasam/ale', { 'branch': 'languagetool_autodetect_breaks_ngrams' }
-
-" C:
-Plug 'ericcurtin/CurtineIncSw.vim'
-
-" Repl Integration:
-Plug 'jpalardy/vim-slime'
-
-" Presentation:
-Plug 'dhruvasagar/vim-marp'
-
-call plug#end()
-
-" Plug update and upgrade
-function! s:plug_update_upgrade()
-  execute 'PlugUpdate'
-  execute 'PlugUpgrade'
+  " Presentation:
+  call minpac#add('dhruvasagar/vim-marp')
 endfunction
-command! PU call <SID>plug_update_upgrade()
 
-" Check if plugin exists
-function! s:plugin_exists(name)
-  return &rtp =~ a:name
+function! PackList(...)
+  call PackInit()
+  return join(sort(keys(minpac#getpluglist())), "\n")
 endfunction
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them calls PackInit() to load minpac and register
+" the information of plugins, then performs the task.
+command! PackUpdate call PackInit() |
+      \ call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() |
+      \ call minpac#clean()
+command! PackStatus call PackInit() |
+      \ call minpac#status()
+command! -nargs=1 -complete=custom,PackList PackOpen call PackInit() |
+      \ execute 'tabe ' . minpac#getpluginfo(<q-args>).dir |
+      \ execute 'lcd ' . minpac#getpluginfo(<q-args>).dir
+command! -nargs=1 -complete=custom,PackList PackBrowser call PackInit() |
+      \ call openbrowser#open(minpac#getpluginfo(<q-args>).url)
 
 " }}}
 " General: Status Line and Tab Line {{{
@@ -1356,14 +1357,12 @@ function! NERDTreeYankCurrentNode()
   endif
 endfunction
 
-if s:plugin_exists('nerdtree')
-  autocmd VimEnter * call NERDTreeAddKeyMap({
-        \ 'key': 'yy',
-        \ 'callback': 'NERDTreeYankCurrentNode',
-        \ 'quickhelpText':
-        \   'put relative path of current node into the default register'
-        \ })
-endif
+autocmd VimEnter * call NERDTreeAddKeyMap({
+      \ 'key': 'yy',
+      \ 'callback': 'NERDTreeYankCurrentNode',
+      \ 'quickhelpText':
+      \   'put relative path of current node into the default register'
+      \ })
 
 "  }}}
 " Plugin: Fzf {{{
@@ -1481,31 +1480,29 @@ let g:startify_fortune_use_unicode = v:true
 let g:startify_enable_special = v:true
 let g:startify_custom_header = []
 
-if s:plugin_exists('vim-startify')
-  let g:startify_custom_footer = [
-        \ '                                            .',
-        \ '                                  .-o',
-        \ '                     .           /  |',
-        \ '            .                 . /   |   .',
-        \ '                               /    |',
-        \ '                      .       /     |',
-        \ '      .                      /      /         .',
-        \ '                 .          /    _./   .',
-        \ '                       _.---~-.=:_',
-        \ '                      (_.-=() <~`-`-.',
-        \ '                     _/ _() ~`-==-._,>',
-        \ '             ..--====--` `~-._.__()',
-        \ '         o===``~~             |__()',
-        \ '                    .         \   |             .',
-        \ '                               \  \    .',
-        \ '                                \  \',
-        \ '            .                    \  \   Sienar Fleet Systems',
-        \ '                     .            \  \  Lambda-class',
-        \ '                                   \_ \ Imperial Shuttle',
-        \ '                           LS        ~o',
-        \ '',
-        \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
-endif
+autocmd VimEnter * let g:startify_custom_footer = [
+      \ '                                            .',
+      \ '                                  .-o',
+      \ '                     .           /  |',
+      \ '            .                 . /   |   .',
+      \ '                               /    |',
+      \ '                      .       /     |',
+      \ '      .                      /      /         .',
+      \ '                 .          /    _./   .',
+      \ '                       _.---~-.=:_',
+      \ '                      (_.-=() <~`-`-.',
+      \ '                     _/ _() ~`-==-._,>',
+      \ '             ..--====--` `~-._.__()',
+      \ '         o===``~~             |__()',
+      \ '                    .         \   |             .',
+      \ '                               \  \    .',
+      \ '                                \  \',
+      \ '            .                    \  \   Sienar Fleet Systems',
+      \ '                     .            \  \  Lambda-class',
+      \ '                                   \_ \ Imperial Shuttle',
+      \ '                           LS        ~o',
+      \ '',
+      \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
 
 " }}}
 " Plugin: VimTex {{{
@@ -1721,16 +1718,20 @@ let g:slime_no_mappings = v:true
 " LanguageClientServer: configure it for relevant languages
 set runtimepath+=$HOME/.vim/plugged/LanguageClient-neovim
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
+autocmd VimEnter * call deoplete#custom#option({
       \ 'auto_complete': v:true,
       \ 'auto_complete_delay': 300,
       \ 'max_list': 500,
       \ 'num_processes': 1,
       \ })
-call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
-call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
-call deoplete#custom#source('neosnippet', 'min_pattern_length', 1)
-call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+autocmd VimEnter * call deoplete#custom#option('ignore_sources',
+      \ {'_': ['buffer', 'around']})
+autocmd VimEnter * call deoplete#custom#source('LanguageClient',
+      \ 'min_pattern_length', 1)
+autocmd VimEnter * call deoplete#custom#source('neosnippet',
+      \ 'min_pattern_length', 1)
+autocmd VimEnter * call deoplete#custom#source('_',
+      \ 'converters', ['converter_remove_paren'])
 
 let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
@@ -2016,9 +2017,7 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " AutoPairs:
-  if s:plugin_exists('auto-pairs')
-    imap <silent><CR> <CR><Plug>AutoPairsReturn
-  endif
+  imap <silent><CR> <CR><Plug>AutoPairsReturn
 
   " Slime:
   xmap <leader>e <Plug>SlimeRegionSend
