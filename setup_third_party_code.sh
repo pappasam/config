@@ -93,6 +93,10 @@ sudo apt update
 sudo apt install neovim
 sudo apt install python-dev python-pip python3-dev python3-pip
 
+# Install minpac (neovim, for me, references vim)
+git clone https://github.com/k-takata/minpac.git \
+  ~/.vim/pack/minpac/opt/minpac
+
 # when creating a virtual environment, run the following to get autocompletion:
 pip install neovim
 gem install neovim
