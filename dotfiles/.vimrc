@@ -369,18 +369,14 @@ function! PackList(...)
   return join(sort(keys(minpac#getpluglist())), "\n")
 endfunction
 
-function! PackStatus()
-  echo 'Getting package status...'
-  call minpac#status()
-endfunction
-
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
 " the information of plugins, then performs the task.
 command! PackUpdate call PackInit() | echo 'Updating packages...' |
-      \ call minpac#update('', {'do': 'PackStatus'})
+      \ call minpac#update('')
 command! PU PackUpdate
-command! PackStatus call PackInit() | call PackStatus()
+command! PackStatus call PackInit() | echo 'Getting package status...' |
+      \ call minpac#status()
 command! PackClean call PackInit() | call minpac#clean()
 command! -nargs=1 -complete=custom,PackList PackRemove call PackInit() |
       \ call minpac#clean(<q-args>)
