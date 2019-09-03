@@ -285,8 +285,8 @@ function PackInit() abort
   call minpac#add('Shougo/neosnippet.vim')
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('Shougo/neco-vim')
-  call minpac#add('autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
+  call minpac#add('pappasam/LanguageClient-neovim', {
+        \ 'branch': 'FIX_DEOPLETE_UNICODE_COMPLETION',
         \ 'do': {-> system('./install.sh')},
         \ })
   call minpac#add('Rip-Rip/clang_complete')
@@ -1724,7 +1724,7 @@ function! CustomDeopleteConfig()
         \ 'auto_complete': v:true,
         \ 'auto_complete_delay': 300,
         \ 'max_list': 500,
-        \ 'num_processes': 1,
+        \ 'num_processes': 2,
         \ })
 
   " Source Defaults:
