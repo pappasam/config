@@ -285,14 +285,10 @@ function PackInit() abort
   call minpac#add('Shougo/neosnippet.vim')
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('Shougo/neco-vim')
-  call minpac#add('pappasam/LanguageClient-neovim', {
-        \ 'branch': 'FIX_DEOPLETE_UNICODE_COMPLETION',
+  call minpac#add('autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
         \ 'do': {-> system('./install.sh')},
         \ })
-  " call minpac#add('autozimu/LanguageClient-neovim', {
-  "       \ 'branch': 'next',
-  "       \ 'do': {-> system('./install.sh')},
-  "       \ })
   call minpac#add('Rip-Rip/clang_complete')
   " for C header filename completion:
   call minpac#add('xaizek/vim-inccomplete')
