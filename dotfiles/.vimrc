@@ -199,7 +199,6 @@ function PackInit() abort
   call minpac#add('t9md/vim-choosewin')
   call minpac#add('mhinz/vim-startify')
   call minpac#add('yssl/QFEnter')
-  call minpac#add('djoshea/vim-autoread')
   call minpac#add('simeji/winresizer')
   call minpac#add('mbbill/undotree')
   call minpac#add('tpope/vim-repeat')
