@@ -289,6 +289,10 @@ function PackInit() abort
         \ 'branch': 'FIX_DEOPLETE_UNICODE_COMPLETION',
         \ 'do': {-> system('./install.sh')},
         \ })
+  " call minpac#add('autozimu/LanguageClient-neovim', {
+  "       \ 'branch': 'next',
+  "       \ 'do': {-> system('./install.sh')},
+  "       \ })
   call minpac#add('Rip-Rip/clang_complete')
   " for C header filename completion:
   call minpac#add('xaizek/vim-inccomplete')
@@ -1749,6 +1753,7 @@ let g:LanguageClient_serverCommands = {
       \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
       \ 'python': ['jedi-language-server'],
       \ 'python.jinja2': ['jedi-language-server'],
+      \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
