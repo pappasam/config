@@ -77,81 +77,6 @@ let maplocalleader = "\\"
 " }}}
 " General: Global config {{{
 
-" Code Completion:
-set completeopt=menuone,longest,preview
-set wildmode=longest,list,full
-set wildmenu
-
-" Hidden Buffer: enable instead of having to write each buffer
-set hidden
-
-" Mouse: enable GUI mouse support in all modes
-set mouse=a
-
-" SwapFiles: prevent their creation
-set nobackup
-set noswapfile
-
-" Line Wrapping: do not wrap lines by default
-set nowrap
-
-" Highlight Search: do that
-set incsearch
-set inccommand=nosplit
-augroup sroeca_incsearch_highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? set hlsearch
-  autocmd CmdlineLeave /,\? set nohlsearch
-augroup END
-
-filetype plugin indent on
-
-" Spell Checking:
-set dictionary=$HOME/.american-english-with-propcase.txt
-set spelllang=en_us
-
-" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
-set nojoinspaces
-
-set showtabline=2
-
-set autoread
-
-set grepprg=rg\ --vimgrep
-
-" Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
-set pastetoggle=<C-_>
-
-set notimeout   " don't timeout on mappings
-set ttimeout    " do timeout on terminal key codes
-
-" Local Vimrc: If exrc is set, the current directory is searched for 3 files
-" in order (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
-set exrc
-
-" Default Shell:
-set shell=$SHELL
-
-" Numbering:
-set number
-
-" Window Splitting: Set split settings (options: splitright, splitbelow)
-set splitright
-
-" Redraw Window:
-augroup redraw_on_refocus
-  autocmd!
-  autocmd FocusGained * redraw!
-augroup END
-
-" Terminal Color Support: only set guicursor if truecolor
-if $COLORTERM ==# 'truecolor'
-  set termguicolors
-else
-  set guicursor=
-endif
-
-" Set Background: for PaperColor, also sets handler
 function! AlacrittySetBackground()
   let g:alacritty_background = system('alacritty-which-colorscheme')
   if !v:shell_error
@@ -162,27 +87,106 @@ function! AlacrittySetBackground()
     set background=dark
   endif
 endfunction
-call AlacrittySetBackground()
-call jobstart(
-      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-      \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }})
 
-" Status Line: specifics for custom status line
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
+function! SetGlobalConfig()
+  " Code Completion:
+  set completeopt=menuone,longest,preview
+  set wildmode=longest,list,full
+  set wildmenu
 
-" ShowCommand: turn off character printing to vim status line
-set noshowcmd
+  " Hidden Buffer: enable instead of having to write each buffer
+  set hidden
 
-" Configure Updatetime: time Vim waits to do something after I stop moving
-set updatetime=750
+  " Mouse: enable GUI mouse support in all modes
+  set mouse=a
 
-" Linux Dev Path: system libraries
-set path+=/usr/include/x86_64-linux-gnu/
+  " SwapFiles: prevent their creation
+  set nobackup
+  set noswapfile
 
-" Vim history for command line; can't imagine that more than 100 is needed
-set history=100
+  " Line Wrapping: do not wrap lines by default
+  set nowrap
+
+  " Highlight Search: do that
+  set incsearch
+  set inccommand=nosplit
+  augroup sroeca_incsearch_highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? set hlsearch
+    autocmd CmdlineLeave /,\? set nohlsearch
+  augroup END
+
+  filetype plugin indent on
+
+  " Spell Checking:
+  set dictionary=$HOME/.american-english-with-propcase.txt
+  set spelllang=en_us
+
+  " Single Space After Punctuation: useful when doing :%j (the opposite of gq)
+  set nojoinspaces
+
+  set showtabline=2
+
+  set autoread
+
+  set grepprg=rg\ --vimgrep
+
+  " Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
+  set pastetoggle=<C-_>
+
+  set notimeout   " don't timeout on mappings
+  set ttimeout    " do timeout on terminal key codes
+
+  " Local Vimrc: If exrc is set, the current directory is searched for 3 files
+  " in order (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
+  set exrc
+
+  " Default Shell:
+  set shell=$SHELL
+
+  " Numbering:
+  set number
+
+  " Window Splitting: Set split settings (options: splitright, splitbelow)
+  set splitright
+
+  " Redraw Window:
+  augroup redraw_on_refocus
+    autocmd!
+    autocmd FocusGained * redraw!
+  augroup END
+
+  " Terminal Color Support: only set guicursor if truecolor
+  if $COLORTERM ==# 'truecolor'
+    set termguicolors
+  else
+    set guicursor=
+  endif
+
+  " Set Background: for PaperColor, also sets handler
+  call AlacrittySetBackground()
+  call jobstart(
+        \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
+        \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }})
+
+  " Status Line: specifics for custom status line
+  set laststatus=2
+  set ttimeoutlen=50
+  set noshowmode
+
+  " ShowCommand: turn off character printing to vim status line
+  set noshowcmd
+
+  " Configure Updatetime: time Vim waits to do something after I stop moving
+  set updatetime=750
+
+  " Linux Dev Path: system libraries
+  set path+=/usr/include/x86_64-linux-gnu/
+
+  " Vim history for command line; can't imagine that more than 100 is needed
+  set history=100
+endfunction
+call SetGlobalConfig()
 
 " }}}
 " General: Vim packages: minpac {{{
@@ -388,30 +392,35 @@ command! -nargs=1 -complete=custom,PackList PackBrowser call PackInit() |
 " }}}
 " General: Status Line and Tab Line {{{
 
-" Tab Line
-set tabline=%t
+function! SetStatusAndTabLine()
+  " Tab Line
+  set tabline=%t
+
+  " Status Line
+  set laststatus=2
+  set statusline=
+  set statusline+=\ %{mode()}\  " spaces after mode
+  set statusline+=%#CursorLine#
+  set statusline+=\   " space
+  set statusline+=%{&paste?'[PASTE]':''}
+  set statusline+=%{&spell?'[SPELL]':''}
+  set statusline+=%r
+  set statusline+=%m
+  set statusline+=%{get(b:,'gitbranch','')}
+  set statusline+=\   " space
+  set statusline+=%*  " Default color
+  set statusline+=\ %f
+  set statusline+=%=
+  set statusline+=%n  " buffer number
+  set statusline+=\ %y\  " File type
+  set statusline+=%#CursorLine#
+  set statusline+=\ %{&ff}\  " Unix or Dos
+  set statusline+=%*  " Default color
+  set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
+endfunction
+call SetStatusAndTabLine()
 
 " Status Line
-set laststatus=2
-set statusline=
-set statusline+=\ %{mode()}\  " spaces after mode
-set statusline+=%#CursorLine#
-set statusline+=\   " space
-set statusline+=%{&paste?'[PASTE]':''}
-set statusline+=%{&spell?'[SPELL]':''}
-set statusline+=%r
-set statusline+=%m
-set statusline+=%{get(b:,'gitbranch','')}
-set statusline+=\   " space
-set statusline+=%*  " Default color
-set statusline+=\ %f
-set statusline+=%=
-set statusline+=%n  " buffer number
-set statusline+=\ %y\  " File type
-set statusline+=%#CursorLine#
-set statusline+=\ %{&ff}\  " Unix or Dos
-set statusline+=%*  " Default color
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 augroup statusline_local_overrides
   autocmd!
   autocmd FileType nerdtree setlocal statusline=\ NERDTree\ %#CursorLine#
