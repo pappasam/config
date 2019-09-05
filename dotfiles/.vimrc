@@ -350,8 +350,7 @@ function PackInit() abort
   call minpac#add('pappasam/vim-filetype-formatter')
 
   " Linting:
-  call minpac#add('pappasam/ale',
-        \ { 'branch': 'languagetool_autodetect_breaks_ngrams' })
+  call minpac#add('neomake/neomake')
 
   " C:
   call minpac#add('ericcurtin/CurtineIncSw.vim')
@@ -1666,31 +1665,20 @@ let g:vim_markdown_auto_insert_bullets = v:false
 let g:vim_markdown_new_list_item_indent = v:false
 
 " }}}
-" Plugin: Ale {{{
+" Plugin: NeoMake {{{
 
-let g:ale_lint_on_enter = v:true
-let g:ale_lint_on_filetype_changed = v:true
-let g:ale_lint_on_insert_leave = v:false
-let g:ale_lint_on_save = v:true
-let g:ale_lint_on_text_changed = 'normal'
+" Remove inline messages; visually jarring
+let g:neomake_virtualtext_current_error = v:false
 
-let g:ale_lint_delay = 0
-let g:ale_warn_about_trailing_whitespace = v:false
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_languagetool_options = ''
-let g:ale_linters_explicit = v:true
-let g:ale_linters = {
-      \ 'markdown': ['write-good', 'languagetool'],
-      \ 'python': ['pylint'],
-      \ 'rst': ['write-good'],
-      \ 'text': ['write-good', 'languagetool'],
-      \ }
+function! CustomNeomakeConfig()
+  " When reading a buffer (after 1s), and when writing.
+  call neomake#configure#automake('rw', 1000)
+endfunction
 
-augroup ale_disable_initially
+augroup neomake_on_vim_startup
   autocmd!
-  autocmd FileType markdown,rst,text ALEDisableBuffer
+  autocmd VimEnter * call CustomNeomakeConfig()
+  autocmd VimEnter * Neomake
 augroup END
 
 " }}}
@@ -2055,8 +2043,8 @@ function! DefaultKeyMappings()
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
 
-  " Ale: shortcuts
-  nnoremap <leader>a :ALEToggleBuffer<cr>
+  " Neomake: shortcuts
+  nnoremap <leader>m :Neomake<cr>
 
   " NeoSnippet:
   imap <C-b> <Plug>(neosnippet_expand_or_jump)
