@@ -350,6 +350,7 @@ function PackInit() abort
   call minpac#add('pappasam/vim-filetype-formatter')
 
   " Linting:
+  call minpac#add('benjie/local-npm-bin.vim')
   call minpac#add('neomake/neomake')
 
   " C:
