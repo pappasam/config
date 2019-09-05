@@ -1681,14 +1681,13 @@ let g:vim_markdown_new_list_item_indent = v:false
 let g:neomake_virtualtext_current_error = v:false
 
 function! CustomNeomakeConfig()
-  " When reading a buffer (after 1s), and when writing.
-  call neomake#configure#automake('rw', 1000)
+  " Run only when writing a buffer
+  call neomake#configure#automake('w')
 endfunction
 
 augroup neomake_on_vim_startup
   autocmd!
   autocmd VimEnter * call CustomNeomakeConfig()
-  autocmd VimEnter * Neomake
 augroup END
 
 " }}}
