@@ -2053,7 +2053,7 @@ function! DefaultKeyMappings()
   vnoremap <leader>f :FiletypeFormat<cr>
 
   " Neomake: shortcuts
-  nnoremap <leader>m :Neomake<cr>
+  nnoremap <leader>a :NeomakeClean<cr>
 
   " NeoSnippet:
   imap <C-b> <Plug>(neosnippet_expand_or_jump)
