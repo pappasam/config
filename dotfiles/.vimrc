@@ -335,8 +335,7 @@ function PackInit() abort
 
   " Writing:
   call minpac#add('dkarter/bullets.vim')
-  call minpac#add('matthew-brett/vim-rst-sections')
-  call minpac#add('nvie/vim-rst-tables')
+  call minpac#add('moiatgit/vim-rst-sections')
   call minpac#add('junegunn/goyo.vim')
   call minpac#add('junegunn/limelight.vim')
   call minpac#add('reedes/vim-wordy')
@@ -1096,66 +1095,22 @@ augroup END
 " }}}
 " Plugin: Restructured Text {{{
 
-" Vim-rst-sections AND vim-rst-tables documentation
-
+" Vim Rst Sections: documentation
+" -----------------------------------------------------------------------
 " Shortcuts:
-" ,,d: create a section, or advance down hierarchy if section already defined
-" ,,u: create a section, or advance up hierarchy if section already defined
-" ,,r: reformat existing section
-" ,,c: create a new table from a table example
-" ,,f: re-flow the table
+" press your *leader* key followed by *s* and then:
+"   * a number from 0 to 6 to set the section level (RstSetSection(level))
+"   * k or j to jump to the previuos or next section
+"   * a or x to increase or decrease the section level
+"   * l to labelize
 
-" Vim Rst Tables: documentation
-" -----------------------------------------------------------------------
 " Conventional Markup Hierarchy:
-"   # with overline, for parts
-"   * with overline, for chapters
-"   =, for sections
-"   -, for subsections
-"   ^, for subsubsections
-"   ", for paragraphs
-
-" Vim Rst Tables: documentation
-" -----------------------------------------------------------------------
-" Create New Table:
-"   1. Open a reStructuredText file
-"   2. Create some kind of table outline:
-"
-"     This is paragraph text *before* the table.
-"
-"     Column 1  Column 2
-"     Foo  Put two (or more) spaces as a field separator.
-"     Bar  Even long lines are fine if you do not put in line endings here.
-"     Qux  This is the last line.
-"
-"     This is paragraph text *after* the table.
-"   3. Put your cursor somewhere in the table.
-"   4. To create the table, press ,,c (or \c if vim's <Leader> is set to the
-"      default value). The output will look something like this:
-"
-"     This is paragraph text *before* the table.
-"
-"     +----------+---------------------------------------------------------+
-"     | Column 1 | Column 2                                                |
-"     +==========+=========================================================+
-"     | Foo      | Put two (or more) spaces as a field separator.          |
-"     +----------+---------------------------------------------------------+
-"     | Bar      | Even very very long lines like these are fine, as long  |
-"     |          | as you do not put in line endings here.                 |
-"     +----------+---------------------------------------------------------+
-"     | Qux      | This is the last line.                                  |
-"     +----------+---------------------------------------------------------+
-"
-"     This is paragraph text *after* the table.
-"
-" Update Existing Table:
-"   1. Change the number of '---' signs in the top row of your table to match
-"      the column widths you would prefer.
-"   2. Put your cursor somewhere in the table.
-"   3. Press ,,f to re-flow the table (or \f if vim's <Leader> is set to the
-"      default value; see also the :map command).
-
-let g:rst_prefer_python_version = 3
+"   1. # with overline, for parts
+"   2. * with overline, for chapters
+"   3. =, for sections
+"   4. -, for subsections
+"   5. ^, for subsubsections
+"   6. ", for paragraphs
 
 " Source: https://stackoverflow.com/a/30772902
 function! LineMatchCount(pat,...)
