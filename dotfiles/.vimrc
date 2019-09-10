@@ -336,6 +336,7 @@ function PackInit() abort
   " Writing:
   call minpac#add('dkarter/bullets.vim')
   call minpac#add('moiatgit/vim-rst-sections')
+  call minpac#add('jlesquembre/rst-tables.nvim', {'do': 'UpdateRemotePlugins'})
   call minpac#add('junegunn/goyo.vim')
   call minpac#add('junegunn/limelight.vim')
   call minpac#add('reedes/vim-wordy')
@@ -1164,9 +1165,10 @@ endfunction
 
 command! HovercraftSlide echo 'Slide ' . LineMatchCount('^----$', 1, line('.'))
 
-augroup hovercraft
+augroup rst_overrides
   autocmd!
   autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
+  autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
 augroup END
 
 " }}}
