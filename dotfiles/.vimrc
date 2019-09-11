@@ -290,7 +290,7 @@ function PackInit() abort
   call minpac#add('Shougo/neco-vim')
   call minpac#add('autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
-        \ 'do': {-> system('./install.sh')},
+        \ 'do': {-> system('bash install.sh')},
         \ })
   call minpac#add('Rip-Rip/clang_complete')
   " for C header filename completion:
