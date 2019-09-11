@@ -556,6 +556,7 @@ augroup writing
         \ | call litecorrect#init(g:litecorrect_custom_user_dict)
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
+  autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
 augroup END
 
 " }}}
