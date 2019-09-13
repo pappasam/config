@@ -233,6 +233,7 @@ function PackInit() abort
   " Git:
   call minpac#add('lambdalisue/gina.vim')
   call minpac#add('junegunn/gv.vim')
+  call minpac#add('whiteinge/diffconflicts')
 
   " Syntax Theme:
   call minpac#add('NLKNguyen/papercolor-theme')
@@ -1627,7 +1628,8 @@ let g:vim_markdown_toml_frontmatter = v:true
 let g:vim_markdown_json_frontmatter = v:true
 let g:vim_markdown_no_default_key_mappings = v:true
 let g:vim_markdown_strikethrough = v:true
-let g:vim_markdown_folding_style_pythonic = v:true
+let g:vim_markdown_folding_disabled = v:true
+" let g:vim_markdown_folding_style_pythonic = v:true
 
 let g:vim_markdown_auto_insert_bullets = v:false
 let g:vim_markdown_new_list_item_indent = v:false
