@@ -1687,7 +1687,10 @@ function! CustomDeopleteConfig()
         \ })
 
   " Source Defaults:
-  call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around']})
+  call deoplete#custom#option('ignore_sources', {
+        \ '_': ['buffer', 'around', 'neosnippet'],
+        \ 'bib': ['buffer', 'around'],
+        \ })
   call deoplete#custom#source('_', 'min_pattern_length', 1)
   call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
 
