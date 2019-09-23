@@ -285,7 +285,10 @@ function PackInit() abort
   call minpac#add('killphi/vim-ebnf')
 
   " Autocompletion And IDE Features:
-  call minpac#add('Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' })
+  call minpac#add('Shougo/deoplete.nvim', {
+        \ 'branch': '5.1',
+        \ 'do': 'UpdateRemotePlugins',
+        \ })
   call minpac#add('Shougo/neosnippet.vim')
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('Shougo/neco-vim')
