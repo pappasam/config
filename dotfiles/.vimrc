@@ -476,7 +476,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
   autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=Dockerfile
   autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
-  autocmd BufNewFile,BufRead,BufEnter poetry.lock set filetype=toml
+  autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
         \ set filetype=conf
 augroup END
@@ -1174,6 +1174,24 @@ augroup rst_overrides
   autocmd!
   autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
   autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
+augroup END
+
+let g:no_rst_sections_maps = 0
+
+augroup rst_sections_mappings
+  autocmd!
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection('0')<cr>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection('1')<cr>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
 augroup END
 
 " }}}
