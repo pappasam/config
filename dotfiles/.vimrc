@@ -293,7 +293,7 @@ function PackInit() abort
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('Shougo/neco-vim')
   call minpac#add('autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
+        \ 'branch': '0.1.154',
         \ 'do': {-> system('bash install.sh')},
         \ })
   call minpac#add('Rip-Rip/clang_complete')
