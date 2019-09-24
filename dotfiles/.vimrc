@@ -285,17 +285,17 @@ function PackInit() abort
   call minpac#add('killphi/vim-ebnf')
 
   " Autocompletion And IDE Features:
+  call minpac#add('autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': {-> system('bash install.sh')},
+        \ })
   call minpac#add('Shougo/deoplete.nvim', {
-        \ 'branch': '5.1',
+        \ 'rev': '*',
         \ 'do': 'UpdateRemotePlugins',
         \ })
   call minpac#add('Shougo/neosnippet.vim')
   call minpac#add('Shougo/neosnippet-snippets')
   call minpac#add('Shougo/neco-vim')
-  call minpac#add('autozimu/LanguageClient-neovim', {
-        \ 'branch': '0.1.154',
-        \ 'do': {-> system('bash install.sh')},
-        \ })
   call minpac#add('Rip-Rip/clang_complete')
   " for C header filename completion:
   call minpac#add('xaizek/vim-inccomplete')
