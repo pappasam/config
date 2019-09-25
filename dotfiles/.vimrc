@@ -1338,6 +1338,7 @@ endfunction
 augroup defx_settings
   autocmd!
   autocmd FileType defx call s:defx_my_settings()
+  autocmd FileType defx setlocal cursorline
 augroup END
 
 " }}}
