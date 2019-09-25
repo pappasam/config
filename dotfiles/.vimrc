@@ -290,7 +290,6 @@ function PackInit() abort
         \ 'do': {-> system('bash install.sh')},
         \ })
   call minpac#add('Shougo/deoplete.nvim', {
-        \ 'rev': '*',
         \ 'do': 'UpdateRemotePlugins',
         \ })
   call minpac#add('Shougo/neosnippet.vim')
