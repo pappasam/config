@@ -231,7 +231,7 @@ function PackInit() abort
   call minpac#add('maxjacobson/vim-fzf-coauthorship')
 
   " Git:
-  call minpac#add('lambdalisue/gina.vim')
+  call minpac#add('tpope/vim-fugitive')
   call minpac#add('junegunn/gv.vim')
   call minpac#add('whiteinge/diffconflicts')
 
@@ -1060,12 +1060,6 @@ augroup keywordprogram-overrides
   " Dictioary: my custom Def function
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
 augroup END
-
-" }}}
-" Plugin: Gina {{{
-
-let g:gina#command#blame#formatter#format = '(%au) %su%=on %ti %ma%in'
-command! Gblame Gina blame --width=80
 
 " }}}
 " Plugin: Jinja2 {{{

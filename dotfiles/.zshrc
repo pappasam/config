@@ -466,6 +466,7 @@ alias publicip='curl -s checkip.amazonaws.com'
 # Git
 # NOTE: git add --patch forces interactive consideration of all hunks; useful
 alias g='git status'
+alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
