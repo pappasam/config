@@ -235,7 +235,7 @@ function PackInit() abort
   call minpac#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
 
   " Git:
-  call minpac#add('git@github.com:tpope/vim-fugitive', { 'rev': 'v3.0' })
+  call minpac#add('git@github.com:tpope/vim-fugitive')
   call minpac#add('git@github.com:junegunn/gv.vim')
   call minpac#add('git@github.com:whiteinge/diffconflicts')
 
