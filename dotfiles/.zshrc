@@ -509,7 +509,7 @@ alias light='alacritty-light'
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
-alias p='python'
+alias p='PYTHONSTARTUP="$(python -m jedi repl)" python'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # Language-env helpers
