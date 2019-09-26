@@ -473,7 +473,7 @@ augroup filetype_recognition
         \ set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
   autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
-  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=Dockerfile
+  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=dockerfile
   autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
   autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
