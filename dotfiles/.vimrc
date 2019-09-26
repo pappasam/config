@@ -1258,73 +1258,48 @@ command! Preview call <SID>preview()
 
 let g:custom_defx_state = tempname()
 
-function! DefXHelp()
-  echo "<CR>          defx#do_action('drop')"
-  echo "c             defx#do_action('copy')"
-  echo "m             defx#do_action('move')"
-  echo "p             defx#do_action('paste')"
-  echo "E             defx#do_action('open', 'vsplit')"
-  echo "P             defx#do_action('open', 'pedit')"
-  echo "o             defx#do_action('open_or_close_tree')"
-  echo "O             defx#do_action('open_tree_recursive')"
-  echo "K             defx#do_action('new_directory')"
-  echo "N             defx#do_action('new_file')"
-  echo "M             defx#do_action('new_multiple_files')"
-  echo "C             defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')"
-  echo "S             defx#do_action('toggle_sort', 'time')"
-  echo "d             defx#do_action('remove')"
-  echo "r             defx#do_action('rename')"
-  echo "!             defx#do_action('execute_command')"
-  echo "x             defx#do_action('execute_system')"
-  echo "yy            defx#do_action('yank_path')"
-  echo "I             defx#do_action('toggle_ignored_files')"
-  echo ";             defx#do_action('repeat')"
-  echo "u             defx#do_action('cd', ['..'])"
-  echo "~             defx#do_action('cd')"
-  echo "q             defx#do_action('quit')"
-  echo "<Space>       defx#do_action('toggle_select') . 'j'"
-  echo "*             defx#do_action('toggle_select_all')"
-  echo "<C-l>         defx#do_action('redraw')"
-  echo "<C-g>         defx#do_action('print')"
-  echo "cd            defx#do_action('change_vim_cwd')"
-  echo "<2-LeftMouse> defx#do_action('drop')"
-  echo "<RightMouse>  defx#do_action('cd', ['..'])"
-endfunction
+let g:custom_defx_mappings = {
+      \ '!': "defx#do_action('execute_command')",
+      \ '*': "defx#do_action('toggle_select_all')",
+      \ ';': "defx#do_action('repeat')",
+      \ '<2-LeftMouse>': "defx#do_action('drop')",
+      \ '<C-g>': "defx#do_action('print')",
+      \ '<C-l>': "defx#do_action('redraw')",
+      \ '<CR>': "defx#do_action('drop')",
+      \ '<RightMouse>': "defx#do_action('cd', ['..'])",
+      \ '<Space>': "defx#do_action('toggle_select') . 'j'",
+      \ 'C': "defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')",
+      \ 'E': "defx#do_action('open', 'vsplit')",
+      \ 'I': "defx#do_action('toggle_ignored_files')",
+      \ 'K': "defx#do_action('new_directory')",
+      \ 'M': "defx#do_action('new_multiple_files')",
+      \ 'N': "defx#do_action('new_file')",
+      \ 'O': "defx#do_action('open_tree_recursive')",
+      \ 'P': "defx#do_action('open', 'pedit')",
+      \ 'S': "defx#do_action('toggle_sort', 'time')",
+      \ 'c': "defx#do_action('copy')",
+      \ 'cd': "defx#do_action('change_vim_cwd')",
+      \ 'd': "defx#do_action('remove')",
+      \ 'm': "defx#do_action('move')",
+      \ 'o': "defx#do_action('open_or_close_tree')",
+      \ 'p': "defx#do_action('paste')",
+      \ 'q': "defx#do_action('quit')",
+      \ 'r': "defx#do_action('rename')",
+      \ 'u': "defx#do_action('cd', ['..'])",
+      \ 'x': "defx#do_action('execute_system')",
+      \ 'yy': "defx#do_action('yank_path')",
+      \ '~': "defx#do_action('cd')",
+      \ }
 
 function! s:defx_my_settings() abort
   " Define mappings
-  nnoremap <silent><buffer><expr> <CR>          defx#do_action('drop')
-  nnoremap <silent><buffer><expr> c             defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m             defx#do_action('move')
-  nnoremap <silent><buffer><expr> p             defx#do_action('paste')
-  nnoremap <silent><buffer><expr> E             defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> P             defx#do_action('open', 'pedit')
-  nnoremap <silent><buffer><expr> o             defx#do_action('open_or_close_tree')
-  nnoremap <silent><buffer><expr> O             defx#do_action('open_tree_recursive')
-  nnoremap <silent><buffer><expr> K             defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N             defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M             defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> S             defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> d             defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r             defx#do_action('rename')
-  nnoremap <silent><buffer><expr> !             defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> x             defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy            defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> I             defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;             defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> u             defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> ~             defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q             defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Space>       defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> *             defx#do_action('toggle_select_all')
-  nnoremap <silent><buffer><expr> j             line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k             line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-l>         defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>         defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd            defx#do_action('change_vim_cwd')
-  nnoremap <silent><buffer><expr> <2-LeftMouse> defx#do_action('drop')
-  nnoremap <silent><buffer><expr> <RightMouse>  defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer> ? :call DefXHelp()<CR>
+  for [key, value] in items(g:custom_defx_mappings)
+    execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
+  endfor
+  nnoremap <silent><buffer> ?
+        \ :for [key, value] in items(g:custom_defx_mappings) <BAR>
+        \ echo '' . key . ':  ' . value <BAR>
+        \ endfor<CR>
   call defx#custom#column('git', 'indicators', {
         \ 'Modified'  : '!',
         \ 'Staged'    : '=',
