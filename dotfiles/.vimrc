@@ -1577,7 +1577,6 @@ function! s:goyo_enter()
   nunmap <silent> <space>j
   nunmap <silent> <space>l
   nunmap <silent> <space>u
-  nunmap <silent> <space>k
 endfunction
 
 function! s:goyo_leave()
