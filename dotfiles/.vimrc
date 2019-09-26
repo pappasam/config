@@ -1256,6 +1256,8 @@ command! Preview call <SID>preview()
 " }}}
 " Plugin: defx {{{
 
+let g:custom_defx_state = tempname()
+
 function! DefXHelp()
   echo "<CR>          defx#do_action('drop')"
   echo "c             defx#do_action('copy')"
@@ -1339,6 +1341,7 @@ augroup defx_settings
   autocmd!
   autocmd FileType defx call s:defx_my_settings()
   autocmd FileType defx setlocal cursorline
+  autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 augroup END
 
 " }}}
@@ -1965,7 +1968,25 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
-  nnoremap <silent> <space>j :Defx -toggle -split=vertical -winwidth=31 -direction=topleft -auto-recursive-level=1 -columns=git:mark:indent:filename:type<CR>
+  nnoremap <silent> <space>j :Defx
+        \ -buffer-name=defx
+        \ -columns=git:mark:indent:filename:type
+        \ -direction=topleft
+        \ -search=`expand('%:p')`
+        \ -session-file=`g:custom_defx_state`
+        \ -split=vertical
+        \ -toggle
+        \ -winwidth=31
+        \ <CR>
+  nnoremap <silent> <space>J :Defx `expand('%:p:h')`
+        \ -buffer-name=defx
+        \ -columns=git:mark:indent:filename:type
+        \ -direction=topleft
+        \ -search=`expand('%:p')`
+        \ -split=vertical
+        \ -toggle
+        \ -winwidth=31
+        \ <CR>
   nnoremap <silent> <space>l :TagbarToggle <CR>
   nnoremap <silent> <space>u :UndotreeToggle<CR>
 
