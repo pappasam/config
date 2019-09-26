@@ -948,11 +948,30 @@ function _hello_quietly {
 }
 
 function _hello_loudly {
-  _arguments "--repeat=[Repat the <message> any number of times]"
+  _arguments "--yolo=[Do that yolo thang]"
 }
 
 function hello() {
-  echo "world"
+  if [[ "$1" = '--help' ]]; then
+    echo "There is no help for you here."
+  elif [[ "$1" = '--verbose' ]]; then
+    echo "There is no verbosity here"
+  elif [[ "$1" = 'quietly' ]]; then
+    if [[ "$2" = "--silent" ]]; then
+      echo "You told me to say it quietly, but I can't!"
+    else
+      echo "hello"
+    fi
+  elif [[ "$1" = 'loudly' ]]; then
+    if [[ "$2" = "--yolo" ]]; then
+      echo "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+    else
+      echo "HELLO"
+    fi
+  else
+    echo "Hello"
+    return 1
+  fi
 }
 compdef _hello hello
 
