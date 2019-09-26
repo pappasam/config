@@ -1268,7 +1268,6 @@ let g:custom_defx_mappings = [
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
       \ ['<Space>       ', "defx#do_action('toggle_select') . 'j'"],
-      \ ['C             ', "defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')"],
       \ ['E             ', "defx#do_action('open', 'vsplit')"],
       \ ['I             ', "defx#do_action('toggle_ignored_files')"],
       \ ['K             ', "defx#do_action('new_directory')"],
@@ -1945,7 +1944,7 @@ function! DefaultKeyMappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j :Defx
         \ -buffer-name=defx
-        \ -columns=git:mark:indent:filename:type
+        \ -columns=git:mark:indent:icon:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
@@ -1955,7 +1954,7 @@ function! DefaultKeyMappings()
         \ <CR>
   nnoremap <silent> <space>J :Defx `expand('%:p:h')`
         \ -buffer-name=defx
-        \ -columns=git:mark:indent:filename:type
+        \ -columns=git:mark:indent:icon:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -split=vertical
