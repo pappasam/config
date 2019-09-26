@@ -1271,6 +1271,8 @@ let g:custom_defx_mappings = [
       \ ['<2-LeftMouse> ', "defx#do_action('drop')"],
       \ ['<C-g>         ', "defx#do_action('print')"],
       \ ['<C-l>         ', "defx#do_action('redraw')"],
+      \ ['<C-s>         ', "defx#do_action('open', 'split')"],
+      \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
       \ ['<Space>       ', "defx#do_action('toggle_select') . 'j'"],
