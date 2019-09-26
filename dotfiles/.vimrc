@@ -1258,47 +1258,47 @@ command! Preview call <SID>preview()
 
 let g:custom_defx_state = tempname()
 
-let g:custom_defx_mappings = {
-      \ '!': "defx#do_action('execute_command')",
-      \ '*': "defx#do_action('toggle_select_all')",
-      \ ';': "defx#do_action('repeat')",
-      \ '<2-LeftMouse>': "defx#do_action('drop')",
-      \ '<C-g>': "defx#do_action('print')",
-      \ '<C-l>': "defx#do_action('redraw')",
-      \ '<CR>': "defx#do_action('drop')",
-      \ '<RightMouse>': "defx#do_action('cd', ['..'])",
-      \ '<Space>': "defx#do_action('toggle_select') . 'j'",
-      \ 'C': "defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')",
-      \ 'E': "defx#do_action('open', 'vsplit')",
-      \ 'I': "defx#do_action('toggle_ignored_files')",
-      \ 'K': "defx#do_action('new_directory')",
-      \ 'M': "defx#do_action('new_multiple_files')",
-      \ 'N': "defx#do_action('new_file')",
-      \ 'O': "defx#do_action('open_tree_recursive')",
-      \ 'P': "defx#do_action('open', 'pedit')",
-      \ 'S': "defx#do_action('toggle_sort', 'time')",
-      \ 'c': "defx#do_action('copy')",
-      \ 'cd': "defx#do_action('change_vim_cwd')",
-      \ 'd': "defx#do_action('remove')",
-      \ 'm': "defx#do_action('move')",
-      \ 'o': "defx#do_action('open_or_close_tree')",
-      \ 'p': "defx#do_action('paste')",
-      \ 'q': "defx#do_action('quit')",
-      \ 'r': "defx#do_action('rename')",
-      \ 'u': "defx#do_action('cd', ['..'])",
-      \ 'x': "defx#do_action('execute_system')",
-      \ 'yy': "defx#do_action('yank_path')",
-      \ '~': "defx#do_action('cd')",
-      \ }
+let g:custom_defx_mappings = [
+      \ ['!             ', "defx#do_action('execute_command')"],
+      \ ['*             ', "defx#do_action('toggle_select_all')"],
+      \ [';             ', "defx#do_action('repeat')"],
+      \ ['<2-LeftMouse> ', "defx#do_action('drop')"],
+      \ ['<C-g>         ', "defx#do_action('print')"],
+      \ ['<C-l>         ', "defx#do_action('redraw')"],
+      \ ['<CR>          ', "defx#do_action('drop')"],
+      \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
+      \ ['<Space>       ', "defx#do_action('toggle_select') . 'j'"],
+      \ ['C             ', "defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')"],
+      \ ['E             ', "defx#do_action('open', 'vsplit')"],
+      \ ['I             ', "defx#do_action('toggle_ignored_files')"],
+      \ ['K             ', "defx#do_action('new_directory')"],
+      \ ['M             ', "defx#do_action('new_multiple_files')"],
+      \ ['N             ', "defx#do_action('new_file')"],
+      \ ['O             ', "defx#do_action('open_tree_recursive')"],
+      \ ['P             ', "defx#do_action('open', 'pedit')"],
+      \ ['S             ', "defx#do_action('toggle_sort', 'time')"],
+      \ ['c             ', "defx#do_action('copy')"],
+      \ ['cd            ', "defx#do_action('change_vim_cwd')"],
+      \ ['d             ', "defx#do_action('remove')"],
+      \ ['m             ', "defx#do_action('move')"],
+      \ ['o             ', "defx#do_action('open_or_close_tree')"],
+      \ ['p             ', "defx#do_action('paste')"],
+      \ ['q             ', "defx#do_action('quit')"],
+      \ ['r             ', "defx#do_action('rename')"],
+      \ ['u             ', "defx#do_action('cd', ['..'])"],
+      \ ['x             ', "defx#do_action('execute_system')"],
+      \ ['yy            ', "defx#do_action('yank_path')"],
+      \ ['~             ', "defx#do_action('cd')"],
+      \ ]
 
 function! s:defx_my_settings() abort
   " Define mappings
-  for [key, value] in items(g:custom_defx_mappings)
+  for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
   endfor
   nnoremap <silent><buffer> ?
-        \ :for [key, value] in items(g:custom_defx_mappings) <BAR>
-        \ echo '' . key . ':  ' . value <BAR>
+        \ :for [key, value] in g:custom_defx_mappings <BAR>
+        \ echo '' . key . ': ' . value <BAR>
         \ endfor<CR>
   call defx#custom#column('git', 'indicators', {
         \ 'Modified'  : '!',
