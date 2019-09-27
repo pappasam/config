@@ -1,0 +1,19 @@
+set -g status-style fg='#424242',bg='#dfddd7'
+
+set -g window-status-current-style fg='#f6f6f6',bg='#424242',bold
+set -g window-status-style fg='#b7b2a5',bg='#dfddd7',bold
+set -g window-status-activity-style fg='#424242',bg='#dfddd7',bold
+
+set -g pane-border-style bg=white,fg='#dedcd6'
+set -g pane-active-border-style bg=white,fg='#dedcd6'
+set -g display-panes-colour '#dedcd6'
+set -g display-panes-active-colour '#dedcd6'
+
+setw -g clock-mode-colour '#424242'
+
+set -g message-style fg='#2b2b2b',bg='#d3d1cc',bold
+
+# set -g message-command-fg '#2b2b2b'
+# set -g message-command-bg '#d3d1cc'
+
+setw -g mode-style fg=white,bg='#424242',bold

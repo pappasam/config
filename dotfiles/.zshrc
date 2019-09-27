@@ -502,8 +502,6 @@ alias cargo-doc='cargo doc --open'
 
 # Alacritty helpers
 alias alacritty-deb-install='cargo deb --install --manifest-path alacritty/Cargo.toml'
-alias dark='alacritty-dark'
-alias light='alacritty-light'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
@@ -542,12 +540,33 @@ function t() {
   fi
   HAS_SESSION=$(tmux has-session -t $SESSION 2>/dev/null)
   if [ $HAS_SESSION ]; then
+    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+      tmux -2 select-window -t $SESSION:1
+      tmux source-file ~/.tmux-light
+    fi
     tmux -2 attach -t $SESSION
   else
     tmux -2 new-session -d -s $SESSION
-    # tmux -2 select-window -t $SESSION:1
-    # tmux -2 rename-window edit
+    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+      tmux -2 select-window -t $SESSION:1
+      tmux source-file ~/.tmux-light
+    fi
     tmux -2 attach -t $SESSION
+  fi
+}
+
+# Alacritty Helpers
+function dark() {
+  alacritty-dark
+  if [ ! -z "$TMUX" ]; then
+    tmux source-file ~/.tmux.conf
+  fi
+}
+
+function light() {
+  alacritty-light
+  if [ ! -z "$TMUX" ]; then
+    tmux source-file ~/.tmux-light
   fi
 }
 
