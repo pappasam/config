@@ -188,6 +188,11 @@ if [ -d "$POETRY_LOC" ]; then
   source $HOME/.poetry/env
 fi
 
+OPAM_LOC="$HOME/.opam/default/bin"
+if [ -d "$OPAM_LOC" ]; then
+  path_ladd "$OPAM_LOC"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
