@@ -247,6 +247,16 @@ wget -O ~/Downloads/ngrams-en-20150817.zip \
 #   ${@}
 
 #######################################################################
+# Language Servers
+#######################################################################
+
+# Live list
+https://langserver.org/
+
+# clangd
+https://clang.llvm.org/extra/clangd/Installation.html#installing-clangd
+
+#######################################################################
 # Java Language Server
 #######################################################################
 cd ~/java

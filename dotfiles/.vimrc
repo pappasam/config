@@ -1692,6 +1692,8 @@ augroup END
 
 " LSP LanguageClient:
 let g:LanguageClient_serverCommands = {
+      \ 'c': ['clangd', '-background-index'],
+      \ 'cpp': ['clangd', '-background-index'],
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
       \ 'javascript': ['npx', '--no-install', '-q', 'flow', 'lsp'],
