@@ -1025,9 +1025,9 @@ SPACESHIP_CHAR_SYMBOL='$ '
 SPACESHIP_DIR_PREFIX=
 SPACESHIP_HOST_COLOR=yellow
 SPACESHIP_HOST_PREFIX=@
-SPACESHIP_HOST_SHOW=always
+SPACESHIP_HOST_SHOW=true
 SPACESHIP_USER_COLOR=yellow
-SPACESHIP_USER_SHOW=always
+SPACESHIP_USER_SHOW=true
 SPACESHIP_USER_SUFFIX=
 SPACESHIP_VENV_PREFIX='('
 SPACESHIP_VENV_SUFFIX=')'
@@ -1037,9 +1037,9 @@ SPACESHIP_VENV_GENERIC_NAMES=()
 # NOTE Below is legacy:
 # NOTE this is not cross-shell; zsh-specific
 
-#######################################################################
-# BEGIN: Git formatting
-#######################################################################
+########################################################################
+## BEGIN: Git formatting
+########################################################################
 #autoload -Uz vcs_info
 #zstyle ':vcs_info:*' stagedstr '%F{yellow}=%f'
 #zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
