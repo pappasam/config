@@ -555,6 +555,7 @@ let g:litecorrect_custom_user_dict = {
       \ 'medieval': ['medival', 'mediaeval', 'medevil'],
       \ 'then': ['hten'],
       \ 'environment': ['environemnt'],
+      \ 'is': ['si'],
       \ }
 
 augroup writing
