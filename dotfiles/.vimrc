@@ -1704,6 +1704,7 @@ let g:LanguageClient_serverCommands = {
       \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+      \ 'terraform': ['terraform-lsp'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
       \ }
 let g:LanguageClient_autoStart = v:true
@@ -1734,22 +1735,6 @@ augroup vimscript_complete
   autocmd!
   autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
   autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
-augroup END
-
-" C_CPP:
-" Jumping back defaults to <C-O> or <C-T> (in is <C-I> per usual)
-" Defaults to <C-]> for goto definition
-" Additionally, jumping to Header file under cursor: gf
-let g:clang_library_path = '/usr/lib/llvm-6.0/lib'
-let g:clang_auto_user_options = 'compile_commands.json, path, .clang_complete'
-let g:clang_complete_auto = v:false
-let g:clang_complete_macros = v:true
-let g:clang_jumpto_declaration_key = "<C-]>"
-
-" Terraform:
-augroup terraform_complete
-  autocmd!
-  autocmd FileType terraform setlocal omnifunc=terraformcomplete#Complete
 augroup END
 
 " Syntaxfile Completion: if you can't get good autocompletion, hack it :p

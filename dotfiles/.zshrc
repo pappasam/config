@@ -1034,7 +1034,7 @@ SPACESHIP_PROMPT_ORDER=(
   # dotnet        # .NET section
   # ember         # Ember.js section
   # kubecontext   # Kubectl context section
-  terraform     # Terraform workspace section
+  # terraform     # Terraform workspace section
   # exec_time     # Execution time
   line_sep      # Line break
   # battery       # Battery level and status
