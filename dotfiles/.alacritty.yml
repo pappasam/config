@@ -47,13 +47,13 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: Hack
+    family: Hack NF
     style: Regular
   bold:
-    family: Hack
+    family: Hack NF
     style: Bold
   italic:
-    family: Hack
+    family: Hack NF
     style: Italic
   size: 13.0
 

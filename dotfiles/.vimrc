@@ -204,6 +204,9 @@ function PackInit() abort
   call minpac#add('git@github.com:kristijanhusak/defx-git', {
         \ 'do': 'UpdateRemotePlugins',
         \ })
+  call minpac#add('git@github.com:kristijanhusak/defx-icons', {
+        \ 'do': 'UpdateRemotePlugins',
+        \ })
   call minpac#add('git@github.com:t9md/vim-choosewin')
   call minpac#add('git@github.com:mhinz/vim-startify')
   call minpac#add('git@github.com:yssl/QFEnter')
@@ -1273,6 +1276,7 @@ let g:custom_defx_mappings = [
       \ ['<C-g>         ', "defx#do_action('print')"],
       \ ['<C-l>         ', "defx#do_action('redraw')"],
       \ ['<C-s>         ', "defx#do_action('open', 'split')"],
+      \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
@@ -1305,16 +1309,6 @@ function! s:defx_my_settings() abort
         \ :for [key, value] in g:custom_defx_mappings <BAR>
         \ echo '' . key . ': ' . value <BAR>
         \ endfor<CR>
-  call defx#custom#column('git', 'indicators', {
-        \ 'Modified'  : '!',
-        \ 'Staged'    : '=',
-        \ 'Untracked' : '?',
-        \ 'Renamed'   : '%',
-        \ 'Unmerged'  : '=',
-        \ 'Ignored'   : '%',
-        \ 'Deleted'   : 'X',
-        \ 'Unknown'   : '?'
-        \ })
 endfunction
 
 augroup defx_settings
@@ -1936,7 +1930,7 @@ function! DefaultKeyMappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j :Defx
         \ -buffer-name=defx
-        \ -columns=git:mark:indent:icon:filename:type
+        \ -columns=mark:git:indent:icons:filename:type:size:time
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
@@ -1946,7 +1940,7 @@ function! DefaultKeyMappings()
         \ <CR>
   nnoremap <silent> <space>J :Defx `expand('%:p:h')`
         \ -buffer-name=defx
-        \ -columns=git:mark:indent:icon:filename:type
+        \ -columns=mark:git:indent:icons:filename:type:size:time
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -split=vertical

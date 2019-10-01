@@ -113,6 +113,13 @@ sudo apt install screenkey
 # Fonts
 #######################################################################
 
+# Download relevant nerd fonts from here
+# https://www.nerdfonts.com/font-downloads
+
+# 1.) Download a Nerd Font
+# 2.) Unzip and copy to ~/.fonts
+# 3.) Run the command fc-cache -fv to manually rebuild the font cache
+
 # Installs the "Hack" font
 sudo apt install fonts-hack-ttf
 
