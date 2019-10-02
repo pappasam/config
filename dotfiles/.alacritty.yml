@@ -47,14 +47,14 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: FuraCode NF
+    family: FuraCode Nerd Font
     style: Retina
   bold:
-    family: FuraCode NF
+    family: FuraCode Nerd Font
     style: Bold
   italic:
-    family: FuraCode NF
-    style: Retina
+    family: FuraCode Nerd Font
+    style: Italic
   size: 14.0
 
   # Offset is the extra space around each character. offset.y can be thought of
