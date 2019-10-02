@@ -33,6 +33,9 @@ sudo apt install stow
 
 sudo apt install shellcheck
 
+# Better annotations
+sudo apt install flameshot
+
 #######################################################################
 # Typing
 #######################################################################
