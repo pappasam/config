@@ -351,6 +351,14 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 #######################################################################
+# AWS
+#######################################################################
+pip install awscli
+
+# pretty shell
+pip install saws
+
+#######################################################################
 # Vim tagbar
 #######################################################################
 cd ~/src/lib

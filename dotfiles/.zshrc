@@ -223,6 +223,7 @@ if [ -f $HOME/.zplug/init.zsh ]; then
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zsh-users/zsh-syntax-highlighting", as:plugin
+  zplug "zsh-users/zsh-syntax-highlighting", as:plugin
   zplug "junegunn/fzf-bin", \
     from:gh-r, \
     as:command, \
