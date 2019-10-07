@@ -937,13 +937,21 @@ function jenkinsfilelint() {  # [arg1]: path to Jenkinsfile
 }
 
 # Zoom
-function zoomy {
+function zoomy() {
   if [ -z $1 ]; then
     echo "Conference room number needed! 'zoomy 1234567890'"
   else
     gio open "zoommtg://zoom.us/join?action=join&confno=$1"
   fi
 }
+
+# Yaml to JSON
+function yamltojson() {
+  local pycmd='import sys, yaml, json'
+  local pycmd="$pycmd;json.dump(yaml.load(sys.stdin), sys.stdout, indent=2)"
+  cat $1 | python -W ignore -c "$pycmd"
+}
+compdef '_files -g "*.(yml|yaml)"' yamltojson
 
 # }}}
 # Compdef Test {{{
