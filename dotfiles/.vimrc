@@ -1659,8 +1659,11 @@ let g:slime_no_mappings = v:true
 " 2) Return from file (relies on tag stack): <C-O>
 " 3) Print the documentation of something under the cursor: <leader>gd
 
-" Deoplete:
+" Deoplete And Neosnippet:
 let g:deoplete#enable_at_startup = 1
+let g:neosnippet#enable_completed_snippet = 1
+let g:neosnippet#enable_complete_done = 1
+
 function! CustomDeopleteConfig()
   " Deoplete Defaults:
   call deoplete#custom#option({
@@ -1688,6 +1691,9 @@ augroup deoplete_on_vim_startup
 augroup END
 
 " LSP LanguageClient:
+" NOTES:
+" yaml-language-server: need .vim/settings.json. Example in dotfiles
+"   * Need older version: npm install -g yaml-language-server@0.4.1
 let g:LanguageClient_serverCommands = {
       \ 'c': ['clangd', '-background-index'],
       \ 'cpp': ['clangd', '-background-index'],
@@ -1702,11 +1708,13 @@ let g:LanguageClient_serverCommands = {
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
       \ 'terraform': ['terraform-lsp'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
+      \ 'yaml': ['yaml-language-server', '--stdio'],
       \ }
 let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'quickfix'
+" let g:LanguageClient_completionPreferTextEdit = v:true
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
@@ -1985,8 +1993,8 @@ function! DefaultKeyMappings()
   omap aq <Plug>(textobj-sandwich-query-a)
 
   " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-P> :call FZFFilesAvoidDefx()<CR>
-  nnoremap <silent> <C-B> :call FZFBuffersAvoidDefx()<CR>
+  nnoremap <silent> <C-p> :call FZFFilesAvoidDefx()<CR>
+  nnoremap <silent> <C-b> :call FZFBuffersAvoidDefx()<CR>
   nnoremap <C-n> yiw:Grep <C-r>"<CR>
   vnoremap <C-n> y:Grep <C-r>"<CR>
   nnoremap <leader><C-n> yiw:GrepIgnoreCase <C-r>"<CR>

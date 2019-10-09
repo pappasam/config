@@ -266,6 +266,8 @@ https://langserver.org/
 # clangd
 https://clang.llvm.org/extra/clangd/Installation.html#installing-clangd
 
+npm install -g yaml-language-server@0.4.1
+
 #######################################################################
 # Java Language Server
 #######################################################################

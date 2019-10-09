@@ -47,15 +47,15 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: FuraCode Nerd Font
-    style: Retina
+    family: Hack Nerd Font
+    style: Normal
   bold:
-    family: FuraCode Nerd Font
+    family: Hack Nerd Font
     style: Bold
   italic:
-    family: FuraCode Nerd Font
+    family: Hack Nerd Font
     style: Italic
-  size: 14.0
+  size: 12.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
