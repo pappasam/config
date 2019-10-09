@@ -1665,7 +1665,7 @@ function! CustomDeopleteConfig()
   " Deoplete Defaults:
   call deoplete#custom#option({
         \ 'auto_complete': v:true,
-        \ 'auto_complete_delay': 300,
+        \ 'auto_complete_delay': 50,
         \ 'max_list': 500,
         \ 'num_processes': 2,
         \ })
@@ -2083,6 +2083,7 @@ cnoreabbrev <expr> vhelp <SID>abbr_help('vhelp', 'vertical help')
 " Using Ack and Acks brings up quickfix automatically
 cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
+cnoreabbrev <expr> Col <SID>abbr_help('Col', 'echo expand(col("."))')
 
 " }}}
 " General: Global Config + Cleanup {{{
