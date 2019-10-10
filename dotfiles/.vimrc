@@ -1714,7 +1714,6 @@ let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'auto'
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'quickfix'
-" let g:LanguageClient_completionPreferTextEdit = v:true
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
