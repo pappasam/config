@@ -1659,10 +1659,22 @@ let g:slime_no_mappings = v:true
 " 2) Return from file (relies on tag stack): <C-O>
 " 3) Print the documentation of something under the cursor: <leader>gd
 
+" My killer function
+function! s:format_yaml_snippet()
+  " Find and replace things with $0, $1, $2, etc
+  s/$\([0-9]\+\)/<`\1`>/g
+  " Expand custom yaml snippet
+  execute 's/\%x00	/\r'
+        \ . repeat(' ', indent('.'))
+        \ . repeat(' ', &shiftwidth)
+        \ . '/g'
+endfunction
+command! FormatYamlSnippet call s:format_yaml_snippet()
+
 " Deoplete And Neosnippet:
 let g:deoplete#enable_at_startup = v:true
-let g:neosnippet#enable_completed_snippet = v:true
-let g:neosnippet#enable_complete_done = v:true
+let g:neosnippet#enable_completed_snippet = v:false
+let g:neosnippet#enable_complete_done = v:false
 
 function! CustomDeopleteConfig()
   " Deoplete Defaults:
