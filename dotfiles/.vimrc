@@ -1660,9 +1660,9 @@ let g:slime_no_mappings = v:true
 " 3) Print the documentation of something under the cursor: <leader>gd
 
 " Deoplete And Neosnippet:
-let g:deoplete#enable_at_startup = 1
-let g:neosnippet#enable_completed_snippet = 1
-let g:neosnippet#enable_complete_done = 1
+let g:deoplete#enable_at_startup = v:true
+let g:neosnippet#enable_completed_snippet = v:true
+let g:neosnippet#enable_complete_done = v:true
 
 function! CustomDeopleteConfig()
   " Deoplete Defaults:
