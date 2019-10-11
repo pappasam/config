@@ -516,7 +516,7 @@ augroup indentation_sr
   autocmd Filetype python,c,haskell,markdown,rust,rst,kv,nginx,asm,nasm,gdscript3
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv,votl,go
+  autocmd Filetype make,tsv,votl,go,gomod
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
@@ -1709,6 +1709,8 @@ augroup END
 let g:LanguageClient_serverCommands = {
       \ 'c': ['clangd', '-background-index'],
       \ 'cpp': ['clangd', '-background-index'],
+      \ 'go': ['gopls'],
+      \ 'gomod': ['gopls'],
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
       \ 'javascript': ['npx', '--no-install', '-q', 'flow', 'lsp'],
@@ -1722,12 +1724,19 @@ let g:LanguageClient_serverCommands = {
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
       \ 'yaml': ['yaml-language-server', '--stdio'],
       \ }
+let g:LanguageClient_rootMarkers = {
+      \ 'go': ['go.mod', 'go.sum'],
+      \ 'gomod': ['go.mod', 'go.sum'],
+      \ 'python': ['pyproject.toml', 'poetry.lock'],
+      \ }
+
 let g:LanguageClient_autoStart = v:true
-let g:LanguageClient_hoverPreview = 'auto'
+let g:LanguageClient_hoverPreview = 'Always'
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'quickfix'
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <buffer> <C-k> :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <buffer> <leader>sf :call LanguageClient#textDocument_formatting()<CR>
