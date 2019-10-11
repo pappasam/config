@@ -352,7 +352,6 @@ function PackInit() abort
   call minpac#add('git@github.com:junegunn/goyo.vim')
   call minpac#add('git@github.com:junegunn/limelight.vim')
   call minpac#add('git@github.com:reedes/vim-wordy')
-  call minpac#add('git@github.com:reedes/vim-litecorrect')
   call minpac#add('git@github.com:tommcdo/vim-exchange')
   call minpac#add('git@github.com:dbmrq/vim-ditto')
 
@@ -542,32 +541,52 @@ augroup END
 " }}}
 " General: Writing (non-coding) {{{
 
-" Notes:
-"   indenting and de-indenting in insert mode are:
-"     <C-t> and <C-d>
-"   formatting hard line breaks
-"     NORMAL
-"       gqap => format current paragraph
-"       gq => format selection
-"     VISUAL
-"       J => join all lines
-
-" My custom litecorrect options
-let g:litecorrect_custom_user_dict = {
-      \ 'maybe': ['mabye'],
-      \ 'medieval': ['medival', 'mediaeval', 'medevil'],
-      \ 'then': ['hten'],
-      \ 'environment': ['environemnt'],
-      \ 'is': ['si'],
-      \ 'be': ['eb'],
-      \ }
+function! s:abolish_correct()
+  " Started from:
+  " https://github.com/tpope/tpope/blob/94b1f7c33ee4049866f0726f96d9a0fb5fdf868f/.vim/after/plugin/abolish_tpope.vim
+  Abolish Lidsa                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  Abolish Tqbf                       The quick, brown fox jumps over the lazy dog
+  Abolish afterword{,s}              afterward{}
+  Abolish anomol{y,ies}              anomal{}
+  Abolish austrail{a,an,ia,ian}      austral{ia,ian}
+  Abolish cal{a,e}nder{,s}           cal{e}ndar{}
+  Abolish delimeter{,s}              delimiter{}
+  Abolish despara{te,tely,tion}      despera{}
+  Abolish destionation{,s}           destination{}
+  Abolish d{e,i}screp{e,a}nc{y,ies}  d{i}screp{a}nc{}
+  Abolish euphamis{m,ms,tic,tically} euphemis{}
+  Abolish hense                      hence
+  Abolish improvment{,s}             improvement{}
+  Abolish inherant{,ly}              inherent{}
+  Abolish lastest                    latest
+  Abolish persistan{ce,t,tly}        persisten{}
+  Abolish rec{co,com,o}mend{,s,ed,ing,ation} rec{om}mend{}
+  Abolish referesh{,es}              refresh{}
+  Abolish reproducable               reproducible
+  Abolish resouce{,s}                resource{}
+  Abolish restraunt{,s}              restaurant{}
+  Abolish scflead                    supercalifragilisticexpialidocious
+  Abolish segument{,s,ed,ation}      segment{}
+  Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
+  Abolish si                         is
+  Abolish teh                        the
+  Abolish {,in}consistan{cy,cies,t,tly} {}consisten{}
+  Abolish {,ir}releven{ce,cy,t,tly}  {}relevan{}
+  Abolish {,non}existan{ce,t}        {}existen{}
+  Abolish {,re}impliment{,s,ing,ed,ation} {}implement{}
+  Abolish {,un}nec{ce,ces,e}sar{y,ily} {}nec{es}sar{}
+  Abolish {,un}orgin{,al}            {}origin{}
+  Abolish {c,m}arraige{,s}           {}arriage{}
+  Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+  Abolish {les,compar,compari}sion{,s} {les,compari,compari}son{}
+endfunction
 
 augroup writing
   autocmd!
+  autocmd VimEnter * call s:abolish_correct()
   autocmd FileType markdown,rst,text,gitcommit
         \ setlocal wrap linebreak nolist
         \ | call textobj#sentence#init()
-        \ | call litecorrect#init(g:litecorrect_custom_user_dict)
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
   autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
