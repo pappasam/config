@@ -1682,8 +1682,6 @@ let g:slime_no_mappings = v:true
 
 " Deoplete And Neosnippet:
 let g:deoplete#enable_at_startup = v:true
-let g:neosnippet#enable_completed_snippet = v:false
-let g:neosnippet#enable_complete_done = v:false
 
 function! CustomDeopleteConfig()
   " Deoplete Defaults:
@@ -1763,23 +1761,16 @@ augroup languageclient_on_vim_startup
         \ . ' call CustomLanguageClientConfig()'
 augroup END
 
-" NeoSnippet Yaml Workaround:
-function! s:format_yaml_snippet()
-  " Find and replace things with $0, $1, $2, etc
-  s/$\([0-9]\+\)/<`\1`>/g
-  " Find and replace things like ${...}
-  s/${\([^}]\+\)}/<`\1`>/g
-  " Expand custom yaml snippet
-  execute 's/\%x00	/\r'
-        \ . repeat(' ', indent('.'))
-        \ . repeat(' ', &shiftwidth)
-        \ . '/g'
-endfunction
-nnoremap <silent><expr> <Plug>(neosnippet_jump) neosnippet#mappings#jump_impl()
-augroup custom_yaml_lsp
-  autocmd!
-  autocmd CompleteDone *.yaml silent! call s:format_yaml_snippet()
-  autocmd FileType yaml nmap <C-b> <Plug>(neosnippet_jump)
+" Neosnippet Config:
+" NOTE: selecting an item in insert mode with <C-y>
+let g:neosnippet#enable_completed_snippet = v:false
+let g:neosnippet#enable_complete_done = v:false
+augroup snippet_workarounds
+  autocmd BufEnter *.yaml let g:neosnippet#enable_completed_snippet = v:true
+  autocmd BufEnter *.yaml let g:neosnippet#enable_complete_done = v:true
+  autocmd BufLeave *.yaml let g:neosnippet#enable_completed_snippet = v:false
+  autocmd BufLeave *.yaml let g:neosnippet#enable_complete_done = v:false
+  autocmd FileType yaml imap <buffer> <C-b> <Plug>(neosnippet_jump)
 augroup END
 
 " VimScript:
