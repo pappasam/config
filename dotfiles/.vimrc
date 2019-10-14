@@ -354,6 +354,7 @@ function PackInit() abort
   call minpac#add('git@github.com:reedes/vim-wordy')
   call minpac#add('git@github.com:tommcdo/vim-exchange')
   call minpac#add('git@github.com:dbmrq/vim-ditto')
+  call minpac#add('git@github.com:swordguin/vim-veil.git')
 
   " Previewers:
   call minpac#add('git@github.com:iamcco/markdown-preview.nvim',
@@ -1312,7 +1313,6 @@ let g:custom_defx_mappings = [
       \ ['d             ', "defx#do_action('remove')"],
       \ ['i             ', "defx#do_action('toggle_ignored_files')"],
       \ ['m             ', "defx#do_action('move')"],
-      \ ['m             ', "defx#do_action('new_multiple_files')"],
       \ ['n             ', "defx#do_action('new_file')"],
       \ ['o             ', "defx#do_action('open_or_close_tree')"],
       \ ['p             ', "defx#do_action('paste')"],
@@ -1776,8 +1776,8 @@ function! s:snippet_auto_completion_off()
 endfunction
 
 augroup snippet_workarounds
-  autocmd BufEnter *.yaml call s:snippet_auto_completion_on()
-  autocmd BufLeave *.yaml call s:snippet_auto_completion_off()
+  autocmd BufEnter *.yaml,*.yml call s:snippet_auto_completion_on()
+  autocmd BufLeave *.yaml,*.yml call s:snippet_auto_completion_off()
   autocmd FileType yaml imap <buffer> <C-l> <Plug>(neosnippet_jump)
 augroup END
 
@@ -2007,8 +2007,11 @@ function! DefaultKeyMappings()
   " Choosewin: (just like tmux)
   nnoremap <C-w>q :ChooseWin<CR>
 
-  " Goyo:
+  " Goyo And Writing:
   nnoremap <leader><leader>g :Goyo<CR>
+  nnoremap <leader><leader>l :Limelight!!<CR>
+  nmap <leader><leader>v <Plug>Veil
+
 
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i :IndentLinesToggle<CR>
