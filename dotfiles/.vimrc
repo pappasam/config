@@ -1916,6 +1916,9 @@ function! DefaultKeyMappings()
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
 
+  " Delete:
+  inoremap <C-l> <Del>
+
   " J: basically, unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
 
@@ -2065,9 +2068,9 @@ function! DefaultKeyMappings()
   nnoremap <leader>a :NeomakeClean<cr>
 
   " NeoSnippet:
-  imap <C-l> <Plug>(neosnippet_expand_or_jump)
-  smap <C-l> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-l> <Plug>(neosnippet_expand_target)
+  imap <C-h> <Plug>(neosnippet_expand_or_jump)
+  smap <C-h> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-h> <Plug>(neosnippet_expand_target)
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
