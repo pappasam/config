@@ -1312,12 +1312,11 @@ let g:custom_defx_mappings = [
       \ ['cd            ', "defx#do_action('change_vim_cwd')"],
       \ ['d             ', "defx#do_action('remove')"],
       \ ['i             ', "defx#do_action('toggle_ignored_files')"],
-      \ ['m             ', "defx#do_action('move')"],
-      \ ['n             ', "defx#do_action('new_file')"],
+      \ ['ma            ', "defx#do_action('new_file')"],
+      \ ['mm            ', "defx#do_action('rename')"],
       \ ['o             ', "defx#do_action('open_or_close_tree')"],
       \ ['p             ', "defx#do_action('paste')"],
       \ ['q             ', "defx#do_action('quit')"],
-      \ ['r             ', "defx#do_action('rename')"],
       \ ['ss            ', "defx#do_action('toggle_select')"],
       \ ['u             ', "defx#do_action('cd', ['..'])"],
       \ ['x             ', "defx#do_action('execute_system')"],
@@ -1371,7 +1370,7 @@ function! FZFBuffersAvoidDefx()
   execute 'Buffers'
 endfunction
 
-let g:fzf_height = 12
+let g:fzf_layout = { 'window': 'botright 15new' }
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
       \ 'ctrl-t': 'tab split',
