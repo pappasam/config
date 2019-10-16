@@ -2069,6 +2069,7 @@ function! DefaultKeyMappings()
 
   " Neomake: shortcuts
   nnoremap <leader>a :NeomakeClean<cr>
+  nnoremap <leader>A :NeomakeToggle<cr>
 
   " NeoSnippet:
   imap <C-h> <Plug>(neosnippet_expand_or_jump)
