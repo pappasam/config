@@ -1345,22 +1345,15 @@ augroup END
 " }}}
 " Plugin: Fzf {{{
 
-command! -bang -nargs=* Grep call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --case-sensitive --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-command! -bang -nargs=* GrepIgnoreCase call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-
-" An action can be a reference to a function that processes selected lines
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
 function! FZFFilesAvoidDefx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
   " getcwd(-1, -1) tells it to always use the global working directory
-  call fzf#run(fzf#wrap({'source': 'fd -c always --type f --hidden --follow --exclude ".git"', 'dir': getcwd(-1, -1)}))
+  call fzf#run(fzf#wrap({
+        \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
+        \ 'dir': getcwd(-1, -1),
+        \ }))
 endfunction
 
 function! FZFBuffersAvoidDefx()
@@ -1370,7 +1363,20 @@ function! FZFBuffersAvoidDefx()
   execute 'Buffers'
 endfunction
 
-let g:fzf_layout = { 'window': 'botright 15new' }
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+endfunction
+
+" Note: <C-a><C-l> places the remaining files in a vertical split
+let $FZF_DEFAULT_OPTS = '-m --bind ctrl-a:select-all,ctrl-d:deselect-all '
+      \ . '--preview "'
+      \ . '[[ $(file --mime {}) =~ binary ]] &&'
+      \ . 'echo {} is a binary file ||'
+      \ . '(bat --style=numbers --color=always {} || cat {})'
+      \ . '2> /dev/null | head -500"'
+let g:fzf_layout = { 'window': 'botright 20new' }
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
       \ 'ctrl-t': 'tab split',
@@ -2044,10 +2050,8 @@ function! DefaultKeyMappings()
   " FZF: create shortcuts for finding stuff
   nnoremap <silent> <C-p> :call FZFFilesAvoidDefx()<CR>
   nnoremap <silent> <C-b> :call FZFBuffersAvoidDefx()<CR>
-  nnoremap <C-n> yiw:Grep <C-r>"<CR>
-  vnoremap <C-n> y:Grep <C-r>"<CR>
-  nnoremap <leader><C-n> yiw:GrepIgnoreCase <C-r>"<CR>
-  vnoremap <leader><C-n> y:GrepIgnoreCase <C-r>"<CR>
+  nnoremap <C-n> yiw:Rg <C-r>"<CR>
+  vnoremap <C-n> y:Rg <C-r>"<CR>
 
   " DeleteHiddenBuffers: shortcut to make this easier
   " Note: weird stuff happens if you mess this up
