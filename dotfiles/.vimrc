@@ -1292,6 +1292,24 @@ command! Preview call <SID>preview()
 
 let g:custom_defx_state = tempname()
 
+let g:defx_ignored_files = join([
+      \ '.*',
+      \ 'venv/',
+      \ '__pycache__/',
+      \ 'node_modules/',
+      \ 'build/',
+      \ 'target/',
+      \ 'pip-wheel-metadata/',
+      \ 'fonts/',
+      \ '*.aux',
+      \ '*.toc',
+      \ '*.pdf',
+      \ '*.out',
+      \ '*.o',
+      \ '*.pyc',
+      \ '*.png',
+      \ ], ',')
+
 let g:custom_defx_mappings = [
       \ ['!             ', "defx#do_action('execute_command')"],
       \ ['*             ', "defx#do_action('toggle_select_all')"],
@@ -1998,6 +2016,7 @@ function! DefaultKeyMappings()
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
+        \ -ignored-files=`g:defx_ignored_files`
         \ -split=vertical
         \ -toggle
         \ -winwidth=31
@@ -2007,6 +2026,7 @@ function! DefaultKeyMappings()
         \ -columns=mark:git:indent:icons:filename:type:size:time
         \ -direction=topleft
         \ -search=`expand('%:p')`
+        \ -ignored-files=`g:defx_ignored_files`
         \ -split=vertical
         \ -toggle
         \ -winwidth=31
