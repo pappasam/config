@@ -90,7 +90,7 @@ endfunction
 
 function! SetGlobalConfig()
   " Code Completion:
-  set completeopt=menuone,longest,preview
+  set completeopt=menuone,longest
   set wildmode=longest,list,full
   set wildmenu
 
@@ -1770,6 +1770,7 @@ let g:LanguageClient_rootMarkers = {
 
 let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'Always'
+let g:LanguageClient_useFloatingHover = v:false
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'quickfix'
 function! CustomLanguageClientConfig()
