@@ -236,6 +236,9 @@ function PackInit() abort
   call minpac#add('git@github.com:junegunn/fzf')
   call minpac#add('git@github.com:junegunn/fzf.vim')
   call minpac#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
+  " Below needed by fzf-preview
+  call minpac#add('git@github.com:bogado/file-line.git')
+  call minpac#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
 
   " Git:
   call minpac#add('git@github.com:tpope/vim-fugitive')
@@ -1322,9 +1325,9 @@ let g:custom_defx_mappings = [
       \ ['<C-l>         ', "defx#do_action('resize', 100)"],
       \ ['<C-o>         ', "defx#do_action('cd', ['..'])"],
       \ ['<C-r>         ', "defx#do_action('redraw')"],
-      \ ['<C-s>         ', "defx#do_action('open', 'split')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
+      \ ['<C-x>         ', "defx#do_action('open', 'split')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
       \ ['O             ', "defx#is_opened_tree() ? defx#do_action('multi', ['close_tree', 'open_tree_recursive']) : defx#do_action('open_tree_recursive')"],
@@ -1369,47 +1372,35 @@ augroup defx_settings
 augroup END
 
 " }}}
-" Plugin: Fzf {{{
+" Plugin: Fzf and FZF Preview {{{
+
+" When in preview window, the following key mappings are relevant:
+" <C-s>
+"   - Toggle window size of fzf, normal size and full-screen
+" <C-d>
+"   - Preview page down
+" <C-u>
+"   - Preview page up
+" <C-t> or ?
+"   - Toggle Preview
+" <C-x>, <C-v>, <C-t>: open in split, vert, and tab
 
 function! FZFFilesAvoidDefx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
-  " getcwd(-1, -1) tells it to always use the global working directory
-  call fzf#run(fzf#wrap({
-        \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
-        \ 'dir': getcwd(-1, -1),
-        \ }))
+  ProjectFilesPreview
 endfunction
 
 function! FZFBuffersAvoidDefx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
-  execute 'Buffers'
+  BuffersPreview
 endfunction
 
-" An action can be a reference to a function that processes selected lines
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-endfunction
-
-" Note: <C-a><C-l> places the remaining files in a vertical split
-let $FZF_DEFAULT_OPTS = '-m --bind ctrl-a:select-all,ctrl-d:deselect-all '
-      \ . '--preview "'
-      \ . '[[ $(file --mime {}) =~ binary ]] &&'
-      \ . 'echo {} is a binary file ||'
-      \ . '(bat --style=numbers --color=always {} || cat {})'
-      \ . '2> /dev/null | head -500"'
-let g:fzf_layout = { 'window': 'botright 20new' }
-let g:fzf_action = {
-      \ 'ctrl-o': 'edit',
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'ctrl-l': function('s:build_quickfix_list'),
-      \ }
+let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
+let g:fzf_preview_layout = 'botright 20new'
 
 " }}}
 " Plugin: Tagbar {{{
@@ -1717,6 +1708,8 @@ let g:slime_no_mappings = v:true
 " Deoplete And Neosnippet:
 let g:deoplete#enable_at_startup = v:true
 
+command! Grep ProjectGrepPreview
+
 function! CustomDeopleteConfig()
   " Deoplete Defaults:
   call deoplete#custom#option({
@@ -1860,7 +1853,7 @@ let g:undotree_WindowLayout = 3
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
 let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-s>']
+let g:qfenter_keymap.hopen = ['<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
 " do not copy quickfix when opened in new tab
 let g:qfenter_enable_autoquickfix = v:false
@@ -2080,8 +2073,8 @@ function! DefaultKeyMappings()
   " FZF: create shortcuts for finding stuff
   nnoremap <silent> <C-p> :call FZFFilesAvoidDefx()<CR>
   nnoremap <silent> <C-b> :call FZFBuffersAvoidDefx()<CR>
-  nnoremap <C-n> yiw:Rg <C-r>"<CR>
-  vnoremap <C-n> y:Rg <C-r>"<CR>
+  nnoremap <C-n> yiw:ProjectGrepPreview <C-r>"<CR>
+  vnoremap <C-n> y:ProjectGrepPreview <C-r>"<CR>
 
   " DeleteHiddenBuffers: shortcut to make this easier
   " Note: weird stuff happens if you mess this up
