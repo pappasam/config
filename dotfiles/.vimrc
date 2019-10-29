@@ -1327,7 +1327,7 @@ let g:custom_defx_mappings = [
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
-      \ ['O             ', "defx#do_action('open_tree_recursive')"],
+      \ ['O             ', "defx#is_opened_tree() ? defx#do_action('multi', ['close_tree', 'open_tree_recursive']) : defx#do_action('open_tree_recursive')"],
       \ ['P             ', "defx#do_action('open', 'pedit')"],
       \ ['a             ', "defx#do_action('toggle_select')"],
       \ ['cc            ', "defx#do_action('copy')"],
@@ -1351,6 +1351,10 @@ function! s:defx_my_settings() abort
   for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
   endfor
+  call defx#custom#column('filename', {
+        \ 'min_width': 29,
+        \ 'max_width': 29,
+        \ })
   nnoremap <silent><buffer> ?
         \ :for [key, value] in g:custom_defx_mappings <BAR>
         \ echo '' . key . ': ' . value <BAR>
