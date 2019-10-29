@@ -1389,7 +1389,11 @@ function! FZFFilesAvoidDefx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
-  ProjectFilesPreview
+  " getcwd(-1, -1) tells it to always use the global working directory
+  call fzf#run(fzf#wrap({
+        \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
+        \ 'dir': getcwd(-1, -1),
+        \ }))
 endfunction
 
 function! FZFBuffersAvoidDefx()
@@ -1398,6 +1402,23 @@ function! FZFBuffersAvoidDefx()
   endif
   BuffersPreview
 endfunction
+
+" Note: <C-a><C-l> places the remaining files in a vertical split
+let $FZF_DEFAULT_OPTS = '-m --bind ctrl-u:preview-up,ctrl-d:preview-down '
+      \ . '--reverse '
+      \ . '--prompt="Files>" '
+      \ . '--preview "'
+      \ . '[[ $(file --mime {}) =~ binary ]] &&'
+      \ . 'echo {} is a binary file ||'
+      \ . '(bat --style=numbers --color=always {} || cat {})'
+      \ . '2> /dev/null | head -500"'
+let g:fzf_layout = { 'window': 'botright 20new' }
+let g:fzf_action = {
+      \ 'ctrl-o': 'edit',
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ }
 
 let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
 let g:fzf_preview_layout = 'botright split new'
