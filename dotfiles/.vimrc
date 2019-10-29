@@ -1400,7 +1400,11 @@ function! FZFBuffersAvoidDefx()
 endfunction
 
 let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
-let g:fzf_preview_layout = 'botright 20new'
+let g:fzf_preview_layout = 'botright split new'
+let g:fzf_preview_quit_map = v:true
+let g:fzf_preview_rate = 0.4
+
+command! Gfiles GitFilesPreview
 
 " }}}
 " Plugin: Tagbar {{{
