@@ -1404,7 +1404,7 @@ function! FZFBuffersAvoidDefx()
 endfunction
 
 " Note: <C-a><C-l> places the remaining files in a vertical split
-let $FZF_DEFAULT_OPTS = '-m --bind ctrl-u:preview-up,ctrl-d:preview-down '
+let $FZF_DEFAULT_OPTS = '-m --bind ctrl-u:preview-page-up,ctrl-d:preview-page-down '
       \ . '--reverse '
       \ . '--prompt="Files>" '
       \ . '--preview "'
