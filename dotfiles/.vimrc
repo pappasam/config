@@ -305,6 +305,7 @@ function PackInit() abort
   call minpac#add('git@github.com:Shougo/neosnippet.vim')
   call minpac#add('git@github.com:Shougo/neosnippet-snippets')
   call minpac#add('git@github.com:Shougo/neco-vim')
+  call minpac#add('git@github.com:Shougo/echodoc.vim')
   call minpac#add('git@github.com:Rip-Rip/clang_complete')
   " for C header filename completion:
   call minpac#add('git@github.com:xaizek/vim-inccomplete')
@@ -1851,6 +1852,13 @@ augroup snippet_workarounds
   autocmd BufLeave *.yaml,*.yml call s:snippet_auto_completion_off()
   autocmd FileType yaml imap <buffer> <C-l> <Plug>(neosnippet_jump)
 augroup END
+
+" EchoDoc:
+let g:echodoc#enable_at_startup = v:true
+let g:echodoc#type = 'floating'
+let g:echodoc#highlight_identifier = 'Identifier'
+let g:echodoc#highlight_arguments = 'QuickScopePrimary'
+let g:echodoc#highlight_trailing = 'Type'
 
 " VimScript:
 " Autocompletion is built into Vim. Get defintions with 'K'
