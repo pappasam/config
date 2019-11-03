@@ -736,6 +736,38 @@ function ve() {  # Optional arg: python interpreter name
 }
 compdef _command ve
 
+# Choose a virtualenv from backed up virtualenvs
+# Assumes in current directory, set up with zsh auto completion based on
+# current directory.
+function vc() {  # Optional arg: python venv version
+  if [ -z "$VIRTUAL_ENV" ]; then
+    echo "No virtualenv active, skipping backup"
+  else
+    mkdir -p venv.bak
+    local python_version=$(python --version | cut -d ' ' -f 2)
+    local bak_dir="venv.bak/$python_version"
+    if [ ! -d "$bak_dir" ]; then
+      mv "$VIRTUAL_ENV" "$bak_dir"
+    else
+      echo "ERROR: $bak_dir already exists"
+      return 1
+    fi
+  fi
+  if [ -z "$1" ]; then
+    return 0
+  fi
+  local choose_dir="venv.bak/$1"
+  if [ ! -d "$choose_dir" ]; then
+    echo "ERROR: no such virtualenv $1 backed up"
+    return 1
+  fi
+  mv "$choose_dir" .venv
+}
+_vc_completion() {
+  _directories -W $PWD/venv.bak
+}
+compdef _vc_completion vc
+
 # Print out the Github-recommended gitignore
 export GITIGNORE_DIR=$HOME/src/lib/gitignore
 function gitignore() {
