@@ -1333,6 +1333,7 @@ let g:defx_ignored_files = join([
       \ 'pip-wheel-metadata/',
       \ 'target/',
       \ 'venv/',
+      \ 'venv.bak/',
       \ ], ',')
 
 let g:custom_defx_mappings = [
