@@ -189,198 +189,199 @@ endfunction
 call SetGlobalConfig()
 
 " }}}
-" General: Vim packages: minpac {{{
+" General: Vim packages: vim-packager {{{
 
-function PackInit() abort
-  packadd minpac
-  call minpac#init()
-  call minpac#add('git@github.com:k-takata/minpac', { 'type': 'opt' })
-  call minpac#add('git@github.com:junegunn/vader.vim')
-  call minpac#add('git@github.com:kh3phr3n/tabline')
-  call minpac#add('git@github.com:qpkorr/vim-bufkill')
-  call minpac#add('git@github.com:Shougo/defx.nvim', {
-        \ 'do': 'UpdateRemotePlugins',
+function PackagerInit() abort
+  packadd vim-packager
+  call packager#init()
+  call packager#add('git@github.com:kristijanhusak/vim-packager', { 'type': 'opt' })
+  call packager#add('git@github.com:junegunn/vader.vim')
+  call packager#add('git@github.com:kh3phr3n/tabline')
+  call packager#add('git@github.com:qpkorr/vim-bufkill')
+  call packager#add('git@github.com:Shougo/defx.nvim', {
+        \ 'do': ':UpdateRemotePlugins',
         \ })
-  call minpac#add('git@github.com:kristijanhusak/defx-git', {
-        \ 'do': 'UpdateRemotePlugins',
+  call packager#add('git@github.com:kristijanhusak/defx-git', {
+        \ 'do': ':UpdateRemotePlugins',
         \ })
-  call minpac#add('git@github.com:kristijanhusak/defx-icons', {
-        \ 'do': 'UpdateRemotePlugins',
+  call packager#add('git@github.com:kristijanhusak/defx-icons', {
+        \ 'do': ':UpdateRemotePlugins',
         \ })
-  call minpac#add('git@github.com:t9md/vim-choosewin')
-  call minpac#add('git@github.com:mhinz/vim-startify')
-  call minpac#add('git@github.com:yssl/QFEnter')
-  call minpac#add('git@github.com:simeji/winresizer')
-  call minpac#add('git@github.com:mbbill/undotree')
-  call minpac#add('git@github.com:tpope/vim-repeat')
-  call minpac#add('git@github.com:tpope/vim-eunuch')
-  call minpac#add('git@github.com:henrik/vim-indexed-search')
-  call minpac#add('git@github.com:unblevable/quick-scope')
-  call minpac#add('git@github.com:fcpg/vim-altscreen')
-  call minpac#add('git@github.com:sjl/strftimedammit.vim')
-  call minpac#add('git@github.com:wincent/ferret')
-  call minpac#add('git@github.com:bronson/vim-visual-star-search')
-  call minpac#add('git@github.com:chrisbra/Colorizer')
-  call minpac#add('git@github.com:fidian/hexmode')
-  call minpac#add('git@github.com:wellle/targets.vim')
-  call minpac#add('git@github.com:tpope/vim-scriptease')
-  call minpac#add('git@github.com:romainl/vim-devdocs')
+  call packager#add('git@github.com:t9md/vim-choosewin')
+  call packager#add('git@github.com:mhinz/vim-startify')
+  call packager#add('git@github.com:yssl/QFEnter')
+  call packager#add('git@github.com:simeji/winresizer')
+  call packager#add('git@github.com:mbbill/undotree')
+  call packager#add('git@github.com:tpope/vim-repeat')
+  call packager#add('git@github.com:tpope/vim-eunuch')
+  call packager#add('git@github.com:henrik/vim-indexed-search')
+  call packager#add('git@github.com:unblevable/quick-scope')
+  call packager#add('git@github.com:fcpg/vim-altscreen')
+  call packager#add('git@github.com:sjl/strftimedammit.vim')
+  call packager#add('git@github.com:wincent/ferret')
+  call packager#add('git@github.com:bronson/vim-visual-star-search')
+  call packager#add('git@github.com:chrisbra/Colorizer')
+  call packager#add('git@github.com:fidian/hexmode')
+  call packager#add('git@github.com:wellle/targets.vim')
+  call packager#add('git@github.com:tpope/vim-scriptease')
+  call packager#add('git@github.com:romainl/vim-devdocs')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
   " I have one at the moment (in dotfiles)
   " Not the official plugin, but written in pure vimscript so faster Vim startup
-  call minpac#add('git@github.com:sgur/vim-editorconfig')
+  call packager#add('git@github.com:sgur/vim-editorconfig')
 
   " Fuzzy Finder:
-  call minpac#add('git@github.com:junegunn/fzf')
-  call minpac#add('git@github.com:junegunn/fzf.vim')
-  call minpac#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
+  call packager#add('git@github.com:junegunn/fzf')
+  call packager#add('git@github.com:junegunn/fzf.vim')
+  call packager#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
   " Below needed by fzf-preview
-  call minpac#add('git@github.com:bogado/file-line.git')
-  call minpac#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
+  call packager#add('git@github.com:bogado/file-line.git')
+  call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
 
   " Git:
-  call minpac#add('git@github.com:tpope/vim-fugitive')
-  call minpac#add('git@github.com:junegunn/gv.vim')
-  call minpac#add('git@github.com:whiteinge/diffconflicts')
+  call packager#add('git@github.com:tpope/vim-fugitive')
+  call packager#add('git@github.com:junegunn/gv.vim')
+  call packager#add('git@github.com:whiteinge/diffconflicts')
 
   " Syntax Theme:
-  call minpac#add('git@github.com:NLKNguyen/papercolor-theme')
+  call packager#add('git@github.com:NLKNguyen/papercolor-theme')
 
   " Utilities:
-  call minpac#add('git@github.com:tpope/vim-commentary')
+  call packager#add('git@github.com:tpope/vim-commentary')
   " Convert to snakecase/camelcase/etc
-  call minpac#add('git@github.com:tpope/vim-abolish')
-  call minpac#add('git@github.com:jiangmiao/auto-pairs')
+  call packager#add('git@github.com:tpope/vim-abolish')
+  call packager#add('git@github.com:jiangmiao/auto-pairs')
 
   " Syntax Highlighting:
-  call minpac#add('git@github.com:derekwyatt/vim-scala')
-  call minpac#add('git@github.com:rust-lang/rust.vim')
-  call minpac#add('git@github.com:ron-rs/ron.vim')
-  call minpac#add('git@github.com:vim-python/python-syntax')
-  call minpac#add('git@github.com:autowitch/hive.vim')
-  call minpac#add('git@github.com:elzr/vim-json')
-  call minpac#add('git@github.com:vimoutliner/vimoutliner')
-  call minpac#add('git@github.com:cespare/vim-toml')
-  call minpac#add('git@github.com:Glench/Vim-Jinja2-Syntax')
-  call minpac#add('git@github.com:godlygeek/tabular')
-  call minpac#add('git@github.com:plasticboy/vim-markdown')
-  call minpac#add('git@github.com:mopp/rik_octave.vim')
-  call minpac#add('git@github.com:ekalinin/Dockerfile.vim')
-  call minpac#add('git@github.com:StanAngeloff/php.vim')
-  call minpac#add('git@github.com:vim-scripts/SAS-Syntax')
-  call minpac#add('git@github.com:neovimhaskell/haskell-vim')
-  call minpac#add('git@github.com:pappasam/plantuml-syntax')
-  call minpac#add('git@github.com:NLKNguyen/c-syntax.vim')
-  call minpac#add('git@github.com:hashivim/vim-terraform')
-  call minpac#add('git@github.com:hashivim/vim-vagrant')
-  call minpac#add('git@github.com:lervag/vimtex')
-  call minpac#add('git@github.com:tomlion/vim-solidity')
-  call minpac#add('git@github.com:jparise/vim-graphql')
-  call minpac#add('git@github.com:pangloss/vim-javascript')
-  call minpac#add('git@github.com:evanleck/vim-svelte')
-  call minpac#add('git@github.com:MaxMEllon/vim-jsx-pretty')
-  call minpac#add('git@github.com:groenewege/vim-less')
-  call minpac#add('git@github.com:farfanoide/vim-kivy')
-  call minpac#add('git@github.com:raimon49/requirements.txt.vim')
-  call minpac#add('git@github.com:chr4/nginx.vim')
-  call minpac#add('git@github.com:othree/html5.vim')
-  call minpac#add('git@github.com:pearofducks/ansible-vim')
-  call minpac#add('git@github.com:martinda/Jenkinsfile-vim-syntax')
-  call minpac#add('git@github.com:mattn/vim-xxdcursor')
-  call minpac#add('git@github.com:calviken/vim-gdscript3')
-  call minpac#add('git@github.com:marshallward/vim-restructuredtext')
-  call minpac#add('git@github.com:leafgarland/typescript-vim')
-  call minpac#add('git@github.com:killphi/vim-ebnf')
+  call packager#add('git@github.com:derekwyatt/vim-scala')
+  call packager#add('git@github.com:rust-lang/rust.vim')
+  call packager#add('git@github.com:ron-rs/ron.vim')
+  call packager#add('git@github.com:vim-python/python-syntax')
+  call packager#add('git@github.com:autowitch/hive.vim')
+  call packager#add('git@github.com:elzr/vim-json')
+  call packager#add('git@github.com:vimoutliner/vimoutliner')
+  call packager#add('git@github.com:cespare/vim-toml')
+  call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
+  call packager#add('git@github.com:godlygeek/tabular')
+  call packager#add('git@github.com:plasticboy/vim-markdown')
+  call packager#add('git@github.com:mopp/rik_octave.vim')
+  call packager#add('git@github.com:ekalinin/Dockerfile.vim')
+  call packager#add('git@github.com:StanAngeloff/php.vim')
+  call packager#add('git@github.com:vim-scripts/SAS-Syntax')
+  call packager#add('git@github.com:neovimhaskell/haskell-vim')
+  call packager#add('git@github.com:pappasam/plantuml-syntax')
+  call packager#add('git@github.com:NLKNguyen/c-syntax.vim')
+  call packager#add('git@github.com:hashivim/vim-terraform')
+  call packager#add('git@github.com:hashivim/vim-vagrant')
+  call packager#add('git@github.com:lervag/vimtex')
+  call packager#add('git@github.com:tomlion/vim-solidity')
+  call packager#add('git@github.com:jparise/vim-graphql')
+  call packager#add('git@github.com:pangloss/vim-javascript')
+  call packager#add('git@github.com:evanleck/vim-svelte')
+  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty')
+  call packager#add('git@github.com:groenewege/vim-less')
+  call packager#add('git@github.com:farfanoide/vim-kivy')
+  call packager#add('git@github.com:raimon49/requirements.txt.vim')
+  call packager#add('git@github.com:chr4/nginx.vim')
+  call packager#add('git@github.com:othree/html5.vim')
+  call packager#add('git@github.com:pearofducks/ansible-vim')
+  call packager#add('git@github.com:martinda/Jenkinsfile-vim-syntax')
+  call packager#add('git@github.com:mattn/vim-xxdcursor')
+  call packager#add('git@github.com:calviken/vim-gdscript3')
+  call packager#add('git@github.com:marshallward/vim-restructuredtext')
+  call packager#add('git@github.com:leafgarland/typescript-vim')
+  call packager#add('git@github.com:killphi/vim-ebnf')
 
   " Autocompletion And IDE Features:
-  call minpac#add('git@github.com:autozimu/LanguageClient-neovim', {
+  call packager#add('git@github.com:autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
-        \ 'do': {-> system('bash install.sh')},
+        \ 'do': 'bash install.sh',
         \ })
-  call minpac#add('git@github.com:Shougo/deoplete.nvim', {
-        \ 'do': 'UpdateRemotePlugins',
+  call packager#add('git@github.com:Shougo/deoplete.nvim', {
+        \ 'do': ':UpdateRemotePlugins',
         \ })
-  call minpac#add('git@github.com:Shougo/neosnippet.vim')
-  call minpac#add('git@github.com:Shougo/neosnippet-snippets')
-  call minpac#add('git@github.com:Shougo/neco-vim')
-  call minpac#add('git@github.com:Shougo/echodoc.vim')
-  call minpac#add('git@github.com:Rip-Rip/clang_complete')
+  call packager#add('git@github.com:Shougo/neosnippet.vim')
+  call packager#add('git@github.com:Shougo/neosnippet-snippets')
+  call packager#add('git@github.com:Shougo/neco-vim')
+  call packager#add('git@github.com:Shougo/echodoc.vim')
+  call packager#add('git@github.com:Rip-Rip/clang_complete')
   " for C header filename completion:
-  call minpac#add('git@github.com:xaizek/vim-inccomplete')
+  call packager#add('git@github.com:xaizek/vim-inccomplete')
   " After vim-go, run GoUpdateBinaries
-  call minpac#add('git@github.com:fatih/vim-go')
+  call packager#add('git@github.com:fatih/vim-go')
   " dotlanguage
-  call minpac#add('git@github.com:wannesm/wmgraphviz.vim')
+  call packager#add('git@github.com:wannesm/wmgraphviz.vim')
   " note: must run 'gem install neovim' to get this to work
   " might require the neovim headers
-  call minpac#add('git@github.com:juliosueiras/vim-terraform-completion')
+  call packager#add('git@github.com:juliosueiras/vim-terraform-completion')
 
   " Tagbar:
-  call minpac#add('git@github.com:majutsushi/tagbar')
-  call minpac#add('git@github.com:lvht/tagbar-markdown')
+  call packager#add('git@github.com:majutsushi/tagbar')
+  call packager#add('git@github.com:lvht/tagbar-markdown')
   " Additional requirements
   "   npm install -g jsctags
   "   sudo apt install -y php
 
   " Indentation Only:
-  call minpac#add('git@github.com:vim-scripts/groovyindent-unix')
-  call minpac#add('git@github.com:Vimjas/vim-python-pep8-indent')
-  call minpac#add('git@github.com:Yggdroot/indentLine')
+  call packager#add('git@github.com:vim-scripts/groovyindent-unix')
+  call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
+  call packager#add('git@github.com:Yggdroot/indentLine')
 
   " Web Development General:
-  call minpac#add('git@github.com:tpope/vim-ragtag')
-  call minpac#add('git@github.com:heavenshell/vim-jsdoc')
+  call packager#add('git@github.com:tpope/vim-ragtag')
+  call packager#add('git@github.com:heavenshell/vim-jsdoc')
 
   " Text Objects:
-  call minpac#add('git@github.com:machakann/vim-sandwich')
-  call minpac#add('git@github.com:kana/vim-textobj-user')
+  call packager#add('git@github.com:machakann/vim-sandwich')
+  call packager#add('git@github.com:kana/vim-textobj-user')
   " al/il for the current line
-  call minpac#add('git@github.com:kana/vim-textobj-line')
+  call packager#add('git@github.com:kana/vim-textobj-line')
   " as/is for a sentence of prose (overrides hard-coded native object & motion)
-  call minpac#add('git@github.com:reedes/vim-textobj-sentence')
+  call packager#add('git@github.com:reedes/vim-textobj-sentence')
   " az/iz for a block of folded lines; iz does not include fold marker lines
-  call minpac#add('git@github.com:somini/vim-textobj-fold')
+  call packager#add('git@github.com:somini/vim-textobj-fold')
   " ao/io for a block of indentation (i.e. spaces)
-  call minpac#add('git@github.com:glts/vim-textobj-indblock')
+  call packager#add('git@github.com:glts/vim-textobj-indblock')
   " ay/iy for a syntax group
-  call minpac#add('git@github.com:kana/vim-textobj-syntax')
+  call packager#add('git@github.com:kana/vim-textobj-syntax')
 
   " Writing:
-  call minpac#add('git@github.com:dkarter/bullets.vim')
-  call minpac#add('git@github.com:moiatgit/vim-rst-sections')
-  call minpac#add('git@github.com:jlesquembre/rst-tables.nvim', {
-        \ 'do': 'UpdateRemotePlugins',
+  call packager#add('git@github.com:dkarter/bullets.vim')
+  call packager#add('git@github.com:moiatgit/vim-rst-sections')
+  call packager#add('git@github.com:jlesquembre/rst-tables.nvim', {
+        \ 'do': ':UpdateRemotePlugins',
         \ })
-  call minpac#add('git@github.com:junegunn/goyo.vim')
-  call minpac#add('git@github.com:junegunn/limelight.vim')
-  call minpac#add('git@github.com:reedes/vim-wordy')
-  call minpac#add('git@github.com:tommcdo/vim-exchange')
-  call minpac#add('git@github.com:dbmrq/vim-ditto')
-  call minpac#add('git@github.com:swordguin/vim-veil.git')
+  call packager#add('git@github.com:junegunn/goyo.vim')
+  call packager#add('git@github.com:junegunn/limelight.vim')
+  call packager#add('git@github.com:reedes/vim-wordy')
+  call packager#add('git@github.com:tommcdo/vim-exchange')
+  call packager#add('git@github.com:dbmrq/vim-ditto')
+  call packager#add('git@github.com:swordguin/vim-veil.git')
 
   " Previewers:
-  call minpac#add('git@github.com:iamcco/markdown-preview.nvim',
-        \ { 'do': {-> system('cd app & yarn install')} })
-  call minpac#add('git@github.com:tyru/open-browser.vim')
-  call minpac#add('git@github.com:weirongxu/plantuml-previewer.vim')
+  call packager#add('git@github.com:iamcco/markdown-preview.nvim', {
+        \ 'do': 'cd app & yarn install',
+        \ })
+  call packager#add('git@github.com:tyru/open-browser.vim')
+  call packager#add('git@github.com:weirongxu/plantuml-previewer.vim')
 
   " Code Formatters:
-  call minpac#add('git@github.com:pappasam/vim-filetype-formatter')
+  call packager#add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Linting:
-  call minpac#add('git@github.com:benjie/local-npm-bin.vim')
-  call minpac#add('git@github.com:neomake/neomake')
+  call packager#add('git@github.com:benjie/local-npm-bin.vim')
+  call packager#add('git@github.com:neomake/neomake')
 
   " C:
-  call minpac#add('git@github.com:ericcurtin/CurtineIncSw.vim')
+  call packager#add('git@github.com:ericcurtin/CurtineIncSw.vim')
 
   " Repl Integration:
-  call minpac#add('git@github.com:jpalardy/vim-slime')
+  call packager#add('git@github.com:jpalardy/vim-slime')
 
   " Presentation:
-  call minpac#add('git@github.com:dhruvasagar/vim-marp')
+  call packager#add('git@github.com:dhruvasagar/vim-marp')
 endfunction
 
 function! PackList(...)
@@ -391,19 +392,25 @@ endfunction
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
 " the information of plugins, then performs the task.
-command! PackUpdate call PackInit() | echo 'Updating packages...' |
-      \ call minpac#update('')
-command! PU PackUpdate
-command! PackStatus call PackInit() | echo 'Getting package status...' |
-      \ call minpac#status()
-command! PackClean call PackInit() | call minpac#clean()
-command! -nargs=1 -complete=custom,PackList PackRemove call PackInit() |
-      \ call minpac#clean(<q-args>)
-command! -nargs=1 -complete=custom,PackList PackOpen call PackInit() |
-      \ execute 'tabe ' . minpac#getpluginfo(<q-args>).dir |
-      \ execute 'lcd ' . minpac#getpluginfo(<q-args>).dir
-command! -nargs=1 -complete=custom,PackList PackBrowser call PackInit() |
-      \ call openbrowser#open(minpac#getpluginfo(<q-args>).url)
+command! PackagerInstall call PackagerInit() | call packager#install()
+command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'force_hooks': '<bang>' })
+command! PU PackagerUpdate
+command! PackagerClean call PackagerInit() | call packager#clean()
+command! PackagerStatus call PackagerInit() | call packager#status()
+
+" command! PackUpdate call PackInit() | echo 'Updating packages...' |
+"       \ call minpac#update('')
+" command! PU PackUpdate
+" command! PackStatus call PackInit() | echo 'Getting package status...' |
+"       \ call minpac#status()
+" command! PackClean call PackInit() | call minpac#clean()
+" command! -nargs=1 -complete=custom,PackList PackRemove call PackInit() |
+"       \ call minpac#clean(<q-args>)
+" command! -nargs=1 -complete=custom,PackList PackOpen call PackInit() |
+"       \ execute 'tabe ' . minpac#getpluginfo(<q-args>).dir |
+"       \ execute 'lcd ' . minpac#getpluginfo(<q-args>).dir
+" command! -nargs=1 -complete=custom,PackList PackBrowser call PackInit() |
+"       \ call openbrowser#open(minpac#getpluginfo(<q-args>).url)
 
 " }}}
 " General: Status Line and Tab Line {{{
@@ -549,6 +556,10 @@ augroup END
 function! s:abolish_correct()
   " Started from:
   " https://github.com/tpope/tpope/blob/94b1f7c33ee4049866f0726f96d9a0fb5fdf868f/.vim/after/plugin/abolish_tpope.vim
+  if !exists('g:loaded_abolish')
+    echom 'Abolish does not exist, skipping...'
+    return
+  endif
   Abolish Lidsa                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   Abolish Tqbf                        The quick, brown fox jumps over the lazy dog
   Abolish adn                         and
@@ -1528,29 +1539,37 @@ let g:startify_fortune_use_unicode = v:true
 let g:startify_enable_special = v:true
 let g:startify_custom_header = []
 
-autocmd VimEnter * let g:startify_custom_footer = [
-      \ '                                            .',
-      \ '                                  .-o',
-      \ '                     .           /  |',
-      \ '            .                 . /   |   .',
-      \ '                               /    |',
-      \ '                      .       /     |',
-      \ '      .                      /      /         .',
-      \ '                 .          /    _./   .',
-      \ '                       _.---~-.=:_',
-      \ '                      (_.-=() <~`-`-.',
-      \ '                     _/ _() ~`-==-._,>',
-      \ '             ..--====--` `~-._.__()',
-      \ '         o===``~~             |__()',
-      \ '                    .         \   |             .',
-      \ '                               \  \    .',
-      \ '                                \  \',
-      \ '            .                    \  \   Sienar Fleet Systems',
-      \ '                     .            \  \  Lambda-class',
-      \ '                                   \_ \ Imperial Shuttle',
-      \ '                           LS        ~o',
-      \ '',
-      \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
+function! s:set_startify()
+  if !exists('g:loaded_startify')
+    echom 'Startify is not loaded, skipping...'
+    return
+  endif
+  let g:startify_custom_footer = [
+        \ '                                            .',
+        \ '                                  .-o',
+        \ '                     .           /  |',
+        \ '            .                 . /   |   .',
+        \ '                               /    |',
+        \ '                      .       /     |',
+        \ '      .                      /      /         .',
+        \ '                 .          /    _./   .',
+        \ '                       _.---~-.=:_',
+        \ '                      (_.-=() <~`-`-.',
+        \ '                     _/ _() ~`-==-._,>',
+        \ '             ..--====--` `~-._.__()',
+        \ '         o===``~~             |__()',
+        \ '                    .         \   |             .',
+        \ '                               \  \    .',
+        \ '                                \  \',
+        \ '            .                    \  \   Sienar Fleet Systems',
+        \ '                     .            \  \  Lambda-class',
+        \ '                                   \_ \ Imperial Shuttle',
+        \ '                           LS        ~o',
+        \ '',
+        \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
+endfunction
+
+autocmd VimEnter * call s:set_startify()
 
 " }}}
 " Plugin: VimTex {{{
@@ -1720,6 +1739,10 @@ let g:vim_markdown_new_list_item_indent = v:false
 " let g:neomake_virtualtext_current_error = v:false
 
 function! CustomNeomakeConfig()
+  if !exists('g:loaded_neomake')
+    echom 'neomake does not exist, skipping...'
+    return
+  endif
   " Run only when writing a buffer
   call neomake#configure#automake('w')
 endfunction
@@ -1758,6 +1781,10 @@ let g:deoplete#enable_at_startup = v:true
 command! Grep ProjectGrepPreview
 
 function! CustomDeopleteConfig()
+  if !exists('g:loaded_deoplete')
+    echom 'Deoplete not installed, skipping...'
+    return
+  endif
   " Deoplete Defaults:
   call deoplete#custom#option({
         \ 'auto_complete': v:true,
