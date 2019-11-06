@@ -45,7 +45,7 @@ sudo apt install typespeed
 # Offline dictionary
 #######################################################################
 sudo apt install dict
-sudo apt dict-gcide dict-moby-thesaurus
+sudo apt install dict-gcide dict-moby-thesaurus
 
 #######################################################################
 # keepass
@@ -97,12 +97,12 @@ sudo apt install neovim
 sudo apt install python-dev python-pip python3-dev python3-pip
 
 # Install minpac (neovim, for me, references vim)
-git clone https://github.com/k-takata/minpac.git \
-  ~/.vim/pack/minpac/opt/minpac
+git clone https://github.com/kristijanhusak/vim-packager \
+  ~/.vim/pack/packager/opt/vim-packager
 
-# for ctags
-npm install -g jsctags
-sudo apt install -y php
+# for ctags, after asdf
+# npm install -g jsctags
+# asdf: add php
 
 #######################################################################
 # Vim dependencies
@@ -123,35 +123,23 @@ sudo apt install screenkey
 # 2.) Unzip and copy to ~/.fonts
 # 3.) Run the command fc-cache -fv to manually rebuild the font cache
 
-# Installs the "Hack" font
-sudo apt install fonts-hack-ttf
-
 #######################################################################
 # Tmux - install from source to get latest version
 #######################################################################
-sudo apt remove tmux
-sudo apt install autoconf automake pkg-config libevent-dev
-cd ~/src/lib
-git clone git@github.com:tmux/tmux.git
-cd tmux
-sh autogen.sh
-./configure
-make
-sudo make install
+# sudo apt remove tmux
+# sudo apt install autoconf automake pkg-config libevent-dev
+# cd ~/src/lib
+# git clone git@github.com:tmux/tmux.git
+# cd tmux
+# sh autogen.sh
+# ./configure
+# make
+# sudo make install
 
 #######################################################################
 # System monitoring
 #######################################################################
 sudo apt install htop tree
-
-#######################################################################
-# Python 3
-#######################################################################
-sudo apt install python3-dev
-sudo apt install python3-virtualenv
-
-# enables pyenv to build with tkinter support
-sudo apt install tk-dev
 
 #######################################################################
 # MySQL
@@ -162,13 +150,13 @@ sudo apt install libmysqlclient-dev
 # Wine
 #######################################################################
 # https://wiki.winehq.org/Ubuntu
-sudo apt install libasound2-plugins:i386
-sudo dpkg --add-architecture i386
-wget -nc https://dl.winehq.org/wine-builds/winehq.key
-sudo apt-key add winehq.key
-sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
-sudo apt update
-sudo apt install --install-recommends winehq-stable
+# sudo apt install libasound2-plugins:i386
+# sudo dpkg --add-architecture i386
+# wget -nc https://dl.winehq.org/wine-builds/winehq.key
+# sudo apt-key add winehq.key
+# sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+# sudo apt update
+# sudo apt install --install-recommends winehq-stable
 
 #######################################################################
 # Latex
@@ -178,26 +166,23 @@ sudo apt install texlive-full
 # getting tlmgr (the texlive package manager) to work
 sudo apt install xzdec
 
-# font used for "metropolis" theme
-sudo apt install fonts-firacode
-
 #######################################################################
 # Vagrant
 #######################################################################
 
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | \
-  sudo apt-key add -
+# wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | \
+#   sudo apt-key add -
 
-echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | \
-  sudo tee /etc/apt/sources.list.d/virtualbox.list
+# echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | \
+#   sudo tee /etc/apt/sources.list.d/virtualbox.list
 
-sudo apt update
-sudo apt install virtualbox-5.2
+# sudo apt update
+# sudo apt install virtualbox-5.2
 
-wget -O ~/Downloads/vagrant.deb \
-  https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.deb
+# wget -O ~/Downloads/vagrant.deb \
+#   https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.deb
 
-sudo apt install ~/Downloads/vagrant.deb
+# sudo apt install ~/Downloads/vagrant.deb
 
 
 #######################################################################
@@ -232,22 +217,15 @@ sudo apt install zathura
 sudo apt install librsvg2-bin
 
 #######################################################################
-# Hovercraft! (an impress generator)
-# both steps are included to have the latest version AND the man page
-#######################################################################
-sudo apt install hovercraft
-pip install hovercraft
-
-#######################################################################
 # Writing
 #######################################################################
-npm install -g write-good
+# npm install -g write-good
 
-wget -O ~/Downloads/LanguageTool-stable.zip \
-  https://www.languagetool.org/download/LanguageTool-stable.zip
+# wget -O ~/Downloads/LanguageTool-stable.zip \
+#   https://www.languagetool.org/download/LanguageTool-stable.zip
 
-wget -O ~/Downloads/ngrams-en-20150817.zip \
-  https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
+# wget -O ~/Downloads/ngrams-en-20150817.zip \
+#   https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
 
 # ~/bin/languagetool
 # java -jar ~/java/LanguageTool-4.5/languagetool-commandline.jar \
@@ -261,20 +239,20 @@ wget -O ~/Downloads/ngrams-en-20150817.zip \
 #######################################################################
 
 # Live list
-https://langserver.org/
+# https://langserver.org/
 
 # clangd
-https://clang.llvm.org/extra/clangd/Installation.html#installing-clangd
+# https://clang.llvm.org/extra/clangd/Installation.html#installing-clangd
 
-npm install -g yaml-language-server@0.4.1
+# npm install -g yaml-language-server@0.4.1
 
 #######################################################################
 # Java Language Server
 #######################################################################
-cd ~/java
-git clone git@github.com:georgewfraser/java-language-server.git
-cd java-language-server
-./scripts/link_mac.sh
+# cd ~/java
+# git clone git@github.com:georgewfraser/java-language-server.git
+# cd java-language-server
+# ./scripts/link_mac.sh
 
 #######################################################################
 # Ncurses
@@ -287,19 +265,20 @@ sudo apt install ncurses-doc
 #######################################################################
 
 # rust toolchains
-rustup component add cargo
-rustup component add clippy
-rustup component add rls
-rustup component add rust-analysis
-rustup component add rust-docs
-rustup component add rust-src
-rustup component add rustfmt
+# rustup component add cargo
+# rustup component add clippy
+# rustup component add rls
+# rustup component add rust-analysis
+# rustup component add rust-docs
+# rustup component add rust-src
+# rustup component add rustfmt
 
 # cargo libraries
+
 cargo install bat
 cargo install fd-find
-cargo install racer
 cargo install ripgrep
+cargo install cargo-deb
 
 # supports the following: cargo add; cargo rm ;cargo upgrade
 cargo install cargo-edit
@@ -308,24 +287,24 @@ cargo install cargo-edit
 # Go programs
 #######################################################################
 # license: license -year=2013 -name=Alice mit
-go get -u github.com/nishanths/license
+# go get -u github.com/nishanths/license
 
 #######################################################################
 # kdenlive (along with necessary plugins)
 #######################################################################
-sudo add-apt-repository ppa:kdenlive/kdenlive-stable
-sudo apt update
-sudo apt install kdenlive
-sudo apt install frei0r-plugins frei0r-plugins-dev frei0r-plugins-doc
-sudo apt install dvdauthor
+# sudo add-apt-repository ppa:kdenlive/kdenlive-stable
+# sudo apt update
+# sudo apt install kdenlive
+# sudo apt install frei0r-plugins frei0r-plugins-dev frei0r-plugins-doc
+# sudo apt install dvdauthor
 
 #######################################################################
 # ffmpeg2 (ubunu 16.04-specific workaround for video stabilization)
 #######################################################################
-sudo add-apt-repository ppa:mc3man/ffmpeg-test
-sudo apt update
-sudo apt install ffmpeg-static
-hash -r
+# sudo add-apt-repository ppa:mc3man/ffmpeg-test
+# sudo apt update
+# sudo apt install ffmpeg-static
+# hash -r
 
 #######################################################################
 # peek: the gif-creation program
@@ -340,7 +319,9 @@ sudo apt install peek
 cd src/lib
 git clone git@github.com:eendroroy/alacritty-theme.git
 git clone git@github.com:toggle-corp/alacritty-colorscheme.git
-ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
+# ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
+
+sudo apt install libxcb-xfixes0-dev
 
 #######################################################################
 # zplug
@@ -355,16 +336,16 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 #######################################################################
 # AWS
 #######################################################################
-pip install awscli
+# pip install awscli
 
 # pretty shell
-pip install saws
+# pip install saws
 
 #######################################################################
 # Vim tagbar
 #######################################################################
-cd ~/src/lib
-git clone https://github.com/jszakmeister/rst2ctags
+# cd ~/src/lib
+# git clone https://github.com/jszakmeister/rst2ctags
 
 #######################################################################
 # previewing RST files
@@ -373,14 +354,9 @@ git clone https://github.com/jszakmeister/rst2ctags
 pip install restview
 
 #######################################################################
-# pdfpc
-#######################################################################
-sudo apt install pdf-presenter-console
-
-#######################################################################
 # Inkscape (a great svg drawing program)
 #######################################################################
-sudo snap install inkscape
+# sudo snap install inkscape
 
 #######################################################################
 # zshell
@@ -403,7 +379,7 @@ cd ~/bin
 #######################################################################
 # Less
 #######################################################################
-sudo apt remove less
+# sudo apt remove less
 # Download latest recommended version from:
 # www.greenwoodsoftware.com/less/download.html
 # Follow installation instructions to compile from source

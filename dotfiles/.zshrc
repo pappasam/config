@@ -161,11 +161,6 @@ export BROWSER='/usr/bin/firefox'
 # Enable editor to scale with monitor's DPI
 export WINIT_HIDPI_FACTOR=1.0
 
-# Rust (for racer) (rustup component add rust-src)
-RUST_TOOLCHAIN=$($HOME/.cargo/bin/rustup toolchain list | grep default | awk '{print $1;}')
-export RUST_TOOLCHAIN_PATH="$HOME/.multirust/toolchains/$RUST_TOOLCHAIN"
-export RUST_SRC_PATH="$RUST_TOOLCHAIN_PATH/lib/rustlib/src/rust/src"
-
 # Bat
 export BAT_PAGER=''
 
@@ -228,6 +223,7 @@ if [ -f $HOME/.zplug/init.zsh ]; then
     from:gh-r, \
     as:command, \
     rename-to:fzf
+  zplug "junegunn/fzf", use:"shell/*.zsh", defer:2
   zplug "denysdovhan/spaceship-prompt", \
     use:spaceship.zsh, \
     from:github, \
@@ -1190,9 +1186,6 @@ SPACESHIP_CHAR_COLOR_FAILURE=green
 # }}}
 # FZF {{{
 
-# Load zsh script
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Use fd to generate the list for file and directory completion
 _fzf_compgen_path() {
   fd -c always --hidden --follow --exclude ".git" . "$1"
@@ -1204,7 +1197,15 @@ _fzf_compgen_dir() {
 
 # <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
 bindkey '^T' fzf-completion
+bindkey '^R' fzf-history-widget
+bindkey '^B' fzf-file-widget
 bindkey '^I' $fzf_default_completion
+
+# Widgets:
+# fzf-cd-widget
+# fzf-completion
+# fzf-file-widget
+# fzf-history-widget
 
 # }}}
 # Executed Commands {{{
