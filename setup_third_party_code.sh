@@ -70,6 +70,13 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
 
 # asdf-update: update to latest version
 # asdf reshim <plugin>: makes newly-installed executables available
+# Add all your plugins
+
+#######################################################################
+# Poetry
+#######################################################################
+curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+poetry self:update --preview
 
 #######################################################################
 # Less
