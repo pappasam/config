@@ -578,6 +578,8 @@ function! s:abolish_correct()
   Abolish inherant{,ly}               inherent{}
   Abolish lastest                     latest
   Abolish nto                         not
+  Abolish nto                         not
+  Abolish ot                          to
   Abolish persistan{ce,t,tly}         persisten{}
   Abolish rec{co,com,o}mend{,s,ed,ing,ation} rec{om}mend{}
   Abolish referesh{,es}               refresh{}

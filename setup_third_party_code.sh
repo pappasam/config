@@ -393,3 +393,34 @@ cd ~/bin
 # #!/bin/bash
 # java -jar ~/java/jenkins.war ${@}
 
+#######################################################################
+# Docker (Ubuntu 18.04, Linux Mint 19)
+#######################################################################
+sudo apt update
+sudo apt install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg-agent \
+  software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# make sure we have the correct installation
+sudo apt-key fingerprint 0EBFCD88
+
+# If using Linux Mint 19, or Ubuntu 18.04. Otherwise, update
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+# If the above fails, add
+# deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+# as a line in additional-repositories
+sudo nvim -u NONE /etc/apt/sources.list.d/addtional-repositories.list
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+sudo groupadd docker
+sudo usermod -aG docker "$USER"
+
+# Now log out, log back in, and run the following command
+docker run hello-world

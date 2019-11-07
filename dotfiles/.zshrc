@@ -431,10 +431,12 @@ alias ..........='cd ../../../../../../../../../..'
 # Restart Xserver (go to a tty to run, if necessary)
 alias restart-xserver='sudo systemctl restart display-manager'
 
-# Vim and Vi: try activate Python virtual environment then call neovim
+# Vim and Vi
 alias f='nvim'
 alias vi='nvim'
 alias vim='nvim'
+alias svim='sudo nvim -u NONE'
+alias snvim='sudo nvim -u NONE'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
