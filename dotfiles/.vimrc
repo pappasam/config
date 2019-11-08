@@ -1797,8 +1797,8 @@ function! CustomDeopleteConfig()
 
   " Source Defaults:
   call deoplete#custom#option('ignore_sources', {
-        \ '_': ['buffer', 'around'],
-        \ 'markdown': ['buffer', 'around', 'neosnippet'],
+        \ '_': ['around'],
+        \ 'markdown': ['around', 'neosnippet'],
         \ })
   call deoplete#custom#source('_', 'min_pattern_length', 1)
   call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
