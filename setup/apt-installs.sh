@@ -1,71 +1,66 @@
 #!/bin/bash
 
-# installs useful programs on system
-# assumes you are using Linux Mint
-# RECOMMENDATION:
-#   read document and type these commands yourself
-#   especially if you are using one of the latest Linux distributions.
-#   Things may have changed on the internet between now and your runtime.
-
-set -e
-
-#######################################################################
-# Build, version control, and getting code for elsewhere
-#######################################################################
-sudo add-apt-repository ppa:git-core/ppa
-sudo apt update
-sudo apt install -y \
-  git \
-  build-essential \
-  curl \
-  entr \
-  stow
+# Purpose: documents useful programs on system
+# System: Linux Mint 19.2
+# Instructions: execute each line individually
+# Notes:
+#   read document and type these commands yourself especially if you are using
+#   one of the latest Linux distributions. Things may have changed on the
+#   internet between now and your runtime.
 
 #######################################################################
 # Alternative package managers
 #######################################################################
-sudo apt install -y snapd
+# apt: snapd
 
 #######################################################################
 # zshell
 #######################################################################
-sudo apt install -y zsh
+# apt: zsh
 # without sudo (makes zsh default shell):
+
 chsh -s "$(which zsh)"
 
 #######################################################################
 # zplug
 #######################################################################
+
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 #######################################################################
 # Tmux - install from source to get latest version
 #######################################################################
-# sudo apt remove tmux
-# sudo apt install autoconf automake pkg-config libevent-dev
-# cd ~/src/lib
-# git clone git@github.com:tmux/tmux.git
-# cd tmux
-# sh autogen.sh
-# ./configure
-# make
-# sudo make install
+# apt: autoconf automake pkg-config libevent-dev
+
+sudo apt remove tmux
+
+cd ~/src/lib
+
+git clone git@github.com:tmux/tmux.git
+
+cd tmux
+
+sh autogen.sh
+
+./configure
+
+make
+
+sudo make install
 
 # tpm: Tmux Plugin Manager
+
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 #######################################################################
 # ASDF
 #######################################################################
 
-# install dependencies
-sudo apt install \
-  automake autoconf libreadline-dev \
-  libncurses-dev libssl-dev libyaml-dev \
-  libxslt-dev libffi-dev libtool unixodbc-dev \
-  unzip curl
+# apt: automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev
+# libxslt-dev libffi-dev libtool unixodbc-dev unzip curl
 
 # Download (verify version)
+
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
 
 # asdf-update: update to latest version
@@ -75,7 +70,11 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
 #######################################################################
 # Poetry
 #######################################################################
-curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+
+curl -sSL \
+  https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py \
+  | python
+
 poetry self:update --preview
 
 #######################################################################
@@ -89,11 +88,13 @@ poetry self:update --preview
 #######################################################################
 # NeoVim
 #######################################################################
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install -y neovim
+# ppa: ppa:neovim-ppa/unstable
+# apt: neovim exuberant-ctags screenkey
 
-# Install minpac (neovim, for me, references vim)
+# screenkey: show key presses in the terminal
+
+# Install vim-packager (neovim, for me, references vim)
+
 git clone https://github.com/kristijanhusak/vim-packager \
   ~/.vim/pack/packager/opt/vim-packager
 
@@ -104,69 +105,48 @@ git clone https://github.com/kristijanhusak/vim-packager \
 #######################################################################
 # Man pages for Linux Systems Programming
 #######################################################################
-sudo apt install -y manpages-dev manpages-posix-dev
-sudo apt install -y libx11-doc
+# apt: manpages-dev manpages-posix-dev libx11-doc
 
 # to obtain 'unbuffer', "disables the output buffering that occurs when program
 # output is redirected from non-interactive programs."
 # tl;dr this makes system
 # copy / url opening operations work when using neovim as a man pager
-sudo apt install -y expect-dev
-
-#######################################################################
-# Install packages
-#######################################################################
-sudo apt install -y shellcheck
-
-# Better annotations
-sudo apt install -y flameshot
+# apt: expect-dev
 
 #######################################################################
 # Typing
 #######################################################################
-sudo apt install -y typespeed
+# apt: typespeed
 
 #######################################################################
 # Offline dictionary
 #######################################################################
-sudo apt install -y dict dict-gcide dict-moby-thesaurus
+# apt: dict dict-gcide dict-moby-thesaurus
 
 #######################################################################
 # keepass
 #######################################################################
-# sudo apt install keepass2
-# sudo add-apt-repository ppa:dlech/keepass2-plugins
-# sudo apt update
-# sudo apt install keepass2-plugin-application-indicator
-# Ignore above, install this: https://keeweb.info/
+# Use: https://keeweb.info/
 
 #######################################################################
 # Copy functionality
 #######################################################################
-sudo apt install -y xsel xclip
+# apt: xsel xclip
 
 #######################################################################
 # Fun stuff
 #######################################################################
-sudo apt install -y fortune cowsay bsdgames bsdgames-nonfree
+# apt: fortune cowsay bsdgames bsdgames-nonfree
 
 #######################################################################
 # Install more C Stuff
 #######################################################################
-sudo apt install -y cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
+# apt: cmake llvm-6.0 llvm-6.0-dev libclang-6.0-dev
 
 #######################################################################
 # Apache stuff (htpasswd)
 #######################################################################
-sudo apt install -y apache2-utils
-
-#######################################################################
-# Vim dependencies
-#######################################################################
-sudo apt install -y exuberant-ctags
-
-# Show key presses in the terminal
-sudo apt install -y screenkey
+# apt: apache2-utils
 
 #######################################################################
 # Fonts
@@ -180,18 +160,9 @@ sudo apt install -y screenkey
 # 3.) Run the command fc-cache -fv to manually rebuild the font cache
 
 #######################################################################
-# System monitoring
-#######################################################################
-sudo apt install -y htop tree
-
-#######################################################################
-# MySQL
-#######################################################################
-sudo apt install -y libmysqlclient-dev
-
-#######################################################################
 # Wine
 #######################################################################
+# Just some notes, probably won't want to do any of this
 # https://wiki.winehq.org/Ubuntu
 # sudo apt install libasound2-plugins:i386
 # sudo dpkg --add-architecture i386
@@ -204,10 +175,9 @@ sudo apt install -y libmysqlclient-dev
 #######################################################################
 # Latex
 #######################################################################
-sudo apt install -y texlive-full
+# apt: texlive-full xzdec
 
-# getting tlmgr (the texlive package manager) to work
-sudo apt install -y xzdec
+# xzdec: getting tlmgr (the texlive package manager) to work
 
 #######################################################################
 # Vagrant
@@ -231,14 +201,15 @@ sudo apt install -y xzdec
 #######################################################################
 # Diagramming
 #######################################################################
-sudo apt install -y graphviz gthumb
+# apt: gthumb graphviz
 
 # plantuml
-if [ ! -d ~/java ]; then
-  mkdir ~/java
-fi
+
+mkdir -p ~/java
+
 wget -O ~/java/plantuml.jar \
   http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+
 cd ~/bin
 
 # ~/bin/plantuml
@@ -248,7 +219,7 @@ cd ~/bin
 #######################################################################
 # PDF Viewer with vi bindings
 #######################################################################
-sudo apt install -y zathura
+# apt: zathura
 
 #######################################################################
 # Pandoc
@@ -256,7 +227,7 @@ sudo apt install -y zathura
 # the available version in software repository is not latest
 # build using the provided debian package under pandoc releases
 # https://github.com/jgm/pandoc/releases
-sudo apt install -y librsvg2-bin
+# apt: librsvg2-bin
 
 #######################################################################
 # Writing
@@ -299,23 +270,15 @@ sudo apt install -y librsvg2-bin
 #######################################################################
 # Ncurses
 #######################################################################
-sudo apt install -y libncurses5 libncurses5-dev libncursesw5
-sudo apt install -y ncurses-doc
+# apt: libncurses5 libncurses5-dev libncursesw5 ncurses-doc
 
 #######################################################################
 # Rust packages / rustup components
 #######################################################################
 
-# rust toolchains
-# rustup component add cargo
-# rustup component add clippy
-# rustup component add rls
-# rustup component add rust-analysis
-# rustup component add rust-docs
-# rustup component add rust-src
-# rustup component add rustfmt
-
 # cargo libraries
+
+rustup component add rls
 
 cargo install \
   bat \
@@ -350,27 +313,31 @@ cargo install \
 #######################################################################
 # peek: the gif-creation program
 #######################################################################
-sudo add-apt-repository ppa:peek-developers/stable
-sudo apt update
-sudo apt install -y peek
+# ppa: ppa:peek-developers/stable
+# apt: peek
 
 #######################################################################
 # Alacritty
 #######################################################################
-cd src/lib
-git clone git@github.com:eendroroy/alacritty-theme.git
-git clone git@github.com:toggle-corp/alacritty-colorscheme.git
-ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
+# apt: libxcb-xfixes0-dev
 
-sudo apt install -y libxcb-xfixes0-dev
+cd src/lib
+
+git clone git@github.com:eendroroy/alacritty-theme.git
+
+git clone git@github.com:toggle-corp/alacritty-colorscheme.git
+
+ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
 
 #######################################################################
 # AWS
 #######################################################################
-# pip install awscli
+
+pip install awscli
 
 # pretty shell
-# pip install saws
+
+pip install saws
 
 #######################################################################
 # Vim tagbar
@@ -380,8 +347,8 @@ sudo apt install -y libxcb-xfixes0-dev
 
 #######################################################################
 # previewing RST files
-# don't recommend using sudo with this one
 #######################################################################
+
 pip install restview
 
 #######################################################################
@@ -392,9 +359,10 @@ pip install restview
 #######################################################################
 # Jenkins
 #######################################################################
-wget -O ~/java/jenkins.war \
-  http://mirrors.jenkins.io/war-stable/latest/jenkins.war
-cd ~/bin
+
+# wget -O ~/java/jenkins.war \
+#   http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+# cd ~/bin
 
 # ~/bin/jenkins
 # #!/bin/bash
@@ -403,31 +371,35 @@ cd ~/bin
 #######################################################################
 # Docker (Ubuntu 18.04, Linux Mint 19)
 #######################################################################
+# apt: apt-transport-https ca-certificates curl gnupg-agent
+#      software-properties-common
+
 sudo apt update
-sudo apt install -y \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  gnupg-agent \
-  software-properties-common
+
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # make sure we have the correct installation
+
 sudo apt-key fingerprint 0EBFCD88
 
 # If using Linux Mint 19, or Ubuntu 18.04. Otherwise, update
+
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 
 # If the above fails, add
 # deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
 # as a line in additional-repositories
+
 sudo nvim -u NONE /etc/apt/sources.list.d/addtional-repositories.list
 
 sudo apt update
+
 sudo apt install docker-ce docker-ce-cli containerd.io
 
 sudo groupadd docker
+
 sudo usermod -aG docker "$USER"
 
 # Now log out, log back in, and run the following command
+
 docker run hello-world
