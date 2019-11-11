@@ -2118,7 +2118,6 @@ function! DefaultKeyMappings()
         \ -search=`expand('%:p')`
         \ -ignored-files=`g:defx_ignored_files`
         \ -split=vertical
-        \ -toggle
         \ -winwidth=31
         \ <CR>
   nnoremap <silent> <space>l :TagbarToggle <CR>
