@@ -1801,7 +1801,11 @@ function! CustomDeopleteConfig()
         \ 'markdown': ['neosnippet'],
         \ })
   call deoplete#custom#source('_', 'min_pattern_length', 1)
-  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+  call deoplete#custom#source('_', 'converters', [
+        \ 'converter_remove_paren',
+        \ 'converter_remove_overlap',
+        \ ])
+
 
   " Source Overrides: examples below
   " call deoplete#custom#source('LanguageClient', 'min_pattern_length', 4)
