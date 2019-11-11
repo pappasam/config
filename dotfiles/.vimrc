@@ -1741,19 +1741,20 @@ let g:vim_markdown_new_list_item_indent = v:false
 " Remove inline messages; visually jarring
 " let g:neomake_virtualtext_current_error = v:false
 
-function! CustomNeomakeConfig()
+function! s:custom_neomake_config()
   if !exists('g:loaded_neomake')
     echom 'neomake does not exist, skipping...'
     return
   endif
   " Run only when writing a buffer
   call neomake#configure#automake('w')
+  " Disable Neomake initially
+  silent NeomakeDisable
 endfunction
 
 augroup neomake_on_vim_startup
   autocmd!
-  autocmd VimEnter * call CustomNeomakeConfig()
-  autocmd FileType markdown NeomakeDisableBuffer
+  autocmd VimEnter * call s:custom_neomake_config()
 augroup END
 
 " }}}
@@ -2179,8 +2180,8 @@ function! DefaultKeyMappings()
   vnoremap <leader>f :FiletypeFormat<cr>
 
   " Neomake: shortcuts
-  nnoremap <leader>a :NeomakeClean<cr>
-  nnoremap <leader>A :NeomakeToggleBuffer<cr>
+  nnoremap <leader>a :NeomakeClean<cr>:NeomakeToggle<cr>:write<cr>
+  nnoremap <leader>A :NeomakeClean<cr>
 
   " NeoSnippet:
   imap <C-b> <Plug>(neosnippet_expand_or_jump)
