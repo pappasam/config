@@ -1341,12 +1341,13 @@ let g:defx_ignored_files = join([
       \ '.*',
       \ '__pycache__/',
       \ 'build/',
+      \ 'dist/',
       \ 'fonts/',
       \ 'node_modules/',
       \ 'pip-wheel-metadata/',
       \ 'target/',
-      \ 'venv/',
       \ 'venv.bak/',
+      \ 'venv/',
       \ ], ',')
 
 let g:custom_defx_mappings = [
