@@ -1461,7 +1461,12 @@ let g:fzf_preview_layout = 'botright split new'
 let g:fzf_preview_quit_map = v:true
 let g:fzf_preview_rate = 0.4
 
-command! Gfiles GitFilesPreview
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
+      \ 1,
+      \ fzf#vim#with_preview(),
+      \ <bang>0)
+command! Grep Rg
 
 " }}}
 " Plugin: Tagbar {{{
@@ -1782,17 +1787,15 @@ let g:slime_no_mappings = v:true
 " Deoplete And Neosnippet:
 let g:deoplete#enable_at_startup = v:true
 
-command! Grep ProjectGrepPreview
-
 function! CustomDeopleteConfig()
   if !exists('g:loaded_deoplete')
     echom 'Deoplete not installed, skipping...'
     return
   endif
-  " Deoplete Defaults:
+  " Global Defaults:
   call deoplete#custom#option({
         \ 'auto_complete': v:true,
-        \ 'auto_complete_delay': 50,
+        \ 'auto_complete_delay': 150,
         \ 'max_list': 500,
         \ 'num_processes': 2,
         \ })
@@ -1807,11 +1810,6 @@ function! CustomDeopleteConfig()
         \ 'converter_remove_paren',
         \ 'converter_remove_overlap',
         \ ])
-
-
-  " Source Overrides: examples below
-  " call deoplete#custom#source('LanguageClient', 'min_pattern_length', 4)
-  " call deoplete#custom#source('neosnippet', 'min_pattern_length', 2)
 endfunction
 augroup deoplete_on_vim_startup
   autocmd!
@@ -2161,8 +2159,8 @@ function! DefaultKeyMappings()
   " FZF: create shortcuts for finding stuff
   nnoremap <silent> <C-p> :call FZFFilesAvoidDefx()<CR>
   nnoremap <silent> <C-b> :call FZFBuffersAvoidDefx()<CR>
-  nnoremap <C-n> yiw:ProjectGrepPreview <C-r>"<CR>
-  vnoremap <C-n> y:ProjectGrepPreview <C-r>"<CR>
+  nnoremap <C-n> yiw:Rg <C-r>"<CR>
+  vnoremap <C-n> y:Rg <C-r>"<CR>
 
   " DeleteHiddenBuffers: shortcut to make this easier
   " Note: weird stuff happens if you mess this up
