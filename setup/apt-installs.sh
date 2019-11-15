@@ -22,6 +22,7 @@ sudo apt install -y \
   apt-transport-https \
   autoconf \
   automake \
+  bison \
   bsdgames  \
   bsdgames-nonfree \
   build-essential \
@@ -37,14 +38,19 @@ sudo apt install -y \
   exuberant-ctags \
   flameshot \
   fortune \
+  gettext \
   gnupg-agent \
   graphviz \
   gthumb \
   htop \
   libbz2-dev \
   libclang-6.0-dev \
+  libcurl4-openssl-dev \
+  libedit-dev \
   libevent-dev \
   libffi-dev \
+  libicu-dev \
+  libjpeg-dev \
   liblzma-dev \
   libmysqlclient-dev \
   libncurses-dev \
@@ -52,6 +58,9 @@ sudo apt install -y \
   libncurses5-dev \
   libncursesw5 \
   libncursesw5-dev \
+  libonig-dev \
+  libpng-dev \
+  libpq-dev \
   libreadline-dev \
   librsvg2-bin \
   libsqlite3-dev \
@@ -59,8 +68,10 @@ sudo apt install -y \
   libtool \
   libx11-doc \
   libxcb-xfixes0-dev \
+  libxml2-dev \
   libxslt-dev \
   libyaml-dev \
+  libzip-dev \
   llvm \
   llvm-6.0 \
   llvm-6.0-dev \
@@ -69,6 +80,7 @@ sudo apt install -y \
   manpages-posix-dev \
   ncurses-doc \
   neovim \
+  openssl \
   peek \
   pkg-config \
   python-openssl \
