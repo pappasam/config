@@ -41,44 +41,55 @@ sudo apt install -y \
   graphviz \
   gthumb \
   htop \
+  libbz2-dev \
   libclang-6.0-dev \
   libevent-dev \
   libffi-dev \
+  liblzma-dev \
   libmysqlclient-dev \
   libncurses-dev \
   libncurses5 \
   libncurses5-dev \
   libncursesw5 \
+  libncursesw5-dev \
   libreadline-dev \
   librsvg2-bin \
+  libsqlite3-dev \
   libssl-dev \
   libtool \
   libx11-doc \
   libxcb-xfixes0-dev \
   libxslt-dev \
   libyaml-dev \
+  llvm \
   llvm-6.0 \
   llvm-6.0-dev \
+  make \
   manpages-dev \
   manpages-posix-dev \
   ncurses-doc \
   neovim \
   peek \
   pkg-config \
+  python-openssl \
   screenkey \
   shellcheck \
   snapd \
   software-properties-common \
   stow \
   texlive-full \
+  tk-dev \
   tree \
   typespeed \
   unixodbc-dev \
   unzip \
+  wget \
   xclip \
   xsel \
+  xz-utils \
   xzdec \
   zathura \
+  zlib1g-dev \
   zsh
 
 sudo apt autoclean
