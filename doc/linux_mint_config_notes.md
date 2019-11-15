@@ -68,12 +68,10 @@ The following keyboard shortcuts and mappings make it easier to do things withou
         * Move window to up monitor: Shift+Super+K
         * Move window to down monitor: Shift+Super+J
 * **System**
+    * Main
+        * Lock screen: Ctrl+q
     * Hardware
         * Re-detect display devices: remove the Super+P shortcut (easy to hit accidentailly)
-        * Toggle touchpad state: Ctrl+Alt+T
-    * Screenshots and recording
-        * Take a screenshot of an area: Ctrl+Alt+Y
-        * Copy a screenshot of an area to a clipboard: Shift+Ctrl+Alt+Y
 * **Custom**
     * Panel Toggle
         * Command : ~/.panel-autohide.sh
