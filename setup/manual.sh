@@ -394,7 +394,7 @@ sudo nvim -u NONE /etc/apt/sources.list.d/addtional-repositories.list
 
 sudo apt update
 
-sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 sudo groupadd docker
 

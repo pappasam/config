@@ -80,6 +80,7 @@ sudo apt install -y \
   manpages-posix-dev \
   ncurses-doc \
   neovim \
+  network-manager-openvpn \
   openssl \
   peek \
   pkg-config \
