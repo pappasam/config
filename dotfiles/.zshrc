@@ -824,7 +824,7 @@ function pynew() {
     echo "$dir_name already exists"
     return 1
   fi
-  git init "$dir_name"
+  mkdir "$dir_name"
   cd "$dir_name"
   poetry-init
   gitignore Python.gitignore | grep -v instance/ > .gitignore
