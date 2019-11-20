@@ -1378,6 +1378,7 @@ let g:custom_defx_mappings = [
       \ ['o             ', "defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('drop')"],
       \ ['p             ', "defx#do_action('paste')"],
       \ ['q             ', "defx#do_action('quit')"],
+      \ ['ss            ', "defx#do_action('multi', [['toggle_sort', 'TIME'], 'redraw'])"],
       \ ['t             ', "defx#do_action('open_or_close_tree')"],
       \ ['u             ', "defx#do_action('cd', ['..'])"],
       \ ['x             ', "defx#do_action('execute_system')"],
