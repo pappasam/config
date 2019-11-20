@@ -431,14 +431,14 @@ function! SetStatusAndTabLine()
   set statusline+=%m
   set statusline+=%{get(b:,'gitbranch','')}
   set statusline+=\   " space
-  set statusline+=%*  " Default color
-  set statusline+=\ %f
+  set statusline+=%*  " default color
+  set statusline+=\ %t  " tailed filename
   set statusline+=%=
   set statusline+=%n  " buffer number
-  set statusline+=\ %y\  " File type
+  set statusline+=\ %y\  " file type
   set statusline+=%#CursorLine#
   set statusline+=\ %{&ff}\  " Unix or Dos
-  set statusline+=%*  " Default color
+  set statusline+=%*  " default color
   set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 endfunction
 call SetStatusAndTabLine()
