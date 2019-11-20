@@ -1391,10 +1391,6 @@ function! s:defx_my_settings() abort
   for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
   endfor
-  call defx#custom#column('filename', {
-        \ 'min_width': 29,
-        \ 'max_width': 29,
-        \ })
   nnoremap <silent><buffer> ?
         \ :for [key, value] in g:custom_defx_mappings <BAR>
         \ echo '' . key . ': ' . value <BAR>
