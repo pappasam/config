@@ -1889,7 +1889,7 @@ augroup END
 
 " EchoDoc:
 let g:echodoc#enable_at_startup = v:true
-let g:echodoc#type = 'floating'
+let g:echodoc#type = 'virtual'
 let g:echodoc#highlight_identifier = 'Identifier'
 let g:echodoc#highlight_arguments = 'QuickScopePrimary'
 let g:echodoc#highlight_trailing = 'Type'
