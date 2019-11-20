@@ -1358,7 +1358,7 @@ let g:custom_defx_mappings = [
       \ ['<C-g>         ', "defx#do_action('print')"],
       \ ['<C-h>         ', "defx#do_action('resize', 31)"],
       \ ['<C-i>         ', "defx#do_action('open_directory')"],
-      \ ['<C-l>         ', "defx#do_action('resize', 100)"],
+      \ ['<C-l>         ', "defx#do_action('resize', 72)"],
       \ ['<C-o>         ', "defx#do_action('cd', ['..'])"],
       \ ['<C-r>         ', "defx#do_action('redraw')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
