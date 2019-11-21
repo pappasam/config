@@ -238,7 +238,10 @@ function PackagerInit() abort
   call packager#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
   " Below needed by fzf-preview
   call packager#add('git@github.com:bogado/file-line.git')
-  call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
+  " call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
+  call packager#add('git@github.com:pappasam/fzf-preview.vim.git', {
+        \ 'branch': 'configurable-fzf-keybindings',
+        \ })
 
   " Git:
   call packager#add('git@github.com:tpope/vim-fugitive')
@@ -1437,13 +1440,20 @@ function! FZFBuffersAvoidDefx()
 endfunction
 
 " Note: <C-a><C-l> places the remaining files in a vertical split
-let $FZF_DEFAULT_OPTS = '-m --bind ctrl-u:preview-page-up,ctrl-d:preview-page-down '
+let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
+let g:fzf_preview_default_key_bindings =
+      \ 'ctrl-e:preview-page-down,ctrl-y:preview-page-up,?:toggle-preview'
+let g:fzf_preview_layout = 'botright split new'
+let g:fzf_preview_quit_map = v:true
+let g:fzf_preview_rate = 0.4
+
+let $FZF_DEFAULT_OPTS = '-m --bind ' . g:fzf_preview_default_key_bindings . ' '
       \ . '--reverse '
-      \ . '--prompt="Files>" '
+      \ . '--prompt="Files> " '
       \ . '--preview "'
       \ . '[[ $(file --mime {}) =~ binary ]] &&'
-      \ . 'echo {} is a binary file ||'
-      \ . '(bat --style=numbers --color=always {} || cat {})'
+      \ . 'echo {} is a binary file || '
+      \ . g:fzf_preview_command . ' '
       \ . '2> /dev/null | head -500"'
 let g:fzf_layout = { 'window': 'botright 20new' }
 let g:fzf_action = {
@@ -1452,11 +1462,6 @@ let g:fzf_action = {
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit',
       \ }
-
-let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
-let g:fzf_preview_layout = 'botright split new'
-let g:fzf_preview_quit_map = v:true
-let g:fzf_preview_rate = 0.4
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
