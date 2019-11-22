@@ -668,7 +668,7 @@ function cargodoc() {  # arg1: packagename
 # pydev-install dev: install only dev dependencies
 # pydev-install all: install all deps
 function pydev-install() {  ## Install default python dependencies
-  local env=(pynvim restview jedi-language-server black pylint)
+  local env=(toml-sort isort pynvim restview jedi-language-server black pylint)
   local dev=(mypy pre-commit)
   if [[ "$1" == 'all' ]]; then
     pip install -U $env $dev
