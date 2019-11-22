@@ -1389,7 +1389,19 @@ let g:custom_defx_mappings = [
       \ ['~             ', "defx#do_action('cd')"],
       \ ]
 
-function! s:defx_my_settings() abort
+function! s:open_defx_if_directory()
+  if !exists('g:loaded_defx')
+    echom 'Defx not installed, skipping...'
+    return
+  endif
+  if isdirectory(expand(expand('%:p')))
+    Defx `expand('%:p')`
+        \ -buffer-name=defx
+        \ -columns=mark:git:indent:icons:filename:type:size:time
+  endif
+endfunction
+
+function! s:defx_buffer_settings() abort
   " Define mappings
   for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
@@ -1402,7 +1414,8 @@ endfunction
 
 augroup defx_settings
   autocmd!
-  autocmd FileType defx call s:defx_my_settings()
+  autocmd BufEnter * call s:open_defx_if_directory()
+  autocmd FileType defx call s:defx_buffer_settings()
   autocmd FileType defx setlocal cursorline
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 augroup END
@@ -1932,7 +1945,9 @@ let g:vim_filetype_formatter_commands = {
 " Disable python 2 support
 let g:loaded_python_provider = v:true
 
-" Netrw: disable netrw's gx mapping, prefer tyru/open-browser.vim
+" Netrw: disable completely
+let g:loaded_netrw= v:true
+let g:netrw_loaded_netrwPlugin= v:true
 let g:netrw_nogx = v:true
 
 " UndoTree:
