@@ -238,10 +238,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
   " Below needed by fzf-preview
   call packager#add('git@github.com:bogado/file-line.git')
-  " call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
-  call packager#add('git@github.com:pappasam/fzf-preview.vim.git', {
-        \ 'branch': 'configurable-fzf-keybindings',
-        \ })
+  call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
 
   " Git:
   call packager#add('git@github.com:tpope/vim-fugitive')
