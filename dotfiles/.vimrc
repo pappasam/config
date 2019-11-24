@@ -198,7 +198,9 @@ function PackagerInit() abort
   call packager#add('git@github.com:junegunn/vader.vim')
   call packager#add('git@github.com:kh3phr3n/tabline')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
-  call packager#add('git@github.com:Shougo/defx.nvim', {
+  " call packager#add('git@github.com:Shougo/defx.nvim', {
+  call packager#add('git@github.com:pappasam/defx.nvim.git', {
+        \ 'branch': 'fix-drop',
         \ 'do': ':UpdateRemotePlugins',
         \ })
   call packager#add('git@github.com:kristijanhusak/defx-git', {
