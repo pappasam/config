@@ -1414,6 +1414,11 @@ augroup defx_settings
   autocmd BufEnter * call s:open_defx_if_directory()
   autocmd FileType defx call s:defx_buffer_settings()
   autocmd FileType defx setlocal cursorline
+  autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 augroup END
 
