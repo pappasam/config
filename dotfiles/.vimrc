@@ -378,7 +378,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:ericcurtin/CurtineIncSw.vim')
 
   " Repl Integration:
-  call packager#add('git@github.com:jpalardy/vim-slime')
+  call packager#add('git@github.com:rhysd/reply.vim.git')
 
   " Presentation:
   call packager#add('git@github.com:dhruvasagar/vim-marp')
@@ -1780,20 +1780,6 @@ augroup neomake_on_vim_startup
 augroup END
 
 " }}}
-" Plugin: Slime {{{
-
-let g:slime_target = "tmux"
-let g:slime_paste_file = tempname()
-let g:slime_default_config = {
-      \ "socket_name": "default",
-      \ "target_pane": "{right-of}",
-      \ }
-let g:slime_dont_ask_default = v:true
-
-" Set key mappings in GlobalKeyMappings
-let g:slime_no_mappings = v:true
-
-" }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
 
 " NOTE: General remappings
@@ -2160,9 +2146,10 @@ function! DefaultKeyMappings()
   " AutoPairs:
   imap <silent><CR> <CR><Plug>AutoPairsReturn
 
-  " Slime:
-  xmap <leader>e <Plug>SlimeRegionSend
-  nmap <leader>e <Plug>SlimeParagraphSend
+  " Reply: <C-\><C-n> goes back to insert mode in terminal (duh :p)
+  nnoremap <leader><leader>e :Repl<CR><C-\><C-n><C-w><C-w>
+  nnoremap <leader>e :ReplSend<CR>
+  vnoremap <leader>e :ReplSend<CR>
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
