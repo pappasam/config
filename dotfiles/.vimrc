@@ -378,7 +378,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:ericcurtin/CurtineIncSw.vim')
 
   " Repl Integration:
-  call packager#add('git@github.com:rhysd/reply.vim.git')
+  call packager#add('git@github.com:jpalardy/vim-slime.git')
 
   " Presentation:
   call packager#add('git@github.com:dhruvasagar/vim-marp')
@@ -898,16 +898,18 @@ command! CleanUnicode call <SID>clean_unicode()
 " }}}
 " General: Neovim Terminal {{{
 
-function! s:open_term(view_type)
+function! s:open_term_interactive(view_type)
   execute a:view_type
   terminal
   setlocal nonumber nornu
   startinsert
 endfunction
 
-command! Term call s:open_term('split')
-command! Termv call s:open_term('vsplit')
-command! Vtert call s:open_term('tabnew')
+command! Term call s:open_term('vsplit')
+command! VTerm call s:open_term('vsplit')
+command! STerm call s:open_term('split')
+command! Tterm call s:open_term('tabnew')
+
 
 " }}}
 " General: Macro repeater {{{
@@ -1616,8 +1618,11 @@ endfunction
 " Plugin: AutoPairs {{{
 
 " AutoPairs:
-" unmap CR due to incompatibility with clang-complete
-let g:AutoPairsMapCR = v:false
+" NOTES:
+" * i_<M-e> wraps in surrounding: (-)asdfasfd -> (asdfasfd)
+" unmap CR due to incompatibility with clang-complete (removed for now)
+let g:AutoPairsMapCR = v:true
+let g:AutoPairsFlyMode = v:true
 let g:AutoPairs = {
       \ '(':')',
       \ '[':']',
@@ -1741,6 +1746,50 @@ let g:ragtag_global_maps = v:true
 augroup ragtag_config
   autocmd FileType svelte,javascript call RagtagInit()
 augroup end
+
+" }}}
+" Plugin: Slime {{{
+
+let g:slime_target = "neovim"
+let g:slime_dont_ask_default = v:true
+let g:slime_no_mappings = v:true
+let g:term_repl_open = v:false
+
+function! s:term_repl_open()
+  let command = get(g:repl_filetype_commands, &filetype, &shell)
+  vsplit
+  execute 'terminal ' . command
+  setlocal nonumber nornu
+  let g:repl_terminal_job_id = b:terminal_job_id
+  let g:slime_terminal_window_id = win_getid()
+  wincmd w
+  let b:slime_config = { 'jobid': g:repl_terminal_job_id }
+  let g:term_repl_open = v:true
+endfunction
+
+function! s:term_repl_close()
+  let current_window_id = win_getid()
+  call win_gotoid(g:slime_terminal_window_id) | quit
+  let g:term_repl_open = v:false
+  call win_gotoid(current_window_id)
+  unlet b:slime_config
+endfunction
+
+function! s:term_repl_toggle()
+  if g:term_repl_open == v:false
+    call s:term_repl_open()
+  else
+    call s:term_repl_close()
+  endif
+endfunction
+
+let g:repl_filetype_commands = {
+      \ 'python': 'python',
+      \ }
+
+command! ReplOpen call s:term_repl_open()
+command! ReplClose call s:term_repl_close()
+command! ReplToggle call s:term_repl_toggle()
 
 " }}}
 " Plugin: Vim-markdown {{{
@@ -2145,13 +2194,15 @@ function! DefaultKeyMappings()
   " AutoPairs:
   imap <silent><CR> <CR><Plug>AutoPairsReturn
 
-  " Reply: <C-\><C-n> goes back to insert mode in terminal (duh :p)
-  nnoremap <leader><leader>e :Repl<CR><C-\><C-n><C-w><C-w>
-  nnoremap <leader>e :ReplSend<CR>
-  vnoremap <leader>e :ReplSend<CR>
+  " Slime:
+  nnoremap <leader><leader>e :ReplToggle<CR>
+  xmap <leader>e <Plug>SlimeRegionSend
+  nmap <leader>e <Plug>SlimeLineSend
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
+  xmap s <Nop> xmap ib <Plug>(textobj-sandwich-auto-i)
+  omap s <Nop>
   xmap ib <Plug>(textobj-sandwich-auto-i)
   omap ib <Plug>(textobj-sandwich-auto-i)
   xmap ab <Plug>(textobj-sandwich-auto-a)
