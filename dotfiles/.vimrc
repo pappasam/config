@@ -2196,8 +2196,11 @@ function! DefaultKeyMappings()
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
+  noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
+        \ :<c-u>call slime#send_lines(v:count1)<cr>
+        \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>
   xmap <leader>e <Plug>SlimeRegionSend
-  nmap <leader>e <Plug>SlimeLineSend
+  nmap <leader>e <Plug>CustomSlimeLineSend
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
