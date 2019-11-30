@@ -244,6 +244,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:tpope/vim-fugitive')
   call packager#add('git@github.com:junegunn/gv.vim')
   call packager#add('git@github.com:whiteinge/diffconflicts')
+  call packager#add('git@github.com:rhysd/git-messenger.vim.git')
 
   " Syntax Theme:
   call packager#add('git@github.com:NLKNguyen/papercolor-theme')
