@@ -1118,7 +1118,7 @@ augroup keywordprogram-overrides
 augroup END
 
 " }}}
-" Plugin: GV.vim {{{
+" Plugin: Git Plugins: GV.vim, Fugitive, git-messenger {{{
 
 " NOTES:
 " :GV to open commit browser
@@ -1136,6 +1136,8 @@ augroup END
 " ]] and [[ to move between commits
 " . to start command-line with :Git [CURSOR] SHA à la fugitive
 " q or gq to close
+
+let g:git_messenger_always_into_popup = v:true
 
 " }}}
 " Plugin: Jinja2 {{{
