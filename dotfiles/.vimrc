@@ -347,6 +347,8 @@ function PackagerInit() abort
   call packager#add('git@github.com:glts/vim-textobj-indblock')
   " ay/iy for a syntax group
   call packager#add('git@github.com:kana/vim-textobj-syntax')
+  " ac/ic/af/if for Python classes and functions
+  call packager#add('git@github.com:bps/vim-textobj-python.git')
 
   " Writing:
   call packager#add('git@github.com:dkarter/bullets.vim')
