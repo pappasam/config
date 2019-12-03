@@ -1761,7 +1761,9 @@ let g:slime_no_mappings = v:true
 let g:term_repl_open = v:false
 
 function! s:term_repl_open()
-  let command = get(g:repl_filetype_commands, &filetype, &shell)
+  " let command = get(g:repl_filetype_commands, &filetype, &shell)
+  " NOTE: zshell does not receive the newlines
+  let command = '/bin/bash'
   vsplit
   execute 'terminal ' . command
   setlocal nonumber nornu
