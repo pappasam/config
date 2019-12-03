@@ -2205,8 +2205,8 @@ function! DefaultKeyMappings()
   noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
         \ :<c-u>call slime#send_lines(v:count1)<cr>
         \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>
-  xmap <leader>e <Plug>SlimeRegionSend
-  nmap <leader>e <Plug>CustomSlimeLineSend
+  xmap <leader>e <Plug>SlimeRegionSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
+  nmap <leader>e <Plug>CustomSlimeLineSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
