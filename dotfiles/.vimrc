@@ -1760,6 +1760,10 @@ let g:slime_dont_ask_default = v:true
 let g:slime_no_mappings = v:true
 let g:term_repl_open = v:false
 
+noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
+      \ :<c-u>call slime#send_lines(v:count1)<cr>
+      \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>
+
 function! s:term_repl_open()
   " NOTE: zshell does not receive the newlines
   let command = get(g:repl_filetype_commands, &filetype, '/bin/bash')
@@ -2202,9 +2206,6 @@ function! DefaultKeyMappings()
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
-  noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
-        \ :<c-u>call slime#send_lines(v:count1)<cr>
-        \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>
   xmap <leader>e <Plug>SlimeRegionSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
   nmap <leader>e <Plug>CustomSlimeLineSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
 
