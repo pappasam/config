@@ -1478,6 +1478,10 @@ let g:fzf_custom_file_options = '-m --bind '
       \ . 'echo {} is a binary file || '
       \ . g:fzf_preview_command . ' '
       \ . "2> /dev/null | head -500'"
+let $FZF_DEFAULT_OPTS = '-m --bind '
+      \ . g:fzf_preview_default_key_bindings . ' '
+      \ . '--reverse '
+      \ . '--prompt="> " '
 let g:fzf_layout = { 'window': 'botright 20new' }
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
