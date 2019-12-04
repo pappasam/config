@@ -1451,6 +1451,7 @@ function! FZFFilesAvoidDefx()
   call fzf#run(fzf#wrap({
         \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
         \ 'dir': getcwd(-1, -1),
+        \ 'options': g:fzf_custom_file_options,
         \ }))
 endfunction
 
@@ -1468,15 +1469,15 @@ let g:fzf_preview_default_key_bindings =
 let g:fzf_preview_layout = 'botright split new'
 let g:fzf_preview_quit_map = v:true
 let g:fzf_preview_rate = 0.4
-
-let $FZF_DEFAULT_OPTS = '-m --bind ' . g:fzf_preview_default_key_bindings . ' '
+let g:fzf_custom_file_options = '-m --bind '
+      \ . g:fzf_preview_default_key_bindings . ' '
       \ . '--reverse '
       \ . '--prompt="Files> " '
-      \ . '--preview "'
+      \ . "--preview '"
       \ . '[[ $(file --mime {}) =~ binary ]] &&'
       \ . 'echo {} is a binary file || '
       \ . g:fzf_preview_command . ' '
-      \ . '2> /dev/null | head -500"'
+      \ . "2> /dev/null | head -500'"
 let g:fzf_layout = { 'window': 'botright 20new' }
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
