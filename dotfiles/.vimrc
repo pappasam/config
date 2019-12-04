@@ -1926,7 +1926,7 @@ function! CustomLanguageClientConfig()
   nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
   nnoremap <buffer> <leader>sa :call LanguageClient#textDocument_codeAction()<CR>
   nnoremap <buffer> <leader>ss :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <buffer> <leader>sw :call LanguageClient#workspace_symbol()<CR>
+  nnoremap <buffer> <leader>sw :call LanguageClient#workspace_symbol(expand('<cword>'))<CR>
   nnoremap <buffer> <leader>sc :call LanguageClient_contextMenu()<CR>
   setlocal omnifunc=LanguageClient#complete
 endfunction
