@@ -225,6 +225,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:wellle/targets.vim')
   call packager#add('git@github.com:tpope/vim-scriptease')
   call packager#add('git@github.com:romainl/vim-devdocs')
+  call packager#add('git@github.com:tpope/vim-characterize.git')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
