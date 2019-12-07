@@ -1768,7 +1768,7 @@ let g:term_repl_open = v:false
 
 noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
       \ :<c-u>call slime#send_lines(v:count1)<cr>
-      \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>
+      \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
 
 function! s:term_repl_open()
   " NOTE: zshell does not receive the newlines
@@ -2214,8 +2214,8 @@ function! DefaultKeyMappings()
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
-  xmap <leader>e <Plug>SlimeRegionSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
-  nmap <leader>e <Plug>CustomSlimeLineSend:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>
+  xmap <leader>e <Plug>SlimeRegionSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
+  nmap <leader>e <Plug>CustomSlimeLineSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
