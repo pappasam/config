@@ -1350,6 +1350,7 @@ let g:defx_ignored_files = join([
       \ '__pycache__/',
       \ 'build/',
       \ 'dist/',
+      \ 'docs/_build/',
       \ 'fonts/',
       \ 'node_modules/',
       \ 'pip-wheel-metadata/',
