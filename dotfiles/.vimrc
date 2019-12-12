@@ -351,6 +351,10 @@ function PackagerInit() abort
   " ac/ic/af/if for Python classes and functions
   call packager#add('git@github.com:bps/vim-textobj-python.git')
 
+  " Number Exploration:
+  call packager#add('git@github.com:glts/vim-magnum.git')
+  call packager#add('git@github.com:glts/vim-radical.git')
+
   " Writing:
   call packager#add('git@github.com:dkarter/bullets.vim')
   call packager#add('git@github.com:moiatgit/vim-rst-sections')
@@ -1119,6 +1123,11 @@ augroup keywordprogram-overrides
   " Dictioary: my custom Def function
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
 augroup END
+
+" }}}
+" Plugin: vim-radical {{{
+
+let g:radical_no_mappings = 1
 
 " }}}
 " Plugin: Git Plugins: GV.vim, Fugitive, git-messenger {{{
@@ -2153,6 +2162,14 @@ function! DefaultKeyMappings()
   nnoremap <A-7> 7gt
   nnoremap <A-8> 8gt
   nnoremap <A-9> 9gt
+
+  " Vim Radical:
+  nmap gA <Plug>RadicalView
+  xmap gA <Plug>RadicalView
+  nmap <leader>crd <Plug>RadicalCoerceToDecimal
+  nmap <leader>crx <Plug>RadicalCoerceToHex
+  nmap <leader>cro <Plug>RadicalCoerceToOctal
+  nmap <leader>crb <Plug>RadicalCoerceToBinary
 
   " Substitute: replace word under cursor
   nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//gc<Left><Left><Left>
