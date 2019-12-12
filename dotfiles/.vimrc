@@ -914,10 +914,10 @@ function! s:open_term_interactive(view_type)
   startinsert
 endfunction
 
-command! Term call s:open_term('vsplit')
-command! VTerm call s:open_term('vsplit')
-command! STerm call s:open_term('split')
-command! Tterm call s:open_term('tabnew')
+command! Term call s:open_term_interactive('vsplit')
+command! VTerm call s:open_term_interactive('vsplit')
+command! STerm call s:open_term_interactive('split')
+command! Tterm call s:open_term_interactive('tabnew')
 
 
 " }}}
