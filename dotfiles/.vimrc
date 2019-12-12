@@ -212,9 +212,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:yssl/QFEnter')
   call packager#add('git@github.com:simeji/winresizer')
   call packager#add('git@github.com:mbbill/undotree')
-  call packager#add('git@github.com:tpope/vim-repeat')
-  call packager#add('git@github.com:tpope/vim-eunuch')
-  call packager#add('git@github.com:tpope/vim-speeddating.git')
   call packager#add('git@github.com:henrik/vim-indexed-search')
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:fcpg/vim-altscreen')
@@ -224,9 +221,20 @@ function PackagerInit() abort
   call packager#add('git@github.com:chrisbra/Colorizer')
   call packager#add('git@github.com:fidian/hexmode')
   call packager#add('git@github.com:wellle/targets.vim')
-  call packager#add('git@github.com:tpope/vim-scriptease')
   call packager#add('git@github.com:romainl/vim-devdocs')
+  call packager#add('git@github.com:heavenshell/vim-jsdoc')
+
+  " Tim Pope: general, uncategorizable tim pope plugins
+  " Notes:
+  "   * abolish: convert to snake cases
+  call packager#add('git@github.com:tpope/vim-abolish')
   call packager#add('git@github.com:tpope/vim-characterize.git')
+  call packager#add('git@github.com:tpope/vim-commentary')
+  call packager#add('git@github.com:tpope/vim-eunuch')
+  call packager#add('git@github.com:tpope/vim-ragtag')
+  call packager#add('git@github.com:tpope/vim-repeat')
+  call packager#add('git@github.com:tpope/vim-scriptease')
+  call packager#add('git@github.com:tpope/vim-speeddating.git')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
@@ -250,12 +258,6 @@ function PackagerInit() abort
 
   " Syntax Theme:
   call packager#add('git@github.com:NLKNguyen/papercolor-theme')
-
-  " Utilities:
-  call packager#add('git@github.com:tpope/vim-commentary')
-  " Convert to snakecase/camelcase/etc
-  call packager#add('git@github.com:tpope/vim-abolish')
-  call packager#add('git@github.com:jiangmiao/auto-pairs')
 
   " Syntax Highlighting:
   call packager#add('git@github.com:derekwyatt/vim-scala')
@@ -297,7 +299,13 @@ function PackagerInit() abort
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:killphi/vim-ebnf')
 
+  " Indentation Only:
+  call packager#add('git@github.com:vim-scripts/groovyindent-unix')
+  call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
+  call packager#add('git@github.com:Yggdroot/indentLine')
+
   " Autocompletion And IDE Features:
+  call packager#add('git@github.com:jiangmiao/auto-pairs')
   call packager#add('git@github.com:autozimu/LanguageClient-neovim', {
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
@@ -326,15 +334,6 @@ function PackagerInit() abort
   " Additional requirements
   "   npm install -g jsctags
   "   sudo apt install -y php
-
-  " Indentation Only:
-  call packager#add('git@github.com:vim-scripts/groovyindent-unix')
-  call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
-  call packager#add('git@github.com:Yggdroot/indentLine')
-
-  " Web Development General:
-  call packager#add('git@github.com:tpope/vim-ragtag')
-  call packager#add('git@github.com:heavenshell/vim-jsdoc')
 
   " Text Objects:
   call packager#add('git@github.com:machakann/vim-sandwich')
