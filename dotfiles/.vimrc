@@ -235,6 +235,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-scriptease')
   call packager#add('git@github.com:tpope/vim-speeddating.git')
+  call packager#add('git@github.com:tpope/vim-rsi.git')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
@@ -1644,6 +1645,7 @@ endfunction
 " unmap CR due to incompatibility with clang-complete (removed for now)
 let g:AutoPairsMapCR = v:true
 let g:AutoPairsFlyMode = v:true
+let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairs = {
       \ '(':')',
       \ '[':']',
