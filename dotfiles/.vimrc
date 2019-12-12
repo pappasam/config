@@ -214,6 +214,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:mbbill/undotree')
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-eunuch')
+  call packager#add('git@github.com:tpope/vim-speeddating.git')
   call packager#add('git@github.com:henrik/vim-indexed-search')
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:fcpg/vim-altscreen')
