@@ -872,6 +872,45 @@ function pull() {
   git pull origin "$current_branch"
 }
 
+# GIT: prune/cleanup the local references to remote branch and delete merged
+# local branches
+function gc() {
+  local refs="$(git remote prune origin --dry-run)"
+  if [ -z "$refs" ]
+  then
+    echo "No prunable references found"
+  else
+    echo $refs
+    while true; do
+     read yn\?"Do you wish to prune these local references to remote branches? "
+     case $yn in
+       [Yy]* ) break;;
+       [Nn]* ) return;;
+       * ) echo "Please answer yes or no.";;
+     esac
+    done
+    git remote prune origin
+    echo "Pruned!"
+  fi
+  local branches="$(git branch --merged master | grep -v '^[ *]*master$')"
+  if [ -z "$branches" ]
+  then
+    echo "No merged branches found"
+  else
+    echo $branches
+    while true; do
+     read yn\?"Do you wish to delete these merged local branches? "
+     case $yn in
+       [Yy]* ) break;;
+       [Nn]* ) return;;
+       * ) echo "Please answer yes or no.";;
+     esac
+    done
+    echo $branches | xargs git branch -d
+    echo "Deleted!"
+  fi
+}
+
 # GITHUB: list all of an organization's Repositories
 function github-list {
   local username=$1
