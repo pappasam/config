@@ -507,6 +507,8 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
         \ set filetype=conf
+  autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
+  autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
 augroup END
 
 " }}}
@@ -2175,7 +2177,7 @@ function! DefaultKeyMappings()
 
   " Substitute: replace word under cursor
   nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//gc<Left><Left><Left>
-  vnoremap <leader><leader>s y:%s/\<<C-R>0\>//gc<Left><Left><Left>
+  vnoremap <leader><leader>s y:%s/<C-R>0//gc<Left><Left><Left>
 
   " IndentComma: placing commas one line down; usable with repeat operator '.'
   nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
