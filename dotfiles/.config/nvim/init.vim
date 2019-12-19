@@ -286,6 +286,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:killphi/vim-ebnf')
+  call packager#add('git@github.com:kevinoid/vim-jsonc.git')
 
   " Indentation Only:
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
@@ -510,6 +511,10 @@ augroup custom_comment_config
   autocmd FileType dosini setlocal commentstring=#\ %s
   autocmd FileType dosini setlocal comments=:#,:;
   autocmd FileType sh setlocal formatoptions=jcroql
+
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal commentstring=//\ %s
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal comments=://
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal formatoptions=jcroql
 augroup END
 
 " }}}
