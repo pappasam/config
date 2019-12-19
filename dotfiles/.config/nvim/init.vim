@@ -367,7 +367,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Linting:
-  call packager#add('git@github.com:benjie/local-npm-bin.vim')
   call packager#add('git@github.com:neomake/neomake')
 
   " C:
@@ -1828,6 +1827,37 @@ let g:vim_markdown_new_list_item_indent = v:false
 " Remove inline messages; visually jarring
 " let g:neomake_virtualtext_current_error = v:false
 
+" https://github.com/benjie/local-npm-bin.vim/blob/master/plugin/neomake-local-eslint.vim
+function! s:get_npm_bin(binname)
+  let dir = getcwd()
+  while ! isdirectory(dir . '/node_modules')
+    let dir = fnamemodify(dir, ':h')
+    if dir == '/'
+      break
+    end
+  endwhile
+
+  let binpath = ''
+  if dir != '/'
+    let binpath = dir . '/node_modules/.bin/' . a:binname
+    if ! filereadable(binpath)
+      let binpath = ''
+    end
+  endif
+
+  if empty(binpath)
+    let binpath = system('echo -n $(npm bin)') . '/' . a:binname
+    if v:shell_error == 0
+      let binpath = substitute(binpath, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+    endif
+    if ! filereadable(binpath)
+      let binpath = ''
+    end
+  endif
+
+  return binpath
+endfunction
+
 function! s:custom_neomake_config()
   if !exists('g:loaded_neomake')
     echom 'neomake does not exist, skipping...'
@@ -1843,6 +1873,9 @@ augroup neomake_on_vim_startup
   autocmd!
   autocmd VimEnter * call s:custom_neomake_config()
 augroup END
+
+let g:neomake_typescript_tsc_exe = s:get_npm_bin('tsc')
+let g:neomake_typescript_eslint_exe = s:get_npm_bin('eslint')
 
 " }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
@@ -1910,6 +1943,7 @@ let g:LanguageClient_rootMarkers = {
       \ 'go': ['go.mod', 'go.sum'],
       \ 'gomod': ['go.mod', 'go.sum'],
       \ 'python': ['pyproject.toml', 'poetry.lock'],
+      \ 'typescript': ['tsconfig.json'],
       \ 'yaml': ['.vim/settings.json'],
       \ }
 
