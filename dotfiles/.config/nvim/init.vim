@@ -4,32 +4,19 @@
 "   * To toggle sections below, scroll over a folded section and type 'za'
 "     when in Normal mode.
 " Additional Notes {{{
-" This is my .vimrc. Hopefully you enjoy using it as much as me!
-" I use the latest Linux Mint, but this will probably work with any Linux-based
-" OS. My workflow is terminal-based and I now use Neovim
-"
-" PreRequisites:
-"   To get the most out of this vimrc, please install the following
-"   system dependencies. This may not be comprehensive, but represents
-"   some basics I believe everyone should have that you might not have
-"   by default on a modern Ubuntu-based OS:
-"   * git && build-essential && curl
-"   * nodejs && npm
-"   * rust && cargo
-"   * exuberant-ctags
+
+" This is my Neovim configuration file. Hopefully you enjoy using it as much
+" as me! I use Linux Mint / Ubuntu 18.04, but this will probably work with
+" most Linux-based OS's.
 "
 " Installation:
 "   1. Put file in correct place within filesystem
-"     If using Vim, soft-link this file to ~/.vimrc
-"     If using NeoVim, soft-link this file to ~/.config/nvim/init.vim
-"   2. Install Vim-Plug (a great plugin manager)
-"     As of August 20, 2017, you just need to run this command:
-"     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"   3. Open vim (hint: type vim at command line and press enter :p)
-"   4. :PlugInstall
-"   5. :PlugUpdate
-"   6. :PlugUpgrade
+"     Soft-link this file to ~/.config/nvim/init.vim
+"   2. Install Vim-Packager (a great plugin manager)
+"   3. Open nvim (hint: type nvim at command line and press enter :p)
+"   4. :PackagerInstall
+"   5. :PackagerUpdate
+"   6. :PackagerUpgrade
 
 " TextObjectSelection:
 " object-select OR text-objects
@@ -2354,11 +2341,12 @@ cnoreabbrev <expr> Col <SID>abbr_help('Col', 'echo expand(col("."))')
 
 " }}}
 " General: Global Config + Cleanup {{{
-" commands that need to run at the end of my vimrc
 
-" disable unsafe commands in your project-specific .vimrc files
+" commands that need to run at the end
+
+" disable unsafe commands in your project-specific config files
 " This will prevent :autocmd, shell and write commands from being
-" run inside project-specific .vimrc files unless they’re owned by you.
+" run inside project-specific config files unless they’re owned by you.
 set secure
 
 " }}}
