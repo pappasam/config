@@ -1930,8 +1930,7 @@ let g:LanguageClient_autoStart = v:true
 let g:LanguageClient_hoverPreview = 'Always'
 let g:LanguageClient_useFloatingHover = v:false
 let g:LanguageClient_diagnosticsEnable = v:false
-" Keep below commented out, for now
-" let g:LanguageClient_selectionUI = 'location-list'
+let g:LanguageClient_selectionUI = 'location-list'
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <C-k> :call LanguageClient#textDocument_hover()<CR>
