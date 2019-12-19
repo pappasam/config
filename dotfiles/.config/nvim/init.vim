@@ -2321,8 +2321,8 @@ call DefaultKeyMappings()
 " }}}
 " General: Abbreviations --- {{{
 
-" If in command is at beginning of line, return out_command. Otherwise,
-" return in_line.
+" If in_command is at beginning of line : return out_command
+" Else : return in_command.
 function! s:abbr_help(in_command, out_command)
   if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
     return a:out_command
@@ -2338,6 +2338,9 @@ cnoreabbrev <expr> vhelp <SID>abbr_help('vhelp', 'vertical help')
 cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 cnoreabbrev <expr> Col <SID>abbr_help('Col', 'echo expand(col("."))')
+
+" Open init.vim
+cnoreabbrev <expr> vimrc <SID>abbr_help('vimrc', 'edit ~/.config/nvim/init.vim')
 
 " }}}
 " General: Global Config + Cleanup {{{
