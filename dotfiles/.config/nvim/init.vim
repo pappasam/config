@@ -286,7 +286,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:killphi/vim-ebnf')
-  call packager#add('git@github.com:kevinoid/vim-jsonc.git')
+  call packager#add('git@github.com:neoclide/jsonc.vim.git')
 
   " Indentation Only:
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
@@ -496,6 +496,8 @@ augroup filetype_recognition
         \ set filetype=conf
   autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
   autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc
+        \ set filetype=jsonc
 augroup END
 
 " }}}
@@ -508,13 +510,11 @@ augroup END
 "   ':help fo-table' will get the desired result
 augroup custom_comment_config
   autocmd!
-  autocmd FileType dosini setlocal commentstring=#\ %s
-  autocmd FileType dosini setlocal comments=:#,:;
+  autocmd FileType dosini
+        \ setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType jsonc
+        \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
-
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal commentstring=//\ %s
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal comments=://
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json setlocal formatoptions=jcroql
 augroup END
 
 " }}}
