@@ -1112,7 +1112,7 @@ augroup keywordprogram-overrides
   " DevDocs: all
   autocmd FileType javascript setlocal keywordprg=:DD!
   " DevDocs: specific filetype
-  autocmd FileType rust setlocal keywordprg=:DD
+  autocmd FileType rust,html setlocal keywordprg=:DD
   " Dictioary: my custom Def function
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
 augroup END
