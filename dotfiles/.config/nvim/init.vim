@@ -306,7 +306,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:Shougo/neosnippet-snippets')
   call packager#add('git@github.com:Shougo/neco-vim')
   call packager#add('git@github.com:Shougo/echodoc.vim')
-  call packager#add('git@github.com:Rip-Rip/clang_complete')
   " for C header filename completion:
   call packager#add('git@github.com:xaizek/vim-inccomplete')
   " After vim-go, run GoUpdateBinaries
@@ -1925,13 +1924,13 @@ augroup END
 " LSP LanguageClient:
 " NOTES:
 " yaml-language-server: need .vim/settings.json. Example in dotfiles
-"   * Need older version: npm install -g yaml-language-server@0.4.1
+" \ 'c': ['clangd'],
+" \ 'cpp': ['clangd', '-background-index'],
 let g:LanguageClient_serverCommands = {
-      \ 'c': ['clangd', '-background-index'],
-      \ 'cpp': ['clangd', '-background-index'],
       \ 'go': ['gopls'],
       \ 'gomod': ['gopls'],
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
+      \ 'html': ['npx', '--no-install', '-q', 'html-languageserver', '--stdio'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
       \ 'javascript': ['npx', '--no-install', '-q', 'flow', 'lsp'],
       \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
@@ -1957,6 +1956,7 @@ let g:LanguageClient_hoverPreview = 'Always'
 let g:LanguageClient_useFloatingHover = v:false
 let g:LanguageClient_diagnosticsEnable = v:false
 let g:LanguageClient_selectionUI = 'location-list'
+" let g:LanguageClient_hasSnippetSupport = v:false
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <C-k> :call LanguageClient#textDocument_hover()<CR>

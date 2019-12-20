@@ -73,8 +73,8 @@ sudo apt install -y \
   libyaml-dev \
   libzip-dev \
   llvm \
-  llvm-6.0 \
-  llvm-6.0-dev \
+  llvm-8.0 \
+  llvm-8.0-dev \
   make \
   manpages-dev \
   manpages-posix-dev \
@@ -107,3 +107,5 @@ sudo apt install -y \
 
 sudo apt autoclean
 sudo apt autoremove
+
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
