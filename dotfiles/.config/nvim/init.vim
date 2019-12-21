@@ -1908,7 +1908,7 @@ let g:LanguageClient_serverCommands = {
       \ 'python.jinja2': ['jedi-language-server'],
       \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
       \ 'ruby': ['solargraph', 'stdio'],
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+      \ 'rust': ['rls'],
       \ 'terraform': ['terraform-lsp'],
       \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
       \ 'yaml': ['yaml-language-server', '--stdio'],

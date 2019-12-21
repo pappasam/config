@@ -279,6 +279,7 @@ cd ~/bin
 # cargo libraries
 
 rustup component add rls
+rustup component add rust-src
 
 cargo install \
   bat \
