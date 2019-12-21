@@ -170,7 +170,10 @@ function! SetGlobalConfig()
   " Linux Dev Path: system libraries
   set path+=/usr/include/x86_64-linux-gnu/
 
-  " Vim history for command line; can't imagine that more than 100 is needed
+  " Path: add node_modules for neomake / other stuff
+  let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+
+  " Vim History: for command line; can't imagine that more than 100 is needed
   set history=100
 endfunction
 call SetGlobalConfig()
@@ -1831,37 +1834,6 @@ let g:vim_markdown_new_list_item_indent = v:false
 " Remove inline messages; visually jarring
 " let g:neomake_virtualtext_current_error = v:false
 
-" https://github.com/benjie/local-npm-bin.vim/blob/master/plugin/neomake-local-eslint.vim
-function! s:get_npm_bin(binname)
-  let dir = getcwd()
-  while ! isdirectory(dir . '/node_modules')
-    let dir = fnamemodify(dir, ':h')
-    if dir == '/'
-      break
-    end
-  endwhile
-
-  let binpath = ''
-  if dir != '/'
-    let binpath = dir . '/node_modules/.bin/' . a:binname
-    if ! filereadable(binpath)
-      let binpath = ''
-    end
-  endif
-
-  if empty(binpath)
-    let binpath = system('echo -n $(npm bin)') . '/' . a:binname
-    if v:shell_error == 0
-      let binpath = substitute(binpath, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-    endif
-    if ! filereadable(binpath)
-      let binpath = ''
-    end
-  endif
-
-  return binpath
-endfunction
-
 function! s:custom_neomake_config()
   if !exists('g:loaded_neomake')
     echom 'neomake does not exist, skipping...'
@@ -1877,9 +1849,6 @@ augroup neomake_on_vim_startup
   autocmd!
   autocmd VimEnter * call s:custom_neomake_config()
 augroup END
-
-let g:neomake_typescript_tsc_exe = s:get_npm_bin('tsc')
-let g:neomake_typescript_eslint_exe = s:get_npm_bin('eslint')
 
 " }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{

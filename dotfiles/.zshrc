@@ -855,6 +855,11 @@ function standup() {
   _md_template "*Yesterday:*\n*Today:*\n*Blockers/Reminders:*"
 }
 
+# Profiling neovim
+function nvim_profile() {
+  nvim --cmd 'profile start profile.txt' --cmd 'profile! file ~/.config/nvim/init.vim'
+}
+
 # GIT: git-clone keplergrp repos to src/ directory
 function klone() {
   git clone git@github.com:KeplerGroup/$1
