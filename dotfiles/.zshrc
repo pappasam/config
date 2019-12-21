@@ -856,8 +856,10 @@ function standup() {
 }
 
 # Profiling neovim
-function nvim_profile() {
-  nvim --cmd 'profile start profile.txt' --cmd 'profile! file ~/.config/nvim/init.vim'
+function nvim-profiler() {
+  nvim --startuptime nvim_startup.txt \
+    --cmd 'profile start nvim_init_profile.txt' \
+    --cmd 'profile! file ~/.config/nvim/init.vim'
 }
 
 # GIT: git-clone keplergrp repos to src/ directory
