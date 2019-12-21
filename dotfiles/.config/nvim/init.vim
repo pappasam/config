@@ -1893,9 +1893,10 @@ augroup END
 " LSP LanguageClient:
 " NOTES:
 " yaml-language-server: need .vim/settings.json. Example in dotfiles
-" \ 'c': ['clangd'],
-" \ 'cpp': ['clangd', '-background-index'],
+" clangd-8: need compile_flags.txt or compile_commands.json
 let g:LanguageClient_serverCommands = {
+      \ 'c': ['clangd', '-background-index'],
+      \ 'cpp': ['clangd', '-background-index'],
       \ 'go': ['gopls'],
       \ 'gomod': ['gopls'],
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
