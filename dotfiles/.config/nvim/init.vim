@@ -1515,7 +1515,6 @@ let g:tagbar_case_insensitive = v:true
 let g:tagbar_width = 37
 let g:tagbar_silent = v:true
 let g:tagbar_foldlevel = 0
-let g:tagbar_iconchars = ['▶', '▼']
 let g:tagbar_type_haskell = {
     \ 'ctagsbin': 'hasktags',
     \ 'ctagsargs': '-x -c -o-',
