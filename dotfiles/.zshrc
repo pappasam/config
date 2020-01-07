@@ -436,6 +436,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias svim='sudo nvim -u NONE'
 alias snvim='sudo nvim -u NONE'
+alias vimrc='nvim ~/.config/nvim/init.vim'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
