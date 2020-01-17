@@ -207,7 +207,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:sjl/strftimedammit.vim')
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:bronson/vim-visual-star-search')
-  call packager#add('git@github.com:chrisbra/Colorizer')
   call packager#add('git@github.com:fidian/hexmode')
   call packager#add('git@github.com:wellle/targets.vim')
   call packager#add('git@github.com:romainl/vim-devdocs')
@@ -2086,9 +2085,6 @@ let g:go_version_warning = v:false
 
 " ChooseWin: options
 let g:choosewin_overlay_enable = v:false
-
-" Colorizer: css color code highlighting
-let g:colorizer_auto_filetype='css,html'
 
 " HexMode: configure hex editing
 " relevant command: Hexmode
