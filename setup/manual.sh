@@ -258,6 +258,8 @@ cd ~/bin
 # https://clang.llvm.org/extra/clangd/Installation.html#installing-clangd
 
 # npm install -g yaml-language-server@0.4.1
+# npm install -g vscode-html-languageserver-bin
+# npm install -g typescript-language-server
 
 #######################################################################
 # Java Language Server

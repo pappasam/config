@@ -665,6 +665,13 @@ function cargodoc() {  # arg1: packagename
   fi
 }
 
+function nodedev-install() {  ## Install default nodejs dependencies
+  local env=(vscode-html-languageserver-bin typescript-language-server \
+    jsctags write-good yaml-language-server)
+  npm install --no-save "$@" $env
+  asdf reshim nodejs
+}
+
 # pydev-install: install only env dependencies
 # pydev-install dev: install only dev dependencies
 # pydev-install all: install all deps
@@ -678,6 +685,7 @@ function pydev-install() {  ## Install default python dependencies
   else
     pip install -U $env
   fi
+  asdf reshim python
 }
 
 # activate virtual environment from any directory from current and up
