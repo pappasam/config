@@ -288,6 +288,8 @@ function PackagerInit() abort
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
+  call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
+  call packager#add('git@github.com:styled-components/vim-styled-components.git')
 
   " Indentation Only:
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
@@ -1900,15 +1902,15 @@ let g:LanguageClient_serverCommands = {
       \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
       \ 'html': ['npx', '--no-install', '-q', 'html-languageserver', '--stdio'],
       \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
-      \ 'javascript': ['npx', '--no-install', '-q', 'flow', 'lsp'],
-      \ 'javascript.jsx': ['npx', '--no-install', 'flow', 'lsp'],
+      \ 'javascript': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
       \ 'python': ['jedi-language-server'],
       \ 'python.jinja2': ['jedi-language-server'],
       \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
       \ 'ruby': ['solargraph', 'stdio'],
       \ 'rust': ['rls'],
       \ 'terraform': ['terraform-lsp'],
-      \ 'typescript': ['npx', '--no-install', '-q', 'typescript-language-server', '--stdio'],
+      \ 'typescript': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
       \ 'yaml': ['yaml-language-server', '--stdio'],
       \ }
 let g:LanguageClient_rootMarkers = {

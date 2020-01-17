@@ -666,9 +666,14 @@ function cargodoc() {  # arg1: packagename
 }
 
 function nodedev-install() {  ## Install default nodejs dependencies
-  local env=(vscode-html-languageserver-bin typescript-language-server \
-    jsctags write-good yaml-language-server)
-  npm install --no-save "$@" $env
+  local env=(\
+    javascript-typescript-langserver \
+    jsctags \
+    vscode-html-languageserver-bin \
+    write-good \
+    yaml-language-server \
+  )
+  npm install --no-save -g $env
   asdf reshim nodejs
 }
 
@@ -676,8 +681,19 @@ function nodedev-install() {  ## Install default nodejs dependencies
 # pydev-install dev: install only dev dependencies
 # pydev-install all: install all deps
 function pydev-install() {  ## Install default python dependencies
-  local env=(toml-sort isort pynvim restview jedi-language-server black pylint)
-  local dev=(mypy pre-commit)
+  local env=(\
+    black \
+    isort \
+    jedi-language-server \
+    pylint\
+    pynvim \
+    restview \
+    toml-sort \
+  )
+  local dev=(\
+    mypy \
+    pre-commit \
+  )
   if [[ "$1" == 'all' ]]; then
     pip install -U $env $dev
   elif [[ "$1" == 'dev' ]]; then
