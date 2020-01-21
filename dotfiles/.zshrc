@@ -669,6 +669,8 @@ function nodedev-install() {  ## Install default nodejs dependencies
   local env=(\
     javascript-typescript-langserver \
     jsctags \
+    npm \
+    prettier \
     vscode-html-languageserver-bin \
     write-good \
     yaml-language-server \
@@ -685,6 +687,7 @@ function pydev-install() {  ## Install default python dependencies
     black \
     isort \
     jedi-language-server \
+    pip \
     pylint\
     pynvim \
     restview \
