@@ -1003,7 +1003,12 @@ let s:language_runners = {
       \ }
 
 function! s:code_term_cmd(str_command)
-  vsplit
+  silent only
+  if &columns >= 160
+    vsplit
+  else
+    split
+  endif
   execute 'terminal ' . a:str_command
   nnoremap <buffer> q :bd!<CR>
   cnoremap <buffer> q bd!
@@ -1780,7 +1785,11 @@ noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
 function! s:term_repl_open()
   " NOTE: zshell does not receive the newlines
   let command = get(g:repl_filetype_commands, &filetype, '/bin/bash')
-  vsplit
+  if &columns >= 160
+    vsplit
+  else
+    split
+  endif
   execute 'terminal ' . command
   setlocal nonumber nornu
   let g:repl_terminal_job_id = b:terminal_job_id
