@@ -999,7 +999,7 @@ let s:language_builders = {
 let s:language_runners = {
       \ 'rust': '%:p:r',
       \ 'go': 'go run %',
-      \ 'python': 'python3 %',
+      \ 'python': 'python %',
       \ }
 
 function! s:code_term_cmd(str_command)
@@ -1007,11 +1007,12 @@ function! s:code_term_cmd(str_command)
   if &columns >= 160
     vsplit
   else
-    split
+    belowright split
   endif
   execute 'terminal ' . a:str_command
   nnoremap <buffer> q :bd!<CR>
   cnoremap <buffer> q bd!
+  wincmd w
 endfunction
 
 " Build source code
