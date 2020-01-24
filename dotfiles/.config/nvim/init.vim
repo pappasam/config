@@ -1004,6 +1004,7 @@ let s:language_runners = {
 
 function! s:code_term_cmd(str_command)
   silent only
+  write
   if &columns >= 160
     vsplit
   else
