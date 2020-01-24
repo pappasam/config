@@ -274,7 +274,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:jparise/vim-graphql')
   call packager#add('git@github.com:pangloss/vim-javascript')
   call packager#add('git@github.com:evanleck/vim-svelte')
-  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty')
   call packager#add('git@github.com:groenewege/vim-less')
   call packager#add('git@github.com:farfanoide/vim-kivy')
   call packager#add('git@github.com:raimon49/requirements.txt.vim')
@@ -286,6 +285,8 @@ function PackagerInit() abort
   call packager#add('git@github.com:calviken/vim-gdscript3')
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:leafgarland/typescript-vim')
+  call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
+  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
   call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
@@ -2018,6 +2019,10 @@ let g:vim_filetype_formatter_commands = {
 " let g:python_host_prog = system('which python2')
 " Disable python 2 support
 let g:loaded_python_provider = v:true
+
+" TypeScript:
+let g:typescript_indent_disable = v:false
+let g:vim_jsx_pretty_disable_tsx = v:true
 
 " Netrw: disable completely
 let g:loaded_netrw= v:true
