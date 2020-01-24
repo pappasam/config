@@ -1646,7 +1646,7 @@ endfunction
 " * i_<M-e> wraps in surrounding: (-)asdfasfd -> (asdfasfd)
 " unmap CR due to incompatibility with clang-complete (removed for now)
 let g:AutoPairsMapCR = v:true
-let g:AutoPairsFlyMode = v:true
+let g:AutoPairsFlyMode = v:false
 let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairs = {
       \ '(':')',
