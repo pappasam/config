@@ -286,7 +286,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
-  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
   call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
@@ -486,8 +485,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
-  autocmd BufNewFile,BufRead,BufEnter *.gs set filetype=javascript
+  autocmd BufNewFile,BufRead *.tsx,*.jsx,*.ts,*.js set filetype=typescript.jsx
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
         \ set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
@@ -2022,7 +2020,6 @@ let g:loaded_python_provider = v:true
 
 " TypeScript:
 let g:typescript_indent_disable = v:false
-let g:vim_jsx_pretty_disable_tsx = v:true
 
 " Netrw: disable completely
 let g:loaded_netrw= v:true
