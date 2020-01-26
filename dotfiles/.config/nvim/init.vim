@@ -286,10 +286,10 @@ function PackagerInit() abort
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
+  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
   call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
-  call packager#add('git@github.com:styled-components/vim-styled-components.git')
 
   " Indentation Only:
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
@@ -2029,6 +2029,7 @@ let g:loaded_python_provider = v:true
 
 " TypeScript:
 let g:typescript_indent_disable = v:false
+let g:vim_jsx_pretty_disable_tsx = v:true
 
 " Netrw: disable completely
 let g:loaded_netrw= v:true
@@ -2077,7 +2078,7 @@ let g:vim_json_syntax_conceal = v:false
 let g:FerretMap = v:false
 
 " VimJavascript:
-let g:javascript_plugin_flow = v:true
+let g:javascript_plugin_flow = v:false
 
 " JsDoc:
 let g:jsdoc_enable_es6 = v:true
