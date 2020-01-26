@@ -1656,6 +1656,15 @@ let g:AutoPairs = {
       \ '`':'`',
       \ }
 augroup autopairs_filetype_overrides
+  autocmd FileType typescript.tsx let b:AutoPairs = {
+      \ '(':')',
+      \ '[':']',
+      \ '{':'}',
+      \ "'":"'",
+      \ '"':'"',
+      \ '`':'`',
+      \ '<':'>',
+      \ }
   autocmd FileType markdown let b:AutoPairs = {
         \ '(':')',
         \ '[':']',
