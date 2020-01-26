@@ -516,6 +516,8 @@ augroup custom_comment_config
   autocmd FileType jsonc
         \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
+  autocmd FileType typescript.tsx
+        \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
 augroup END
 
 " }}}
