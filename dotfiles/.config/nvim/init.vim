@@ -715,6 +715,13 @@ augroup spelling_options
   autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='magenta' gui=underline,italic
 augroup END
 
+" Neomake:
+augroup my_neomake_signs
+  autocmd!
+  autocmd ColorScheme *
+        \ highlight NeomakeVirtualtextError guifg=#ff3333 guibg=#1c1c1c
+augroup END
+
 " Trailing Whitespace: (initial highlight below doesn't matter)
 highlight EOLWS ctermbg=DarkCyan
 match EOLWS /\s\+$/
@@ -2286,7 +2293,7 @@ function! DefaultKeyMappings()
   vnoremap <leader>f :FiletypeFormat<cr>
 
   " Neomake: shortcuts
-  nnoremap <leader>a :NeomakeClean<cr>:NeomakeToggle<cr>:write<cr>
+  nnoremap <leader>a :NeomakeClean<cr>:NeomakeToggle<cr>
   nnoremap <leader>A :NeomakeClean<cr>
 
   " NeoSnippet:
