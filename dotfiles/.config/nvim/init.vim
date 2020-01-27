@@ -692,7 +692,7 @@ augroup end
 " Typescript: fixes
 augroup typescript_syntax
   autocmd!
-  autocmd ColorScheme * highlight link typescriptExceptions Conditional
+  autocmd ColorScheme * highlight link typescriptExceptions Exception
 augroup end
 
 " QuickScope: choose primary and secondary colors
