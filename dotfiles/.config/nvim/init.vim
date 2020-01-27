@@ -284,7 +284,10 @@ function PackagerInit() abort
   call packager#add('git@github.com:mattn/vim-xxdcursor')
   call packager#add('git@github.com:calviken/vim-gdscript3')
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
-  call packager#add('git@github.com:leafgarland/typescript-vim')
+  " call packager#add('git@github.com:leafgarland/typescript-vim')
+  call packager#add('git@github.com:pappasam/typescript-vim.git', {
+        \ 'branch': 'INDENT_CORRECTLY_MULTILINE_GENERICS',
+        \ })
   call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
   call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:killphi/vim-ebnf')
@@ -392,23 +395,9 @@ endfunction
 " the information of plugins, then performs the task.
 command! PackagerInstall call PackagerInit() | call packager#install()
 command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'force_hooks': '<bang>' })
-command! PU PackagerUpdate
 command! PackagerClean call PackagerInit() | call packager#clean()
 command! PackagerStatus call PackagerInit() | call packager#status()
-
-" command! PackUpdate call PackInit() | echo 'Updating packages...' |
-"       \ call minpac#update('')
-" command! PU PackUpdate
-" command! PackStatus call PackInit() | echo 'Getting package status...' |
-"       \ call minpac#status()
-" command! PackClean call PackInit() | call minpac#clean()
-" command! -nargs=1 -complete=custom,PackList PackRemove call PackInit() |
-"       \ call minpac#clean(<q-args>)
-" command! -nargs=1 -complete=custom,PackList PackOpen call PackInit() |
-"       \ execute 'tabe ' . minpac#getpluginfo(<q-args>).dir |
-"       \ execute 'lcd ' . minpac#getpluginfo(<q-args>).dir
-" command! -nargs=1 -complete=custom,PackList PackBrowser call PackInit() |
-"       \ call openbrowser#open(minpac#getpluginfo(<q-args>).url)
+command! -bang PU call PackagerInit() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
 " General: Status Line and Tab Line {{{
@@ -698,6 +687,12 @@ augroup end
 augroup javascript_syntax
   autocmd!
   autocmd FileType javascript syntax keyword jsBooleanTrue this
+augroup end
+
+" Typescript: fixes
+augroup javascript_syntax
+  autocmd!
+  autocmd ColorScheme * highlight link typescriptExceptions Conditional
 augroup end
 
 " QuickScope: choose primary and secondary colors
