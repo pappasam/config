@@ -506,7 +506,7 @@ alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
 
 # Alacritty helpers
-alias alacritty-deb-install='cargo deb --install --manifest-path alacritty/Cargo.toml'
+alias alacritty-deb-install='cargo deb --install -p alacritty'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
