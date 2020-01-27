@@ -474,7 +474,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
   autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
   autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead *.tsx,*.jsx,*.ts,*.js set filetype=typescript.jsx
+  autocmd BufNewFile,BufRead,BufEnter *.jsx,*.js set filetype=javascript
   autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
         \ set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
@@ -505,7 +505,7 @@ augroup custom_comment_config
   autocmd FileType jsonc
         \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType typescript.tsx
+  autocmd FileType typescript.tsx,typescript
         \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
 augroup END
 
@@ -690,7 +690,7 @@ augroup javascript_syntax
 augroup end
 
 " Typescript: fixes
-augroup javascript_syntax
+augroup typescript_syntax
   autocmd!
   autocmd ColorScheme * highlight link typescriptExceptions Conditional
 augroup end
