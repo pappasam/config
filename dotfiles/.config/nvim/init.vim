@@ -80,16 +80,25 @@ function! SetGlobalConfig()
   set completeopt=menuone,longest
   set wildmode=longest,list,full
   set wildmenu
+  " don't give |ins-completion-menu| messages; they're noisy
+  set shortmess+=c
 
   " Hidden Buffer: enable instead of having to write each buffer
   set hidden
+
+  " Sign Column: always show it
+  set signcolumn=yes
 
   " Mouse: enable GUI mouse support in all modes
   set mouse=a
 
   " SwapFiles: prevent their creation
   set nobackup
+  set nowritebackup
   set noswapfile
+
+  " Command Line Height: higher for display for messages
+  set cmdheight=2
 
   " Line Wrapping: do not wrap lines by default
   set nowrap
@@ -165,7 +174,7 @@ function! SetGlobalConfig()
   set noshowcmd
 
   " Configure Updatetime: time Vim waits to do something after I stop moving
-  set updatetime=750
+  set updatetime=300
 
   " Linux Dev Path: system libraries
   set path+=/usr/include/x86_64-linux-gnu/
@@ -301,26 +310,9 @@ function PackagerInit() abort
 
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:jiangmiao/auto-pairs')
-  call packager#add('git@github.com:autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
+  call packager#add('git@github.com:neoclide/coc.nvim.git', {
+        \ 'branch': 'release',
         \ })
-  call packager#add('git@github.com:Shougo/deoplete.nvim', {
-        \ 'do': ':UpdateRemotePlugins',
-        \ })
-  call packager#add('git@github.com:Shougo/neosnippet.vim')
-  call packager#add('git@github.com:Shougo/neosnippet-snippets')
-  call packager#add('git@github.com:Shougo/neco-vim')
-  call packager#add('git@github.com:Shougo/echodoc.vim')
-  " for C header filename completion:
-  call packager#add('git@github.com:xaizek/vim-inccomplete')
-  " After vim-go, run GoUpdateBinaries
-  call packager#add('git@github.com:fatih/vim-go')
-  " dotlanguage
-  call packager#add('git@github.com:wannesm/wmgraphviz.vim')
-  " note: must run 'gem install neovim' to get this to work
-  " might require the neovim headers
-  call packager#add('git@github.com:juliosueiras/vim-terraform-completion')
 
   " Tagbar:
   call packager#add('git@github.com:majutsushi/tagbar')
@@ -1660,6 +1652,10 @@ let g:AutoPairs = {
       \ '`':'`',
       \ }
 augroup autopairs_filetype_overrides
+  autocmd FileType json let b:AutoPairs = {
+      \ '[':']',
+      \ '{':'}',
+      \ }
   autocmd FileType typescript.tsx let b:AutoPairs = {
       \ '(':')',
       \ '[':']',
@@ -1876,124 +1872,13 @@ augroup END
 " }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
 
-" NOTE: General remappings
-" 1) go to file containing definition: <C-]>
-" 2) Return from file (relies on tag stack): <C-O>
-" 3) Print the documentation of something under the cursor: <leader>gd
-
-" Deoplete And Neosnippet:
-let g:deoplete#enable_at_startup = v:true
-
-function! CustomDeopleteConfig()
-  if !exists('g:loaded_deoplete')
-    echom 'Deoplete not installed, skipping...'
-    return
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
   endif
-  " Global Defaults:
-  call deoplete#custom#option({
-        \ 'auto_complete': v:true,
-        \ 'auto_complete_delay': 150,
-        \ 'max_list': 500,
-        \ 'num_processes': 2,
-        \ })
-
-  " Source Defaults:
-  call deoplete#custom#option('ignore_sources', {
-        \ '_': [],
-        \ 'markdown': ['neosnippet'],
-        \ })
-  call deoplete#custom#source('_', 'min_pattern_length', 1)
-  call deoplete#custom#source('_', 'converters', [
-        \ 'converter_remove_paren',
-        \ 'converter_remove_overlap',
-        \ ])
 endfunction
-augroup deoplete_on_vim_startup
-  autocmd!
-  autocmd VimEnter * call CustomDeopleteConfig()
-augroup END
-
-" LSP LanguageClient:
-" NOTES:
-" yaml-language-server: need .vim/settings.json. Example in dotfiles
-" clangd-8: need compile_flags.txt or compile_commands.json
-let g:LanguageClient_serverCommands = {
-      \ 'c': ['clangd', '-background-index'],
-      \ 'cpp': ['clangd', '-background-index'],
-      \ 'go': ['gopls'],
-      \ 'gomod': ['gopls'],
-      \ 'haskell': ['stack', 'exec', 'hie-wrapper'],
-      \ 'html': ['npx', '--no-install', '-q', 'html-languageserver', '--stdio'],
-      \ 'java': [$HOME . '/java/java-language-server/dist/mac/bin/launcher', '--quiet'],
-      \ 'javascript': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
-      \ 'python': ['jedi-language-server'],
-      \ 'python.jinja2': ['jedi-language-server'],
-      \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
-      \ 'ruby': ['solargraph', 'stdio'],
-      \ 'rust': ['rls'],
-      \ 'terraform': ['terraform-lsp'],
-      \ 'typescript': ['npx', '--no-install', '-q', 'javascript-typescript-stdio'],
-      \ 'yaml': ['yaml-language-server', '--stdio'],
-      \ }
-let g:LanguageClient_rootMarkers = {
-      \ 'go': ['go.mod', 'go.sum'],
-      \ 'gomod': ['go.mod', 'go.sum'],
-      \ 'python': ['pyproject.toml', 'poetry.lock'],
-      \ 'typescript': ['tsconfig.json'],
-      \ 'yaml': ['.vim/settings.json'],
-      \ }
-
-let g:LanguageClient_autoStart = v:true
-let g:LanguageClient_hoverPreview = 'Always'
-let g:LanguageClient_useFloatingHover = v:false
-let g:LanguageClient_diagnosticsEnable = v:false
-let g:LanguageClient_selectionUI = 'location-list'
-" let g:LanguageClient_hasSnippetSupport = v:false
-function! CustomLanguageClientConfig()
-  nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer> <C-k> :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer> <leader>sd :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer> <leader>sr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>sf :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <buffer> <leader>su :call LanguageClient#textDocument_references()<CR>
-  nnoremap <buffer> <leader>sa :call LanguageClient#textDocument_codeAction()<CR>
-  nnoremap <buffer> <leader>ss :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <buffer> <leader>sw :call LanguageClient#workspace_symbol(expand('<cword>'))<CR>
-  nnoremap <buffer> <leader>sc :call LanguageClient_contextMenu()<CR>
-  setlocal omnifunc=LanguageClient#complete
-endfunction
-augroup languageclient_on_vim_startup
-  autocmd!
-  execute 'autocmd FileType '
-        \ . join(keys(g:LanguageClient_serverCommands), ',')
-        \ . ' call CustomLanguageClientConfig()'
-augroup END
-
-" Neosnippet Config:
-" NOTE: selecting an item in insert mode with <C-y>
-function! s:snippet_auto_completion_on()
-  let g:neosnippet#enable_completed_snippet = v:true
-  let g:neosnippet#enable_complete_done = v:true
-endfunction
-
-function! s:snippet_auto_completion_off()
-  let g:neosnippet#enable_completed_snippet = v:false
-  let g:neosnippet#enable_complete_done = v:false
-endfunction
-
-augroup snippet_workarounds
-  autocmd BufEnter *.yaml,*.yml call s:snippet_auto_completion_on()
-  autocmd BufLeave *.yaml,*.yml call s:snippet_auto_completion_off()
-  autocmd FileType yaml imap <buffer> <C-l> <Plug>(neosnippet_jump)
-augroup END
-
-" EchoDoc:
-let g:echodoc#enable_at_startup = v:true
-let g:echodoc#type = 'virtual'
-let g:echodoc#highlight_identifier = 'Identifier'
-let g:echodoc#highlight_arguments = 'QuickScopePrimary'
-let g:echodoc#highlight_trailing = 'Type'
 
 " VimScript:
 " Autocompletion is built into Vim. Get defintions with 'K'
@@ -2145,9 +2030,9 @@ function! DefaultKeyMappings()
   inoremap <M-CR> <CR><C-o>O
 
   " Omnicompletion: <C-@> is signal sent by some terms when pressing <C-Space>
-  " Disable below for now; I'm using deoplete to get this automatically
-  inoremap <C-@> <C-x><C-o>
-  inoremap <C-space> <C-x><C-o>
+  " Disabled for now: using COC
+  " inoremap <C-@> <C-x><C-o>
+  " inoremap <C-space> <C-x><C-o>
 
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
@@ -2307,6 +2192,23 @@ function! DefaultKeyMappings()
 
   " Run Or Build:
   nnoremap <leader><leader>r :Run<CR>
+
+  " Coc: settings for coc.nvim
+  " see https://github.com/neoclide/coc.nvim
+  nmap <silent> <C-]> <Plug>(coc-definition)
+  nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
+  nmap <silent> <leader>st <Plug>(coc-type-definition)
+  nmap <silent> <leader>si <Plug>(coc-implementation)
+  nmap <silent> <leader>su <Plug>(coc-references)
+  nmap <silent> <leader>sr <Plug>(coc-rename)
+  " Show commands
+  nnoremap <silent> <leader>sc :<C-u>CocList commands<cr>
+  " Find symbol of current document
+  nnoremap <silent> <leader>ss :<C-u>CocList outline<cr>
+  " Search workspace symbols
+  nnoremap <silent> <leader>sw :<C-u>CocList -I symbols<cr>
+  " Use <c-space> to trigger completion
+  inoremap <silent><expr> <c-space> coc#refresh()
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
