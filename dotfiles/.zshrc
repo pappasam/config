@@ -687,7 +687,6 @@ function pydev-install() {  ## Install default python dependencies
   local env=(\
     black \
     isort \
-    jedi-language-server \
     pip \
     pylint\
     pynvim \
