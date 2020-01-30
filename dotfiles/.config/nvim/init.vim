@@ -2201,6 +2201,10 @@ function! DefaultKeyMappings()
   nmap <silent> <leader>si <Plug>(coc-implementation)
   nmap <silent> <leader>su <Plug>(coc-references)
   nmap <silent> <leader>sr <Plug>(coc-rename)
+  " next and previous items in a list
+  nnoremap <silent> <leader>sn :<C-u>CocNext<CR>
+  nnoremap <silent> <leader>sp :<C-u>CocPrev<CR>
+  nnoremap <silent> <leader>sl :<C-u>CocListResume<CR>
   " Show commands
   nnoremap <silent> <leader>sc :<C-u>CocList commands<cr>
   " Find symbol of current document
