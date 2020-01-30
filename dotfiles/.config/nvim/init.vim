@@ -433,25 +433,25 @@ function! StripNewlines(instring)
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
 endfunction
 
-function! StatuslineGitBranch()
-  let b:gitbranch = ''
-  if &modifiable
-    try
-      let branch_name = StripNewlines(system(
-            \ 'git -C ' .
-            \ expand('%:p:h') .
-            \ ' rev-parse --abbrev-ref HEAD'))
-      if !v:shell_error
-        let b:gitbranch = '[git::' . branch_name . ']'
-      endif
-    catch
-    endtry
-  endif
-endfunction
+" function! StatuslineGitBranch()
+"   let b:gitbranch = ''
+"   if &modifiable
+"     try
+"       let branch_name = StripNewlines(system(
+"             \ 'git -C ' .
+"             \ expand('%:p:h') .
+"             \ ' rev-parse --abbrev-ref HEAD'))
+"       if !v:shell_error
+"         let b:gitbranch = '[git::' . branch_name . ']'
+"       endif
+"     catch
+"     endtry
+"   endif
+" endfunction
 
 augroup get_git_branch
   autocmd!
-  autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
+  " autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
 augroup END
 
 " }}}
