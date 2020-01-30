@@ -2209,6 +2209,9 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader>sw :<C-u>CocList -I symbols<cr>
   " Use <c-space> to trigger completion
   inoremap <silent><expr> <c-space> coc#refresh()
+  " Scroll in floating window
+  nnoremap <expr><C-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-d>"
+  nnoremap <expr><C-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-u>"
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
