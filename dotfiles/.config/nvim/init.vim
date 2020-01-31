@@ -314,6 +314,7 @@ function PackagerInit() abort
         \ 'branch': 'release',
         \ })
   for coc_plugin in [
+        \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:neoclide/coc-json.git',
         \ 'git@github.com:neoclide/coc-python.git',
         \ 'git@github.com:neoclide/coc-rls.git',
