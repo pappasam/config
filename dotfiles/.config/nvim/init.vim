@@ -313,6 +313,18 @@ function PackagerInit() abort
   call packager#add('git@github.com:neoclide/coc.nvim.git', {
         \ 'branch': 'release',
         \ })
+  for coc_plugin in [
+        \ 'git@github.com:neoclide/coc-json.git',
+        \ 'git@github.com:neoclide/coc-python.git',
+        \ 'git@github.com:neoclide/coc-rls.git',
+        \ 'git@github.com:neoclide/coc-tsserver.git',
+        \ 'git@github.com:neoclide/coc-yaml.git',
+        \ 'git@github.com:neoclide/coc.nvim.git',
+        \ ]
+    call packager#add(coc_plugin, {
+          \ 'do': 'yarn install',
+          \ })
+  endfor
 
   " Tagbar:
   call packager#add('git@github.com:majutsushi/tagbar')
