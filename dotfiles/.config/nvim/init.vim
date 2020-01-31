@@ -2038,9 +2038,13 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " Autopairs: not a plugin, just my own custom implementation
-  inoremap (; (<CR>)<C-c>O
-  inoremap {; {<CR>}<C-c>O
-  inoremap [; [<CR>]<C-c>O
+  " ideas below. I'm not super happy with anything right now
+  " inoremap (<CR> (<CR>)<C-c>O
+  " inoremap {<CR> {<CR>}<C-c>O
+  " inoremap [<CR> [<CR>]<C-c>O
+  " inoremap (<Space> (<Space><Space>)<left><left>
+  " inoremap {<Space> {<Space><Space>}<left><left>
+  " inoremap [<Space> [<Space><Space>]<left><left>
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
