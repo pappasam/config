@@ -163,7 +163,8 @@ function! SetGlobalConfig()
   call AlacrittySetBackground()
   call jobstart(
         \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-        \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }})
+        \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }}
+        \ )
 
   " Status Line: specifics for custom status line
   set laststatus=2
@@ -179,7 +180,7 @@ function! SetGlobalConfig()
   " Linux Dev Path: system libraries
   set path+=/usr/include/x86_64-linux-gnu/
 
-  " Path: add node_modules for neomake / other stuff
+  " Path: add node_modules for language servers / linters / other stuff
   let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 
   " Vim History: for command line; can't imagine that more than 100 is needed
@@ -376,9 +377,6 @@ function PackagerInit() abort
 
   " Code Formatters:
   call packager#add('git@github.com:pappasam/vim-filetype-formatter')
-
-  " Linting:
-  call packager#add('git@github.com:neomake/neomake')
 
   " C:
   call packager#add('git@github.com:ericcurtin/CurtineIncSw.vim')
@@ -718,13 +716,6 @@ augroup spelling_options
   autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='ForestGreen' gui=underline,italic
   autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='yellow' gui=underline,italic
   autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='magenta' gui=underline,italic
-augroup END
-
-" Neomake:
-augroup my_neomake_signs
-  autocmd!
-  autocmd ColorScheme *
-        \ highlight NeomakeVirtualtextError guifg=#ff3333 guibg=#1c1c1c
 augroup END
 
 " Trailing Whitespace: (initial highlight below doesn't matter)
@@ -1776,28 +1767,6 @@ let g:vim_markdown_auto_insert_bullets = v:false
 let g:vim_markdown_new_list_item_indent = v:false
 
 " }}}
-" Plugin: NeoMake {{{
-
-" Remove inline messages; visually jarring
-" let g:neomake_virtualtext_current_error = v:false
-
-function! s:custom_neomake_config()
-  if !exists('g:loaded_neomake')
-    echom 'neomake does not exist, skipping...'
-    return
-  endif
-  " Run only when writing a buffer
-  call neomake#configure#automake('w')
-  " Disable Neomake initially
-  silent NeomakeDisable
-endfunction
-
-augroup neomake_on_vim_startup
-  autocmd!
-  autocmd VimEnter * call s:custom_neomake_config()
-augroup END
-
-" }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
 
 " Coc:
@@ -2106,15 +2075,6 @@ function! DefaultKeyMappings()
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
-
-  " Neomake: shortcuts
-  nnoremap <leader>a :NeomakeClean<cr>:NeomakeToggle<cr>
-  nnoremap <leader>A :NeomakeClean<cr>
-
-  " NeoSnippet:
-  imap <C-s> <Plug>(neosnippet_expand_or_jump)
-  smap <C-s> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-s> <Plug>(neosnippet_expand_target)
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
