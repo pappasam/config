@@ -32,7 +32,6 @@
 " 1. use Ctrl-V ) to insert paren without trigger the plugin.
 " 2. use Alt-P to turn off the plugin.
 " 3. use DEL or <C-O>x to delete the character insert by plugin.
-" 4. (more recently): type <C-l> in insert mode to delete right character
 "
 " QuickfixAndLocationList:
 " ccl: close quickfix (my abbreviation: cc)
@@ -310,6 +309,7 @@ function PackagerInit() abort
   call packager#add('git@github.com:Yggdroot/indentLine')
 
   " Autocompletion And IDE Features:
+  call packager#add('git@github.com:honza/vim-snippets.git')
   call packager#add('git@github.com:neoclide/coc.nvim.git', {
         \ 'branch': 'release',
         \ })
@@ -319,6 +319,7 @@ function PackagerInit() abort
         \ 'git@github.com:neoclide/coc-json.git',
         \ 'git@github.com:neoclide/coc-python.git',
         \ 'git@github.com:neoclide/coc-rls.git',
+        \ 'git@github.com:neoclide/coc-snippets.git',
         \ 'git@github.com:neoclide/coc-tsserver.git',
         \ 'git@github.com:neoclide/coc-yaml.git',
         \ 'git@github.com:neoclide/coc.nvim.git',
@@ -1786,6 +1787,12 @@ augroup END
 let g:coc_filetype_map = {
       \ }
 
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<C-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<C-k>'
+
 " VimScript:
 " Autocompletion is built into Vim. Get defintions with 'K'
 augroup vimscript_complete
@@ -1924,9 +1931,6 @@ function! DefaultKeyMappings()
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
-
-  " Delete:
-  inoremap <C-l> <Del>
 
   " J: basically, unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
@@ -2106,6 +2110,11 @@ function! DefaultKeyMappings()
   " Scroll in floating window
   nnoremap <expr><C-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-d>"
   nnoremap <expr><C-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-u>"
+  " snippets
+  imap <C-l> <Plug>(coc-snippets-expand)
+  vmap <C-j> <Plug>(coc-snippets-select)
+  " Use <C-j> for both expand and jump (make expand higher priority.)
+  imap <C-j> <Plug>(coc-snippets-expand-jump)
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
