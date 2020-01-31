@@ -14,9 +14,9 @@
 "     Soft-link this file to ~/.config/nvim/init.vim
 "   2. Install Vim-Packager (a great plugin manager)
 "   3. Open nvim (hint: type nvim at command line and press enter :p)
-"   4. :PackagerInstall
-"   5. :PackagerUpdate
-"   6. :PackagerUpgrade
+"   4.     :PackInstall
+"   5.     :PackUpdate
+"   6.     :PackUpgrade
 
 " TextObjectSelection:
 " object-select OR text-objects
@@ -190,7 +190,7 @@ call SetGlobalConfig()
 " }}}
 " General: Vim packages: vim-packager {{{
 
-function PackagerInit() abort
+function PackInit() abort
   packadd vim-packager
   call packager#init()
   call packager#add('git@github.com:kristijanhusak/vim-packager', { 'type': 'opt' })
@@ -398,11 +398,11 @@ endfunction
 " Define user commands for updating/cleaning the plugins.
 " Each of them calls PackInit() to load minpac and register
 " the information of plugins, then performs the task.
-command! PackagerInstall call PackagerInit() | call packager#install()
-command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'force_hooks': '<bang>' })
-command! PackagerClean call PackagerInit() | call packager#clean()
-command! PackagerStatus call PackagerInit() | call packager#status()
-command! -bang PU call PackagerInit() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackInstall call PackInit() | call packager#install()
+command! -bang PackUpdate call PackInit() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackClean call PackInit() | call packager#clean()
+command! PackStatus call PackInit() | call packager#status()
+command! -bang PU call PackInit() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
 " General: Status Line and Tab Line {{{
