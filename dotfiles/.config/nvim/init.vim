@@ -309,7 +309,6 @@ function PackagerInit() abort
   call packager#add('git@github.com:Yggdroot/indentLine')
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:jiangmiao/auto-pairs')
   call packager#add('git@github.com:neoclide/coc.nvim.git', {
         \ 'branch': 'release',
         \ })
@@ -492,7 +491,7 @@ augroup filetype_recognition
         \ set filetype=conf
   autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
   autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc,.markdownlintrc
         \ set filetype=jsonc
 augroup END
 
@@ -1648,91 +1647,6 @@ function! MyVimTexDocHandler(context)
 endfunction
 
 " }}}
-" Plugin: AutoPairs {{{
-
-" AutoPairs:
-" NOTES:
-" * i_<M-e> wraps in surrounding: (-)asdfasfd -> (asdfasfd)
-" unmap CR due to incompatibility with clang-complete (removed for now)
-let g:AutoPairsMapCR = v:true
-let g:AutoPairsFlyMode = v:false
-let g:AutoPairsShortcutBackInsert = ''
-let g:AutoPairs = {
-      \ '(':')',
-      \ '[':']',
-      \ '{':'}',
-      \ "'":"'",
-      \ '"':'"',
-      \ '`':'`',
-      \ }
-augroup autopairs_filetype_overrides
-  autocmd FileType json let b:AutoPairs = {
-      \ '[':']',
-      \ '{':'}',
-      \ }
-  autocmd FileType typescript.tsx let b:AutoPairs = {
-      \ '(':')',
-      \ '[':']',
-      \ '{':'}',
-      \ "'":"'",
-      \ '"':'"',
-      \ '`':'`',
-      \ '<':'>',
-      \ }
-  autocmd FileType markdown let b:AutoPairs = {
-        \ '(':')',
-        \ '[':']',
-        \ '{':'}',
-        \ '{!':'!}',
-        \ '"':'"',
-        \ "'":"'",
-        \ '`':'`',
-        \ '"""': '"""',
-        \ "'''": "'''",
-        \ '```': '```',
-        \ }
-  autocmd FileType plantuml let b:AutoPairs = {
-        \ '(':')',
-        \ '[':']',
-        \ '{':'}',
-        \ '"':'"',
-        \ '`':'`',
-        \ }
-  autocmd FileType *.jinja2,python,toml let b:AutoPairs = {
-        \ '(':')',
-        \ '[':']',
-        \ '{':'}',
-        \ "'":"'",
-        \ '"':'"',
-        \ '`':'`',
-        \ '"""': '"""',
-        \ "'''": "'''",
-        \ '{%':'%}',
-        \ '{{':'}}',
-        \ }
-  autocmd FileType rust let b:AutoPairs = {
-        \ '[':']',
-        \ '{':'}',
-        \ '(':')',
-        \ '"':'"',
-        \ '`':'`',
-        \ }
-  autocmd FileType tex let b:AutoPairs = {
-        \ '(':')',
-        \ '[':']',
-        \ '{':'}',
-        \ '`': "'",
-        \ }
-  autocmd FileType vim let b:AutoPairs = {
-        \ '(':')',
-        \ '[':']',
-        \ '{':'}',
-        \ "'":"'",
-        \ '`':'`',
-        \ }
-augroup END
-
-" }}}
 " Plugin: Sandwich {{{
 
 " LatexNotes:
@@ -1886,6 +1800,7 @@ augroup END
 " }}}
 " Plugin: AutoCompletion / GoTo Definition / LSP / Snippets {{{
 
+" Coc:
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -1893,6 +1808,14 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+augroup coc_key_overrides
+  autocmd!
+  autocmd FileType help nunmap <C-]>
+augroup END
+
+let g:coc_filetype_map = {
+      \ }
 
 " VimScript:
 " Autocompletion is built into Vim. Get defintions with 'K'
@@ -2039,15 +1962,6 @@ function! DefaultKeyMappings()
   " J: basically, unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
 
-  " InsertModeHelpers: Insert one line above after enter
-  " Useful for ``` in markdown. Key code = Alt+Enter
-  inoremap <M-CR> <CR><C-o>O
-
-  " Omnicompletion: <C-@> is signal sent by some terms when pressing <C-Space>
-  " Disabled for now: using COC
-  " inoremap <C-@> <C-x><C-o>
-  " inoremap <C-space> <C-x><C-o>
-
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
@@ -2149,8 +2063,10 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader><leader>h :ResizeWindowHeight<CR>
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
-  " AutoPairs:
-  imap <silent><CR> <CR><Plug>AutoPairsReturn
+  " Autopairs: not a plugin, just my own custom implementation
+  inoremap (; (<CR>)<C-c>O
+  inoremap {; {<CR>}<C-c>O
+  inoremap [; [<CR>]<C-c>O
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
@@ -2178,7 +2094,7 @@ function! DefaultKeyMappings()
   vnoremap <C-n> y:Rg <C-r>"<CR>
 
   " DeleteHiddenBuffers: shortcut to make this easier
-  " Note: weird stuff happens if you mess this up
+  " note: weird stuff happens if you mess this up
   nnoremap <leader>d :DeleteInactiveBuffers<CR>
 
   " Jumping To Header File:
