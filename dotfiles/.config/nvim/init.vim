@@ -1940,6 +1940,10 @@ function! DefaultKeyMappings()
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
 
+  " InsertModeHelpers: Insert one line above after enter
+  " Useful for ``` in markdown. Key code = Alt+Enter
+  inoremap <M-CR> <CR><C-o>O
+
   " MoveVisual: up and down visually only if count is specified before
   " Otherwise, you want to move up lines numerically e.g. ignore wrapped lines
   nnoremap <expr> k
