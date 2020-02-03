@@ -13,5 +13,8 @@
   },
   "code-fence-style": {
     "style": "backtick"
+  },
+  "no-duplicate-heading": {
+    "siblings_only": true
   }
 }
