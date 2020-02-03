@@ -1896,9 +1896,6 @@ let g:bullets_enabled_file_types = [
       \ 'rst',
       \ ]
 
-" VimMarkdownComposer: override defaults
-let g:markdown_composer_open_browser = v:false
-
 " RequirementsVim: filetype detection (begin with requirements)
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
 
