@@ -1,5 +1,8 @@
 {
   // The configuration file for markdownlint
   "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/master/schema/markdownlint-config-schema.json",
-  "line-length": false
+  "line-length": false,
+  "no-trailing-spaces": {
+    "strict": true
+  }
 }

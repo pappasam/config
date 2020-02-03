@@ -523,7 +523,7 @@ augroup END
 set expandtab shiftwidth=2 softtabstop=2 tabstop=8
 augroup indentation_sr
   autocmd!
-  autocmd Filetype python,c,haskell,markdown,rust,rst,kv,nginx,asm,nasm,gdscript3
+  autocmd Filetype python,c,haskell,rust,rst,kv,nginx,asm,nasm,gdscript3
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go,gomod
@@ -1763,8 +1763,6 @@ let g:vim_markdown_json_frontmatter = v:true
 let g:vim_markdown_no_default_key_mappings = v:true
 let g:vim_markdown_strikethrough = v:true
 let g:vim_markdown_folding_disabled = v:true
-" let g:vim_markdown_folding_style_pythonic = v:true
-
 let g:vim_markdown_auto_insert_bullets = v:false
 let g:vim_markdown_new_list_item_indent = v:false
 
