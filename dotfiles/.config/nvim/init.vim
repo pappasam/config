@@ -314,6 +314,7 @@ function PackInit() abort
         \ 'branch': 'release',
         \ })
   for coc_plugin in [
+        \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
@@ -325,7 +326,7 @@ function PackInit() abort
         \ 'git@github.com:neoclide/coc-yaml.git',
         \ ]
     call packager#add(coc_plugin, {
-          \ 'do': 'yarn install',
+          \ 'do': 'yarn install && yarn build',
           \ })
   endfor
 
