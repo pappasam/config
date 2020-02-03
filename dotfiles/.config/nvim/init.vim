@@ -326,7 +326,7 @@ function PackInit() abort
         \ 'git@github.com:neoclide/coc-yaml.git',
         \ ]
     call packager#add(coc_plugin, {
-          \ 'do': 'yarn install && yarn build',
+          \ 'do': 'yarn install --frozen-lockfile && yarn build',
           \ })
   endfor
 
@@ -372,7 +372,7 @@ function PackInit() abort
 
   " Previewers:
   call packager#add('git@github.com:iamcco/markdown-preview.nvim', {
-        \ 'do': 'cd app & yarn install',
+        \ 'do': 'cd app & yarn install --frozen-lockfile',
         \ })
   call packager#add('git@github.com:tyru/open-browser.vim')
   call packager#add('git@github.com:weirongxu/plantuml-previewer.vim')
