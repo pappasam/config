@@ -2112,8 +2112,8 @@ function! DefaultKeyMappings()
   " Use <c-space> to trigger completion
   inoremap <silent><expr> <c-space> coc#refresh()
   " Scroll in floating window
-  nnoremap <expr><C-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-d>"
-  nnoremap <expr><C-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-u>"
+  nnoremap <expr><C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
+  nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
   " snippets
   imap <C-l> <Plug>(coc-snippets-expand)
   vmap <C-j> <Plug>(coc-snippets-select)
