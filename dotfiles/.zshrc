@@ -669,13 +669,10 @@ function cargodoc() {  # arg1: packagename
 
 function nodedev-install() {  ## Install default nodejs dependencies
   local env=(\
-    javascript-typescript-langserver \
     jsctags \
     npm \
     prettier \
-    vscode-html-languageserver-bin \
     write-good \
-    yaml-language-server \
   )
   npm install --no-save -g $env
   asdf reshim nodejs
