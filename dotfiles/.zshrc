@@ -690,7 +690,7 @@ function pydev-install() {  ## Install default python dependencies
     pylint\
     pynvim \
     restview \
-    rope \
+    rope==0.14.0 \
     toml-sort \
   )
   local dev=(\
