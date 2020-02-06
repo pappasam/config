@@ -2094,6 +2094,7 @@ function! DefaultKeyMappings()
   " Coc: settings for coc.nvim
   " see https://github.com/neoclide/coc.nvim
   nmap <silent> <C-]> <Plug>(coc-definition)
+  nmap <silent> <C-LeftMouse> <LeftMouse><Plug>(coc-definition)
   nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
   nmap <silent> <leader>st <Plug>(coc-type-definition)
   nmap <silent> <leader>si <Plug>(coc-implementation)
@@ -2122,6 +2123,9 @@ function! DefaultKeyMappings()
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
+
+  " Out Jump List:
+  nnoremap <C-RightMouse> <C-o>
 
   " Clipboard Copy Paste: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
