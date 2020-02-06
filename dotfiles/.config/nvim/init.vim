@@ -316,6 +316,7 @@ function PackInit() abort
   for coc_plugin in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
+        \ 'git@github.com:iamcco/coc-vimlsp.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
         \ 'git@github.com:neoclide/coc-json.git',
@@ -1780,10 +1781,6 @@ endfunction
 
 augroup coc_keyboard_overrides
   autocmd!
-  autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
-  autocmd FileType vim,help nnoremap <silent> <C-]> "zyiw:exe "help ".@z.""<CR>
-  autocmd FileType vim,help
-        \ nnoremap <silent> <2-LeftMouse> "zyiw:exe "help ".@z.""<CR>
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
