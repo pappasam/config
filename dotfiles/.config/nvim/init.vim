@@ -2094,7 +2094,7 @@ function! DefaultKeyMappings()
   " Coc: settings for coc.nvim
   " see https://github.com/neoclide/coc.nvim
   nmap <silent> <C-]> <Plug>(coc-definition)
-  nmap <silent> <C-LeftMouse> <LeftMouse><Plug>(coc-definition)
+  nmap <silent> <2-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
   nmap <silent> <leader>st <Plug>(coc-type-definition)
   nmap <silent> <leader>si <Plug>(coc-implementation)
@@ -2125,7 +2125,7 @@ function! DefaultKeyMappings()
   " Mouse Configuration: remaps mouse to work better in terminal
 
   " Out Jump List:
-  nnoremap <C-RightMouse> <C-o>
+  nnoremap <RightMouse> <C-o>
 
   " Clipboard Copy Paste: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
@@ -2143,9 +2143,9 @@ function! DefaultKeyMappings()
 
   " Mouse Open Close Folds: open folds with the mouse, and close the folds
   " open operation taken from: https://stackoverflow.com/a/13924974
-  nnoremap <expr> <2-LeftMouse>
-        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'
-  nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
+  nnoremap <expr> <C-LeftMouse>
+        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
+  nnoremap <C-RightMouse> <LeftMouse><LeftRelease>zc
 
   " Scrolling Dropdown: dropdown scrollable + click to select highlighted
   inoremap <expr> <S-ScrollWheelUp>
