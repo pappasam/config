@@ -1778,9 +1778,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-augroup coc_key_overrides
+augroup coc_keyboard_overrides
   autocmd!
-  autocmd FileType help nunmap <C-]>
+  autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
+  autocmd FileType vim,help nnoremap <silent> <C-]> "zyiw:exe "help ".@z.""<CR>
+  autocmd FileType vim,help
+        \ nnoremap <silent> <2-LeftMouse> "zyiw:exe "help ".@z.""<CR>
+  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup END
 
 let g:coc_filetype_map = {
@@ -1791,22 +1795,6 @@ let g:coc_snippet_next = '<C-j>'
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<C-k>'
-
-" VimScript:
-" Autocompletion is built into Vim. Get defintions with 'K'
-augroup vimscript_complete
-  autocmd!
-  autocmd FileType vim inoremap <buffer> <C-@> <C-x><C-v>
-  autocmd FileType vim inoremap <buffer> <C-space> <C-x><C-v>
-augroup END
-
-" Syntaxfile Completion: if you can't get good autocompletion, hack it :p
-" Note: Only completes keywords prefixed by the language name itself.
-" For example: markdownYolo, markdownHello, but NOT mkdHello
-augroup syntaxfile_complete
-  autocmd!
-  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-augroup END
 
 " }}}
 " Plugin: Vim-filetype-formatter {{{
