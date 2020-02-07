@@ -1,4 +1,5 @@
 {
   "suggest.autoTrigger": "always",
-  "suggest.noselect": true
+  "suggest.noselect": true,
+  "pairs.enableCharacters": ["(", "[", "{", "<"]
 }

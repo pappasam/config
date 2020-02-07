@@ -320,6 +320,7 @@ function PackInit() abort
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
         \ 'git@github.com:neoclide/coc-json.git',
+        \ 'git@github.com:neoclide/coc-pairs.git',
         \ 'git@github.com:neoclide/coc-python.git',
         \ 'git@github.com:neoclide/coc-rls.git',
         \ 'git@github.com:neoclide/coc-snippets.git',
@@ -2013,22 +2014,12 @@ function! DefaultKeyMappings()
   nnoremap <leader><leader>l :Limelight!!<CR>
   nmap <leader><leader>v <Plug>Veil
 
-
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i :IndentLinesToggle<CR>
 
   " ResizeWindow: up and down; relies on custom functions
   nnoremap <silent> <leader><leader>h :ResizeWindowHeight<CR>
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
-
-  " Autopairs: not a plugin, just my own custom implementation
-  " ideas below. I'm not super happy with anything right now
-  " inoremap (<CR> (<CR>)<C-c>O
-  " inoremap {<CR> {<CR>}<C-c>O
-  " inoremap [<CR> [<CR>]<C-c>O
-  " inoremap (<Space> (<Space><Space>)<left><left>
-  " inoremap {<Space> {<Space><Space>}<left><left>
-  " inoremap [<Space> [<Space><Space>]<left><left>
 
   " Slime:
   nnoremap <leader><leader>e :ReplToggle<CR>
@@ -2105,6 +2096,9 @@ function! DefaultKeyMappings()
   vmap <C-j> <Plug>(coc-snippets-select)
   " Use <C-j> for both expand and jump (make expand higher priority.)
   imap <C-j> <Plug>(coc-snippets-expand-jump)
+  " For pairs, correctly position cursor on Enter
+  inoremap <silent><expr> <CR>
+        \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
