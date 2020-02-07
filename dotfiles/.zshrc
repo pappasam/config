@@ -481,7 +481,7 @@ alias gd='git diff'
 alias gdw='git diff --word-diff'
 
 # upgrade
-alias upgrade='sudo apt update && sudo apt upgrade'
+alias upgrade='sudo apt update && sudo apt upgrade -y'
 
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
