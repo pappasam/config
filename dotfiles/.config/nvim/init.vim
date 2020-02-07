@@ -1794,6 +1794,41 @@ let g:coc_snippet_next = '<C-j>'
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<C-k>'
 
+" Customization:
+function! s:coc_diagnostic_disable()
+  call coc#config('diagnostic.enable', v:false)
+  let g:coc_custom_diagnostic_enabled = v:false
+  silent CocRestart
+  echom 'Disabled: Coc Diagnostics'
+endfunction
+
+function! s:coc_diagnostic_enable()
+  call coc#config('diagnostic.enable', v:true)
+  let g:coc_custom_diagnostic_enabled = v:true
+  echom 'Enabled: Coc Diagnostics'
+endfunction
+
+function! s:coc_diagnostic_toggle()
+  if g:coc_custom_diagnostic_enabled == v:true
+    call s:coc_diagnostic_disable()
+  else
+    call s:coc_diagnostic_enable()
+  endif
+endfunction
+
+function! s:coc_init()
+  let g:coc_custom_diagnostic_enabled = v:true
+endfunction
+
+augroup coc_initialization
+  autocmd!
+  autocmd VimEnter * call s:coc_init()
+augroup END
+
+command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
+command! CocDiagnosticEnable call s:coc_diagnostic_enable()
+command! CocDiagnosticDisable call s:coc_diagnostic_disable()
+
 " }}}
 " Plugin: Vim-filetype-formatter {{{
 
@@ -2099,6 +2134,8 @@ function! DefaultKeyMappings()
   " For pairs, correctly position cursor on Enter
   inoremap <silent><expr> <CR>
         \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  " Toggle diagnostics
+  nnoremap <silent> <leader>a :CocDiagnosticToggle<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
