@@ -232,7 +232,6 @@ function PackInit() abort
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-scriptease')
   call packager#add('git@github.com:tpope/vim-speeddating.git')
-  call packager#add('git@github.com:tpope/vim-rsi.git')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
@@ -1767,10 +1766,10 @@ let g:coc_filetype_map = {
       \ }
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_next = '<C-h>'
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<C-k>'
+let g:coc_snippet_prev = '<C-l>'
 
 " Customization:
 function! s:coc_diagnostic_disable()
@@ -1923,6 +1922,27 @@ let g:omni_syntax_use_iskeyword_numeric = v:false
 " This is defined as a function to allow me to reset all my key remappings
 " without needing to repeate myself. Useful with Goyo for now
 function! DefaultKeyMappings()
+  " Unmappings:
+  inoremap <C-h> <nop>
+
+  " Command Mode Remappings Like Bash:
+  " taken from: https://github.com/tpope/vim-rsi
+  cnoremap <C-A> <Home>
+  cnoremap <C-X><C-A> <C-A>
+  cnoremap <C-B> <Left>
+  cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
+  cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
+  cnoremap <expr> <C-T> <SID>transpose()
+  cnoremap <expr> <C-U> <SID>ctrl_u()
+  cnoremap <C-Y> <C-R>-
+  cnoremap <M-b> <S-Left>
+  cnoremap <M-f> <S-Right>
+  cnoremap <M-d> <C-O>dw
+  cnoremap <M-d> <S-Right><C-W>
+  cnoremap <M-n> <Down>
+  cnoremap <M-p> <Up>
+  cnoremap <M-BS> <C-W>
+  cnoremap <M-C-h> <C-W>
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
@@ -2104,11 +2124,8 @@ function! DefaultKeyMappings()
   " Scroll in floating window
   nnoremap <expr><C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
   nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
-  " snippets
+  " snippets: most mappings done as global option in Coc section
   imap <C-l> <Plug>(coc-snippets-expand)
-  vmap <C-j> <Plug>(coc-snippets-select)
-  " Use <C-j> for both expand and jump (make expand higher priority.)
-  imap <C-j> <Plug>(coc-snippets-expand-jump)
   " For pairs, correctly position cursor on Enter
   inoremap <silent><expr> <CR>
         \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -2160,6 +2177,30 @@ function! DefaultKeyMappings()
 endfunction
 
 call DefaultKeyMappings()
+
+" Helper Functions For Bash Like Command Line Remappings:
+function! s:transpose() abort
+  let pos = getcmdpos()
+  if getcmdtype() =~# '[?/]'
+    return "\<C-T>"
+  elseif pos > strlen(getcmdline())
+    let pre = "\<Left>"
+    let pos -= 1
+  elseif pos <= 1
+    let pre = "\<Right>"
+    let pos += 1
+  else
+    let pre = ""
+  endif
+  return pre . "\<BS>\<Right>".matchstr(getcmdline()[0 : pos-2], '.$')
+endfunction
+
+function! s:ctrl_u()
+  if getcmdpos() > 1
+    let @- = getcmdline()[:getcmdpos()-2]
+  endif
+  return "\<C-U>"
+endfunction
 
 " }}}
 " General: Abbreviations --- {{{
