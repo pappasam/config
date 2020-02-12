@@ -316,6 +316,7 @@ function PackInit() abort
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:iamcco/coc-vimlsp.git',
+        \ 'git@github.com:josa42/coc-docker.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
         \ 'git@github.com:neoclide/coc-json.git',
