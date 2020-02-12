@@ -292,10 +292,7 @@ function PackInit() abort
   call packager#add('git@github.com:mattn/vim-xxdcursor')
   call packager#add('git@github.com:calviken/vim-gdscript3')
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
-  " call packager#add('git@github.com:leafgarland/typescript-vim')
-  call packager#add('git@github.com:pappasam/typescript-vim.git', {
-        \ 'branch': 'INDENT_CORRECTLY_MULTILINE_GENERICS',
-        \ })
+  call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
   call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:killphi/vim-ebnf')
