@@ -351,6 +351,14 @@ function PackInit() abort
   call packager#add('git@github.com:glts/vim-textobj-indblock')
   " ay/iy for a syntax group
   call packager#add('git@github.com:kana/vim-textobj-syntax')
+  " ae/ie for entire buffers
+  call packager#add('git@github.com:kana/vim-textobj-entire.git')
+  " af{char}/if{char} for a region between {char}s
+  call packager#add('git@github.com:thinca/vim-textobj-between.git')
+  " ai/ii for similarly indented, aI/iI for same indentation
+  call packager#add('git@github.com:kana/vim-textobj-indent.git')
+  " au/iu for a URI, also includes URI handlers and is easy to extend
+  call packager#add('git@github.com:jceb/vim-textobj-uri.git')
   " ac/ic/af/if for Python classes and functions
   call packager#add('git@github.com:bps/vim-textobj-python.git')
 
