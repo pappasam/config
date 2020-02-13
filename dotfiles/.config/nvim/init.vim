@@ -1350,6 +1350,7 @@ let g:defx_ignored_files = join([
       \ 'fonts/',
       \ 'node_modules/',
       \ 'pip-wheel-metadata/',
+      \ 'site/',
       \ 'target/',
       \ 'venv.bak/',
       \ 'venv/',
