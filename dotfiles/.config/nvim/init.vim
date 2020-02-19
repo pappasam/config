@@ -207,7 +207,6 @@ function PackInit() abort
         \ 'do': ':UpdateRemotePlugins',
         \ })
   call packager#add('git@github.com:t9md/vim-choosewin')
-  call packager#add('git@github.com:mhinz/vim-startify')
   call packager#add('git@github.com:yssl/QFEnter')
   call packager#add('git@github.com:simeji/winresizer')
   call packager#add('git@github.com:mbbill/undotree')
@@ -311,7 +310,6 @@ function PackInit() abort
   for coc_plugin in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
-        \ 'git@github.com:iamcco/coc-vimlsp.git',
         \ 'git@github.com:josa42/coc-docker.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
@@ -1111,10 +1109,21 @@ augroup keywordprogram-overrides
 augroup END
 
 " }}}
-" General: Vim help shortcuts {{{
+" General: Startup without arguments {{{
 
-command! Manual vert help user-manual
-command! Reference vert help reference_toc
+function! s:enter_no_args()
+  if argc() == 0
+    help reference_toc
+    only
+    setlocal colorcolumn=0
+    echo 'For User Manual, type ":help user-manual"'
+  endif
+endfunction
+
+augroup on_enter
+  autocmd!
+  autocmd VimEnter * call s:enter_no_args()
+augroup END
 
 " }}}
 " Plugin: vim-radical {{{
@@ -1559,59 +1568,6 @@ let g:tagbar_type_rst = {
       \ },
       \ 'sort': 0,
       \ }
-
-" }}}
-" Plugin: Startify {{{
-" \ '                _______.     ___      .___  ___.',
-" \ '               /       |    /   \     |   \/   |',
-" \ '              |   (----`   /  ^  \    |  \  /  |',
-" \ '               \   \      /  /_\  \   |  |\/|  |',
-" \ '           .----)   |    /  _____  \  |  |  |  |',
-" \ '           |_______/    /__/     \__\ |__|  |__|',
-" \ ' ____    __    ____      ___      .______           _______.',
-" \ ' \   \  /  \  /   /     /   \     |   _  \         /       |',
-" \ '  \   \/    \/   /     /  ^  \    |  |_)  |       |   (----`',
-" \ '   \            /     /  /_\  \   |      /         \   \',
-" \ '    \    /\    /     /  _____  \  |  |\  \----..----)   |',
-" \ '     \__/  \__/     /__/     \__\ | _| `._____||_______/',
-" \ '',
-
-let g:startify_list_order = []
-let g:startify_fortune_use_unicode = v:true
-let g:startify_enable_special = v:true
-let g:startify_custom_header = []
-
-function! s:set_startify()
-  if !exists('g:loaded_startify')
-    echom 'Startify is not loaded, skipping...'
-    return
-  endif
-  let g:startify_custom_footer = [
-        \ '                                            .',
-        \ '                                  .-o',
-        \ '                     .           /  |',
-        \ '            .                 . /   |   .',
-        \ '                               /    |',
-        \ '                      .       /     |',
-        \ '      .                      /      /         .',
-        \ '                 .          /    _./   .',
-        \ '                       _.---~-.=:_',
-        \ '                      (_.-=() <~`-`-.',
-        \ '                     _/ _() ~`-==-._,>',
-        \ '             ..--====--` `~-._.__()',
-        \ '         o===``~~             |__()',
-        \ '                    .         \   |             .',
-        \ '                               \  \    .',
-        \ '                                \  \',
-        \ '            .                    \  \   Sienar Fleet Systems',
-        \ '                     .            \  \  Lambda-class',
-        \ '                                   \_ \ Imperial Shuttle',
-        \ '                           LS        ~o',
-        \ '',
-        \] + map(startify#fortune#boxed(), {idx, val -> ' ' . val})
-endfunction
-
-autocmd VimEnter * call s:set_startify()
 
 " }}}
 " Plugin: VimTex {{{
