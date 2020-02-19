@@ -231,7 +231,6 @@ function PackInit() abort
   call packager#add('git@github.com:tpope/vim-ragtag')
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-scriptease')
-  call packager#add('git@github.com:tpope/vim-speeddating.git')
 
   " EditorConfig: https://editorconfig.org/
   " Overrides default Vim settings when an editorconfig file is found
@@ -1112,6 +1111,12 @@ augroup keywordprogram-overrides
 augroup END
 
 " }}}
+" General: Vim help shortcuts {{{
+
+command! Manual vert help user-manual
+command! Reference vert help reference_toc
+
+" }}}
 " Plugin: vim-radical {{{
 
 let g:radical_no_mappings = 1
@@ -1166,6 +1171,8 @@ augroup man_page_custom
   autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
   autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
+  autocmd FileType help nnoremap <buffer> <C-]> <C-]>
+  autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
 augroup END
 
 " }}}
@@ -2108,7 +2115,7 @@ function! DefaultKeyMappings()
   " Coc: settings for coc.nvim
   " see https://github.com/neoclide/coc.nvim
   nmap <silent> <C-]> <Plug>(coc-definition)
-  nmap <silent> <2-LeftMouse> <Plug>(coc-definition)
+  nmap <silent> <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
   nmap <silent> <leader>st <Plug>(coc-type-definition)
   nmap <silent> <leader>si <Plug>(coc-implementation)
@@ -2140,8 +2147,7 @@ function! DefaultKeyMappings()
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
 
-  " Out Jump List:
-  nnoremap <RightMouse> <C-o>
+  " Out Jump List: already mapped to <C-RightMouse>
 
   " Clipboard Copy Paste: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
@@ -2159,9 +2165,9 @@ function! DefaultKeyMappings()
 
   " Mouse Open Close Folds: open folds with the mouse, and close the folds
   " open operation taken from: https://stackoverflow.com/a/13924974
-  nnoremap <expr> <C-LeftMouse>
+  nnoremap <expr> <2-LeftMouse>
         \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
-  nnoremap <C-RightMouse> <LeftMouse><LeftRelease>zc
+  nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
 
   " Scrolling Dropdown: dropdown scrollable + click to select highlighted
   inoremap <expr> <S-ScrollWheelUp>
