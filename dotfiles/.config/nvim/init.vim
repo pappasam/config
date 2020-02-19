@@ -1113,7 +1113,7 @@ augroup END
 
 function! s:enter_no_args()
   if argc() == 0
-    help reference_toc
+    help help.txt
     only
     setlocal colorcolumn=0
     echo 'For User Manual, type ":help user-manual"'
