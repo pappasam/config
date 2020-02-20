@@ -589,7 +589,6 @@ augroup writing
         \ | call textobj#sentence#init()
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
-  autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
 augroup END
 
 " }}}
@@ -929,11 +928,6 @@ function! AtInit()
   return 'g@l'
 endfunction
 
-" Enable calling a function within the mapping for @
-nnoremap <expr> <plug>@init AtInit()
-" A macro could, albeit unusually, end in Insert mode.
-inoremap <expr> <plug>@init "\<c-o>".AtInit()
-
 function! AtReg()
   let s:atcount = v:count1
   let l:c = nr2char(getchar())
@@ -952,9 +946,6 @@ function! QStop()
   set operatorfunc=QSetRepeat
   return 'g@l'
 endfunction
-
-nnoremap <expr> <plug>qstop QStop()
-inoremap <expr> <plug>qstop "\<c-o>".QStop()
 
 let s:qrec = 0
 function! QStart()
@@ -1116,6 +1107,7 @@ function! s:enter_no_args()
     help help.txt
     only
     setlocal colorcolumn=0
+    normal! jjzt
     echo 'For User Manual, type ":help user-manual"'
   endif
 endfunction
@@ -1124,6 +1116,33 @@ augroup on_enter
   autocmd!
   autocmd VimEnter * call s:enter_no_args()
 augroup END
+
+" }}}
+" General: Bash command line startups {{{
+
+" Helper Functions For Bash Like Command Line Remappings:
+function! s:transpose() abort
+  let pos = getcmdpos()
+  if getcmdtype() =~# '[?/]'
+    return "\<C-T>"
+  elseif pos > strlen(getcmdline())
+    let pre = "\<Left>"
+    let pos -= 1
+  elseif pos <= 1
+    let pre = "\<Right>"
+    let pos += 1
+  else
+    let pre = ""
+  endif
+  return pre . "\<BS>\<Right>".matchstr(getcmdline()[0 : pos-2], '.$')
+endfunction
+
+function! s:ctrl_u()
+  if getcmdpos() > 1
+    let @- = getcmdline()[:getcmdpos()-2]
+  endif
+  return "\<C-U>"
+endfunction
 
 " }}}
 " Plugin: vim-radical {{{
@@ -1175,13 +1194,7 @@ let g:man_hardwrap = v:true
 
 augroup man_page_custom
   autocmd!
-  autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
   autocmd FileType man setlocal number relativenumber
-  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
-  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
-  autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
-  autocmd FileType help nnoremap <buffer> <C-]> <C-]>
-  autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
 augroup END
 
 " }}}
@@ -1256,29 +1269,7 @@ endfunction
 
 command! HovercraftSlide echo 'Slide ' . LineMatchCount('^----$', 1, line('.'))
 
-augroup rst_overrides
-  autocmd!
-  autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
-  autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
-augroup END
-
 let g:no_rst_sections_maps = 0
-
-augroup rst_sections_mappings
-  autocmd!
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection('0')<cr>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection('1')<cr>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
-augroup END
 
 " }}}
 " Plugin: Markdown-preview.vim {{{
@@ -1420,7 +1411,7 @@ function! s:open_defx_if_directory()
   endif
 endfunction
 
-function! s:defx_buffer_settings() abort
+function! s:defx_buffer_remappings() abort
   " Define mappings
   for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
@@ -1434,13 +1425,7 @@ endfunction
 augroup defx_settings
   autocmd!
   autocmd BufEnter * call s:open_defx_if_directory()
-  autocmd FileType defx call s:defx_buffer_settings()
   autocmd FileType defx setlocal cursorline
-  autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
-  autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
-  autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
-  autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
-  autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 augroup END
 
@@ -1655,10 +1640,6 @@ let g:slime_target = "neovim"
 let g:slime_dont_ask_default = v:true
 let g:slime_no_mappings = v:true
 let g:term_repl_open = v:false
-
-noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
-      \ :<c-u>call slime#send_lines(v:count1)<cr>
-      \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
 
 function! s:term_repl_open()
   " NOTE: zshell does not receive the newlines
@@ -1885,10 +1866,10 @@ let g:omni_syntax_use_single_byte = v:false
 let g:omni_syntax_use_iskeyword_numeric = v:false
 
 " }}}
-" General: Global key remappings {{{
+" General: Key remappings {{{
 
 " This is defined as a function to allow me to reset all my key remappings
-" without needing to repeate myself. Useful with Goyo for now
+" without needing to repeat myself.
 function! DefaultKeyMappings()
   " Unmappings:
   inoremap <C-h> <nop>
@@ -1941,6 +1922,12 @@ function! DefaultKeyMappings()
   nnoremap K Kg
 
   " Macro Repeater:
+  " Enable calling a function within the mapping for @
+  nnoremap <expr> <plug>@init AtInit()
+  " A macro could, albeit unusually, end in Insert mode.
+  inoremap <expr> <plug>@init "\<c-o>".AtInit()
+  nnoremap <expr> <plug>qstop QStop()
+  inoremap <expr> <plug>qstop "\<c-o>".QStop()
   " The following code allows pressing . immediately after
   " recording a macro to play it back.
   nmap <expr> @ AtReg()
@@ -2023,6 +2010,9 @@ function! DefaultKeyMappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " Slime:
+  noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
+        \ :<c-u>call slime#send_lines(v:count1)<cr>
+        \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
   nnoremap <leader><leader>e :ReplToggle<CR>
   xmap <leader>e <Plug>SlimeRegionSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
   nmap <leader>e <Plug>CustomSlimeLineSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
@@ -2141,33 +2131,53 @@ function! DefaultKeyMappings()
   inoremap <expr> <LeftMouse>
         \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
+  " Augroups: all key-mapping-relate augroups
+  augroup remap_markdown
+    autocmd!
+    autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
+  augroup END
+
+  augroup remap_man_help
+    autocmd!
+    autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
+    autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
+    autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
+    autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
+    autocmd FileType help nnoremap <buffer> <C-]> <C-]>
+    autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
+  augroup END
+
+  augroup remap_rst
+    autocmd!
+    autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
+    autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection('0')<cr>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection('1')<cr>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
+  augroup END
+
+  augroup remap_defx
+    autocmd!
+    autocmd FileType defx call s:defx_buffer_remappings()
+    autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
+    autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
+    autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
+    autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
+    autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
+  augroup END
+
 endfunction
 
 call DefaultKeyMappings()
-
-" Helper Functions For Bash Like Command Line Remappings:
-function! s:transpose() abort
-  let pos = getcmdpos()
-  if getcmdtype() =~# '[?/]'
-    return "\<C-T>"
-  elseif pos > strlen(getcmdline())
-    let pre = "\<Left>"
-    let pos -= 1
-  elseif pos <= 1
-    let pre = "\<Right>"
-    let pos += 1
-  else
-    let pre = ""
-  endif
-  return pre . "\<BS>\<Right>".matchstr(getcmdline()[0 : pos-2], '.$')
-endfunction
-
-function! s:ctrl_u()
-  if getcmdpos() > 1
-    let @- = getcmdline()[:getcmdpos()-2]
-  endif
-  return "\<C-U>"
-endfunction
 
 " }}}
 " General: Abbreviations --- {{{
