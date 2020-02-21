@@ -1,5 +1,11 @@
 {
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
-  "pairs.enableCharacters": ["(", "[", "{", "<"]
+  "diagnostic.enable": false,
+  "pairs.enableCharacters": [
+    "(",
+    "[",
+    "{",
+    "<"
+  ]
 }

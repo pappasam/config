@@ -660,19 +660,6 @@ augroup END
 " }}}
 " General: Syntax highlighting {{{
 
-" Python: Highlight args and kwargs, since they are conventionally special
-augroup python_syntax
-  autocmd!
-  autocmd FileType python syntax keyword pythonBuiltinObj args
-  autocmd FileType python syntax keyword pythonBuiltinObj kwargs
-augroup end
-
-" Javascript: Highlight this keyword in object / function definitions
-augroup javascript_syntax
-  autocmd!
-  autocmd FileType javascript syntax keyword jsBooleanTrue this
-augroup end
-
 " Typescript: fixes
 augroup typescript_syntax
   autocmd!
@@ -1744,7 +1731,7 @@ function! s:coc_diagnostic_toggle()
 endfunction
 
 function! s:coc_init()
-  let g:coc_custom_diagnostic_enabled = v:true
+  let g:coc_custom_diagnostic_enabled = v:false
 endfunction
 
 augroup coc_initialization
