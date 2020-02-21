@@ -109,7 +109,7 @@ function! SetGlobalConfig()
     autocmd!
     autocmd CmdlineEnter /,\? set hlsearch
     autocmd CmdlineLeave /,\? set nohlsearch
-  augroup END
+  augroup end
 
   filetype plugin indent on
 
@@ -149,7 +149,7 @@ function! SetGlobalConfig()
   augroup redraw_on_refocus
     autocmd!
     autocmd FocusGained * redraw!
-  augroup END
+  augroup end
 
   " Terminal Color Support: only set guicursor if truecolor
   if $COLORTERM ==# 'truecolor'
@@ -440,7 +440,7 @@ call SetStatusAndTabLine()
 augroup statusline_local_overrides
   autocmd!
   autocmd FileType defx setlocal statusline=\ defx\ %#CursorLine#
-augroup END
+augroup end
 
 " Strip newlines from a string
 function! StripNewlines(instring)
@@ -473,7 +473,7 @@ augroup filetype_recognition
   autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
   autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc,.markdownlintrc
         \ set filetype=jsonc
-augroup END
+augroup end
 
 " }}}
 " General: Comment / Text Format Options {{{
@@ -492,7 +492,7 @@ augroup custom_comment_config
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType typescript.tsx,typescript
         \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-augroup END
+augroup end
 
 " }}}
 " General: Indentation (tabs, spaces, width, etc) {{{
@@ -517,7 +517,7 @@ augroup indentation_sr
         \ cinoptions+='(s,U1'
         \ cinoptions+='j1'
         \ cinoptions+='J1'
-augroup END
+augroup end
 
 " }}}
 " General: ColorColumn different widths for different filetypes {{{
@@ -527,7 +527,7 @@ augroup colorcolumn_configuration
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
   autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
-augroup END
+augroup end
 
 " }}}
 " General: Writing (non-coding) {{{
@@ -589,7 +589,7 @@ augroup writing
         \ | call textobj#sentence#init()
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
-augroup END
+augroup end
 
 " }}}
 " General: Digraphs {{{
@@ -629,7 +629,7 @@ augroup fold_settings
         \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
   autocmd FileType markdown,rst
         \ setlocal nofoldenable
-augroup END
+augroup end
 
 " }}}
 " General: Trailing whitespace {{{
@@ -655,7 +655,7 @@ command! TrimWhitespace call <SID>trim_whitespace()
 augroup fix_whitespace_save
   autocmd!
   autocmd BufWritePre * TrimWhitespace
-augroup END
+augroup end
 
 " }}}
 " General: Syntax highlighting {{{
@@ -671,7 +671,7 @@ augroup qs_colors
   autocmd!
   autocmd ColorScheme * highlight QuickScopePrimary guifg='LimeGreen' ctermfg=Green gui=underline
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='turquoise1' ctermfg=Cyan gui=underline
-augroup END
+augroup end
 
 " Spell Checking:
 augroup spelling_options
@@ -684,7 +684,7 @@ augroup spelling_options
   autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='ForestGreen' gui=underline,italic
   autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='yellow' gui=underline,italic
   autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='magenta' gui=underline,italic
-augroup END
+augroup end
 
 " Trailing Whitespace: (initial highlight below doesn't matter)
 highlight EOLWS ctermbg=DarkCyan
@@ -699,14 +699,14 @@ augroup whitespace_color
   autocmd InsertLeave * highlight EOLWS guibg='CornflowerBlue' ctermbg=DarkCyan
 
   autocmd FileType defx highlight clear EOLWS
-augroup END
+augroup end
 
 " Cursorline: disable, then override if necessary
 highlight CursorLine cterm=NONE
 augroup cursorline_setting
   autocmd!
   autocmd FileType tagbar setlocal cursorline
-augroup END
+augroup end
 
 " ********************************************************************
 " Papercolor: options
@@ -821,7 +821,7 @@ augroup stay_no_lcd
         \ execute 'lcd' fnameescape(w:lcd) |
         \ unlet w:lcd |
         \ endif
-augroup END
+augroup end
 
 " --- }}}
 " General: Delete hidden buffers {{{
@@ -1085,7 +1085,7 @@ augroup keywordprogram-overrides
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
   " Dictioary: my custom Def function
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
-augroup END
+augroup end
 
 " }}}
 " General: Startup without arguments {{{
@@ -1103,7 +1103,7 @@ endfunction
 augroup on_enter
   autocmd!
   autocmd VimEnter * call s:enter_no_args()
-augroup END
+augroup end
 
 " }}}
 " General: Bash command line startups {{{
@@ -1183,7 +1183,7 @@ let g:man_hardwrap = v:true
 augroup man_page_custom
   autocmd!
   autocmd FileType man setlocal number relativenumber
-augroup END
+augroup end
 
 " }}}
 " Plugin: Restructured Text {{{
@@ -1415,7 +1415,7 @@ augroup defx_settings
   autocmd BufEnter * call s:open_defx_if_directory()
   autocmd FileType defx setlocal cursorline
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
-augroup END
+augroup end
 
 " }}}
 " Plugin: Fzf and FZF Preview {{{
@@ -1698,7 +1698,7 @@ endfunction
 augroup coc_keyboard_overrides
   autocmd!
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-augroup END
+augroup end
 
 let g:coc_filetype_map = {
       \ }
@@ -1738,7 +1738,7 @@ endfunction
 augroup coc_initialization
   autocmd!
   autocmd VimEnter * call s:coc_init()
-augroup END
+augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
 command! CocDiagnosticEnable call s:coc_diagnostic_enable()
@@ -1788,7 +1788,7 @@ let g:qfenter_enable_autoquickfix = v:false
 " automatically move QuickFix window to fill entire bottom screen
 augroup QuickFix
   autocmd FileType qf wincmd J
-augroup END
+augroup end
 
 " WinResize:
 let g:winresizer_start_key = '<C-\>'
@@ -2122,7 +2122,7 @@ function! DefaultKeyMappings()
   augroup remap_markdown
     autocmd!
     autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
-  augroup END
+  augroup end
 
   augroup remap_man_help
     autocmd!
@@ -2132,7 +2132,7 @@ function! DefaultKeyMappings()
     autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
     autocmd FileType help nnoremap <buffer> <C-]> <C-]>
     autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
-  augroup END
+  augroup end
 
   augroup remap_rst
     autocmd!
@@ -2150,7 +2150,7 @@ function! DefaultKeyMappings()
     autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
     autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
     autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
-  augroup END
+  augroup end
 
   augroup remap_defx
     autocmd!
@@ -2160,7 +2160,7 @@ function! DefaultKeyMappings()
     autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
     autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
     autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
-  augroup END
+  augroup end
 
 endfunction
 
