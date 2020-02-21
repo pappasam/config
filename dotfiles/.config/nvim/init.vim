@@ -63,7 +63,7 @@ let maplocalleader = "\\"
 " }}}
 " General: Global config {{{
 
-function! AlacrittySetBackground()
+function! s:alacritty_set_background()
   let g:alacritty_background = system('alacritty-which-colorscheme')
   if !v:shell_error
     let &background = g:alacritty_background
@@ -159,10 +159,10 @@ function! SetGlobalConfig()
   endif
 
   " Set Background: for PaperColor, also sets handler
-  call AlacrittySetBackground()
+  call <SID>alacritty_set_background()
   call jobstart(
         \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-        \ {'on_stdout': { j, d, e -> AlacrittySetBackground() }}
+        \ {'on_stdout': { j, d, e -> <SID>alacritty_set_background() }}
         \ )
 
   " Status Line: specifics for custom status line
