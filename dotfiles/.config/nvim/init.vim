@@ -1043,6 +1043,7 @@ function! s:vim_colors()
   nohlsearch
   nnoremap <buffer> d <C-d>
   nnoremap <buffer> u <C-u>
+  nnoremap <buffer> q :q<CR>
   file VimColors
   set nomodifiable
 endfunction
