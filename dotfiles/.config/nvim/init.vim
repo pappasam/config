@@ -74,7 +74,7 @@ function! s:alacritty_set_background()
   endif
 endfunction
 
-function! SetGlobalConfig()
+function! s:set_global_config()
   " Code Completion:
   set completeopt=menuone,longest
   set wildmode=longest,list,full
@@ -185,12 +185,13 @@ function! SetGlobalConfig()
   " Vim History: for command line; can't imagine that more than 100 is needed
   set history=100
 endfunction
-call SetGlobalConfig()
+
+call s:set_global_config()
 
 " }}}
 " General: Vim packages: vim-packager {{{
 
-function PackInit() abort
+function s:pack_init() abort
   packadd vim-packager
   call packager#init()
   call packager#add('git@github.com:kristijanhusak/vim-packager', { 'type': 'opt' })
@@ -392,19 +393,11 @@ function PackInit() abort
   call packager#add('git@github.com:dhruvasagar/vim-marp')
 endfunction
 
-function! PackList(...)
-  call PackInit()
-  return join(sort(keys(minpac#getpluglist())), "\n")
-endfunction
-
-" Define user commands for updating/cleaning the plugins.
-" Each of them calls PackInit() to load minpac and register
-" the information of plugins, then performs the task.
-command! PackInstall call PackInit() | call packager#install()
-command! -bang PackUpdate call PackInit() | call packager#update({ 'force_hooks': '<bang>' })
-command! PackClean call PackInit() | call packager#clean()
-command! PackStatus call PackInit() | call packager#status()
-command! -bang PU call PackInit() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackInstall call <SID>pack_init() | call packager#install()
+command! -bang PackUpdate call <SID>pack_init() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackClean call <SID>pack_init() | call packager#clean()
+command! PackStatus call <SID>pack_init() | call packager#status()
+command! -bang PU call <SID>pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
 " General: Status Line and Tab Line {{{
