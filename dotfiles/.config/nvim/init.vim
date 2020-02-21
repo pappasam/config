@@ -1195,14 +1195,14 @@ augroup end
 "   6. ", for paragraphs
 
 " Source: https://stackoverflow.com/a/30772902
-function! LineMatchCount(pat,...)
+function! s:line_match_count(pat,...)
   " searches for pattern matches in the active buffer, with optional start and
   " end line number specifications
 
   " useful command-line for testing against last-used pattern within last-used
-  " visual selection: echo LineMatchCount(@/,getpos("'<")[1],getpos("'>")[1])
+  " visual selection: echo s:line_match_count(@/,getpos("'<")[1],getpos("'>")[1])
 
-  if (a:0 > 2) | echoerr 'too many arguments for function: LineMatchCount()'
+  if (a:0 > 2) | echoerr 'too many arguments for function: s:line_match_count()'
         \ | return| endif
   let start = a:0 >= 1 ? a:000[0] : 1
   let end = a:0 >= 2 ? a:000[1] : line('$')
@@ -1244,7 +1244,8 @@ function! LineMatchCount(pat,...)
   return lineCount
 endfunction
 
-command! HovercraftSlide echo 'Slide ' . LineMatchCount('^----$', 1, line('.'))
+command! HovercraftSlide echo 'Slide '
+      \ . <SID>line_match_count('^----$', 1, line('.'))
 
 let g:no_rst_sections_maps = 0
 
@@ -1420,7 +1421,7 @@ augroup end
 "   - Toggle Preview
 " <C-x>, <C-v>, <C-t>: open in split, vert, and tab
 
-function! FZFFilesAvoidDefx()
+function! s:fzf_files_avoid_defx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
@@ -1432,7 +1433,7 @@ function! FZFFilesAvoidDefx()
         \ }))
 endfunction
 
-function! FZFBuffersAvoidDefx()
+function! s:fzf_buffers_avoid_defx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
@@ -1539,6 +1540,7 @@ let g:vimtex_compiler_latexmk = {'callback' : v:false}
 let g:tex_flavor = 'latex'
 let g:vimtex_imaps_enabled = v:false
 let g:vimtex_doc_handlers = ['MyVimTexDocHandler']
+
 function! MyVimTexDocHandler(context)
   " Function called with using :VimtexDocPackage
   " to pull up package documentation
@@ -1586,7 +1588,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  call DefaultKeyMappings()
+  call <SID>default_key_mappings()
   if &filetype == 'markdown'
     " Preserve code highlighting
     doautocmd Mkd BufWinEnter
@@ -1848,7 +1850,7 @@ let g:omni_syntax_use_iskeyword_numeric = v:false
 
 " This is defined as a function to allow me to reset all my key remappings
 " without needing to repeat myself.
-function! DefaultKeyMappings()
+function! s:default_key_mappings()
   " Unmappings:
   inoremap <C-h> <nop>
 
@@ -2010,8 +2012,8 @@ function! DefaultKeyMappings()
   omap aq <Plug>(textobj-sandwich-query-a)
 
   " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-p> :call FZFFilesAvoidDefx()<CR>
-  nnoremap <silent> <C-b> :call FZFBuffersAvoidDefx()<CR>
+  nnoremap <silent> <C-p> :call <SID>fzf_files_avoid_defx()<CR>
+  nnoremap <silent> <C-b> :call <SID>fzf_buffers_avoid_defx()<CR>
   nnoremap <C-n> yiw:Rg <C-r>"<CR>
   vnoremap <C-n> y:Rg <C-r>"<CR>
 
@@ -2153,7 +2155,7 @@ function! DefaultKeyMappings()
 
 endfunction
 
-call DefaultKeyMappings()
+call s:default_key_mappings()
 
 " }}}
 " General: Abbreviations --- {{{
