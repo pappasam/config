@@ -2077,19 +2077,17 @@ function! DefaultKeyMappings()
         \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   " Toggle diagnostics
   nnoremap <silent> <leader>a :CocDiagnosticToggle<CR>
+  nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
+  nmap <silent> <leader>p <Plug>(coc-diagnostic-prev)
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
 
   " Out Jump List: already mapped to <C-RightMouse>
 
-  " Clipboard Copy Paste: Visual mode copy is pretty simple
+  " Clipboard Copy: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
-  " Normal mode paste checks whether the current line has text
-  " if yes, insert new line, if no, start paste on the current line
-  nnoremap <expr> <leader>p
-        \ len(getline('.')) == 0 ? '"+p' : 'o<esc>"+p'
 
   " Mouse Copy: system copy mouse characteristics
   vnoremap <RightMouse> "+y
