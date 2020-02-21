@@ -402,7 +402,7 @@ command! -bang PU call <SID>pack_init() | call packager#clean() | call packager#
 " }}}
 " General: Status Line and Tab Line {{{
 
-function! SetStatusAndTabLine()
+function! s:set_status_and_tabline()
   " Tab Line
   set tabline=%t
 
@@ -427,18 +427,14 @@ function! SetStatusAndTabLine()
   set statusline+=%*  " default color
   set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 endfunction
-call SetStatusAndTabLine()
+
+call s:set_status_and_tabline()
 
 " Status Line
 augroup statusline_local_overrides
   autocmd!
   autocmd FileType defx setlocal statusline=\ defx\ %#CursorLine#
 augroup end
-
-" Strip newlines from a string
-function! StripNewlines(instring)
-  return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
-endfunction
 
 " }}}
 " General: Filetype specification {{{
