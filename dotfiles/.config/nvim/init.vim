@@ -220,6 +220,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:wellle/targets.vim')
   call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:heavenshell/vim-jsdoc')
+  call packager#add('git@github.com:ryvnf/readline.vim.git')
 
   " Tim Pope: general, uncategorizable tim pope plugins
   " Notes:
@@ -1095,33 +1096,6 @@ augroup on_enter
 augroup end
 
 " }}}
-" General: Bash command line startups {{{
-
-" Helper Functions For Bash Like Command Line Remappings:
-function! s:transpose() abort
-  let pos = getcmdpos()
-  if getcmdtype() =~# '[?/]'
-    return "\<C-T>"
-  elseif pos > strlen(getcmdline())
-    let pre = "\<Left>"
-    let pos -= 1
-  elseif pos <= 1
-    let pre = "\<Right>"
-    let pos += 1
-  else
-    let pre = ""
-  endif
-  return pre . "\<BS>\<Right>".matchstr(getcmdline()[0 : pos-2], '.$')
-endfunction
-
-function! s:ctrl_u()
-  if getcmdpos() > 1
-    let @- = getcmdline()[:getcmdpos()-2]
-  endif
-  return "\<C-U>"
-endfunction
-
-" }}}
 " Plugin: vim-radical {{{
 
 let g:radical_no_mappings = 1
@@ -1851,28 +1825,6 @@ let g:omni_syntax_use_iskeyword_numeric = v:false
 " This is defined as a function to allow me to reset all my key remappings
 " without needing to repeat myself.
 function! s:default_key_mappings()
-  " Unmappings:
-  inoremap <C-h> <nop>
-
-  " Command Mode Remappings Like Bash:
-  " taken from: https://github.com/tpope/vim-rsi
-  cnoremap <C-A> <Home>
-  cnoremap <C-X><C-A> <C-A>
-  cnoremap <C-B> <Left>
-  cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
-  cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>Right>"
-  cnoremap <expr> <C-T> <SID>transpose()
-  cnoremap <expr> <C-U> <SID>ctrl_u()
-  cnoremap <C-Y> <C-R>-
-  cnoremap <M-b> <S-Left>
-  cnoremap <M-f> <S-Right>
-  cnoremap <M-d> <C-O>dw
-  cnoremap <M-d> <S-Right><C-W>
-  cnoremap <M-n> <Down>
-  cnoremap <M-p> <Up>
-  cnoremap <M-BS> <C-W>
-  cnoremap <M-C-h> <C-W>
-
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
 
