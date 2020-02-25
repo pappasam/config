@@ -2170,16 +2170,12 @@ function! s:abbr_help(in_command, out_command)
   endif
 endfunction
 
-" Help menu simpler
-cnoreabbrev <expr> vhelp <SID>abbr_help('vhelp', 'vertical help')
-
 " Using Ack and Acks brings up quickfix automatically
 cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
-cnoreabbrev <expr> Col <SID>abbr_help('Col', 'echo expand(col("."))')
 
 " Open init.vim
-cnoreabbrev <expr> vimrc <SID>abbr_help('vimrc', 'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/.config/nvim/init.vim')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
