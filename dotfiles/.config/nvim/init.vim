@@ -1942,7 +1942,7 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " Slime:
-  noremap <unique> <script> <silent> <Plug>CustomSlimeLineSend
+  noremap <script> <silent> <Plug>CustomSlimeLineSend
         \ :<c-u>call slime#send_lines(v:count1)<cr>
         \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
   nnoremap <leader><leader>e :ReplToggle<CR>
