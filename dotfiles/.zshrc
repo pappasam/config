@@ -436,8 +436,8 @@ alias vi='nvim'
 alias vim='nvim'
 alias svim='sudo nvim -u NONE'
 alias snvim='sudo nvim -u NONE'
-alias vimrc='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
-alias zshrc='nvim ~/dotfiles/dotfiles/.zshrc'
+alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
+alias z='nvim ~/dotfiles/dotfiles/.zshrc'
 alias vplug='cd ~/.config/nvim/pack/packager/start'
 
 # Grep, but ignore annoying directories
