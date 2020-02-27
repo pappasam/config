@@ -1120,7 +1120,8 @@ let g:radical_no_mappings = 1
 " . to start command-line with :Git [CURSOR] SHA à la fugitive
 " q or gq to close
 
-let g:git_messenger_always_into_popup = v:true
+let g:git_messenger_always_into_popup = v:false
+let g:git_messenger_no_default_mappings = v:true
 
 " }}}
 " Plugin: Jinja2 {{{
@@ -1990,6 +1991,9 @@ function! s:default_key_mappings()
   " Run Or Build:
   nnoremap <leader><leader>r :Run<CR>
 
+  " GitMessenger:
+  nmap <leader>sg <Plug>(git-messenger)
+
   " Coc: settings for coc.nvim
   " see https://github.com/neoclide/coc.nvim
   nmap <silent> <C-]> <Plug>(coc-definition)
@@ -2127,7 +2131,7 @@ cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 
 " Open init.vim
-cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/init.vim')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
