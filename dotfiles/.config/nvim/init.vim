@@ -482,6 +482,7 @@ augroup custom_comment_config
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType typescript.tsx,typescript
         \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup end
 
 " }}}
