@@ -33,3 +33,6 @@ asdf global yarn 1.19.1
 asdf plugin-add golang
 asdf install golang 1.13.4
 asdf global golang 1.13.4
+
+asdf plugin-add java https://github.com/halcyon/asdf-java.git
+asdf install java adopt-openjdk-13.0.2+8
