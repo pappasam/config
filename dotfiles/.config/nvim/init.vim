@@ -1669,12 +1669,8 @@ augroup end
 
 let g:coc_filetype_map = {
       \ }
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<C-h>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<C-l>'
+let g:coc_snippet_next = '<C-l>'
+let g:coc_snippet_prev = '<C-h>'
 
 " Customization:
 function! s:coc_diagnostic_disable()
