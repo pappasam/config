@@ -1083,7 +1083,7 @@ augroup end
 
 function! s:enter_no_args()
   if argc() == 0
-    help help.txt
+    help
     only
     setlocal colorcolumn=0
     normal! jjzt
