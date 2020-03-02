@@ -607,7 +607,7 @@ function gitzip() {  # arg1: the git repository
   git archive --format=zip --prefix="$git_name-from-zip/" HEAD -o "$outfile"
   popd > /dev/null
 }
-compdef _dirs gitzip
+compdef _directories gitzip
 
 # Pipe man stuff to neovim
 function m() {
@@ -635,7 +635,7 @@ compdef _dict_words syn
 function d() { #arg1: directory
   cd $1
 }
-compdef _dirs d
+compdef _directories d
 
 # Move up n directories using:  cd.. dir
 function cd_up() {  # arg1: number|word
