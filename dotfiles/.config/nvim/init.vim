@@ -2088,8 +2088,8 @@ function! s:default_key_mappings()
     autocmd!
     autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
     autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection('0')<cr>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection('1')<cr>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection(0)<CR>
+    autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection(1)<CR>
     autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
     autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
     autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
