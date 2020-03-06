@@ -1079,24 +1079,6 @@ augroup keywordprogram-overrides
 augroup end
 
 " }}}
-" General: Startup without arguments {{{
-
-function! s:enter_no_args()
-  if argc() == 0
-    help
-    only
-    setlocal colorcolumn=0
-    normal! jjzt
-    echo 'For User Manual, type ":help user-manual"'
-  endif
-endfunction
-
-augroup on_enter
-  autocmd!
-  autocmd VimEnter * call s:enter_no_args()
-augroup end
-
-" }}}
 " Plugin: vim-radical {{{
 
 let g:radical_no_mappings = 1
