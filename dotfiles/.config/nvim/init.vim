@@ -228,7 +228,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:tpope/vim-abolish')
   call packager#add('git@github.com:tpope/vim-characterize.git')
   call packager#add('git@github.com:tpope/vim-commentary')
-  call packager#add('git@github.com:tpope/vim-eunuch')
   call packager#add('git@github.com:tpope/vim-ragtag')
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-scriptease')
