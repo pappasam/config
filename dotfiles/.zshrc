@@ -697,6 +697,7 @@ function pydev-install() {  ## Install default python dependencies
     black \
     isort \
     jedi \
+    neovim-remote \
     pip \
     pylint\
     pynvim \
