@@ -29,6 +29,7 @@ sudo apt install -y \
   ca-certificates \
   cmake \
   cowsay  \
+  cpanminus \
   curl \
   dict \
   dict-gcide \
@@ -83,6 +84,7 @@ sudo apt install -y \
   network-manager-openvpn \
   openssl \
   peek \
+  perl \
   pkg-config \
   python-openssl \
   screenkey \

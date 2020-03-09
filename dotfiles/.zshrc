@@ -680,6 +680,7 @@ function cargodoc() {  # arg1: packagename
 function nodedev-install() {  ## Install default nodejs dependencies
   local env=(\
     jsctags \
+    neovim \
     npm \
     prettier \
     write-good \

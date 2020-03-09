@@ -102,6 +102,9 @@ git clone https://github.com/kristijanhusak/vim-packager \
 # npm install -g jsctags
 # asdf: add php
 
+# for perl support, install neovim extension engine
+# cpanm Neovim::Ext
+
 #######################################################################
 # Man pages for Linux Systems Programming
 #######################################################################
