@@ -79,14 +79,14 @@ function! s:set_global_config()
   set completeopt=menuone,longest
   set wildmode=longest,list,full
   set wildmenu
-  " don't give |ins-completion-menu| messages; they're noisy
-  set shortmess+=c
+
+  " Messages:
+  " c = don't give |ins-completion-menu| messages; they're noisy
+  " I = ignore startup message
+  set shortmess+=cI
 
   " Hidden Buffer: enable instead of having to write each buffer
   set hidden
-
-  " Disable Startup Message:
-  set shortmess=I
 
   " Sign Column: always show it
   set signcolumn=yes
