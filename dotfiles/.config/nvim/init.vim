@@ -85,6 +85,9 @@ function! s:set_global_config()
   " Hidden Buffer: enable instead of having to write each buffer
   set hidden
 
+  " Disable Startup Message:
+  set shortmess=I
+
   " Sign Column: always show it
   set signcolumn=yes
 
@@ -1652,6 +1655,7 @@ let g:coc_filetype_map = {
       \ }
 let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
+let g:coc_start_at_startup = 1
 
 " Customization:
 function! s:coc_diagnostic_disable()
