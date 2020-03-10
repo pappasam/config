@@ -242,7 +242,6 @@ function s:pack_init() abort
   " Fuzzy Finder:
   call packager#add('git@github.com:junegunn/fzf')
   call packager#add('git@github.com:junegunn/fzf.vim')
-  call packager#add('git@github.com:maxjacobson/vim-fzf-coauthorship')
   " Below needed by fzf-preview
   call packager#add('git@github.com:bogado/file-line.git')
   call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
@@ -250,7 +249,6 @@ function s:pack_init() abort
   " Git:
   call packager#add('git@github.com:tpope/vim-fugitive')
   call packager#add('git@github.com:junegunn/gv.vim')
-  call packager#add('git@github.com:whiteinge/diffconflicts')
   call packager#add('git@github.com:rhysd/git-messenger.vim.git')
 
   " Syntax Theme:
