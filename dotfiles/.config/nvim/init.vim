@@ -221,7 +221,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:bronson/vim-visual-star-search')
   call packager#add('git@github.com:fidian/hexmode')
   call packager#add('git@github.com:romainl/vim-devdocs')
-  call packager#add('git@github.com:heavenshell/vim-jsdoc')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
 
   " Tim Pope: general, uncategorizable tim pope plugins
@@ -1760,9 +1759,6 @@ let g:FerretMap = v:false
 
 " VimJavascript:
 let g:javascript_plugin_flow = v:false
-
-" JsDoc:
-let g:jsdoc_enable_es6 = v:true
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
