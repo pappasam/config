@@ -1636,7 +1636,7 @@ let g:vim_markdown_new_list_item_indent = v:false
 " Coc:
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+    execute 'help ' . expand('<cword>')
   else
     call CocAction('doHover')
   endif
