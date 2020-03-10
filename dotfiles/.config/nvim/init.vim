@@ -220,7 +220,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:bronson/vim-visual-star-search')
   call packager#add('git@github.com:fidian/hexmode')
-  call packager#add('git@github.com:wellle/targets.vim')
   call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:heavenshell/vim-jsdoc')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
@@ -1706,10 +1705,7 @@ let g:vim_filetype_formatter_commands = {
 " }}}
 " Plugin: Miscellaneous global var config {{{
 
-" Python: configure python paths
-" let g:python3_host_prog = system('which python3')
-" let g:python_host_prog = system('which python2')
-" Disable python 2 support
+" Python: disable python 2 support
 let g:loaded_python_provider = v:true
 
 " TypeScript:
