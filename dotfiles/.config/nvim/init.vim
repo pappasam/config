@@ -214,7 +214,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:yssl/QFEnter')
   call packager#add('git@github.com:simeji/winresizer')
   call packager#add('git@github.com:mbbill/undotree')
-  call packager#add('git@github.com:henrik/vim-indexed-search')
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:sjl/strftimedammit.vim')
   call packager#add('git@github.com:wincent/ferret')
