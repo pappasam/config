@@ -2110,6 +2110,9 @@ cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 " Open init.vim
 cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/init.vim')
 
+" Open zshrc
+cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
+
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 
