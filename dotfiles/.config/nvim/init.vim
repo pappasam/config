@@ -1360,6 +1360,13 @@ function! s:open_defx_if_directory()
   endif
 endfunction
 
+function! s:defx_redraw()
+  if !exists('g:loaded_defx')
+    return
+  endif
+  call defx#redraw()
+endfunction
+
 function! s:defx_buffer_remappings() abort
   " Define mappings
   for [key, value] in g:custom_defx_mappings
@@ -1563,11 +1570,10 @@ function! s:goyo_leave()
   if &filetype == 'markdown'
     " Preserve code highlighting
     doautocmd Mkd BufWinEnter
-  elseif &filetype == 'rst'
-    " Preserve italics and bold
-    syntax off
-    syntax on
   endif
+  syntax off
+  syntax on
+  windo call s:defx_redraw()
 endfunction
 
 autocmd! User GoyoEnter nested call s:goyo_enter()
