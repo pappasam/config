@@ -83,7 +83,8 @@ function! s:set_global_config()
   " Messages:
   " c = don't give |ins-completion-menu| messages; they're noisy
   " I = ignore startup message
-  set shortmess+=cI
+  set shortmess+=c
+  set shortmess+=I
 
   " Hidden Buffer: enable instead of having to write each buffer
   set hidden
@@ -135,9 +136,16 @@ function! s:set_global_config()
   set notimeout   " don't timeout on mappings
   set ttimeout    " do timeout on terminal key codes
 
-  " Local Vimrc: If exrc is set, the current directory is searched for 3 files
-  " in order (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
+  " Local Vimrc: execute commands from $PWD/.nvimrc
+  "
+  " *exrc* if set, the current directory is searched for 3 files in order
+  " (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
+  "
+  " *secure* disable unsafe commands in your project-specific config files
+  " This will prevent :autocmd, shell and write commands from being run inside
+  " project-specific config files unless they’re owned by you.
   set exrc
+  set secure
 
   " Default Shell:
   set shell=$SHELL
@@ -2115,15 +2123,5 @@ cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
-
-" }}}
-" General: Global Config + Cleanup {{{
-
-" commands that need to run at the end
-
-" disable unsafe commands in your project-specific config files
-" This will prevent :autocmd, shell and write commands from being
-" run inside project-specific config files unless they’re owned by you.
-set secure
 
 " }}}
