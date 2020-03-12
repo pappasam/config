@@ -1576,8 +1576,11 @@ function! s:goyo_leave()
   windo call s:defx_redraw()
 endfunction
 
-autocmd! User GoyoEnter nested call s:goyo_enter()
-autocmd! User GoyoLeave nested call s:goyo_leave()
+augroup custom_goyo
+  autocmd!
+  autocmd! User GoyoEnter nested call s:goyo_enter()
+  autocmd! User GoyoLeave nested call s:goyo_leave()
+augroup end
 
 " }}}
 " Plugin: RagTag {{{
