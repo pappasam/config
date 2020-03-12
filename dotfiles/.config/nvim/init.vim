@@ -1328,7 +1328,7 @@ let g:custom_defx_mappings = [
       \ ['<C-x>         ', "defx#do_action('open', 'split')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
-      \ ['O             ', "defx#is_opened_tree() ? defx#do_action('multi', ['close_tree', 'open_tree_recursive']) : defx#do_action('open_tree_recursive')"],
+      \ ['O             ', "defx#do_action('open_tree_recursive', 3)"],
       \ ['P             ', "defx#do_action('open', 'pedit')"],
       \ ['a             ', "defx#do_action('toggle_select')"],
       \ ['cc            ', "defx#do_action('copy')"],
