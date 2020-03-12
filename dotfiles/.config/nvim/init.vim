@@ -63,18 +63,11 @@ let maplocalleader = "\\"
 " }}}
 " General: Global config {{{
 
-function! s:alacritty_set_background()
-  let g:alacritty_background = system('alacritty-which-colorscheme')
-  if !v:shell_error
-    let &background = g:alacritty_background
-  else
-    echo 'error calling "alacritty-which-colorscheme"'
-    echo 'default to set background=dark'
-    set background=dark
-  endif
-endfunction
-
 function! s:set_global_config()
+
+  " Enable filetype detection, plugin loading, and indentation loading
+  filetype plugin indent on
+
   " Code Completion:
   set completeopt=menuone,longest
   set wildmode=longest,list,full
@@ -107,15 +100,9 @@ function! s:set_global_config()
   set nowrap
 
   " Highlight Search: do that
+  " note: hlsearcha nd nohlsearch are defined in autocmd outside function
   set incsearch
   set inccommand=nosplit
-  augroup sroeca_incsearch_highlight
-    autocmd!
-    autocmd CmdlineEnter /,\? set hlsearch
-    autocmd CmdlineLeave /,\? set nohlsearch
-  augroup end
-
-  filetype plugin indent on
 
   " Spell Checking:
   set dictionary=$HOME/.american-english-with-propcase.txt
@@ -133,11 +120,12 @@ function! s:set_global_config()
   " Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
   set pastetoggle=<C-_>
 
-  set notimeout   " don't timeout on mappings
-  set ttimeout    " do timeout on terminal key codes
+  " Don't timeout on mappings
+  set notimeout
+  " Do timeout on terminal key codes
+  set ttimeout
 
-  " Local Vimrc: execute commands from $PWD/.nvimrc
-  "
+  " Local Vimrc: execute commands securely from $PWD/.nvimrc
   " *exrc* if set, the current directory is searched for 3 files in order
   " (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
   "
@@ -156,12 +144,6 @@ function! s:set_global_config()
   " Window Splitting: Set split settings (options: splitright, splitbelow)
   set splitright
 
-  " Redraw Window:
-  augroup redraw_on_refocus
-    autocmd!
-    autocmd FocusGained * redraw!
-  augroup end
-
   " Terminal Color Support: only set guicursor if truecolor
   if $COLORTERM ==# 'truecolor'
     set termguicolors
@@ -169,12 +151,8 @@ function! s:set_global_config()
     set guicursor=
   endif
 
-  " Set Background: for PaperColor, also sets handler
-  call s:alacritty_set_background()
-  call jobstart(
-        \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-        \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
-        \ )
+  " Set Background: defaults do dark
+  set background=dark
 
   " Status Line: specifics for custom status line
   set laststatus=2
@@ -184,7 +162,7 @@ function! s:set_global_config()
   " ShowCommand: turn off character printing to vim status line
   set noshowcmd
 
-  " Configure Updatetime: time Vim waits to do something after I stop moving
+  " Updatetime: time Vim waits to do something after I stop moving
   set updatetime=300
 
   " Linux Dev Path: system libraries
@@ -198,6 +176,12 @@ function! s:set_global_config()
 endfunction
 
 call s:set_global_config()
+
+augroup custom_incsearch_highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? set hlsearch
+  autocmd CmdlineLeave /,\? set nohlsearch
+augroup end
 
 " }}}
 " General: Vim packages: vim-packager {{{
@@ -654,7 +638,31 @@ augroup fix_whitespace_save
 augroup end
 
 " }}}
+" Alacritty Callback: dynamic terminal color change {{{
+
+function! s:alacritty_set_background()
+  let g:alacritty_background = system('alacritty-which-colorscheme')
+  if !v:shell_error
+    let &background = g:alacritty_background
+  else
+    echom 'Error calling "alacritty-which-colorscheme"'
+  endif
+endfunction
+
+call s:alacritty_set_background()
+call jobstart(
+      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
+      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
+      \ )
+
+" }}}
 " General: Syntax highlighting {{{
+
+" Redraw Window: whenever a window regains focus
+augroup custom_redraw_on_refocus
+  autocmd!
+  autocmd FocusGained * redraw!
+augroup end
 
 " Typescript: fixes
 augroup typescript_syntax
@@ -2038,65 +2046,64 @@ function! s:default_key_mappings()
         \ pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
   inoremap <expr> <LeftMouse>
         \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
-
-  " Augroups: all key-mapping-relate augroups
-  augroup remap_markdown
-    autocmd!
-    autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
-  augroup end
-
-  " Mouse Open Close Folds: open folds with the mouse, and close the folds
-  " open operation taken from: https://stackoverflow.com/a/13924974
-  augroup foldenabled
-    autocmd!
-    autocmd FileType vim,tmux,bash,zsh,sh
-          \ nnoremap <expr> <2-LeftMouse>
-          \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
-    autocmd FileType vim,tmux,bash,zsh,sh
-          \ nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
-  augroup end
-
-  augroup remap_man_help
-    autocmd!
-    autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
-    autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
-    autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
-    autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
-    autocmd FileType help nnoremap <buffer> <C-]> <C-]>
-    autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
-  augroup end
-
-  augroup remap_rst
-    autocmd!
-    autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
-    autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection(0)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection(1)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
-    autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
-  augroup end
-
-  augroup remap_defx
-    autocmd!
-    autocmd FileType defx call s:defx_buffer_remappings()
-    autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
-    autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
-    autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
-    autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
-    autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
-  augroup end
-
 endfunction
 
 call s:default_key_mappings()
+
+" Augroups: all key-mapping-relate augroups
+augroup remap_markdown
+  autocmd!
+  autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
+augroup end
+
+" Mouse Open Close Folds: open folds with the mouse, and close the folds
+" open operation taken from: https://stackoverflow.com/a/13924974
+augroup foldenabled
+  autocmd!
+  autocmd FileType vim,tmux,bash,zsh,sh
+        \ nnoremap <expr> <2-LeftMouse>
+        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
+  autocmd FileType vim,tmux,bash,zsh,sh
+        \ nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
+augroup end
+
+augroup remap_man_help
+  autocmd!
+  autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
+  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
+  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
+  autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
+  autocmd FileType help nnoremap <buffer> <C-]> <C-]>
+  autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
+augroup end
+
+augroup remap_rst
+  autocmd!
+  autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
+  autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection(0)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection(1)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
+augroup end
+
+augroup remap_defx
+  autocmd!
+  autocmd FileType defx call s:defx_buffer_remappings()
+  autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
+augroup end
 
 " }}}
 " General: Abbreviations --- {{{
