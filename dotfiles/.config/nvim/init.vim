@@ -162,10 +162,10 @@ function! s:set_global_config()
   endif
 
   " Set Background: for PaperColor, also sets handler
-  call <SID>alacritty_set_background()
+  call s:alacritty_set_background()
   call jobstart(
         \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-        \ {'on_stdout': { j, d, e -> <SID>alacritty_set_background() }}
+        \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
         \ )
 
   " Status Line: specifics for custom status line
