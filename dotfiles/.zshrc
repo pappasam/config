@@ -128,9 +128,8 @@ export MANPAGER=less
 # Git
 export GIT_PAGER=less
 
-# tmuxinator
+# Set default text editor
 export EDITOR=/usr/bin/nvim
-export SHELL=/usr/bin/zsh
 
 # environment variable controlling difference between HI-DPI / Non HI_DPI
 # turn off because it messes up my pdf tooling
