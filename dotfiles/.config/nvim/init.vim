@@ -391,11 +391,11 @@ function s:pack_init() abort
   call packager#add('git@github.com:dhruvasagar/vim-marp')
 endfunction
 
-command! PackInstall call <SID>pack_init() | call packager#install()
-command! -bang PackUpdate call <SID>pack_init() | call packager#update({ 'force_hooks': '<bang>' })
-command! PackClean call <SID>pack_init() | call packager#clean()
-command! PackStatus call <SID>pack_init() | call packager#status()
-command! -bang PU call <SID>pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackInstall call s:pack_init() | call packager#install()
+command! -bang PackUpdate call s:pack_init() | call packager#update({ 'force_hooks': '<bang>' })
+command! PackClean call s:pack_init() | call packager#clean()
+command! PackStatus call s:pack_init() | call packager#status()
+command! -bang PU call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
 " General: Status Line and Tab Line {{{
@@ -605,8 +605,8 @@ function! s:read_dict_to_preview(word, dict) range
   execute ":redraw!"
 endfunction
 
-command! -nargs=1 Def call <SID>read_dict_to_preview(<q-args>, "gcide")
-command! -nargs=1 Syn call <SID>read_dict_to_preview(<q-args>, "moby-thesaurus")
+command! -nargs=1 Def call s:read_dict_to_preview(<q-args>, "gcide")
+command! -nargs=1 Syn call s:read_dict_to_preview(<q-args>, "moby-thesaurus")
 
  " }}}
 " General: Folding Settings {{{
@@ -638,7 +638,7 @@ function! s:trim_whitespace()
   call winrestview(l:save)
 endfunction
 
-command! TrimWhitespace call <SID>trim_whitespace()
+command! TrimWhitespace call s:trim_whitespace()
 
 augroup fix_whitespace_save
   autocmd!
@@ -782,8 +782,8 @@ function! s:resize_window_height()
   endif
 endfunction
 
-command! ResizeWindowWidth call <SID>resize_window_width()
-command! ResizeWindowHeight call <SID>resize_window_height()
+command! ResizeWindowWidth call s:resize_window_width()
+command! ResizeWindowHeight call s:resize_window_height()
 
 " }}}
 " General: Avoid saving 'lcd' {{{
@@ -838,7 +838,7 @@ function! s:delete_inactive_buffers()
   echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
 
-command! DeleteInactiveBuffers call <SID>delete_inactive_buffers()
+command! DeleteInactiveBuffers call s:delete_inactive_buffers()
 
 " }}}
 " General: Clean Unicode {{{
@@ -852,7 +852,7 @@ function! s:clean_unicode()
   silent! %s/—/-/g
   silent! %s/…/.../g
 endfunction()
-command! CleanUnicode call <SID>clean_unicode()
+command! CleanUnicode call s:clean_unicode()
 
 " }}}
 " General: Neovim Terminal {{{
@@ -984,8 +984,8 @@ function! s:code_run()
   endif
 endfunction
 
-command! Build call <SID>code_build()
-command! Run call <SID>code_run()
+command! Build call s:code_build()
+command! Run call s:code_run()
 
 " }}}
 " General: Command abbreviations {{{
@@ -1036,7 +1036,7 @@ function! s:vim_colors()
   set nomodifiable
 endfunction
 
-command! VimColors silent call <SID>vim_colors()
+command! VimColors silent call s:vim_colors()
 
 " }}}
 " General: Toggle numbers {{{
@@ -1057,8 +1057,8 @@ function! s:toggle_relative_number()
   endif
 endfunction
 
-command! ToggleNumber call <SID>toggle_number()
-command! ToggleRelativeNumber call <SID>toggle_relative_number()
+command! ToggleNumber call s:toggle_number()
+command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
 " General: keywordprg {{{
@@ -1117,7 +1117,7 @@ function! s:jinja2_toggle()
   execute "set filetype=" . new_filetype
 endfunction
 
-command! Jinja2Toggle call <SID>jinja2_toggle()
+command! Jinja2Toggle call s:jinja2_toggle()
 
 " }}}
 " Plugin: Man pager / help (builtins) {{{
@@ -1200,7 +1200,7 @@ function! s:line_match_count(pat,...)
 endfunction
 
 command! HovercraftSlide echo 'Slide '
-      \ . <SID>line_match_count('^----$', 1, line('.'))
+      \ . s:line_match_count('^----$', 1, line('.'))
 
 let g:no_rst_sections_maps = 0
 
@@ -1266,7 +1266,7 @@ function! s:preview()
   endif
 endfunction
 
-command! Preview call <SID>preview()
+command! Preview call s:preview()
 
 " }}}
 " Plugin: defx {{{
@@ -1543,7 +1543,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  call <SID>default_key_mappings()
+  call s:default_key_mappings()
   if &filetype == 'markdown'
     " Preserve code highlighting
     doautocmd Mkd BufWinEnter
@@ -1554,8 +1554,8 @@ function! s:goyo_leave()
   endif
 endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+autocmd! User GoyoEnter nested call s:goyo_enter()
+autocmd! User GoyoLeave nested call s:goyo_leave()
 
 " }}}
 " Plugin: RagTag {{{
