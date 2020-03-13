@@ -1,0 +1,17 @@
+version: 2
+
+tools:
+  python-mypy: &python-mypy
+    lint-command: 'mypy --show-column-numbers'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+  python-pylint: &python-pylint
+    lint-command: 'pylint'
+    lint-formats:
+      - '%f:%l:%c: %t%m'
+
+languages:
+  python:
+    - <<: *python-pylint

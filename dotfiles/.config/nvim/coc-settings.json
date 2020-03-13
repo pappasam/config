@@ -7,5 +7,21 @@
     "[",
     "{",
     "<"
-  ]
+  ],
+  "languageserver": {
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["python"]
+    },
+    "jls": {
+      "command": "jedi-language-server",
+      "args": [],
+      "filetypes": ["python"],
+      "initializationOptions": {
+      },
+      "settings": {
+      }
+    }
+  }
 }
