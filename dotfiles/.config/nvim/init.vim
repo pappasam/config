@@ -2065,6 +2065,12 @@ augroup remap_markdown
   autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
 augroup end
 
+augroup click_override
+  autocmd!
+  autocmd FileType qf nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
+  autocmd FileType man nnoremap <buffer> <2-LeftMouse> <C-]>
+augroup end
+
 " Mouse Open Close Folds: open folds with the mouse, and close the folds
 " open operation taken from: https://stackoverflow.com/a/13924974
 augroup foldenabled
