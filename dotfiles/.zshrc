@@ -723,6 +723,11 @@ function pydev-install() {  ## Install default python dependencies
   asdf reshim python
 }
 
+function godev-install() {  ## Install default golang dependencies
+  go get github.com/mattn/efm-langserver
+  asdf reshim golang
+}
+
 # activate virtual environment from any directory from current and up
 # Name of virtualenv
 VIRTUAL_ENV_DEFAULT=.venv
