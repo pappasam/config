@@ -505,9 +505,6 @@ alias cookiecutter-hovercraft='cookiecutter gh:pappasam/cookiecutter-hovercraft'
 alias cargo-update='cargo +nightly install-update -a'
 alias cargo-doc='cargo doc --open'
 
-# Alacritty helpers
-alias alacritty-deb-install='cargo deb --install -p alacritty'
-
 # Python
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
@@ -584,6 +581,14 @@ function light() {
     tmux source-file ~/.tmux-light
   fi
 }
+
+function alacritty-install() {
+  cargo deb --install -p alacritty
+  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+}
+
+# Alacritty helpers
+
 
 # Fix window dimensions: tty mode
 # Set consolefonts to appropriate size based on monitor resolution
