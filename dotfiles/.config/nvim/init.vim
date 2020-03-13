@@ -1319,7 +1319,6 @@ let g:custom_defx_mappings = [
       \ ['<C-g>         ', "defx#do_action('print')"],
       \ ['<C-h>         ', "defx#do_action('resize', 31)"],
       \ ['<C-i>         ', "defx#do_action('open_directory')"],
-      \ ['<C-l>         ', "defx#do_action('resize', 72)"],
       \ ['<C-o>         ', "defx#do_action('cd', ['..'])"],
       \ ['<C-r>         ', "defx#do_action('redraw')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
@@ -2021,14 +2020,14 @@ function! s:default_key_mappings()
   " Search workspace symbols
   nnoremap <silent> <leader>sw :<C-u>CocList -I symbols<cr>
   " Use <c-space> to trigger completion
-  inoremap <silent><expr> <c-space> coc#refresh()
+  inoremap <silent> <expr> <c-space> coc#refresh()
   " Scroll in floating window
-  nnoremap <expr><C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-  nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+  nnoremap <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
+  nnoremap <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
   " snippets: most mappings done as global option in Coc section
   imap <C-l> <Plug>(coc-snippets-expand)
   " For pairs, correctly position cursor on Enter
-  inoremap <silent><expr> <CR>
+  inoremap <silent> <expr> <CR>
         \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   " Toggle diagnostics
   nnoremap <silent> <leader>a :CocDiagnosticToggle<CR>
@@ -2125,11 +2124,12 @@ augroup end
 augroup remap_defx
   autocmd!
   autocmd FileType defx call s:defx_buffer_remappings()
-  autocmd FileType defx nmap <buffer><silent> gp <Plug>(defx-git-prev)
-  autocmd FileType defx nmap <buffer><silent> gn <Plug>(defx-git-next)
-  autocmd FileType defx nmap <buffer><silent> gs <Plug>(defx-git-stage)
-  autocmd FileType defx nmap <buffer><silent> gu <Plug>(defx-git-reset)
-  autocmd FileType defx nmap <buffer><silent> gd <Plug>(defx-git-discard)
+  autocmd FileType defx nmap <buffer> <silent> gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap <buffer> <silent> gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap <buffer> <silent> gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap <buffer> <silent> gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap <buffer> <silent> gd <Plug>(defx-git-discard)
+  autocmd FileType defx nnoremap <buffer> <silent> <C-l> :ResizeWindowWidth<CR>
 augroup end
 
 " }}}
