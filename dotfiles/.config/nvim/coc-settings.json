@@ -18,6 +18,12 @@
       "command": "jedi-language-server",
       "args": [],
       "filetypes": ["python"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {
+      }
     }
   }
 }

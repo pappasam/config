@@ -1676,6 +1676,18 @@ let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
 let g:coc_start_at_startup = 1
 
+" Coc Pairs: enable/disable characters per filetype
+augroup coc_pairs_custom
+  autocmd!
+  autocmd FileType terraform let b:coc_pairs = [
+        \ ['(', ')'],
+        \ ['[', ']'],
+        \ ['{', '}'],
+        \ ['<', '>'],
+        \ ['"', '"'],
+        \ ]
+augroup end
+
 " Customization:
 function! s:coc_diagnostic_disable()
   call coc#config('diagnostic.enable', v:false)

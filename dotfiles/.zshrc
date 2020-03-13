@@ -176,6 +176,12 @@ if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
 fi
 
+HOME_BIN_HIDDEN="$HOME/.bin"
+if [ ! -d "$HOME_BIN_HIDDEN" ]; then
+  mkdir "$HOME_BIN_HIDDEN"
+fi
+path_ladd "$HOME_BIN_HIDDEN"
+
 POETRY_LOC="$HOME/.poetry/bin"
 if [ -d "$POETRY_LOC" ]; then
   path_ladd "$POETRY_LOC"
