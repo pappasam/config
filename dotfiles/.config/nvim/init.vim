@@ -2068,6 +2068,7 @@ augroup click_override
   autocmd!
   autocmd FileType qf nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
   autocmd FileType man nnoremap <buffer> <2-LeftMouse> <C-]>
+  autocmd FileType markdown,rst nnoremap <buffer> <silent> <2-LeftMouse> :normal gx<CR>
 augroup end
 
 " Mouse Open Close Folds: open folds with the mouse, and close the folds
