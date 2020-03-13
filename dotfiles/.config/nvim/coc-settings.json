@@ -17,11 +17,7 @@
     "jls": {
       "command": "jedi-language-server",
       "args": [],
-      "filetypes": ["python"],
-      "initializationOptions": {
-      },
-      "settings": {
-      }
+      "filetypes": ["python"]
     }
   }
 }
