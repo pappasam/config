@@ -305,6 +305,7 @@ function s:pack_init() abort
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
         \ 'git@github.com:neoclide/coc-json.git',
+        \ 'git@github.com:neoclide/coc-lists.git',
         \ 'git@github.com:neoclide/coc-pairs.git',
         \ 'git@github.com:neoclide/coc-rls.git',
         \ 'git@github.com:neoclide/coc-snippets.git',
