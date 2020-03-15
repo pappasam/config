@@ -233,9 +233,6 @@ function s:pack_init() abort
   " Fuzzy Finder:
   call packager#add('git@github.com:junegunn/fzf')
   call packager#add('git@github.com:junegunn/fzf.vim')
-  " Below needed by fzf-preview
-  call packager#add('git@github.com:bogado/file-line.git')
-  call packager#add('git@github.com:yuki-ycino/fzf-preview.vim.git')
 
   " Git:
   call packager#add('git@github.com:tpope/vim-fugitive')
@@ -1414,7 +1411,7 @@ function! s:fzf_buffers_avoid_defx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
-  FzfPreviewBuffers
+  Buffers
 endfunction
 
 " Note: <C-a><C-l> places the remaining files in a vertical split
