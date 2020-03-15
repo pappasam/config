@@ -1,9 +1,9 @@
-# Samuel Roeca's dotfiles
+# dotfiles, by Sam
 
-This a repository of Sam Roeca's personal system settings. Feel free to repurpose these files in any way you so-desire.
+Samuel Roeca's personal [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) for Linux Mint 18 / Ubuntu 19. Feel free to use anything you find useful.
 
-GNU Stow helps automate the placement of symbolic links in the home directory. Run the following command from this directory to place the files in the proper location on your OS:
+GNU Stow automates the placement of symbolic links in the home directory. To get started, run `make` from the command line.
 
-```bash
-make dotfiles
-```
+## Author
+
+Samuel Roeca *samuel.roeca@gmail.com*
