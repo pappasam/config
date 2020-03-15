@@ -635,7 +635,7 @@ augroup fix_whitespace_save
 augroup end
 
 " }}}
-" Alacritty Callback: dynamic terminal color change {{{
+" General: alacritty callback for dynamic terminal color change {{{
 
 function! s:alacritty_set_background()
   let g:alacritty_background = system('alacritty-which-colorscheme')
