@@ -284,6 +284,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
   call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
+  call packager#add('git@github.com:gisraptor/vim-lilypond-integrator.git')
 
   " Indentation Only:
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')

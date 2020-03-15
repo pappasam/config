@@ -358,6 +358,13 @@ pip install saws
 pip install restview
 
 #######################################################################
+# Lilypond
+#######################################################################
+
+# Go to https://lilypond.org/unix.html and download latest 64 bit version
+# Follow installation instructions; it installs for specific user
+
+#######################################################################
 # Inkscape (a great svg drawing program)
 #######################################################################
 # sudo snap install inkscape
