@@ -356,7 +356,6 @@ function s:pack_init() abort
         \ })
   call packager#add('git@github.com:junegunn/goyo.vim')
   call packager#add('git@github.com:junegunn/limelight.vim')
-  call packager#add('git@github.com:reedes/vim-wordy')
   call packager#add('git@github.com:tommcdo/vim-exchange')
   call packager#add('git@github.com:dbmrq/vim-ditto')
   call packager#add('git@github.com:swordguin/vim-veil.git')
