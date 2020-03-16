@@ -1414,14 +1414,9 @@ function! s:fzf_buffers_avoid_defx()
   Buffers
 endfunction
 
-" Note: <C-a><C-l> places the remaining files in a vertical split
 let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
 let g:fzf_preview_default_key_bindings =
       \ 'ctrl-e:preview-page-down,ctrl-y:preview-page-up,?:toggle-preview'
-let g:fzf_preview_layout = 'botright split new'
-let g:fzf_preview_quit_map = v:true
-let g:fzf_preview_rate = 0.4
-let g:fzf_preview_use_floating_window = 0
 let g:fzf_custom_file_options = '-m --bind '
       \ . g:fzf_preview_default_key_bindings . ' '
       \ . '--reverse '
