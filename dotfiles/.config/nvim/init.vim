@@ -396,18 +396,15 @@ function! s:set_status_and_tabline()
   " Status Line
   set laststatus=2
   set statusline=
-  set statusline+=\ %{mode()}\  " spaces after mode
   set statusline+=%#CursorLine#
-  set statusline+=\   " space
-  set statusline+=%{&paste?'[PASTE]':''}
-  set statusline+=%{&spell?'[SPELL]':''}
+  set statusline+=\ %{mode()}
+  set statusline+=\ %*\  " Color separator + space
+  set statusline+=%{&paste?'[P]':''}
+  set statusline+=%{&spell?'[S]':''}
   set statusline+=%r
+  set statusline+=%t
   set statusline+=%m
-  set statusline+=\   " space
-  set statusline+=%*  " default color
-  set statusline+=\ %t  " tailed filename
   set statusline+=%=
-  set statusline+=%v  " column number
   set statusline+=\ %y\  " file type
   set statusline+=%#CursorLine#
   set statusline+=\ %{&ff}\  " Unix or Dos
@@ -503,7 +500,7 @@ set colorcolumn=80
 augroup colorcolumn_configuration
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-  autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
+  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
 augroup end
 
 " }}}
