@@ -1793,6 +1793,7 @@ let g:bullets_enabled_file_types = [
       \ 'scratch',
       \ 'rst',
       \ ]
+let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom']
 
 " RequirementsVim: filetype detection (begin with requirements)
 let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
