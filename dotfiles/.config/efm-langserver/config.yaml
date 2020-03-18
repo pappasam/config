@@ -1,7 +1,7 @@
 version: 2
 tools:
   python-pylint: &python-pylint
-    lint-command: 'pylint --output-format text --score no'
+    lint-command: 'pylint --output-format text --score no --msg-template="{path}:{line}:{column}: {C}{msg_id}: {msg} ({symbol})"'
     lint-formats:
       - '%f:%l:%c: %t%m'
 languages:
