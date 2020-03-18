@@ -287,9 +287,9 @@ function s:pack_init() abort
   call packager#add('git@github.com:gisraptor/vim-lilypond-integrator.git')
 
   " Indentation Only:
+  call packager#add('git@github.com:Yggdroot/indentLine')
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
   call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
-  call packager#add('git@github.com:Yggdroot/indentLine')
 
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:honza/vim-snippets.git')
@@ -352,9 +352,6 @@ function s:pack_init() abort
         \ })
   call packager#add('git@github.com:junegunn/goyo.vim')
   call packager#add('git@github.com:junegunn/limelight.vim')
-  call packager#add('git@github.com:tommcdo/vim-exchange')
-  call packager#add('git@github.com:dbmrq/vim-ditto')
-  call packager#add('git@github.com:swordguin/vim-veil.git')
 
   " Previewers:
   call packager#add('git@github.com:iamcco/markdown-preview.nvim', {
@@ -366,14 +363,8 @@ function s:pack_init() abort
   " Code Formatters:
   call packager#add('git@github.com:pappasam/vim-filetype-formatter')
 
-  " C:
-  call packager#add('git@github.com:ericcurtin/CurtineIncSw.vim')
-
   " Repl Integration:
   call packager#add('git@github.com:jpalardy/vim-slime.git')
-
-  " Presentation:
-  call packager#add('git@github.com:dhruvasagar/vim-marp')
 endfunction
 
 command! PackInstall call s:pack_init() | call packager#install()
@@ -1953,9 +1944,6 @@ function! s:default_key_mappings()
   " DeleteHiddenBuffers: shortcut to make this easier
   " note: weird stuff happens if you mess this up
   nnoremap <leader>d :DeleteInactiveBuffers<CR>
-
-  " Jumping To Header File:
-  nnoremap gh :call CurtineIncSw()<CR>
 
   " SearchBackward: remap comma to single quote
   nnoremap ' ,
