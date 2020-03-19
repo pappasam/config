@@ -1991,7 +1991,7 @@ function! s:default_key_mappings()
   imap <C-l> <Plug>(coc-snippets-expand)
   " For pairs, correctly position cursor on Enter
   inoremap <silent> <expr> <CR>
-        \ pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+        \ pumvisible() ? '<CR>' : '\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>'
   " Toggle diagnostics
   nnoremap <silent> <leader>a :CocDiagnosticToggle<CR>
   nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
