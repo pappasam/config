@@ -448,6 +448,8 @@ augroup custom_comment_config
   autocmd!
   autocmd FileType dosini
         \ setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType tmux
+        \ setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
   autocmd FileType jsonc
         \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
