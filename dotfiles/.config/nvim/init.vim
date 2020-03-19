@@ -300,6 +300,7 @@ function s:pack_init() abort
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:josa42/coc-docker.git',
+        \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
         \ 'git@github.com:neoclide/coc-json.git',
@@ -2106,12 +2107,6 @@ function! s:abbr_help(in_command, out_command)
   endif
 endfunction
 
-function! s:coc_config()
-  tabe ~/dotfiles/dotfiles/.config/nvim/coc-settings.json
-  vsplit ~/dotfiles/dotfiles/.config/efm-langserver/config.yaml
-  wincmd w
-endfunction
-
 " Using Ack and Acks brings up quickfix automatically
 cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
@@ -2122,8 +2117,9 @@ cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/
 " Open zshrc
 cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
 
-" Open coc settings
-cnoreabbrev <expr> cs <SID>abbr_help('cs', 'call <SID>coc_config()')
+" Open settings for language server files
+cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> efm <SID>abbr_help('efm', 'edit ~/dotfiles/dotfiles/.config/efm-langserver/config.yaml')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
