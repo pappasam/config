@@ -1398,6 +1398,23 @@ augroup custom_keywordprg
 augroup end
 
 " }}}
+" General: skeleton templates {{{
+
+" Create temporary file from skeleton
+function! s:skeleton_temp(file_skeleton, filetype)
+  execute 'edit ' . tempname()
+  execute '0read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
+  let &filetype = a:filetype
+  /{{Cursor}}
+  normal! n
+  normal! da{
+  startinsert!
+endfunction
+
+command! Clubhouse silent call s:skeleton_temp('clubhouse.md', 'markdown')
+command! Standup silent call s:skeleton_temp('standup.md', 'markdown')
+
+" }}}
 " Plugins: git plugins: gv.vim, fugitive, git-messenger {{{
 
 " NOTES:
