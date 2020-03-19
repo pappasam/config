@@ -165,3 +165,4 @@ shell:
 # Key bindings: see alacritty's latest example config file for defaults
 key_bindings:
   - { key: LBracket, mods: Control, mode: Vi, action: ClearSelection }
+  - { key: 05, mods: Shift, mode: Vi, action: Last }
