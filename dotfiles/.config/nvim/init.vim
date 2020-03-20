@@ -170,6 +170,7 @@ function s:pack_init() abort
   for coc_plugin in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
+        \ 'git@github.com:iamcco/coc-diagnostic.git',
         \ 'git@github.com:josa42/coc-docker.git',
         \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
@@ -730,7 +731,6 @@ cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
 
 " Open settings for language server files
 cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
-cnoreabbrev <expr> efm <SID>abbr_help('efm', 'edit ~/dotfiles/dotfiles/.config/efm-langserver/config.yaml')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
