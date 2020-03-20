@@ -1403,7 +1403,8 @@ augroup end
 " Create temporary file from skeleton
 function! s:skeleton_temp(file_skeleton, filetype)
   execute 'edit ' . tempname()
-  execute '0read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
+  execute 'read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
+  0delete_
   let &filetype = a:filetype
   /{{Cursor}}
   normal! n
