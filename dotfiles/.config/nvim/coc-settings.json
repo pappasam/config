@@ -2,6 +2,7 @@
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
+  "yank.highlight.duration": 1000,
   "pairs.enableCharacters": [
     "(",
     "[",
