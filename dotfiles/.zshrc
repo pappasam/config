@@ -571,7 +571,14 @@ function light() {
 
 function alacritty-install() {
   cargo deb --install -p alacritty
+
+  # terminfo
   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+
+  # man page
+  sudo mkdir -p /usr/local/share/man/man1
+  gzip -c extra/alacritty.man | \
+    sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 }
 
 # Alacritty helpers
