@@ -296,6 +296,10 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=8
 
+" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
+set isfname+=@-@
+set isfname+=:
+
 " Highlight Search: do that
 " note: hlsearcha nd nohlsearch are defined in autocmd outside function
 set incsearch
@@ -706,6 +710,30 @@ augroup custom_remap_defx
   autocmd FileType defx nmap <buffer> <silent> gd <Plug>(defx-git-discard)
   autocmd FileType defx nnoremap <buffer> <silent> <C-l> :ResizeWindowWidth<CR>
 augroup end
+
+augroup custom_init_vim
+  autocmd!
+  autocmd BufNewFile,BufRead,BufEnter init.vim
+        \ nnoremap <buffer> <silent> gf :call <SID>gf_vimrc_open_plugin()<CR>
+augroup end
+
+" }}}
+" General: vimrc / init.vim helpers {{{
+
+function! s:gf_vimrc_open_plugin()
+  let ssh_url = expand('<cfile>')
+  let ssh_components = split(ssh_url, '/')
+  if len(ssh_components) != 2
+    " do regular 'gf'
+    normal! gf
+    return
+  endif
+  let directory = ssh_components[1]
+  let parent_directory = directory == 'vim-packager' ? 'opt/' : 'start/'
+  let path = '~/.config/nvim/pack/packager/' . parent_directory . directory
+  execute 'tabe ' . path
+  execute 'lcd ' . path
+endfunction
 
 " }}}
 " General: abbreviations --- {{{
@@ -1722,10 +1750,11 @@ function! s:fzf_files_avoid_defx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
+  " ignore below comment: keeping for now in case I need it again soon:
   " getcwd(-1, -1) tells it to always use the global working directory
+  " 'dir': getcwd(-1, -1),
   call fzf#run(fzf#wrap({
         \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
-        \ 'dir': getcwd(-1, -1),
         \ 'options': g:fzf_custom_file_options,
         \ }))
 endfunction

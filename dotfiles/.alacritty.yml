@@ -166,3 +166,5 @@ shell:
 key_bindings:
   - { key: LBracket, mods: Control, mode: Vi, action: ClearSelection }
   - { key: 05, mods: Shift, mode: Vi, action: Last }
+  - { key: 06, mods: Shift, mode: Vi, action: Bracket }
+  - { key: 07, mods: Shift, mode: Vi, action: FirstOccupied }
