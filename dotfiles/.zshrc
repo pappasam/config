@@ -425,6 +425,8 @@ alias snvim='sudo nvim -u NONE'
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
 alias vplug='cd ~/.config/nvim/pack/packager/start'
+alias clubhouse='nvim -c "Clubhouse"'
+alias standup='nvim -c "Standup"'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
@@ -877,23 +879,6 @@ function pynew() {
 
 EOL
   chmod +x main.py
-}
-
-# Templates for nvim
-function _md_template() {  # arg1: template
-  local current_date=$(date +'%Y-%m-%d_%H:%M:%S')
-  local calling_func=$funcstack[2]
-  local filepath="/tmp/${calling_func}_$current_date.md"
-  echo -e $1 > $filepath
-  nvim -c 'set nofoldenable' $filepath
-}
-
-function clubhouse() {
-  _md_template "## Objective\n## Value\n## Acceptance Criteria"
-}
-
-function standup() {
-  _md_template "*Yesterday:*\n*Today:*\n*Blockers/Reminders:*"
 }
 
 # Profiling neovim
