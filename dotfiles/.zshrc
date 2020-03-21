@@ -1,19 +1,5 @@
-#!/bin/zsh
-
-# Notes:
-#
-# Searching for a specific man page
-#   1. apropros
-#   2. man -k
-#
-# Clearning "less" search results
-#   Alt-u
-
-#######################################################################
-# Environment Setup
-#######################################################################
-
-# Path Functions {{{
+# Samuel Roeca's '~/.zshrc'. Toggle folds with 'za'.
+# Env: path functions {{{
 
 function path_ladd() {
   # Takes 1 argument and adds it to the beginning of the PATH
@@ -30,7 +16,7 @@ function path_radd() {
 }
 
 # }}}
-# Exported variable: LS_COLORS {{{
+# Env: LS_COLORS {{{
 
 # Colors when using the LS command
 # NOTE:
@@ -97,7 +83,7 @@ LS_COLORS+="*.rpm=90"
 export LS_COLORS
 
 # }}}
-# Exported variables: General {{{
+# Env: exported variables {{{
 
 # React
 export REACT_EDITOR='less'
@@ -164,7 +150,7 @@ export WINIT_HIDPI_FACTOR=1.0
 export BAT_PAGER=''
 
 # }}}
-# Path appends + Misc env setup {{{
+# Env: path appends + misc env setup {{{
 
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]; then
@@ -197,12 +183,7 @@ fi
 export PATH
 
 # }}}
-
-#######################################################################
-# Interactive session setup
-#######################################################################
-
-# Import from other Bash Files {{{
+# Src: script sourcing {{{
 
 include () {
   [[ -f "$1" ]] && source "$1"
@@ -211,7 +192,7 @@ include () {
 include ~/.bash/sensitive
 
 # }}}
-# Plugins {{{
+# Zsh: plugins {{{
 
 if [ -f $HOME/.zplug/init.zsh ]; then
   source $HOME/.zplug/init.zsh
@@ -250,7 +231,7 @@ else
 fi
 
 # }}}
-# ZShell Options {{{
+# Zsh: options {{{
 
 #######################################################################
 # Set options
@@ -293,13 +274,13 @@ export PERIOD=1
 export LISTMAX=0
 
 # }}}
-# ZShell Misc Autoloads {{{
+# Zsh: misc autoloads {{{
 
 # Enables zshell calculator: type with zcalc
 autoload -Uz zcalc
 
 # }}}
-# ZShell Hook Functions {{{
+# Zsh: hook functions {{{
 
 # NOTE: precmd is defined within the prompt section
 
@@ -350,7 +331,7 @@ function zshexit() {
 }
 
 # }}}
-# ZShell Auto Completion {{{
+# Zsh: auto completion {{{
 
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -385,7 +366,7 @@ compctl -f -K _vault_complete vault
 fpath+=~/.zfunc
 
 # }}}
-# ZShell Key-Bindings {{{
+# Zsh: key remapping {{{
 
 # emacs
 bindkey -e
@@ -410,13 +391,13 @@ bindkey -M menuselect '^l' forward-char
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}
-# ASDF: needs to run after ZSH setup {{{
+# Src: asdf (needs to run after zsh setup) {{{
 
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
 
 # }}}
-# Aliases {{{
+# Gen: aliases {{{
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
@@ -525,7 +506,7 @@ alias goenv-init='eval "$(goenv init -)"'
 alias rbenv-init='eval "$(rbenv init -)"'
 
 # }}}
-# Functions {{{
+# Gen: functions {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
@@ -1086,7 +1067,7 @@ function yamltojson() {
 compdef '_files -g "*.(yml|yaml)"' yamltojson
 
 # }}}
-# Compdef Test {{{
+# Gen: compdef testing {{{
 
 # Example from:
 # https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
@@ -1146,7 +1127,7 @@ compdef _hello hello
 
 
 # }}}
-# ZShell prompt (PS1) {{{
+# Zsh: shell prompt config {{{
 
 # https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
 
@@ -1155,33 +1136,8 @@ SPACESHIP_PROMPT_ORDER=(
   host          # Hostname section
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
-  # hg            # Mercurial section (hg_branch  + hg_status)
-  # package       # Package version
-  # node          # Node.js section
-  # ruby          # Ruby section
-  # elixir        # Elixir section
-  # xcode         # Xcode section
-  # swift         # Swift section
-  # golang        # Go section
-  # php           # PHP section
-  # rust          # Rust section
-  # haskell       # Haskell Stack section
-  # julia         # Julia section
-  # docker        # Docker section
-  # aws           # Amazon Web Services section
   venv          # virtualenv section
-  # conda         # conda virtualenv section
-  # pyenv         # Pyenv section
-  # dotnet        # .NET section
-  # ember         # Ember.js section
-  # kubecontext   # Kubectl context section
-  # terraform     # Terraform workspace section
-  # exec_time     # Execution time
   line_sep      # Line break
-  # battery       # Battery level and status
-  # vi_mode       # Vi-mode indicator
-  # jobs          # Background jobs indicator
-  # exit_code     # Exit code section
   char          # Prompt character
 )
 
@@ -1202,93 +1158,8 @@ SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
 
-
-# NOTE Below is legacy:
-# NOTE this is not cross-shell; zsh-specific
-
-########################################################################
-## BEGIN: Git formatting
-########################################################################
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' stagedstr '%F{yellow}=%f'
-#zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
-#zstyle ':vcs_info:*' check-for-changes true
-#zstyle ':vcs_info:*' actionformats \
-#  '%F{magenta}[%F{green}%b%F{yellow}|%F{red}%a%F{magenta}]%f '
-#zstyle ':vcs_info:*' formats \
-#  '%F{magenta}[%F{green}%b%m%F{magenta}] %F{green}%c%F{yellow}%u%f'
-#zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
-#zstyle ':vcs_info:*' enable git
-
-## Show untracked files
-#untracked_msg="Untracked files:"
-#function +vi-git-untracked() {
-#  local in_tree=$(git rev-parse --is-inside-work-tree 2> /dev/null)
-#  local untracked=$(git status | grep "$untracked_msg")
-#  if [[ "$in_tree" == 'true' ]] && [[ "$untracked" == "$untracked_msg" ]]; then
-#    hook_com[unstaged]+='%F{red}?%f'
-#  fi
-#}
-
-## Show remote ref name and number of commits ahead-of or behind
-#function +vi-git-st() {
-#  local ahead behind remote
-#  local -a gitstatus
-
-#  # Are we on a remote-tracking branch?
-#  remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
-#    --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
-
-#  if [[ -n ${remote} ]] ; then
-#    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-#    (( $ahead )) && gitstatus+=( "${c3}+${ahead}${c2}" )
-#    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-#    (( $behind )) && gitstatus+=( "${c4}-${behind}${c2}" )
-#    hook_com[branch]="${hook_com[branch]} [@ ${(j:/:)gitstatus}]"
-#  fi
-#}
-
-## Show count of stashed changes
-#function +vi-git-stash() {
-#  local -a stashes
-
-#  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-#    stashes=$(git stash list 2>/dev/null | wc -l)
-#    hook_com[misc]+=" (stash ${stashes})"
-#  fi
-#}
-
-########################################################################
-## END: Git formatting
-########################################################################
-
-## Set Terminal settings
-## https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-#COLOR_BRIGHT_BLUE="6"
-#COLOR_GOLD="3"
-#COLOR_SILVER="7"
-#COLOR_PYTHON_GREEN="2"
-#COLOR_WHITE="15"
-#COLOR_BLACK="0"
-
-## Set Bash PS1
-#PS1_DIR="%B%F{$COLOR_BRIGHT_BLUE}%~%f%b"
-#PS1_USR="%B%F{$COLOR_GOLD}%n@%M%b%f"
-#PS1_END="%B%F{$COLOR_BLACK}$ %f%b"
-
-## Figure out if a Python virtualenv is active
-#function virtualenv_info(){
-#  if [[ -n "$VIRTUAL_ENV" ]]; then
-#    echo "<venv-active>"
-#  fi
-#}
-
-#PS1="${PS1_DIR} \$vcs_info_msg_0_ %F{$COLOR_PYTHON_GREEN}\$(virtualenv_info)%f \
-
-#${PS1_USR} ${PS1_END}"
-
 # }}}
-# FZF {{{
+# Zsh: fzf {{{
 
 # Use fd to generate the list for file and directory completion
 _fzf_compgen_path() {
@@ -1312,7 +1183,7 @@ bindkey '^I' $fzf_default_completion
 # fzf-history-widget
 
 # }}}
-# Executed Commands {{{
+# Exe: executed commands {{{
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
@@ -1332,5 +1203,15 @@ if [[ -o interactive ]]; then
   va &> /dev/null
 
 fi
+
+# }}}
+# Man: helpful hints {{{
+
+# Searching for a specific man page
+#   1. apropros
+#   2. man -k
+#
+# Clearning "less" search results
+#   Alt-u
 
 # }}}

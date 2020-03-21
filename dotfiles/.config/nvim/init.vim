@@ -1,60 +1,4 @@
-" Author: Samuel Roeca <samuel.roeca@gmail.com>
-"
-" Notes:
-"   * To toggle sections below, scroll over a folded section and type 'za'
-"     when in Normal mode.
-" Notes: continued {{{
-
-" This is my Neovim configuration file. Hopefully you enjoy using it as much
-" as me! I use Linux Mint / Ubuntu 18.04, but this will probably work with
-" most Linux-based OS's.
-"
-" Installation:
-"   1. Put file in correct place within filesystem
-"     Soft-link this file to ~/.config/nvim/init.vim
-"   2. Install Vim-Packager (a great plugin manager)
-"   3. Open nvim (hint: type nvim at command line and press enter :p)
-"   4.     :PackInstall
-"   5.     :PackUpdate
-"   6.     :PackUpgrade
-
-" TextObjectSelection:
-" object-select OR text-objects
-" delete the inner (...) block where the cursor is.
-" dib ( or 'di(' )
-" -----------------------------------------------------------
-"  Folding:
-"  zi: toggles everything
-"  za: toggles the current section
-" -----------------------------------------------------------
-" ParenInsertion:
-" There are 3 ways
-" 1. use Ctrl-V ) to insert paren without trigger the plugin.
-" 2. use Alt-P to turn off the plugin.
-" 3. use DEL or <C-O>x to delete the character insert by plugin.
-"
-" QuickfixAndLocationList:
-" ccl: close quickfix (my abbreviation: cc)
-" cw: open quickfix if there is anything to open
-" lcl: close location list (my abbreviation: lc)
-" lw: open location list if there is anything to open
-"
-" InsertModeEditing:
-" TLDR
-"   :help insert-index
-" CTRL-H   delete the character in front of the cursor
-" CTRL-W   delete the word in front of the cursor
-" CTRL-U   delete all characters in front of the cursor
-" CTRL-L   delete character under cursor (I create this in general remappings)
-"
-" CommandMode:
-" q: -> open the command editing window
-"
-" ExMode:
-" Q -> opens ex mode
-" To lean more about the ex editor, type 'man ex'
-
-" }}}
+" Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
 " General: packages {{{
 
 function s:pack_init() abort
@@ -2162,5 +2106,57 @@ let g:hexmode_xxd_options = '-g 2'
 " Syntax Omni Completion:
 let g:omni_syntax_use_single_byte = v:false
 let g:omni_syntax_use_iskeyword_numeric = v:false
+
+" }}}
+" Tidbits: helpful hints {{{
+
+" This is my Neovim configuration file. Hopefully you enjoy using it as much
+" as me! I use Linux Mint / Ubuntu 18.04, but this will probably work with
+" most Linux-based OS's.
+"
+" Installation:
+"   1. Put file in correct place within filesystem
+"     Soft-link this file to ~/.config/nvim/init.vim
+"   2. Install Vim-Packager (a great plugin manager)
+"   3. Open nvim (hint: type nvim at command line and press enter :p)
+"   4.     :PackInstall
+"   5.     :PackUpdate
+"   6.     :PackUpgrade
+
+" TextObjectSelection:
+" object-select OR text-objects
+" delete the inner (...) block where the cursor is.
+" dib ( or 'di(' )
+" -----------------------------------------------------------
+"  Folding:
+"  zi: toggles everything
+"  za: toggles the current section
+" -----------------------------------------------------------
+" ParenInsertion:
+" There are 3 ways
+" 1. use Ctrl-V ) to insert paren without trigger the plugin.
+" 2. use Alt-P to turn off the plugin.
+" 3. use DEL or <C-O>x to delete the character insert by plugin.
+"
+" QuickfixAndLocationList:
+" ccl: close quickfix (my abbreviation: cc)
+" cw: open quickfix if there is anything to open
+" lcl: close location list (my abbreviation: lc)
+" lw: open location list if there is anything to open
+"
+" InsertModeEditing:
+" TLDR
+"   :help insert-index
+" CTRL-H   delete the character in front of the cursor
+" CTRL-W   delete the word in front of the cursor
+" CTRL-U   delete all characters in front of the cursor
+" CTRL-L   delete character under cursor (I create this in general remappings)
+"
+" CommandMode:
+" q: -> open the command editing window
+"
+" ExMode:
+" Q -> opens ex mode
+" To lean more about the ex editor, type 'man ex'
 
 " }}}
