@@ -581,9 +581,6 @@ function alacritty-install() {
     sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 }
 
-# Alacritty helpers
-
-
 # Fix window dimensions: tty mode
 # Set consolefonts to appropriate size based on monitor resolution
 # For each new monitor, you'll need to do this manually
