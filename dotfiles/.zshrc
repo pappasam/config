@@ -501,12 +501,6 @@ alias poetry-clean='poetry cache:clear --all pypi'
 alias py='PYTHONSTARTUP="$(python -m jedi repl)" python'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
-# Language-env helpers
-alias pyenv-init='eval "$(pyenv init -)"'
-alias nodenv-init='eval "$(nodenv init -)"'
-alias goenv-init='eval "$(goenv init -)"'
-alias rbenv-init='eval "$(rbenv init -)"'
-
 # }}}
 # Gen: functions {{{
 
