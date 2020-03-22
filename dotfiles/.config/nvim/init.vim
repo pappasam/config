@@ -1838,8 +1838,9 @@ let g:textobj_sandwich_no_default_key_mappings = v:true
 " }}}
 " Plugins: goyo {{{
 
-" Set width a bit wider to account for line numbers
+let g:goyo_height = '100%'
 let g:goyo_width = 84
+let g:goyo_linenr = 1
 
 function! s:goyo_enter()
   " Repeat whitespace match
