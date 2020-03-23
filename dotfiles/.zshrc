@@ -1,5 +1,5 @@
 # Samuel Roeca's '~/.zshrc'. Toggle folds with 'za'.
-# Env: path functions {{{
+# Environ: path functions {{{
 
 function path_ladd() {
   # Takes 1 argument and adds it to the beginning of the PATH
@@ -16,7 +16,7 @@ function path_radd() {
 }
 
 # }}}
-# Env: LS_COLORS {{{
+# Environ: LS_COLORS {{{
 
 # Colors when using the LS command
 # NOTE:
@@ -83,7 +83,7 @@ LS_COLORS+="*.rpm=90"
 export LS_COLORS
 
 # }}}
-# Env: exported variables {{{
+# Environ: exported variables {{{
 
 # React
 export REACT_EDITOR='less'
@@ -150,7 +150,7 @@ export WINIT_HIDPI_FACTOR=1.0
 export BAT_PAGER=''
 
 # }}}
-# Env: path appends + misc env setup {{{
+# Environ: path appends + misc env setup {{{
 
 RUST_CARGO="$HOME/.cargo/bin"
 if [ -d "$RUST_CARGO" ]; then
@@ -183,7 +183,7 @@ fi
 export PATH
 
 # }}}
-# Src: script sourcing {{{
+# Imports: script sourcing {{{
 
 include () {
   [[ -f "$1" ]] && source "$1"
@@ -192,7 +192,7 @@ include () {
 include ~/.bash/sensitive
 
 # }}}
-# Zsh: plugins {{{
+# Z-shell: plugins {{{
 
 if [ -f $HOME/.zplug/init.zsh ]; then
   source $HOME/.zplug/init.zsh
@@ -231,7 +231,7 @@ else
 fi
 
 # }}}
-# Zsh: options {{{
+# Z-shell: options {{{
 
 #######################################################################
 # Set options
@@ -274,13 +274,13 @@ export PERIOD=1
 export LISTMAX=0
 
 # }}}
-# Zsh: misc autoloads {{{
+# Z-shell: misc autoloads {{{
 
 # Enables zshell calculator: type with zcalc
 autoload -Uz zcalc
 
 # }}}
-# Zsh: hook functions {{{
+# Z-shell: hook functions {{{
 
 # NOTE: precmd is defined within the prompt section
 
@@ -331,7 +331,7 @@ function zshexit() {
 }
 
 # }}}
-# Zsh: auto completion {{{
+# Z-shell: auto completion {{{
 
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -366,7 +366,67 @@ compctl -f -K _vault_complete vault
 fpath+=~/.zfunc
 
 # }}}
-# Zsh: key remapping {{{
+# Z-shell: compdef testing {{{
+
+# Example from:
+# https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
+
+function _hello {
+  local line
+
+  _arguments -C \
+    "-h [Show help information]" \
+    "--help[Show help information]" \
+    "-v[Print verbose message]" \
+    "--verbose[Print verbose message]" \
+    "1: :(quietly loudly)" \
+    "*::arg:->args"
+
+  case $line[1] in
+    loudly)
+      _hello_loudly
+      ;;
+    quietly)
+      _hello_quietly
+      ;;
+  esac
+}
+
+function _hello_quietly {
+  _arguments "--silent[Dont output anything]"
+}
+
+function _hello_loudly {
+  _arguments "--yolo=[Do that yolo thang]"
+}
+
+function hello() {
+  if [[ "$1" = '--help' ]]; then
+    echo "There is no help for you here."
+  elif [[ "$1" = '--verbose' ]]; then
+    echo "There is no verbosity here"
+  elif [[ "$1" = 'quietly' ]]; then
+    if [[ "$2" = "--silent" ]]; then
+      echo "You told me to say it quietly, but I can't!"
+    else
+      echo "hello"
+    fi
+  elif [[ "$1" = 'loudly' ]]; then
+    if [[ "$2" = "--yolo" ]]; then
+      echo "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+    else
+      echo "HELLO"
+    fi
+  else
+    echo "Hello"
+    return 1
+  fi
+}
+compdef _hello hello
+
+
+# }}}
+# Z-shell: key remapping {{{
 
 # emacs
 bindkey -e
@@ -391,13 +451,69 @@ bindkey -M menuselect '^l' forward-char
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}
-# Src: asdf (needs to run after zsh setup) {{{
+# Z-shell: fzf {{{
+
+# Use fd to generate the list for file and directory completion
+_fzf_compgen_path() {
+  fd -c always --hidden --follow --exclude ".git" . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd -c always --hidden --type d --follow --exclude ".git" . "$1"
+}
+
+# <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
+bindkey '^T' fzf-completion
+bindkey '^R' fzf-history-widget
+bindkey '^B' fzf-file-widget
+bindkey '^I' $fzf_default_completion
+
+# Widgets:
+# fzf-cd-widget
+# fzf-completion
+# fzf-file-widget
+# fzf-history-widget
+
+# }}}
+# Z-shell: shell prompt config {{{
+
+# https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  host          # Hostname section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  venv          # virtualenv section
+  line_sep      # Line break
+  char          # Prompt character
+)
+
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL='$ '
+SPACESHIP_DIR_PREFIX=
+SPACESHIP_DIR_TRUNC=0
+SPACESHIP_DIR_TRUNC_REPO=false
+SPACESHIP_HOST_COLOR=yellow
+SPACESHIP_HOST_PREFIX=@
+SPACESHIP_HOST_SHOW=true
+SPACESHIP_USER_COLOR=yellow
+SPACESHIP_USER_SHOW=true
+SPACESHIP_USER_SUFFIX=
+SPACESHIP_VENV_PREFIX='('
+SPACESHIP_VENV_SUFFIX=')'
+SPACESHIP_VENV_GENERIC_NAMES=()
+SPACESHIP_CHAR_COLOR_SUCCESS=green
+SPACESHIP_CHAR_COLOR_FAILURE=green
+
+# }}}
+# Imports: asdf (needs to run after zsh setup) {{{
 
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
 
 # }}}
-# Gen: aliases {{{
+# General: aliases {{{
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
@@ -501,7 +617,7 @@ alias py='PYTHONSTARTUP="$(python -m jedi repl)" python'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
-# Gen: functions {{{
+# General: functions {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
@@ -1049,123 +1165,7 @@ function yamltojson() {
 compdef '_files -g "*.(yml|yaml)"' yamltojson
 
 # }}}
-# Gen: compdef testing {{{
-
-# Example from:
-# https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
-
-function _hello {
-  local line
-
-  _arguments -C \
-    "-h [Show help information]" \
-    "--help[Show help information]" \
-    "-v[Print verbose message]" \
-    "--verbose[Print verbose message]" \
-    "1: :(quietly loudly)" \
-    "*::arg:->args"
-
-  case $line[1] in
-    loudly)
-      _hello_loudly
-      ;;
-    quietly)
-      _hello_quietly
-      ;;
-  esac
-}
-
-function _hello_quietly {
-  _arguments "--silent[Dont output anything]"
-}
-
-function _hello_loudly {
-  _arguments "--yolo=[Do that yolo thang]"
-}
-
-function hello() {
-  if [[ "$1" = '--help' ]]; then
-    echo "There is no help for you here."
-  elif [[ "$1" = '--verbose' ]]; then
-    echo "There is no verbosity here"
-  elif [[ "$1" = 'quietly' ]]; then
-    if [[ "$2" = "--silent" ]]; then
-      echo "You told me to say it quietly, but I can't!"
-    else
-      echo "hello"
-    fi
-  elif [[ "$1" = 'loudly' ]]; then
-    if [[ "$2" = "--yolo" ]]; then
-      echo "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-    else
-      echo "HELLO"
-    fi
-  else
-    echo "Hello"
-    return 1
-  fi
-}
-compdef _hello hello
-
-
-# }}}
-# Zsh: shell prompt config {{{
-
-# https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
-
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  host          # Hostname section
-  dir           # Current directory section
-  git           # Git section (git_branch + git_status)
-  venv          # virtualenv section
-  line_sep      # Line break
-  char          # Prompt character
-)
-
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL='$ '
-SPACESHIP_DIR_PREFIX=
-SPACESHIP_DIR_TRUNC=0
-SPACESHIP_DIR_TRUNC_REPO=false
-SPACESHIP_HOST_COLOR=yellow
-SPACESHIP_HOST_PREFIX=@
-SPACESHIP_HOST_SHOW=true
-SPACESHIP_USER_COLOR=yellow
-SPACESHIP_USER_SHOW=true
-SPACESHIP_USER_SUFFIX=
-SPACESHIP_VENV_PREFIX='('
-SPACESHIP_VENV_SUFFIX=')'
-SPACESHIP_VENV_GENERIC_NAMES=()
-SPACESHIP_CHAR_COLOR_SUCCESS=green
-SPACESHIP_CHAR_COLOR_FAILURE=green
-
-# }}}
-# Zsh: fzf {{{
-
-# Use fd to generate the list for file and directory completion
-_fzf_compgen_path() {
-  fd -c always --hidden --follow --exclude ".git" . "$1"
-}
-
-_fzf_compgen_dir() {
-  fd -c always --hidden --type d --follow --exclude ".git" . "$1"
-}
-
-# <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
-bindkey '^T' fzf-completion
-bindkey '^R' fzf-history-widget
-bindkey '^B' fzf-file-widget
-bindkey '^I' $fzf_default_completion
-
-# Widgets:
-# fzf-cd-widget
-# fzf-completion
-# fzf-file-widget
-# fzf-history-widget
-
-# }}}
-# Exe: executed commands {{{
+# General: executed commands {{{
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
@@ -1187,7 +1187,7 @@ if [[ -o interactive ]]; then
 fi
 
 # }}}
-# Man: helpful hints {{{
+# Tidbits: helpful hints {{{
 
 # Searching for a specific man page
 #   1. apropros
