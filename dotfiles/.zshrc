@@ -416,12 +416,11 @@ alias ..........='cd ../../../../../../../../../..'
 # Restart Xserver (go to a tty to run, if necessary)
 alias restart-xserver='sudo systemctl restart display-manager'
 
-# Vim and Vi
+# Neovim
 alias f='nvim'
-alias vi='nvim'
-alias vim='nvim'
-alias svim='sudo nvim -u NONE'
-alias snvim='sudo nvim -u NONE'
+compdef _vim f
+alias fn='nvim -u NONE'
+compdef _vim fn
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
 alias vplug='cd ~/.config/nvim/pack/packager/start'
@@ -612,11 +611,11 @@ compdef _directories gitzip
 
 # Pipe man stuff to neovim
 function m() {
-  man --location $@ &> /dev/null
+  man --location "$@" &> /dev/null
   if [ $? -eq 0 ]; then
-    man --pager=cat $@ | nvim -c 'set ft=man' -
+    man --pager=cat "$@" | nvim -c 'set ft=man' -
   else
-    man $@
+    man "$@"
   fi
 }
 compdef _man m
@@ -815,7 +814,7 @@ function gitignore() {
   else
     # print all the files
     local count=0
-    for filevalue in $@; do
+    for filevalue in "$@"; do
       echo "#################################################################"
       echo "# $filevalue"
       echo "#################################################################"
