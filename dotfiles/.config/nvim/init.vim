@@ -1848,9 +1848,19 @@ function! s:goyo_enter()
   nunmap <silent> <space>j
   nunmap <silent> <space>l
   nunmap <silent> <space>u
+
+  " Width: 1, 2, or 3 files wide
+  nnoremap <silent> gww :Goyo 84<CR>
+  nnoremap <silent> gw1 :Goyo 84<CR>
+  nnoremap <silent> gw2 :Goyo 168<CR>
+  nnoremap <silent> gw3 :Goyo 252<CR>
 endfunction
 
 function! s:goyo_leave()
+  nunmap <silent> gww
+  nunmap <silent> gw1
+  nunmap <silent> gw2
+  nunmap <silent> gw3
   call s:default_key_mappings()
   if &filetype == 'markdown'
     " Preserve code highlighting
