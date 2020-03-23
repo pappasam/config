@@ -107,7 +107,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:honza/vim-snippets.git')
   call packager#add('git@github.com:neoclide/coc.nvim.git', {
         \ 'branch': 'release',
         \ })
@@ -703,6 +702,7 @@ cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
 
 " Open settings for language server files
 cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
