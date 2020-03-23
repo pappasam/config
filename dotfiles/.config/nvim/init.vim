@@ -522,7 +522,7 @@ function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   " see https://github.com/neoclide/coc.nvim
   nmap <silent> <C-]> <Plug>(coc-definition)
-  nmap <silent> <2-LeftMouse> <Plug>(coc-definition)
+  nmap <silent> <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
   nmap <silent> <leader>st <Plug>(coc-type-definition)
   nmap <silent> <leader>si <Plug>(coc-implementation)
@@ -600,7 +600,6 @@ augroup end
 augroup custom_remap_click
   autocmd!
   autocmd FileType qf,markdown,rst nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
-  autocmd FileType man nnoremap <buffer> <2-LeftMouse> <C-]>
 augroup end
 
 " Mouse Open Close Folds: open folds with the mouse, and close the folds
@@ -616,12 +615,11 @@ augroup end
 
 augroup custom_remap_man_help
   autocmd!
-  autocmd FileType man nnoremap <buffer> <silent> <C-]> :silent! Man<CR>
+  autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
+  autocmd FileType man,help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
   autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
-  autocmd FileType help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
-  autocmd FileType help nnoremap <buffer> <C-]> <C-]>
-  autocmd FileType help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
+  autocmd FileType man,help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
 augroup end
 
 augroup custom_remap_rst
