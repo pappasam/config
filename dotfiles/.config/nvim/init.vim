@@ -1431,7 +1431,7 @@ let g:man_hardwrap = v:true
 
 augroup custom_man_page
   autocmd!
-  autocmd FileType man setlocal number relativenumber
+  autocmd FileType man setlocal number
 augroup end
 
 " }}}
