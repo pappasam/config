@@ -1161,6 +1161,10 @@ if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
     # if you're in the first tmux pane within all of tmux
     quote
+  elif [ -n "$TMUX" ]; then
+    # do nothing
+  else
+    echo 'Outside of tmux. Use command "t" to enter tmux'
   fi
 
   # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
@@ -1173,7 +1177,6 @@ if [[ -o interactive ]]; then
 
   # Try activate virtual environment, don't worry about console output
   va &> /dev/null
-
 fi
 
 # }}}
