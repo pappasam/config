@@ -1082,20 +1082,11 @@ command! ResizeWindowHeight call s:resize_window_height()
 
 augroup custom_no_save_lcd
   autocmd!
-  if exists(':tcd') == 2
-    autocmd User BufStaySavePre
-          \ if haslocaldir() |
-          \ let w:lcd = getcwd() |
-          \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
-          \ endif
-  else
-    autocmd User BufStaySavePre
-          \ if haslocaldir() |
-          \ let w:lcd = getcwd() |
-          \ cd - |
-          \ cd - |
-          \ endif
-  endif
+  autocmd User BufStaySavePre
+        \ if haslocaldir() |
+        \ let w:lcd = getcwd() |
+        \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
+        \ endif
   autocmd User BufStaySavePost
         \ if exists('w:lcd') |
         \ execute 'lcd' fnameescape(w:lcd) |
@@ -1103,7 +1094,7 @@ augroup custom_no_save_lcd
         \ endif
 augroup end
 
-" --- }}}
+" }}}
 " General: delete hidden buffers {{{
 
 " From: https://stackoverflow.com/a/7321131
