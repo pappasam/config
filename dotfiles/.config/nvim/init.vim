@@ -2010,6 +2010,11 @@ augroup custom_coc
         \ ['<', '>'],
         \ ['"', '"'],
         \ ]
+  autocmd FileType make let b:coc_pairs = [
+        \ ['(', ')'],
+        \ ['[', ']'],
+        \ ['{', '}'],
+        \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
 augroup end
 
