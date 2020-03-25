@@ -573,9 +573,6 @@ alias gp='git remote prune origin'
 alias gd='git diff'
 alias gdw='git diff --word-diff'
 
-# upgrade
-alias upgrade='sudo apt update && sudo apt upgrade -y'
-
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
@@ -653,6 +650,17 @@ function gr() {
     echo "'$PWD' is not inside a git repository"
     return 1
   fi
+}
+
+# upgrade relevant local systems
+function upgrade() {
+  sudo apt update
+  sudo apt upgrade -y
+  pushd
+  cd ~/src/lib/alacritty
+  alacritty-install
+  popd
+  nvim -c 'PU'
 }
 
 # Alacritty Helpers
