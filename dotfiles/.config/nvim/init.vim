@@ -1587,6 +1587,7 @@ let g:defx_ignored_files = join([
       \ 'fonts/',
       \ 'node_modules/',
       \ 'pip-wheel-metadata/',
+      \ 'plantuml-images/',
       \ 'site/',
       \ 'target/',
       \ 'venv.bak/',
