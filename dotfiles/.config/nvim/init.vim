@@ -327,6 +327,11 @@ augroup custom_incsearch_highlight
 augroup end
 
 " }}}
+" General: rebuild personal docs {{{
+
+helptags ~/.config/nvim/doc
+
+" }}}
 " General: statusline / tabline {{{
 
 " Tab Line
