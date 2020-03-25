@@ -951,11 +951,20 @@ augroup custom_syntax_typescript
   autocmd ColorScheme * highlight link typescriptExceptions Exception
 augroup end
 
+" Vim Help: fixes
+augroup custom_syntax_vimhelp
+  autocmd!
+  autocmd ColorScheme * highlight clear helpStar
+  autocmd ColorScheme * highlight clear helpIgnore
+  autocmd ColorScheme * highlight helpStar guifg=cyan1
+  autocmd ColorScheme * highlight helpIgnore guifg=cyan1
+augroup end
+
 " QuickScope: choose primary and secondary colors
 augroup custom_syntax_quickscope
   autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='LimeGreen' ctermfg=Green gui=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='turquoise1' ctermfg=Cyan gui=underline
+  autocmd ColorScheme * highlight QuickScopePrimary guifg=LimeGreen ctermfg=Green gui=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg=turquoise1 ctermfg=Cyan gui=underline
 augroup end
 
 " Spell Checking:
@@ -965,10 +974,10 @@ augroup custom_syntax_spelling
   autocmd ColorScheme * highlight clear SpellRare
   autocmd ColorScheme * highlight clear SpellCap
   autocmd ColorScheme * highlight clear SpellLocal
-  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg='red1' gui=underline,italic
-  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg='ForestGreen' gui=underline,italic
-  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg='yellow' gui=underline,italic
-  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg='magenta' gui=underline,italic
+  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg=red1 gui=underline,italic
+  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg=ForestGreen gui=underline,italic
+  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg=yellow gui=underline,italic
+  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg=magenta gui=underline,italic
 augroup end
 
 " Trailing Whitespace: (initial highlight below doesn't matter)
@@ -978,10 +987,10 @@ augroup custom_syntax_whitespace
   autocmd!
   " mkdLineBreak is a link group; special 'link' syntax required here
   autocmd ColorScheme * highlight link mkdLineBreak NONE
-  autocmd ColorScheme * highlight EOLWS guibg='CornflowerBlue' ctermbg=DarkCyan
+  autocmd ColorScheme * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
 
   autocmd InsertEnter * highlight clear EOLWS
-  autocmd InsertLeave * highlight EOLWS guibg='CornflowerBlue' ctermbg=DarkCyan
+  autocmd InsertLeave * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
 
   autocmd FileType defx highlight clear EOLWS
 augroup end
