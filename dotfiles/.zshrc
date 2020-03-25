@@ -658,6 +658,7 @@ function upgrade() {
   sudo apt upgrade -y
   pushd
   cd ~/src/lib/alacritty
+  git pull
   alacritty-install
   popd
   nvim -c 'PU'
