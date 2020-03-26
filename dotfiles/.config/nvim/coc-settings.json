@@ -2,29 +2,12 @@
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
-  "yank.highlight.duration": 1000,
   "pairs.enableCharacters": [
     "(",
     "[",
     "{",
     "<"
   ],
-  "languageserver": {
-    "jls": {
-      "command": "jedi-language-server",
-      "args": [],
-      "filetypes": [
-        "python"
-      ]
-    },
-    "terraform": {
-      "command": "terraform-lsp",
-      "filetypes": [
-        "terraform"
-      ],
-      "initializationOptions": {}
-    }
-  },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint"
   },
@@ -60,6 +43,22 @@
       },
       "offsetColumn": 1,
       "formatLines": 1
+    }
+  },
+  "languageserver": {
+    "jls": {
+      "command": "jedi-language-server",
+      "args": [],
+      "filetypes": [
+        "python"
+      ]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform"
+      ],
+      "initializationOptions": {}
     }
   }
 }

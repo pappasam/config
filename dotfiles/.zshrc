@@ -784,6 +784,7 @@ function cargodoc() {  # arg1: packagename
 
 function nodedev-install() {  ## Install default nodejs dependencies
   local env=(\
+    git+https://github.com/Perlence/tstags.git \
     jsctags \
     neovim \
     npm \

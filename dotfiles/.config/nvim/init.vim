@@ -681,7 +681,7 @@ function! s:gf_vimrc_open_plugin()
 endfunction
 
 " }}}
-" General: abbreviations --- {{{
+" General: abbreviations {{{
 
 " If in_command is at beginning of line : return out_command
 " Else : return in_command.
@@ -956,8 +956,10 @@ augroup custom_syntax_vimhelp
   autocmd!
   autocmd ColorScheme * highlight clear helpStar
   autocmd ColorScheme * highlight clear helpIgnore
+  autocmd ColorScheme * highlight clear helpBacktick
   autocmd ColorScheme * highlight helpStar guifg=cyan1
   autocmd ColorScheme * highlight helpIgnore guifg=cyan1
+  autocmd ColorScheme * highlight helpBacktick guifg=cyan1
 augroup end
 
 " QuickScope: choose primary and secondary colors
@@ -1800,6 +1802,24 @@ let g:tagbar_type_rst = {
         \ 's' : 'section',
       \ },
       \ 'sort': 0,
+      \ }
+let g:tagbar_type_typescript = {
+      \ 'ctagsbin' : 'tstags',
+      \ 'ctagsargs' : '-f-',
+      \ 'kinds': [
+        \ 'e:enums:0:1',
+        \ 'f:function:0:1',
+        \ 't:typealias:0:1',
+        \ 'M:Module:0:1',
+        \ 'I:import:0:1',
+        \ 'i:interface:0:1',
+        \ 'C:class:0:1',
+        \ 'm:method:0:1',
+        \ 'p:property:0:1',
+        \ 'v:variable:0:1',
+        \ 'c:const:0:1',
+      \ ],
+      \ 'sort' : 0
       \ }
 
 " }}}
