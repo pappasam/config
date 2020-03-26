@@ -63,7 +63,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:ron-rs/ron.vim')
   call packager#add('git@github.com:vim-python/python-syntax')
   call packager#add('git@github.com:autowitch/hive.vim')
-  call packager#add('git@github.com:elzr/vim-json')
   call packager#add('git@github.com:vimoutliner/vimoutliner')
   call packager#add('git@github.com:cespare/vim-toml')
   call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
