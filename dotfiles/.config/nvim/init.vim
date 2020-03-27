@@ -260,11 +260,10 @@ set ttimeout
 
 " Local Vimrc: execute commands securely from $PWD/.nvimrc
 " *exrc* if set, the current directory is searched for 3 files in order
-" (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
-"
+"   (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
 " *secure* disable unsafe commands in your project-specific config files
-" This will prevent :autocmd, shell and write commands from being run inside
-" project-specific config files unless they’re owned by you.
+"   This will prevent :autocmd, shell and write commands from being run inside
+"   project-specific config files unless they’re owned by you.
 set exrc
 set secure
 
