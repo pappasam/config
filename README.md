@@ -15,4 +15,4 @@ make
 
 ## Author
 
-Samuel Roeca *samuel.roeca@gmail.com*
+Samuel Roeca _samuel.roeca@gmail.com_

@@ -3,8 +3,4 @@ tabWidth = 2
 semi = false
 singleQuote = true
 htmlWhitespaceSensitivity = "ignore"
-
-[[overrides]]
-files = "*.md"
-[overrides.options]
-tabWidth = 4
+proseWrap = "never"  # Do not wrap Markdown prose

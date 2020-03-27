@@ -586,12 +586,6 @@ endfunction
 
 call s:default_key_mappings()
 
-" Augroups: all key-mapping-relate augroups
-augroup custom_remap_markdown
-  autocmd!
-  autocmd FileType markdown nnoremap <buffer> <leader>f :TableFormat<CR>
-augroup end
-
 augroup custom_remap_click
   autocmd!
   autocmd FileType qf,markdown,rst nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
@@ -2036,9 +2030,7 @@ command! CocDiagnosticDisable call s:coc_diagnostic_disable()
 " Plugins: vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = v:false
-let g:vim_filetype_formatter_ft_no_defaults = [
-      \ 'markdown',
-      \ ]
+let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -',
       \ }
