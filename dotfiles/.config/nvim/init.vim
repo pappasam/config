@@ -5,6 +5,45 @@ function s:pack_init() abort
   packadd vim-packager
   call packager#init()
   call packager#add('git@github.com:kristijanhusak/vim-packager', { 'type': 'opt' })
+
+  " Autocompletion And IDE Features:
+  call packager#add('git@github.com:neoclide/coc.nvim.git', {
+        \ 'branch': 'release',
+        \ })
+  for coc_plugin in [
+        \ 'git@github.com:coc-extensions/coc-svelte.git',
+        \ 'git@github.com:fannheyward/coc-markdownlint.git',
+        \ 'git@github.com:iamcco/coc-diagnostic.git',
+        \ 'git@github.com:josa42/coc-docker.git',
+        \ 'git@github.com:josa42/coc-go.git',
+        \ 'git@github.com:neoclide/coc-css.git',
+        \ 'git@github.com:neoclide/coc-html.git',
+        \ 'git@github.com:neoclide/coc-json.git',
+        \ 'git@github.com:neoclide/coc-lists.git',
+        \ 'git@github.com:neoclide/coc-pairs.git',
+        \ 'git@github.com:neoclide/coc-rls.git',
+        \ 'git@github.com:neoclide/coc-snippets.git',
+        \ 'git@github.com:neoclide/coc-tsserver.git',
+        \ 'git@github.com:neoclide/coc-yaml.git',
+        \ ]
+    call packager#add(coc_plugin, {
+          \ 'do': 'yarn install --frozen-lockfile && yarn build',
+          \ })
+  endfor
+  call packager#add('git@github.com:majutsushi/tagbar')
+  call packager#add('git@github.com:lvht/tagbar-markdown')
+
+  " Tim Pope: general, uncategorizable tim pope plugins
+  " Notes:
+  "   * abolish: convert to snake cases
+  call packager#add('git@github.com:tpope/vim-abolish')
+  call packager#add('git@github.com:tpope/vim-characterize.git')
+  call packager#add('git@github.com:tpope/vim-commentary')
+  call packager#add('git@github.com:tpope/vim-ragtag')
+  call packager#add('git@github.com:tpope/vim-repeat')
+  call packager#add('git@github.com:tpope/vim-scriptease')
+
+  " General:
   call packager#add('git@github.com:junegunn/vader.vim')
   call packager#add('git@github.com:kh3phr3n/tabline')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
@@ -29,22 +68,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
 
-  " Tim Pope: general, uncategorizable tim pope plugins
-  " Notes:
-  "   * abolish: convert to snake cases
-  call packager#add('git@github.com:tpope/vim-abolish')
-  call packager#add('git@github.com:tpope/vim-characterize.git')
-  call packager#add('git@github.com:tpope/vim-commentary')
-  call packager#add('git@github.com:tpope/vim-ragtag')
-  call packager#add('git@github.com:tpope/vim-repeat')
-  call packager#add('git@github.com:tpope/vim-scriptease')
-
-  " EditorConfig: https://editorconfig.org/
-  " Overrides default Vim settings when an editorconfig file is found
-  " I have one at the moment (in dotfiles)
-  " Not the official plugin, but written in pure vimscript so faster Vim startup
-  call packager#add('git@github.com:sgur/vim-editorconfig')
-
   " Fuzzy Finder:
   call packager#add('git@github.com:junegunn/fzf')
   call packager#add('git@github.com:junegunn/fzf.vim')
@@ -53,6 +76,55 @@ function s:pack_init() abort
   call packager#add('git@github.com:tpope/vim-fugitive')
   call packager#add('git@github.com:junegunn/gv.vim')
   call packager#add('git@github.com:rhysd/git-messenger.vim.git')
+
+  " Text Objects:
+  call packager#add('git@github.com:machakann/vim-sandwich')
+  call packager#add('git@github.com:kana/vim-textobj-user')
+  " al/il for the current line
+  call packager#add('git@github.com:kana/vim-textobj-line')
+  " as/is for a sentence of prose (overrides hard-coded native object & motion)
+  call packager#add('git@github.com:reedes/vim-textobj-sentence')
+  " az/iz for a block of folded lines; iz does not include fold marker lines
+  call packager#add('git@github.com:somini/vim-textobj-fold')
+  " ao/io for a block of indentation (i.e. spaces)
+  call packager#add('git@github.com:glts/vim-textobj-indblock')
+  " ay/iy for a syntax group
+  call packager#add('git@github.com:kana/vim-textobj-syntax')
+  " ae/ie for entire buffers
+  call packager#add('git@github.com:kana/vim-textobj-entire.git')
+  " ai/ii for similarly indented, aI/iI for same indentation
+  call packager#add('git@github.com:kana/vim-textobj-indent.git')
+  " au/iu for a URI, also includes URI handlers and is easy to extend
+  call packager#add('git@github.com:jceb/vim-textobj-uri.git')
+  " ac/ic/af/if for Python classes and functions
+  call packager#add('git@github.com:bps/vim-textobj-python.git')
+
+  " Writing:
+  call packager#add('git@github.com:dkarter/bullets.vim')
+  call packager#add('git@github.com:moiatgit/vim-rst-sections')
+  call packager#add('git@github.com:jlesquembre/rst-tables.nvim', {
+        \ 'do': ':UpdateRemotePlugins',
+        \ })
+  call packager#add('git@github.com:junegunn/goyo.vim')
+  call packager#add('git@github.com:junegunn/limelight.vim')
+
+  " Previewers:
+  call packager#add('git@github.com:iamcco/markdown-preview.nvim', {
+        \ 'do': 'cd app & yarn install --frozen-lockfile',
+        \ })
+  call packager#add('git@github.com:tyru/open-browser.vim')
+  call packager#add('git@github.com:weirongxu/plantuml-previewer.vim')
+
+  " Code Formatters:
+  call packager#add('git@github.com:pappasam/vim-filetype-formatter')
+
+  " Repl Integration:
+  call packager#add('git@github.com:jpalardy/vim-slime.git')
+
+  " Indentation Only:
+  call packager#add('git@github.com:Yggdroot/indentLine')
+  call packager#add('git@github.com:vim-scripts/groovyindent-unix')
+  call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
 
   " Syntax Theme:
   call packager#add('git@github.com:NLKNguyen/papercolor-theme')
@@ -99,87 +171,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:neoclide/jsonc.vim.git')
   call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
   call packager#add('git@github.com:gisraptor/vim-lilypond-integrator.git')
-
-  " Indentation Only:
-  call packager#add('git@github.com:Yggdroot/indentLine')
-  call packager#add('git@github.com:vim-scripts/groovyindent-unix')
-  call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
-
-  " Autocompletion And IDE Features:
-  call packager#add('git@github.com:neoclide/coc.nvim.git', {
-        \ 'branch': 'release',
-        \ })
-  for coc_plugin in [
-        \ 'git@github.com:coc-extensions/coc-svelte.git',
-        \ 'git@github.com:fannheyward/coc-markdownlint.git',
-        \ 'git@github.com:iamcco/coc-diagnostic.git',
-        \ 'git@github.com:josa42/coc-docker.git',
-        \ 'git@github.com:josa42/coc-go.git',
-        \ 'git@github.com:neoclide/coc-css.git',
-        \ 'git@github.com:neoclide/coc-html.git',
-        \ 'git@github.com:neoclide/coc-json.git',
-        \ 'git@github.com:neoclide/coc-lists.git',
-        \ 'git@github.com:neoclide/coc-pairs.git',
-        \ 'git@github.com:neoclide/coc-rls.git',
-        \ 'git@github.com:neoclide/coc-snippets.git',
-        \ 'git@github.com:neoclide/coc-tsserver.git',
-        \ 'git@github.com:neoclide/coc-yaml.git',
-        \ ]
-    call packager#add(coc_plugin, {
-          \ 'do': 'yarn install --frozen-lockfile && yarn build',
-          \ })
-  endfor
-
-  " Tagbar:
-  call packager#add('git@github.com:majutsushi/tagbar')
-  call packager#add('git@github.com:lvht/tagbar-markdown')
-  " Additional requirements
-  "   npm install -g jsctags
-  "   sudo apt install -y php
-
-  " Text Objects:
-  call packager#add('git@github.com:machakann/vim-sandwich')
-  call packager#add('git@github.com:kana/vim-textobj-user')
-  " al/il for the current line
-  call packager#add('git@github.com:kana/vim-textobj-line')
-  " as/is for a sentence of prose (overrides hard-coded native object & motion)
-  call packager#add('git@github.com:reedes/vim-textobj-sentence')
-  " az/iz for a block of folded lines; iz does not include fold marker lines
-  call packager#add('git@github.com:somini/vim-textobj-fold')
-  " ao/io for a block of indentation (i.e. spaces)
-  call packager#add('git@github.com:glts/vim-textobj-indblock')
-  " ay/iy for a syntax group
-  call packager#add('git@github.com:kana/vim-textobj-syntax')
-  " ae/ie for entire buffers
-  call packager#add('git@github.com:kana/vim-textobj-entire.git')
-  " ai/ii for similarly indented, aI/iI for same indentation
-  call packager#add('git@github.com:kana/vim-textobj-indent.git')
-  " au/iu for a URI, also includes URI handlers and is easy to extend
-  call packager#add('git@github.com:jceb/vim-textobj-uri.git')
-  " ac/ic/af/if for Python classes and functions
-  call packager#add('git@github.com:bps/vim-textobj-python.git')
-
-  " Writing:
-  call packager#add('git@github.com:dkarter/bullets.vim')
-  call packager#add('git@github.com:moiatgit/vim-rst-sections')
-  call packager#add('git@github.com:jlesquembre/rst-tables.nvim', {
-        \ 'do': ':UpdateRemotePlugins',
-        \ })
-  call packager#add('git@github.com:junegunn/goyo.vim')
-  call packager#add('git@github.com:junegunn/limelight.vim')
-
-  " Previewers:
-  call packager#add('git@github.com:iamcco/markdown-preview.nvim', {
-        \ 'do': 'cd app & yarn install --frozen-lockfile',
-        \ })
-  call packager#add('git@github.com:tyru/open-browser.vim')
-  call packager#add('git@github.com:weirongxu/plantuml-previewer.vim')
-
-  " Code Formatters:
-  call packager#add('git@github.com:pappasam/vim-filetype-formatter')
-
-  " Repl Integration:
-  call packager#add('git@github.com:jpalardy/vim-slime.git')
 endfunction
 
 command! PackInstall call s:pack_init() | call packager#install()
