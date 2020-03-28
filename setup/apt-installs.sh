@@ -28,6 +28,8 @@ sudo apt install -y \
   build-essential \
   ca-certificates \
   cmake \
+  cmus \
+  cmus-plugin-ffmpeg \
   cowsay  \
   cpanminus \
   curl \
