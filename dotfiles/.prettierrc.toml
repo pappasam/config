@@ -3,4 +3,4 @@ tabWidth = 2
 semi = false
 singleQuote = true
 htmlWhitespaceSensitivity = "ignore"
-proseWrap = "never"  # Do not wrap Markdown prose
+proseWrap = "preserve"
