@@ -870,9 +870,11 @@ command! -nargs=1 Syn call s:read_dict_to_preview(<q-args>, "moby-thesaurus")
 augroup custom_fold_settings
   autocmd!
   autocmd FileType vim,tmux,bash,zsh,sh
-        \ setlocal foldmethod=marker foldlevelstart=0 foldnestmax=1
+        \ setlocal foldenable foldmethod=marker foldnestmax=1
   autocmd FileType markdown,rst
         \ setlocal nofoldenable
+  autocmd FileType yaml
+        \ setlocal nofoldenable foldmethod=indent foldnestmax=1
 augroup end
 
 " }}}
