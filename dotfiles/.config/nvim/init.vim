@@ -1151,7 +1151,6 @@ command! VTerm call s:open_term_interactive('vsplit')
 command! STerm call s:open_term_interactive('split')
 command! Tterm call s:open_term_interactive('tabnew')
 
-
 " }}}
 " General: macro repeater {{{
 
