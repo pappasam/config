@@ -362,6 +362,10 @@ function! s:default_key_mappings()
   " J: basically, unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
 
+  " Shifting: in visual mode, make shifts keep selection
+  vnoremap < <gv
+  vnoremap > >gv
+
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
@@ -559,6 +563,10 @@ function! s:default_key_mappings()
 
   " Mouse Copy: system copy mouse characteristics
   vnoremap <RightMouse> "+y
+
+  " Mouse Move: move visually selected text
+  vnoremap <silent> <A-LeftMouse>
+        \ <LeftMouse>mzgvX`zP`[v`]
 
   " Mouse Paste: make it come from the system register
   nnoremap <MiddleMouse> "+<MiddleMouse>
