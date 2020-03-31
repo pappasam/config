@@ -8,6 +8,9 @@
     "{",
     "<"
   ],
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml"
+  },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint"
   },
@@ -46,6 +49,11 @@
     }
   },
   "languageserver": {
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["Dockerfile"],
+      "args": ["--stdio"]
+    },
     "jls": {
       "command": "jedi-language-server",
       "args": [],

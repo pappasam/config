@@ -14,7 +14,6 @@ function s:pack_init() abort
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:iamcco/coc-diagnostic.git',
-        \ 'git@github.com:josa42/coc-docker.git',
         \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
@@ -1976,11 +1975,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-let g:coc_filetype_map = {
-      \ }
 let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
 let g:coc_start_at_startup = 1
+let g:coc_filetype_map = {
+      \ 'yaml.ansible': 'yaml',
+      \ 'yaml.docker-compose': 'yaml',
+      \ }
 
 " Customization:
 function! s:coc_diagnostic_disable()
