@@ -564,9 +564,6 @@ function! s:default_key_mappings()
   " Mouse Copy: system copy mouse characteristics
   vnoremap <RightMouse> "+y
 
-  " Mouse Move: move visually selected text
-  vnoremap <silent> <A-LeftMouse> :call <SID>v_a_leftmouse()<cr>
-
   " Mouse Paste: make it come from the system register
   nnoremap <MiddleMouse> "+<MiddleMouse>
 
@@ -651,21 +648,6 @@ augroup custom_init_vim
   autocmd BufNewFile,BufRead,BufEnter init.vim
         \ nnoremap <buffer> <silent> gf :call <SID>gf_vimrc_open_plugin()<CR>
 augroup end
-
-" }}}
-" General: key remapping helpers {{{
-
-function! s:v_a_leftmouse()
-  let beginning = getpos("'<")[1]
-  let ending = getpos("'>")[1]
-  execute "normal! \<LeftMouse>"
-  let current = line('.')
-  if beginning <= current && ending >= current
-    normal! gv
-  else
-    normal! mzgvX`zp`[v`]
-  endif
-endfunction
 
 " }}}
 " General: vimrc / init.vim helpers {{{
