@@ -1,6 +1,6 @@
 ## Objective
 
-- {{Cursor}}
+{{Cursor}}
 
 ## Value
 ## Acceptance Criteria
