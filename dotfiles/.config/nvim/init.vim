@@ -577,6 +577,13 @@ endfunction
 
 call s:default_key_mappings()
 
+" helper to remap d, u, and q for readonly buffers
+function! s:key_mappings_readonly()
+  nnoremap <silent> <buffer> d <C-d>
+  nnoremap <silent> <buffer> u <C-u>
+  nnoremap <silent> <buffer> q :q<CR>
+endfunction
+
 augroup custom_remap_click
   autocmd!
   autocmd FileType qf,markdown,rst nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
@@ -833,29 +840,45 @@ augroup end
 digraph jj 699  " Hawaiian character ʻ
 
 " }}}
-" General: word definition and meaning lookup {{{
+" General: read command line programs output to documentation window {{{
 
-" Enable looking up values in either a dictionary or a thesaurus
-" these are expected to be either:
-"   Dict: dict-gcide
-"   Thesaurus: dict-moby-thesaurus
-function! s:read_dict_to_preview(word, dict) range
+" read values from a Bash command into a preview window
+function! s:read_command_to_doc(word, command, filetype) range
   let dst = tempname()
-  execute "silent ! dict -d " . a:dict . " " . string(a:word) . " > " . dst
+  let command = substitute(a:command, 'WORD', a:word, '')
+  execute 'silent ! ' . command . ' > ' . dst
+  let opencmd = a:filetype == &filetype ? 'silent! edit! ' : 'silent! split! '
   pclose! |
-        \ execute "silent! pedit! " . dst |
-        \ wincmd P |
+        \ execute opencmd . dst |
         \ set modifiable noreadonly |
+        \ execute 'set filetype=' . a:filetype |
         \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
-        \ setlocal nobuflisted |
-        \ execute "resize " . (line('$') + 1)
-  execute ":redraw!"
+        \ setlocal nobuflisted
+  redraw!
+  execute 'file ' . a:word . ' (' . bufnr('%') . ')'
+  call s:key_mappings_readonly()
 endfunction
 
-command! -nargs=1 Def call s:read_dict_to_preview(<q-args>, "gcide")
-command! -nargs=1 Syn call s:read_dict_to_preview(<q-args>, "moby-thesaurus")
+command! -nargs=1 Def call s:read_command_to_doc(<q-args>, 'dict -d gcide WORD', 'dictionary')
+command! -nargs=1 Syn call s:read_command_to_doc(<q-args>, 'dict -d moby-thesaurus WORD', 'dictionary')
+command! -nargs=1 Pydoc call s:read_command_to_doc(<q-args>, 'pydoc WORD', 'pydoc')
 
  " }}}
+" General: keywordprg {{{
+
+" Enable 'K' support for commands
+augroup custom_keywordprg
+  autocmd!
+  " DevDocs: all
+  autocmd FileType javascript setlocal keywordprg=:DD!
+  " DevDocs: specific filetype
+  autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
+  " Dictioary: my custom Def function
+  autocmd FileType markdown,rst,tex,txt,dictionary setlocal keywordprg=:Def
+  autocmd FileType python,pydoc setlocal keywordprg=:Pydoc
+augroup end
+
+" }}}
 " General: folding settings {{{
 
 augroup custom_fold_settings
@@ -1303,9 +1326,7 @@ function! s:vim_colors()
   %s/^\s*\(\d\+\)\s\+\(\d\+\)\s\+\(\d\+\)\s\+/\=printf(" %3d %3d %3d   #%02x%02x%02x   ", submatch(1), submatch(2), submatch(3), submatch(1), submatch(2), submatch(3))/
   1
   nohlsearch
-  nnoremap <buffer> d <C-d>
-  nnoremap <buffer> u <C-u>
-  nnoremap <buffer> q :q<CR>
+  call s:key_mappings_readonly()
   file VimColors
   set nomodifiable
 endfunction
@@ -1333,21 +1354,6 @@ endfunction
 
 command! ToggleNumber call s:toggle_number()
 command! ToggleRelativeNumber call s:toggle_relative_number()
-
-" }}}
-" General: keywordprg {{{
-
-" Map DevDocs command to the keyword program for select programs
-" Enables 'K' for said programs
-augroup custom_keywordprg
-  autocmd!
-  " DevDocs: all
-  autocmd FileType javascript setlocal keywordprg=:DD!
-  " DevDocs: specific filetype
-  autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
-  " Dictioary: my custom Def function
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
-augroup end
 
 " }}}
 " General: skeleton templates {{{
