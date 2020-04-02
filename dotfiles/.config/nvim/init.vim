@@ -840,23 +840,19 @@ augroup end
 digraph jj 699  " Hawaiian character ʻ
 
 " }}}
-" General: read command line programs output to documentation window {{{
+" General: bash cli > vim documentation window {{{
 
-" read values from a Bash command into a preview window
 function! s:read_command_to_doc(word, command, filetype) range
   let dst = tempname()
   let command = substitute(a:command, 'WORD', a:word, '')
   execute 'silent ! ' . command . ' > ' . dst
-  let opencmd = a:filetype == &filetype ? 'silent! edit! ' : 'silent! split! '
-  pclose! |
-        \ execute opencmd . dst |
-        \ set modifiable noreadonly |
-        \ execute 'set filetype=' . a:filetype |
-        \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
-        \ setlocal nobuflisted
-  redraw!
+  let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
+  execute 'silent! ' . opencmd . ' ' . dst
+  execute 'set filetype=' . a:filetype
   execute 'file ' . a:word . ' (' . bufnr('%') . ')'
+  set buftype=nowrite nomodifiable noswapfile readonly nomodified nobuflisted
   call s:key_mappings_readonly()
+  redraw!
 endfunction
 
 command! -nargs=1 Def call s:read_command_to_doc(<q-args>, 'dict -d gcide WORD', 'dictionary')
@@ -864,16 +860,12 @@ command! -nargs=1 Syn call s:read_command_to_doc(<q-args>, 'dict -d moby-thesaur
 command! -nargs=1 Pydoc call s:read_command_to_doc(<q-args>, 'pydoc WORD', 'pydoc')
 
  " }}}
-" General: keywordprg {{{
+" General: keywordprg K support {{{
 
-" Enable 'K' support for commands
 augroup custom_keywordprg
   autocmd!
-  " DevDocs: all
   autocmd FileType javascript setlocal keywordprg=:DD!
-  " DevDocs: specific filetype
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
-  " Dictioary: my custom Def function
   autocmd FileType markdown,rst,tex,txt,dictionary setlocal keywordprg=:Def
   autocmd FileType python,pydoc setlocal keywordprg=:Pydoc
 augroup end
