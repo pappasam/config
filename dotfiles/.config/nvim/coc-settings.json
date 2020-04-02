@@ -1,4 +1,5 @@
 {
+  "coc.preferences.enableFloatHighlight": false,
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
@@ -51,8 +52,12 @@
   "languageserver": {
     "dockerfile": {
       "command": "docker-langserver",
-      "filetypes": ["Dockerfile"],
-      "args": ["--stdio"]
+      "filetypes": [
+        "Dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
     },
     "jls": {
       "command": "jedi-language-server",

@@ -846,7 +846,6 @@ function! s:read_dict_to_preview(word, dict) range
         \ execute "silent! pedit! " . dst |
         \ wincmd P |
         \ set modifiable noreadonly |
-        \ call append(0, 'This is a scratch buffer in a preview window') |
         \ set buftype=nofile nomodifiable noswapfile readonly nomodified |
         \ setlocal nobuflisted |
         \ execute "resize " . (line('$') + 1)
@@ -1347,7 +1346,7 @@ augroup custom_keywordprg
   " DevDocs: specific filetype
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
   " Dictioary: my custom Def function
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=dict\ -d\ gcide
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
 augroup end
 
 " }}}
@@ -2029,6 +2028,9 @@ let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -',
+      \ 'jsonc' : 'python3 -c "import json, sys;'
+      \                . 'print(json.dumps(json.load(sys.stdin),'
+      \                . 'indent=2), end=\"\")"',
       \ }
 
 " }}}
