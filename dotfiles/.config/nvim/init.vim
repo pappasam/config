@@ -422,7 +422,7 @@ function! s:default_key_mappings()
   nmap <leader><CR> <Plug>NewLineComma
 
   " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-  nnoremap <silent> <leader>j :Jinja2Toggle<CR>
+  nnoremap <silent> <leader><leader>j :Jinja2Toggle<CR>
 
   " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R :ToggleNumber<CR>
@@ -1979,6 +1979,8 @@ let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
 let g:coc_start_at_startup = 1
 let g:coc_filetype_map = {
+      \ 'python.jinja2': 'python',
+      \ 'sql.jinja2': 'sql',
       \ 'yaml.ansible': 'yaml',
       \ 'yaml.docker-compose': 'yaml',
       \ }
