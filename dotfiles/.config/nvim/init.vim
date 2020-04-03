@@ -842,22 +842,23 @@ digraph jj 699  " Hawaiian character ʻ
 " }}}
 " General: bash cli > vim documentation window {{{
 
-function! s:read_command_to_doc(word, command, filetype) range
-  let dst = tempname()
+function! s:read_command_to_doc(word, command, name, filetype) range
+  let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
+  let bufname = a:name . '-' . a:word
+  let dst = tempname() . '-' . bufname
   let command = substitute(a:command, 'WORD', a:word, '')
   execute 'silent ! ' . command . ' > ' . dst
-  let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
   execute 'silent! ' . opencmd . ' ' . dst
   execute 'set filetype=' . a:filetype
-  execute 'file ' . a:word . ' (' . bufnr('%') . ')'
+  execute 'file ' . dst
   set buftype=nowrite nomodifiable noswapfile readonly nomodified nobuflisted
   call s:key_mappings_readonly()
   redraw!
 endfunction
 
-command! -nargs=1 Def call s:read_command_to_doc(<q-args>, 'dict -d gcide WORD', 'dictionary')
-command! -nargs=1 Syn call s:read_command_to_doc(<q-args>, 'dict -d moby-thesaurus WORD', 'dictionary')
-command! -nargs=1 Pydoc call s:read_command_to_doc(<q-args>, 'pydoc WORD', 'pydoc')
+command! -nargs=1 Def call s:read_command_to_doc(<q-args>, 'dict -d gcide WORD', 'def', 'dictionary')
+command! -nargs=1 Syn call s:read_command_to_doc(<q-args>, 'dict -d moby-thesaurus WORD', 'syn', 'dictionary')
+command! -nargs=1 Pydoc call s:read_command_to_doc(<q-args>, 'pydoc WORD', 'pydoc', 'rst.pydoc')
 
  " }}}
 " General: keywordprg K support {{{
@@ -867,7 +868,7 @@ augroup custom_keywordprg
   autocmd FileType javascript setlocal keywordprg=:DD!
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
   autocmd FileType markdown,rst,tex,txt,dictionary setlocal keywordprg=:Def
-  autocmd FileType python,pydoc setlocal keywordprg=:Pydoc
+  autocmd FileType python,rst.pydoc setlocal keywordprg=:Pydoc
 augroup end
 
 " }}}
