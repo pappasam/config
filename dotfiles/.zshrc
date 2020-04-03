@@ -600,7 +600,7 @@ alias cargo-doc='cargo doc --open'
 # Enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
-alias py='PYTHONSTARTUP="$(python -m jedi repl)" python'
+alias py='nvim -c "silent! normal! ggdG" -c "ReplToggle" /tmp/repl.py'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
