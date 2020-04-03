@@ -844,13 +844,12 @@ digraph jj 699  " Hawaiian character ʻ
 
 function! s:read_command_to_doc(word, command, name, filetype) range
   let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
-  let bufname = a:name . '-' . a:word
-  let dst = tempname() . '-' . bufname
+  let fp = fnamemodify(tempname(), ':p:h') . '/' . a:name . '-' . a:word
   let command = substitute(a:command, 'WORD', a:word, '')
-  execute 'silent ! ' . command . ' > ' . dst
-  execute 'silent! ' . opencmd . ' ' . dst
+  execute 'silent ! ' . command . ' > ' . fp
+  execute 'silent! ' . opencmd . ' ' . fp
   execute 'set filetype=' . a:filetype
-  execute 'file ' . dst
+  execute 'file ' . fp
   set buftype=nowrite nomodifiable noswapfile readonly nomodified nobuflisted
   call s:key_mappings_readonly()
   redraw!
