@@ -2026,9 +2026,6 @@ let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -',
-      \ 'jsonc' : 'python3 -c "import json, sys;'
-      \                . 'print(json.dumps(json.load(sys.stdin),'
-      \                . 'indent=2), end=\"\")"',
       \ }
 
 " }}}

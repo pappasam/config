@@ -3,12 +3,7 @@
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
-  "pairs.enableCharacters": [
-    "(",
-    "[",
-    "{",
-    "<"
-  ],
+  "pairs.enableCharacters": ["(", "[", "{", "<"],
   "yaml.schemas": {
     "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml"
   },
@@ -52,25 +47,17 @@
   "languageserver": {
     "dockerfile": {
       "command": "docker-langserver",
-      "filetypes": [
-        "Dockerfile"
-      ],
-      "args": [
-        "--stdio"
-      ]
+      "filetypes": ["Dockerfile"],
+      "args": ["--stdio"]
     },
     "jls": {
       "command": "jedi-language-server",
       "args": [],
-      "filetypes": [
-        "python"
-      ]
+      "filetypes": ["python"]
     },
     "terraform": {
       "command": "terraform-lsp",
-      "filetypes": [
-        "terraform"
-      ],
+      "filetypes": ["terraform"],
       "initializationOptions": {}
     }
   }
