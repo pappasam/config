@@ -871,12 +871,18 @@ call s:create_doc_command('Def', 'dict -d gcide %s', 'dict.gitcommit')
 call s:create_doc_command('Syn', 'dict -d moby-thesaurus %s', 'dict.gitcommit')
 call s:create_doc_command('Pydoc', 'pydoc %s', 'pydoc.rst')
 
-augroup custom_keywordprg
+augroup custom_keywordprg_custom_filetypes
+  autocmd!
+  autocmd FileType dict.gitcommit setlocal keywordprg=:Def
+  autocmd FileType pydoc.rst setlocal keywordprg=:Pydoc
+augroup end
+
+augroup custom_keywordprg_regular_filetypes
   autocmd!
   autocmd FileType javascript setlocal keywordprg=:DD!
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
-  autocmd FileType markdown,rst,tex,txt,dict.gitcommit setlocal keywordprg=:Def
-  autocmd FileType python,pydoc.rst setlocal keywordprg=:Pydoc
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
+  autocmd FileType python setlocal keywordprg=:Pydoc
 augroup end
 
 " }}}
