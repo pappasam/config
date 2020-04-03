@@ -867,16 +867,16 @@ function! s:create_doc_command(cmdname, cmd, filetype)
         \ )
 endfunction
 
-call s:create_doc_command('Def', 'dict -d gcide %s', 'dictionary')
-call s:create_doc_command('Syn', 'dict -d moby-thesaurus %s', 'dictionary')
-call s:create_doc_command('Pydoc', 'pydoc %s', 'rst.pydoc')
+call s:create_doc_command('Def', 'dict -d gcide %s', 'dict.gitcommit')
+call s:create_doc_command('Syn', 'dict -d moby-thesaurus %s', 'dict.gitcommit')
+call s:create_doc_command('Pydoc', 'pydoc %s', 'pydoc.rst')
 
 augroup custom_keywordprg
   autocmd!
   autocmd FileType javascript setlocal keywordprg=:DD!
   autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
-  autocmd FileType markdown,rst,tex,txt,dictionary setlocal keywordprg=:Def
-  autocmd FileType python,rst.pydoc setlocal keywordprg=:Pydoc
+  autocmd FileType markdown,rst,tex,txt,dict.gitcommit setlocal keywordprg=:Def
+  autocmd FileType python,pydoc.rst setlocal keywordprg=:Pydoc
 augroup end
 
 " }}}
