@@ -1898,6 +1898,8 @@ let g:slime_no_mappings = v:true
 let g:term_repl_open = v:false
 
 function! s:term_repl_open()
+  " make current window the only window
+  only
   " NOTE: zshell does not receive the newlines
   let command = get(g:repl_filetype_commands, &filetype, '/bin/bash')
   if &columns >= 160
