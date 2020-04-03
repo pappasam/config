@@ -844,7 +844,7 @@ digraph jj 699  " Hawaiian character ʻ
 
 function! s:read_command_to_doc(word, command, name, filetype) range
   let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
-  let fp = fnamemodify(tempname(), ':p:h') . '/' . a:name . '-' . a:word
+  let fp = fnamemodify(tempname(), ':p:h') . '/' . a:word . ':' . a:name
   let command = substitute(a:command, 'WORD', a:word, '')
   execute 'silent ! ' . command . ' > ' . fp
   execute 'silent! ' . opencmd . ' ' . fp
