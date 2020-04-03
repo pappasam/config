@@ -840,13 +840,12 @@ augroup end
 digraph jj 699  " Hawaiian character ʻ
 
 " }}}
-" General: bash cli > vim documentation window {{{
+" General: keywordprg K support + bash cli > vim documentation window {{{
 
 function! s:read_command_to_doc(word, command, name, filetype) range
   let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
-  let tempdir = fnamemodify(tempname(), ':p:h')
-  let fp = tempdir . '/' . a:word . '.' . a:name
-  let command = substitute(a:command, 'WORD', a:word, '')
+  let fp = fnamemodify(tempname(), ':p:h') . '/' . a:word . '.' . a:name
+  let command = printf(a:command, a:word)
   execute 'silent ! ' . command . ' > ' . fp
   execute 'silent! ' . opencmd . ' ' . fp
   execute 'set filetype=' . a:filetype
@@ -856,12 +855,21 @@ function! s:read_command_to_doc(word, command, name, filetype) range
   redraw!
 endfunction
 
-command! -nargs=1 Def call s:read_command_to_doc(<q-args>, 'dict -d gcide WORD', 'def', 'dictionary')
-command! -nargs=1 Syn call s:read_command_to_doc(<q-args>, 'dict -d moby-thesaurus WORD', 'syn', 'dictionary')
-command! -nargs=1 Pydoc call s:read_command_to_doc(<q-args>, 'pydoc WORD', 'pydoc', 'rst.pydoc')
+" Create global command 'cmdname'
+function! s:create_doc_command(cmdname, cmd, filetype)
+  execute printf(
+        \ "command! -nargs=1 %s call " .
+        \ "s:read_command_to_doc(<q-args>, '%s', '%s', '%s')",
+        \ a:cmdname,
+        \ a:cmd,
+        \ tolower(a:cmdname),
+        \ a:filetype,
+        \ )
+endfunction
 
- " }}}
-" General: keywordprg K support {{{
+call s:create_doc_command('Def', 'dict -d gcide %s', 'dictionary')
+call s:create_doc_command('Syn', 'dict -d moby-thesaurus %s', 'dictionary')
+call s:create_doc_command('Pydoc', 'pydoc %s', 'rst.pydoc')
 
 augroup custom_keywordprg
   autocmd!
