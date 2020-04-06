@@ -2001,7 +2001,7 @@ let g:vim_filetype_formatter_commands = {
       \ }
 
 " }}}
-" Plugin: vim-keywordprg-commands {{{
+" Plugins: vim-keywordprg-commands {{{
 
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
