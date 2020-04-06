@@ -53,6 +53,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/defx-git', {'do': ':UpdateRemotePlugins'})
   call packager#add('git@github.com:kristijanhusak/defx-icons', {'do': ':UpdateRemotePlugins'})
   call packager#add('git@github.com:mbbill/undotree')
+  call packager#add('git@github.com:pappasam/vim-keywordprg-commands.git')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
   call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
@@ -838,52 +839,6 @@ augroup end
 " General: digraphs {{{
 
 digraph jj 699  " Hawaiian character ʻ
-
-" }}}
-" General: keywordprg K support + bash cli > vim documentation window {{{
-
-function! s:read_command_to_doc(word, command, name, filetype) range
-  let opencmd = a:filetype == &filetype ? 'edit!' : 'split!'
-  let fp = fnamemodify(tempname(), ':p:h') . '/' . a:word . '.' . a:name
-  let command = printf(a:command, a:word)
-  execute 'silent ! ' . command . ' > ' . fp
-  execute 'silent! ' . opencmd . ' ' . fp
-  execute 'set filetype=' . a:filetype
-  execute 'file ' . fp
-  set buftype=nowrite nomodifiable noswapfile readonly nomodified nobuflisted
-  call s:key_mappings_readonly()
-  redraw!
-endfunction
-
-" Create global command 'cmdname'
-function! s:create_doc_command(cmdname, cmd, filetype)
-  execute printf(
-        \ "command! -nargs=1 %s call " .
-        \ "s:read_command_to_doc(<q-args>, '%s', '%s', '%s')",
-        \ a:cmdname,
-        \ a:cmd,
-        \ tolower(a:cmdname),
-        \ a:filetype,
-        \ )
-endfunction
-
-call s:create_doc_command('Def', 'dict -d gcide %s', 'dict.gitcommit')
-call s:create_doc_command('Syn', 'dict -d moby-thesaurus %s', 'dict.gitcommit')
-call s:create_doc_command('Pydoc', 'pydoc %s', 'pydoc.rst')
-
-augroup custom_keywordprg_custom_filetypes
-  autocmd!
-  autocmd FileType dict.gitcommit setlocal keywordprg=:Def
-  autocmd FileType pydoc.rst setlocal keywordprg=:Pydoc
-augroup end
-
-augroup custom_keywordprg_regular_filetypes
-  autocmd!
-  autocmd FileType javascript setlocal keywordprg=:DD!
-  autocmd FileType typescript,rust,html,css setlocal keywordprg=:DD
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
-  autocmd FileType python setlocal keywordprg=:Pydoc
-augroup end
 
 " }}}
 " General: folding settings {{{
@@ -2044,6 +1999,14 @@ let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -',
       \ }
+
+" }}}
+" Plugin: vim-keywordprg-commands {{{
+
+augroup custom_keywordprg
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
+  autocmd FileType python setlocal keywordprg=:Pydoc
+augroup end
 
 " }}}
 " Plugins: misc global var config {{{
