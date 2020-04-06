@@ -36,6 +36,7 @@ sudo apt install -y \
   dict \
   dict-gcide \
   dict-moby-thesaurus \
+  dict-wn \
   entr \
   expect-dev \
   exuberant-ctags \
