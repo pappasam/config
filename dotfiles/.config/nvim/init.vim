@@ -13,6 +13,7 @@ function s:pack_init() abort
   for coc_plugin in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
+        \ 'git@github.com:fannheyward/coc-texlab.git',
         \ 'git@github.com:iamcco/coc-diagnostic.git',
         \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
@@ -1778,7 +1779,7 @@ function! MyVimTexDocHandler(context)
   " to pull up package documentation
   call vimtex#doc#make_selection(a:context)
   if !empty(a:context.selected)
-    execute '!texdoc' a:context.selected '&'
+    execute '!texdoc ' . a:context.selected . ' &'
   endif
   return 1
 endfunction
@@ -2002,6 +2003,8 @@ let g:vim_filetype_formatter_commands = {
 
 " }}}
 " Plugins: vim-keywordprg-commands {{{
+
+" NOTE: latex is handled by vimtex
 
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
