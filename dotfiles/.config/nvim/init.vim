@@ -463,8 +463,8 @@ function! s:default_key_mappings()
         \ :<c-u>call slime#send_lines(v:count1)<cr>
         \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
   nnoremap <leader><leader>e :ReplToggle<CR>
-  xmap <leader>e <Plug>SlimeRegionSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
-  nmap <leader>e <Plug>CustomSlimeLineSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n><C-w><C-w>:set nolazyredraw<CR>:redraw<CR>
+  xmap <leader>e <Plug>SlimeRegionSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n>:call win_gotoid(g:slime_code_window_id)<CR>:set nolazyredraw<CR>:redraw<CR>
+  nmap <leader>e <Plug>CustomSlimeLineSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n>:call win_gotoid(g:slime_code_window_id)<CR>:set nolazyredraw<CR>:redraw<CR>
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
@@ -1869,8 +1869,13 @@ let g:term_repl_open = v:false
 
 function! s:term_repl_open()
   " make current window the only window
-  only
+  " only
   " NOTE: zshell does not receive the newlines
+  if exists('g:slime_code_window_id')
+    echo 'Cannot have two slime sessions at once'
+    return
+  endif
+  let g:slime_code_window_id = win_getid()
   let command = get(g:repl_filetype_commands, &filetype, '/bin/bash')
   if &columns >= 160
     vsplit
@@ -1881,17 +1886,19 @@ function! s:term_repl_open()
   setlocal nonumber nornu
   let g:repl_terminal_job_id = b:terminal_job_id
   let g:slime_terminal_window_id = win_getid()
-  wincmd w
+  call win_gotoid(g:slime_code_window_id)
   let b:slime_config = { 'jobid': g:repl_terminal_job_id }
   let g:term_repl_open = v:true
 endfunction
 
 function! s:term_repl_close()
   let current_window_id = win_getid()
-  call win_gotoid(g:slime_terminal_window_id) | quit
-  let g:term_repl_open = v:false
+  call win_gotoid(g:slime_terminal_window_id)
+  quit
   call win_gotoid(current_window_id)
-  unlet b:slime_config
+  let g:term_repl_open = v:false
+  unlet g:slime_terminal_window_id
+  unlet g:slime_code_window_id
 endfunction
 
 function! s:term_repl_toggle()
