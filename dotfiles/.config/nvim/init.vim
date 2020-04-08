@@ -115,7 +115,8 @@ function s:pack_init() abort
   call packager#add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Repl Integration:
-  call packager#add('git@github.com:jpalardy/vim-slime.git')
+  " call packager#add('git@github.com:jpalardy/vim-slime.git')
+  call packager#add('git@github.com:pappasam/nvim-repl.git')
 
   " Indentation Only:
   call packager#add('git@github.com:Vimjas/vim-python-pep8-indent')
@@ -462,12 +463,9 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
 
   " Slime:
-  noremap <script> <silent> <Plug>CustomSlimeLineSend
-        \ :<c-u>call slime#send_lines(v:count1)<cr>
-        \ :silent! call repeat#set("\<Plug>CustomSlimeLineSend")<CR>hj
   nnoremap <leader><leader>e :ReplToggle<CR>
-  xmap <leader>e <Plug>SlimeRegionSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n>:call win_gotoid(g:slime_code_window_id)<CR>:set nolazyredraw<CR>:redraw<CR>
-  nmap <leader>e <Plug>CustomSlimeLineSend:set lazyredraw<CR>:call win_gotoid(g:slime_terminal_window_id)<CR>i<C-\><C-n>:call win_gotoid(g:slime_code_window_id)<CR>:set nolazyredraw<CR>:redraw<CR>
+  nmap <leader>e <Plug>ReplSendLine
+  vmap <leader>e :ReplSend<CR>
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
@@ -1863,62 +1861,13 @@ augroup custom_ragtag
 augroup end
 
 " }}}
-" Plugins: slime {{{
-
-let g:slime_target = "neovim"
-let g:slime_dont_ask_default = v:true
-let g:slime_no_mappings = v:true
-let g:term_repl_open = v:false
-
-function! s:term_repl_open()
-  " make current window the only window
-  " only
-  " NOTE: zshell does not receive the newlines
-  if exists('g:slime_code_window_id')
-    echo 'Cannot have two slime sessions at once'
-    return
-  endif
-  let g:slime_code_window_id = win_getid()
-  let command = get(g:repl_filetype_commands, &filetype, '/bin/bash')
-  if &columns >= 160
-    vsplit
-  else
-    split
-  endif
-  execute 'terminal ' . command
-  setlocal nonumber nornu
-  let g:repl_terminal_job_id = b:terminal_job_id
-  let g:slime_terminal_window_id = win_getid()
-  call win_gotoid(g:slime_code_window_id)
-  let b:slime_config = { 'jobid': g:repl_terminal_job_id }
-  let g:term_repl_open = v:true
-endfunction
-
-function! s:term_repl_close()
-  let current_window_id = win_getid()
-  call win_gotoid(g:slime_terminal_window_id)
-  quit
-  call win_gotoid(current_window_id)
-  let g:term_repl_open = v:false
-  unlet g:slime_terminal_window_id
-  unlet g:slime_code_window_id
-endfunction
-
-function! s:term_repl_toggle()
-  if g:term_repl_open == v:false
-    call s:term_repl_open()
-  else
-    call s:term_repl_close()
-  endif
-endfunction
+" Plugins: nvim-repl {{{
 
 let g:repl_filetype_commands = {
       \ 'python': 'python',
       \ }
 
-command! ReplOpen call s:term_repl_open()
-command! ReplClose call s:term_repl_close()
-command! ReplToggle call s:term_repl_toggle()
+let g:repl_default = '/bin/bash'
 
 " }}}
 " Plugins: vim-markdown {{{
