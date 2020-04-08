@@ -3,4 +3,4 @@
 - {{Cursor}}
 
 *Today:*
-*Blockers/Reminders:*"
+*Blockers/Reminders:*
