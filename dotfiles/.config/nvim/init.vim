@@ -54,7 +54,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/defx-git', {'do': ':UpdateRemotePlugins'})
   call packager#add('git@github.com:kristijanhusak/defx-icons', {'do': ':UpdateRemotePlugins'})
   call packager#add('git@github.com:mbbill/undotree')
-  call packager#add('git@github.com:pappasam/vim-keywordprg-commands.git')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
   call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
@@ -64,6 +63,10 @@ function s:pack_init() abort
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:yssl/QFEnter')
+
+  " KeywordPrg:
+  call packager#add('git@github.com:pappasam/vim-keywordprg-commands.git')
+  call packager#add('git@github.com:romainl/vim-devdocs.git')
 
   " Fuzzy Finder:
   call packager#add('git@github.com:junegunn/fzf')
@@ -2009,13 +2012,14 @@ let g:vim_filetype_formatter_commands = {
       \ }
 
 " }}}
-" Plugins: vim-keywordprg-commands {{{
+" Plugins: keywordprg helpers (vim-keywordprg-commands, etc) {{{
 
 " NOTE: latex is handled by vimtex
 
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
   autocmd FileType python setlocal keywordprg=:Pydoc
+  autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ typescript
 augroup end
 
 " }}}
