@@ -1867,7 +1867,7 @@ augroup end
 "       \ 'python': 'python',
 "       \ }
 
-" let g:repl_default = '/bin/bash'
+let g:repl_default = &shell
 
 " }}}
 " Plugins: vim-markdown {{{

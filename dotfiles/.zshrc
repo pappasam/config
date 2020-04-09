@@ -428,8 +428,7 @@ bindkey -e
 #         useful to get out of both select and search-backward
 # '^z' - stop interactive tab-complete mode and go back to regular selection
 
-# make vi keys do menu-expansion (eg, ^j does expansion, navigate with hjkl)
-bindkey '^j' menu-expand-or-complete
+# navigate menu with vi keys "hjkl"
 bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
 bindkey -M menuselect '^h' backward-char
