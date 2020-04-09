@@ -464,8 +464,8 @@ function! s:default_key_mappings()
 
   " Repl: my very own repl plugin
   nnoremap <leader><leader>e :ReplToggle<CR>
-  vnoremap <leader>e :ReplSend<CR>
   nmap <leader>e <Plug>ReplSendLine
+  vmap <leader>e <Plug>ReplSendVisual
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
