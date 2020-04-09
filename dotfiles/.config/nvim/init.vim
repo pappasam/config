@@ -1863,11 +1863,11 @@ augroup end
 " }}}
 " Plugins: nvim-repl {{{
 
-let g:repl_filetype_commands = {
-      \ 'python': 'python',
-      \ }
+" let g:repl_filetype_commands = {
+"       \ 'python': 'python',
+"       \ }
 
-let g:repl_default = '/bin/bash'
+" let g:repl_default = '/bin/bash'
 
 " }}}
 " Plugins: vim-markdown {{{
