@@ -1965,6 +1965,8 @@ let g:vim_filetype_formatter_commands = {
 " }}}
 " Plugins: keywordprg helpers (vim-keywordprg-commands, etc) {{{
 
+let g:vim_keywordprg_commands = {
+      \ }
 " NOTE: latex is handled by vimtex
 
 augroup custom_keywordprg
