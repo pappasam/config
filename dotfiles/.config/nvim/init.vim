@@ -1970,7 +1970,7 @@ let g:vim_keywordprg_commands = {
 " NOTE: latex is handled by vimtex
 
 augroup custom_keywordprg
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:Def
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
   autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ typescript
 augroup end
