@@ -655,6 +655,7 @@ function gr() {
 function upgrade() {
   sudo apt update
   sudo apt upgrade -y
+  sudo apt autoremove -y
   pushd
   cd ~/src/lib/alacritty
   git pull
