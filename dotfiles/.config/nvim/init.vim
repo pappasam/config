@@ -80,6 +80,8 @@ function s:pack_init() abort
   " Text Objects:
   call packager#add('git@github.com:machakann/vim-sandwich')
   call packager#add('git@github.com:kana/vim-textobj-user')
+  " support additional delimiters
+  call packager#add('git@github.com:EvanQuan/vim-textobj-delimiters.git')
   " al/il for the current line
   call packager#add('git@github.com:kana/vim-textobj-line')
   " as/is for a sentence of prose (overrides hard-coded native object & motion)
