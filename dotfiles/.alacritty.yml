@@ -155,8 +155,8 @@ selection:
 
 dynamic_title: true
 
-# Live config reload (changes require restart)
-live_config_reload: true
+# Live config reload: false because I think it's more performant
+live_config_reload: false
 
 # Shell
 shell:
