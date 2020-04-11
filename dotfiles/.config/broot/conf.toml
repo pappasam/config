@@ -82,6 +82,7 @@ execution = ":page_up"
 
 [[verbs]]
 invocation = "open_directory"
+from_shell = true
 key = "ctrl-o"
 execution = "cd {directory}"
 

@@ -179,6 +179,7 @@ include () {
 }
 
 include ~/.bash/sensitive
+include ~/.config/broot/launcher/bash/br
 
 # }}}
 # Z-shell: plugins {{{
@@ -601,9 +602,6 @@ alias pip='noglob pip'
 alias poetry-clean='poetry cache:clear --all pypi'
 alias py='nvim -c "silent! normal! ggdG" -c "ReplToggle" /tmp/repl.py'
 alias pycache-clean='find . -name "*.pyc" -delete'
-
-# broot
-alias b='broot'
 
 # }}}
 # General: functions {{{
