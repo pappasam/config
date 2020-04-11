@@ -1865,9 +1865,9 @@ augroup end
 " }}}
 " Plugins: nvim-repl {{{
 
-" let g:repl_filetype_commands = {
-"       \ 'python': 'python',
-"       \ }
+let g:repl_filetype_commands = {
+      \ 'python': 'bpython -q',
+      \ }
 
 " let g:repl_default = &shell
 

@@ -802,6 +802,7 @@ function nodedev-install() {  ## Install default nodejs dependencies
 function pydev-install() {  ## Install default python dependencies
   local env=(\
     black \
+    bpython \
     isort \
     jedi \
     jedi-language-server \
@@ -810,7 +811,6 @@ function pydev-install() {  ## Install default python dependencies
     pylint\
     pynvim \
     restview \
-    rope==0.14.0 \
     toml-sort \
   )
   local dev=(\
