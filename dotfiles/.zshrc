@@ -115,7 +115,7 @@ export MANPAGER=less
 export GIT_PAGER=less
 
 # Set default text editor
-export EDITOR=/usr/bin/nvim
+export EDITOR=nvim
 
 # environment variable controlling difference between HI-DPI / Non HI_DPI
 # turn off because it messes up my pdf tooling
@@ -602,6 +602,9 @@ alias poetry-clean='poetry cache:clear --all pypi'
 alias py='nvim -c "silent! normal! ggdG" -c "ReplToggle" /tmp/repl.py'
 alias pycache-clean='find . -name "*.pyc" -delete'
 
+# broot
+alias b='broot'
+
 # }}}
 # General: functions {{{
 
@@ -782,7 +785,12 @@ function cargodoc() {  # arg1: packagename
   fi
 }
 
-function nodedev-install() {  ## Install default nodejs dependencies
+function rustdev-install() {
+  cargo install broot
+  asdf reshim rust
+}
+
+function nodedev-install() {
   local env=(\
     dockerfile-language-server-nodejs \
     git+https://github.com/Perlence/tstags.git \
@@ -806,24 +814,16 @@ function pydev-install() {  ## Install default python dependencies
     isort \
     jedi \
     jedi-language-server \
+    mypy \
     neovim-remote \
     pip \
+    pre-commit \
     pylint\
     pynvim \
     restview \
     toml-sort \
   )
-  local dev=(\
-    mypy \
-    pre-commit \
-  )
-  if [[ "$1" == 'all' ]]; then
-    pip install -U $env $dev
-  elif [[ "$1" == 'dev' ]]; then
-    pip install -U $dev
-  else
-    pip install -U $env
-  fi
+  pip install -U $env
   asdf reshim python
 }
 
