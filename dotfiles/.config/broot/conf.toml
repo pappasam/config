@@ -24,17 +24,21 @@ default_flags = ""
 
 [[verbs]]
 invocation = "edit"
-key = "F2"
+key = "enter"
 shortcut = "e"
 execution = "$EDITOR {file}"
 
 [[verbs]]
-key = "ctrl-c"
-execution = ":quit"
+key = "ctrl-o"
+execution = ":back"
 
 [[verbs]]
-invocation = "create {subpath}"
-execution = "$EDITOR {directory}/{subpath}"
+key = "alt-i"
+execution = ":toggle_hidden"
+
+[[verbs]]
+key = "ctrl-c"
+execution = ":quit"
 
 [[verbs]]
 invocation = "git_diff"
