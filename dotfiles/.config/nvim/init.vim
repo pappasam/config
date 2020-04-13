@@ -185,7 +185,13 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " }}}
-" General: global config {{{
+" General: environment variables {{{
+
+" Path: add node_modules for language servers / linters / other stuff
+let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+
+" }}}
+" General: options {{{
 
 " Enable filetype detection, plugin loading, and indentation loading
 filetype plugin indent on
@@ -266,8 +272,7 @@ set ttimeout
 set exrc
 set secure
 
-" Default Shell:
-set shell=$SHELL
+" Default Shell: 'shell' defaults to $SHELL
 
 " Numbering:
 set number
@@ -301,9 +306,6 @@ set updatetime=300
 
 " Linux Dev Path: system libraries
 set path+=/usr/include/x86_64-linux-gnu/
-
-" Path: add node_modules for language servers / linters / other stuff
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 
 " Vim History: for command line; can't imagine that more than 100 is needed
 set history=100
@@ -1866,10 +1868,15 @@ augroup end
 " Plugins: nvim-repl {{{
 
 let g:repl_filetype_commands = {
+      \ 'bash': 'bash',
+      \ 'javascript': 'node',
       \ 'python': 'bpython -q',
+      \ 'sh': 'sh',
+      \ 'vim': 'nvim --clean -ERZM',
+      \ 'zsh': 'zsh',
       \ }
 
-" let g:repl_default = &shell
+let g:repl_default = &shell
 
 " }}}
 " Plugins: vim-markdown {{{
