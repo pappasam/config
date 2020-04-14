@@ -149,16 +149,6 @@ export WINIT_HIDPI_FACTOR=1.0
 # Bat
 export BAT_PAGER=''
 
-# MANPATH: add asdf man pages to my man path
-MANPATH="$HOME/man"
-if [ -x "$(command -v fd)" ]; then
-  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
-    MANPATH="$MANPATH:$(dirname $value)"
-  done
-  # colon at end. See "man manpath"
-  export MANPATH="$MANPATH:"
-fi
-
 # }}}
 # Environ: path appends + misc env setup {{{
 
@@ -510,6 +500,19 @@ SPACESHIP_CHAR_COLOR_FAILURE=green
 
 source $HOME/.asdf/asdf.sh
 source $HOME/.asdf/completions/asdf.bash
+
+# }}}
+# General: post-asdf env setup {{{
+
+# MANPATH: add asdf man pages to my man path
+MANPATH="$HOME/man"
+if [ -x "$(command -v fd)" ]; then
+  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+    MANPATH="$MANPATH:$(dirname $value)"
+  done
+  # colon at end. See "man manpath"
+  export MANPATH="$MANPATH:"
+fi
 
 # }}}
 # General: aliases {{{
