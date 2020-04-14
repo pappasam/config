@@ -675,6 +675,8 @@ function upgrade() {
   git pull
   alacritty-install
   popd
+  asdf uninstall neovim nightly
+  asdf install neovim nightly
   nvim -c 'PU'
 }
 
