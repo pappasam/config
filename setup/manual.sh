@@ -30,26 +30,8 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 #######################################################################
 # Tmux - install from source to get latest version
 #######################################################################
-# apt: autoconf automake pkg-config libevent-dev
-
-sudo apt remove tmux
-
-cd ~/src/lib
-
-git clone git@github.com:tmux/tmux.git
-
-cd tmux
-
-sh autogen.sh
-
-./configure
-
-make
-
-sudo make install
 
 # tpm: Tmux Plugin Manager
-
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 #######################################################################
