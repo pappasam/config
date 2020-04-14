@@ -2,37 +2,28 @@
 
 set -e
 
+###########################################################################
+# Custom
+
 asdf plugin-add nodejs
 bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 asdf install nodejs 12.13.0
 asdf global nodejs 12.13.0
-npm install neovim
-asdf reshim nodejs
 
-asdf plugin-add php
-asdf install php 7.3.11
-asdf global php 7.3.11
+###########################################################################
+# Generalized
 
-asdf plugin-add python
-asdf install python 3.7.5
-asdf install python 3.8.0
-asdf global python 3.7.5
+asdf_setup() {
+  asdf plugin-add $1
+  asdf install $1 $2
+  asdf global $1 $2
+}
 
-asdf plugin-add ruby
-asdf install ruby 2.6.5
-asdf global ruby 2.6.5
-
-asdf plugin-add rust
-asdf install rust nightly
-asdf global rust nightly
-
-asdf plugin-add yarn
-asdf install yarn 1.19.1
-asdf global yarn 1.19.1
-
-asdf plugin-add golang
-asdf install golang 1.13.4
-asdf global golang 1.13.4
-
-asdf plugin-add java https://github.com/halcyon/asdf-java.git
-asdf install java adopt-openjdk-13.0.2+8
+asdf_setup golang 1.13.4
+asdf_setup java adopt-openjdk-13.0.2+8
+asdf_setup neovim nightly
+asdf_setup php 7.3.11
+asdf_setup python 3.8.2
+asdf_setup ruby 2.6.5
+asdf_setup rust nightly
+asdf_setup yarn 1.19.1

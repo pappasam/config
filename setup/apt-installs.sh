@@ -12,7 +12,6 @@
 set -e
 
 sudo add-apt-repository -y ppa:peek-developers/stable
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
 sudo apt update
 sudo apt upgrade -y
@@ -83,7 +82,6 @@ sudo apt install -y \
   manpages-dev \
   manpages-posix-dev \
   ncurses-doc \
-  neovim \
   network-manager-openvpn \
   openssl \
   peek \
