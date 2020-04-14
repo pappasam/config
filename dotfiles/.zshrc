@@ -149,6 +149,14 @@ export WINIT_HIDPI_FACTOR=1.0
 # Bat
 export BAT_PAGER=''
 
+# MANPATH: add asdf man pages to my man path
+if [ -x "$(command -v fd)" ]; then
+  for value in $(fd man1 ~/.asdf/installs --type directory); do
+    MANPATH="$(dirname $value):$MANPATH"
+  done
+  export MANPATH
+fi
+
 # }}}
 # Environ: path appends + misc env setup {{{
 
