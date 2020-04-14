@@ -150,11 +150,13 @@ export WINIT_HIDPI_FACTOR=1.0
 export BAT_PAGER=''
 
 # MANPATH: add asdf man pages to my man path
+MANPATH="$HOME/man"
 if [ -x "$(command -v fd)" ]; then
-  for value in $(fd man1 ~/.asdf/installs --type directory); do
-    MANPATH="$(dirname $value):$MANPATH"
+  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+    MANPATH="$MANPATH:$(dirname $value)"
   done
-  export MANPATH
+  # colon at end. See "man manpath"
+  export MANPATH="$MANPATH:"
 fi
 
 # }}}
