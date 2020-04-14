@@ -514,6 +514,8 @@ if [ -x "$(command -v fd)" ]; then
   export MANPATH="$MANPATH:"
 fi
 
+include ~/.asdf/plugins/java/set-java-home.sh
+
 # }}}
 # General: aliases {{{
 
