@@ -1,15 +1,15 @@
 " Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
 " General: packages {{{
 
+" Note: vim-packager automatically executes UpdateRemotePlugins
+
 function s:pack_init() abort
   packadd vim-packager
   call packager#init()
-  call packager#add('git@github.com:kristijanhusak/vim-packager', { 'type': 'opt' })
+  call packager#add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:neoclide/coc.nvim.git', {
-        \ 'branch': 'release',
-        \ })
+  call packager#add('git@github.com:neoclide/coc.nvim.git', {'branch': 'release'})
   for coc_plugin in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
@@ -46,13 +46,13 @@ function s:pack_init() abort
   call packager#add('git@github.com:tpope/vim-scriptease')
 
   " General:
-  call packager#add('git@github.com:Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'})
+  call packager#add('git@github.com:Shougo/defx.nvim')
   call packager#add('git@github.com:bronson/vim-visual-star-search')
   call packager#add('git@github.com:fidian/hexmode')
   call packager#add('git@github.com:junegunn/vader.vim')
   call packager#add('git@github.com:kh3phr3n/tabline')
-  call packager#add('git@github.com:kristijanhusak/defx-git', {'do': ':UpdateRemotePlugins'})
-  call packager#add('git@github.com:kristijanhusak/defx-icons', {'do': ':UpdateRemotePlugins'})
+  call packager#add('git@github.com:kristijanhusak/defx-git')
+  call packager#add('git@github.com:kristijanhusak/defx-icons')
   call packager#add('git@github.com:mbbill/undotree')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
   call packager#add('git@github.com:romainl/vim-devdocs')
@@ -103,7 +103,7 @@ function s:pack_init() abort
 
   " Writing:
   call packager#add('git@github.com:dkarter/bullets.vim')
-  call packager#add('git@github.com:jlesquembre/rst-tables.nvim', {'do': ':UpdateRemotePlugins'})
+  call packager#add('git@github.com:jlesquembre/rst-tables.nvim')
   call packager#add('git@github.com:junegunn/goyo.vim')
   call packager#add('git@github.com:junegunn/limelight.vim')
   call packager#add('git@github.com:moiatgit/vim-rst-sections')
@@ -649,6 +649,8 @@ augroup custom_init_vim
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter init.vim
         \ nnoremap <buffer> <silent> gf :call <SID>gf_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim
+        \ nnoremap <buffer> <silent> gx :call <SID>gx_vimrc_open_plugin()<CR>
 augroup end
 
 " }}}
@@ -667,6 +669,18 @@ function! s:gf_vimrc_open_plugin()
   let path = '~/.config/nvim/pack/packager/' . parent_directory . directory
   execute 'tabe ' . path
   execute 'lcd ' . path
+endfunction
+
+function! s:gx_vimrc_open_plugin()
+  let ssh_url = expand('<cfile>')
+  let ssh_components = split(ssh_url, ':')
+  if len(ssh_components) != 2
+    " do regular 'gx'
+    normal! gx
+    return
+  endif
+  let path = ssh_components[1]
+  execute 'OpenBrowser ' . 'https://github.com/' . path
 endfunction
 
 " }}}
