@@ -18,6 +18,7 @@ function s:pack_init() abort
         \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
+        \ 'git@github.com:neoclide/coc-java.git',
         \ 'git@github.com:neoclide/coc-json.git',
         \ 'git@github.com:neoclide/coc-lists.git',
         \ 'git@github.com:neoclide/coc-pairs.git',
