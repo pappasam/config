@@ -523,15 +523,15 @@ function! s:default_key_mappings()
   nmap <silent> <leader>su <Plug>(coc-references)
   nmap <silent> <leader>sr <Plug>(coc-rename)
   " next and previous items in a list
-  nnoremap <silent> <leader>sn :<C-u>CocNext<CR>
-  nnoremap <silent> <leader>sp :<C-u>CocPrev<CR>
-  nnoremap <silent> <leader>sl :<C-u>CocListResume<CR>
+  nnoremap <silent> <leader>sn :CocNext<CR>
+  nnoremap <silent> <leader>sp :CocPrev<CR>
+  nnoremap <silent> <leader>sl :CocListResume<CR>
   " Show commands
-  nnoremap <silent> <leader>sc :<C-u>CocList commands<cr>
+  nnoremap <silent> <leader>sc :CocList commands<cr>
   " Find symbol of current document
-  nnoremap <silent> <leader>ss :<C-u>CocList outline<cr>
+  nnoremap <silent> <leader>ss :CocList outline<cr>
   " Search workspace symbols
-  nnoremap <silent> <leader>sw :<C-u>CocList -I symbols<cr>
+  nnoremap <silent> <leader>sw :CocList -I symbols<cr>
   " Use <c-space> to trigger completion
   inoremap <silent> <expr> <c-space> coc#refresh()
   " Scroll in floating window
