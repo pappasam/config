@@ -672,6 +672,7 @@ function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
+  rustup update
   pushd
   cd ~/src/lib/alacritty
   git pull
