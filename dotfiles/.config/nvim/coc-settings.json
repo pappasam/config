@@ -64,6 +64,11 @@
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
       "initializationOptions": {}
+    },
+    "cobol": {
+      "command": "cobol-language-server",
+      "filetypes": ["cobol"],
+      "initializationOptions": {}
     }
   }
 }
