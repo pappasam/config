@@ -498,8 +498,8 @@ SPACESHIP_CHAR_COLOR_FAILURE=green
 # }}}
 # Imports: asdf (needs to run after zsh setup) {{{
 
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
+include $HOME/.asdf/asdf.sh
+include $HOME/.asdf/completions/asdf.bash
 
 # }}}
 # General: post-asdf env setup {{{
