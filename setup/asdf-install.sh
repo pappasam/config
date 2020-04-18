@@ -28,3 +28,4 @@ asdf_setup ruby 2.6.5
 asdf_setup rust nightly
 asdf_setup tmux 3.1
 asdf_setup yarn 1.19.1
+asdf_setup github-cli 0.6.4
