@@ -500,8 +500,8 @@ function! s:default_key_mappings()
   nnoremap ' ,
 
   " FiletypeFormat: remap leader f to do filetype formatting
-  nnoremap <leader>f :FiletypeFormat<cr>
-  vnoremap <leader>f :FiletypeFormat<cr>
+  nnoremap <silent> <leader>f :FiletypeFormat<cr>
+  vnoremap <silent> <leader>f :FiletypeFormat<cr>
 
   " Open Browser: override netrw
   nmap gx <Plug>(openbrowser-smart-search)
