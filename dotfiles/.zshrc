@@ -163,6 +163,12 @@ if [ ! -d "$HOME_BIN_HIDDEN" ]; then
 fi
 path_ladd "$HOME_BIN_HIDDEN"
 
+HOME_LOCAL_BIN="$HOME/.local/bin"
+if [ ! -d "$HOME_LOCAL_BIN" ]; then
+  mkdir -p "$HOME_LOCAL_BIN"
+fi
+path_ladd "$HOME_LOCAL_BIN"
+
 OPAM_LOC="$HOME/.opam/default/bin"
 if [ -d "$OPAM_LOC" ]; then
   path_ladd "$OPAM_LOC"
