@@ -52,8 +52,11 @@ sudo apt install -y \
   libedit-dev \
   libevent-dev \
   libffi-dev \
+  libfreetype6-dev \
   libicu-dev \
   libjpeg-dev \
+  libldap2-dev \
+  libldb-dev \
   liblzma-dev \
   libmysqlclient-dev \
   libncurses-dev \
@@ -72,12 +75,11 @@ sudo apt install -y \
   libx11-doc \
   libxcb-xfixes0-dev \
   libxml2-dev \
+  libxpm-dev \
   libxslt-dev \
   libyaml-dev \
   libzip-dev \
   llvm \
-  llvm-8.0 \
-  llvm-8.0-dev \
   make \
   manpages-dev \
   manpages-posix-dev \
@@ -88,6 +90,7 @@ sudo apt install -y \
   perl \
   pkg-config \
   python-openssl \
+  re2c \
   screenkey \
   shellcheck \
   snapd \
@@ -110,5 +113,3 @@ sudo apt install -y \
 
 sudo apt autoclean
 sudo apt autoremove
-
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
