@@ -1,6 +1,6 @@
-# After getting ASDF installed, run this script...
+# !/bin/bash
 
-set -e
+# After getting ASDF installed, run this script...
 
 ###########################################################################
 # Custom
@@ -14,9 +14,9 @@ asdf global nodejs 12.13.0
 # Generalized
 
 asdf_setup() {
-  asdf plugin-add $1
-  asdf install $1 $2
-  asdf global $1 $2
+  asdf plugin-add "$1"
+  asdf install "$1" "$2"
+  asdf global "$1" "$2"
 }
 
 asdf_setup golang 1.13.4
