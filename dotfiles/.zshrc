@@ -550,7 +550,6 @@ compdef _vim fn
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
 alias vplug='cd ~/.config/nvim/pack/packager/start'
-alias s='nvim -c "Scratch"'
 alias clubhouse='nvim -c "Clubhouse"'
 alias standup='nvim -c "Standup"'
 
