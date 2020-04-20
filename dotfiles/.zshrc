@@ -813,14 +813,14 @@ function rustdev-install() {
 }
 
 function nodedev-install() {
-  local env=(\
-    dockerfile-language-server-nodejs \
-    git+https://github.com/Perlence/tstags.git \
-    jsctags \
-    neovim \
-    npm \
-    prettier \
-    write-good \
+  local env=(
+    dockerfile-language-server-nodejs
+    git+https://github.com/Perlence/tstags.git
+    jsctags
+    neovim
+    npm
+    prettier
+    write-good
   )
   npm install --no-save -g $env
   asdf reshim nodejs
@@ -830,23 +830,31 @@ function nodedev-install() {
 # pydev-install dev: install only dev dependencies
 # pydev-install all: install all deps
 function pydev-install() {  ## Install default python dependencies
-  local env=(\
-    black \
-    bpython \
-    isort \
-    jedi \
-    jedi-language-server \
-    mypy \
-    neovim-remote \
-    pip \
-    pre-commit \
-    pylint\
-    pynvim \
-    restview \
-    toml-sort \
+  local for_pip=(
+    bpython
+    neovim-remote
+    pip
+    pynvim
   )
-  pip install -U $env
+  local for_pipx=(
+    black
+    isort
+    jedi-language-server
+    mypy
+    pre-commit
+    pylint
+    restview
+    toml-sort
+  )
+  pip install -U $for_pip
   asdf reshim python
+  if command -v pipx > /dev/null; then
+    for arg in $for_pipx; do
+      pipx install "$arg"
+    done
+  else
+    echo 'pipx not installed. Install with "pip install pipx"'
+  fi
 }
 
 function godev-install() {  ## Install default golang dependencies
