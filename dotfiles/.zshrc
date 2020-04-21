@@ -851,7 +851,7 @@ function pydev-install() {  ## Install default python dependencies
     for arg in $for_pipx; do
       pipx install "$arg"
     done
-    pipx upgrade-all
+    pipx upgrade-all --force
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
