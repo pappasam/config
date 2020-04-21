@@ -835,6 +835,11 @@ function pydev-install() {  ## Install default python dependencies
     pip
     pynvim
   )
+  pip install -U $for_pip
+  asdf reshim python
+}
+
+function pyglob-install() {  ## Install global Python applications
   local for_pipx=(
     black
     isort
@@ -845,13 +850,11 @@ function pydev-install() {  ## Install default python dependencies
     restview
     toml-sort
   )
-  pip install -U $for_pip
-  asdf reshim python
   if command -v pipx > /dev/null; then
     for arg in $for_pipx; do
       pipx install "$arg"
+      pipx upgrade "$arg"
     done
-    pipx upgrade-all --force
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
