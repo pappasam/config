@@ -58,7 +58,9 @@
     "jls": {
       "command": "jedi-language-server",
       "args": [],
-      "filetypes": ["python"]
+      "filetypes": ["python"],
+      "initializationOptions": {
+      }
     },
     "terraform": {
       "command": "terraform-lsp",
