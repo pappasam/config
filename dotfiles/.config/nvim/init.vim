@@ -769,7 +769,7 @@ augroup end
 
 augroup custom_indentation
   autocmd!
-  autocmd Filetype python,c,haskell,rust,rst,kv,nginx,asm,nasm,gdscript3
+  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3
         \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype make,tsv,votl,go,gomod
