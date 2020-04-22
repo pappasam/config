@@ -843,6 +843,7 @@ function pydev-install() {  ## Install default python dependencies
 function pyglob-install() {  ## Install global Python applications
   local for_pipx=(
     black
+    cookiecutter
     isort
     jedi-language-server
     mypy
