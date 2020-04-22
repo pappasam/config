@@ -1347,22 +1347,21 @@ function! s:randnum(max) abort
 endfunction
 
 " Create temporary file from skeleton
-function! s:skeleton(file_skeleton, filetype)
+function! s:skeleton(file_skeleton)
   let parts = split(a:file_skeleton, '\.')
-  let fn = join([parts[0] . s:randnum(10000)] + parts[1:], '.')
+  let fn = join([parts[0] . '-' . s:randnum(10000)] + parts[1:], '.')
   execute 'edit ' . fn
   execute 'read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
   0delete_
-  let &filetype = a:filetype
   /{{Cursor}}
   normal! n
   normal! da{
   startinsert!
 endfunction
 
-command! Clubhouse silent call s:skeleton('clubhouse.md', 'markdown')
-command! Standup silent call s:skeleton('standup.md', 'markdown')
-command! Mentor silent call s:skeleton('mentor.md', 'markdown')
+command! Clubhouse silent call s:skeleton('clubhouse.md')
+command! Standup silent call s:skeleton('standup.md')
+command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
 " Plugins: git plugins: gv.vim, fugitive, git-messenger {{{
