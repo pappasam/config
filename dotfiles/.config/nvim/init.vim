@@ -1341,9 +1341,16 @@ command! ToggleRelativeNumber call s:toggle_relative_number()
 " }}}
 " General: skeleton templates {{{
 
+" https://vi.stackexchange.com/a/3833
+function! s:randnum(max) abort
+  return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
+endfunction
+
 " Create temporary file from skeleton
-function! s:skeleton_temp(file_skeleton, filetype)
-  execute 'edit ' . tempname()
+function! s:skeleton(file_skeleton, filetype)
+  let parts = split(a:file_skeleton, '\.')
+  let fn = join([parts[0] . s:randnum(10000)] + parts[1:], '.')
+  execute 'edit ' . fn
   execute 'read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
   0delete_
   let &filetype = a:filetype
@@ -1353,9 +1360,9 @@ function! s:skeleton_temp(file_skeleton, filetype)
   startinsert!
 endfunction
 
-command! Clubhouse silent call s:skeleton_temp('clubhouse.md', 'markdown')
-command! Standup silent call s:skeleton_temp('standup.md', 'markdown')
-command! Mentor silent call s:skeleton_temp('mentor.md', 'markdown')
+command! Clubhouse silent call s:skeleton('clubhouse.md', 'markdown')
+command! Standup silent call s:skeleton('standup.md', 'markdown')
+command! Mentor silent call s:skeleton('mentor.md', 'markdown')
 
 " }}}
 " Plugins: git plugins: gv.vim, fugitive, git-messenger {{{
