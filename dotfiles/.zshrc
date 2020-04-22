@@ -552,6 +552,7 @@ alias z='nvim ~/dotfiles/dotfiles/.zshrc'
 alias vplug='cd ~/.config/nvim/pack/packager/start'
 alias clubhouse='nvim -c "Clubhouse"'
 alias standup='nvim -c "Standup"'
+alias mentor='nvim -c "Mentor"'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'

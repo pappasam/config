@@ -1355,6 +1355,7 @@ endfunction
 
 command! Clubhouse silent call s:skeleton_temp('clubhouse.md', 'markdown')
 command! Standup silent call s:skeleton_temp('standup.md', 'markdown')
+command! Mentor silent call s:skeleton_temp('mentor.md', 'markdown')
 
 " }}}
 " Plugins: git plugins: gv.vim, fugitive, git-messenger {{{
