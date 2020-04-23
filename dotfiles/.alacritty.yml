@@ -165,6 +165,10 @@ shell:
 # Key bindings: see alacritty's latest example config file for defaults
 key_bindings:
   - { key: LBracket, mods: Control, mode: Vi, action: ClearSelection }
+  - { key: Q, mode: Vi, action: ScrollToBottom }
+  - { key: Q, mode: Vi, action: ToggleViMode }
+  # Key: $
   - { key: 05, mods: Shift, mode: Vi, action: Last }
   - { key: 06, mods: Shift, mode: Vi, action: Bracket }
+  # Key: 0
   - { key: 07, mods: Shift, mode: Vi, action: FirstOccupied }
