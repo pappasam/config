@@ -995,8 +995,8 @@ let g:PaperColor_Theme_Options.theme = {}
 
 " Bold And Italics:
 let g:PaperColor_Theme_Options.theme.default = {
-      \ 'allow_bold': 1,
-      \ 'allow_italic': 1,
+      \ 'allow_bold': v:true,
+      \ 'allow_italic': v:false,
       \ }
 
 " Folds And Highlights:
