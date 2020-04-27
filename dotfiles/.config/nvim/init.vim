@@ -2002,7 +2002,7 @@ let g:vim_keywordprg_commands = {
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
-  autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ typescript
+  autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ javascript
 augroup end
 
 " }}}
