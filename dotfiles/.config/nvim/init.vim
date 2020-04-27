@@ -1007,6 +1007,7 @@ let g:PaperColor_Theme_Options.theme['default.dark'].override = {
       \ 'visual_fg' : ['gray12', '0'],
       \ 'visual_bg' : ['gray', '6'],
       \ }
+
 " Language Specific Overrides:
 let g:PaperColor_Theme_Options.language = {
       \    'python': {
