@@ -26,6 +26,7 @@ function s:pack_init() abort
         \ 'git@github.com:neoclide/coc-snippets.git',
         \ 'git@github.com:neoclide/coc-tsserver.git',
         \ 'git@github.com:neoclide/coc-yaml.git',
+        \ 'git@github.com:pappasam/coc-jedi.git',
         \ ]
     call packager#add(coc_plugin, {
           \ 'do': 'yarn install --frozen-lockfile && yarn build',

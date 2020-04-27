@@ -55,13 +55,6 @@
       "filetypes": ["Dockerfile"],
       "args": ["--stdio"]
     },
-    "jls": {
-      "command": "jedi-language-server",
-      "args": [],
-      "filetypes": ["python"],
-      "initializationOptions": {
-      }
-    },
     "terraform": {
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
