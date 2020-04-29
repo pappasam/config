@@ -528,6 +528,8 @@ augroup custom_coc
         \ ['{', '}'],
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
+  " autocmd CursorHold * call CocActionAsync('showSignatureHelp')
+  " autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
