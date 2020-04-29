@@ -527,6 +527,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader>sn :CocNext<CR>
   nnoremap <silent> <leader>sp :CocPrev<CR>
   nnoremap <silent> <leader>sl :CocListResume<CR>
+  " SignatureHelp
+  nnoremap <silent> <leader>sa :call CocActionAsync('showSignatureHelp')<CR>
   " Show commands
   nnoremap <silent> <leader>sc :CocList commands<cr>
   " Find symbol of current document
