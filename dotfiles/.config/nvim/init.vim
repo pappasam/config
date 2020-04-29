@@ -1,4 +1,3 @@
-" Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
 " General: packages {{{
 
 " Note: vim-packager automatically executes UpdateRemotePlugins
@@ -181,16 +180,359 @@ command! PackStatus call s:pack_init() | call packager#status()
 command! -bang PU call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
-" General: leader mappings {{{
+" General: mappings {{{
 
-let mapleader = ","
-let maplocalleader = "\\"
+let mapleader = ','
+
+function! s:default_key_mappings()
+  " Escape: also clears highlighting
+  nnoremap <silent> <esc> :noh<return><esc>
+
+  " J: unmap in normal mode unless range explicitly specified
+  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
+
+  " Shifting: in visual mode, make shifts keep selection
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Exit: Preview, Help, QuickFix, and Location List
+  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
+  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
+
+  " InsertModeHelpers: Insert one line above after enter
+  inoremap <M-CR> <CR><C-o>O
+
+  " MoveVisual: up and down visually only if count is specified before
+  nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+
+  " Macro Repeater:
+  " Enable calling a function within the mapping for @
+  nnoremap <expr> <plug>@init AtInit()
+  " A macro could, albeit unusually, end in Insert mode.
+  inoremap <expr> <plug>@init "\<c-o>".AtInit()
+  nnoremap <expr> <plug>qstop QStop()
+  inoremap <expr> <plug>qstop "\<c-o>".QStop()
+  " The following code allows pressing . immediately after
+  " recording a macro to play it back.
+  nmap <expr> @ AtReg()
+  " Finally, remap q! Recursion is actually useful here I think,
+  " otherwise I would use 'nnoremap'.
+  nmap <expr> q QStart()
+
+  " MoveTabs: goto tab number. Same as Firefox
+  nnoremap <A-1> 1gt
+  nnoremap <A-2> 2gt
+  nnoremap <A-3> 3gt
+  nnoremap <A-4> 4gt
+  nnoremap <A-5> 5gt
+  nnoremap <A-6> 6gt
+  nnoremap <A-7> 7gt
+  nnoremap <A-8> 8gt
+  nnoremap <A-9> 9gt
+
+  " Substitute: replace word under cursor
+  nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//gc<Left><Left><Left>
+  vnoremap <leader><leader>s y:%s/<C-R>0//gc<Left><Left><Left>
+
+  " IndentComma: placing commas one line down; usable with repeat operator '.'
+  nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
+        \:call repeat#set("\<Plug>NewLineComma")<CR>
+  nmap <leader><CR> <Plug>NewLineComma
+
+  " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
+  nnoremap <silent> <leader><leader>j :Jinja2Toggle<CR>
+
+  " ToggleRelativeNumber: uses custom functions
+  nnoremap <silent> <leader>R :ToggleNumber<CR>
+  nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
+
+  " TogglePluginWindows:
+  nnoremap <silent> <space>j :Defx
+        \ -buffer-name=defx
+        \ -columns=mark:git:indent:icons:filename:type:size:time
+        \ -direction=topleft
+        \ -search=`expand('%:p')`
+        \ -session-file=`g:custom_defx_state`
+        \ -ignored-files=`g:defx_ignored_files`
+        \ -split=vertical
+        \ -toggle
+        \ -winwidth=31
+        \ <CR>
+  nnoremap <silent> <space>J :Defx `expand('%:p:h')`
+        \ -buffer-name=defx
+        \ -columns=mark:git:indent:icons:filename:type:size:time
+        \ -direction=topleft
+        \ -search=`expand('%:p')`
+        \ -ignored-files=`g:defx_ignored_files`
+        \ -split=vertical
+        \ -winwidth=31
+        \ <CR>
+  nnoremap <silent> <space>l :TagbarToggle <CR>
+  nnoremap <silent> <space>u :UndotreeToggle<CR>
+
+  " Choosewin: (just like tmux)
+  nnoremap <C-w>q :ChooseWin<CR>
+
+  " Goyo And Writing:
+  nnoremap <leader><leader>g :Goyo<CR>
+  nnoremap <leader><leader>l :Limelight!!<CR>
+  nmap     <leader><leader>v <Plug>Veil
+
+  " IndentLines: toggle if indent lines is visible
+  nnoremap <silent> <leader>i :IndentLinesToggle<CR>
+
+  " ResizeWindow: up and down; relies on custom functions
+  nnoremap <silent> <leader><leader>h :ResizeWindowHeight<CR>
+  nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
+
+  " Repl: my very own repl plugin
+  nnoremap <leader><leader>e :ReplToggle<CR>
+  nmap     <leader>e <Plug>ReplSendLine
+  vmap     <leader>e <Plug>ReplSendVisual
+
+  " Sandwich: below mappings address the issue raised here:
+  " https://github.com/machakann/vim-sandwich/issues/62
+  xmap s  <Nop> xmap ib <Plug>(textobj-sandwich-auto-i)
+  omap s  <Nop>
+  xmap ib <Plug>(textobj-sandwich-auto-i)
+  omap ib <Plug>(textobj-sandwich-auto-i)
+  xmap ab <Plug>(textobj-sandwich-auto-a)
+  omap ab <Plug>(textobj-sandwich-auto-a)
+
+  xmap iq <Plug>(textobj-sandwich-query-i)
+  omap iq <Plug>(textobj-sandwich-query-i)
+  xmap aq <Plug>(textobj-sandwich-query-a)
+  omap aq <Plug>(textobj-sandwich-query-a)
+
+  " FZF: create shortcuts for finding stuff
+  nnoremap <silent> <C-p> :call <SID>fzf_files_avoid_defx()<CR>
+  nnoremap <silent> <C-b> :call <SID>fzf_buffers_avoid_defx()<CR>
+  nnoremap          <C-n> yiw:Rg <C-r>"<CR>
+  vnoremap          <C-n> y:Rg <C-r>"<CR>
+
+  " DeleteHiddenBuffers: shortcut to make this easier
+  nnoremap <leader>d :DeleteInactiveBuffers<CR>
+
+  " SearchBackward: remap comma to single quote
+  nnoremap ' ,
+
+  " FiletypeFormat: remap leader f to do filetype formatting
+  nnoremap <silent> <leader>f :FiletypeFormat<cr>
+  vnoremap <silent> <leader>f :FiletypeFormat<cr>
+
+  " Open Browser: override netrw
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
+
+  " Run Or Build:
+  nnoremap <leader><leader>r :Run<CR>
+
+  " GitMessenger:
+  nmap <leader>sg <Plug>(git-messenger)
+
+  " Coc: settings for coc.nvim
+  nmap     <silent>        <C-]> <Plug>(coc-definition)
+  nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
+  nnoremap <silent>        <C-K> :call <SID>show_documentation()<CR>
+  nmap     <silent>        <leader>st <Plug>(coc-type-definition)
+  nmap     <silent>        <leader>si <Plug>(coc-implementation)
+  nmap     <silent>        <leader>su <Plug>(coc-references)
+  nmap     <silent>        <leader>sr <Plug>(coc-rename)
+  nnoremap <silent>        <leader>sn :CocNext<CR>
+  nnoremap <silent>        <leader>sp :CocPrev<CR>
+  nnoremap <silent>        <leader>sl :CocListResume<CR>
+  nnoremap <silent>        <leader>sa :call CocActionAsync('showSignatureHelp')<CR>
+  nnoremap <silent>        <leader>sc :CocList commands<cr>
+  nnoremap <silent>        <leader>ss :CocList outline<cr>
+  nnoremap <silent>        <leader>sw :CocList -I symbols<cr>
+  inoremap <silent> <expr> <c-space> coc#refresh()
+  nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
+  nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+  imap     <silent>        <C-l> <Plug>(coc-snippets-expand)
+  inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
+  nnoremap <silent>        <leader>a :CocDiagnosticToggle<CR>
+  nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
+  nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
+
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Mouse Configuration: remaps mouse to work better in terminal
+
+  " Out Jump List: <C-RightMouse> already mapped to something like <C-t>
+  nnoremap <RightMouse> <C-o>
+
+  " Clipboard Copy: Visual mode copy is pretty simple
+  vnoremap <leader>y "+y
+  nnoremap <leader>y "+y
+
+  " Mouse Copy: system copy mouse characteristics
+  vnoremap <RightMouse> "+y
+
+  " Mouse Paste: make it come from the system register
+  nnoremap <MiddleMouse> "+<MiddleMouse>
+
+  " Scrolling Dropdown: dropdown scrollable + click to select highlighted
+  inoremap <expr> <S-ScrollWheelUp>
+        \ pumvisible() ?
+        \ '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' :
+        \ '<Esc><S-ScrollWheelUp>'
+  inoremap <expr> <S-ScrollWheelDown>
+        \ pumvisible() ?
+        \ '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' :
+        \ '<Esc><S-ScrollWheelDown>'
+  inoremap <expr> <ScrollWheelUp>
+        \ pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
+  inoremap <expr> <ScrollWheelDown>
+        \ pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
+  inoremap <expr> <LeftMouse>
+        \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
+
+  " Auto-execute all filetypes
+  let &filetype=&filetype
+endfunction
+
+call s:default_key_mappings()
+
+" helper to remap d, u, and q for readonly buffers
+function! s:key_mappings_readonly()
+  nnoremap <silent> <buffer> d <C-d>
+  nnoremap <silent> <buffer> u <C-u>
+  nnoremap <silent> <buffer> q :q<CR>
+endfunction
+
+augroup custom_remap_click
+  autocmd!
+  autocmd FileType qf,markdown,rst nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
+augroup end
+
+" Mouse Open Close Folds: open folds with the mouse, and close the folds
+" open operation taken from: https://stackoverflow.com/a/13924974
+augroup custom_remap_folds
+  autocmd!
+  autocmd FileType vim,tmux,bash,zsh,sh
+        \ nnoremap <expr> <2-LeftMouse>
+        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
+  autocmd FileType vim,tmux,bash,zsh,sh
+        \ nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
+augroup end
+
+augroup custom_remap_man_help
+  autocmd!
+  autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
+  autocmd FileType man,help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
+  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
+  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
+  autocmd FileType man,help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
+augroup end
+
+augroup custom_remap_rst
+  autocmd!
+  autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
+  autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection(0)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection(1)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
+augroup end
+
+augroup custom_remap_defx
+  autocmd!
+  autocmd FileType defx call s:defx_buffer_remappings()
+  autocmd FileType defx nmap <buffer> <silent> gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap <buffer> <silent> gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap <buffer> <silent> gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap <buffer> <silent> gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap <buffer> <silent> gd <Plug>(defx-git-discard)
+  autocmd FileType defx nnoremap <buffer> <silent> <C-l> :ResizeWindowWidth<CR>
+augroup end
+
+augroup custom_init_vim
+  autocmd!
+  autocmd BufNewFile,BufRead,BufEnter init.vim
+        \ nnoremap <buffer> <silent> gf :call <SID>gf_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim
+        \ nnoremap <buffer> <silent> gx :call <SID>gx_vimrc_open_plugin()<CR>
+augroup end
 
 " }}}
-" General: environment variables {{{
+" Package: coc.nvim {{{
 
-" Path: add node_modules for language servers / linters / other stuff
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+" Coc:
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'help ' . expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+let g:coc_snippet_next = '<C-l>'
+let g:coc_snippet_prev = '<C-h>'
+let g:coc_start_at_startup = 1
+let g:coc_filetype_map = {
+      \ 'python.jinja2': 'python',
+      \ 'sql.jinja2': 'sql',
+      \ 'yaml.ansible': 'yaml',
+      \ 'yaml.docker-compose': 'yaml',
+      \ }
+
+" Customization:
+function! s:coc_diagnostic_disable()
+  call coc#config('diagnostic.enable', v:false)
+  let g:coc_custom_diagnostic_enabled = v:false
+  silent CocRestart
+  echom 'Disabled: Coc Diagnostics'
+endfunction
+
+function! s:coc_diagnostic_enable()
+  call coc#config('diagnostic.enable', v:true)
+  let g:coc_custom_diagnostic_enabled = v:true
+  echom 'Enabled: Coc Diagnostics'
+endfunction
+
+function! s:coc_diagnostic_toggle()
+  if g:coc_custom_diagnostic_enabled == v:true
+    call s:coc_diagnostic_disable()
+  else
+    call s:coc_diagnostic_enable()
+  endif
+endfunction
+
+function! s:coc_init()
+  let g:coc_custom_diagnostic_enabled = v:false
+endfunction
+
+augroup custom_coc
+  autocmd!
+  autocmd VimEnter * call s:coc_init()
+  autocmd FileType terraform let b:coc_pairs = [
+        \ ['(', ')'],
+        \ ['[', ']'],
+        \ ['{', '}'],
+        \ ['<', '>'],
+        \ ['"', '"'],
+        \ ]
+  autocmd FileType make let b:coc_pairs = [
+        \ ['(', ')'],
+        \ ['[', ']'],
+        \ ['{', '}'],
+        \ ]
+  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
+augroup end
+
+command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
+command! CocDiagnosticEnable call s:coc_diagnostic_enable()
+command! CocDiagnosticDisable call s:coc_diagnostic_disable()
 
 " }}}
 " General: options {{{
@@ -319,610 +661,7 @@ augroup custom_incsearch_highlight
 augroup end
 
 " }}}
-" General: rebuild personal docs {{{
-
-helptags ~/.config/nvim/doc
-
-" }}}
-" General: statusline / tabline {{{
-
-" Tab Line
-set tabline=%t
-
-" Status Line
-set laststatus=2
-set statusline=
-set statusline+=%#CursorLine#
-set statusline+=\ %{mode()}
-set statusline+=\ %*\  " Color separator + space
-set statusline+=%{&paste?'[P]':''}
-set statusline+=%{&spell?'[S]':''}
-set statusline+=%r
-set statusline+=%t
-set statusline+=%m
-set statusline+=%=
-set statusline+=\ %y\  " file type
-set statusline+=%#CursorLine#
-set statusline+=\ %{&ff}\  " Unix or Dos
-set statusline+=%*  " default color
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
-
-" Status Line
-augroup custom_statusline
-  autocmd!
-  autocmd FileType defx setlocal statusline=\ defx\ %#CursorLine#
-augroup end
-
-" }}}
-" General: key remappings {{{
-
-" This is defined as a function to allow me to reset all my key remappings
-" without needing to repeat myself.
-function! s:default_key_mappings()
-  " Escape: also clears highlighting
-  nnoremap <silent> <esc> :noh<return><esc>
-
-  " J: basically, unmap in normal mode unless range explicitly specified
-  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
-
-  " Shifting: in visual mode, make shifts keep selection
-  vnoremap < <gv
-  vnoremap > >gv
-
-  " Exit: Preview, Help, QuickFix, and Location List
-  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
-  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
-
-  " InsertModeHelpers: Insert one line above after enter
-  " Useful for ``` in markdown. Key code = Alt+Enter
-  inoremap <M-CR> <CR><C-o>O
-
-  " MoveVisual: up and down visually only if count is specified before
-  " Otherwise, you want to move up lines numerically e.g. ignore wrapped lines
-  nnoremap <expr> k
-        \ v:count == 0 ? 'gk' : 'k'
-  vnoremap <expr> k
-        \ v:count == 0 ? 'gk' : 'k'
-  nnoremap <expr> j
-        \ v:count == 0 ? 'gj' : 'j'
-  vnoremap <expr> j
-        \ v:count == 0 ? 'gj' : 'j'
-
-  " Macro Repeater:
-  " Enable calling a function within the mapping for @
-  nnoremap <expr> <plug>@init AtInit()
-  " A macro could, albeit unusually, end in Insert mode.
-  inoremap <expr> <plug>@init "\<c-o>".AtInit()
-  nnoremap <expr> <plug>qstop QStop()
-  inoremap <expr> <plug>qstop "\<c-o>".QStop()
-  " The following code allows pressing . immediately after
-  " recording a macro to play it back.
-  nmap <expr> @ AtReg()
-  " Finally, remap q! Recursion is actually useful here I think,
-  " otherwise I would use 'nnoremap'.
-  nmap <expr> q QStart()
-
-  " MoveTabs: goto tab number. Same as Firefox
-  nnoremap <A-1> 1gt
-  nnoremap <A-2> 2gt
-  nnoremap <A-3> 3gt
-  nnoremap <A-4> 4gt
-  nnoremap <A-5> 5gt
-  nnoremap <A-6> 6gt
-  nnoremap <A-7> 7gt
-  nnoremap <A-8> 8gt
-  nnoremap <A-9> 9gt
-
-  " Substitute: replace word under cursor
-  nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//gc<Left><Left><Left>
-  vnoremap <leader><leader>s y:%s/<C-R>0//gc<Left><Left><Left>
-
-  " IndentComma: placing commas one line down; usable with repeat operator '.'
-  nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
-        \:call repeat#set("\<Plug>NewLineComma")<CR>
-  nmap <leader><CR> <Plug>NewLineComma
-
-  " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-  nnoremap <silent> <leader><leader>j :Jinja2Toggle<CR>
-
-  " ToggleRelativeNumber: uses custom functions
-  nnoremap <silent> <leader>R :ToggleNumber<CR>
-  nnoremap <silent> <leader>r :ToggleRelativeNumber<CR>
-
-  " TogglePluginWindows:
-  nnoremap <silent> <space>j :Defx
-        \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type:size:time
-        \ -direction=topleft
-        \ -search=`expand('%:p')`
-        \ -session-file=`g:custom_defx_state`
-        \ -ignored-files=`g:defx_ignored_files`
-        \ -split=vertical
-        \ -toggle
-        \ -winwidth=31
-        \ <CR>
-  nnoremap <silent> <space>J :Defx `expand('%:p:h')`
-        \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type:size:time
-        \ -direction=topleft
-        \ -search=`expand('%:p')`
-        \ -ignored-files=`g:defx_ignored_files`
-        \ -split=vertical
-        \ -winwidth=31
-        \ <CR>
-  nnoremap <silent> <space>l :TagbarToggle <CR>
-  nnoremap <silent> <space>u :UndotreeToggle<CR>
-
-  " Choosewin: (just like tmux)
-  nnoremap <C-w>q :ChooseWin<CR>
-
-  " Goyo And Writing:
-  nnoremap <leader><leader>g :Goyo<CR>
-  nnoremap <leader><leader>l :Limelight!!<CR>
-  nmap <leader><leader>v <Plug>Veil
-
-  " IndentLines: toggle if indent lines is visible
-  nnoremap <silent> <leader>i :IndentLinesToggle<CR>
-
-  " ResizeWindow: up and down; relies on custom functions
-  nnoremap <silent> <leader><leader>h :ResizeWindowHeight<CR>
-  nnoremap <silent> <leader><leader>w :ResizeWindowWidth<CR>
-
-  " Repl: my very own repl plugin
-  nnoremap <leader><leader>e :ReplToggle<CR>
-  nmap <leader>e <Plug>ReplSendLine
-  vmap <leader>e <Plug>ReplSendVisual
-
-  " Sandwich: below mappings address the issue raised here:
-  " https://github.com/machakann/vim-sandwich/issues/62
-  xmap s <Nop> xmap ib <Plug>(textobj-sandwich-auto-i)
-  omap s <Nop>
-  xmap ib <Plug>(textobj-sandwich-auto-i)
-  omap ib <Plug>(textobj-sandwich-auto-i)
-  xmap ab <Plug>(textobj-sandwich-auto-a)
-  omap ab <Plug>(textobj-sandwich-auto-a)
-
-  xmap iq <Plug>(textobj-sandwich-query-i)
-  omap iq <Plug>(textobj-sandwich-query-i)
-  xmap aq <Plug>(textobj-sandwich-query-a)
-  omap aq <Plug>(textobj-sandwich-query-a)
-
-  " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-p> :call <SID>fzf_files_avoid_defx()<CR>
-  nnoremap <silent> <C-b> :call <SID>fzf_buffers_avoid_defx()<CR>
-  nnoremap <C-n> yiw:Rg <C-r>"<CR>
-  vnoremap <C-n> y:Rg <C-r>"<CR>
-
-  " DeleteHiddenBuffers: shortcut to make this easier
-  " note: weird stuff happens if you mess this up
-  nnoremap <leader>d :DeleteInactiveBuffers<CR>
-
-  " SearchBackward: remap comma to single quote
-  nnoremap ' ,
-
-  " FiletypeFormat: remap leader f to do filetype formatting
-  nnoremap <silent> <leader>f :FiletypeFormat<cr>
-  vnoremap <silent> <leader>f :FiletypeFormat<cr>
-
-  " Open Browser: override netrw
-  nmap gx <Plug>(openbrowser-smart-search)
-  vmap gx <Plug>(openbrowser-smart-search)
-
-  " Run Or Build:
-  nnoremap <leader><leader>r :Run<CR>
-
-  " GitMessenger:
-  nmap <leader>sg <Plug>(git-messenger)
-
-  " Coc: settings for coc.nvim
-  " see https://github.com/neoclide/coc.nvim
-  nmap <silent> <C-]> <Plug>(coc-definition)
-  nmap <silent> <C-LeftMouse> <Plug>(coc-definition)
-  nnoremap <silent> <C-K> :call <SID>show_documentation()<CR>
-  nmap <silent> <leader>st <Plug>(coc-type-definition)
-  nmap <silent> <leader>si <Plug>(coc-implementation)
-  nmap <silent> <leader>su <Plug>(coc-references)
-  nmap <silent> <leader>sr <Plug>(coc-rename)
-  " next and previous items in a list
-  nnoremap <silent> <leader>sn :CocNext<CR>
-  nnoremap <silent> <leader>sp :CocPrev<CR>
-  nnoremap <silent> <leader>sl :CocListResume<CR>
-  " SignatureHelp
-  nnoremap <silent> <leader>sa :call CocActionAsync('showSignatureHelp')<CR>
-  " Show commands
-  nnoremap <silent> <leader>sc :CocList commands<cr>
-  " Find symbol of current document
-  nnoremap <silent> <leader>ss :CocList outline<cr>
-  " Search workspace symbols
-  nnoremap <silent> <leader>sw :CocList -I symbols<cr>
-  " Use <c-space> to trigger completion
-  inoremap <silent> <expr> <c-space> coc#refresh()
-  " Scroll in floating window
-  nnoremap <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-  nnoremap <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
-  " snippets: most mappings done as global option in Coc section
-  imap <C-l> <Plug>(coc-snippets-expand)
-  " For pairs, correctly position cursor on Enter
-  inoremap <silent> <expr> <CR>
-        \ pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  " Toggle diagnostics
-  nnoremap <silent> <leader>a :CocDiagnosticToggle<CR>
-  nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
-  nmap <silent> <leader>p <Plug>(coc-diagnostic-prev)
-
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Mouse Configuration: remaps mouse to work better in terminal
-
-  " Out Jump List: <C-RightMouse> already mapped to something like <C-t>
-  nnoremap <RightMouse> <C-o>
-
-  " Clipboard Copy: Visual mode copy is pretty simple
-  vnoremap <leader>y "+y
-  nnoremap <leader>y "+y
-
-  " Mouse Copy: system copy mouse characteristics
-  vnoremap <RightMouse> "+y
-
-  " Mouse Paste: make it come from the system register
-  nnoremap <MiddleMouse> "+<MiddleMouse>
-
-  " Scrolling Dropdown: dropdown scrollable + click to select highlighted
-  inoremap <expr> <S-ScrollWheelUp>
-        \ pumvisible() ?
-        \ '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' :
-        \ '<Esc><S-ScrollWheelUp>'
-  inoremap <expr> <S-ScrollWheelDown>
-        \ pumvisible() ?
-        \ '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' :
-        \ '<Esc><S-ScrollWheelDown>'
-  inoremap <expr> <ScrollWheelUp>
-        \ pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
-  inoremap <expr> <ScrollWheelDown>
-        \ pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
-  inoremap <expr> <LeftMouse>
-        \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
-
-  " Auto-execute all filetypes
-  let &filetype=&filetype
-endfunction
-
-call s:default_key_mappings()
-
-" helper to remap d, u, and q for readonly buffers
-function! s:key_mappings_readonly()
-  nnoremap <silent> <buffer> d <C-d>
-  nnoremap <silent> <buffer> u <C-u>
-  nnoremap <silent> <buffer> q :q<CR>
-endfunction
-
-augroup custom_remap_click
-  autocmd!
-  autocmd FileType qf,markdown,rst nnoremap <buffer> <2-LeftMouse> <2-LeftMouse>
-augroup end
-
-" Mouse Open Close Folds: open folds with the mouse, and close the folds
-" open operation taken from: https://stackoverflow.com/a/13924974
-augroup custom_remap_folds
-  autocmd!
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ nnoremap <expr> <2-LeftMouse>
-        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
-augroup end
-
-augroup custom_remap_man_help
-  autocmd!
-  autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  autocmd FileType man,help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
-  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
-  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
-  autocmd FileType man,help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
-augroup end
-
-augroup custom_remap_rst
-  autocmd!
-  autocmd FileType rst nnoremap <buffer> <leader>w :HovercraftSlide<CR>
-  autocmd FileType rst nnoremap <buffer> <leader>f :TableRstFormat<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 :call RstSetSection(0)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 :call RstSetSection(1)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 :call RstSetSection(2)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 :call RstSetSection(3)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 :call RstSetSection(4)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 :call RstSetSection(5)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 :call RstSetSection(6)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk :call RstGoPrevSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj :call RstGoNextSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa :call RstIncrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx :call RstDecrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl :call RstSectionLabelize()<CR>
-augroup end
-
-augroup custom_remap_defx
-  autocmd!
-  autocmd FileType defx call s:defx_buffer_remappings()
-  autocmd FileType defx nmap <buffer> <silent> gp <Plug>(defx-git-prev)
-  autocmd FileType defx nmap <buffer> <silent> gn <Plug>(defx-git-next)
-  autocmd FileType defx nmap <buffer> <silent> gs <Plug>(defx-git-stage)
-  autocmd FileType defx nmap <buffer> <silent> gu <Plug>(defx-git-reset)
-  autocmd FileType defx nmap <buffer> <silent> gd <Plug>(defx-git-discard)
-  autocmd FileType defx nnoremap <buffer> <silent> <C-l> :ResizeWindowWidth<CR>
-augroup end
-
-augroup custom_init_vim
-  autocmd!
-  autocmd BufNewFile,BufRead,BufEnter init.vim
-        \ nnoremap <buffer> <silent> gf :call <SID>gf_vimrc_open_plugin()<CR>
-  autocmd BufNewFile,BufRead,BufEnter init.vim
-        \ nnoremap <buffer> <silent> gx :call <SID>gx_vimrc_open_plugin()<CR>
-augroup end
-
-" }}}
-" General: vimrc / init.vim helpers {{{
-
-function! s:gf_vimrc_open_plugin()
-  let ssh_url = expand('<cfile>')
-  let ssh_components = split(ssh_url, '/')
-  if len(ssh_components) != 2
-    " do regular 'gf'
-    normal! gf
-    return
-  endif
-  let directory = ssh_components[1]
-  let parent_directory = directory == 'vim-packager' ? 'opt/' : 'start/'
-  let path = '~/.config/nvim/pack/packager/' . parent_directory . directory
-  execute 'tabe ' . path
-  execute 'lcd ' . path
-endfunction
-
-function! s:gx_vimrc_open_plugin()
-  let ssh_url = expand('<cfile>')
-  let ssh_components = split(ssh_url, ':')
-  if len(ssh_components) != 2
-    " do regular 'gx'
-    normal! gx
-    return
-  endif
-  let path = ssh_components[1]
-  execute 'OpenBrowser ' . 'https://github.com/' . path
-endfunction
-
-" }}}
-" General: abbreviations {{{
-
-" If in_command is at beginning of line : return out_command
-" Else : return in_command.
-function! s:abbr_help(in_command, out_command)
-  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
-    return a:out_command
-  else
-    return a:in_command
-  endif
-endfunction
-
-" Using Ack and Acks brings up quickfix automatically
-cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
-cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
-
-" Open init.vim
-cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/init.vim')
-
-" Open zshrc
-cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
-
-" Open settings for language server files
-cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
-cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
-
-" 'c' is abbreviation for 'close'. I use it way more often than 'change'
-cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
-
-" }}}
-" General: filetype specification {{{
-
-augroup custom_filetype_recognition
-  autocmd!
-  autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
-  autocmd BufNewFile,BufRead,BufEnter *.config,.cookiecutterrc set filetype=yaml
-  autocmd BufNewFile,BufRead,BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term
-        \ set filetype=json
-  autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
-  autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
-  autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead,BufEnter *.jsx,*.js set filetype=javascript
-  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
-        \ set filetype=dosini
-  autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
-  autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
-  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=dockerfile
-  autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
-  autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
-        \ set filetype=conf
-  autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
-  autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc,.markdownlintrc
-        \ set filetype=jsonc
-augroup end
-
-" }}}
-" General: comment / text format options {{{
-
-" Notes:
-" commentstring: read by vim-commentary; must be one template
-" comments: csv of comments.
-" formatoptions: influences how Vim formats text
-"   ':help fo-table' will get the desired result
-augroup custom_comment_config
-  autocmd!
-  autocmd FileType dosini
-        \ setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType tmux
-        \ setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc
-        \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
-  autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType typescript.tsx,typescript
-        \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-augroup end
-
-" }}}
-" General: indentation (tabs, spaces, width, etc) {{{
-
-augroup custom_indentation
-  autocmd!
-  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3
-        \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
-  autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv,votl,go,gomod
-        \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
-  " Prevent auto-indenting from occuring
-  autocmd Filetype yaml setlocal indentkeys-=<:>
-
-  autocmd Filetype ron setlocal cindent
-        \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
-        \ cinoptions+='(s,m2'
-        \ cinoptions+='(s,U1'
-        \ cinoptions+='j1'
-        \ cinoptions+='J1'
-augroup end
-
-" }}}
-" General: colorColumn different widths for different filetypes {{{
-
-augroup custom_colorcolumn
-  autocmd!
-  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
-augroup end
-
-" }}}
-" General: writing (non-coding) {{{
-
-function! s:abolish_correct()
-  " Started from:
-  " https://github.com/tpope/tpope/blob/94b1f7c33ee4049866f0726f96d9a0fb5fdf868f/.vim/after/plugin/abolish_tpope.vim
-  if !exists('g:loaded_abolish')
-    echom 'Abolish does not exist, skipping...'
-    return
-  endif
-  Abolish Lidsa                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  Abolish Tqbf                        The quick, brown fox jumps over the lazy dog
-  Abolish adn                         and
-  Abolish afterword{,s}               afterward{}
-  Abolish anomol{y,ies}               anomal{}
-  Abolish austrail{a,an,ia,ian}       austral{ia,ian}
-  Abolish cal{a,e}nder{,s}            cal{e}ndar{}
-  Abolish delimeter{,s}               delimiter{}
-  Abolish despara{te,tely,tion}       despera{}
-  Abolish destionation{,s}            destination{}
-  Abolish d{e,i}screp{e,a}nc{y,ies}   d{i}screp{a}nc{}
-  Abolish euphamis{m,ms,tic,tically}  euphemis{}
-  Abolish hense                       hence
-  Abolish hte                         the
-  Abolish improvment{,s}              improvement{}
-  Abolish inherant{,ly}               inherent{}
-  Abolish lastest                     latest
-  Abolish nto                         not
-  Abolish nto                         not
-  Abolish ot                          to
-  Abolish persistan{ce,t,tly}         persisten{}
-  Abolish rec{co,com,o}mend{,s,ed,ing,ation} rec{om}mend{}
-  Abolish referesh{,es}               refresh{}
-  Abolish reproducable                reproducible
-  Abolish resouce{,s}                 resource{}
-  Abolish restraunt{,s}               restaurant{}
-  Abolish scflead                     supercalifragilisticexpialidocious
-  Abolish segument{,s,ed,ation}       segment{}
-  Abolish seperat{e,es,ed,ing,ely,ion,ions,or} separat{}
-  Abolish si                          is
-  Abolish teh                         the
-  Abolish {,in}consistan{cy,cies,t,tly} {}consisten{}
-  Abolish {,ir}releven{ce,cy,t,tly}   {}relevan{}
-  Abolish {,non}existan{ce,t}         {}existen{}
-  Abolish {,re}impliment{,s,ing,ed,ation} {}implement{}
-  Abolish {,un}nec{ce,ces,e}sar{y,ily} {}nec{es}sar{}
-  Abolish {,un}orgin{,al}             {}origin{}
-  Abolish {c,m}arraige{,s}            {}arriage{}
-  Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
-  Abolish {les,compar,compari}sion{,s} {les,compari,compari}son{}
-endfunction
-
-augroup custom_writing
-  autocmd!
-  autocmd VimEnter * call s:abolish_correct()
-  autocmd FileType markdown,rst,text,gitcommit
-        \ setlocal wrap linebreak nolist
-        \ | call textobj#sentence#init()
-  autocmd FileType requirements setlocal nospell
-  autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
-augroup end
-
-" }}}
-" General: digraphs {{{
-
-digraph jj 699  " Hawaiian character ʻ
-
-" }}}
-" General: folding settings {{{
-
-augroup custom_fold_settings
-  autocmd!
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ setlocal foldenable foldmethod=marker foldnestmax=1
-  autocmd FileType markdown,rst
-        \ setlocal nofoldenable
-  autocmd FileType yaml
-        \ setlocal nofoldenable foldmethod=indent foldnestmax=1
-augroup end
-
-" }}}
-" General: trailing whitespace {{{
-
-function! s:trim_whitespace()
-  let l:save = winsaveview()
-  if &ft == 'markdown'
-    " Replace lines with only trailing spaces
-    %s/^\s\+$//e
-    " Replace lines with exactly one trailing space with no trailing spaces
-    %g/\S\s$/s/\s$//g
-    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
-    %s/\s\s\s\+$/  /e
-  else
-    " Remove all trailing spaces
-    %s/\s\+$//e
-  endif
-  call winrestview(l:save)
-endfunction
-
-command! TrimWhitespace call s:trim_whitespace()
-
-augroup custom_fix_whitespace_save
-  autocmd!
-  autocmd BufWritePre * TrimWhitespace
-augroup end
-
-" }}}
-" General: alacritty callback for dynamic terminal color change {{{
-
-function! s:alacritty_set_background()
-  let g:alacritty_background = system('alacritty-which-colorscheme')
-  if !v:shell_error
-    let &background = g:alacritty_background
-  else
-    echom 'Error calling "alacritty-which-colorscheme"'
-  endif
-endfunction
-
-call s:alacritty_set_background()
-call jobstart(
-      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
-      \ )
-
-" }}}
-" General: syntax highlighting {{{
+" General: syntax and colorscheme {{{
 
 " Redraw Window: whenever a window regains focus
 augroup custom_redraw_on_refocus
@@ -1023,12 +762,323 @@ let g:PaperColor_Theme_Options.language = {
       \    }
       \ }
 
-" Load:
-try
-  colorscheme PaperColor
-catch
-  echo 'An error occured while configuring PaperColor'
-endtry
+function s:set_papercolor()
+  try
+    colorscheme PaperColor
+  catch
+    echo 'An error occured while configuring PaperColor'
+  endtry
+endfunction
+
+augroup custom_set_colorscheme
+  autocmd!
+  autocmd VimEnter * call s:set_papercolor()
+augroup end
+
+" }}}
+" General: filetype {{{
+
+augroup custom_filetype_recognition
+  autocmd!
+  autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
+  autocmd BufNewFile,BufRead,BufEnter *.config,.cookiecutterrc set filetype=yaml
+  autocmd BufNewFile,BufRead,BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term
+        \ set filetype=json
+  autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
+  autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
+  autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
+  autocmd BufNewFile,BufRead,BufEnter *.jsx,*.js set filetype=javascript
+  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
+        \ set filetype=dosini
+  autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
+  autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
+  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=dockerfile
+  autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
+  autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
+  autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
+        \ set filetype=conf
+  autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
+  autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
+  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc,.markdownlintrc
+        \ set filetype=jsonc
+augroup end
+
+" }}}
+" General: indentation {{{
+
+augroup custom_indentation
+  autocmd!
+  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3
+        \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
+  autocmd Filetype dot setlocal autoindent cindent
+  autocmd Filetype make,tsv,votl,go,gomod
+        \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+  " Prevent auto-indenting from occuring
+  autocmd Filetype yaml setlocal indentkeys-=<:>
+
+  autocmd Filetype ron setlocal cindent
+        \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
+        \ cinoptions+='(s,m2'
+        \ cinoptions+='(s,U1'
+        \ cinoptions+='j1'
+        \ cinoptions+='J1'
+augroup end
+
+" }}}
+" General: statusline & tabline {{{
+
+" Tab Line
+set tabline=%t
+
+" Status Line
+set laststatus=2
+set statusline=
+set statusline+=%#CursorLine#
+set statusline+=\ %{mode()}
+set statusline+=\ %*\  " Color separator + space
+set statusline+=%{&paste?'[P]':''}
+set statusline+=%{&spell?'[S]':''}
+set statusline+=%r
+set statusline+=%t
+set statusline+=%m
+set statusline+=%=
+set statusline+=\ %y\  " file type
+set statusline+=%#CursorLine#
+set statusline+=\ %{&ff}\  " Unix or Dos
+set statusline+=%*  " default color
+set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
+
+" Status Line
+augroup custom_statusline
+  autocmd!
+  autocmd FileType defx setlocal statusline=\ defx\ %#CursorLine#
+augroup end
+
+" }}}
+" General: environment variables {{{
+
+" Path: add node_modules for language servers / linters / other stuff
+let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+
+" }}}
+" General: helptags {{{
+
+helptags ~/.config/nvim/doc
+
+" }}}
+" General: init.vim helpers {{{
+
+function! s:gf_vimrc_open_plugin()
+  let ssh_url = expand('<cfile>')
+  let ssh_components = split(ssh_url, '/')
+  if len(ssh_components) != 2
+    " do regular 'gf'
+    normal! gf
+    return
+  endif
+  let directory = ssh_components[1]
+  let parent_directory = directory == 'vim-packager' ? 'opt/' : 'start/'
+  let path = '~/.config/nvim/pack/packager/' . parent_directory . directory
+  execute 'tabe ' . path
+  execute 'lcd ' . path
+endfunction
+
+function! s:gx_vimrc_open_plugin()
+  let ssh_url = expand('<cfile>')
+  let ssh_components = split(ssh_url, ':')
+  if len(ssh_components) != 2
+    " do regular 'gx'
+    normal! gx
+    return
+  endif
+  let path = ssh_components[1]
+  execute 'OpenBrowser ' . 'https://github.com/' . path
+endfunction
+
+" }}}
+" General: abbreviations {{{
+
+" If in_command is at beginning of line : return out_command
+" Else : return in_command.
+function! s:abbr_help(in_command, out_command)
+  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
+    return a:out_command
+  else
+    return a:in_command
+  endif
+endfunction
+
+" Using Ack and Acks brings up quickfix automatically
+cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
+cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
+
+" Open init.vim
+cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/init.vim')
+
+" Open zshrc
+cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
+
+" Open settings for language server files
+cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
+
+" 'c' is abbreviation for 'close'. I use it way more often than 'change'
+cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
+
+" }}}
+" General: comment & text format options {{{
+
+" Notes:
+" commentstring: read by vim-commentary; must be one template
+" comments: csv of comments.
+" formatoptions: influences how Vim formats text
+"   ':help fo-table' will get the desired result
+augroup custom_comment_config
+  autocmd!
+  autocmd FileType dosini
+        \ setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType tmux
+        \ setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType jsonc
+        \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
+  autocmd FileType sh setlocal formatoptions=jcroql
+  autocmd FileType typescript.tsx,typescript
+        \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+augroup end
+
+" }}}
+" General: colorColumn different widths for different filetypes {{{
+
+augroup custom_colorcolumn
+  autocmd!
+  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
+  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
+augroup end
+
+" }}}
+" General: writing {{{
+
+function! s:abolish_correct()
+  " Started from:
+  " https://github.com/tpope/tpope/blob/94b1f7c33ee4049866f0726f96d9a0fb5fdf868f/.vim/after/plugin/abolish_tpope.vim
+  if !exists('g:loaded_abolish')
+    echom 'Abolish does not exist, skipping...'
+    return
+  endif
+  Abolish Lidsa                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  Abolish Tqbf                        The quick, brown fox jumps over the lazy dog
+  Abolish adn                         and
+  Abolish afterword{,s}               afterward{}
+  Abolish anomol{y,ies}               anomal{}
+  Abolish austrail{a,an,ia,ian}       austral{ia,ian}
+  Abolish cal{a,e}nder{,s}            cal{e}ndar{}
+  Abolish delimeter{,s}               delimiter{}
+  Abolish despara{te,tely,tion}       despera{}
+  Abolish destionation{,s}            destination{}
+  Abolish d{e,i}screp{e,a}nc{y,ies}   d{i}screp{a}nc{}
+  Abolish euphamis{m,ms,tic,tically}  euphemis{}
+  Abolish hense                       hence
+  Abolish hte                         the
+  Abolish improvment{,s}              improvement{}
+  Abolish inherant{,ly}               inherent{}
+  Abolish lastest                     latest
+  Abolish nto                         not
+  Abolish nto                         not
+  Abolish ot                          to
+  Abolish persistan{ce,t,tly}         persisten{}
+  Abolish rec{co,com,o}mend{,s,ed,ing,ation} rec{om}mend{}
+  Abolish referesh{,es}               refresh{}
+  Abolish reproducable                reproducible
+  Abolish resouce{,s}                 resource{}
+  Abolish restraunt{,s}               restaurant{}
+  Abolish scflead                     supercalifragilisticexpialidocious
+  Abolish segument{,s,ed,ation}       segment{}
+  Abolish seperat{e,es,ed,ing,ely,ion,ions,or} separat{}
+  Abolish si                          is
+  Abolish teh                         the
+  Abolish {,in}consistan{cy,cies,t,tly} {}consisten{}
+  Abolish {,ir}releven{ce,cy,t,tly}   {}relevan{}
+  Abolish {,non}existan{ce,t}         {}existen{}
+  Abolish {,re}impliment{,s,ing,ed,ation} {}implement{}
+  Abolish {,un}nec{ce,ces,e}sar{y,ily} {}nec{es}sar{}
+  Abolish {,un}orgin{,al}             {}origin{}
+  Abolish {c,m}arraige{,s}            {}arriage{}
+  Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
+  Abolish {les,compar,compari}sion{,s} {les,compari,compari}son{}
+endfunction
+
+augroup custom_writing
+  autocmd!
+  autocmd VimEnter * call s:abolish_correct()
+  autocmd FileType markdown,rst,text,gitcommit
+        \ setlocal wrap linebreak nolist
+        \ | call textobj#sentence#init()
+  autocmd FileType requirements setlocal nospell
+  autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
+augroup end
+
+" }}}
+" General: digraphs {{{
+
+digraph jj 699  " Hawaiian character ʻ
+
+" }}}
+" General: folding {{{
+
+augroup custom_fold_settings
+  autocmd!
+  autocmd FileType vim,tmux,bash,zsh,sh
+        \ setlocal foldenable foldmethod=marker foldnestmax=1
+  autocmd FileType markdown,rst
+        \ setlocal nofoldenable
+  autocmd FileType yaml
+        \ setlocal nofoldenable foldmethod=indent foldnestmax=1
+augroup end
+
+" }}}
+" General: trailing whitespace {{{
+
+function! s:trim_whitespace()
+  let l:save = winsaveview()
+  if &ft == 'markdown'
+    " Replace lines with only trailing spaces
+    %s/^\s\+$//e
+    " Replace lines with exactly one trailing space with no trailing spaces
+    %g/\S\s$/s/\s$//g
+    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
+    %s/\s\s\s\+$/  /e
+  else
+    " Remove all trailing spaces
+    %s/\s\+$//e
+  endif
+  call winrestview(l:save)
+endfunction
+
+command! TrimWhitespace call s:trim_whitespace()
+
+augroup custom_fix_whitespace_save
+  autocmd!
+  autocmd BufWritePre * TrimWhitespace
+augroup end
+
+" }}}
+" General: alacritty callback for dynamic terminal color change {{{
+
+function! s:alacritty_set_background()
+  let g:alacritty_background = system('alacritty-which-colorscheme')
+  if !v:shell_error
+    let &background = g:alacritty_background
+  else
+    echom 'Error calling "alacritty-which-colorscheme"'
+  endif
+endfunction
+
+call s:alacritty_set_background()
+call jobstart(
+      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
+      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
+      \ )
 
 " }}}
 " General: resize window {{{
@@ -1220,7 +1270,7 @@ function! QStart()
 endfunction
 
 " }}}
-" General: language builder / runner {{{
+" General: language builder & runner {{{
 
 let s:language_builders = {
       \ 'rust': 'rustc %',
@@ -1368,7 +1418,7 @@ command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
-" Plugins: git plugins: gv.vim, fugitive, git-messenger {{{
+" Package: git plugins: gv.vim, fugitive, git-messenger {{{
 
 " NOTES:
 " :GV to open commit browser
@@ -1391,7 +1441,7 @@ let g:git_messenger_always_into_popup = v:false
 let g:git_messenger_no_default_mappings = v:true
 
 " }}}
-" Plugins: jinja2 {{{
+" Package: jinja2 {{{
 
 function! s:jinja2_toggle()
   let jinja2 = '.jinja2'
@@ -1407,7 +1457,7 @@ endfunction
 command! Jinja2Toggle call s:jinja2_toggle()
 
 " }}}
-" Plugins: man pager / help (builtins) {{{
+" Package: man pager {{{
 
 let g:man_hardwrap = v:true
 
@@ -1417,7 +1467,7 @@ augroup custom_man_page
 augroup end
 
 " }}}
-" Plugins: restructured text {{{
+" Package: restructured text {{{
 
 " Vim Rst Sections: documentation
 " -----------------------------------------------------------------------
@@ -1492,7 +1542,7 @@ command! HovercraftSlide echo 'Slide '
 let g:no_rst_sections_maps = 0
 
 " }}}
-" Plugins: markdown-preview.vim {{{
+" Package: markdown-preview.vim {{{
 
 let g:mkdp_auto_start = v:false
 let g:mkdp_auto_close = v:false
@@ -1533,7 +1583,7 @@ let g:mkdp_preview_options = {
       \ }
 
 " }}}
-" Plugins: preview compiled stuff in viewer {{{
+" Package: preview compiled stuff in viewer {{{
 
 function! s:preview()
   if &filetype ==? 'rst'
@@ -1556,7 +1606,7 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Plugins: defx {{{
+" Package: defx {{{
 
 let g:custom_defx_state = tempname()
 
@@ -1657,7 +1707,7 @@ augroup custom_defx
 augroup end
 
 " }}}
-" Plugins: fzf and fzf preview {{{
+" Package: fzf and fzf preview {{{
 
 " When in preview window, the following key mappings are relevant:
 " <C-s>
@@ -1721,7 +1771,7 @@ command! -bang -nargs=* Rg
       \ <bang>0)
 
 " }}}
-" Plugins: tagbar {{{
+" Package: tagbar {{{
 
 let g:tagbar_map_showproto = '`'
 let g:tagbar_show_linenumbers = -1
@@ -1797,7 +1847,7 @@ let g:tagbar_type_typescript = {
       \ }
 
 " }}}
-" Plugins: vim-tex {{{
+" Package: vim-tex {{{
 
 let g:vimtex_compiler_latexmk = {'callback' : v:false}
 let g:tex_flavor = 'latex'
@@ -1815,7 +1865,7 @@ function! MyVimTexDocHandler(context)
 endfunction
 
 " }}}
-" Plugins: sandwich {{{
+" Package: sandwich {{{
 
 " LatexNotes:
 "   textobject:
@@ -1835,7 +1885,7 @@ endfunction
 let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " }}}
-" Plugins: goyo {{{
+" Package: goyo {{{
 
 let g:goyo_height = '100%'
 let g:goyo_width = 84
@@ -1879,7 +1929,7 @@ augroup custom_goyo
 augroup end
 
 " }}}
-" Plugins: ragtag {{{
+" Package: ragtag {{{
 
 " Load mappings on every filetype
 let g:ragtag_global_maps = v:true
@@ -1890,7 +1940,7 @@ augroup custom_ragtag
 augroup end
 
 " }}}
-" Plugins: nvim-repl {{{
+" Package: nvim-repl {{{
 
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
@@ -1904,7 +1954,7 @@ let g:repl_filetype_commands = {
 let g:repl_default = &shell
 
 " }}}
-" Plugins: vim-markdown {{{
+" Package: vim-markdown {{{
 
 let g:vim_markdown_frontmatter = v:true
 let g:vim_markdown_toml_frontmatter = v:true
@@ -1916,77 +1966,7 @@ let g:vim_markdown_auto_insert_bullets = v:false
 let g:vim_markdown_new_list_item_indent = v:false
 
 " }}}
-" Plugins: autoCompletion / go-to Definition / lsp / snippets {{{
-
-" Coc:
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'help ' . expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-let g:coc_snippet_next = '<C-l>'
-let g:coc_snippet_prev = '<C-h>'
-let g:coc_start_at_startup = 1
-let g:coc_filetype_map = {
-      \ 'python.jinja2': 'python',
-      \ 'sql.jinja2': 'sql',
-      \ 'yaml.ansible': 'yaml',
-      \ 'yaml.docker-compose': 'yaml',
-      \ }
-
-" Customization:
-function! s:coc_diagnostic_disable()
-  call coc#config('diagnostic.enable', v:false)
-  let g:coc_custom_diagnostic_enabled = v:false
-  silent CocRestart
-  echom 'Disabled: Coc Diagnostics'
-endfunction
-
-function! s:coc_diagnostic_enable()
-  call coc#config('diagnostic.enable', v:true)
-  let g:coc_custom_diagnostic_enabled = v:true
-  echom 'Enabled: Coc Diagnostics'
-endfunction
-
-function! s:coc_diagnostic_toggle()
-  if g:coc_custom_diagnostic_enabled == v:true
-    call s:coc_diagnostic_disable()
-  else
-    call s:coc_diagnostic_enable()
-  endif
-endfunction
-
-function! s:coc_init()
-  let g:coc_custom_diagnostic_enabled = v:false
-endfunction
-
-augroup custom_coc
-  autocmd!
-  autocmd VimEnter * call s:coc_init()
-  autocmd FileType terraform let b:coc_pairs = [
-        \ ['(', ')'],
-        \ ['[', ']'],
-        \ ['{', '}'],
-        \ ['<', '>'],
-        \ ['"', '"'],
-        \ ]
-  autocmd FileType make let b:coc_pairs = [
-        \ ['(', ')'],
-        \ ['[', ']'],
-        \ ['{', '}'],
-        \ ]
-  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-augroup end
-
-command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
-command! CocDiagnosticEnable call s:coc_diagnostic_enable()
-command! CocDiagnosticDisable call s:coc_diagnostic_disable()
-
-" }}}
-" Plugins: vim-filetype-formatter {{{
+" Package: vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
@@ -1995,7 +1975,7 @@ let g:vim_filetype_formatter_commands = {
       \ }
 
 " }}}
-" Plugins: keywordprg helpers (vim-keywordprg-commands, etc) {{{
+" Package: keywordprg helpers (vim-keywordprg-commands, etc) {{{
 
 let g:vim_keywordprg_commands = {
       \ }
@@ -2008,7 +1988,7 @@ augroup custom_keywordprg
 augroup end
 
 " }}}
-" Plugins: misc global var config {{{
+" Package: misc global var config {{{
 
 " Python: disable python 2 support
 let g:loaded_python_provider = v:true
@@ -2154,3 +2134,4 @@ let g:omni_syntax_use_iskeyword_numeric = v:false
 " To lean more about the ex editor, type 'man ex'
 
 " }}}
+" Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
