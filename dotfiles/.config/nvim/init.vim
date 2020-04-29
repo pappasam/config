@@ -8,8 +8,8 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:neoclide/coc.nvim.git', {'branch': 'release'})
-  for coc_plugin in [
+  for coc_package in [
+        \ 'git@github.com:neoclide/coc.nvim.git',
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:fannheyward/coc-texlab.git',
@@ -27,7 +27,7 @@ function s:pack_init() abort
         \ 'git@github.com:neoclide/coc-yaml.git',
         \ 'git@github.com:pappasam/coc-jedi.git',
         \ ]
-    call packager#add(coc_plugin, {
+    call packager#add(coc_package, {
           \ 'do': 'yarn install --frozen-lockfile && yarn build',
           \ })
   endfor
