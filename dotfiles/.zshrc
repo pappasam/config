@@ -840,10 +840,11 @@ function pydev-install() {  ## Install default python dependencies
   asdf reshim python
 }
 
-function pyglob-install() {  ## Install global Python applications
+function pyglobal-install() {  ## Install global Python applications
   local for_pipx=(
     black
     cookiecutter
+    docker-compose
     isort
     jedi-language-server
     mypy
