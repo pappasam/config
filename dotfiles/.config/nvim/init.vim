@@ -528,8 +528,7 @@ augroup custom_coc
         \ ['{', '}'],
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-  " autocmd CursorHold * call CocActionAsync('showSignatureHelp')
-  " autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
+  autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
@@ -772,10 +771,8 @@ function s:set_papercolor()
   endtry
 endfunction
 
-augroup custom_set_colorscheme
-  autocmd!
-  autocmd VimEnter * call s:set_papercolor()
-augroup end
+" must set this before vim-enter; Coc bugs out otherwise
+call s:set_papercolor()
 
 " }}}
 " General: filetype {{{
