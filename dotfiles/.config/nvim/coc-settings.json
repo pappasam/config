@@ -4,6 +4,7 @@
   "suggest.noselect": true,
   "diagnostic.enable": false,
   "signature.preferShownAbove": false,
+  "vimlsp.suggest.fromRuntimepath": true,
   "list.normalMappings": {
     "<C-v>": "action:vsplit",
     "<C-x>": "action:split",

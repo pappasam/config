@@ -14,6 +14,7 @@ function s:pack_init() abort
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:fannheyward/coc-texlab.git',
         \ 'git@github.com:iamcco/coc-diagnostic.git',
+        \ 'git@github.com:iamcco/coc-vimlsp.git',
         \ 'git@github.com:josa42/coc-go.git',
         \ 'git@github.com:neoclide/coc-css.git',
         \ 'git@github.com:neoclide/coc-html.git',
