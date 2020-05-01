@@ -100,8 +100,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:kana/vim-textobj-indent.git')
   " au/iu for a URI, also includes URI handlers and is easy to extend
   call packager#add('git@github.com:jceb/vim-textobj-uri.git')
-  " ac/ic/af/if for Python classes and functions
-  call packager#add('git@github.com:bps/vim-textobj-python.git')
 
   " Writing:
   call packager#add('git@github.com:dkarter/bullets.vim')
@@ -334,6 +332,7 @@ function! s:default_key_mappings()
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
 
+
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
@@ -343,6 +342,10 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
+  xmap                     if <Plug>(coc-funcobj-i)
+  xmap                     af <Plug>(coc-funcobj-a)
+  omap                     if <Plug>(coc-funcobj-i)
+  omap                     af <Plug>(coc-funcobj-a)
   nnoremap <silent>        <leader>sn :CocNext<CR>
   nnoremap <silent>        <leader>sp :CocPrev<CR>
   nnoremap <silent>        <leader>sl :CocListResume<CR>
@@ -531,6 +534,7 @@ augroup custom_coc
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
