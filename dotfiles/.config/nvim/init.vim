@@ -338,6 +338,7 @@ function! s:default_key_mappings()
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-K> :call <SID>show_documentation()<CR>
+  nnoremap <silent>        <C-h> :call CocActionAsync('highlight')<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
@@ -345,7 +346,6 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>sn :CocNext<CR>
   nnoremap <silent>        <leader>sp :CocPrev<CR>
   nnoremap <silent>        <leader>sl :CocListResume<CR>
-  nnoremap <silent>        <leader>sh :call CocActionAsync('highlight')<CR>
   nnoremap <silent>        <leader>ss :call CocActionAsync('showSignatureHelp')<CR>
   nnoremap <silent>        <leader>sc :CocList commands<cr>
   nnoremap <silent>        <leader>so :CocList -A outline<cr>
