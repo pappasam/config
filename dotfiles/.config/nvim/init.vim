@@ -345,10 +345,11 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>sn :CocNext<CR>
   nnoremap <silent>        <leader>sp :CocPrev<CR>
   nnoremap <silent>        <leader>sl :CocListResume<CR>
-  nnoremap <silent>        <leader>sa :call CocActionAsync('showSignatureHelp')<CR>
+  nnoremap <silent>        <leader>sh :call CocActionAsync('highlight')<CR>
+  nnoremap <silent>        <leader>ss :call CocActionAsync('showSignatureHelp')<CR>
   nnoremap <silent>        <leader>sc :CocList commands<cr>
-  nnoremap <silent>        <leader>ss :CocList outline<cr>
-  nnoremap <silent>        <leader>sw :CocList -I symbols<cr>
+  nnoremap <silent>        <leader>so :CocList -A outline<cr>
+  nnoremap <silent>        <leader>sw :CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
   nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
   nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
@@ -473,7 +474,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'help ' . expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -529,7 +530,7 @@ augroup custom_coc
         \ ['{', '}'],
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-  autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
+  autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
