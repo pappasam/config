@@ -3,6 +3,8 @@
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
+  "signature.hideOnTextChange": true,
+  "signature.enable": false,
   "vimlsp.suggest.fromRuntimepath": true,
   "list.normalMappings": {
     "<C-v>": "action:vsplit",

@@ -336,7 +336,8 @@ function! s:default_key_mappings()
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-K> <cmd>call <SID>show_documentation()<CR>
-  nnoremap <silent>        <C-h> <cmd>call CocActionAsync('highlight')<CR>
+  nnoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
+  inoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
@@ -348,7 +349,6 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
   nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
   nnoremap <silent>        <leader>sl <cmd>CocListResume<CR>
-  nnoremap <silent>        <leader>ss <cmd>call CocActionAsync('showSignatureHelp')<CR>
   nnoremap <silent>        <leader>sc <cmd>CocList commands<cr>
   nnoremap <silent>        <leader>so <cmd>CocList -A outline<cr>
   nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
@@ -532,7 +532,6 @@ augroup custom_coc
         \ ['{', '}'],
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-  autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
   autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup end
 
