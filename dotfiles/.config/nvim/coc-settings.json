@@ -6,6 +6,7 @@
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "vimlsp.suggest.fromRuntimepath": true,
+  "vimlsp.indexes.count": 50,
   "list.normalMappings": {
     "<C-v>": "action:vsplit",
     "<C-x>": "action:split",
