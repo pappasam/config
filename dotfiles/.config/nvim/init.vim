@@ -8,8 +8,8 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
+  call packager#add('git@github.com:neoclide/coc.nvim', {'branch': 'release'})
   for coc_package in [
-        \ 'git@github.com:neoclide/coc.nvim.git',
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:fannheyward/coc-texlab.git',
