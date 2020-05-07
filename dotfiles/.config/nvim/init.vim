@@ -190,10 +190,6 @@ function! s:default_key_mappings()
   " J: unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
 
-  " Shifting: in visual mode, make shifts keep selection
-  vnoremap < <gv
-  vnoremap > >gv
-
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
