@@ -729,19 +729,16 @@ augroup custom_cursorline
   autocmd FileType tagbar setlocal cursorline
 augroup end
 
-" ********************************************************************
-" Papercolor: options
-" ********************************************************************
+" *****************************************************************************
+" Papercolor: configuration
+" See: /home/sroeca/.config/nvim/pack/packager/start/papercolor-theme/DESIGN.md
+" *****************************************************************************
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options.theme = {}
-
-" Bold And Italics:
 let g:PaperColor_Theme_Options.theme.default = {
       \ 'allow_bold': v:true,
       \ 'allow_italic': v:true,
       \ }
-
-" Folds And Highlights:
 let g:PaperColor_Theme_Options.theme['default.dark'] = {}
 let g:PaperColor_Theme_Options.theme['default.dark'].override = {
       \ 'folded_bg' : ['gray22', '0'],
@@ -749,8 +746,11 @@ let g:PaperColor_Theme_Options.theme['default.dark'].override = {
       \ 'visual_fg' : ['gray12', '0'],
       \ 'visual_bg' : ['gray', '6'],
       \ }
-
-" Language Specific Overrides:
+let g:PaperColor_Theme_Options.theme['default.light'] = {}
+let g:PaperColor_Theme_Options.theme['default.light'].override = {
+      \ 'color00' : ['ivory', '0'],
+      \ 'linenumber_bg' : ['ivory', '0'],
+      \ }
 let g:PaperColor_Theme_Options.language = {
       \    'python': {
       \      'highlight_builtins' : 1,
