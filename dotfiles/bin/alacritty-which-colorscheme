@@ -3,8 +3,8 @@
 local current=$(basename \
   $(alacritty-colorscheme -c $HOME/.alacritty.yml --show-applied))
 
-if [[ $current == 'tomorrow_night_bright.yaml' ]]; then
-  echo -n 'dark'
-else
+if [[ $current == 'papercolor_light.yaml' ]]; then
   echo -n 'light'
+else
+  echo -n 'dark'
 fi

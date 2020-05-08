@@ -2,4 +2,4 @@
 
 alacritty-colorscheme \
   -c $HOME/.alacritty.yml \
-  -a "$HOME/src/lib/alacritty-theme/themes/tomorrow_night_bright.yaml"
+  -a "$HOME/src/lib/alacritty-theme/themes/ayu_dark.yaml"
