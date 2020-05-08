@@ -512,6 +512,15 @@ function! s:coc_init()
   let g:coc_custom_diagnostic_enabled = v:false
 endfunction
 
+function! s:autocmd_custom_coc()
+  if !exists("g:did_coc_loaded")
+    return
+  endif
+  augroup custom_coc
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+  augroup end
+endfunction
+
 augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:coc_init()
@@ -528,7 +537,7 @@ augroup custom_coc
         \ ['{', '}'],
         \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
