@@ -678,7 +678,6 @@ function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
-  rustup update
   pushd
   cd ~/src/lib/alacritty
   git pull
@@ -808,7 +807,11 @@ function cargodoc() {  # arg1: packagename
 }
 
 function rustdev-install() {
-  cargo install broot
+  cargo install bat
+  cargo install fd-find
+  cargo install ripgrep
+  cargo install cargo-deb
+  cargo install cargo-edit
   asdf reshim rust
 }
 

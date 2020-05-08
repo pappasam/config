@@ -25,7 +25,7 @@ asdf_setup neovim nightly
 asdf_setup php 7.4.5
 asdf_setup python 3.8.2
 asdf_setup ruby 2.6.5
-asdf_setup rust nightly
+asdf_setup rust 1.43.1
 asdf_setup tmux 3.1b
 asdf_setup yarn 1.19.1
 asdf_setup github-cli 0.6.4
