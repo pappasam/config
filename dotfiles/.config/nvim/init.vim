@@ -8,7 +8,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:neoclide/coc.nvim', {'branch': 'release'})
+  call packager#add('git@github.com:neoclide/coc.nvim.git', {'do': 'yarn install && yarn build'})
   for coc_package in [
         \ 'git@github.com:coc-extensions/coc-svelte.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
@@ -184,11 +184,47 @@ command! -bang PU call s:pack_init() | call packager#clean() | call packager#upd
 let mapleader = ','
 
 function! s:default_key_mappings()
+  " Coc: settings for coc.nvim
+  nmap     <silent>        <C-]> <Plug>(coc-definition)
+  nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
+  nnoremap <silent>        <C-K> <cmd>call <SID>show_documentation()<CR>
+  nnoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
+  inoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
+  nmap     <silent>        <leader>st <Plug>(coc-type-definition)
+  nmap     <silent>        <leader>si <Plug>(coc-implementation)
+  nmap     <silent>        <leader>su <Plug>(coc-references)
+  nmap     <silent>        <leader>sr <Plug>(coc-rename)
+  xmap     <silent>        if <Plug>(coc-funcobj-i)
+  xmap     <silent>        af <Plug>(coc-funcobj-a)
+  omap     <silent>        if <Plug>(coc-funcobj-i)
+  omap     <silent>        af <Plug>(coc-funcobj-a)
+  xmap     <silent>        ic <Plug>(coc-classobj-i)
+  xmap     <silent>        ac <Plug>(coc-classobj-a)
+  omap     <silent>        ic <Plug>(coc-classobj-i)
+  omap     <silent>        ac <Plug>(coc-classobj-a)
+  nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
+  nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
+  nnoremap <silent>        <leader>sl <cmd>CocListResume<CR>
+  nnoremap <silent>        <leader>sc <cmd>CocList commands<cr>
+  nnoremap <silent>        <leader>so <cmd>CocList -A outline<cr>
+  nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
+  inoremap <silent> <expr> <c-space> coc#refresh()
+  nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
+  nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+  imap     <silent>        <C-l> <Plug>(coc-snippets-expand)
+  inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
+  nnoremap <silent>        <leader>a <cmd>CocDiagnosticToggle<CR>
+  nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
+  nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
+
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
 
   " J: unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
+
+  " SearchBackward: remap comma to single quote
+  nnoremap ' ,
 
   " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
@@ -296,7 +332,6 @@ function! s:default_key_mappings()
   omap ib <Plug>(textobj-sandwich-auto-i)
   xmap ab <Plug>(textobj-sandwich-auto-a)
   omap ab <Plug>(textobj-sandwich-auto-a)
-
   xmap iq <Plug>(textobj-sandwich-query-i)
   omap iq <Plug>(textobj-sandwich-query-i)
   xmap aq <Plug>(textobj-sandwich-query-a)
@@ -311,9 +346,6 @@ function! s:default_key_mappings()
   " DeleteHiddenBuffers: shortcut to make this easier
   nnoremap <leader>d <cmd>DeleteInactiveBuffers<CR>
 
-  " SearchBackward: remap comma to single quote
-  nnoremap ' ,
-
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <cmd>FiletypeFormat<cr>
   vnoremap <silent> <leader>f :FiletypeFormat<cr>
@@ -327,35 +359,6 @@ function! s:default_key_mappings()
 
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
-
-  " Coc: settings for coc.nvim
-  nmap     <silent>        <C-]> <Plug>(coc-definition)
-  nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
-  nnoremap <silent>        <C-K> <cmd>call <SID>show_documentation()<CR>
-  nnoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
-  inoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
-  nmap     <silent>        <leader>st <Plug>(coc-type-definition)
-  nmap     <silent>        <leader>si <Plug>(coc-implementation)
-  nmap     <silent>        <leader>su <Plug>(coc-references)
-  nmap     <silent>        <leader>sr <Plug>(coc-rename)
-  xmap                     if <Plug>(coc-funcobj-i)
-  xmap                     af <Plug>(coc-funcobj-a)
-  omap                     if <Plug>(coc-funcobj-i)
-  omap                     af <Plug>(coc-funcobj-a)
-  nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
-  nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
-  nnoremap <silent>        <leader>sl <cmd>CocListResume<CR>
-  nnoremap <silent>        <leader>sc <cmd>CocList commands<cr>
-  nnoremap <silent>        <leader>so <cmd>CocList -A outline<cr>
-  nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
-  inoremap <silent> <expr> <c-space> coc#refresh()
-  nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-  nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
-  imap     <silent>        <C-l> <Plug>(coc-snippets-expand)
-  inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  nnoremap <silent>        <leader>a <cmd>CocDiagnosticToggle<CR>
-  nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
-  nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Mouse Configuration: remaps mouse to work better in terminal
