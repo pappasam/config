@@ -1,5 +1,6 @@
 {
   "coc.preferences.enableFloatHighlight": false,
+  "coc.preferences.extensionUpdateCheck": "never",
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": false,
