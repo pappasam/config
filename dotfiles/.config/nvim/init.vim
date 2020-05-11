@@ -43,7 +43,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:tpope/vim-abolish')
   call packager#add('git@github.com:tpope/vim-characterize.git')
   call packager#add('git@github.com:tpope/vim-commentary')
-  call packager#add('git@github.com:tpope/vim-ragtag')
   call packager#add('git@github.com:tpope/vim-repeat')
   call packager#add('git@github.com:tpope/vim-scriptease')
 
@@ -65,6 +64,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:yssl/QFEnter')
+  call packager#add('git@github.com:alvan/vim-closetag.git')
 
   " KeywordPrg:
   call packager#add('git@github.com:pappasam/vim-keywordprg-commands.git')
@@ -78,6 +78,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:junegunn/gv.vim')
   call packager#add('git@github.com:rhysd/git-messenger.vim.git')
   call packager#add('git@github.com:tpope/vim-fugitive')
+  call packager#add('git@github.com:sodapopcan/vim-twiggy.git')
 
   " Text Objects:
   call packager#add('git@github.com:machakann/vim-sandwich')
@@ -1940,17 +1941,6 @@ augroup custom_goyo
 augroup end
 
 " }}}
-" Package: ragtag {{{
-
-" Load mappings on every filetype
-let g:ragtag_global_maps = v:true
-
-" Additional files for whice ragtag will initialize
-augroup custom_ragtag
-  autocmd FileType svelte,javascript call RagtagInit()
-augroup end
-
-" }}}
 " Package: nvim-repl {{{
 
 let g:repl_filetype_commands = {
@@ -2091,6 +2081,9 @@ let g:hexmode_xxd_options = '-g 2'
 " Syntax Omni Completion:
 let g:omni_syntax_use_single_byte = v:false
 let g:omni_syntax_use_iskeyword_numeric = v:false
+
+" CloseTags:
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx,*.jsx'
 
 " }}}
 " Tidbits: helpful hints {{{
