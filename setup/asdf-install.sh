@@ -7,8 +7,8 @@
 
 asdf plugin-add nodejs
 bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-asdf install nodejs 14.0.0
-asdf global nodejs 14.0.0
+asdf install nodejs 14.2.0
+asdf global nodejs 14.2.0
 
 ###########################################################################
 # Generalized
