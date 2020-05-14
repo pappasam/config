@@ -173,11 +173,11 @@ function s:pack_init() abort
   call packager#add('git@github.com:vimoutliner/vimoutliner')
 endfunction
 
-command! PackInstall call s:pack_init() | call packager#install()
-command! -bang PackUpdate call s:pack_init() | call packager#update({ 'force_hooks': '<bang>' })
-command! PackClean call s:pack_init() | call packager#clean()
-command! PackStatus call s:pack_init() | call packager#status()
-command! -bang PU call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
+command!       PackInstall call s:pack_init() | call packager#install({ 'on_finish': 'call packager#status()' })
+command! -bang PackUpdate  call s:pack_init() | call packager#update({ 'force_hooks': '<bang>', 'on_finish': 'call packager#status()' })
+command!       PackClean   call s:pack_init() | call packager#clean()
+command!       PackStatus  call s:pack_init() | call packager#status()
+command! -bang PU          call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>', 'on_finish': 'call packager#status()' })
 
 " }}}
 " General: mappings {{{
@@ -378,20 +378,11 @@ function! s:default_key_mappings()
   nnoremap <MiddleMouse> "+<MiddleMouse>
 
   " Scrolling Dropdown: dropdown scrollable + click to select highlighted
-  inoremap <expr> <S-ScrollWheelUp>
-        \ pumvisible() ?
-        \ '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' :
-        \ '<Esc><S-ScrollWheelUp>'
-  inoremap <expr> <S-ScrollWheelDown>
-        \ pumvisible() ?
-        \ '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' :
-        \ '<Esc><S-ScrollWheelDown>'
-  inoremap <expr> <ScrollWheelUp>
-        \ pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
-  inoremap <expr> <ScrollWheelDown>
-        \ pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
-  inoremap <expr> <LeftMouse>
-        \ pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
+  inoremap <expr> <S-ScrollWheelUp>   pumvisible() ? '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' : '<Esc><S-ScrollWheelUp>'
+  inoremap <expr> <S-ScrollWheelDown> pumvisible() ? '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' : '<Esc><S-ScrollWheelDown>'
+  inoremap <expr> <ScrollWheelUp>     pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
+  inoremap <expr> <ScrollWheelDown>   pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
+  inoremap <expr> <LeftMouse>         pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
   " Auto-execute all filetypes
   let &filetype=&filetype
@@ -415,26 +406,23 @@ augroup end
 " open operation taken from: https://stackoverflow.com/a/13924974
 augroup custom_remap_folds
   autocmd!
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ nnoremap <expr> <2-LeftMouse>
-        \ foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ nnoremap <RightMouse> <LeftMouse><LeftRelease>zc
+  autocmd FileType vim,tmux,bash,zsh,sh nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
+  autocmd FileType vim,tmux,bash,zsh,sh nnoremap        <RightMouse> <LeftMouse><LeftRelease>zc
 augroup end
 
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  autocmd FileType man,help nnoremap <buffer> <C-LeftMouse> <C-LeftMouse>
-  autocmd FileType man,help nnoremap <buffer> <expr> d &modifiable == 0 ? '<C-d>' : 'd'
-  autocmd FileType man,help nnoremap <buffer> <expr> u &modifiable == 0 ? '<C-u>' : 'u'
-  autocmd FileType man,help nnoremap <buffer> <expr> q &modifiable == 0 ? ':q<cr>' : 'q'
+  autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
+  autocmd FileType man,help nnoremap <buffer> <expr>   d &modifiable == 0 ? '<C-d>' : 'd'
+  autocmd FileType man,help nnoremap <buffer> <expr>   u &modifiable == 0 ? '<C-u>' : 'u'
+  autocmd FileType man,help nnoremap <buffer> <expr>   q &modifiable == 0 ? ':q<cr>' : 'q'
 augroup end
 
 augroup custom_remap_rst
   autocmd!
-  autocmd FileType rst nnoremap <buffer> <leader>w <cmd>HovercraftSlide<CR>
-  autocmd FileType rst nnoremap <buffer> <leader>f <cmd>TableRstFormat<CR>
+  autocmd FileType rst nnoremap <buffer>          <leader>w <cmd>HovercraftSlide<CR>
+  autocmd FileType rst nnoremap <buffer>          <leader>f <cmd>TableRstFormat<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <cmd>call RstSetSection(0)<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 <cmd>call RstSetSection(1)<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 <cmd>call RstSetSection(2)<CR>
@@ -452,20 +440,18 @@ augroup end
 augroup custom_remap_defx
   autocmd!
   autocmd FileType defx call s:defx_buffer_remappings()
-  autocmd FileType defx nmap <buffer> <silent> gp <Plug>(defx-git-prev)
-  autocmd FileType defx nmap <buffer> <silent> gn <Plug>(defx-git-next)
-  autocmd FileType defx nmap <buffer> <silent> gs <Plug>(defx-git-stage)
-  autocmd FileType defx nmap <buffer> <silent> gu <Plug>(defx-git-reset)
-  autocmd FileType defx nmap <buffer> <silent> gd <Plug>(defx-git-discard)
+  autocmd FileType defx nmap     <buffer> <silent> gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap     <buffer> <silent> gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap     <buffer> <silent> gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap     <buffer> <silent> gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap     <buffer> <silent> gd <Plug>(defx-git-discard)
   autocmd FileType defx nnoremap <buffer> <silent> <C-l> <cmd>ResizeWindowWidth<CR>
 augroup end
 
 augroup custom_init_vim
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter init.vim
-        \ nnoremap <buffer> <silent> gf <cmd>call <SID>gf_vimrc_open_plugin()<CR>
-  autocmd BufNewFile,BufRead,BufEnter init.vim
-        \ nnoremap <buffer> <silent> gx <cmd>call <SID>gx_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gf <cmd>call <SID>gf_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <cmd>call <SID>gx_vimrc_open_plugin()<CR>
 augroup end
 
 " }}}
@@ -820,14 +806,11 @@ augroup end
 
 augroup custom_indentation
   autocmd!
-  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3
-        \ setlocal shiftwidth=4 softtabstop=4 tabstop=8
+  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv,votl,go,gomod
-        \ setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
-
   autocmd Filetype ron setlocal cindent
         \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
         \ cinoptions+='(s,m2'
@@ -947,15 +930,11 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 "   ':help fo-table' will get the desired result
 augroup custom_comment_config
   autocmd!
-  autocmd FileType dosini
-        \ setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType tmux
-        \ setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc
-        \ setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
+  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType tmux setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType typescript.tsx,typescript
-        \ setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  autocmd FileType typescript.tsx,typescript setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup end
 
@@ -1023,9 +1002,7 @@ endfunction
 augroup custom_writing
   autocmd!
   autocmd VimEnter * call s:abolish_correct()
-  autocmd FileType markdown,rst,text,gitcommit
-        \ setlocal wrap linebreak nolist
-        \ | call textobj#sentence#init()
+  autocmd FileType markdown,rst,text,gitcommit setlocal wrap linebreak nolist | call textobj#sentence#init()
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup end
@@ -1040,12 +1017,9 @@ digraph jj 699  " Hawaiian character ʻ
 
 augroup custom_fold_settings
   autocmd!
-  autocmd FileType vim,tmux,bash,zsh,sh
-        \ setlocal foldenable foldmethod=marker foldnestmax=1
-  autocmd FileType markdown,rst
-        \ setlocal nofoldenable
-  autocmd FileType yaml
-        \ setlocal nofoldenable foldmethod=indent foldnestmax=1
+  autocmd FileType vim,tmux,bash,zsh,sh setlocal foldenable foldmethod=marker foldnestmax=1
+  autocmd FileType markdown,rst setlocal nofoldenable
+  autocmd FileType yaml setlocal nofoldenable foldmethod=indent foldnestmax=1
 augroup end
 
 " }}}
