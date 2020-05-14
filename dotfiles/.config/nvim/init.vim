@@ -561,8 +561,6 @@ set signcolumn=yes
 set mouse=a
 
 " SwapFiles: prevent their creation
-set nobackup
-set nowritebackup
 set noswapfile
 
 " Command Line Height: higher for display for messages
@@ -604,19 +602,6 @@ set pastetoggle=<C-_>
 
 " Don't timeout on mappings
 set notimeout
-" Do timeout on terminal key codes
-set ttimeout
-
-" Local Vimrc: execute commands securely from $PWD/.nvimrc
-" *exrc* if set, the current directory is searched for 3 files in order
-"   (Unix), using the first it finds: '.nvimrc', '_nvimrc', '.exrc'
-" *secure* disable unsafe commands in your project-specific config files
-"   This will prevent :autocmd, shell and write commands from being run inside
-"   project-specific config files unless they’re owned by you.
-set exrc
-set secure
-
-" Default Shell: 'shell' defaults to $SHELL
 
 " Numbering:
 set number
@@ -730,7 +715,7 @@ augroup end
 
 " *****************************************************************************
 " Papercolor: configuration
-" See: /home/sroeca/.config/nvim/pack/packager/start/papercolor-theme/DESIGN.md
+" See: ~/.config/nvim/pack/packager/start/papercolor-theme/DESIGN.md
 " *****************************************************************************
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options.theme = {}
@@ -778,27 +763,23 @@ call s:set_papercolor()
 
 augroup custom_filetype_recognition
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter *.hql,*.q set filetype=hive
-  autocmd BufNewFile,BufRead,BufEnter *.config,.cookiecutterrc set filetype=yaml
-  autocmd BufNewFile,BufRead,BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term
-        \ set filetype=json
-  autocmd BufNewFile,BufRead,BufEnter *.asm set filetype=nasm
-  autocmd BufNewFile,BufRead,BufEnter *.handlebars set filetype=html
-  autocmd BufNewFile,BufRead,BufEnter *.m,*.oct set filetype=octave
-  autocmd BufNewFile,BufRead,BufEnter *.jsx,*.js set filetype=javascript
-  autocmd BufNewFile,BufRead,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc
-        \ set filetype=dosini
-  autocmd BufNewFile,BufRead,BufEnter *.tsv set filetype=tsv
-  autocmd BufNewFile,BufRead,BufEnter *.toml set filetype=toml
-  autocmd BufNewFile,BufRead,BufEnter Dockerfile.* set filetype=dockerfile
-  autocmd BufNewFile,BufRead,BufEnter Makefile.* set filetype=make
-  autocmd BufNewFile,BufRead,BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufNewFile,BufRead,BufEnter .gitignore,.dockerignore
-        \ set filetype=conf
-  autocmd BufNewFile,BufRead,BufEnter *.sql.j2 set filetype=sql.jinja2
-  autocmd BufNewFile,BufRead,BufEnter *.py.j2 set filetype=python.jinja2
-  autocmd BufNewFile,BufRead,BufEnter tsconfig.json,*.jsonc,.markdownlintrc
-        \ set filetype=jsonc
+  autocmd BufEnter *.hql,*.q set filetype=hive
+  autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
+  autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
+  autocmd BufEnter *.asm set filetype=nasm
+  autocmd BufEnter *.handlebars set filetype=html
+  autocmd BufEnter *.m,*.oct set filetype=octave
+  autocmd BufEnter *.jsx,*.js set filetype=javascript
+  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc set filetype=dosini
+  autocmd BufEnter *.tsv set filetype=tsv
+  autocmd BufEnter *.toml set filetype=toml
+  autocmd BufEnter Dockerfile.* set filetype=dockerfile
+  autocmd BufEnter Makefile.* set filetype=make
+  autocmd BufEnter poetry.lock,Pipfile set filetype=toml
+  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
+  autocmd BufEnter *.sql.j2 set filetype=sql.jinja2
+  autocmd BufEnter *.py.j2 set filetype=python.jinja2
+  autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
 augroup end
 
 " }}}
@@ -806,11 +787,13 @@ augroup end
 
 augroup custom_indentation
   autocmd!
-  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4 tabstop=8
-  autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=4 noexpandtab
+  " 4 spaces per tab, not 2
+  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  " Use hard tabs, not spaces
+  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
+  autocmd Filetype dot setlocal autoindent cindent
   autocmd Filetype ron setlocal cindent
         \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
         \ cinoptions+='(s,m2'
