@@ -914,7 +914,7 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 augroup custom_comment_config
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType tmux setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType tmux,python setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType typescript.tsx,typescript setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
