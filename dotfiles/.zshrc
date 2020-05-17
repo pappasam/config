@@ -846,6 +846,7 @@ function pydev-install() {  ## Install default python dependencies
     pip
     pylint
     pynvim
+    wheel
   )
   pip install -U $for_pip
   asdf reshim python
