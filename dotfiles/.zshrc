@@ -841,11 +841,11 @@ function nodedev-install() {
 function pydev-install() {  ## Install default python dependencies
   local for_pip=(
     bpython
+    mypy
     neovim-remote
     pip
-    pynvim
     pylint
-    mypy
+    pynvim
   )
   pip install -U $for_pip
   asdf reshim python
@@ -854,11 +854,14 @@ function pydev-install() {  ## Install default python dependencies
 function pyglobal-install() {  ## Install global Python applications
   local for_pipx=(
     black
+    bpython
     cookiecutter
     docker-compose
     isort
     jedi-language-server
+    mypy
     pre-commit
+    pylint
     restview
     toml-sort
   )
