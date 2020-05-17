@@ -844,6 +844,8 @@ function pydev-install() {  ## Install default python dependencies
     neovim-remote
     pip
     pynvim
+    pylint
+    mypy
   )
   pip install -U $for_pip
   asdf reshim python
@@ -856,9 +858,7 @@ function pyglobal-install() {  ## Install global Python applications
     docker-compose
     isort
     jedi-language-server
-    mypy
     pre-commit
-    pylint
     restview
     toml-sort
   )
