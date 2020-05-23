@@ -173,11 +173,11 @@ function s:pack_init() abort
   call packager#add('git@github.com:vimoutliner/vimoutliner')
 endfunction
 
-command!       PackInstall call s:pack_init() | call packager#install({ 'on_finish': 'call packager#status()' })
-command! -bang PackUpdate  call s:pack_init() | call packager#update({ 'force_hooks': '<bang>', 'on_finish': 'call packager#status()' })
+command!       PackInstall call s:pack_init() | call packager#install()
+command! -bang PackUpdate  call s:pack_init() | call packager#update({ 'force_hooks': '<bang>' })
 command!       PackClean   call s:pack_init() | call packager#clean()
 command!       PackStatus  call s:pack_init() | call packager#status()
-command! -bang PU          call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>', 'on_finish': 'call packager#status()' })
+command! -bang PU          call s:pack_init() | call packager#clean() | call packager#update({ 'force_hooks': '<bang>' })
 
 " }}}
 " General: mappings {{{
