@@ -5,6 +5,7 @@
   "diagnostic.enable": false,
   "signature.hideOnTextChange": true,
   "signature.enable": false,
+  "jedi.markupKindPreferred": "plaintext",
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "list.normalMappings": {
