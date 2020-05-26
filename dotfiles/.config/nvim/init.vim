@@ -212,7 +212,7 @@ function! s:default_key_mappings()
   inoremap <silent> <expr> <c-space> coc#refresh()
   nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
   nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
-  imap     <silent>        <C-l> <Plug>(coc-snippets-expand)
+  imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
   nnoremap <silent>        <leader>a <cmd>CocDiagnosticToggle<CR>
   nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
