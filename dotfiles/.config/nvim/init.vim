@@ -526,6 +526,14 @@ augroup custom_coc
         \ ['[', ']'],
         \ ['{', '}'],
         \ ]
+  autocmd FileType python let b:coc_pairs = [
+        \ ['(', ')'],
+        \ ['[', ']'],
+        \ ['{', '}'],
+        \ ['<', '>'],
+        \ ['"', '"'],
+        \ ["'", "'"],
+        \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
