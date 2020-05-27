@@ -466,8 +466,8 @@ function! s:show_documentation()
   endif
 endfunction
 
-let g:coc_snippet_next = '<C-l>'
-let g:coc_snippet_prev = '<C-h>'
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
 let g:coc_start_at_startup = 1
 let g:coc_filetype_map = {
       \ 'python.jinja2': 'python',
