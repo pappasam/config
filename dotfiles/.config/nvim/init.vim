@@ -508,32 +508,13 @@ function! s:autocmd_custom_coc()
   endif
   augroup custom_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
 endfunction
 
 augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:coc_init()
-  autocmd FileType terraform let b:coc_pairs = [
-        \ ['(', ')'],
-        \ ['[', ']'],
-        \ ['{', '}'],
-        \ ['<', '>'],
-        \ ['"', '"'],
-        \ ]
-  autocmd FileType make let b:coc_pairs = [
-        \ ['(', ')'],
-        \ ['[', ']'],
-        \ ['{', '}'],
-        \ ]
-  autocmd FileType python let b:coc_pairs = [
-        \ ['(', ')'],
-        \ ['[', ']'],
-        \ ['{', '}'],
-        \ ['<', '>'],
-        \ ['"', '"'],
-        \ ["'", "'"],
-        \ ]
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
