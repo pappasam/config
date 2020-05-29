@@ -2,7 +2,7 @@
   "coc.preferences.extensionUpdateCheck": "never",
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
-  "diagnostic.enable": false,
+  "diagnostic.enable": true,
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "jedi.markupKindPreferred": "plaintext",

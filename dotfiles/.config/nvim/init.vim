@@ -214,7 +214,7 @@ function! s:default_key_mappings()
   nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  nnoremap <silent>        <leader>a <cmd>CocDiagnosticToggle<CR>
+  nnoremap                 <leader>a <cmd>CocDiagnosticToggle<CR>
   nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
   nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
 
@@ -476,30 +476,27 @@ let g:coc_filetype_map = {
       \ 'yaml.docker-compose': 'yaml',
       \ }
 
-" Customization:
 function! s:coc_diagnostic_disable()
-  call coc#config('diagnostic.enable', v:false)
-  let g:coc_custom_diagnostic_enabled = v:false
-  silent CocRestart
-  echom 'Disabled: Coc Diagnostics'
+  let b:coc_diagnostic_disable = 1
+  silent call coc#util#clear_signs()
+  silent call clearmatches()
+  silent call nvim_buf_clear_namespace(bufnr('%'), -1, 0, -1)
 endfunction
 
 function! s:coc_diagnostic_enable()
-  call coc#config('diagnostic.enable', v:true)
-  let g:coc_custom_diagnostic_enabled = v:true
-  echom 'Enabled: Coc Diagnostics'
-endfunction
-
-function! s:coc_diagnostic_toggle()
-  if g:coc_custom_diagnostic_enabled == v:true
-    call s:coc_diagnostic_disable()
-  else
-    call s:coc_diagnostic_enable()
+  if exists('b:coc_diagnostic_disable')
+    unlet b:coc_diagnostic_disable
   endif
 endfunction
 
-function! s:coc_init()
-  let g:coc_custom_diagnostic_enabled = v:false
+function! s:coc_diagnostic_toggle()
+  if get(b:, 'coc_diagnostic_disable') == 1
+    call s:coc_diagnostic_enable()
+    echo 'Coc: diagnostics enabled'
+  else
+    call s:coc_diagnostic_disable()
+    echo 'Coc: diagnostics disabled'
+  endif
 endfunction
 
 function! s:autocmd_custom_coc()
@@ -507,6 +504,7 @@ function! s:autocmd_custom_coc()
     return
   endif
   augroup custom_coc
+    autocmd FileType * call s:coc_diagnostic_disable()
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
@@ -514,14 +512,12 @@ endfunction
 
 augroup custom_coc
   autocmd!
-  autocmd VimEnter * call s:coc_init()
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
+  autocmd VimEnter * let b:coc_diagnostic_disable = 1
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
-command! CocDiagnosticEnable call s:coc_diagnostic_enable()
-command! CocDiagnosticDisable call s:coc_diagnostic_disable()
 
 " }}}
 " General: options {{{
