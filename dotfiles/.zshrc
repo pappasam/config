@@ -854,6 +854,7 @@ function pydev-install() {  ## Install default python dependencies
 
 function pyglobal-install() {  ## Install global Python applications
   local for_pipx=(
+    awscli
     black
     bpython
     cookiecutter
