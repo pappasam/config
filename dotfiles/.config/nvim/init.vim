@@ -357,9 +357,6 @@ function! s:default_key_mappings()
   nmap gx <Plug>(openbrowser-smart-search)
   vmap gx <Plug>(openbrowser-smart-search)
 
-  " Run Or Build:
-  nnoremap <leader><leader>r <cmd>Run<CR>
-
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
 
@@ -1224,58 +1221,6 @@ function! QStart()
   endif
   return 'q'.s:qreg
 endfunction
-
-" }}}
-" General: language builder & runner {{{
-
-let s:language_builders = {
-      \ 'rust': 'rustc %',
-      \ 'go': 'go build %',
-      \ }
-
-let s:language_runners = {
-      \ 'rust': '%:p:r',
-      \ 'go': 'go run %',
-      \ 'python': 'python %',
-      \ }
-
-function! s:code_term_cmd(str_command)
-  silent only
-  write
-  if &columns >= 160
-    vsplit
-  else
-    belowright split
-  endif
-  execute 'terminal ' . a:str_command
-  nnoremap <buffer> q :bd!<CR>
-  cnoremap <buffer> q bd!
-  wincmd w
-endfunction
-
-" Build source code
-function! s:code_build()
-  if !has_key(s:language_builders, &filetype)
-    echo 'Build not configured for filetype "' . &filetype . '"'
-    return
-  endif
-  call s:code_term_cmd(s:language_builders[&filetype])
-endfunction
-
-" Run source code
-function! s:code_run()
-  let filepath = expand('%:p')
-  if executable(filepath) == 1
-    call s:code_term_cmd(filepath)
-  elseif !has_key(s:language_runners, &filetype)
-    echo 'Run not configured for filetype "' . &filetype . '"'
-  else
-    call s:code_term_cmd(s:language_runners[&filetype])
-  endif
-endfunction
-
-command! Build call s:code_build()
-command! Run call s:code_run()
 
 " }}}
 " General: command abbreviations {{{
