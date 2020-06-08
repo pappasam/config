@@ -488,6 +488,8 @@ endfunction
 function! s:coc_diagnostic_enable()
   if exists('b:coc_diagnostic_disable')
     unlet b:coc_diagnostic_disable
+    " below line necessary to get diagnostics to run fully again
+    silent edit
   endif
 endfunction
 
