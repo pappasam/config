@@ -95,9 +95,10 @@
       "args": ["--stdio"]
     },
     "terraform": {
-      "command": "terraform-lsp",
+      "command": "terraform-ls",
       "filetypes": ["terraform"],
-      "initializationOptions": {}
+      "rootPatterns": ["Makefile", ".git"],
+      "args": ["serve"]
     },
     "cobol": {
       "command": "cobol-language-server",
