@@ -858,6 +858,7 @@ function pyglobal-install() {  ## Install global Python applications
     black
     bpython
     cookiecutter
+    docformatter
     docker-compose
     isort
     jedi-language-server
