@@ -506,7 +506,6 @@ function! s:autocmd_custom_coc()
     return
   endif
   augroup custom_coc
-    autocmd FileType * call s:coc_diagnostic_disable()
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
@@ -516,7 +515,6 @@ augroup custom_coc
   autocmd!
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
-  autocmd VimEnter * let b:coc_diagnostic_disable = 1
 augroup end
 
 command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
