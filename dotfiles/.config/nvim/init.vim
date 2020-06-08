@@ -10,7 +10,7 @@ function s:pack_init() abort
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:neoclide/coc.nvim.git', {'do': 'yarn install && yarn build'})
   for coc_package in [
-        \ 'git@github.com:coc-extensions/coc-svelte.git',
+        \ 'git@github.com:davidroeca/coc-svelte-language-tools.git',
         \ 'git@github.com:fannheyward/coc-markdownlint.git',
         \ 'git@github.com:fannheyward/coc-texlab.git',
         \ 'git@github.com:iamcco/coc-diagnostic.git',
@@ -195,7 +195,8 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
-  nmap     <silent>        <leader>sa <Plug>(coc-codeaction-line)
+  nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
+  vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
   xmap     <silent>        if <Plug>(coc-funcobj-i)
   xmap     <silent>        af <Plug>(coc-funcobj-a)
   omap     <silent>        if <Plug>(coc-funcobj-i)
