@@ -94,11 +94,17 @@
       "filetypes": ["Dockerfile"],
       "args": ["--stdio"]
     },
-    "terraform": {
+    "terraform-ls": {
       "command": "terraform-ls",
       "filetypes": ["terraform"],
       "rootPatterns": ["Makefile", ".git"],
       "args": ["serve"]
+    },
+    "tflint": {
+      "command": "tflint",
+      "filetypes": ["terraform"],
+      "rootPatterns": ["Makefile", ".git"],
+      "args": ["--langserver"]
     },
     "cobol": {
       "command": "cobol-language-server",
