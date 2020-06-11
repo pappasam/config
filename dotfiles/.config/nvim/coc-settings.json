@@ -10,6 +10,7 @@
   "jedi.diagnostics.enable": false,
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
+  "java.enabled": false,
   "list.normalMappings": {
     "<C-v>": "action:vsplit",
     "<C-x>": "action:split",
