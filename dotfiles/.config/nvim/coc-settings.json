@@ -7,6 +7,7 @@
   "signature.enable": false,
   "jedi.markupKindPreferred": "plaintext",
   "jedi.jediSettings.autoImportModules": ["numpy"],
+  "jedi.diagnostics.enable": false,
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "list.normalMappings": {
