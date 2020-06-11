@@ -549,7 +549,6 @@ alias fn='nvim -u NONE'
 compdef _vim fn
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
-alias vplug='cd ~/.config/nvim/pack/packager/start'
 alias clubhouse='nvim -c "Clubhouse"'
 alias standup='nvim -c "Standup"'
 alias mentor='nvim -c "Mentor"'
@@ -662,6 +661,15 @@ function t() {
     tmux -2 attach -t $SESSION
   fi
 }
+
+# Go to a Neovim plugin
+function vplug() {
+  cd ~/.config/nvim/pack/packager/start/$1
+}
+_vplug_completion() {
+  _directories -W "$HOME/.config/nvim/pack/packager/start"
+}
+compdef _vplug_completion vplug
 
 # cd to the current git root
 function gr() {
