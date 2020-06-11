@@ -77,7 +77,7 @@
           "message": 4
         }
       ],
-      "rootPatterns": [".git", "pyproject.toml", "setup.py"],
+      "rootPatterns": ["pyproject.toml", "setup.py", ".git"],
       "securities": {
         "informational": "hint",
         "refactor": "info",
