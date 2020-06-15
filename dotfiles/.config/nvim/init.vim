@@ -197,13 +197,9 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
   nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
   vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
-  xmap     <silent>        if <Plug>(coc-funcobj-i)
   xmap     <silent>        af <Plug>(coc-funcobj-a)
-  omap     <silent>        if <Plug>(coc-funcobj-i)
   omap     <silent>        af <Plug>(coc-funcobj-a)
-  xmap     <silent>        ic <Plug>(coc-classobj-i)
   xmap     <silent>        ac <Plug>(coc-classobj-a)
-  omap     <silent>        ic <Plug>(coc-classobj-i)
   omap     <silent>        ac <Plug>(coc-classobj-a)
   nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
   nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
