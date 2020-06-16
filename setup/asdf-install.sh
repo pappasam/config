@@ -29,3 +29,8 @@ asdf_setup rust 1.43.1
 asdf_setup tmux 3.1b
 asdf_setup yarn 1.22.4
 asdf_setup github-cli 0.9.0
+
+# kubernetes
+asdf_setup minikube 1.11.0
+asdf_setup kubectl 1.19.0-beta.2
+asdf_setup skaffold 1.11.0
