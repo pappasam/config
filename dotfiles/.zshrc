@@ -1018,9 +1018,9 @@ function poetry-init() {
     return 1
   fi
   poetry init --no-interaction &> /dev/null
-  sed -i '1s/^/[tool.black]\nline-length = 79\n\n/' pyproject.toml
+  cat-pyproject >> pyproject.toml
+  toml-sort --in-place pyproject.toml
   touch README.md
-  echo "Python poetry project initialized!"
 }
 
 # Create New Python Repo
@@ -1041,11 +1041,9 @@ function pynew() {
   mkinstance
   ve
   cat > main.py <<EOL
-#!/usr/bin/env python
 """The main module"""
 
 EOL
-  chmod +x main.py
 }
 
 # Profiling neovim
@@ -1221,6 +1219,13 @@ function yamltojson() {
   cat $1 | python -W ignore -c "$pycmd"
 }
 compdef '_files -g "*.(yml|yaml)"' yamltojson
+
+# }}}
+# General: cat functions {{{
+
+function cat-pyproject() {
+  cat "$HOME/dotfiles/cat-scripts/pyproject-top.toml"
+}
 
 # }}}
 # General: executed commands {{{
