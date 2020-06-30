@@ -212,7 +212,7 @@ function! s:default_key_mappings()
   nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  nnoremap                 <leader>a <cmd>call CocActionAsync('diagnosticToggle')<CR>
+  nnoremap                 <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
   nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
   nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
 
@@ -347,9 +347,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <C-b> <cmd>call <SID>fzf_buffers_avoid_defx()<CR>
   nnoremap          <C-n> yiw:Rg <C-r>"<CR>
   vnoremap          <C-n> y:Rg <C-r>"<CR>
-
-  " DeleteHiddenBuffers: shortcut to make this easier
-  nnoremap <leader>d <cmd>DeleteInactiveBuffers<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <cmd>FiletypeFormat<cr>
