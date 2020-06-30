@@ -212,7 +212,7 @@ function! s:default_key_mappings()
   nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  nnoremap                 <leader>a <cmd>CocDiagnosticToggle<CR>
+  nnoremap                 <leader>a <cmd>call CocActionAsync('diagnosticToggle')<CR>
   nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
   nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
 
@@ -289,6 +289,9 @@ function! s:default_key_mappings()
         \ -ignored-files=`g:defx_ignored_files`
         \ -split=vertical
         \ -toggle
+        \ -floating-preview
+        \ -vertical-preview
+        \ -preview-height=50
         \ -winwidth=31
         \ <CR>
   nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
@@ -298,6 +301,9 @@ function! s:default_key_mappings()
         \ -search=`expand('%:p')`
         \ -ignored-files=`g:defx_ignored_files`
         \ -split=vertical
+        \ -floating-preview
+        \ -vertical-preview
+        \ -preview-height=50
         \ -winwidth=31
         \ <CR>
   nnoremap <silent> <space>l <cmd>TagbarToggle <CR>
@@ -471,31 +477,6 @@ let g:coc_filetype_map = {
       \ 'yaml.docker-compose': 'yaml',
       \ }
 
-function! s:coc_diagnostic_disable()
-  let b:coc_diagnostic_disable = 1
-  silent call coc#util#clear_signs()
-  silent call clearmatches()
-  silent call nvim_buf_clear_namespace(bufnr('%'), -1, 0, -1)
-endfunction
-
-function! s:coc_diagnostic_enable()
-  if exists('b:coc_diagnostic_disable')
-    unlet b:coc_diagnostic_disable
-    " below line necessary to get diagnostics to run fully again
-    silent edit
-  endif
-endfunction
-
-function! s:coc_diagnostic_toggle()
-  if get(b:, 'coc_diagnostic_disable') == 1
-    call s:coc_diagnostic_enable()
-    echo 'Coc: diagnostics enabled'
-  else
-    call s:coc_diagnostic_disable()
-    echo 'Coc: diagnostics disabled'
-  endif
-endfunction
-
 function! s:autocmd_custom_coc()
   if !exists("g:did_coc_loaded")
     return
@@ -511,8 +492,6 @@ augroup custom_coc
   autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
-
-command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
 
 " }}}
 " General: options {{{
@@ -1547,7 +1526,7 @@ let g:custom_defx_mappings = [
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
       \ ['O             ', "defx#do_action('open_tree', 'recursive:3')"],
-      \ ['P             ', "defx#do_action('open', 'pedit')"],
+      \ ['P             ', "defx#do_action('preview')"],
       \ ['a             ', "defx#do_action('toggle_select')"],
       \ ['cc            ', "defx#do_action('copy')"],
       \ ['cd            ', "defx#do_action('change_vim_cwd')"],
