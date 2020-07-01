@@ -188,7 +188,7 @@ function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
-  nnoremap <silent>        <C-K> <cmd>call <SID>show_documentation()<CR>
+  nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
   nnoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
   inoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
