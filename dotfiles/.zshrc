@@ -870,6 +870,8 @@ function pyglobal-install() {  ## Install global Python applications
     docker-compose
     isort
     jedi-language-server
+    jupyterlab
+    jupytext
     pre-commit
     restview
     toml-sort

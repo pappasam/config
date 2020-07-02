@@ -129,6 +129,9 @@ function s:pack_init() abort
   " Syntax Theme:
   call packager#add('git@github.com:NLKNguyen/papercolor-theme')
 
+  " Jupyter Integration:
+  call packager#add('git@github.com:goerz/jupytext.vim.git')
+
   " Syntax Highlighting:
   call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
   call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
@@ -160,7 +163,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:neovimhaskell/haskell-vim')
   call packager#add('git@github.com:othree/html5.vim')
   call packager#add('git@github.com:pangloss/vim-javascript')
-  call packager#add('git@github.com:pappasam/plantuml-syntax')
+  call packager#add('git@github.com:aklt/plantuml-syntax.git')
   call packager#add('git@github.com:pearofducks/ansible-vim')
   call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
   call packager#add('git@github.com:plasticboy/vim-markdown')
