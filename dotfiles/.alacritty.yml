@@ -22,6 +22,7 @@ window:
   dimensions:
     columns: 80
     lines: 24
+  dynamic_title: true
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -123,7 +124,7 @@ colors:
     white:   '0xFFFFFF'
 # color_end
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -153,7 +154,6 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-dynamic_title: true
 
 # Live config reload
 live_config_reload: true
