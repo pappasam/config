@@ -605,6 +605,24 @@ augroup custom_incsearch_highlight
 augroup end
 
 " }}}
+" General: alacritty callback for dynamic terminal color change {{{
+
+function! s:alacritty_set_background()
+  let g:alacritty_background = system('alacritty-which-colorscheme')
+  if !v:shell_error
+    let &background = g:alacritty_background
+  else
+    echom 'Error calling "alacritty-which-colorscheme"'
+  endif
+endfunction
+
+call s:alacritty_set_background()
+call jobstart(
+      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
+      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
+      \ )
+
+" }}}
 " General: syntax and colorscheme {{{
 
 " Redraw Window: whenever a window regains focus
@@ -989,24 +1007,6 @@ augroup custom_fix_whitespace_save
   autocmd!
   autocmd BufWritePre * TrimWhitespace
 augroup end
-
-" }}}
-" General: alacritty callback for dynamic terminal color change {{{
-
-function! s:alacritty_set_background()
-  let g:alacritty_background = system('alacritty-which-colorscheme')
-  if !v:shell_error
-    let &background = g:alacritty_background
-  else
-    echom 'Error calling "alacritty-which-colorscheme"'
-  endif
-endfunction
-
-call s:alacritty_set_background()
-call jobstart(
-      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
-      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
-      \ )
 
 " }}}
 " General: resize window {{{
