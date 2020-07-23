@@ -607,6 +607,12 @@ augroup end
 " }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
+" set environment variables based on light or dark
+function s:set_env_from_background()
+  let $BAT_THEME = &background == 'light' ?
+        \ 'Monokai Extended Light' : 'Monokai Extended'
+endfunction
+
 function! s:alacritty_set_background()
   let g:alacritty_background = system('alacritty-which-colorscheme')
   if !v:shell_error
@@ -614,6 +620,7 @@ function! s:alacritty_set_background()
   else
     echom 'Error calling "alacritty-which-colorscheme"'
   endif
+  call s:set_env_from_background()
 endfunction
 
 call s:alacritty_set_background()
@@ -1595,6 +1602,22 @@ augroup end
 " <C-t> or ?
 "   - Toggle Preview
 " <C-x>, <C-v>, <C-t>: open in split, vert, and tab
+
+let g:fzf_colors = {
+      \ 'fg': ['fg', 'Normal'],
+      \ 'bg': ['bg', 'Normal'],
+      \ 'hl': ['fg', 'Comment'],
+      \ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+': ['fg', 'Statement'],
+      \ 'info': ['fg', 'PreProc'],
+      \ 'border': ['fg', 'Ignore'],
+      \ 'prompt': ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker': ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header': ['fg', 'Comment'],
+      \ }
 
 function! s:fzf_files_avoid_defx()
   if (expand('%') =~# 'defx' && winnr('$') > 1)
