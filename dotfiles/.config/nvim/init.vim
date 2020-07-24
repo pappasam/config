@@ -285,7 +285,7 @@ function! s:default_key_mappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j <cmd>Defx
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type:size:time
+        \ -columns=mark:git:indent:icons:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
@@ -299,7 +299,7 @@ function! s:default_key_mappings()
         \ <CR>
   nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type:size:time
+        \ -columns=mark:git:indent:icons:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -ignored-files=`g:defx_ignored_files`
@@ -1552,6 +1552,16 @@ let g:custom_defx_mappings = [
       \ ['~             ', "defx#do_action('cd')"],
       \ ]
 
+function! s:autocmd_custom_defx()
+  if !exists('g:loaded_defx')
+    return
+  endif
+  call defx#custom#column('filename', {
+        \ 'min_width': 0,
+        \ 'max_width': 100,
+        \ })
+endfunction
+
 function! s:open_defx_if_directory()
   if !exists('g:loaded_defx')
     echom 'Defx not installed, skipping...'
@@ -1584,6 +1594,7 @@ endfunction
 
 augroup custom_defx
   autocmd!
+  autocmd VimEnter * call s:autocmd_custom_defx()
   autocmd BufEnter * call s:open_defx_if_directory()
   autocmd FileType defx setlocal cursorline
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
