@@ -1557,7 +1557,7 @@ function! s:autocmd_custom_defx()
     return
   endif
   call defx#custom#column('filename', {
-        \ 'min_width': 0,
+        \ 'min_width': 100,
         \ 'max_width': 100,
         \ })
 endfunction
