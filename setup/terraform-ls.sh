@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="0.3.2"
+VERSION="0.5.4"
 DOWNLOAD_FILE="$HOME/Downloads/terraform.zip"
 
 curl -o "$DOWNLOAD_FILE" \
