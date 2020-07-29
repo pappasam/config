@@ -545,7 +545,7 @@ alias restart-xserver='sudo systemctl restart display-manager'
 # Neovim
 alias f='nvim'
 compdef _vim f
-alias fn='nvim -u NONE'
+alias fn='nvim -u NORC --noplugin'
 compdef _vim fn
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
