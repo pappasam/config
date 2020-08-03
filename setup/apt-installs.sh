@@ -43,9 +43,11 @@ sudo apt install -y \
   fortune \
   gettext \
   gnupg-agent \
+  graphicsmagick \
   graphviz \
   gthumb \
   htop \
+  imagemagick \
   libbz2-dev \
   libclang-6.0-dev \
   libcurl4-openssl-dev \
@@ -58,6 +60,8 @@ sudo apt install -y \
   libldap2-dev \
   libldb-dev \
   liblzma-dev \
+  libmagick++-dev \
+  libmapnik-dev \
   libmysqlclient-dev \
   libncurses-dev \
   libncurses5 \
@@ -72,6 +76,7 @@ sudo apt install -y \
   libsqlite3-dev \
   libssl-dev \
   libtool \
+  libvips-tools \
   libx11-doc \
   libxcb-xfixes0-dev \
   libxml2-dev \
