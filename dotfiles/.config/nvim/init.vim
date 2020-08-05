@@ -334,7 +334,7 @@ function! s:default_key_mappings()
 
   " Sandwich: below mappings address the issue raised here:
   " https://github.com/machakann/vim-sandwich/issues/62
-  xmap s  <Nop> xmap ib <Plug>(textobj-sandwich-auto-i)
+  xmap s  <Nop>
   omap s  <Nop>
   xmap ib <Plug>(textobj-sandwich-auto-i)
   omap ib <Plug>(textobj-sandwich-auto-i)
