@@ -866,12 +866,10 @@ function pyglobal-install() {  ## Install global Python applications
   local for_pipx=(
     awscli
     black
-    bpython
     cookiecutter
     docformatter
     docker-compose
     isort
-    jedi-language-server
     jupyterlab
     jupytext
     pre-commit
@@ -880,8 +878,7 @@ function pyglobal-install() {  ## Install global Python applications
   )
   if command -v pipx > /dev/null; then
     for arg in $for_pipx; do
-      pipx install "$arg"
-      pipx upgrade "$arg"
+      pipx uninstall "$arg" && pipx install "$arg"
     done
   else
     echo 'pipx not installed. Install with "pip install pipx"'
