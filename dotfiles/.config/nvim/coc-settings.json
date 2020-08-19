@@ -29,7 +29,9 @@
     "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml"
   },
   "diagnostic-languageserver.filetypes": {
-    "python": "pylint"
+    "python": "pylint",
+    "markdown": "write-good",
+    "rst": "write-good",
   },
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
@@ -62,6 +64,7 @@
     "pylint": {
       "sourceName": "pylint",
       "command": "pylint",
+      "debounce": 100,
       "args": [
         "--output-format",
         "text",
@@ -92,22 +95,22 @@
       "offsetColumn": 1,
       "formatLines": 1
     },
-    "languagetool": {
-      "command": "languagetool",
-      "debounce": 200,
-      "args": ["-"],
+    "write-good": {
+      "sourceName": "write-good",
+      "command": "write-good",
+      "debounce": 100,
+      "args": ["--text=%text"],
       "offsetLine": 0,
-      "offsetColumn": 0,
-      "sourceName": "languagetool",
-      "formatLines": 2,
+      "offsetColumn": 1,
+      "formatLines": 1,
       "formatPattern": [
-        "^\\d+?\\.\\)\\s+Line\\s+(\\d+),\\s+column\\s+(\\d+),\\s+([^\\n]+)\nMessage:\\s+(.*)(\\r|\\n)*$",
+        "(.*)\\s+on\\s+line\\s+(\\d+)\\s+at\\s+column\\s+(\\d+)\\s*$",
         {
-          "line": 1,
-          "column": 2,
-          "message": [4, 3]
+          "line": 2,
+          "column": 3,
+          "message": 1
         }
-      ],
+      ]
     }
   },
   "languageserver": {
