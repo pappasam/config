@@ -265,15 +265,15 @@ cd ~/bin
 
 # cargo libraries
 
-rustup component add rls
-rustup component add rust-src
+# rustup component add rls
+# rustup component add rust-src
 
-cargo install \
-  bat \
-  fd-find \
-  ripgrep \
-  cargo-deb \
-  cargo-edit
+# cargo install \
+#   bat \
+#   fd-find \
+#   ripgrep \
+#   cargo-deb \
+#   cargo-edit
 
 #######################################################################
 # Go programs

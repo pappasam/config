@@ -821,6 +821,8 @@ function cargodoc() {  # arg1: packagename
 }
 
 function rustdev-install() {
+  rustup component add rls
+  rustup component add rust-src
   cargo install bat
   cargo install fd-find
   cargo install ripgrep
