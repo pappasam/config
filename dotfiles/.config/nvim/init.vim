@@ -477,6 +477,14 @@ let g:coc_filetype_map = {
       \ 'yaml.docker-compose': 'yaml',
       \ }
 
+" Coc Sources: from https://github.com/neoclide/coc-sources
+let g:coc_global_extensions = [
+      \ 'coc-dictionary',
+      \ 'coc-emoji',
+      \ 'coc-syntax',
+      \ 'coc-word',
+      \ ]
+
 function! s:autocmd_custom_coc()
   if !exists("g:did_coc_loaded")
     return

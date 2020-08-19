@@ -1,5 +1,8 @@
 {
   "coc.preferences.extensionUpdateCheck": "never",
+  "coc.source.emoji.filetypes": ["markdown", "rst"],
+  "coc.source.dictionary.filetypes": ["markdown", "rst"],
+  "coc.source.word.filetypes": ["markdown", "rst"],
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": true,
@@ -88,6 +91,23 @@
       },
       "offsetColumn": 1,
       "formatLines": 1
+    },
+    "languagetool": {
+      "command": "languagetool",
+      "debounce": 200,
+      "args": ["-"],
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "languagetool",
+      "formatLines": 2,
+      "formatPattern": [
+        "^\\d+?\\.\\)\\s+Line\\s+(\\d+),\\s+column\\s+(\\d+),\\s+([^\\n]+)\nMessage:\\s+(.*)(\\r|\\n)*$",
+        {
+          "line": 1,
+          "column": 2,
+          "message": [4, 3]
+        }
+      ],
     }
   },
   "languageserver": {
