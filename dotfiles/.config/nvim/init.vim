@@ -761,7 +761,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.asm set filetype=nasm
   autocmd BufEnter *.handlebars set filetype=html
   autocmd BufEnter *.m,*.oct set filetype=octave
-  autocmd BufEnter *.jsx,*.js set filetype=javascript
+  autocmd BufEnter *.jsx,*.js,*.gs set filetype=javascript
   autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf set filetype=dosini
   autocmd BufEnter *.tsv set filetype=tsv
   autocmd BufEnter *.toml set filetype=toml
