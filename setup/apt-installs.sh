@@ -98,7 +98,6 @@ sudo apt install -y \
   re2c \
   screenkey \
   shellcheck \
-  snapd \
   software-properties-common \
   stow \
   texlive-full \
