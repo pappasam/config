@@ -26,12 +26,13 @@
   },
   "pairs.enableCharacters": ["(", "[", "{", "<", "\"", "'"],
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml"
+    "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml",
+    "https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json": "/*serverless.yml"
   },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
     "markdown": "write-good",
-    "rst": "write-good",
+    "rst": "write-good"
   },
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
