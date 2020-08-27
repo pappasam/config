@@ -700,10 +700,6 @@ augroup end
 
 " Cursorline: disable, then override if necessary
 highlight CursorLine cterm=NONE
-augroup custom_cursorline
-  autocmd!
-  autocmd FileType tagbar setlocal cursorline
-augroup end
 
 " *****************************************************************************
 " Papercolor: configuration
@@ -995,6 +991,14 @@ augroup custom_fold_settings
   autocmd FileType vim,tmux,bash,zsh,sh setlocal foldenable foldmethod=marker foldnestmax=1
   autocmd FileType markdown,rst setlocal nofoldenable
   autocmd FileType yaml setlocal nofoldenable foldmethod=indent foldnestmax=1
+augroup end
+
+" }}}
+" General: cursorline {{{
+
+augroup custom_cursorline
+  autocmd!
+  autocmd FileType tagbar,defx,qf setlocal cursorline
 augroup end
 
 " }}}
@@ -1604,7 +1608,6 @@ augroup custom_defx
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_defx()
   autocmd BufEnter * call s:open_defx_if_directory()
-  autocmd FileType defx setlocal cursorline
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 augroup end
 
