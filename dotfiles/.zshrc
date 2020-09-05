@@ -361,6 +361,9 @@ compctl -f -K _vault_complete vault
 # Add autocompletion path
 fpath+=~/.zfunc
 
+# Add autocompletion for aws-cli v2
+complete -C aws_completer aws
+
 # }}}
 # Z-shell: compdef testing {{{
 
@@ -864,7 +867,6 @@ function pydev-install() {  ## Install default python dependencies
 
 function pyglobal-install() {  ## Install global Python applications
   local for_pipx=(
-    awscli
     black
     cookiecutter
     docformatter
@@ -883,6 +885,16 @@ function pyglobal-install() {  ## Install global Python applications
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
+}
+
+function awscli-install() {  ## Install the latest version of the aws cli (v2)
+  pushd
+  cd "$HOME/Downloads"
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  ./aws/install --install-dir "$HOME/.local/aws-cli" --bin-dir "$HOME/bin" --update
+  rm -r aws
+  popd
 }
 
 function godev-install() {  ## Install default golang dependencies
