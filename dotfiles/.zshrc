@@ -765,6 +765,23 @@ function gitzip() {  # arg1: the git repository
 }
 compdef _directories gitzip
 
+function gb() {  # go to main branch, pull latest, delete current branch, prune
+  if [ $# -eq 0 ]; then
+    local branch_main="master"
+  else
+    local branch_main="$1"
+  fi
+  local branch_current="$(git branch --show-current)"
+  if [[ "$branch_main" == "$branch_current" ]]; then
+    echo "On main branch '$branch_main', exiting"
+    return 1
+  fi
+  git checkout "$branch_main" &&
+    git pull &&
+    git branch -d "$branch_current" &&
+    git remote prune origin
+}
+
 # Pipe man stuff to neovim
 function m() {
   man --location "$@" &> /dev/null
