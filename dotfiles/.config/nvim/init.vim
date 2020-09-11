@@ -501,6 +501,12 @@ augroup custom_coc
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
 
+augroup custom_coc_pairs
+  autocmd!
+  autocmd FileType html let b:coc_pairs_disabled = ['<']
+  autocmd FileType rust let b:coc_pairs_disabled = ["'"]
+augroup end
+
 " }}}
 " General: options {{{
 
