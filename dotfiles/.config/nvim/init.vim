@@ -1517,7 +1517,6 @@ let g:defx_ignored_files = join([
       \ '*.o',
       \ '*.out',
       \ '*.pdf',
-      \ '*.png',
       \ '*.pyc',
       \ '*.toc',
       \ '.*',
