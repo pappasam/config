@@ -120,11 +120,10 @@
       "filetypes": ["Dockerfile"],
       "args": ["--stdio"]
     },
-    "terraform-ls": {
-      "command": "terraform-ls",
+    "terraform-lsp": {
+      "command": "terraform-lsp",
       "filetypes": ["terraform"],
-      "rootPatterns": ["Makefile", ".git"],
-      "args": ["serve"]
+      "rootPatterns": ["Makefile", ".git"]
     },
     "tflint": {
       "command": "tflint",
