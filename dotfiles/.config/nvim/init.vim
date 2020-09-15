@@ -1900,6 +1900,7 @@ augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
   autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ javascript
+  autocmd FileType terraform setlocal keywordprg=:DD\ terraform
 augroup end
 
 " }}}
