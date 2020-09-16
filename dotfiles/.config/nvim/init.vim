@@ -1682,7 +1682,15 @@ let $FZF_DEFAULT_OPTS = '-m --bind '
       \ . g:fzf_preview_default_key_bindings . ' '
       \ . '--reverse '
       \ . '--prompt="> " '
-let g:fzf_layout = { 'window': 'botright 20new' }
+
+" Floating window
+let g:fzf_layout = { 'window': {
+      \ 'width': 0.9,
+      \ 'height': 0.6,
+      \ 'yoffset': 0.9,
+      \ 'highlight': 'Todo',
+      \ } }
+
 let g:fzf_action = {
       \ 'ctrl-o': 'edit',
       \ 'ctrl-t': 'tab split',
