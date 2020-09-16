@@ -758,6 +758,7 @@ call s:set_papercolor()
 augroup custom_filetype_recognition
   autocmd!
   autocmd BufEnter *.hql,*.q set filetype=hive
+  autocmd BufEnter .envrc set filetype=sh
   autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
   autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
   autocmd BufEnter *.asm set filetype=nasm
