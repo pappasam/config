@@ -1278,6 +1278,11 @@ if [[ -o interactive ]]; then
     source <(kubectl completion zsh)
   fi
 
+  # direnv
+  if [ $commands[direnv] ]; then
+    eval "$(direnv hook zsh)"
+  fi
+
   # Try activate virtual environment, don't worry about console output
   va &> /dev/null
 fi

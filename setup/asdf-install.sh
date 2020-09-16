@@ -30,6 +30,7 @@ asdf_setup tmux 3.1b
 asdf_setup yarn 1.22.4
 asdf_setup github-cli 0.9.0
 asdf_setup gohugo extended_0.74.3
+asdf_setup direnv 2.22.0
 
 # kubernetes
 asdf_setup minikube 1.11.0
