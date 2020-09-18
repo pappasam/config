@@ -35,7 +35,7 @@ function s:pack_init() abort
 
   " Tagbar:
   call packager#add('git@github.com:lvht/tagbar-markdown')
-  call packager#add('git@github.com:majutsushi/tagbar')
+  call packager#add('git@github.com:preservim/tagbar.git')
 
   " Tim Pope: general, uncategorizable tim pope plugins
   " Notes:
