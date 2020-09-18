@@ -37,6 +37,9 @@ function s:pack_init() abort
   call packager#add('git@github.com:lvht/tagbar-markdown')
   call packager#add('git@github.com:preservim/tagbar.git')
 
+  " LocationList:
+  call packager#add('git@github.com:elbeardmorez/vim-loclist-follow.git')
+
   " Tim Pope: general, uncategorizable tim pope plugins
   " Notes:
   "   * abolish: convert to snake cases
@@ -414,6 +417,9 @@ augroup end
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
+  " make gO behave like tagbar to man and help filetypes
+  " works in conjunction with vim-loclist-follow
+  autocmd FileType man,help nmap     <buffer> <silent> <space>l gO<C-w>L:vertical resize 37<cr><C-w><C-w><C-w><C-w>
   autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
   autocmd FileType man,help nnoremap <buffer> <expr>   d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr>   u &modifiable == 0 ? '<C-u>' : 'u'
@@ -2029,6 +2035,16 @@ let g:omni_syntax_use_iskeyword_numeric = v:false
 
 " CloseTags:
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx,*.jsx'
+
+" LocListFollow:
+let g:loclist_follow = 1
+let g:loclist_follow_modes = 'n'
+let g:loclist_follow_target = 'previous'
+
+augroup custom_loclistfollow
+  autocmd!
+  autocmd FileType man,help LoclistFollowToggle
+augroup end
 
 " }}}
 " Tidbits: helpful hints {{{
