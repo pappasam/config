@@ -690,6 +690,10 @@ function upgrade() {
   sudo apt upgrade -y
   sudo apt autoremove -y
   pushd
+  cd ~/dotfiles
+  git pull
+  popd
+  pushd
   cd ~/src/lib/alacritty
   git pull
   alacritty-install
