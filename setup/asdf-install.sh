@@ -34,6 +34,7 @@ asdf_setup postgres 13.0
 asdf_setup python 3.8.6
 asdf_setup ruby 2.6.5
 asdf_setup rust 1.43.1
+asdf_setup sqlite 3.33.0
 asdf_setup tmux 3.2-rc
 asdf_setup yarn 1.22.4
 
