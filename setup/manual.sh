@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Purpose: documents useful programs on system
-# System: Linux Mint 19.2
 # Instructions: execute each line individually
 # Notes:
 #   read document and type these commands yourself especially if you are using
@@ -9,55 +8,24 @@
 #   internet between now and your runtime.
 
 #######################################################################
-# Alternative package managers
-#######################################################################
-# apt: snapd
-
-#######################################################################
 # zshell
 #######################################################################
-# apt: zsh
-# without sudo (makes zsh default shell):
-
 chsh -s "$(which zsh)"
 
 #######################################################################
 # zplug
 #######################################################################
-
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 #######################################################################
-# Tmux - install from source to get latest version
+# tpm: install from source to get latest version
 #######################################################################
-
-# tpm: Tmux Plugin Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone git@github.com:tmux-plugins/tpm.git ~/.tmux/plugins/tpm
 
 #######################################################################
 # ASDF
 #######################################################################
-
-# apt: automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev
-# libxslt-dev libffi-dev libtool unixodbc-dev unzip curl
-
-# Download (verify version)
-
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
-
-# asdf-update: update to latest version
-# asdf reshim <plugin>: makes newly-installed executables available
-# Add all your plugins
-
-#######################################################################
-# Poetry
-#######################################################################
-
-curl -sSL \
-  https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py \
-  | python
-
-poetry self:update --preview
+git clone git@github.com:asdf-vm/asdf.git ~/.asdf --branch v0.7.4
 
 #######################################################################
 # Less
@@ -70,14 +38,7 @@ poetry self:update --preview
 #######################################################################
 # NeoVim
 #######################################################################
-# ppa: ppa:neovim-ppa/unstable
-# apt: neovim exuberant-ctags screenkey
-
-# screenkey: show key presses in the terminal
-
-# Install vim-packager (neovim, for me, references vim)
-
-git clone https://github.com/kristijanhusak/vim-packager \
+git clone git@github.com:kristijanhusak/vim-packager.git \
   ~/.vim/pack/packager/opt/vim-packager
 
 # for ctags, after asdf
