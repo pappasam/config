@@ -40,7 +40,7 @@ asdf_setup sqlite 3.33.0
 asdf_setup terraform-lsp 0.0.10
 asdf_setup tflint 0.20.2
 asdf_setup tfsec 0.27.0
-asdf_setup tmux 3.1
+asdf_setup tmux 3.2-rc
 asdf_setup yarn 1.22.4
 
 # kubernetes
