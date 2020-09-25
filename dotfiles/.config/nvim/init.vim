@@ -1528,7 +1528,7 @@ function! s:preview()
     " from plantuml-previewer.vim
     exec 'PlantumlOpen'
   else
-    echo 'Preview not supported for this filetype'
+    !gio open %:p
   endif
 endfunction
 
