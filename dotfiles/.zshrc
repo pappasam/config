@@ -898,6 +898,7 @@ function pyglobal-install() {  ## Install global Python applications
     pre-commit
     restview
     toml-sort
+    ueberzug
   )
   if command -v pipx > /dev/null; then
     for arg in $for_pipx; do
