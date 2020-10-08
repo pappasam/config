@@ -1642,6 +1642,7 @@ augroup custom_defx
   autocmd VimEnter * call s:autocmd_custom_defx()
   autocmd BufEnter * call s:open_defx_if_directory()
   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
+  autocmd FileType defx setlocal nonumber norelativenumber
 augroup end
 
 " }}}
