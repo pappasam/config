@@ -1936,7 +1936,7 @@ let g:vim_markdown_new_list_item_indent = v:false
 let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -q - | isort - | docformatter -',
+      \ 'python': 'black -q - | isort -q - | docformatter -',
       \ }
 
 " }}}
