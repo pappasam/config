@@ -33,9 +33,8 @@ function s:pack_init() abort
           \ })
   endfor
 
-  " Tagbar:
-  call packager#add('git@github.com:lvht/tagbar-markdown')
-  call packager#add('git@github.com:preservim/tagbar.git')
+  " Vista: Tagbar replacement extraordinaire
+  call packager#add('git@github.com:liuchengxu/vista.vim.git')
 
   " LocationList:
   call packager#add('git@github.com:elbeardmorez/vim-loclist-follow.git')
@@ -312,7 +311,8 @@ function! s:default_key_mappings()
         \ -preview-height=50
         \ -winwidth=31
         \ <CR>
-  nnoremap <silent> <space>l <cmd>TagbarToggle <CR>
+  nnoremap <silent> <space>l <cmd>Vista!!<CR>
+  nnoremap <silent> <space>L <cmd>Vista focus<CR>
   nnoremap <silent> <space>u <cmd>UndotreeToggle<CR>
 
   " Choosewin: (just like tmux)
@@ -417,7 +417,7 @@ augroup end
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  " make gO behave like tagbar to man and help filetypes
+  " make gO behave like vista to man and help filetypes
   " works in conjunction with vim-loclist-follow
   autocmd FileType man,help nmap     <buffer> <silent> <space>l gO<C-w>L:vertical resize 37<cr><C-w><C-w><C-w><C-w>
   autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
@@ -1011,7 +1011,7 @@ augroup end
 
 augroup custom_cursorline
   autocmd!
-  autocmd FileType tagbar,defx,qf setlocal cursorline
+  autocmd FileType defx,qf setlocal cursorline
 augroup end
 
 " }}}
@@ -1734,93 +1734,15 @@ command! -bang -nargs=* Rg
       \ <bang>0)
 
 " }}}
-" Package: tagbar {{{
+" Package: vista {{{
 
-let g:tagbar_map_showproto = '`'
-let g:tagbar_show_linenumbers = -1
-let g:tagbar_autofocus = v:true
-let g:tagbar_indent = 1
-let g:tagbar_sort = v:false  " order by order in sort file
-let g:tagbar_case_insensitive = v:true
-let g:tagbar_width = 37
-let g:tagbar_silent = v:true
-let g:tagbar_foldlevel = 0
-let g:tagbar_type_haskell = {
-      \ 'ctagsbin': 'hasktags',
-      \ 'ctagsargs': '-x -c -o-',
-      \ 'kinds': [
-      \   'm:modules:0:1',
-      \   'd:data: 0:1',
-      \   'd_gadt: data gadt:0:1',
-      \   't:type names:0:1',
-      \   'nt:new types:0:1',
-      \   'c:classes:0:1',
-      \   'cons:constructors:1:1',
-      \   'c_gadt:constructor gadt:1:1',
-      \   'c_a:constructor accessors:1:1',
-      \   'ft:function types:1:1',
-      \   'fi:function implementations:0:1',
-      \   'o:others:0:1',
-      \ ],
-      \ 'sro': '.',
-      \ 'kind2scope': {
-      \   'm': 'module',
-      \   'c': 'class',
-      \   'd': 'data',
-      \   't': 'type',
-      \ },
-      \ 'scope2kind': {
-      \   'module': 'm',
-      \   'class': 'c',
-      \   'data': 'd',
-      \   'type': 't',
-      \ },
-      \ }
-let g:tagbar_type_rst = {
-      \ 'ctagstype': 'rst',
-      \ 'ctagsbin' : '~/src/lib/rst2ctags/rst2ctags.py',
-      \ 'ctagsargs' : '-f - --sort=yes',
-      \ 'kinds' : [
-      \   's:sections',
-      \   'i:images',
-      \ ],
-      \ 'sro' : '|',
-      \ 'kind2scope' : {
-      \   's' : 'section',
-      \ },
-      \ 'sort': 0,
-      \ }
-let g:tagbar_type_typescript = {
-      \ 'ctagsbin' : 'tstags',
-      \ 'ctagsargs' : '-f-',
-      \ 'kinds': [
-      \   'e:enums:0:1',
-      \   'f:function:0:1',
-      \   't:typealias:0:1',
-      \   'M:Module:0:1',
-      \   'I:import:0:1',
-      \   'i:interface:0:1',
-      \   'C:class:0:1',
-      \   'm:method:0:1',
-      \   'p:property:0:1',
-      \   'v:variable:0:1',
-      \   'c:const:0:1',
-      \ ],
-      \ 'sort' : 0
-      \ }
-let g:tagbar_type_terraform = {
-      \ 'ctagstype' : 'terraform',
-      \ 'kinds' : [
-      \   'r:resource',
-      \   'd:data',
-      \   'v:variable',
-      \   'p:provider',
-      \   'o:output',
-      \   'm:module',
-      \   'f:tfvar'
-      \ ],
-      \ 'sort' : 1,
-      \ }
+let g:vista_sidebar_width = 37
+let g:vista_fold_toggle_icons = ['▼', '▶']
+let g:vista_default_executive = 'coc'
+let g:vista_executive_for = {}
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_keep_fzf_colors = 1
+let g:vista_finder_alternative_executives = []
 
 " }}}
 " Package: vim-tex {{{
