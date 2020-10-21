@@ -461,6 +461,11 @@ augroup custom_init_vim
   autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <cmd>call <SID>gx_vimrc_open_plugin()<CR>
 augroup end
 
+augroup custom_vista
+  autocmd!
+  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <cmd>call vista#cursor#FoldOrJump()<CR>
+augroup end
+
 " }}}
 " Package: coc.nvim {{{
 
