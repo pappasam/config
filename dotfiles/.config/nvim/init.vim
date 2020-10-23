@@ -155,7 +155,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:hashivim/vim-vagrant')
   call packager#add('git@github.com:jparise/vim-graphql')
   call packager#add('git@github.com:killphi/vim-ebnf')
-  call packager#add('git@github.com:leafgarland/typescript-vim')
   call packager#add('git@github.com:lervag/vimtex')
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
   call packager#add('git@github.com:martinda/Jenkinsfile-vim-syntax')
@@ -167,7 +166,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:pangloss/vim-javascript')
   call packager#add('git@github.com:aklt/plantuml-syntax.git')
   call packager#add('git@github.com:pearofducks/ansible-vim')
-  call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
   call packager#add('git@github.com:plasticboy/vim-markdown')
   call packager#add('git@github.com:raimon49/requirements.txt.vim')
   call packager#add('git@github.com:ron-rs/ron.vim')
@@ -663,12 +661,6 @@ augroup custom_redraw_on_refocus
   autocmd FocusGained * redraw!
 augroup end
 
-" Typescript: fixes
-augroup custom_syntax_typescript
-  autocmd!
-  autocmd ColorScheme * highlight link typescriptExceptions Exception
-augroup end
-
 " Vim Help: fixes
 augroup custom_syntax_vimhelp
   autocmd!
@@ -923,7 +915,6 @@ augroup custom_comment_config
   autocmd FileType tmux,python setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType typescript.tsx,typescript setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup end
 
@@ -1876,7 +1867,7 @@ let g:vim_keywordprg_commands = {
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
-  autocmd FileType typescript,typescript.tsx setlocal keywordprg=:DD\ javascript
+  autocmd FileType typescript,typescriptreact setlocal keywordprg=:DD\ javascript
   autocmd FileType terraform setlocal keywordprg=:DD\ terraform
 augroup end
 
@@ -1885,10 +1876,6 @@ augroup end
 
 " Python: disable python 2 support
 let g:loaded_python_provider = v:true
-
-" TypeScript:
-let g:typescript_indent_disable = v:false
-let g:vim_jsx_pretty_disable_tsx = v:true
 
 " Netrw: disable completely
 let g:loaded_netrw= v:true
