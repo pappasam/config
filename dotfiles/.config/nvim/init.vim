@@ -115,7 +115,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:moiatgit/vim-rst-sections')
 
   " Previewers:
-  call packager#add('git@github.com:iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install --frozen-lockfile'})
+  call packager#add('git@github.com:iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call packager#add('git@github.com:tyru/open-browser.vim')
   call packager#add('git@github.com:weirongxu/plantuml-previewer.vim')
 
