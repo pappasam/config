@@ -36,6 +36,9 @@ function s:pack_init() abort
   " Vista: Tagbar replacement extraordinaire
   call packager#add('git@github.com:liuchengxu/vista.vim.git')
 
+  " Colors: See CSS colors
+  call packager#add('git@github.com:chrisbra/Colorizer.git')
+
   " LocationList:
   call packager#add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
@@ -514,6 +517,7 @@ augroup custom_coc_pairs
   autocmd!
   autocmd FileType html let b:coc_pairs_disabled = ['<']
   autocmd FileType rust let b:coc_pairs_disabled = ["'"]
+  autocmd FileType vim let b:coc_pairs_disabled = ['"']
 augroup end
 
 " }}}
