@@ -133,6 +133,7 @@ function s:pack_init() abort
 
   " Syntax Theme:
   call packager#add('git@github.com:NLKNguyen/papercolor-theme')
+  call packager#add('git@github.com:pappasam/papercolor-theme-slim.git')
 
   " Jupyter Integration:
   call packager#add('git@github.com:goerz/jupytext.vim.git')
@@ -665,37 +666,6 @@ augroup custom_redraw_on_refocus
   autocmd FocusGained * redraw!
 augroup end
 
-" Vim Help: fixes
-augroup custom_syntax_vimhelp
-  autocmd!
-  autocmd ColorScheme * highlight clear helpStar
-  autocmd ColorScheme * highlight clear helpIgnore
-  autocmd ColorScheme * highlight clear helpBacktick
-  autocmd ColorScheme * highlight helpStar guifg=cyan1
-  autocmd ColorScheme * highlight helpIgnore guifg=cyan1
-  autocmd ColorScheme * highlight helpBacktick guifg=cyan1
-augroup end
-
-" QuickScope: choose primary and secondary colors
-augroup custom_syntax_quickscope
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg=LimeGreen ctermfg=Green gui=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg=turquoise1 ctermfg=Cyan gui=underline
-augroup end
-
-" Spell Checking:
-augroup custom_syntax_spelling
-  autocmd!
-  autocmd ColorScheme * highlight clear SpellBad
-  autocmd ColorScheme * highlight clear SpellRare
-  autocmd ColorScheme * highlight clear SpellCap
-  autocmd ColorScheme * highlight clear SpellLocal
-  autocmd ColorScheme * highlight SpellBad ctermfg=DarkRed guifg=red1 gui=underline,italic
-  autocmd ColorScheme * highlight SpellRare ctermfg=DarkGreen guifg=ForestGreen gui=underline,italic
-  autocmd ColorScheme * highlight SpellCap ctermfg=Yellow guifg=yellow gui=underline,italic
-  autocmd ColorScheme * highlight SpellLocal ctermfg=DarkMagenta guifg=magenta gui=underline,italic
-augroup end
-
 " Trailing Whitespace: (initial highlight below doesn't matter)
 highlight EOLWS ctermbg=DarkCyan
 match EOLWS /\s\+$/
@@ -714,50 +684,16 @@ augroup end
 " Cursorline: disable, then override if necessary
 highlight CursorLine cterm=NONE
 
-" *****************************************************************************
-" Papercolor: configuration
-" See: ~/.config/nvim/pack/packager/start/papercolor-theme/DESIGN.md
-" *****************************************************************************
-let g:PaperColor_Theme_Options = {}
-let g:PaperColor_Theme_Options.theme = {}
-let g:PaperColor_Theme_Options.theme.default = {
-      \ 'allow_bold': v:true,
-      \ 'allow_italic': v:true,
-      \ }
-let g:PaperColor_Theme_Options.theme['default.dark'] = {}
-let g:PaperColor_Theme_Options.theme['default.dark'].override = {
-      \ 'folded_bg' : ['gray22', '0'],
-      \ 'folded_fg' : ['gray69', '6'],
-      \ 'visual_fg' : ['gray12', '0'],
-      \ 'visual_bg' : ['gray', '6'],
-      \ }
-let g:PaperColor_Theme_Options.theme['default.light'] = {}
-let g:PaperColor_Theme_Options.theme['default.light'].override = {
-      \ 'color00' : ['ivory', '0'],
-      \ 'linenumber_bg' : ['ivory', '0'],
-      \ }
-let g:PaperColor_Theme_Options.language = {
-      \    'python': {
-      \      'highlight_builtins' : 1,
-      \    },
-      \    'cpp': {
-      \      'highlight_standard_library': 1,
-      \    },
-      \    'c': {
-      \      'highlight_builtins' : 1,
-      \    }
-      \ }
+" let g:PaperColor_Theme_Options.theme['default.light'].override = {
+"       \ 'color00' : ['ivory', '0'],
+"       \ 'linenumber_bg' : ['ivory', '0'],
+"       \ }
 
-function s:set_papercolor()
-  try
-    colorscheme PaperColor
-  catch
-    echo 'An error occured while configuring PaperColor'
-  endtry
-endfunction
-
-" must set this before vim-enter; Coc bugs out otherwise
-call s:set_papercolor()
+try
+  colorscheme PaperColorSlim
+catch
+  echo 'An error occured while configuring Papercolor'
+endtry
 
 " }}}
 " General: filetype {{{
@@ -1717,7 +1653,7 @@ let g:fzf_layout = { 'window': {
       \ 'width': 0.9,
       \ 'height': 0.6,
       \ 'yoffset': 0.9,
-      \ 'highlight': 'Todo',
+      \ 'highlight': 'Ignore',
       \ } }
 
 let g:fzf_action = {
