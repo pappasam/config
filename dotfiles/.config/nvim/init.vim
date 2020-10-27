@@ -33,6 +33,10 @@ function s:pack_init() abort
           \ })
   endfor
 
+  " TreeSitter:
+  call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git')
+  call packager#add('git@github.com:nvim-treesitter/playground.git')
+
   " Vista: Tagbar replacement extraordinaire
   call packager#add('git@github.com:liuchengxu/vista.vim.git')
 
@@ -694,6 +698,11 @@ try
 catch
   echo 'An error occured while configuring Papercolor'
 endtry
+
+augroup custom_treesitter
+  autocmd!
+  " autocmd VimEnter * lua require('treesitter_config')
+augroup end
 
 " }}}
 " General: filetype {{{
