@@ -180,7 +180,7 @@ export PATH
 # }}}
 # Imports: script sourcing {{{
 
-include () {
+function include() {
   [[ -f "$1" ]] && source "$1"
 }
 
