@@ -41,7 +41,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:liuchengxu/vista.vim.git')
 
   " Colors: See CSS colors
-  call packager#add('git@github.com:chrisbra/Colorizer.git')
+  call packager#add('git@github.com:norcalli/nvim-colorizer.lua.git')
 
   " LocationList:
   call packager#add('git@github.com:elbeardmorez/vim-loclist-follow.git')
@@ -526,6 +526,14 @@ augroup custom_coc_pairs
 augroup end
 
 " }}}
+" Package: treesitter {{{
+
+augroup custom_treesitter
+  autocmd!
+  autocmd VimEnter * lua require'treesitter_config'
+augroup end
+
+" }}}
 " General: options {{{
 
 " Enable filetype detection, plugin loading, and indentation loading
@@ -698,11 +706,6 @@ try
 catch
   echo 'An error occured while configuring Papercolor'
 endtry
-
-augroup custom_treesitter
-  autocmd!
-  " autocmd VimEnter * lua require('treesitter_config')
-augroup end
 
 " }}}
 " General: filetype {{{
@@ -1921,6 +1924,14 @@ let g:loclist_follow_target = 'previous'
 augroup custom_loclistfollow
   autocmd!
   autocmd FileType man,help LoclistFollowToggle
+augroup end
+
+" }}}
+" Package: nvim-colorizer {{{
+
+augroup custom_colorizer
+  autocmd!
+  autocmd VimEnter * lua require'colorizer'.setup()
 augroup end
 
 " }}}
