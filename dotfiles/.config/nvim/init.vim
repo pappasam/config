@@ -1939,6 +1939,9 @@ let g:loclist_follow = 1
 let g:loclist_follow_modes = 'n'
 let g:loclist_follow_target = 'previous'
 
+" Makefile: global variable to prevent syntax highlighting of commands
+let g:make_no_commands = 1
+
 augroup custom_loclistfollow
   autocmd!
   autocmd FileType man,help LoclistFollowToggle
