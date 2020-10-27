@@ -528,9 +528,27 @@ augroup end
 " }}}
 " Package: treesitter {{{
 
+function s:init_treesitter()
+lua << EOF
+require('nvim-treesitter.configs').setup({
+  highlight = { enable = true },
+  indent    = { enable = true },
+  textobjects = { enable = true },
+  ensure_installed = {
+    'html',
+    'javascript',
+    'python',
+    'query',
+    'rust',
+    'tsx',
+    'typescript',
+}})
+EOF
+endfunction
+
 augroup custom_treesitter
   autocmd!
-  autocmd VimEnter * lua require'treesitter_config'
+  autocmd VimEnter * call s:init_treesitter()
 augroup end
 
 " }}}
