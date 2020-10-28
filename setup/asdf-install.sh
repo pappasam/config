@@ -24,6 +24,7 @@ asdf_setup() {
 }
 
 asdf_setup direnv 2.22.0
+asdf_setup fzf 0.24.0
 asdf_setup github-cli 0.9.0
 asdf_setup gohugo extended_0.74.3
 asdf_setup golang 1.14.4
