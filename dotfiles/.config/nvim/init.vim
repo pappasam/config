@@ -143,6 +143,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:goerz/jupytext.vim.git')
 
   " Syntax Highlighting:
+  call packager#add('git@github.com:leafgarland/typescript-vim.git')
   call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
   call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:NLKNguyen/c-syntax.vim')
@@ -179,7 +180,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:ron-rs/ron.vim')
   call packager#add('git@github.com:rust-lang/rust.vim')
   call packager#add('git@github.com:tomlion/vim-solidity')
-  call packager#add('git@github.com:vim-python/python-syntax')
   call packager#add('git@github.com:vim-scripts/SAS-Syntax')
   call packager#add('git@github.com:vimoutliner/vimoutliner')
 endfunction
@@ -537,11 +537,18 @@ require('nvim-treesitter.configs').setup({
   indent    = { enable = true },
   textobjects = { enable = true },
   ensure_installed = {
+    'bash',
+    'c',
+    'css',
+    'go',
     'html',
     'javascript',
+    'json',
+    'lua',
     'python',
     'query',
     'rust',
+    'toml',
     'tsx',
     'typescript',
 }})
