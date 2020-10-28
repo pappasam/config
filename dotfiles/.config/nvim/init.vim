@@ -197,6 +197,7 @@ let mapleader = ','
 
 function! s:default_key_mappings()
   " Coc: settings for coc.nvim
+  " NOTE: <C-w><C-p> gets you in, and out, of floating windows
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
@@ -219,8 +220,8 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>so <cmd>CocList -A outline<cr>
   nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
-  nnoremap <silent> <expr> <C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-  nnoremap <silent> <expr> <C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+  nnoremap <silent> <expr> <C-e> coc#float#has_float() ? coc#float#scroll(1) : "\<C-e>"
+  nnoremap <silent> <expr> <C-y> coc#float#has_float() ? coc#float#scroll(0) : "\<C-y>"
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
   nnoremap                 <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
