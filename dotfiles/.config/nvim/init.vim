@@ -724,11 +724,6 @@ augroup end
 " Cursorline: disable, then override if necessary
 highlight CursorLine cterm=NONE
 
-" let g:PaperColor_Theme_Options.theme['default.light'].override = {
-"       \ 'color00' : ['ivory', '0'],
-"       \ 'linenumber_bg' : ['ivory', '0'],
-"       \ }
-
 try
   colorscheme PaperColorSlim
 catch
