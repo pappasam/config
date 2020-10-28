@@ -275,8 +275,8 @@ function! s:default_key_mappings()
   nnoremap <A-9> 9gt
 
   " Substitute: replace word under cursor
-  nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//gc<Left><Left><Left>
-  vnoremap <leader><leader>s y:%s/<C-R>0//gc<Left><Left><Left>
+  nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//g<Left><Left>
+  vnoremap <leader><leader>s y:%s/<C-R>0//g<Left><Left>
 
   " IndentComma: placing commas one line down; usable with repeat operator '.'
   nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
@@ -304,6 +304,7 @@ function! s:default_key_mappings()
         \ -vertical-preview
         \ -preview-height=50
         \ -winwidth=31
+        \ -root-marker=''
         \ <CR>
   nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
         \ -buffer-name=defx
@@ -316,6 +317,7 @@ function! s:default_key_mappings()
         \ -vertical-preview
         \ -preview-height=50
         \ -winwidth=31
+        \ -root-marker=''
         \ <CR>
   nnoremap <silent> <space>l <cmd>Vista!!<CR>
   nnoremap <silent> <space>L <cmd>Vista focus<CR>
