@@ -196,6 +196,7 @@ if [ -f $HOME/.zplug/init.zsh ]; then
   # BEGIN: List plugins
 
   # use double quotes: the plugin manager author says we must for some reason
+  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
   zplug "paulirish/git-open", as:plugin
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
@@ -204,6 +205,7 @@ if [ -f $HOME/.zplug/init.zsh ]; then
     use:spaceship.zsh, \
     from:github, \
     as:theme
+  zplug "junegunn/fzf", use:"shell/*.zsh", defer:2
 
   #END: List plugins
 
