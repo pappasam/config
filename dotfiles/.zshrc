@@ -725,7 +725,7 @@ function alacritty-install() {
   sudo update-desktop-database
 
   # terminfo
-  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+  tic -xe alacritty,alacritty-direct extra/alacritty.info
 
   # man page
   sudo mkdir -p /usr/local/share/man/man1

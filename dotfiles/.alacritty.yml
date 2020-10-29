@@ -44,15 +44,10 @@ dpi:
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
-# Font configuration (changes require restart)
+# Font configuration
 font:
   normal:
-    family: FiraCode Nerd Font
-    style: Retina
-  bold:
-    family: FiraCode Nerd Font
-    style: Bold
-  italic:
+    # this section handles bold AND italics
     family: FiraCode Nerd Font
     style: Retina
   size: 10.0
