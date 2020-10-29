@@ -143,9 +143,8 @@ function s:pack_init() abort
   call packager#add('git@github.com:goerz/jupytext.vim.git')
 
   " Syntax Highlighting:
-  call packager#add('git@github.com:leafgarland/typescript-vim.git')
+  call packager#add('git@github.com:pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
-  call packager#add('git@github.com:MaxMEllon/vim-jsx-pretty.git')
   call packager#add('git@github.com:NLKNguyen/c-syntax.vim')
   call packager#add('git@github.com:StanAngeloff/php.vim')
   call packager#add('git@github.com:autowitch/hive.vim')
@@ -535,7 +534,6 @@ function s:init_treesitter()
 lua << EOF
 require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
-  indent    = { enable = true },
   textobjects = { enable = true },
   ensure_installed = {
     'bash',
@@ -735,23 +733,23 @@ endtry
 
 augroup custom_filetype_recognition
   autocmd!
-  autocmd BufEnter *.hql,*.q set filetype=hive
-  autocmd BufEnter .envrc set filetype=sh
-  autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
-  autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
   autocmd BufEnter *.asm set filetype=nasm
-  autocmd BufEnter *.handlebars set filetype=html
-  autocmd BufEnter *.m,*.oct set filetype=octave
-  autocmd BufEnter *.jsx,*.js,*.gs set filetype=javascript
   autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf set filetype=dosini
-  autocmd BufEnter *.tsv set filetype=tsv
+  autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
+  autocmd BufEnter *.handlebars set filetype=html
+  autocmd BufEnter *.hql,*.q set filetype=hive
+  autocmd BufEnter *.js,*.gs set filetype=javascript
+  autocmd BufEnter *.m,*.oct set filetype=octave
+  autocmd BufEnter *.py.j2 set filetype=python.jinja2
+  autocmd BufEnter *.sql.j2 set filetype=sql.jinja2
   autocmd BufEnter *.toml set filetype=toml
+  autocmd BufEnter *.tsv set filetype=tsv
+  autocmd BufEnter .envrc set filetype=sh
+  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
+  autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
   autocmd BufEnter Dockerfile.* set filetype=dockerfile
   autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
-  autocmd BufEnter *.sql.j2 set filetype=sql.jinja2
-  autocmd BufEnter *.py.j2 set filetype=python.jinja2
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
 augroup end
 
