@@ -590,7 +590,6 @@ alias gl='git --no-pager branch --verbose --all'
 alias gm='git commit --verbose'
 alias gma='git add --all && git commit --verbose'
 alias gp='git remote prune origin'
-alias gd='git diff'
 alias gdw='git diff --word-diff'
 
 # battery
@@ -678,6 +677,15 @@ function gr() {
   else
     echo "'$PWD' is not inside a git repository"
     return 1
+  fi
+}
+
+# git diff
+function gd() {
+  if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+    git diff | delta --light --line-numbers
+  else
+    git diff | delta --dark  --line-numbers
   fi
 }
 
@@ -845,11 +853,14 @@ function rustdev-install() {
   rustup component add rls
   rustup component add rust-src
   cargo install bat
-  cargo install fd-find
-  cargo install ripgrep
   cargo install cargo-deb
   cargo install cargo-edit
+  cargo install cargo-update
+  cargo install fd-find
+  cargo install git-delta
+  cargo install ripgrep
   asdf reshim rust
+  cargo install-update -a
 }
 
 function nodedev-install() {
