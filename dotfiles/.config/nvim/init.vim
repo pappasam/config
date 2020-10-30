@@ -1543,7 +1543,7 @@ let g:custom_defx_mappings = [
       \ ['<C-r>         ', "defx#do_action('redraw')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
-      \ ['<C-x>         ', "defx#do_action('open', 'split')"],
+      \ ['<C-x>         ', "defx#do_action('drop', 'split')"],
       \ ['<CR>          ', "defx#do_action('drop')"],
       \ ['<RightMouse>  ', "defx#do_action('cd', ['..'])"],
       \ ['O             ', "defx#do_action('open_tree', 'recursive:3')"],
