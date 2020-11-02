@@ -895,6 +895,8 @@ function pydev-install() {  ## Install default python dependencies
 }
 
 function pyglobal-install() {  ## Install global Python applications
+  pip install -U pipx
+  asdf reshim python
   local for_pipx=(
     black
     cookiecutter
