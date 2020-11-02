@@ -531,6 +531,10 @@ augroup end
 " Package: treesitter {{{
 
 function s:init_treesitter()
+  if !exists('g:loaded_nvim_treesitter')
+    echom 'nvim-treesitter does not exist, skipping...'
+    return
+  endif
 lua << EOF
 require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
