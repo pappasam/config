@@ -571,7 +571,7 @@ filetype plugin indent on
 
 " Code Completion:
 set completeopt=menuone,longest
-set wildmode=longest,list,full
+set wildmode=longest:full
 set wildmenu
 
 " Messages:
