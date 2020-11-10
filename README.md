@@ -1,6 +1,6 @@
 # dotfiles
 
-Samuel Roeca's personal [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) for Linux Mint 19 / Ubuntu 18. Feel free to use anything you find useful.
+Samuel Roeca's personal [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) for Linux Mint / Ubuntu. Feel free to use anything you find useful.
 
 ## Setup
 
@@ -12,10 +12,6 @@ sudo apt install git build-essential stow
 # Now place the dotfiles
 make
 ```
-
-*hello*
-
-*hello*
 
 ## Author
 
