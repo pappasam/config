@@ -105,6 +105,12 @@
     }
   },
   "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh", "bash", "zsh", "make"],
+      "ignoredRootPaths": ["~"]
+    },
     "dockerfile": {
       "command": "docker-langserver",
       "filetypes": ["Dockerfile"],

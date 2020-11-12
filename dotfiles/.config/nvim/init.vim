@@ -540,7 +540,6 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   textobjects = { enable = true },
   ensure_installed = {
-    'bash',
     'c',
     'cpp',
     'css',

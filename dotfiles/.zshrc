@@ -850,7 +850,7 @@ function cargodoc() {  # arg1: packagename
   fi
 }
 
-function rustdev-install() {
+function rustglobal-install() {
   rustup component add rls
   rustup component add rust-src
   cargo install bat
@@ -864,8 +864,9 @@ function rustdev-install() {
   cargo install-update -a
 }
 
-function nodedev-install() {
+function nodeglobal-install() {
   local env=(
+    bash-language-server
     dockerfile-language-server-nodejs
     git+https://github.com/Perlence/tstags.git
     jsctags
@@ -878,9 +879,6 @@ function nodedev-install() {
   asdf reshim nodejs
 }
 
-# pydev-install: install only env dependencies
-# pydev-install dev: install only dev dependencies
-# pydev-install all: install all deps
 function pydev-install() {  ## Install default python dependencies
   local for_pip=(
     bpython
@@ -920,7 +918,7 @@ function pyglobal-install() {  ## Install global Python applications
   fi
 }
 
-function awscli-install() {  ## Install the latest version of the aws cli (v2)
+function awscliglobal-install() {  ## Install latest version of aws cli (v2)
   pushd
   cd "$HOME/Downloads"
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -930,7 +928,7 @@ function awscli-install() {  ## Install the latest version of the aws cli (v2)
   popd
 }
 
-function godev-install() {  ## Install default golang dependencies
+function goglobal-install() {  ## Install default golang dependencies
   go get github.com/mattn/efm-langserver
   asdf reshim golang
 }
