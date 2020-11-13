@@ -9,29 +9,7 @@ function s:pack_init() abort
 
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
-  for coc_package in [
-        \ 'git@github.com:davidroeca/coc-svelte-language-tools.git',
-        \ 'git@github.com:fannheyward/coc-markdownlint.git',
-        \ 'git@github.com:fannheyward/coc-texlab.git',
-        \ 'git@github.com:iamcco/coc-diagnostic.git',
-        \ 'git@github.com:iamcco/coc-vimlsp.git',
-        \ 'git@github.com:josa42/coc-go.git',
-        \ 'git@github.com:neoclide/coc-css.git',
-        \ 'git@github.com:neoclide/coc-html.git',
-        \ 'git@github.com:neoclide/coc-java.git',
-        \ 'git@github.com:neoclide/coc-json.git',
-        \ 'git@github.com:neoclide/coc-lists.git',
-        \ 'git@github.com:neoclide/coc-pairs.git',
-        \ 'git@github.com:neoclide/coc-rls.git',
-        \ 'git@github.com:neoclide/coc-snippets.git',
-        \ 'git@github.com:neoclide/coc-tsserver.git',
-        \ 'git@github.com:neoclide/coc-yaml.git',
-        \ 'git@github.com:pappasam/coc-jedi.git',
-        \ ]
-    call packager#add(coc_package, {
-          \ 'do': 'yarn install --frozen-lockfile && yarn build',
-          \ })
-  endfor
+  call packager#add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git')
@@ -499,12 +477,28 @@ let g:coc_filetype_map = {
       \ 'yaml.docker-compose': 'yaml',
       \ }
 
-" Coc Sources: from https://github.com/neoclide/coc-sources
+" Coc Global Extensions: automatically installed on Vim open
 let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-diagnostic',
       \ 'coc-dictionary',
       \ 'coc-emoji',
+      \ 'coc-go',
+      \ 'coc-html',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-lists',
+      \ 'coc-markdownlint',
+      \ 'coc-pairs',
+      \ 'coc-rls',
+      \ 'coc-snippets',
+      \ 'coc-svelte',
       \ 'coc-syntax',
+      \ 'coc-texlab',
+      \ 'coc-tsserver',
+      \ 'coc-vimlsp',
       \ 'coc-word',
+      \ 'coc-yaml',
       \ ]
 
 function! s:autocmd_custom_coc()
