@@ -326,6 +326,9 @@ function! s:default_key_mappings()
   " Choosewin: (just like tmux)
   nnoremap <C-w>q <cmd>ChooseWin<CR>
 
+  " Override <C-w>H to delete defx buffers
+  nnoremap <C-w>H <cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
+
   " Goyo And Writing:
   nnoremap <leader><leader>g <cmd>Goyo<CR>
   nnoremap <leader><leader>l <cmd>Limelight!!<CR>
