@@ -136,7 +136,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:gisraptor/vim-lilypond-integrator.git')
   call packager#add('git@github.com:godlygeek/tabular')
   call packager#add('git@github.com:groenewege/vim-less')
-  call packager#add('git@github.com:hail2u/vim-css3-syntax.git')
   call packager#add('git@github.com:hashivim/vim-terraform')
   call packager#add('git@github.com:hashivim/vim-vagrant')
   call packager#add('git@github.com:jparise/vim-graphql')
