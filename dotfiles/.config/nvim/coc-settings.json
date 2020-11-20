@@ -28,7 +28,10 @@
   "yaml.schemas": {
     "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v3.8.json": "/*docker-compose.yml",
     "https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json": "/*serverless.yml",
-    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": ["/*open-api*.yml", "/*open-api*.yaml"]
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
+      "/*open-api*.yml",
+      "/*open-api*.yaml"
+    ]
   },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
