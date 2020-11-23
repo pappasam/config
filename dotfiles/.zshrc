@@ -935,6 +935,9 @@ function awscliglobal-install() {  ## Install latest version of aws cli (v2)
   unzip awscliv2.zip
   ./aws/install --install-dir "$HOME/.local/aws-cli" --bin-dir "$HOME/bin" --update
   rm -r aws
+  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+  sudo dpkg -i session-manager-plugin.deb
+  rm session-manager-plugin.deb
   popd
 }
 
