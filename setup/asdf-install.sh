@@ -9,10 +9,10 @@ asdf_setup_nodejs() {
   local plugin="nodejs"
   asdf plugin-add "$plugin"
   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-  if [ "$2" = 'latest' ]; then
+  if [ "$1" = 'latest' ]; then
     local version=$(asdf latest $plugin)
   else
-    local version="$2"
+    local version="$1"
   fi
   asdf install "$plugin" "$version"
   asdf global "$plugin" "$version"
