@@ -36,7 +36,7 @@ asdf_setup() {
 }
 
 asdf_setup direnv latest
-asdf_setup fzf 0.24.2
+asdf_setup fzf 0.24.3
 asdf_setup github-cli latest
 asdf_setup gohugo extended_0.74.3
 asdf_setup golang latest

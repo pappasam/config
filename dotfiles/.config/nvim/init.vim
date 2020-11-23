@@ -8,7 +8,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
-  call packager#add('git@github.com:neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
+  call packager#add('git@github.com:neoclide/coc.nvim.git', {'branch': 'release'})
   call packager#add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:

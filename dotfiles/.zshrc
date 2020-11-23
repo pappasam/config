@@ -851,6 +851,14 @@ function cargodoc() {  # arg1: packagename
   fi
 }
 
+function global-install() {
+  rustglobal-install
+  nodeglobal-install
+  pyglobal-install
+  awscliglobal-install
+  goglobal-install
+}
+
 function rustglobal-install() {
   rustup component add rls
   rustup component add rust-src
