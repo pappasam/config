@@ -876,6 +876,7 @@ function rustglobal-install() {
 function nodeglobal-install() {
   local env=(
     bash-language-server
+    devspace
     dockerfile-language-server-nodejs
     git+https://github.com/Perlence/tstags.git
     jsctags

@@ -57,6 +57,5 @@ asdf_setup tmux latest
 asdf_setup yarn latest
 
 # kubernetes
-asdf_setup kubectl 1.19.0-beta.2
-asdf_setup minikube 1.11.0
-asdf_setup skaffold 1.11.0
+asdf_setup kubectl 1.19.4
+asdf_setup minikube 1.15.1
