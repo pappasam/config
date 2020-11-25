@@ -76,6 +76,7 @@ sudo apt install -y \
   libsqlite3-dev \
   libssl-dev \
   libtool \
+  libtool-bin \
   libvips-tools \
   libx11-doc \
   libxcb-xfixes0-dev \

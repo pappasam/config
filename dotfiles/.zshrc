@@ -694,6 +694,8 @@ function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
+  asdf update
+  asdf plugin-update --all
   pushd
   cd ~/dotfiles
   git pull
@@ -704,8 +706,8 @@ function upgrade() {
   asdf local rust nightly
   alacritty-install
   popd
-  asdf uninstall neovim nightly
-  asdf install neovim nightly
+  asdf uninstall neovim ref:master
+  asdf install neovim ref:master
   nvim -c 'PU'
   nvim -c 'CocUpdate'
 }

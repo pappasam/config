@@ -41,7 +41,7 @@ asdf_setup github-cli latest
 asdf_setup gohugo extended_0.74.3
 asdf_setup golang latest
 asdf_setup java adopt-openjdk-13.0.2+8
-asdf_setup neovim nightly
+asdf_setup neovim ref:master
 asdf_setup php latest
 asdf_setup postgres 13.0
 asdf_setup python 3.8.6
