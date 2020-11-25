@@ -709,7 +709,7 @@ function upgrade() {
   asdf uninstall neovim ref:master
   asdf install neovim ref:master
   nvim -c 'PU'
-  nvim -c 'CocUpdate'
+  nvim -c 'CocUpdateSync' -c 'TSUpdate'
 }
 
 # Alacritty Helpers
