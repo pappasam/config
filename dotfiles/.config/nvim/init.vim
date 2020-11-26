@@ -121,7 +121,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:goerz/jupytext.vim.git')
 
   " Syntax Highlighting:
-  call packager#add('git@github.com:pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
+  call packager#add('git@github.com:peitalin/vim-jsx-typescript.git')
   call packager#add('git@github.com:Glench/Vim-Jinja2-Syntax')
   call packager#add('git@github.com:NLKNguyen/c-syntax.vim')
   call packager#add('git@github.com:StanAngeloff/php.vim')
