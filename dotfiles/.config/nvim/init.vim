@@ -10,6 +10,7 @@ function s:pack_init() abort
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:neoclide/coc.nvim.git', {'branch': 'release'})
   call packager#add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
+  call packager#add('git@github.com:coc-extensions/coc-svelte.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git')
@@ -491,7 +492,6 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-rls',
       \ 'coc-snippets',
-      \ 'coc-svelte',
       \ 'coc-syntax',
       \ 'coc-texlab',
       \ 'coc-tsserver',
