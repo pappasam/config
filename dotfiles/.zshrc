@@ -510,17 +510,18 @@ include $HOME/.asdf/completions/asdf.bash
 # }}}
 # General: post-asdf env setup {{{
 
+# NOTE: currently commented out because this slows down zsh load a lot
 # MANPATH: add asdf man pages to my man path
-MANPATH="$HOME/man"
-if [ -x "$(command -v fd)" ]; then
-  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
-    MANPATH="$MANPATH:$(dirname $value)"
-  done
-  # colon at end. See "man manpath"
-  export MANPATH="$MANPATH:"
-fi
+# MANPATH="$HOME/man"
+# if [ -x "$(command -v fd)" ]; then
+#   for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+#     MANPATH="$MANPATH:$(dirname $value)"
+#   done
+#   # colon at end. See "man manpath"
+#   export MANPATH="$MANPATH:"
+# fi
 
-include ~/.asdf/plugins/java/set-java-home.sh
+# include ~/.asdf/plugins/java/set-java-home.sh
 
 # }}}
 # General: aliases {{{
@@ -1303,9 +1304,10 @@ if [[ -o interactive ]]; then
   stty -ixon
 
   # kubectl autocompletion
-  if [ $commands[kubectl] ]; then
-    source <(kubectl completion zsh)
-  fi
+  # NOTE: commented out currently because this slows zsh load down a lot
+  # if [ $commands[kubectl] ]; then
+  #   source <(kubectl completion zsh)
+  # fi
 
   # direnv
   if [ $commands[direnv] ]; then
