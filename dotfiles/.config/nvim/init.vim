@@ -115,7 +115,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:vim-scripts/groovyindent-unix')
 
   " Syntax Theme:
-  call packager#add('git@github.com:NLKNguyen/papercolor-theme')
   call packager#add('git@github.com:pappasam/papercolor-theme-slim.git')
 
   " Jupyter Integration:
