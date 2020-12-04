@@ -543,6 +543,7 @@ require('nvim-treesitter.configs').setup({
     'html',
     'java',
     'javascript',
+    'jsdoc',
     'json',
     'lua',
     'php',
