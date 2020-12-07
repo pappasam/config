@@ -707,8 +707,8 @@ function upgrade() {
   asdf local rust nightly
   alacritty-install
   popd
-  asdf uninstall neovim ref:master
-  asdf install neovim ref:master
+  asdf uninstall neovim nightly
+  asdf install neovim nightly
   nvim -c 'PU'
   nvim -c 'CocUpdateSync' -c 'TSUpdate'
 }
