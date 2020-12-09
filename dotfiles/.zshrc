@@ -344,17 +344,6 @@ zstyle ':completion:*' matcher-list '' \
 fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
 
-# Manual libraries
-
-# vault, by Hashicorp
-_vault_complete() {
-  local word completions
-  word="$1"
-  completions="$(vault --cmplt "${word}")"
-  reply=( "${(ps:\n:)completions}" )
-}
-compctl -f -K _vault_complete vault
-
 # Add autocompletion path
 fpath+=~/.zfunc
 
