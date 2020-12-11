@@ -337,10 +337,10 @@ function! s:default_key_mappings()
   omap aq <Plug>(textobj-sandwich-query-a)
 
   " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-p> <cmd>call <SID>fzf_files_avoid_defx()<CR>
-  nnoremap <silent> <C-b> <cmd>call <SID>fzf_buffers_avoid_defx()<CR>
-  nnoremap          <C-n> yiw:Rg <C-r>"<CR>
-  vnoremap          <C-n> y:Rg <C-r>"<CR>
+  nnoremap <silent> <C-p><C-p> <cmd>call <SID>fzf_avoid_defx('Files')<CR>
+  nnoremap <silent> <C-p><C-b> <cmd>call <SID>fzf_avoid_defx('Buffers')<CR>
+  nnoremap          <C-n><C-n> yiw:Rg <C-r>"<CR>
+  vnoremap          <C-n><C-n> y:Rg <C-r>"<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <cmd>FiletypeFormat<cr>
@@ -1648,42 +1648,21 @@ let g:fzf_colors = {
       \ 'header': ['fg', 'Comment'],
       \ }
 
-function! s:fzf_files_avoid_defx()
+" Execute fzf command, but avoid doing so in a defx buffer
+function! s:fzf_avoid_defx(command)
   if (expand('%') =~# 'defx' && winnr('$') > 1)
     execute "normal! \<c-w>\<c-w>"
   endif
-  " ignore below comment: keeping for now in case I need it again soon:
-  " getcwd(-1, -1) tells it to always use the global working directory
-  " 'dir': getcwd(-1, -1),
-  call fzf#run(fzf#wrap({
-        \ 'source': 'fd --type f --hidden --follow --exclude ".git"',
-        \ 'options': g:fzf_custom_file_options,
-        \ }))
+  execute a:command
 endfunction
 
-function! s:fzf_buffers_avoid_defx()
-  if (expand('%') =~# 'defx' && winnr('$') > 1)
-    execute "normal! \<c-w>\<c-w>"
-  endif
-  Buffers
-endfunction
-
-let g:fzf_preview_command = 'bat --style=numbers --color=always {}'
 let g:fzf_preview_default_key_bindings =
       \ 'ctrl-e:preview-page-down,ctrl-y:preview-page-up,?:toggle-preview'
-let g:fzf_custom_file_options = '-m --bind '
-      \ . g:fzf_preview_default_key_bindings . ' '
-      \ . '--reverse '
-      \ . '--prompt="Files> " '
-      \ . "--preview '"
-      \ . '[[ $(file --mime {}) =~ binary ]] &&'
-      \ . 'echo {} is a binary file || '
-      \ . g:fzf_preview_command . ' '
-      \ . "2> /dev/null | head -500'"
 let $FZF_DEFAULT_OPTS = '-m --bind '
       \ . g:fzf_preview_default_key_bindings . ' '
       \ . '--reverse '
       \ . '--prompt="> " '
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude ".git"'
 
 " Floating window
 let g:fzf_layout = { 'window': {
@@ -1699,12 +1678,6 @@ let g:fzf_action = {
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit',
       \ }
-
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
-      \ 1,
-      \ fzf#vim#with_preview(),
-      \ <bang>0)
 
 " }}}
 " Package: vista {{{
