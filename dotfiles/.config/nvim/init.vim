@@ -474,6 +474,7 @@ let g:coc_filetype_map = {
       \ 'sql.jinja2': 'sql',
       \ 'yaml.ansible': 'yaml',
       \ 'yaml.docker-compose': 'yaml',
+      \ 'jinja.html': 'html',
       \ }
 
 " Coc Global Extensions: automatically installed on Vim open
