@@ -867,6 +867,7 @@ function rustglobal-install() {
 
 function nodeglobal-install() {
   local env=(
+    @angular/cli
     bash-language-server
     devspace
     dockerfile-language-server-nodejs
