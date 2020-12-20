@@ -698,6 +698,7 @@ function upgrade() {
   popd
   asdf uninstall neovim nightly
   asdf install neovim nightly
+  asdf global neovim nightly
   nvim -c 'PU'
   nvim -c 'CocUpdateSync' -c 'TSUpdate'
 }
