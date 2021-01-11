@@ -163,7 +163,7 @@ key_bindings:
   - { key: Q, mode: Vi, action: ScrollToBottom }
   - { key: Q, mode: Vi, action: ToggleViMode }
   # Key: $
-  - { key: 05, mods: Shift, mode: Vi, action: Last }
-  - { key: 06, mods: Shift, mode: Vi, action: Bracket }
+  # - { key: 05, mods: Shift, mode: Vi, action: Last }
+  # - { key: 06, mods: Shift, mode: Vi, action: Bracket }
   # Key: 0
-  - { key: 07, mods: Shift, mode: Vi, action: FirstOccupied }
+  # - { key: 07, mods: Shift, mode: Vi, action: FirstOccupied }
