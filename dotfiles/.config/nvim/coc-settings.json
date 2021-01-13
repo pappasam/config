@@ -11,6 +11,7 @@
   "jedi.markupKindPreferred": "plaintext",
   "jedi.jediSettings.autoImportModules": ["numpy", "alembic", "pydantic"],
   "jedi.diagnostics.enable": false,
+  "jedi.startupMessage": true,
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "java.enabled": false,
