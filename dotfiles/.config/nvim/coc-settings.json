@@ -9,7 +9,12 @@
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "jedi.markupKindPreferred": "plaintext",
-  "jedi.jediSettings.autoImportModules": ["numpy", "alembic", "pydantic"],
+  "jedi.jediSettings.autoImportModules": [
+    "numpy",
+    "alembic",
+    "pydantic",
+    "sqlalchemy"
+  ],
   "jedi.diagnostics.enable": false,
   "jedi.startupMessage": true,
   "vimlsp.suggest.fromRuntimepath": true,
