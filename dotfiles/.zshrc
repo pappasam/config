@@ -901,6 +901,7 @@ function pyglobal-install() {  ## Install global Python applications
   pip install -U pipx
   asdf reshim python
   local for_pipx=(
+    aws-sam-cli
     black
     cookiecutter
     docformatter
