@@ -12,7 +12,6 @@
   "jedi.jediSettings.autoImportModules": [
     "numpy",
     "alembic",
-    "pydantic",
     "sqlalchemy"
   ],
   "jedi.diagnostics.enable": false,
