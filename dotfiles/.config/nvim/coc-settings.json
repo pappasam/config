@@ -10,7 +10,6 @@
   "signature.enable": false,
   "jedi.markupKindPreferred": "plaintext",
   "jedi.jediSettings.autoImportModules": [
-    "numpy",
     "alembic",
     "sqlalchemy"
   ],
