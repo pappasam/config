@@ -9,3 +9,7 @@ sudo add-apt-repository -y ppa:git-core/ppa
 
 sudo apt update
 sudo apt install git
+
+sudo add-apt-repository ppa:obsproject/obs-studio
+sudo apt update
+sudo apt install obs-studio
