@@ -11,7 +11,9 @@
   "jedi.markupKindPreferred": "plaintext",
   "jedi.jediSettings.autoImportModules": [
     "alembic",
-    "sqlalchemy"
+    "sqlalchemy",
+    "fastai",
+    "fastcore"
   ],
   "jedi.diagnostics.enable": false,
   "jedi.startupMessage": true,
