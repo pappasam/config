@@ -73,6 +73,7 @@ sudo apt install -y \
   libpq-dev \
   libreadline-dev \
   librsvg2-bin \
+  libsasl2-dev \
   libsqlite3-dev \
   libssl-dev \
   libtool \
