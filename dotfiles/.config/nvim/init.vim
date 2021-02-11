@@ -200,8 +200,8 @@ function! s:default_key_mappings()
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
   nnoremap                 <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
-  nmap     <silent>        <leader>n <Plug>(coc-diagnostic-next)
-  nmap     <silent>        <leader>p <Plug>(coc-diagnostic-prev)
+  nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
+  nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
