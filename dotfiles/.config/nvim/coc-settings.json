@@ -1,14 +1,19 @@
 {
   "coc.preferences.extensionUpdateCheck": "never",
   "coc.source.emoji.filetypes": ["markdown", "rst"],
-  "coc.source.dictionary.filetypes": ["markdown", "rst"],
-  "coc.source.word.filetypes": ["markdown", "rst"],
+  "coc.source.dictionary.filetypes": [
+    "gitcommit",
+    "html",
+    "markdown",
+    "rst",
+    "text"
+  ],
+  "coc.source.word.filetypes": ["gitcommit", "html", "markdown", "rst", "text"],
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": true,
   "signature.hideOnTextChange": true,
   "signature.enable": false,
-  "jedi.markupKindPreferred": "plaintext",
   "jedi.jediSettings.autoImportModules": [
     "alembic",
     "sqlalchemy",
