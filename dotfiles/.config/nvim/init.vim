@@ -52,6 +52,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:yssl/QFEnter')
   call packager#add('git@github.com:alvan/vim-closetag.git')
+  call packager#add('git@github.com:dstein64/nvim-scrollview.git')
 
   " KeywordPrg:
   call packager#add('git@github.com:pappasam/vim-keywordprg-commands.git')
