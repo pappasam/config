@@ -16,8 +16,8 @@
   "signature.enable": false,
   "jedi.jediSettings.autoImportModules": [
     "alembic",
-    "sqlalchemy",
     "fastai",
+    "sqlalchemy",
     "fastcore"
   ],
   "jedi.diagnostics.enable": false,
