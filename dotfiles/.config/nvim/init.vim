@@ -174,6 +174,9 @@ let mapleader = ','
 function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   " NOTE: <C-w><C-p> gets you in, and out, of floating windows
+  inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
+  inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
+  inoremap <silent>        <C-w>    <cmd>call SurroundCw()<CR>
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
@@ -1302,6 +1305,81 @@ endfunction
 command! Clubhouse silent call s:skeleton('clubhouse.md')
 command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
+
+" }}}
+" General: spacesurround {{{
+
+" Helper functions to format surrounding text as I type
+" The function is: Surround<Key>, where key is the intended mapping key
+
+" 1. Add two spaces around cursor when pressing space bar.
+" 2. Spaces will be deleted if cursor is in middle with 1 space on either side.
+"     For example: ( | ), pressing <bs> or <c-w> should delete surrounding
+"     spaces
+let s:surround_spaces = {
+      \ '()': 1,
+      \ '[]': 1,
+      \ '{}': 1,
+      \ }
+
+function! SurroundSpace()
+  let char_left = getline('.')[col('.') - 2]
+  let char_right = getline('.')[col('.') - 1]
+  let left_right = char_left . char_right
+  if has_key(s:surround_spaces, left_right)
+    call feedkeys("\<space>\<space>\<left>", 'ni')
+  else
+    call feedkeys("\<space>", 'ni')
+  endif
+endfunction
+
+" delete surround items if surrounding cursor with no space
+" for example: (|)
+" when pressing delete, surrounding parentheses will be deleted
+let s:surround_delete = {
+      \ "''": 1,
+      \ '""': 1,
+      \ '()': 1,
+      \ '<>': 1,
+      \ '[]': 1,
+      \ '{}': 1,
+      \ }
+
+function! SurroundBackspace()
+  let char_left = getline('.')[col('.') - 3]
+  let char_left_mid = getline('.')[col('.') - 2]
+  let char_right_mid = getline('.')[col('.') - 1]
+  let char_right = getline('.')[col('.')]
+  let mid_left_right = char_left_mid . char_right_mid
+  let left_right = char_left . char_right
+  if has_key(s:surround_delete, mid_left_right)
+    call feedkeys("\<bs>\<right>\<bs>", 'ni')
+  elseif mid_left_right != '  '
+    call feedkeys("\<bs>", 'ni')
+  elseif has_key(s:surround_spaces, left_right)
+    execute "normal! \<right>di" . left_right[1]
+  else
+    call feedkeys("\<bs>", 'ni')
+  endif
+endfunction
+
+function! SurroundCw()
+  let char_left = getline('.')[col('.') - 3]
+  let char_left_mid = getline('.')[col('.') - 2]
+  let char_right_mid = getline('.')[col('.') - 1]
+  let char_right = getline('.')[col('.')]
+  let mid_left_right = char_left_mid . char_right_mid
+  let left_right = char_left . char_right
+  if has_key(s:surround_delete, mid_left_right)
+    call feedkeys("\<bs>\<right>\<bs>", 'ni')
+  elseif mid_left_right != '  '
+    call feedkeys("\<c-w>", 'ni')
+  elseif has_key(s:surround_spaces, left_right)
+    execute "normal! \<right>di" . left_right[1]
+  else
+    call feedkeys("\<c-w>", 'ni')
+  endif
+endfunction
 
 " }}}
 " Package: git plugins: gv.vim, fugitive, git-messenger {{{
