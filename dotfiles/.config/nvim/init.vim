@@ -530,6 +530,12 @@ augroup custom_coc_pairs
   autocmd FileType vim let b:coc_pairs_disabled = ['"']
 augroup end
 
+augroup custom_coc_additional_keyword_characters
+  autocmd!
+  autocmd FileType nginx
+        \ let b:coc_additional_keywords = ['.', '/', '"', '$', '-']
+augroup end
+
 " }}}
 " Package: treesitter {{{
 
@@ -680,6 +686,11 @@ augroup custom_incsearch_highlight
   autocmd!
   autocmd CmdlineEnter /,\? set hlsearch
   autocmd CmdlineLeave /,\? set nohlsearch
+augroup end
+
+augroup custom_nginx
+  autocmd!
+  autocmd FileType nginx set iskeyword+=$
 augroup end
 
 " }}}

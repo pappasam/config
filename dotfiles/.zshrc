@@ -897,6 +897,11 @@ function pydev-install() {  ## Install default python dependencies
   asdf reshim python
 }
 
+function pipx-upgrade() {
+  pipx uninstall $1
+  pipx install $1
+}
+
 function pyglobal-install() {  ## Install global Python applications
   pip install -U pipx
   asdf reshim python
