@@ -875,6 +875,7 @@ function nodeglobal-install() {
     git+https://github.com/Perlence/tstags.git
     jsctags
     neovim
+    nginx-linter
     nginxbeautifier
     npm
     prettier

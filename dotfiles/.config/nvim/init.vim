@@ -781,7 +781,7 @@ augroup end
 augroup custom_indentation
   autocmd!
   " 4 spaces per tab, not 2
-  autocmd Filetype python,c,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   " Use hard tabs, not spaces
   autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
@@ -1900,7 +1900,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -q - | docformatter -',
       \ 'nginx':
       \   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
-      \   . 'nginxbeautifier --space 2 /tmp/nginx.conf >& /dev/null && '
+      \   . 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
       \   . 'cat /tmp/nginx.conf && '
       \   . 'rm /tmp/nginx.conf',
       \ }

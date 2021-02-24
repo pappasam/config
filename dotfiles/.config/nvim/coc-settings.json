@@ -53,12 +53,35 @@
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
     "markdown": "write-good",
-    "rst": "write-good"
+    "rst": "write-good",
+    "nginx": "nginx-linter"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "python": ["black", "isort", "docformatter"]
   },
   "diagnostic-languageserver.linters": {
+    "nginx-linter": {
+      "sourceName": "nginx-linter",
+      "command": "nginx-linter",
+      "debounce": 100,
+      "args": [
+        "--include",
+        "%file"
+      ],
+      "formatPattern": [
+        "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "rootPatterns": ["nginx.conf", ".git"],
+      "securities": {
+        "error": "info"
+      }
+    },
     "pylint": {
       "sourceName": "pylint",
       "command": "pylint",
