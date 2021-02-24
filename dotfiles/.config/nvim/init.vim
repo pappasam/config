@@ -532,8 +532,7 @@ augroup end
 
 augroup custom_coc_additional_keyword_characters
   autocmd!
-  autocmd FileType nginx
-        \ let b:coc_additional_keywords = ['.', '/', '"', '$', '-']
+  autocmd FileType nginx let b:coc_additional_keywords = ['$']
 augroup end
 
 " }}}
@@ -782,7 +781,7 @@ augroup end
 augroup custom_indentation
   autocmd!
   " 4 spaces per tab, not 2
-  autocmd Filetype python,c,haskell,rust,kv,nginx,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype python,c,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   " Use hard tabs, not spaces
   autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
@@ -1899,6 +1898,11 @@ let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -q - | docformatter -',
+      \ 'nginx':
+      \   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
+      \   . 'nginxbeautifier --space 2 /tmp/nginx.conf >& /dev/null && '
+      \   . 'cat /tmp/nginx.conf && '
+      \   . 'rm /tmp/nginx.conf',
       \ }
 
 " }}}
