@@ -128,7 +128,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:autowitch/hive.vim')
   call packager#add('git@github.com:calviken/vim-gdscript3')
   call packager#add('git@github.com:cespare/vim-toml')
-  call packager#add('git@github.com:pappasam/nginx.vim.git', {'branch': 'remove-ngxBlock-normal'})
+  call packager#add('git@github.com:chr4/nginx.vim.git')
   call packager#add('git@github.com:derekwyatt/vim-scala')
   call packager#add('git@github.com:ekalinin/Dockerfile.vim')
   call packager#add('git@github.com:evanleck/vim-svelte')
@@ -907,7 +907,7 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 augroup custom_comment_config
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType tmux,python setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
