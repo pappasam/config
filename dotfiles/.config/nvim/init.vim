@@ -128,7 +128,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:autowitch/hive.vim')
   call packager#add('git@github.com:calviken/vim-gdscript3')
   call packager#add('git@github.com:cespare/vim-toml')
-  call packager#add('git@github.com:chr4/nginx.vim')
+  call packager#add('git@github.com:pappasam/nginx.vim.git', {'branch': 'remove-ngxBlock-normal'})
   call packager#add('git@github.com:derekwyatt/vim-scala')
   call packager#add('git@github.com:ekalinin/Dockerfile.vim')
   call packager#add('git@github.com:evanleck/vim-svelte')
