@@ -519,7 +519,6 @@ endfunction
 
 augroup custom_coc
   autocmd!
-  autocmd FileType plantuml setlocal omnifunc=syntaxcomplete#Complete
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
 

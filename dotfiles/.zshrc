@@ -916,6 +916,7 @@ function pyglobal-install() {  ## Install global Python applications
     isort
     jupyterlab
     jupytext
+    nginx-language-server
     pre-commit
     restview
     toml-sort
