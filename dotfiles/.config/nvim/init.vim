@@ -283,6 +283,7 @@ function! s:default_key_mappings()
         \ -floating-preview
         \ -vertical-preview
         \ -preview-height=50
+        \ -preview-width=80
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
@@ -296,6 +297,7 @@ function! s:default_key_mappings()
         \ -floating-preview
         \ -vertical-preview
         \ -preview-height=50
+        \ -preview-width=80
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
