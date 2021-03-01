@@ -1637,8 +1637,6 @@ let g:custom_defx_mappings = [
       \ ['<2-LeftMouse> ', "defx#is_directory() ? defx#do_action('open_tree', 'toggle') : defx#do_action('drop')"],
       \ ['<C-g>         ', "defx#do_action('print')"],
       \ ['<C-h>         ', "defx#do_action('resize', 31)"],
-      \ ['<C-i>         ', "defx#do_action('open_directory')"],
-      \ ['<C-o>         ', "defx#do_action('cd', ['..'])"],
       \ ['<C-r>         ', "defx#do_action('redraw')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
