@@ -17,8 +17,9 @@
   "jedi.jediSettings.autoImportModules": [
     "alembic",
     "fastai",
-    "sqlalchemy",
-    "fastcore"
+    "fastcore",
+    "matplotlib",
+    "sqlalchemy"
   ],
   "jedi.diagnostics.enable": false,
   "jedi.startupMessage": true,
