@@ -906,6 +906,7 @@ function pipx-upgrade() {
 
 function pyglobal-install() {  ## Install global Python applications
   pip install -U pipx
+  pydev-install
   asdf reshim python
   local for_pipx=(
     aws-sam-cli
