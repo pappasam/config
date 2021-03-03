@@ -12,7 +12,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
-  call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git')
+  call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
   call packager#add('git@github.com:nvim-treesitter/playground.git')
 
   " Vista: Tagbar replacement extraordinaire
