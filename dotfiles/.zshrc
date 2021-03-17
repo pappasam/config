@@ -879,6 +879,7 @@ function nodeglobal-install() {
     nginxbeautifier
     npm
     prettier
+    tree-sitter-cli
     write-good
   )
   npm install --no-save -g $env
