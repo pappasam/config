@@ -769,23 +769,6 @@ function gitzip() {  # arg1: the git repository
 }
 compdef _directories gitzip
 
-function gb() {  # go to main branch, pull latest, delete current branch, prune
-  if [ $# -eq 0 ]; then
-    local branch_main="master"
-  else
-    local branch_main="$1"
-  fi
-  local branch_current="$(git branch --show-current)"
-  if [[ "$branch_main" == "$branch_current" ]]; then
-    echo "On main branch '$branch_main', exiting"
-    return 1
-  fi
-  git checkout "$branch_main" &&
-    git pull &&
-    git branch -d "$branch_current" &&
-    git remote prune origin
-}
-
 # Pipe man stuff to neovim
 function m() {
   man --location "$@" &> /dev/null
@@ -1131,45 +1114,6 @@ function push() {
 function pull() {
   local current_branch="$(git rev-parse --abbrev-ref HEAD)"
   git pull origin "$current_branch"
-}
-
-# GIT: prune/cleanup the local references to remote branch and delete merged
-# local branches
-function gc() {
-  local refs="$(git remote prune origin --dry-run)"
-  if [ -z "$refs" ]
-  then
-    echo "No prunable references found"
-  else
-    echo $refs
-    while true; do
-     read yn\?"Do you wish to prune these local references to remote branches? "
-     case $yn in
-       [Yy]* ) break;;
-       [Nn]* ) return;;
-       * ) echo "Please answer yes or no.";;
-     esac
-    done
-    git remote prune origin
-    echo "Pruned!"
-  fi
-  local branches="$(git branch --merged master | grep -v '^[ *]*master$')"
-  if [ -z "$branches" ]
-  then
-    echo "No merged branches found"
-  else
-    echo $branches
-    while true; do
-     read yn\?"Do you wish to delete these merged local branches? "
-     case $yn in
-       [Yy]* ) break;;
-       [Nn]* ) return;;
-       * ) echo "Please answer yes or no.";;
-     esac
-    done
-    echo $branches | xargs git branch -d
-    echo "Deleted!"
-  fi
 }
 
 # GITHUB: list all of an organization's Repositories
