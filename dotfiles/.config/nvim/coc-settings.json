@@ -204,7 +204,12 @@
     "POSIX",
     "PYPI",
     "alacritty",
-    "keplergrp"
+    "itertools",
+    "keplergrp",
+    "pydantic",
+    "pygls",
+    "pylint",
+    "venv"
   ],
   "cSpell.ignoreRegExpList": [
     "0x[a-f0-9]+",
