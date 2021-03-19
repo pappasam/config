@@ -203,6 +203,11 @@
     "Monokai",
     "POSIX",
     "PYPI",
-    "alacritty"
+    "alacritty",
+    "keplergrp"
+  ],
+  "cSpell.ignoreRegExpList": [
+    "0x[a-f0-9]+",
+    "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
   ]
 }
