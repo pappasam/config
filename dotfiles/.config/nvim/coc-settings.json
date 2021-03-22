@@ -206,6 +206,7 @@
     "alacritty",
     "itertools",
     "keplergrp",
+    "mentees",
     "plantuml",
     "pydantic",
     "pygls",
