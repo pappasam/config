@@ -274,10 +274,6 @@ cd src/lib
 
 git clone git@github.com:eendroroy/alacritty-theme.git
 
-git clone git@github.com:toggle-corp/alacritty-colorscheme.git
-
-ln -s $PWD/alacritty-colorscheme/alacritty-colorscheme $HOME/bin/
-
 #######################################################################
 # AWS
 #######################################################################

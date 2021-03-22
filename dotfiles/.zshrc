@@ -893,6 +893,7 @@ function pyglobal-install() {  ## Install global Python applications
   pydev-install
   asdf reshim python
   local for_pipx=(
+    alacritty-colorscheme
     aws-sam-cli
     black
     cookiecutter

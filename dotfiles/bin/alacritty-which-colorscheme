@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 local current=$(basename \
-  $(alacritty-colorscheme -c $HOME/.alacritty.yml --show-applied))
+  $(alacritty-colorscheme -c $HOME/.alacritty.yml status))
 
 if [[ $current == 'papercolor_light.yaml' ]]; then
   echo -n 'light'

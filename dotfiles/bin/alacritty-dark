@@ -2,4 +2,5 @@
 
 alacritty-colorscheme \
   -c $HOME/.alacritty.yml \
-  -a "$HOME/src/lib/alacritty-theme/themes/ayu_dark.yaml"
+  -C "$HOME/src/lib/alacritty-theme/themes/" \
+  apply 'ayu_dark.yaml'

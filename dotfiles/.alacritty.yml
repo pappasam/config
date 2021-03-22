@@ -91,6 +91,7 @@ cursor:
 # /home/sroeca/src/lib/alacritty-theme/themes/ayu_dark.yaml
 # Colors (Ayu Dark)
 colors:
+  # COLORSCHEME: ayu_dark.yaml
   # Default colors
   primary:
     background: '0x0A0E14'
@@ -98,27 +99,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x01060E'
-    red:     '0xEA6C73'
-    green:   '0x91B362'
-    yellow:  '0xF9AF4F'
-    blue:    '0x53BDFA'
+    black: '0x01060E'
+    red: '0xEA6C73'
+    green: '0x91B362'
+    yellow: '0xF9AF4F'
+    blue: '0x53BDFA'
     magenta: '0xFAE994'
-    cyan:    '0x90E1C6'
-    white:   '0xC7C7C7'
+    cyan: '0x90E1C6'
+    white: '0xC7C7C7'
 
   # Bright colors
   bright:
-    black:   '0x686868'
-    red:     '0xF07178'
-    green:   '0xC2D94C'
-    yellow:  '0xFFB454'
-    blue:    '0x59C2FF'
+    black: '0x686868'
+    red: '0xF07178'
+    green: '0xC2D94C'
+    yellow: '0xFFB454'
+    blue: '0x59C2FF'
     magenta: '0xFFEE99'
-    cyan:    '0x95E6CB'
-    white:   '0xFFFFFF'
-# color_end
-
+    cyan: '0x95E6CB'
+    white: '0xFFFFFF'
 bell:
   animation: EaseOutExpo
   duration: 0
@@ -136,11 +135,11 @@ scrolling:
 
 # Mouse bindings
 mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+  - {mouse: Middle, action: PasteSelection}
 
 mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+  double_click: {threshold: 300}
+  triple_click: {threshold: 300}
   url:
     launcher: xdg-open
     modifiers: Shift
@@ -159,9 +158,9 @@ shell:
 
 # Key bindings: see alacritty's latest example config file for defaults
 key_bindings:
-  - { key: LBracket, mods: Control, mode: Vi, action: ClearSelection }
-  - { key: Q, mode: Vi, action: ScrollToBottom }
-  - { key: Q, mode: Vi, action: ToggleViMode }
+  - {key: LBracket, mods: Control, mode: Vi, action: ClearSelection}
+  - {key: Q, mode: Vi, action: ScrollToBottom}
+  - {key: Q, mode: Vi, action: ToggleViMode}
   # Key: $
   # - { key: 05, mods: Shift, mode: Vi, action: Last }
   # - { key: 06, mods: Shift, mode: Vi, action: Bracket }
