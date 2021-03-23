@@ -1,20 +1,19 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty it self.
 # env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  # To install alacritty terminfo, run the following command from alacritty's
-  # root folder:
-  #   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-  # TERM: alacritty
+# TERM variable
+#
+# This value is used to set the `$TERM` environment variable for
+# each instance of Alacritty. If it is not present, alacritty will
+# check the local terminfo database and use `alacritty` if it is
+# available, otherwise `xterm-256color` is used.
+# To install alacritty terminfo, run the following command from alacritty's
+# root folder:
+#   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+# TERM: alacritty
 
 window:
   # Window dimensions in character columns and lines
@@ -135,19 +134,18 @@ scrolling:
 
 # Mouse bindings
 mouse_bindings:
-  - {mouse: Middle, action: PasteSelection}
+  - { mouse: Middle, action: PasteSelection }
 
 mouse:
-  double_click: {threshold: 300}
-  triple_click: {threshold: 300}
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
   url:
     launcher: xdg-open
     modifiers: Shift
   hide_when_typing: false
 
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
 
 # Live config reload
 live_config_reload: true
@@ -158,14 +156,14 @@ shell:
 
 # Key bindings: see alacritty's latest example config file for defaults
 # Need scancodes. See: https://github.com/alacritty/alacritty/issues/4111
-# To get scancodes: `showkey --scancodes -a`
+# To get scancodes: `sudo showkey`
 key_bindings:
-  - {key: LBracket, mods: Control, mode: Vi, action: ClearSelection}
-  - {key: Q, mode: Vi, action: ScrollToBottom}
-  - {key: Q, mode: Vi, action: ToggleViMode}
-  # Key: $
-  - { key: 36, mods: Shift, mode: Vi, action: Last }
-  # Key: %
-  - { key: 37, mods: Shift, mode: Vi, action: Bracket }
-  # Key: )
-  - { key: 41, mods: Shift, mode: Vi, action: FirstOccupied }
+  - { key: LBracket, mods: Control, mode: Vi, action: ClearSelection }
+  - { key: Q, mode: Vi, action: ScrollToBottom }
+  - { key: Q, mode: Vi, action: ToggleViMode }
+  # Key: $ (scancode for 4)
+  - { key: 5, mods: Shift, mode: Vi, action: Last }
+  # Key: % (scancode for 5)
+  - { key: 6, mods: Shift, mode: Vi, action: Bracket }
+  # Key: ) (scancode for 0)
+  - { key: 11, mods: Shift, mode: Vi, action: FirstOccupied }
