@@ -202,6 +202,7 @@
     "alacritty",
     "itertools",
     "keplergrp",
+    "kipauth",
     "mentees",
     "plantuml",
     "pydantic",
