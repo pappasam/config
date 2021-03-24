@@ -5,6 +5,8 @@
   editor = nvim
   autocrlf = input
   safecrlf = true
+[init]
+  defaultBranch = main
 [alias]
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   root = rev-parse --show-toplevel
