@@ -634,13 +634,9 @@ function t() {
   else
     SESSION=Main
   fi
-  HAS_SESSION=$(tmux has-session -t $SESSION 2>/dev/null)
-  if [ $HAS_SESSION ]; then
-    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-      tmux -2 select-window -t $SESSION:1
-      tmux source-file ~/.tmux-light
-    fi
-    tmux -2 attach -t $SESSION
+  if tmux has-session -t $SESSION 2>/dev/null; then
+    echo "session '$SESSION' already exists. Attach with:"
+    echo "tmux -2 attach -t $SESSION"
   else
     tmux -2 new-session -d -s $SESSION
     if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
