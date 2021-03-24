@@ -53,8 +53,6 @@
   },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
-    "markdown": "write-good",
-    "rst": "write-good",
     "nginx": "nginx-linter"
   },
   "diagnostic-languageserver.formatFiletypes": {
@@ -65,10 +63,7 @@
       "sourceName": "nginx-linter",
       "command": "nginx-linter",
       "debounce": 100,
-      "args": [
-        "--include",
-        "%file"
-      ],
+      "args": ["--include", "%file"],
       "formatPattern": [
         "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
         {
@@ -201,6 +196,7 @@
   },
   "cSpell.userWords": [
     "Monokai",
+    "OWASP",
     "POSIX",
     "PYPI",
     "alacritty",
@@ -213,8 +209,5 @@
     "pylint",
     "venv"
   ],
-  "cSpell.ignoreRegExpList": [
-    "0x[a-f0-9]+",
-    "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
-  ]
+  "cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"]
 }
