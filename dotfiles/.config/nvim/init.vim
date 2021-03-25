@@ -10,6 +10,7 @@ function s:pack_init() abort
   " Autocompletion And IDE Features:
   call packager#add('git@github.com:neoclide/coc.nvim.git', {'branch': 'release'})
   call packager#add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
+  call packager#add('git@github.com:tjdevries/coc-zsh.git')
 
   " TreeSitter:
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
@@ -542,6 +543,7 @@ augroup end
 augroup custom_coc_additional_keyword_characters
   autocmd!
   autocmd FileType nginx let b:coc_additional_keywords = ['$']
+  autocmd FileType zsh let b:coc_additional_keywords = ['-']
 augroup end
 
 " }}}
@@ -708,6 +710,7 @@ augroup end
 augroup custom_nginx
   autocmd!
   autocmd FileType nginx set iskeyword+=$
+  autocmd FileType zsh set iskeyword+=-
 augroup end
 
 " }}}
