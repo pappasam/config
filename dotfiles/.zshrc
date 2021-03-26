@@ -701,14 +701,20 @@ function upgrade() {
 
 # Alacritty Helpers
 function dark() {
-  alacritty-dark
+  alacritty-colorscheme \
+    -c "$HOME/.alacritty.yml" \
+    -C "$HOME/src/lib/alacritty-theme/themes/" \
+    apply 'ayu_dark.yaml'
   if [ ! -z "$TMUX" ]; then
     tmux source-file ~/.tmux.conf
   fi
 }
 
 function light() {
-  alacritty-light
+  alacritty-colorscheme \
+    -c "$HOME/.alacritty.yml" \
+    -C "$HOME/src/lib/alacritty-theme/themes/" \
+    apply 'papercolor_light.yaml'
   if [ ! -z "$TMUX" ]; then
     tmux source-file ~/.tmux-light
   fi

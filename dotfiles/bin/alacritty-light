@@ -1,6 +1,0 @@
-#!/bin/bash
-
-alacritty-colorscheme \
-  -c $HOME/.alacritty.yml \
-  -C "$HOME/src/lib/alacritty-theme/themes/" \
-  apply 'papercolor_light.yaml'
