@@ -1917,11 +1917,6 @@ let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -q - | docformatter -',
-      \ 'nginx':
-      \   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
-      \   . 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
-      \   . 'cat /tmp/nginx.conf && '
-      \   . 'rm /tmp/nginx.conf',
       \ }
 
 " }}}
