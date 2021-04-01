@@ -210,6 +210,7 @@
     "pydantic",
     "pygls",
     "pylint",
+    "tomlkit",
     "venv"
   ],
   "cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"]
