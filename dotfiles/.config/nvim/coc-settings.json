@@ -195,6 +195,7 @@
     "default": "\uf29c"
   },
   "cSpell.userWords": [
+    "Anshu",
     "Incrementer",
     "Monokai",
     "OWASP",
@@ -213,6 +214,7 @@
     "pydantic",
     "pygls",
     "pylint",
+    "robustification",
     "tomlkit",
     "venv"
   ],
