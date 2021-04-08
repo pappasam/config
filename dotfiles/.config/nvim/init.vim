@@ -174,10 +174,6 @@ let mapleader = ','
 
 function! s:default_key_mappings()
   " Coc: settings for coc.nvim
-  " NOTE: <C-w><C-p> gets you in, and out, of floating windows
-  inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
-  inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
-  inoremap <silent>        <C-w>    <cmd>call SurroundCw()<CR>
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
@@ -212,6 +208,16 @@ function! s:default_key_mappings()
   nnoremap                 <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
+
+  " Pairs: Utilities for dealing with pairs
+  " NOTE: <C-w><C-p> gets you in, and out, of floating windows
+  inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
+  inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
+  inoremap <silent>        <C-w>    <cmd>call SurroundCw()<CR>
+  inoremap <silent>        }        <cmd>call SurroundPairCloseJump('{' , '}' )<CR>
+  inoremap <silent>        )        <cmd>call SurroundPairCloseJump('(' , ')' )<CR>
+  inoremap <silent>        ]        <cmd>call SurroundPairCloseJump('\[', '\]')<CR>
+  inoremap <silent>        >        <cmd>call SurroundPairCloseJump('<' , '>' )<CR>
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
@@ -524,6 +530,8 @@ function! s:autocmd_custom_coc()
   augroup custom_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    " Coc nvim might override my mappings. I call them again just in case.
+    autocmd User CocNvimInit call s:default_key_mappings()
   augroup end
 endfunction
 
@@ -1410,6 +1418,30 @@ function! SurroundCw()
   else
     call feedkeys("\<c-w>", 'ni')
   endif
+endfunction
+
+function! SurroundPairCloseJump(open, close) abort
+  let char_left = getline('.')[col('.') - 2]
+  let char_right = getline('.')[col('.') - 1]
+  " Pull out last character, hacky way of chopping off any escape characters
+  let open_raw = a:open[len(a:open) - 1]
+  let close_raw = a:close[len(a:close) - 1]
+  " If open and close are jammed together, following strategy doesn't work so
+  " we just move 1 character to the right and call it a day.
+  if char_left == open_raw && char_right == close_raw
+    call feedkeys("\<right>", 'ni')
+    return
+  endif
+  " Search to see if we're in the middle of a 'pair'. If so, it'll move the
+  " cursor one before the matching character. If not, will return 0 or -1 and
+  " we'll just insert the raw closing character.
+  if searchpair(a:open, '', a:close) <= 0
+    call feedkeys(close_raw, 'ni')
+    return
+  endif
+  " If we were in a pair, we'll reach this stage and move the character 1 to
+  " the right to get past the final character.
+  call feedkeys("\<right>", 'ni')
 endfunction
 
 " }}}
