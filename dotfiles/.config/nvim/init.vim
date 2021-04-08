@@ -150,7 +150,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:neovimhaskell/haskell-vim')
   call packager#add('git@github.com:othree/html5.vim')
   call packager#add('git@github.com:pangloss/vim-javascript')
-  call packager#add('git@github.com:pappasam/plantuml-syntax.git', {'branch': 'fix-colon-line'})
+  call packager#add('git@github.com:aklt/plantuml-syntax.git')
   call packager#add('git@github.com:pearofducks/ansible-vim')
   call packager#add('git@github.com:plasticboy/vim-markdown')
   call packager#add('git@github.com:raimon49/requirements.txt.vim')
@@ -1338,7 +1338,7 @@ command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
-" General: spacesurround {{{
+" General: spacesurround and pairs {{{
 
 " Helper functions to format surrounding text as I type
 " The function is: Surround<Key>, where key is the intended mapping key
