@@ -217,7 +217,6 @@ function! s:default_key_mappings()
   inoremap <silent>        }        <cmd>call SurroundPairCloseJump('{' , '}' )<CR>
   inoremap <silent>        )        <cmd>call SurroundPairCloseJump('(' , ')' )<CR>
   inoremap <silent>        ]        <cmd>call SurroundPairCloseJump('\[', '\]')<CR>
-  inoremap <silent>        >        <cmd>call SurroundPairCloseJump('<' , '>' )<CR>
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
