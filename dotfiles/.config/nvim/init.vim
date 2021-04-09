@@ -1424,18 +1424,17 @@ function! SurroundPairCloseJump(open, close) abort
   let char_left = getline('.')[col('.') - 2]
   let char_right = getline('.')[col('.') - 1]
   " Pull out last character, hacky way of chopping off any escape characters
-  let open_raw = a:open[len(a:open) - 1]
   let close_raw = a:close[len(a:close) - 1]
   " If open and close are jammed together, following strategy doesn't work so
   " we just move 1 character to the right and call it a day.
-  if char_left == open_raw && char_right == close_raw
+  if char_right == close_raw
     call feedkeys("\<right>", 'ni')
     return
   endif
   " Search to see if we're in the middle of a 'pair'. If so, it'll move the
   " cursor one before the matching character. If not, will return 0 or -1 and
   " we'll just insert the raw closing character.
-  if searchpair(a:open, '', a:close) <= 0
+  if searchpair(a:open, '', a:close, 'W') <= 0
     call feedkeys(close_raw, 'ni')
     return
   endif
