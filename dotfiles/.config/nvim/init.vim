@@ -1441,7 +1441,11 @@ function! SurroundPairCloseJump(open, close) abort
   " Search to see if we're in the middle of a 'pair'. If so, it'll move the
   " cursor one before the matching character. If not, will return 0 or -1 and
   " we'll just insert the raw closing character.
-  if searchpair(a:open, '', a:close, 'W') <= 0
+  "
+  " We pass the current line number to ensure that the search does not go past
+  " the current line. This prevents weird behavior where the cursor jumps to
+  " the end of the file or something.
+  if searchpair(a:open, '', a:close, 'W', '', line('.')) <= 0
     call feedkeys(close_raw, 'ni')
     return
   endif
