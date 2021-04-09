@@ -1369,8 +1369,10 @@ let s:surround_spaces = {
       \ }
 
 function! SurroundSpace()
-  let char_left = getline('.')[col('.') - 2]
-  let char_right = getline('.')[col('.') - 1]
+  let line_this = getline('.')
+  let col_this = col('.')
+  let char_left = line_this[col_this - 2]
+  let char_right = line_this[col_this - 1]
   let left_right = char_left . char_right
   if has_key(s:surround_spaces, left_right)
     call feedkeys("\<space>\<space>\<left>", 'ni')
@@ -1392,10 +1394,12 @@ let s:surround_delete = {
       \ }
 
 function! SurroundBackspace()
-  let char_left = getline('.')[col('.') - 3]
-  let char_left_mid = getline('.')[col('.') - 2]
-  let char_right_mid = getline('.')[col('.') - 1]
-  let char_right = getline('.')[col('.')]
+  let line_this = getline('.')
+  let col_this = col('.')
+  let char_left = line_this[col_this - 3]
+  let char_left_mid = line_this[col_this - 2]
+  let char_right_mid = line_this[col_this - 1]
+  let char_right = line_this[col_this]
   let mid_left_right = char_left_mid . char_right_mid
   let left_right = char_left . char_right
   if has_key(s:surround_delete, mid_left_right)
@@ -1410,10 +1414,12 @@ function! SurroundBackspace()
 endfunction
 
 function! SurroundCw()
-  let char_left = getline('.')[col('.') - 3]
-  let char_left_mid = getline('.')[col('.') - 2]
-  let char_right_mid = getline('.')[col('.') - 1]
-  let char_right = getline('.')[col('.')]
+  let line_this = getline('.')
+  let col_this = col('.')
+  let char_left = line_this[col_this - 3]
+  let char_left_mid = line_this[col_this - 2]
+  let char_right_mid = line_this[col_this - 1]
+  let char_right = line_this[col_this]
   let mid_left_right = char_left_mid . char_right_mid
   let left_right = char_left . char_right
   if has_key(s:surround_delete, mid_left_right)
@@ -1428,8 +1434,10 @@ function! SurroundCw()
 endfunction
 
 function! SurroundPairCloseJump(open, close) abort
-  let char_left = getline('.')[col('.') - 2]
-  let char_right = getline('.')[col('.') - 1]
+  let line_this = getline('.')
+  let col_this = col('.')
+  let char_left = line_this[col_this - 2]
+  let char_right = line_this[col_this - 1]
   " Pull out last character, hacky way of chopping off any escape characters
   let close_raw = a:close[len(a:close) - 1]
   " If open and close are jammed together, following strategy doesn't work so
