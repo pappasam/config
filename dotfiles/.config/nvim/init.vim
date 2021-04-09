@@ -14,6 +14,7 @@ function s:pack_init() abort
 
   " TreeSitter:
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
+  call packager#add('git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git')
   call packager#add('git@github.com:nvim-treesitter/playground.git')
 
   " Vista: Tagbar replacement extraordinaire
@@ -184,10 +185,6 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
   nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
   vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
-  xmap     <silent>        af <Plug>(coc-funcobj-a)
-  omap     <silent>        af <Plug>(coc-funcobj-a)
-  xmap     <silent>        ac <Plug>(coc-classobj-a)
-  omap     <silent>        ac <Plug>(coc-classobj-a)
   nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
   nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
   nnoremap <silent>        <leader>sl <cmd>CocListResume<CR>
@@ -564,7 +561,18 @@ function s:init_treesitter()
 lua << EOF
 require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
-  textobjects = { enable = true },
+  textobjects = {
+    select = {
+      enable = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+      },
+    },
+  },
   ensure_installed = {
     'bash',
     'c',
