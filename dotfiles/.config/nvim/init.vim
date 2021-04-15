@@ -768,9 +768,8 @@ highlight EOLWS ctermbg=DarkCyan
 match EOLWS /\s\+$/
 augroup custom_syntax_whitespace
   autocmd!
-  " mkdLineBreak is a link group; special 'link' syntax required here
-  " autocmd ColorScheme * highlight link mkdLineBreak NONE
   autocmd ColorScheme * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
+  autocmd ColorScheme * highlight link HighlightedyankRegion Visual
 
   autocmd InsertEnter * highlight clear EOLWS
   autocmd InsertLeave * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
