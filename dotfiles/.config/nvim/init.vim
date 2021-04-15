@@ -153,8 +153,8 @@ function s:pack_init() abort
   call packager#add('git@github.com:pangloss/vim-javascript')
   call packager#add('git@github.com:aklt/plantuml-syntax.git')
   call packager#add('git@github.com:pearofducks/ansible-vim')
-  call packager#add('git@github.com:plasticboy/vim-markdown')
   call packager#add('git@github.com:raimon49/requirements.txt.vim')
+  call packager#add('git@github.com:tpope/vim-markdown.git')
   call packager#add('git@github.com:ron-rs/ron.vim')
   call packager#add('git@github.com:rust-lang/rust.vim')
   call packager#add('git@github.com:tomlion/vim-solidity')
@@ -517,6 +517,7 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-word',
       \ 'coc-yaml',
+      \ 'coc-yank',
       \ ]
 
 function! s:autocmd_custom_coc()
@@ -768,7 +769,7 @@ match EOLWS /\s\+$/
 augroup custom_syntax_whitespace
   autocmd!
   " mkdLineBreak is a link group; special 'link' syntax required here
-  autocmd ColorScheme * highlight link mkdLineBreak NONE
+  " autocmd ColorScheme * highlight link mkdLineBreak NONE
   autocmd ColorScheme * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
 
   autocmd InsertEnter * highlight clear EOLWS
@@ -1949,18 +1950,6 @@ let g:repl_filetype_commands = {
 let g:repl_default = &shell
 
 " }}}
-" Package: vim-markdown {{{
-
-let g:vim_markdown_frontmatter = v:true
-let g:vim_markdown_toml_frontmatter = v:true
-let g:vim_markdown_json_frontmatter = v:true
-let g:vim_markdown_no_default_key_mappings = v:true
-let g:vim_markdown_strikethrough = v:true
-let g:vim_markdown_folding_disabled = v:true
-let g:vim_markdown_auto_insert_bullets = v:false
-let g:vim_markdown_new_list_item_indent = v:false
-
-" }}}
 " Package: vim-filetype-formatter {{{
 
 let g:vim_filetype_formatter_verbose = v:false
@@ -1988,6 +1977,9 @@ augroup end
 
 " Python: disable python 2 support
 let g:loaded_python_provider = v:true
+
+" Markdown:
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " Netrw: disable completely
 let g:loaded_netrw= v:true
