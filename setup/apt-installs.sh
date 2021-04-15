@@ -12,6 +12,7 @@
 set -e
 
 sudo add-apt-repository -y ppa:peek-developers/stable
+sudo add-apt-repository -y ppa:git-core/ppa
 
 sudo apt update
 sudo apt upgrade -y
@@ -42,6 +43,7 @@ sudo apt install -y \
   flameshot \
   fortune \
   gettext \
+  git \
   gnupg-agent \
   graphicsmagick \
   graphviz \
