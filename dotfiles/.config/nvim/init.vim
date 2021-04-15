@@ -22,6 +22,7 @@ function s:pack_init() abort
 
   " Colors: See CSS colors
   call packager#add('git@github.com:norcalli/nvim-colorizer.lua.git')
+  call packager#add('git@github.com:ntpeters/vim-better-whitespace.git')
 
   " LocationList:
   call packager#add('git@github.com:elbeardmorez/vim-loclist-follow.git')
@@ -764,26 +765,15 @@ augroup custom_redraw_on_refocus
 augroup end
 
 " Trailing Whitespace: (initial highlight below doesn't matter)
-highlight EOLWS ctermbg=DarkCyan
-match EOLWS /\s\+$/
 augroup custom_syntax_whitespace
   autocmd!
-  autocmd ColorScheme * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
-  autocmd ColorScheme * highlight link HighlightedyankRegion Visual
-
-  autocmd InsertEnter * highlight clear EOLWS
-  autocmd InsertLeave * highlight EOLWS guibg=CornflowerBlue ctermbg=DarkCyan
-
-  autocmd FileType defx highlight clear EOLWS
+  autocmd ColorScheme * highlight link ExtraWhitespace DiffText
 augroup end
-
-" Cursorline: disable, then override if necessary
-highlight CursorLine cterm=NONE
 
 try
   colorscheme PaperColorSlim
 catch
-  echo 'An error occured while configuring Papercolor'
+  echo 'An error occurred while configuring Papercolor'
 endtry
 
 " }}}
