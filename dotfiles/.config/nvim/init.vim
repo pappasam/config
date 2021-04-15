@@ -770,6 +770,12 @@ augroup custom_syntax_whitespace
   autocmd ColorScheme * highlight link ExtraWhitespace DiffText
 augroup end
 
+" Coc Yank:
+augroup custom_coc_yank
+  autocmd!
+  autocmd ColorScheme * highlight link HighlightedyankRegion Search
+augroup end
+
 try
   colorscheme PaperColorSlim
 catch
