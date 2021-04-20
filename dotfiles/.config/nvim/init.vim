@@ -1976,27 +1976,7 @@ let g:loaded_python_provider = v:true
 " Markdown:
 let g:markdown_fenced_languages = [
       \ 'bash=sh',
-      \ 'c',
-      \ 'cpp',
-      \ 'css',
-      \ 'go',
-      \ 'graphql',
-      \ 'html',
-      \ 'java',
-      \ 'javascript',
-      \ 'json',
-      \ 'jsonc',
-      \ 'lua',
-      \ 'ocaml',
-      \ 'php',
       \ 'python',
-      \ 'rst',
-      \ 'ruby',
-      \ 'rust',
-      \ 'svelte',
-      \ 'toml',
-      \ 'typescript',
-      \ 'zsh',
       \ ]
 
 " Netrw: disable completely
