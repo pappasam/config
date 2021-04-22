@@ -635,8 +635,7 @@ function t() {
     SESSION=Main
   fi
   if tmux has-session -t $SESSION 2>/dev/null; then
-    echo "session '$SESSION' already exists. Attach with:"
-    echo "tmux -2 attach -t $SESSION"
+    echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
   else
     tmux -2 new-session -d -s $SESSION
     if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
@@ -1245,8 +1244,10 @@ if [[ -o interactive ]]; then
     quote
   elif [ -n "$TMUX" ]; then
     # do nothing
+  elif tmux has-session -t Main 2>/dev/null; then
+    # do nothing
   else
-    echo 'Outside of tmux. Use command "t" to enter tmux'
+    echo 'Command "t" to enter tmux'
   fi
 
   # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
