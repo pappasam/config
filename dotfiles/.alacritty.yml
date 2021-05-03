@@ -139,9 +139,6 @@ mouse_bindings:
 mouse:
   double_click: {threshold: 300}
   triple_click: {threshold: 300}
-  url:
-    launcher: xdg-open
-    modifiers: Shift
   hide_when_typing: false
 
 selection:
