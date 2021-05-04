@@ -1895,9 +1895,6 @@ let g:goyo_width = 84
 let g:goyo_linenr = 1
 
 function! s:goyo_enter()
-  " Repeat whitespace match
-  match EOLWS /\s\+$/
-
   " Disable key mappings
   nunmap <silent> <space>j
   nunmap <silent> <space>l
@@ -1916,10 +1913,6 @@ function! s:goyo_leave()
   nunmap <silent> gw2
   nunmap <silent> gw3
   call s:default_key_mappings()
-  if &filetype == 'markdown'
-    " Preserve code highlighting
-    doautocmd Mkd BufWinEnter
-  endif
   syntax off
   syntax on
   windo call s:defx_redraw()
