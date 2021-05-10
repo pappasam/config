@@ -541,7 +541,6 @@ augroup end
 
 augroup custom_coc_pairs
   autocmd!
-  autocmd FileType html let b:coc_pairs_disabled = ['<']
   autocmd FileType plantuml let b:coc_pairs_disabled = ["'"]
   autocmd FileType rust let b:coc_pairs_disabled = ["'"]
   autocmd FileType vim let b:coc_pairs_disabled = ['"']
@@ -1385,7 +1384,6 @@ let s:surround_delete = {
       \ "''": 1,
       \ '""': 1,
       \ '()': 1,
-      \ '<>': 1,
       \ '[]': 1,
       \ '{}': 1,
       \ }
