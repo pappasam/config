@@ -668,9 +668,9 @@ function gr() {
 # git diff
 function gd() {
   if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-    git diff | delta --light --line-numbers
+    git diff $@ | delta --light --line-numbers
   else
-    git diff | delta --dark  --line-numbers
+    git diff $@ | delta --dark  --line-numbers
   fi
 }
 
