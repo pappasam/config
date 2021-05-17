@@ -179,7 +179,7 @@ function! s:default_key_mappings()
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
-  inoremap <silent>        <C-h> <cmd>call CocActionAsync('showSignatureHelp')<CR>
+  inoremap <silent>        <C-s> <cmd>call CocActionAsync('showSignatureHelp')<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
@@ -212,6 +212,7 @@ function! s:default_key_mappings()
   " NOTE: <C-w><C-p> gets you in, and out, of floating windows
   inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
   inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
+  inoremap <silent>        <C-h>    <cmd>call SurroundBackspace()<CR>
   inoremap <silent>        <C-w>    <cmd>call SurroundCw()<CR>
   inoremap <silent>        }        <cmd>call SurroundPairCloseJump('{' , '}' )<CR>
   inoremap <silent>        )        <cmd>call SurroundPairCloseJump('(' , ')' )<CR>
