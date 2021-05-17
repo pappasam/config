@@ -147,7 +147,7 @@
   "languageserver": {
     "terraform-lsp": {
       "command": "terraform-lsp",
-      "filetypes": ["terraform"],
+      "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"]
     },
     "nginx-language-server": {
@@ -157,7 +157,7 @@
     },
     "tflint": {
       "command": "tflint",
-      "filetypes": ["terraform"],
+      "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"],
       "args": ["--langserver"]
     },
