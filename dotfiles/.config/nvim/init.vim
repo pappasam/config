@@ -46,7 +46,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:kristijanhusak/defx-icons')
   call packager#add('git@github.com:mbbill/undotree')
   call packager#add('git@github.com:qpkorr/vim-bufkill')
-  call packager#add('git@github.com:romainl/vim-devdocs')
   call packager#add('git@github.com:ryvnf/readline.vim.git')
   call packager#add('git@github.com:simeji/winresizer')
   call packager#add('git@github.com:sjl/strftimedammit.vim')
