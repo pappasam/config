@@ -196,6 +196,9 @@
   },
   "cSpell.userWords": [
     "Anshu",
+    "DCM's",
+    "Deduped",
+    "Flashtalking",
     "Incrementer",
     "Mentee",
     "Monokai",
@@ -205,6 +208,7 @@
     "Roeca",
     "alacritty",
     "codebase's",
+    "deduping",
     "ingestions",
     "itertools",
     "keplergrp",
@@ -215,9 +219,12 @@
     "pydantic",
     "pygls",
     "pylint",
+    "remarketing",
     "robustification",
     "tomlkit",
-    "venv"
+    "touchpoints",
+    "venv",
+    "vlookup"
   ],
   "cSpell.ignoreRegExpList": ["0x[a-f0-9]+", "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"]
 }
