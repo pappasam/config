@@ -145,8 +145,9 @@
     }
   },
   "languageserver": {
-    "terraform-lsp": {
-      "command": "terraform-lsp",
+    "terraform-ls": {
+      "command": "terraform-ls",
+      "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"]
     },
