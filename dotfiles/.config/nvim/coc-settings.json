@@ -238,6 +238,7 @@
     "rgetattr",
     "robustification",
     "rrule",
+    "teamwide",
     "tomlkit",
     "touchpoints",
     "venv",
