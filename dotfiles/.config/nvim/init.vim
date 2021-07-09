@@ -283,7 +283,7 @@ function! s:default_key_mappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j <cmd>Defx
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type
+        \ -columns=mark:git:indent:icons:space:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
@@ -299,7 +299,7 @@ function! s:default_key_mappings()
         \ <CR>
   nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type
+        \ -columns=mark:git:indent:icons:space:filename:type
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -ignored-files=`g:defx_ignored_files`
