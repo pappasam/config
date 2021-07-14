@@ -25,12 +25,8 @@ asdf_setup_nodejs latest
 
 asdf_setup() {
   local plugin="$1"
+  local version="$2"
   asdf plugin-add "$plugin"
-  if [ "$2" = 'latest' ]; then
-    local version=$(asdf latest $plugin)
-  else
-    local version="$2"
-  fi
   asdf install "$plugin" "$version"
   asdf global "$plugin" "$version"
 }
