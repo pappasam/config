@@ -813,7 +813,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter .envrc set filetype=sh
   autocmd BufEnter .gitignore,.dockerignore set filetype=conf
   autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
-  autocmd BufEnter Dockerfile.* set filetype=dockerfile
+  autocmd BufEnter Dockerfile.* set filetype=Dockerfile
   autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
