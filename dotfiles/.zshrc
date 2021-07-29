@@ -324,8 +324,14 @@ function zshexit() {
 }
 
 # }}}
+# Imports: asdf (must be before z-shell autocompletion setup){{{
+
+include $HOME/.asdf/asdf.sh
+
+# }}}
 # Z-shell: auto completion {{{
 
+fpath=(${ASDF_DIR}/completions $fpath)
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
@@ -489,12 +495,6 @@ SPACESHIP_VENV_SUFFIX=')'
 SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
-
-# }}}
-# Imports: asdf (needs to run after zsh setup) {{{
-
-include $HOME/.asdf/asdf.sh
-include $HOME/.asdf/completions/asdf.bash
 
 # }}}
 # General: post-asdf env setup {{{
@@ -942,6 +942,17 @@ function goglobal-install() {  ## Install default golang dependencies
   go get github.com/mattn/efm-langserver
   asdf reshim golang
 }
+
+function _asdf_complete_plugins() {  ## zsh completion function for plugin-list
+  local -a subcmds
+  subcmds=($(asdf plugin-list | tr '\n' ' '))
+  _describe 'List installed plugins for zsh completion' subcmds
+}
+
+function asdfl() {  ## Install and set the latest version of asdf
+  asdf install $1 latest && asdf global $1 latest
+}
+compdef _asdf_complete_plugins asdfl
 
 # activate virtual environment from any directory from current and up
 # Name of virtualenv
