@@ -14,8 +14,7 @@ asdf_setup_nodejs() {
   else
     local version="$1"
   fi
-  asdf install "$plugin" "$version"
-  asdf global "$plugin" "$version"
+  asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
 asdf_setup_nodejs latest
@@ -27,8 +26,7 @@ asdf_setup() {
   local plugin="$1"
   local version="$2"
   asdf plugin-add "$plugin"
-  asdf install "$plugin" "$version"
-  asdf global "$plugin" "$version"
+  asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
 asdf_setup direnv latest
