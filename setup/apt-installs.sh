@@ -17,6 +17,8 @@ sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 sudo apt upgrade -y
 
+# dict-moby-thesaurus : this doesn't appear to be available on ubuntu?
+
 sudo apt install -y \
   apache2-utils \
   apt-transport-https \
@@ -35,7 +37,6 @@ sudo apt install -y \
   curl \
   dict \
   dict-gcide \
-  dict-moby-thesaurus \
   dict-wn \
   entr \
   expect-dev \
