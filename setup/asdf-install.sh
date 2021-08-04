@@ -45,7 +45,6 @@ asdf_setup shellcheck latest
 asdf_setup shfmt latest
 asdf_setup sqlite latest
 asdf_setup terraform-ls latest
-asdf_setup terraform-lsp latest
 asdf_setup tflint latest
 asdf_setup tfsec latest
 asdf_setup tmux latest
