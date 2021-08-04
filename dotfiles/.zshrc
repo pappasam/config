@@ -197,7 +197,6 @@ if [ -f $HOME/.zplug/init.zsh ]; then
 
   # use double quotes: the plugin manager author says we must for some reason
   zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-  zplug "paulirish/git-open", as:plugin
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zsh-users/zsh-syntax-highlighting", as:plugin
@@ -679,6 +678,25 @@ function gd() {
   else
     git diff $@ | delta --dark  --line-numbers
   fi
+}
+
+# open browser at current location
+function gop() {
+  if [ ! $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  elif [[ $# = 0 ]]; then
+    gh browse
+    return 0
+  fi
+  local git_root=$(git root)
+  local arg_expanded=$(readlink -f "$1")
+  local arg_relative=$(realpath --relative-base="$git_root" "$arg_expanded")
+  if [[ "$arg_relative" = '.' ]]; then
+    gh browse
+    return 0
+  fi
+  gh browse "$arg_relative"
 }
 
 # upgrade relevant local systems
