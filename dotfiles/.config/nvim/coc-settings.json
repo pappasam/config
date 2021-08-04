@@ -19,7 +19,9 @@
     "fastai",
     "fastcore",
     "matplotlib",
-    "sqlalchemy"
+    "sqlalchemy",
+    "django",
+    "django.db"
   ],
   "jedi.diagnostics.enable": false,
   "jedi.startupMessage": true,
