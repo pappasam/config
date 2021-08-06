@@ -144,6 +144,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:killphi/vim-ebnf')
   call packager#add('git@github.com:lervag/vimtex')
   call packager#add('git@github.com:marshallward/vim-restructuredtext')
+  call packager#add('git@github.com:jxnblk/vim-mdx-js.git')
   call packager#add('git@github.com:martinda/Jenkinsfile-vim-syntax')
   call packager#add('git@github.com:mattn/vim-xxdcursor')
   call packager#add('git@github.com:mopp/rik_octave.vim')
@@ -2037,10 +2038,11 @@ let g:indentLine_enabled = v:false  " indentlines disabled by default
 
 " BulletsVim:
 let g:bullets_enabled_file_types = [
-      \ 'markdown',
-      \ 'text',
       \ 'gitcommit',
+      \ 'markdown',
+      \ 'markdown.mdx',
       \ 'scratch',
+      \ 'text',
       \ 'rst',
       \ ]
 let g:bullets_outline_levels = ['num', 'std-']
