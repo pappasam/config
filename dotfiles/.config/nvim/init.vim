@@ -180,6 +180,7 @@ function! s:default_key_mappings()
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
   inoremap <silent>        <C-s> <cmd>call CocActionAsync('showSignatureHelp')<CR>
+  nnoremap <silent>        <C-w>f <cmd>call coc#float#jump()<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
@@ -209,7 +210,6 @@ function! s:default_key_mappings()
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
 
   " Pairs: Utilities for dealing with pairs
-  " NOTE: <C-w><C-p> gets you in, and out, of floating windows
   inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
   inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
   inoremap <silent>        <C-h>    <cmd>call SurroundBackspace()<CR>
