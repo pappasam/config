@@ -33,6 +33,7 @@ window:
   # Window decorations
   # Setting this to none will result in window without borders and title bar.
   decorations: full
+  opacity: 1.0
 
 # The FreeType rasterizer needs to know the device DPI for best results
 # (changes require restart)
@@ -120,8 +121,6 @@ colors:
 bell:
   animation: EaseOutExpo
   duration: 0
-
-background_opacity: 1.0
 
 scrolling:
   # How many lines of scrollback to keep,
