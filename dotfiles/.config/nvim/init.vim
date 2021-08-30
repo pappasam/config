@@ -511,7 +511,6 @@ let g:coc_global_extensions = [
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
-      \ 'coc-spell-checker',
       \ 'coc-svelte',
       \ 'coc-svg',
       \ 'coc-syntax',
