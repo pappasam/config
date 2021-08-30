@@ -515,6 +515,7 @@ let g:coc_global_extensions = [
       \ 'coc-svg',
       \ 'coc-syntax',
       \ 'coc-texlab',
+      \ 'coc-toml',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-word',
