@@ -799,7 +799,7 @@ compdef _directories gitzip
 function m() {
   man --location "$@" &> /dev/null
   if [ $? -eq 0 ]; then
-    man --pager=cat "$@" 2>/dev/null | nvim -c 'set ft=man' -
+    man --pager=cat "$@" 2>/dev/null | nvim -c '+Man!' -
   else
     man "$@"
   fi
