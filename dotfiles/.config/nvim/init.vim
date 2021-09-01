@@ -132,7 +132,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:cespare/vim-toml')
   call packager#add('git@github.com:chr4/nginx.vim.git')
   call packager#add('git@github.com:derekwyatt/vim-scala')
-  call packager#add('git@github.com:ekalinin/Dockerfile.vim')
   call packager#add('git@github.com:evanleck/vim-svelte')
   call packager#add('git@github.com:farfanoide/vim-kivy')
   call packager#add('git@github.com:gisraptor/vim-lilypond-integrator.git')
@@ -593,6 +592,7 @@ require('nvim-treesitter.configs').setup({
     'c',
     'cpp',
     'css',
+    'dockerfile',
     'gdscript',
     'go',
     'graphql',
@@ -814,7 +814,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter .envrc set filetype=sh
   autocmd BufEnter .gitignore,.dockerignore set filetype=conf
   autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term set filetype=json
-  autocmd BufEnter Dockerfile.* set filetype=Dockerfile
+  autocmd BufEnter Dockerfile.* set filetype=dockerfile
   autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
