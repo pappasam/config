@@ -16,6 +16,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git')
   call packager#add('git@github.com:nvim-treesitter/playground.git')
+  call packager#add('git@github.com:windwp/nvim-ts-autotag.git')
 
   " Vista: Tagbar replacement extraordinaire
   call packager#add('git@github.com:liuchengxu/vista.vim.git')
@@ -53,7 +54,6 @@ function s:pack_init() abort
   call packager#add('git@github.com:unblevable/quick-scope')
   call packager#add('git@github.com:wincent/ferret')
   call packager#add('git@github.com:yssl/QFEnter')
-  call packager#add('git@github.com:alvan/vim-closetag.git')
   call packager#add('git@github.com:dstein64/nvim-scrollview.git')
 
   " KeywordPrg:
@@ -586,6 +586,9 @@ require('nvim-treesitter.configs').setup({
           ["ic"] = "@class.inner",
       },
     },
+  },
+  autotag = {
+    enable = true,
   },
   ensure_installed = {
     'bash',
@@ -2071,9 +2074,6 @@ let g:hexmode_xxd_options = '-g 2'
 " Syntax Omni Completion:
 let g:omni_syntax_use_single_byte = v:false
 let g:omni_syntax_use_iskeyword_numeric = v:false
-
-" CloseTags:
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx,*.jsx'
 
 " LocListFollow:
 let g:loclist_follow = 1
