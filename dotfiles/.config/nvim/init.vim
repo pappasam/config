@@ -589,6 +589,7 @@ require('nvim-treesitter.configs').setup({
   },
   ensure_installed = {
     'bash',
+    'bibtex',
     'c',
     'cpp',
     'css',
@@ -596,6 +597,7 @@ require('nvim-treesitter.configs').setup({
     'gdscript',
     'go',
     'graphql',
+    'hcl',
     'html',
     'java',
     'javascript',
@@ -603,6 +605,7 @@ require('nvim-treesitter.configs').setup({
     'json',
     'jsonc',
     'julia',
+    'latex',
     'ledger',
     'lua',
     'ocaml',
