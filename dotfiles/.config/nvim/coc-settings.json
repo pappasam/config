@@ -54,7 +54,8 @@
   },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
-    "nginx": "nginx-linter"
+    "nginx": "nginx-linter",
+    "terraform": "tflint"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "python": ["black", "isort", "docformatter"]
@@ -97,6 +98,7 @@
         {
           "line": 1,
           "column": 2,
+          "endColumn": 2,
           "security": 3,
           "message": 4
         }
@@ -111,6 +113,7 @@
         "fatal": "error"
       },
       "offsetColumn": 1,
+      "offsetColumnEnd": 1,
       "formatLines": 1
     },
     "write-good": {
@@ -127,6 +130,24 @@
           "line": 2,
           "column": 3,
           "message": 1
+        }
+      ]
+    },
+    "tflint": {
+      "sourceName": "tflint",
+      "command": "tflint-for-coc",
+      "debounce": 100,
+      "args": ["%file"],
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "formatLines": 1,
+      "formatPattern": [
+        "^[^:]*?:(\\d+?),(\\d+?)-(\\d+?):\\s+?(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "endColumn": 3,
+          "message": 4
         }
       ]
     }
@@ -156,12 +177,6 @@
       "command": "nginx-language-server",
       "filetypes": ["nginx"],
       "rootPatterns": ["nginx.conf", ".git"]
-    },
-    "tflint": {
-      "command": "tflint",
-      "filetypes": ["terraform", "tf"],
-      "rootPatterns": ["Makefile", ".git"],
-      "args": ["--langserver"]
     },
     "cobol": {
       "command": "cobol-language-server",
@@ -195,5 +210,5 @@
     "snippet": "\ue60b",
     "typeParameter": "\uf728",
     "default": "\uf29c"
-  },
+  }
 }

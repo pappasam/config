@@ -1,0 +1,8 @@
+#!/bin/bash
+# Explanation
+# 1. Run tflint with json format
+# 2. Get error messages as a list of strings
+# 3a. Remove first quote
+# 3b. Remove last quote
+# 3c. Replace all escaped quotes with regular quotes
+tflint --format json "$1" | jq ".errors[].message" | sed -e 's/^"//' -e 's/"$//' -e 's/\\"/"/g'
