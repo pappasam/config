@@ -783,6 +783,15 @@ augroup custom_redraw_on_refocus
   autocmd FocusGained * redraw!
 augroup end
 
+" Typescript Fix Paren Highlights:
+augroup custom_syntax_typescript_fix_parens
+  autocmd!
+  " typescriptParens are stupidly linked to 'Normal' in Neovim.
+  " This causes problems with hover windows in coc and is solved here
+  autocmd ColorScheme * highlight link typescriptParens NONE
+  autocmd ColorScheme * highlight link typescriptParens cleared
+augroup end
+
 " Trailing Whitespace: (initial highlight below doesn't matter)
 augroup custom_syntax_whitespace
   autocmd!
