@@ -7,6 +7,15 @@
 #   one of the latest Linux distributions. Things may have changed on the
 #   internet between now and your runtime.
 
+
+#######################################################################
+# Audio: apple airplay
+#######################################################################
+# required to get airplay to work
+# https://askubuntu.com/questions/1324297/cant-enable-make-discoverable-pulseaudio-network-sound-devices-available-local
+# https://tutorialforlinux.com/2021/02/12/step-by-step-airplay-speakers-ubuntu-21-04-setup-guide/
+sudo ln -s /usr/lib/pulse-13.99.1 /usr/lib/pulse-13.99
+
 #######################################################################
 # zshell
 #######################################################################
