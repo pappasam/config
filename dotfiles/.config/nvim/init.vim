@@ -65,9 +65,10 @@ function s:pack_init() abort
   call packager#add('git@github.com:junegunn/fzf.vim')
 
   " Git:
-  call packager#add('git@github.com:junegunn/gv.vim')
   call packager#add('git@github.com:rhysd/git-messenger.vim.git')
   call packager#add('git@github.com:tpope/vim-fugitive')
+  " Gives command :Flog , which opens git history of repo. Alternative go :GV
+  call packager#add('git@github.com:rbong/vim-flog.git')
   call packager#add('git@github.com:sodapopcan/vim-twiggy.git')
 
   " Text Objects:
