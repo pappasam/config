@@ -97,9 +97,12 @@ sudo apt install -y \
   ncurses-doc \
   network-manager-openvpn \
   openssl \
+  paprefs \
   peek \
   perl \
   pkg-config \
+  pulseaudio-module-gsettings \
+  pulseaudio-module-raop \
   python-openssl \
   re2c \
   screenkey \
