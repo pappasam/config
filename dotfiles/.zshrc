@@ -685,18 +685,20 @@ function gop() {
   if [ ! $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
     echo "'$PWD' is not inside a git repository"
     return 1
-  elif [[ $# = 0 ]]; then
-    gh browse
+  fi
+  local branch_current=$(git branch --show-current)
+  if [[ $# = 0 ]]; then
+    gh browse --branch "$branch_current"
     return 0
   fi
   local git_root=$(git root)
   local arg_expanded=$(readlink -f "$1")
   local arg_relative=$(realpath --relative-base="$git_root" "$arg_expanded")
   if [[ "$arg_relative" = '.' ]]; then
-    gh browse
-    return 0
+    gh browse --branch "$branch_current"
+  else
+    gh browse "$arg_relative" --branch "$branch_current"
   fi
-  gh browse "$arg_relative"
 }
 
 # upgrade relevant local systems
