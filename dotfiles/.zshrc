@@ -708,11 +708,11 @@ function upgrade() {
   sudo apt autoremove -y
   asdf update
   asdf plugin-update --all
-  pushd
+  pushd .
   cd ~/dotfiles
   git pull
   popd
-  pushd
+  pushd .
   cd ~/src/lib/alacritty
   git pull
   asdf local rust nightly
