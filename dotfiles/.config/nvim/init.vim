@@ -824,6 +824,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.handlebars set filetype=html
   autocmd BufEnter *.hql,*.q set filetype=hive
   autocmd BufEnter *.js,*.gs set filetype=javascript
+  autocmd BufEnter *.min.js set filetype=none
   autocmd BufEnter *.m,*.oct set filetype=octave
   autocmd BufEnter *.py.j2 set filetype=python.jinja2
   autocmd BufEnter *.sql.j2 set filetype=sql.jinja2
