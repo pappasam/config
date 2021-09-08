@@ -17,6 +17,7 @@ function s:pack_init() abort
   call packager#add('git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git')
   call packager#add('git@github.com:nvim-treesitter/playground.git')
   call packager#add('git@github.com:windwp/nvim-ts-autotag.git')
+  call packager#add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git')
 
   " Vista: Tagbar replacement extraordinaire
   call packager#add('git@github.com:liuchengxu/vista.vim.git')
@@ -1486,6 +1487,28 @@ function! SurroundPairCloseJump(open, close) abort
   " the right to get past the final character.
   call feedkeys("\<right>", 'ni')
 endfunction
+
+" }}}
+" Package: nvim-ts-context-commentstring {{{
+
+function s:init_ts_context_commentstring()
+  if !exists('g:loaded_commentary')
+    echom 'ts context commentstring does not exist, skipping...'
+    return
+  endif
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
+}
+EOF
+endfunction
+
+augroup custom_ts_context_commentstring
+  autocmd!
+  autocmd VimEnter * call s:init_ts_context_commentstring()
+augroup end
 
 " }}}
 " Package: git plugins: gv.vim, fugitive, git-messenger {{{
