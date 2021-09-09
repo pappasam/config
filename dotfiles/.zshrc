@@ -709,10 +709,6 @@ function upgrade() {
   asdf update
   asdf plugin-update --all
   pushd .
-  cd ~/dotfiles
-  git pull
-  popd
-  pushd .
   cd ~/src/lib/alacritty
   git pull
   asdf local rust nightly
