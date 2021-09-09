@@ -1640,6 +1640,13 @@ endfunction
 augroup custom_diffview
   autocmd!
   autocmd VimEnter * call s:init_diffview()
+  autocmd FileType DiffviewFiles nnoremap <buffer> <silent> q <cmd>tabclose<cr>
+  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
+  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
+  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
+  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
+  autocmd FileType DiffviewFiles nnoremap <buffer> <silent> <space>j <cmd>DiffviewToggleFiles<cr>
+  autocmd VimEnter * command! Gdiff DiffviewOpen
 augroup end
 
 " }}}
