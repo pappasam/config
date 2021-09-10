@@ -173,11 +173,6 @@
       "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"]
     },
-    "nginx-language-server": {
-      "command": "nginx-language-server",
-      "filetypes": ["nginx"],
-      "rootPatterns": ["nginx.conf", ".git"]
-    },
     "cobol": {
       "command": "cobol-language-server",
       "filetypes": ["cobol"],
