@@ -1125,6 +1125,9 @@ function pynew() {
 """The main module"""
 
 EOL
+  git init
+  git add .
+  git commit -m "Initial commit"
 }
 
 # Profiling neovim
