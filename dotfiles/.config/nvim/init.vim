@@ -1947,7 +1947,12 @@ function! s:open_defx_if_directory()
   if isdirectory(expand(expand('%:p')))
     Defx `expand('%:p')`
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:filename:type:size:time
+        \ -columns=mark:git:indent:icons:space:filename:type
+        \ -ignored-files=`g:defx_ignored_files`
+        \ -floating-preview
+        \ -vertical-preview
+        \ -preview-height=50
+        \ -preview-width=85
   endif
 endfunction
 
