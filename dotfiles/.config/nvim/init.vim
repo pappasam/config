@@ -1612,7 +1612,7 @@ require'diffview'.setup {
     },
     file_history_panel = {
       ["g!"]            = cb("options"),            -- Open the option panel
-      ["<C-d>"]         = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
+      ["d"]         = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
       ["zR"]            = cb("open_all_folds"),
       ["zM"]            = cb("close_all_folds"),
       ["j"]             = cb("next_entry"),
@@ -1642,12 +1642,12 @@ endfunction
 augroup custom_diffview
   autocmd!
   autocmd VimEnter * call s:init_diffview()
-  autocmd FileType DiffviewFiles nnoremap <buffer> <silent> q <cmd>tabclose<cr>
-  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
-  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
-  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
-  autocmd FileType DiffviewFiles cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
-  autocmd FileType DiffviewFiles nnoremap <buffer> <silent> <space>j <cmd>DiffviewToggleFiles<cr>
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <cmd>tabclose<cr>
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <cmd>DiffviewToggleFiles<cr>
 augroup end
 
 " }}}
