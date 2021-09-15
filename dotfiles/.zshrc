@@ -701,6 +701,24 @@ function gop() {
   fi
 }
 
+function gdl() {  # checkout origin default, pull, delete old branch, and prune
+  if [ ! $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  fi
+  local branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+  if [ -z "$branch_default" ]; then
+    echo "Cannot connect to remote repo. Check internet connection..."
+    return 2
+  fi
+  local branch_current=$(git branch --show-current)
+  git checkout "$branch_default" && \
+    git pull && \
+    git branch -d "$branch_current" && \
+    git remote prune origin && \
+    git remote set-head origin -a
+}
+
 # upgrade relevant local systems
 function upgrade() {
   sudo apt update
