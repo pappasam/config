@@ -196,12 +196,12 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
 
-  nnoremap <silent><nowait><expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
-  nnoremap <silent><nowait><expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
-  inoremap <silent><nowait><expr> <C-e> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-e>"
-  inoremap <silent><nowait><expr> <C-y> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-y>"
-  vnoremap <silent><nowait><expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
-  vnoremap <silent><nowait><expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
+  nnoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
+  nnoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
+  inoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-e>"
+  inoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-y>"
+  vnoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
+  vnoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
 
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
@@ -1967,7 +1967,7 @@ function! s:defx_buffer_remappings() abort
   for [key, value] in g:custom_defx_mappings
     execute 'nnoremap <silent><buffer><expr> ' . key . ' ' . value
   endfor
-  nnoremap <silent><buffer> ?
+  nnoremap <silent> <buffer> ?
         \ :for [key, value] in g:custom_defx_mappings <BAR>
         \ echo '' . key . ': ' . value <BAR>
         \ endfor<CR>
