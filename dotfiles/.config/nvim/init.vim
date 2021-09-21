@@ -285,7 +285,7 @@ function! s:default_key_mappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j <cmd>Defx
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename:type
+        \ -columns=mark:git:indent:icons:space:filename
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -session-file=`g:custom_defx_state`
@@ -301,7 +301,7 @@ function! s:default_key_mappings()
         \ <CR>
   nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename:type
+        \ -columns=mark:git:indent:icons:space:filename
         \ -direction=topleft
         \ -search=`expand('%:p')`
         \ -ignored-files=`g:defx_ignored_files`
@@ -657,7 +657,7 @@ set shortmess+=I
 set hidden
 
 " Sign Column: always show it
-set signcolumn=yes
+set signcolumn=number
 
 " Mouse: enable GUI mouse support in all modes
 set mouse=a
@@ -1105,17 +1105,13 @@ augroup end
 " https://stackoverflow.com/questions/2075276/longest-line-in-vim
 function! s:resize_window_width()
   normal! m`
-  let maxlength   = 0
-  let linenumber  = 1
-  while linenumber <= line('$')
-    exe ':' . linenumber
-    let linelength  = virtcol('$')
-    if maxlength < linelength
-      let maxlength = linelength
-    endif
-    let linenumber  = linenumber+1
-  endwhile
-  exe ':vertical resize ' . (maxlength + 4)
+  let max_line = line('$')
+  let maxlength = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
+  if &number
+    execute ':vertical resize ' . (maxlength + len(max_line + '') + 1)
+  else
+    execute ':vertical resize ' . (maxlength - 1)
+  endif
   normal! ``
 endfunction
 
@@ -1946,7 +1942,7 @@ function! s:open_defx_if_directory()
   if isdirectory(expand(expand('%:p')))
     Defx `expand('%:p')`
         \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename:type
+        \ -columns=mark:git:indent:icons:space:filename
         \ -ignored-files=`g:defx_ignored_files`
         \ -floating-preview
         \ -vertical-preview
