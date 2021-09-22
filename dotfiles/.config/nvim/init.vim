@@ -452,12 +452,13 @@ augroup end
 augroup custom_remap_defx
   autocmd!
   autocmd FileType defx call s:defx_buffer_remappings()
-  autocmd FileType defx nmap     <buffer> <silent> gp <Plug>(defx-git-prev)
-  autocmd FileType defx nmap     <buffer> <silent> gn <Plug>(defx-git-next)
-  autocmd FileType defx nmap     <buffer> <silent> gs <Plug>(defx-git-stage)
-  autocmd FileType defx nmap     <buffer> <silent> gu <Plug>(defx-git-reset)
-  autocmd FileType defx nmap     <buffer> <silent> gd <Plug>(defx-git-discard)
-  autocmd FileType defx nnoremap <buffer> <silent> <C-l> <cmd>ResizeWindowWidth<CR>
+  autocmd FileType defx nmap     <buffer> <silent>        gp <Plug>(defx-git-prev)
+  autocmd FileType defx nmap     <buffer> <silent>        gn <Plug>(defx-git-next)
+  autocmd FileType defx nmap     <buffer> <silent>        gs <Plug>(defx-git-stage)
+  autocmd FileType defx nmap     <buffer> <silent>        gu <Plug>(defx-git-reset)
+  autocmd FileType defx nmap     <buffer> <silent>        gd <Plug>(defx-git-discard)
+  autocmd FileType defx nnoremap <buffer> <silent> <expr> <C-l> defx#do_action('resize', winwidth(0)+2)
+  autocmd FileType defx nnoremap <buffer> <silent> <expr> <C-h> defx#do_action('resize', winwidth(0)-2)
 augroup end
 
 augroup custom_init_vim
@@ -1900,7 +1901,6 @@ let g:custom_defx_mappings = [
       \ [';             ', "defx#do_action('repeat')"],
       \ ['<2-LeftMouse> ', "defx#is_directory() ? defx#do_action('open_tree', 'toggle') : defx#do_action('drop')"],
       \ ['<C-g>         ', "defx#do_action('print')"],
-      \ ['<C-h>         ', "defx#do_action('resize', 31)"],
       \ ['<C-r>         ', "defx#do_action('redraw')"],
       \ ['<C-t>         ', "defx#do_action('open', 'tabe')"],
       \ ['<C-v>         ', "defx#do_action('open', 'vsplit')"],
@@ -1932,8 +1932,8 @@ function! s:autocmd_custom_defx()
     return
   endif
   call defx#custom#column('filename', {
-        \ 'min_width': 100,
-        \ 'max_width': 100,
+        \ 'min_width': 10,
+        \ 'max_width_percent': 90,
         \ })
 endfunction
 
