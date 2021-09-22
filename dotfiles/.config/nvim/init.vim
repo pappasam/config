@@ -1104,14 +1104,17 @@ augroup end
 " modified function from:
 " https://stackoverflow.com/questions/2075276/longest-line-in-vim
 function! s:resize_window_width()
-  normal! m`
+  if &wrap
+    echo 'run `:set nowrap` before resizing window'
+    return
+  endif
   let max_line = line('$')
   let maxlength = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
-  if &number
-    execute ':vertical resize ' . (maxlength + len(max_line + '') + 1)
-  else
-    execute ':vertical resize ' . (maxlength - 1)
-  endif
+  let adjustment = &number
+        \ ? maxlength + len(max_line + '') + 1
+        \ : maxlength - 1
+  normal! m`
+  execute ':vertical resize ' . adjustment
   normal! ``
 endfunction
 
