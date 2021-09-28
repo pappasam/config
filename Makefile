@@ -10,4 +10,3 @@ stow-dotfiles:  ## soft-link dotfiles in home folder with stow
 stow-dotfiles-no-restow:  ## soft-link dotfiles in home folder with stow, without restow
 	@mkdir -p $(MKDIR_CONFIG) $(MKDIR_HOME)
 	stow --target $(HOME) dotfiles
-
