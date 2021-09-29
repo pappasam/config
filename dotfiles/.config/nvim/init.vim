@@ -1112,7 +1112,7 @@ function! s:resize_window_width()
   let max_line = line('$')
   let maxlength = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
   let adjustment = &number
-        \ ? maxlength + len(max_line + '') + 1
+        \ ? maxlength + max([len(max_line + ''), 2]) + 1
         \ : maxlength - 1
   normal! m`
   execute ':vertical resize ' . adjustment
