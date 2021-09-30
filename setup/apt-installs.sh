@@ -108,7 +108,6 @@ sudo apt install -y \
   screenkey \
   shellcheck \
   software-properties-common \
-  stow \
   texlive-full \
   tk-dev \
   tree \
@@ -118,6 +117,7 @@ sudo apt install -y \
   wget \
   xclip \
   xsel \
+  xstow \
   xz-utils \
   xzdec \
   zathura \
