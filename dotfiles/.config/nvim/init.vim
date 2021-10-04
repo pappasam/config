@@ -2283,7 +2283,7 @@ augroup custom_colorizer
 augroup end
 
 " }}}
-" Tidbits: helpful hints {{{
+" Tidbits: helpful hints / temporary fixes {{{
 
 " This is my Neovim configuration file. Hopefully you enjoy using it as much
 " as me! I use Linux Mint / Ubuntu 18.04, but this will probably work with
@@ -2333,6 +2333,15 @@ augroup end
 " ExMode:
 " Q -> opens ex mode
 " To lean more about the ex editor, type 'man ex'
+
+" Temporary Fixes
+
+" Fix weird package issues with nightly. Periodically try removing these
+" explicit packadd statements and see if things have fixed themselves.
+packadd coc-jedi.git
+packadd defx.nvim
+packadd defx-git
+packadd defx-icons
 
 " }}}
 " Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
