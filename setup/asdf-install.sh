@@ -28,7 +28,7 @@
 asdf_setup() {
   local plugin="$1"
   local version="$2"
-  asdf plugin-add "$plugin"
+  asdf plugin add "$plugin"
   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
