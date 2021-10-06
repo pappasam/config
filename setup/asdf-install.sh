@@ -5,19 +5,22 @@
 ###########################################################################
 # Custom
 
-asdf_setup_nodejs() {
-  local plugin="nodejs"
-  asdf plugin-add "$plugin"
-  bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-  if [ "$1" = 'latest' ]; then
-    local version=$(asdf latest $plugin)
-  else
-    local version="$1"
-  fi
-  asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
-}
+# I believe nodejs has been fixed. Keeping commented lines in case we run into
+# issues in the future
 
-asdf_setup_nodejs latest
+# asdf_setup_nodejs() {
+#   local plugin="nodejs"
+#   asdf plugin-add "$plugin"
+#   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+#   if [ "$1" = 'latest' ]; then
+#     local version=$(asdf latest $plugin)
+#   else
+#     local version="$1"
+#   fi
+#   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
+# }
+
+# asdf_setup_nodejs latest
 
 ###########################################################################
 # Generalized
@@ -29,6 +32,7 @@ asdf_setup() {
   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
+asdf_setup nodejs latest
 asdf_setup direnv latest
 asdf_setup fzf latest
 asdf_setup github-cli latest
