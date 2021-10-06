@@ -182,7 +182,7 @@ function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
-  nnoremap <silent>        <C-k> <cmd>call <SID>show_documentation()<CR>
+  nnoremap <silent>        <C-k> <cmd>call CocActionAsync('doHover')<CR>
   inoremap <silent>        <C-s> <cmd>call CocActionAsync('showSignatureHelp')<CR>
   nnoremap <silent>        <C-w>f <cmd>call coc#float#jump()<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
@@ -477,15 +477,6 @@ augroup end
 
 " }}}
 " Package: coc.nvim {{{
-
-" Coc:
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'help ' . expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
 
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
