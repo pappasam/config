@@ -554,11 +554,12 @@ augroup end
 " Package: treesitter {{{
 
 function s:init_treesitter()
-  if !exists('g:loaded_nvim_treesitter')
-    echom 'nvim-treesitter does not exist, skipping...'
-    return
-  endif
 lua << EOF
+local ok, _ = pcall(require, 'nvim-treesitter.configs')
+if not ok then
+  print('nvim-treesitter does not exist, skipping...')
+  return
+end
 -- nvim-treesitter/queries/python/injections.scm, with docstring
 -- injections removed
 local py_injections = [[
@@ -1498,6 +1499,11 @@ function s:init_ts_context_commentstring()
     return
   endif
 lua << EOF
+local ok, _ = pcall(require, 'nvim-treesitter.configs')
+if not ok then
+  print('nvim-treesitter does not exist, skipping...')
+  return
+end
 require'nvim-treesitter.configs'.setup {
   context_commentstring = {
     enable = true
@@ -1547,7 +1553,6 @@ function s:init_diffview()
   endif
 lua << EOF
 local cb = require'diffview.config'.diffview_callback
-
 require'diffview'.setup {
   diff_binaries = false,    -- Show diffs for binaries
   use_icons = true,         -- Requires nvim-web-devicons
@@ -2097,6 +2102,11 @@ function s:init_zen_mode()
     return
   endif
 lua << EOF
+local ok, _ = pcall(require, 'zen-mode')
+if not ok then
+  print('zen-mode does not exist, skipping...')
+  return
+end
 require'zen-mode'.setup {
   window = {
     backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
@@ -2303,9 +2313,20 @@ augroup end
 " }}}
 " Package: nvim-colorizer {{{
 
+function s:init_colorizer()
+lua << EOF
+local ok, _ = pcall(require, 'colorizer')
+if not ok then
+  print('zen-mode does not exist, skipping...')
+  return
+end
+require'colorizer'.setup()
+EOF
+endfunction
+
 augroup custom_colorizer
   autocmd!
-  autocmd VimEnter * lua require'colorizer'.setup()
+  autocmd VimEnter * call s:init_colorizer()
 augroup end
 
 " }}}
