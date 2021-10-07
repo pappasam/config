@@ -53,6 +53,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:wincent/ferret')
   call a:packager.add('git@github.com:yssl/QFEnter')
   call a:packager.add('git@github.com:dstein64/nvim-scrollview.git')
+  call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
@@ -96,7 +97,6 @@ function! s:packager_init(packager) abort
   " Writing:
   call a:packager.add('git@github.com:dkarter/bullets.vim')
   call a:packager.add('git@github.com:jlesquembre/rst-tables.nvim')
-  call a:packager.add('git@github.com:junegunn/goyo.vim')
   call a:packager.add('git@github.com:junegunn/limelight.vim')
   call a:packager.add('git@github.com:moiatgit/vim-rst-sections')
 
@@ -326,8 +326,8 @@ function! s:default_key_mappings()
   " Override <C-w>H to delete defx buffers
   nnoremap <C-w>H <cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
 
-  " Goyo And Writing:
-  nnoremap <leader><leader>g <cmd>Goyo<CR>
+  " Zenmode / Writing:
+  nnoremap <leader><leader>g <cmd>ZenMode<CR>
   nnoremap <leader><leader>l <cmd>Limelight!!<CR>
   nmap     <leader><leader>v <Plug>Veil
 
@@ -2089,40 +2089,68 @@ endfunction
 let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " }}}
-" Package: goyo {{{
+" Package: zen-mode.nvim {{{
 
-let g:goyo_height = '100%'
-let g:goyo_width = 84
-let g:goyo_linenr = 1
-
-function! s:goyo_enter()
-  " Disable key mappings
-  nunmap <silent> <space>j
-  nunmap <silent> <space>l
-  nunmap <silent> <space>u
-
-  " Width: 1, 2, or 3 files wide
-  nnoremap <silent> gww :Goyo 84<CR>
-  nnoremap <silent> gw1 :Goyo 84<CR>
-  nnoremap <silent> gw2 :Goyo 168<CR>
-  nnoremap <silent> gw3 :Goyo 252<CR>
+function s:init_zen_mode()
+  if !exists('g:loaded_commentary')
+    echom 'ts context commentstring does not exist, skipping...'
+    return
+  endif
+lua << EOF
+require'zen-mode'.setup {
+  window = {
+    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+    -- height and width can be:
+    -- * an absolute number of cells when > 1
+    -- * a percentage of the width / height of the editor when <= 1
+    -- * a function that returns the width or the height
+    width = 120, -- width of the Zen window
+    height = 1, -- height of the Zen window
+    -- by default, no options are changed for the Zen window
+    -- uncomment any of the options below, or add other vim.wo options you want to apply
+    options = {
+      -- signcolumn = "no", -- disable signcolumn
+      -- number = false, -- disable number column
+      -- relativenumber = false, -- disable relative numbers
+      -- cursorline = false, -- disable cursorline
+      -- cursorcolumn = false, -- disable cursor column
+      -- foldcolumn = "0", -- disable fold column
+      -- list = false, -- disable whitespace characters
+    },
+  },
+  plugins = {
+    -- disable some global vim options (vim.o...)
+    -- comment the lines to not apply the options
+    options = {
+      enabled = true,
+      ruler = false, -- disables the ruler text in the cmd line area
+      showcmd = false, -- disables the command in the last line of the screen
+    },
+    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+    gitsigns = { enabled = false }, -- disables git signs
+    tmux = { enabled = false }, -- disables the tmux statusline
+    -- this will change the font size on kitty when in zen mode
+    -- to make this work, you need to set the following kitty options:
+    -- - allow_remote_control socket-only
+    -- - listen_on unix:/tmp/kitty
+    kitty = {
+      enabled = false,
+      font = "+4", -- font size increment
+    },
+  },
+  -- callback where you can add custom code when the Zen window opens
+  on_open = function(win)
+  end,
+  -- callback where you can add custom code when the Zen window closes
+  on_close = function()
+  end,
+}
+EOF
 endfunction
 
-function! s:goyo_leave()
-  nunmap <silent> gww
-  nunmap <silent> gw1
-  nunmap <silent> gw2
-  nunmap <silent> gw3
-  call s:default_key_mappings()
-  syntax off
-  syntax on
-  windo call s:defx_redraw()
-endfunction
-
-augroup custom_goyo
+augroup custom_ts_context_commentstring
   autocmd!
-  autocmd! User GoyoEnter nested call s:goyo_enter()
-  autocmd! User GoyoLeave nested call s:goyo_leave()
+  autocmd VimEnter * call s:init_zen_mode()
 augroup end
 
 " }}}
