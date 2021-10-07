@@ -748,6 +748,10 @@ augroup custom_nginx
   autocmd FileType zsh,sh set iskeyword+=-
 augroup end
 
+" Make Python support work better with asdf
+let g:python3_host_prog = "$HOME/.asdf/shims/python"
+let g:loaded_python_provider = 0
+
 " }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
