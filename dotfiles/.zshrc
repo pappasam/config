@@ -732,9 +732,10 @@ function upgrade() {
   asdf local rust nightly
   alacritty-install
   popd
-  asdf uninstall neovim nightly
-  asdf install neovim nightly
-  asdf global neovim nightly
+  # comment out below. Nightly is constantly breaking
+  # asdf uninstall neovim nightly
+  # asdf install neovim nightly
+  # asdf global neovim nightly
   nvim -c 'PU'
   nvim -c 'CocUpdate'
 }
