@@ -917,10 +917,8 @@ function pydev-install() {  ## Install default python dependencies
   local for_pip=(
     bpython
     mypy
-    neovim-remote
     pip
     pylint
-    pynvim
     wheel
   )
   pip install -U $for_pip
@@ -933,7 +931,7 @@ function pipx-upgrade() {
 }
 
 function pyglobal-install() {  ## Install global Python applications
-  pip install -U pipx
+  pip install -U pipx pynvim neovim-remote
   pydev-install
   asdf reshim python
   local for_pipx=(
