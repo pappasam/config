@@ -53,6 +53,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:wincent/ferret')
   call a:packager.add('git@github.com:yssl/QFEnter')
   call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
+  call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
@@ -211,15 +212,6 @@ function! s:default_key_mappings()
   nnoremap                 <leader>D <cmd>call CocActionAsync('diagnosticPreview')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
-
-  " Pairs: Utilities for dealing with pairs
-  inoremap <silent>        <space>  <cmd>call SurroundSpace()<CR>
-  inoremap <silent>        <bs>     <cmd>call SurroundBackspace()<CR>
-  inoremap <silent>        <C-h>    <cmd>call SurroundBackspace()<CR>
-  inoremap <silent>        <C-w>    <cmd>call SurroundCw()<CR>
-  inoremap <silent>        }        <cmd>call SurroundPairCloseJump('{' , '}' )<CR>
-  inoremap <silent>        )        <cmd>call SurroundPairCloseJump('(' , ')' )<CR>
-  inoremap <silent>        ]        <cmd>call SurroundPairCloseJump('\[', '\]')<CR>
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> :noh<return><esc>
@@ -503,7 +495,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-lists',
       \ 'coc-markdownlint',
-      \ 'coc-pairs',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
@@ -534,13 +525,7 @@ endfunction
 augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
-augroup end
-
-augroup custom_coc_pairs
-  autocmd!
-  autocmd FileType plantuml let b:coc_pairs_disabled = ["'"]
-  autocmd FileType rust let b:coc_pairs_disabled = ["'"]
-  autocmd FileType vim let b:coc_pairs_disabled = ['"']
+  autocmd User CocNvimInit * call s:default_key_mappings()
 augroup end
 
 augroup custom_coc_additional_keyword_characters
@@ -1381,115 +1366,6 @@ command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
-" General: spacesurround and pairs {{{
-
-" Helper functions to format surrounding text as I type
-" The function is: Surround<Key>, where key is the intended mapping key
-
-" 1. Add two spaces around cursor when pressing space bar.
-" 2. Spaces will be deleted if cursor is in middle with 1 space on either side.
-"     For example: ( | ), pressing <bs> or <c-w> should delete surrounding
-"     spaces
-let s:surround_spaces = {
-      \ '()': 1,
-      \ '[]': 1,
-      \ '{}': 1,
-      \ }
-
-function! SurroundSpace()
-  let line_this = getline('.')
-  let col_this = col('.')
-  let char_left = line_this[col_this - 2]
-  let char_right = line_this[col_this - 1]
-  let left_right = char_left . char_right
-  if has_key(s:surround_spaces, left_right)
-    call feedkeys("\<space>\<space>\<left>", 'ni')
-  else
-    call feedkeys("\<space>", 'ni')
-  endif
-endfunction
-
-" delete surround items if surrounding cursor with no space
-" for example: (|)
-" when pressing delete, surrounding parentheses will be deleted
-let s:surround_delete = {
-      \ "''": 1,
-      \ '""': 1,
-      \ '()': 1,
-      \ '[]': 1,
-      \ '{}': 1,
-      \ }
-
-function! SurroundBackspace()
-  let line_this = getline('.')
-  let col_this = col('.')
-  let char_left = line_this[col_this - 3]
-  let char_left_mid = line_this[col_this - 2]
-  let char_right_mid = line_this[col_this - 1]
-  let char_right = line_this[col_this]
-  let mid_left_right = char_left_mid . char_right_mid
-  let left_right = char_left . char_right
-  if has_key(s:surround_delete, mid_left_right)
-    call feedkeys("\<bs>\<right>\<bs>", 'ni')
-  elseif mid_left_right != '  '
-    call feedkeys("\<bs>", 'ni')
-  elseif has_key(s:surround_spaces, left_right)
-    execute "normal! \<right>di" . left_right[1]
-  else
-    call feedkeys("\<bs>", 'ni')
-  endif
-endfunction
-
-function! SurroundCw()
-  let line_this = getline('.')
-  let col_this = col('.')
-  let char_left = line_this[col_this - 3]
-  let char_left_mid = line_this[col_this - 2]
-  let char_right_mid = line_this[col_this - 1]
-  let char_right = line_this[col_this]
-  let mid_left_right = char_left_mid . char_right_mid
-  let left_right = char_left . char_right
-  if has_key(s:surround_delete, mid_left_right)
-    call feedkeys("\<bs>\<right>\<bs>", 'ni')
-  elseif mid_left_right != '  '
-    call feedkeys("\<c-w>", 'ni')
-  elseif has_key(s:surround_spaces, left_right)
-    execute "normal! \<right>di" . left_right[1]
-  else
-    call feedkeys("\<c-w>", 'ni')
-  endif
-endfunction
-
-function! SurroundPairCloseJump(open, close) abort
-  let line_this = getline('.')
-  let col_this = col('.')
-  let char_left = line_this[col_this - 2]
-  let char_right = line_this[col_this - 1]
-  " Pull out last character, hacky way of chopping off any escape characters
-  let close_raw = a:close[len(a:close) - 1]
-  " If open and close are jammed together, following strategy doesn't work so
-  " we just move 1 character to the right and call it a day.
-  if char_right == close_raw
-    call feedkeys("\<right>", 'ni')
-    return
-  endif
-  " Search to see if we're in the middle of a 'pair'. If so, it'll move the
-  " cursor one before the matching character. If not, will return 0 or -1 and
-  " we'll just insert the raw closing character.
-  "
-  " We pass the current line number to ensure that the search does not go past
-  " the current line. This prevents weird behavior where the cursor jumps to
-  " the end of the file or something.
-  if searchpair(a:open, '', a:close, 'W', '', line('.')) <= 0
-    call feedkeys(close_raw, 'ni')
-    return
-  endif
-  " If we were in a pair, we'll reach this stage and move the character 1 to
-  " the right to get past the final character.
-  call feedkeys("\<right>", 'ni')
-endfunction
-
-" }}}
 " Package: nvim-ts-context-commentstring {{{
 
 function s:init_ts_context_commentstring()
@@ -2093,9 +1969,57 @@ endfunction
 let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " }}}
+" Package: nvim-autopairs {{{
+
+function! s:init_nvim_autopairs()
+lua << EOF
+local ok, _ = pcall(require, 'nvim-autopairs')
+if not ok then
+  print('nvim-autopairs does not exist, skipping...')
+  return
+end
+local npairs = require'nvim-autopairs'
+local Rule   = require'nvim-autopairs.rule'
+npairs.setup({
+  disable_filetype = { "TelescopePrompt" },
+})
+npairs.add_rules {
+  Rule(' ', ' ')
+    :with_pair(function (opts)
+      local pair = opts.line:sub(opts.col - 1, opts.col)
+      return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+    end),
+  Rule('( ', ' )')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%)') ~= nil
+      end)
+      :use_key(')'),
+  Rule('{ ', ' }')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%}') ~= nil
+      end)
+      :use_key('}'),
+  Rule('[ ', ' ]')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%]') ~= nil
+      end)
+      :use_key(']')
+}
+EOF
+endfunction
+
+augroup custom_nvim_autopairs
+  autocmd!
+  autocmd VimEnter * call s:init_nvim_autopairs()
+augroup end
+
+" }}}
 " Package: zen-mode.nvim {{{
 
-function s:init_zen_mode()
+function! s:init_zen_mode()
   if !exists('g:loaded_commentary')
     echom 'ts context commentstring does not exist, skipping...'
     return
@@ -2157,7 +2081,7 @@ require'zen-mode'.setup {
 EOF
 endfunction
 
-augroup custom_ts_context_commentstring
+augroup custom_zenmode
   autocmd!
   autocmd VimEnter * call s:init_zen_mode()
 augroup end
