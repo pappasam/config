@@ -52,7 +52,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:unblevable/quick-scope')
   call a:packager.add('git@github.com:wincent/ferret')
   call a:packager.add('git@github.com:yssl/QFEnter')
-  call a:packager.add('git@github.com:dstein64/nvim-scrollview.git')
   call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
 
   " KeywordPrg:
