@@ -729,7 +729,6 @@ function upgrade() {
   pushd .
   cd ~/src/lib/alacritty
   git pull
-  asdf local rust nightly
   alacritty-install
   popd
   # comment out below. Nightly is constantly breaking
