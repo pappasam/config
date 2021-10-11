@@ -83,7 +83,7 @@ cursor:
   #   - Beam
   style:
     shape: Block
-    blinking: Always
+    blinking: Never
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
