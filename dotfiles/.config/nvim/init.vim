@@ -182,21 +182,21 @@ function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
-  nnoremap <silent>        <C-k> <cmd>call CocActionAsync('doHover')<CR>
-  inoremap <silent>        <C-s> <cmd>call CocActionAsync('showSignatureHelp')<CR>
-  nnoremap <silent>        <C-w>f <cmd>call coc#float#jump()<CR>
+  nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
+  inoremap <silent>        <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
+  nnoremap <silent>        <C-w>f <Cmd>call coc#float#jump()<CR>
   nmap     <silent>        <leader>st <Plug>(coc-type-definition)
   nmap     <silent>        <leader>si <Plug>(coc-implementation)
   nmap     <silent>        <leader>su <Plug>(coc-references)
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
   nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
   vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
-  nnoremap <silent>        <leader>sn <cmd>CocNext<CR>
-  nnoremap <silent>        <leader>sp <cmd>CocPrev<CR>
-  nnoremap <silent>        <leader>sl <cmd>CocListResume<CR>
-  nnoremap <silent>        <leader>sc <cmd>CocList commands<cr>
-  nnoremap <silent>        <leader>so <cmd>CocList -A outline<cr>
-  nnoremap <silent>        <leader>sw <cmd>CocList -A -I symbols<cr>
+  nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
+  nnoremap <silent>        <leader>sp <Cmd>CocPrev<CR>
+  nnoremap <silent>        <leader>sl <Cmd>CocListResume<CR>
+  nnoremap <silent>        <leader>sc <Cmd>CocList commands<cr>
+  nnoremap <silent>        <leader>so <Cmd>CocList -A outline<cr>
+  nnoremap <silent>        <leader>sw <Cmd>CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
 
   nnoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
@@ -208,8 +208,8 @@ function! s:default_key_mappings()
 
   imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
-  nnoremap                 <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
-  nnoremap                 <leader>D <cmd>call CocActionAsync('diagnosticPreview')<CR>
+  nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggle')<CR>
+  nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
 
@@ -270,14 +270,14 @@ function! s:default_key_mappings()
   nmap <leader><CR> <Plug>NewLineComma
 
   " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-  nnoremap <silent> <leader><leader>j <cmd>Jinja2Toggle<CR>
+  nnoremap <silent> <leader><leader>j <Cmd>Jinja2Toggle<CR>
 
   " ToggleRelativeNumber: uses custom functions
-  nnoremap <silent> <leader>R <cmd>ToggleNumber<CR>
-  nnoremap <silent> <leader>r <cmd>ToggleRelativeNumber<CR>
+  nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
+  nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
-  nnoremap <silent> <space>j <cmd>Defx
+  nnoremap <silent> <space>j <Cmd>Defx
         \ -buffer-name=defx
         \ -columns=mark:git:indent:icons:space:filename
         \ -direction=topleft
@@ -293,7 +293,7 @@ function! s:default_key_mappings()
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
-  nnoremap <silent> <space>J <cmd>Defx `expand('%:p:h')`
+  nnoremap <silent> <space>J <Cmd>Defx `expand('%:p:h')`
         \ -buffer-name=defx
         \ -columns=mark:git:indent:icons:space:filename
         \ -direction=topleft
@@ -307,30 +307,30 @@ function! s:default_key_mappings()
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
-  nnoremap <silent> <space>l <cmd>Vista!!<CR>
-  nnoremap <silent> <space>L <cmd>Vista focus<CR>
-  nnoremap <silent> <space>u <cmd>UndotreeToggle<CR>
+  nnoremap <silent> <space>l <Cmd>Vista!!<CR>
+  nnoremap <silent> <space>L <Cmd>Vista focus<CR>
+  nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
   " Choosewin: (just like tmux)
-  nnoremap <C-w>q <cmd>ChooseWin<CR>
+  nnoremap <C-w>q <Cmd>ChooseWin<CR>
 
   " Override <C-w>H to delete defx buffers
-  nnoremap <C-w>H <cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
+  nnoremap <C-w>H <Cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
 
   " Zenmode / Writing:
-  nnoremap <leader><leader>g <cmd>ZenMode<CR>
-  nnoremap <leader><leader>l <cmd>Limelight!!<CR>
+  nnoremap <leader><leader>g <Cmd>ZenMode<CR>
+  nnoremap <leader><leader>l <Cmd>Limelight!!<CR>
   nmap     <leader><leader>v <Plug>Veil
 
   " IndentLines: toggle if indent lines is visible
-  nnoremap <silent> <leader>i <cmd>IndentLinesToggle<CR>
+  nnoremap <silent> <leader>i <Cmd>IndentLinesToggle<CR>
 
   " ResizeWindow: up and down; relies on custom functions
-  nnoremap <silent> <leader><leader>h <cmd>ResizeWindowHeight<CR>
-  nnoremap <silent> <leader><leader>w <cmd>ResizeWindowWidth<CR>
+  nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
+  nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
 
   " Repl: my very own repl plugin
-  nnoremap <leader><leader>e <cmd>ReplToggle<CR>
+  nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
   nmap     <leader>e <Plug>ReplSendLine
   vmap     <leader>e <Plug>ReplSendVisual
 
@@ -348,13 +348,13 @@ function! s:default_key_mappings()
   omap aq <Plug>(textobj-sandwich-query-a)
 
   " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-p><C-p> <cmd>call <SID>fzf_avoid_defx('Files')<CR>
-  nnoremap <silent> <C-p><C-b> <cmd>call <SID>fzf_avoid_defx('Buffers')<CR>
+  nnoremap <silent> <C-p><C-p> <Cmd>call <SID>fzf_avoid_defx('Files')<CR>
+  nnoremap <silent> <C-p><C-b> <Cmd>call <SID>fzf_avoid_defx('Buffers')<CR>
   nnoremap          <C-n><C-n> yiw:Rg <C-r>"<CR>
   vnoremap          <C-n><C-n> y:Rg <C-r>"<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
-  nnoremap <silent> <leader>f <cmd>FiletypeFormat<cr>
+  nnoremap <silent> <leader>f <Cmd>FiletypeFormat<cr>
   vnoremap <silent> <leader>f :FiletypeFormat<cr>
 
   " Open Browser: override netrw
@@ -397,7 +397,7 @@ call s:default_key_mappings()
 function! s:key_mappings_readonly()
   nnoremap <silent> <buffer> d <C-d>
   nnoremap <silent> <buffer> u <C-u>
-  nnoremap <silent> <buffer> q <cmd>q<CR>
+  nnoremap <silent> <buffer> q <Cmd>q<CR>
 endfunction
 
 augroup custom_remap_click
@@ -427,20 +427,20 @@ augroup end
 
 augroup custom_remap_rst
   autocmd!
-  autocmd FileType rst nnoremap <buffer>          <leader>w <cmd>HovercraftSlide<CR>
-  autocmd FileType rst nnoremap <buffer>          <leader>f <cmd>TableRstFormat<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <cmd>call RstSetSection(0)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 <cmd>call RstSetSection(1)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 <cmd>call RstSetSection(2)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 <cmd>call RstSetSection(3)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 <cmd>call RstSetSection(4)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 <cmd>call RstSetSection(5)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 <cmd>call RstSetSection(6)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk <cmd>call RstGoPrevSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj <cmd>call RstGoNextSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa <cmd>call RstIncrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx <cmd>call RstDecrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <cmd>call RstSectionLabelize()<CR>
+  autocmd FileType rst nnoremap <buffer>          <leader>w <Cmd>HovercraftSlide<CR>
+  autocmd FileType rst nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 <Cmd>call RstSetSection(1)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 <Cmd>call RstSetSection(2)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 <Cmd>call RstSetSection(3)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 <Cmd>call RstSetSection(4)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 <Cmd>call RstSetSection(5)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 <Cmd>call RstSetSection(6)<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk <Cmd>call RstGoPrevSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj <Cmd>call RstGoNextSection()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa <Cmd>call RstIncrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx <Cmd>call RstDecrSectionLevel()<CR>
+  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
 augroup end
 
 augroup custom_remap_defx
@@ -457,13 +457,13 @@ augroup end
 
 augroup custom_init_vim
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gf <cmd>call <SID>gf_vimrc_open_plugin()<CR>
-  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <cmd>call <SID>gx_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gf <Cmd>call <SID>gf_vimrc_open_plugin()<CR>
+  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <Cmd>call <SID>gx_vimrc_open_plugin()<CR>
 augroup end
 
 augroup custom_vista
   autocmd!
-  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <cmd>call vista#cursor#FoldOrJump()<CR>
+  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <Cmd>call vista#cursor#FoldOrJump()<CR>
 augroup end
 
 " }}}
@@ -1520,12 +1520,12 @@ endfunction
 augroup custom_diffview
   autocmd!
   autocmd VimEnter * call s:init_diffview()
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <cmd>tabclose<cr>
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <Cmd>tabclose<cr>
   autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
   autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
   autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
   autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <cmd>DiffviewToggleFiles<cr>
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <Cmd>DiffviewToggleFiles<cr>
 augroup end
 
 " }}}
