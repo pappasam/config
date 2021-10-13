@@ -56,9 +56,6 @@
     "nginx": "nginx-linter",
     "terraform": "tflint"
   },
-  "diagnostic-languageserver.formatFiletypes": {
-    "python": ["black", "isort", "docformatter"]
-  },
   "diagnostic-languageserver.linters": {
     "nginx-linter": {
       "sourceName": "nginx-linter",
@@ -149,20 +146,6 @@
           "message": 4
         }
       ]
-    }
-  },
-  "diagnostic-languageserver.formatters": {
-    "black": {
-      "command": "black",
-      "args": ["black", "-q", "-"]
-    },
-    "isort": {
-      "command": "isort",
-      "args": ["-q", "-"]
-    },
-    "docformatter": {
-      "command": "docformatter",
-      "args": ["-"]
     }
   },
   "languageserver": {

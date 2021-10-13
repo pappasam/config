@@ -214,7 +214,7 @@ function! s:default_key_mappings()
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
 
   " Escape: also clears highlighting
-  nnoremap <silent> <esc> :noh<return><esc>
+  nnoremap <silent> <esc> <Cmd>noh<return><esc>
 
   " J: unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
@@ -531,7 +531,6 @@ augroup end
 augroup custom_coc_additional_keyword_characters
   autocmd!
   autocmd FileType nginx let b:coc_additional_keywords = ['$']
-  autocmd FileType zsh let b:coc_additional_keywords = ['-']
 augroup end
 
 " }}}
