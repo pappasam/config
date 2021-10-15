@@ -731,12 +731,8 @@ function upgrade() {
   git pull
   alacritty-install
   popd
-  # comment out below. Nightly is constantly breaking
-  # asdf uninstall neovim nightly
-  # asdf install neovim nightly
-  # asdf global neovim nightly
-  nvim -c 'PU'
-  nvim -c 'CocUpdate'
+  nvim -c 'PackZshAuto'
+  nvim -c 'CocUpdateAsyncWaitThenQuit'
 }
 
 # Alacritty Helpers
