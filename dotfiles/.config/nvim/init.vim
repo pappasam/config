@@ -2320,9 +2320,6 @@ augroup end
 " Fix weird package issues with nightly. Periodically try removing these
 " explicit packadd statements and see if things have fixed themselves.
 packadd coc-jedi.git
-packadd defx.nvim
-packadd defx-git
-packadd defx-icons
 
 " }}}
 " Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
