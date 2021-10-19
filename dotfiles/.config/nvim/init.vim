@@ -1286,6 +1286,9 @@ endfunction
 " Fix highlighting
 command! FixHighlight syntax sync fromstart
 
+" Save and quit all windows. Really easy to type and X is not mapped in Neovim
+command! X xa
+
 " }}}
 " General: view available colors {{{
 
