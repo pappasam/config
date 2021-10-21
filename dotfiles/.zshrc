@@ -1134,6 +1134,13 @@ function pynew() {
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
+  poetry add \
+    -D mypy \
+    -D pylint \
+    -D black \
+    -D docformatter \
+    -D isort \
+    -D toml-sort
   cat > main.py <<EOL
 """The main module"""
 
