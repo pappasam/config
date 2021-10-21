@@ -30,6 +30,7 @@ sudo apt install -y \
   build-essential \
   ca-certificates \
   cmake \
+  cmatrix \
   cmus \
   cmus-plugin-ffmpeg \
   cowsay  \
