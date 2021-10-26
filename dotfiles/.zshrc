@@ -731,7 +731,7 @@ function upgrade() {
   git pull
   alacritty-install
   popd
-  nvim -c 'PackZshAuto'
+  nvim -c 'PU'
   nvim -c 'CocUpdateAsyncWaitThenQuit'
 }
 

@@ -172,7 +172,6 @@ command! PackUpdate     PackagerUpdate
 command! PackClean      PackagerClean
 command! PackStatus     PackagerStatus
 command! PU             PackagerUpdate | PackagerClean
-command! PackZshAuto    PackagerUpdate | PackagerClean | quit
 
 " }}}
 " General: mappings {{{
