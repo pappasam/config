@@ -19,10 +19,6 @@ function! s:packager_init(packager) abort
   " Vista: Tagbar replacement extraordinaire
   call a:packager.add('git@github.com:liuchengxu/vista.vim.git')
 
-  " Colors: See CSS colors
-  call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
-  call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
-
   " LocationList:
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
@@ -54,6 +50,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:yssl/QFEnter')
   call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
+  call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
@@ -490,6 +487,7 @@ let g:coc_global_extensions = [
       \ 'coc-docker',
       \ 'coc-emoji',
       \ 'coc-go',
+      \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
@@ -2244,25 +2242,6 @@ let g:make_no_commands = 1
 augroup custom_loclistfollow
   autocmd!
   autocmd FileType man,help LoclistFollowToggle
-augroup end
-
-" }}}
-" Package: nvim-colorizer {{{
-
-function s:init_colorizer()
-lua << EOF
-local ok, _ = pcall(require, 'colorizer')
-if not ok then
-  print('zen-mode does not exist, skipping...')
-  return
-end
-require'colorizer'.setup()
-EOF
-endfunction
-
-augroup custom_colorizer
-  autocmd!
-  autocmd VimEnter * call s:init_colorizer()
 augroup end
 
 " }}}
