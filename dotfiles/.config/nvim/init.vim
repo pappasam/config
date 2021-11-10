@@ -729,6 +729,12 @@ set path+=/usr/include/x86_64-linux-gnu/
 " Vim History: for command line; can't imagine that more than 100 is needed
 set history=100
 
+" Redraw Window: whenever a window regains focus
+augroup custom_redraw_on_refocus
+  autocmd!
+  autocmd FocusGained * redraw!
+augroup end
+
 augroup custom_incsearch_highlight
   autocmd!
   autocmd CmdlineEnter /,\? set hlsearch
@@ -773,31 +779,22 @@ call jobstart(
 " }}}
 " General: syntax and colorscheme {{{
 
-" Redraw Window: whenever a window regains focus
-augroup custom_redraw_on_refocus
-  autocmd!
-  autocmd FocusGained * redraw!
-augroup end
-
-" Typescript Fix Paren Highlights:
-augroup custom_syntax_typescript_fix_parens
+augroup custom_syntax_typescript
   autocmd!
   " typescriptParens are stupidly linked to 'Normal' in Neovim.
   " This causes problems with hover windows in coc and is solved here
-  autocmd ColorScheme * highlight link typescriptParens NONE
   autocmd ColorScheme * highlight link typescriptParens cleared
 augroup end
 
-" Trailing Whitespace: (initial highlight below doesn't matter)
 augroup custom_syntax_whitespace
   autocmd!
   autocmd ColorScheme * highlight link ExtraWhitespace DiffText
 augroup end
 
-" Coc Yank:
-augroup custom_coc_yank
+augroup custom_syntax_coc
   autocmd!
   autocmd ColorScheme * highlight link HighlightedyankRegion Search
+  autocmd ColorScheme * highlight link CocHighlightText Underlined
 augroup end
 
 try
