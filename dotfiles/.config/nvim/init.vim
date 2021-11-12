@@ -16,9 +16,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:windwp/nvim-ts-autotag.git')
   call a:packager.add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git')
 
-  " Vista: Tagbar replacement extraordinaire
-  call a:packager.add('git@github.com:liuchengxu/vista.vim.git')
-
   " LocationList:
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
@@ -304,8 +301,7 @@ function! s:default_key_mappings()
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
-  nnoremap <silent> <space>l <Cmd>Vista!!<CR>
-  nnoremap <silent> <space>L <Cmd>Vista focus<CR>
+  nnoremap <silent> <space>l <Cmd>CocOutline<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
   " Override <C-w>H to delete defx buffers
@@ -410,9 +406,9 @@ augroup end
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  " make gO behave like vista to man and help filetypes
+  " make gO behave like CocOutline to man and help filetypes
   " works in conjunction with vim-loclist-follow
-  autocmd FileType man,help nmap     <buffer> <silent> <space>l gO<C-w>L:vertical resize 37<cr><C-w><C-w><C-w><C-w>
+  autocmd FileType man,help nmap     <buffer> <silent> <space>l gO<C-w>L:vertical resize 37<cr>
   autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
   autocmd FileType man,help nnoremap <buffer> <expr>   d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr>   u &modifiable == 0 ? '<C-u>' : 'u'
@@ -453,11 +449,6 @@ augroup custom_init_vim
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gf <Cmd>call <SID>gf_vimrc_open_plugin()<CR>
   autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <Cmd>call <SID>gx_vimrc_open_plugin()<CR>
-augroup end
-
-augroup custom_vista
-  autocmd!
-  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <Cmd>call vista#cursor#FoldOrJump()<CR>
 augroup end
 
 " }}}
@@ -1923,17 +1914,6 @@ let g:fzf_action = {
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit',
       \ }
-
-" }}}
-" Package: vista {{{
-
-let g:vista_sidebar_width = 37
-let g:vista_fold_toggle_icons = ['▼', '▶']
-let g:vista_default_executive = 'coc'
-let g:vista_executive_for = {}
-let g:vista_fzf_preview = ['right:50%']
-let g:vista_keep_fzf_colors = 1
-let g:vista_finder_alternative_executives = []
 
 " }}}
 " Package: vim-tex {{{
