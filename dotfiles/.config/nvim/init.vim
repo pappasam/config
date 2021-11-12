@@ -573,11 +573,14 @@ require('nvim-treesitter.configs').setup({
     'bash',
     'bibtex',
     'c',
+    'comment',
     'cpp',
     'css',
     'dockerfile',
+    'dot',
     'gdscript',
     'go',
+    'gomod',
     'graphql',
     'hcl',
     'html',
@@ -585,6 +588,7 @@ require('nvim-treesitter.configs').setup({
     'javascript',
     'jsdoc',
     'json',
+    'json5',
     'jsonc',
     'julia',
     'latex',
@@ -603,6 +607,7 @@ require('nvim-treesitter.configs').setup({
     'tsx',
     'typescript',
     'vim',
+    'yaml',
 }})
 EOF
 endfunction
