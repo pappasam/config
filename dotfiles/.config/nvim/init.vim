@@ -44,7 +44,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:ryvnf/readline.vim.git')
   call a:packager.add('git@github.com:simeji/winresizer')
   call a:packager.add('git@github.com:sjl/strftimedammit.vim')
-  call a:packager.add('git@github.com:t9md/vim-choosewin')
   call a:packager.add('git@github.com:unblevable/quick-scope')
   call a:packager.add('git@github.com:wincent/ferret')
   call a:packager.add('git@github.com:yssl/QFEnter')
@@ -308,9 +307,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>l <Cmd>Vista!!<CR>
   nnoremap <silent> <space>L <Cmd>Vista focus<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
-
-  " Choosewin: (just like tmux)
-  nnoremap <C-w>q <Cmd>ChooseWin<CR>
 
   " Override <C-w>H to delete defx buffers
   nnoremap <C-w>H <Cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
@@ -2216,9 +2212,6 @@ let g:qs_max_chars = 10000
 
 " Go: random stuff
 let g:go_version_warning = v:false
-
-" ChooseWin: options
-let g:choosewin_overlay_enable = v:false
 
 " HexMode: configure hex editing
 " relevant command: Hexmode
