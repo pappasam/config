@@ -66,6 +66,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:rbong/vim-flog.git')
   call a:packager.add('git@github.com:sodapopcan/vim-twiggy.git')
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
+  call a:packager.add('git@github.com:nvim-lua/plenary.nvim.git')
   call a:packager.add('git@github.com:sindrets/diffview.nvim.git')
   call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
 
