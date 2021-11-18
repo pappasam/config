@@ -353,7 +353,14 @@ zmodload -i zsh/complist
 fpath+=~/.zfunc
 
 # Add autocompletion for aws-cli v2
-complete -C aws_completer aws
+if command -v aws > /dev/null; then
+  complete -C aws_completer aws
+fi
+
+# Add autocompletion for pipx
+if command -v pipx > /dev/null; then
+  eval "$(register-python-argcomplete pipx)"
+fi
 
 # }}}
 # Z-shell: compdef testing {{{
@@ -920,11 +927,6 @@ function pydev-install() {  ## Install default python dependencies
   asdf reshim python
 }
 
-function pipx-upgrade() {
-  pipx uninstall $1
-  pipx install $1
-}
-
 function pyglobal-install() {  ## Install global Python applications
   pip install -U pipx pynvim neovim-remote
   pydev-install
@@ -947,7 +949,9 @@ function pyglobal-install() {  ## Install global Python applications
   )
   if command -v pipx > /dev/null; then
     for arg in $for_pipx; do
-      pipx uninstall "$arg" && pipx install "$arg"
+      # We avoid reinstall because it won't install uninstalled pacakges
+      pipx uninstall "$arg"
+      pipx install "$arg"
     done
   else
     echo 'pipx not installed. Install with "pip install pipx"'
