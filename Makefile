@@ -1,7 +1,8 @@
 MKDIR_CONFIG = $(subst dotfiles, ~, $(wildcard dotfiles/.config/*))
 MKDIR_HOME = ~/.stack/ ~/bin/
 
-.PHONY: xstow-dotfiles
-xstow-dotfiles:  ## soft-link dotfiles in home folder with stow
+.PHONY: stow-dotfiles
+stow-dotfiles:  ## soft-link dotfiles in home folder with stow
 	@mkdir -p $(MKDIR_CONFIG) $(MKDIR_HOME)
-	xstow --target $(HOME) --restow dotfiles
+	@echo "\033[1m\033[31mNOTE\033[0m: Ignore BUG warnings, they're spurious"
+	stow --target $(HOME) --restow dotfiles
