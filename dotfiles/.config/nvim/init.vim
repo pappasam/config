@@ -1362,7 +1362,7 @@ function! s:skeleton(file_skeleton)
   startinsert!
 endfunction
 
-command! Clubhouse silent call s:skeleton('clubhouse.md')
+command! Shortcut silent call s:skeleton('shortcut.md')
 command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 

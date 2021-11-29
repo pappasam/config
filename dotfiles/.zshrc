@@ -545,7 +545,7 @@ alias fn='nvim -u NORC --noplugin'
 compdef _vim fn
 alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/dotfiles/dotfiles/.zshrc'
-alias clubhouse='nvim -c "Clubhouse"'
+alias shortcut='nvim -c "Shortcut"'
 alias standup='nvim -c "Standup"'
 alias mentor='nvim -c "Mentor"'
 
