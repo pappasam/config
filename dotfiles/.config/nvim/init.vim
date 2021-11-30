@@ -1025,7 +1025,7 @@ endfunction
 augroup custom_writing
   autocmd!
   autocmd VimEnter * call s:abolish_correct()
-  autocmd FileType markdown,rst,text,gitcommit setlocal wrap linebreak nolist | call textobj#sentence#init()
+  autocmd FileType markdown,markdown.mdx,mdx,rst,text,gitcommit setlocal wrap linebreak nolist | call textobj#sentence#init()
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup end
