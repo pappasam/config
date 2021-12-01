@@ -459,6 +459,7 @@ let g:coc_snippet_prev = '<C-k>'
 let g:coc_start_at_startup = 1
 let g:coc_filetype_map = {
       \ 'python.jinja2': 'python',
+      \ 'markdown.mdx': 'markdown',
       \ 'sql.jinja2': 'sql',
       \ 'yaml.ansible': 'yaml',
       \ 'yaml.docker-compose': 'yaml',
