@@ -513,6 +513,7 @@ augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
   autocmd User CocNvimInit * call s:default_key_mappings()
+  autocmd FileType coctree set nowrap
 augroup end
 
 augroup custom_coc_additional_keyword_characters
