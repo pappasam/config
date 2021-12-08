@@ -301,7 +301,7 @@ function! s:default_key_mappings()
         \ -winwidth=31
         \ -root-marker=''
         \ <CR>
-  nnoremap <silent> <space>l <Cmd>CocToggleOutline<CR>
+  nnoremap <silent> <space>l <Cmd>CocOutline<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
   " Override <C-w>H to delete defx buffers
@@ -497,18 +497,6 @@ let g:coc_global_extensions = [
       \ 'coc-yank',
       \ ]
 
-function! s:coc_toggle_outline()
-  if !exists('t:coc_outline_open')
-    let t:coc_outline_open = 1
-    call CocActionAsync('showOutline', v:false)
-  else
-    call CocActionAsync('hideOutline')
-    unlet t:coc_outline_open
-  endif
-endfunction
-
-command! CocToggleOutline call s:coc_toggle_outline()
-
 function! s:autocmd_custom_coc()
   if !exists("g:did_coc_loaded")
     return
@@ -525,8 +513,6 @@ augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
   autocmd User CocNvimInit * call s:default_key_mappings()
-  autocmd FileType coctree set nowrap
-  autocmd QuitPre CocTree* unlet t:coc_outline_open
 augroup end
 
 augroup custom_coc_additional_keyword_characters
@@ -2160,7 +2146,6 @@ let g:qfenter_enable_autoquickfix = v:false
 " automatically move QuickFix window to fill entire bottom screen
 augroup custom_quickfix
   autocmd FileType qf wincmd J
-  autocmd FileType qf setlocal nonumber
 augroup end
 
 " WinResize:
