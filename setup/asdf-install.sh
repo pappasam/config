@@ -32,6 +32,7 @@ asdf_setup() {
   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
+asdf_setup act latest
 asdf_setup direnv latest
 asdf_setup fzf latest
 asdf_setup github-cli latest
