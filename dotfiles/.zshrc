@@ -325,6 +325,9 @@ function zshexit() {
 # }}}
 # Imports: asdf (must be before z-shell autocompletion setup){{{
 
+# force usage of install-poetry script
+export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
+
 include $HOME/.asdf/asdf.sh
 
 # }}}
