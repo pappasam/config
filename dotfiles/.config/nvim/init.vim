@@ -2274,11 +2274,5 @@ augroup end
 " Q -> opens ex mode
 " To lean more about the ex editor, type 'man ex'
 
-" Temporary Fixes
-
-" Fix weird package issues with nightly. Periodically try removing these
-" explicit packadd statements and see if things have fixed themselves.
-packadd coc-jedi.git
-
 " }}}
 " Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
