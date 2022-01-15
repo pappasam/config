@@ -774,22 +774,22 @@ call jobstart(
 " }}}
 " General: syntax and colorscheme {{{
 
-augroup custom_syntax_typescript
+augroup custom_colorscheme
   autocmd!
   " typescriptParens are stupidly linked to 'Normal' in Neovim.
   " This causes problems with hover windows in coc and is solved here
   autocmd ColorScheme * highlight link typescriptParens cleared
-augroup end
-
-augroup custom_syntax_whitespace
-  autocmd!
   autocmd ColorScheme * highlight link ExtraWhitespace DiffText
-augroup end
-
-augroup custom_syntax_coc
-  autocmd!
   autocmd ColorScheme * highlight link HighlightedyankRegion Search
   autocmd ColorScheme * highlight link CocHighlightText Underlined
+augroup end
+
+augroup custom_papercolorslim
+  autocmd!
+  autocmd ColorScheme PaperColorSlim
+        \ if &background == 'light' |
+        \ execute 'highlight Normal guibg=#fffff0' |
+        \ endif
 augroup end
 
 try
