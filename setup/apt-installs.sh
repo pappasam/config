@@ -105,6 +105,7 @@ sudo apt install -y \
   pulseaudio-module-gsettings \
   pulseaudio-module-raop \
   python-openssl \
+  qpdf \
   re2c \
   screenkey \
   shellcheck \
