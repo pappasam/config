@@ -55,6 +55,7 @@ asdf_setup terraform-ls latest
 asdf_setup tflint latest
 asdf_setup tfsec latest
 asdf_setup tmux latest
+asdf_setup vim latest
 asdf_setup yarn latest
 
 # kubernetes
