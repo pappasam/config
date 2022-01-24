@@ -26,7 +26,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:tpope/vim-characterize.git')
   call a:packager.add('git@github.com:tpope/vim-commentary')
   call a:packager.add('git@github.com:tpope/vim-repeat')
-  call a:packager.add('git@github.com:tpope/vim-scriptease')
 
   " General:
   call a:packager.add('git@github.com:Shougo/defx.nvim')
@@ -206,6 +205,9 @@ function! s:default_key_mappings()
   nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
+
+  " View Syntax Groups
+  nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
 
   " Escape: also clears highlighting
   nnoremap <silent> <esc> <Cmd>noh<return><esc>
@@ -618,6 +620,26 @@ augroup custom_treesitter
   autocmd!
   autocmd VimEnter * call s:init_treesitter()
 augroup end
+
+" }}}
+" General: syntax highlighting diagnostics {{{
+
+function! s:vim_syntax_group()
+  let l:s = synID(line('.'), col('.'), 1)
+  if l:s == ''
+    echo 'none'
+  else
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+  endif
+endfun
+
+function! s:syntax_group()
+  if &syntax == ''
+    TSHighlightCapturesUnderCursor
+  else
+    call s:vim_syntax_group()
+  endif
+endfunction
 
 " }}}
 " General: options {{{
