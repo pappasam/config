@@ -46,6 +46,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
   call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
+  call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
@@ -1389,6 +1390,23 @@ endfunction
 command! Shortcut silent call s:skeleton('shortcut.md')
 command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
+
+" }}}
+" Package: nvim-colorizer {{{
+
+" ColorizerToggle
+function! s:init_colorizer()
+  try
+    lua require'colorizer'.setup()
+  catch
+    echo 'colorizer not configured'
+  endtry
+endfunction
+
+augroup custom_colorizer
+  autocmd!
+  autocmd VimEnter * call s:init_colorizer()
+augroup end
 
 " }}}
 " Package: nvim-ts-context-commentstring {{{
