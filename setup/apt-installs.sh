@@ -39,6 +39,7 @@ sudo apt install -y \
   dict \
   dict-gcide \
   dict-wn \
+  enscript \
   entr \
   expect-dev \
   exuberant-ctags \
