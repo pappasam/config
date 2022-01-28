@@ -558,7 +558,14 @@ local py_injections = [[
 ]]
 vim.treesitter.set_query('python', 'injections', py_injections)
 require('nvim-treesitter.configs').setup({
-  highlight = { enable = true, disable = {"html", "svelte"} },
+  highlight = {
+    enable = true,
+    disable = {"html", "svelte"}
+  },
+  indent = {
+    enable = true,
+    disable = { "python" },
+  },
   textobjects = {
     select = {
       enable = true,
