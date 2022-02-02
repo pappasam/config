@@ -24,6 +24,7 @@
     "django.db"
   ],
   "jedi.startupMessage": true,
+  "html.autoClosingTags": false,
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "java.enabled": false,
