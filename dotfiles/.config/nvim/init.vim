@@ -606,6 +606,7 @@ require('nvim-treesitter.configs').setup({
     'latex',
     'ledger',
     'lua',
+    'markdown',
     'ocaml',
     'php',
     'python',
