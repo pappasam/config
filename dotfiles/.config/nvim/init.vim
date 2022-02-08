@@ -12,6 +12,7 @@ function! s:packager_init(packager) abort
   " TreeSitter:
   call a:packager.add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
   call a:packager.add('git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git')
+  call a:packager.add('git@github.com:lewis6991/spellsitter.nvim.git')
   call a:packager.add('git@github.com:nvim-treesitter/playground.git')
   call a:packager.add('git@github.com:windwp/nvim-ts-autotag.git')
   call a:packager.add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git')
@@ -625,9 +626,50 @@ require('nvim-treesitter.configs').setup({
 EOF
 endfunction
 
+function s:init_spellsitter()
+  try
+lua << EOF
+require('spellsitter').setup {
+-- Whether enabled, can be a list of filetypes, e.g. {'python', 'lua'}
+  enable = true,
+}
+EOF
+  catch
+    echo 'spellsitter not configured'
+  endtry
+endfunction
+
 augroup custom_treesitter
   autocmd!
   autocmd VimEnter * call s:init_treesitter()
+  autocmd VimEnter * call s:init_spellsitter()
+augroup end
+
+" }}}
+" Package: nvim-ts-context-commentstring {{{
+
+function s:init_ts_context_commentstring()
+  if !exists('g:loaded_commentary')
+    echom 'ts context commentstring does not exist, skipping...'
+    return
+  endif
+lua << EOF
+local ok, _ = pcall(require, 'nvim-treesitter.configs')
+if not ok then
+  print('nvim-treesitter does not exist, skipping...')
+  return
+end
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
+}
+EOF
+endfunction
+
+augroup custom_ts_context_commentstring
+  autocmd!
+  autocmd VimEnter * call s:init_ts_context_commentstring()
 augroup end
 
 " }}}
@@ -1414,33 +1456,6 @@ endfunction
 augroup custom_colorizer
   autocmd!
   autocmd VimEnter * call s:init_colorizer()
-augroup end
-
-" }}}
-" Package: nvim-ts-context-commentstring {{{
-
-function s:init_ts_context_commentstring()
-  if !exists('g:loaded_commentary')
-    echom 'ts context commentstring does not exist, skipping...'
-    return
-  endif
-lua << EOF
-local ok, _ = pcall(require, 'nvim-treesitter.configs')
-if not ok then
-  print('nvim-treesitter does not exist, skipping...')
-  return
-end
-require'nvim-treesitter.configs'.setup {
-  context_commentstring = {
-    enable = true
-  }
-}
-EOF
-endfunction
-
-augroup custom_ts_context_commentstring
-  autocmd!
-  autocmd VimEnter * call s:init_ts_context_commentstring()
 augroup end
 
 " }}}
