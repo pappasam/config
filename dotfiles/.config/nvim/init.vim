@@ -537,15 +537,11 @@ endfunction
 command! CocUpdateAsyncWaitThenQuit :call CocActionAsync('updateExtensions', v:false, function('<sid>CocUpdateCallback'))
 
 " }}}
-" Package: treesitter {{{
+" Package: treesitter and its various plugins {{{
 
-function s:init_treesitter()
+function! s:init_treesitter()
+  try
 lua << EOF
-local ok, _ = pcall(require, 'nvim-treesitter.configs')
-if not ok then
-  print('nvim-treesitter does not exist, skipping...')
-  return
-end
 -- nvim-treesitter/queries/python/injections.scm, with docstring
 -- injections removed
 local py_injections = [[
@@ -624,13 +620,15 @@ require('nvim-treesitter.configs').setup({
     'yaml',
 }})
 EOF
+  catch
+    echo 'nvim-treesitter not configured'
+  endtry
 endfunction
 
-function s:init_spellsitter()
+function! s:init_spellsitter()
   try
 lua << EOF
 require('spellsitter').setup {
--- Whether enabled, can be a list of filetypes, e.g. {'python', 'lua'}
   enable = true,
 }
 EOF
@@ -639,36 +637,24 @@ EOF
   endtry
 endfunction
 
-augroup custom_treesitter
-  autocmd!
-  autocmd VimEnter * call s:init_treesitter()
-  autocmd VimEnter * call s:init_spellsitter()
-augroup end
-
-" }}}
-" Package: nvim-ts-context-commentstring {{{
-
-function s:init_ts_context_commentstring()
-  if !exists('g:loaded_commentary')
-    echom 'ts context commentstring does not exist, skipping...'
-    return
-  endif
+function! s:init_ts_context_commentstring()
+  try
 lua << EOF
-local ok, _ = pcall(require, 'nvim-treesitter.configs')
-if not ok then
-  print('nvim-treesitter does not exist, skipping...')
-  return
-end
 require'nvim-treesitter.configs'.setup {
   context_commentstring = {
     enable = true
   }
 }
 EOF
+  catch
+    echo 'ts_context_commentstring not configured'
+  endtry
 endfunction
 
-augroup custom_ts_context_commentstring
+augroup custom_treesitter
   autocmd!
+  autocmd VimEnter * call s:init_treesitter()
+  autocmd VimEnter * call s:init_spellsitter()
   autocmd VimEnter * call s:init_ts_context_commentstring()
 augroup end
 
@@ -823,7 +809,7 @@ let g:loaded_python_provider = 0
 " General: alacritty callback for dynamic terminal color change {{{
 
 " set environment variables based on light or dark
-function s:set_env_from_background()
+function! s:set_env_from_background()
   let $BAT_THEME = &background == 'light' ?
         \ 'Monokai Extended Light' : 'Monokai Extended'
 endfunction
@@ -1487,7 +1473,7 @@ set diffopt+=internal,algorithm:patience
 " }}}
 " Package: diffview {{{
 
-function s:init_diffview()
+function! s:init_diffview()
   if !exists('g:diffview_nvim_loaded')
     echom 'diffview does not exist, skipping...'
     return
@@ -1597,7 +1583,7 @@ augroup end
 " }}}
 " Package: nvim-web-icons {{{
 
-function s:init_nvim_web_icons()
+function! s:init_nvim_web_icons()
   if !exists('g:loaded_devicons')
     echom 'devicons does not exist, skipping...'
     return
