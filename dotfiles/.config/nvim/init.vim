@@ -537,7 +537,7 @@ endfunction
 command! CocUpdateAsyncWaitThenQuit :call CocActionAsync('updateExtensions', v:false, function('<sid>CocUpdateCallback'))
 
 " }}}
-" Package: treesitter and its various plugins {{{
+" Package: treesitter and its plugins {{{
 
 function! s:init_treesitter()
   try
@@ -656,6 +656,266 @@ augroup custom_treesitter
   autocmd VimEnter * call s:init_treesitter()
   autocmd VimEnter * call s:init_spellsitter()
   autocmd VimEnter * call s:init_ts_context_commentstring()
+augroup end
+
+" }}}
+" Package: lua extensions {{{
+
+" nvim-colorizer: ColorizerToggle
+function! s:init_colorizer()
+  try
+    lua require'colorizer'.setup()
+  catch
+    echo 'colorizer not configured'
+  endtry
+endfunction
+
+" diffview
+function! s:init_diffview()
+  try
+lua << EOF
+local cb = require'diffview.config'.diffview_callback
+require'diffview'.setup {
+  diff_binaries = false,    -- Show diffs for binaries
+  use_icons = true,         -- Requires nvim-web-devicons
+  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+  signs = {
+    fold_closed = "",
+    fold_open = "",
+  },
+  file_panel = {
+    position = "left",      -- One of 'left', 'right', 'top', 'bottom'
+    width = 35,             -- Only applies when position is 'left' or 'right'
+    height = 10,            -- Only applies when position is 'top' or 'bottom'
+  },
+  file_history_panel = {
+    position = "bottom",
+    width = 35,
+    height = 16,
+    log_options = {
+      max_count = 256,      -- Limit the number of commits
+      follow = false,       -- Follow renames (only for single file)
+      all = false,          -- Include all refs under 'refs/' including HEAD
+      merges = false,       -- List only merge commits
+      no_merges = false,    -- List no merge commits
+      reverse = false,      -- List commits in reverse order
+    },
+  },
+  key_bindings = {
+    disable_defaults = true,                   -- Disable the default key bindings
+    -- The `view` bindings are active in the diff buffers, only when the current
+    -- tabpage is a Diffview.
+    view = {
+      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
+      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
+      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
+      ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
+      ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
+      ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
+      ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
+    },
+    file_panel = {
+      ["j"]             = cb("next_entry"),         -- Bring the cursor to the next file entry
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),       -- Open the diff for the selected entry.
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
+      ["S"]             = cb("stage_all"),          -- Stage all entries.
+      ["U"]             = cb("unstage_all"),        -- Unstage all entries.
+      ["X"]             = cb("restore_entry"),      -- Restore entry to the state on the left side.
+      ["R"]             = cb("refresh_files"),      -- Update stats and entries in the file list.
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    file_history_panel = {
+      ["g!"]            = cb("options"),            -- Open the option panel
+      ["d"]         = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
+      ["zR"]            = cb("open_all_folds"),
+      ["zM"]            = cb("close_all_folds"),
+      ["j"]             = cb("next_entry"),
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    option_panel = {
+      ["<tab>"] = cb("select"),
+      ["q"]     = cb("close"),
+    },
+  },
+}
+EOF
+  catch
+    echom 'diffview not configured'
+  endtry
+endfunction
+
+" nvim-web-icons
+function! s:init_nvim_web_icons()
+  try
+lua << EOF
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+    icon = "",
+    color = "#428850",
+    name = "Zsh"
+  }
+ };
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
+EOF
+  catch
+    echom 'nvim_web_icons not configured'
+  endtry
+endfunction
+
+" nvim-autopairs
+function! s:init_nvim_autopairs()
+  try
+lua << EOF
+local ok, _ = pcall(require, 'nvim-autopairs')
+if not ok then
+  print('nvim-autopairs does not exist, skipping...')
+  return
+end
+local npairs = require'nvim-autopairs'
+local Rule   = require'nvim-autopairs.rule'
+npairs.setup({
+  disable_filetype = { "TelescopePrompt" },
+})
+npairs.add_rules {
+  Rule(' ', ' ')
+    :with_pair(function (opts)
+      local pair = opts.line:sub(opts.col - 1, opts.col)
+      return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+    end),
+  Rule('( ', ' )')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%)') ~= nil
+      end)
+      :use_key(')'),
+  Rule('{ ', ' }')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%}') ~= nil
+      end)
+      :use_key('}'),
+  Rule('[ ', ' ]')
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+          return opts.prev_char:match('.%]') ~= nil
+      end)
+      :use_key(']')
+}
+EOF
+  catch
+    echom 'nvim_autopairs not configured'
+  endtry
+endfunction
+
+" zen-mode.nvim , zenmode
+function! s:init_zen_mode()
+  try
+lua << EOF
+local ok, _ = pcall(require, 'zen-mode')
+if not ok then
+  print('zen-mode does not exist, skipping...')
+  return
+end
+require'zen-mode'.setup {
+  window = {
+    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+    -- height and width can be:
+    -- * an absolute number of cells when > 1
+    -- * a percentage of the width / height of the editor when <= 1
+    -- * a function that returns the width or the height
+    width = 120, -- width of the Zen window
+    height = 1, -- height of the Zen window
+    -- by default, no options are changed for the Zen window
+    -- uncomment any of the options below, or add other vim.wo options you want to apply
+    options = {
+      -- signcolumn = "no", -- disable signcolumn
+      -- number = false, -- disable number column
+      -- relativenumber = false, -- disable relative numbers
+      -- cursorline = false, -- disable cursorline
+      -- cursorcolumn = false, -- disable cursor column
+      -- foldcolumn = "0", -- disable fold column
+      -- list = false, -- disable whitespace characters
+    },
+  },
+  plugins = {
+    -- disable some global vim options (vim.o...)
+    -- comment the lines to not apply the options
+    options = {
+      enabled = true,
+      ruler = false, -- disables the ruler text in the cmd line area
+      showcmd = false, -- disables the command in the last line of the screen
+    },
+    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+    gitsigns = { enabled = false }, -- disables git signs
+    tmux = { enabled = false }, -- disables the tmux statusline
+    -- this will change the font size on kitty when in zen mode
+    -- to make this work, you need to set the following kitty options:
+    -- - allow_remote_control socket-only
+    -- - listen_on unix:/tmp/kitty
+    kitty = {
+      enabled = false,
+      font = "+4", -- font size increment
+    },
+  },
+  -- callback where you can add custom code when the Zen window opens
+  on_open = function(win)
+  end,
+  -- callback where you can add custom code when the Zen window closes
+  on_close = function()
+  end,
+}
+EOF
+  catch
+    echom 'zenmode not configured'
+  endtry
+endfunction
+
+augroup custom_general_lua_extensions
+  autocmd!
+  autocmd VimEnter * call s:init_colorizer()
+  autocmd VimEnter * call s:init_diffview()
+  autocmd VimEnter * call s:init_nvim_web_icons()
+  autocmd VimEnter * call s:init_nvim_autopairs()
+  autocmd VimEnter * call s:init_zen_mode()
+augroup end
+
+augroup custom_diffview
+  autocmd!
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <Cmd>tabclose<cr>
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
+  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <Cmd>DiffviewToggleFiles<cr>
 augroup end
 
 " }}}
@@ -1428,23 +1688,6 @@ command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
-" Package: nvim-colorizer {{{
-
-" ColorizerToggle
-function! s:init_colorizer()
-  try
-    lua require'colorizer'.setup()
-  catch
-    echo 'colorizer not configured'
-  endtry
-endfunction
-
-augroup custom_colorizer
-  autocmd!
-  autocmd VimEnter * call s:init_colorizer()
-augroup end
-
-" }}}
 " Package: git plugins: gv.vim, fugitive, git-messenger {{{
 
 " NOTES:
@@ -1469,147 +1712,6 @@ let g:git_messenger_no_default_mappings = v:true
 
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
-
-" }}}
-" Package: diffview {{{
-
-function! s:init_diffview()
-  try
-lua << EOF
-local cb = require'diffview.config'.diffview_callback
-require'diffview'.setup {
-  diff_binaries = false,    -- Show diffs for binaries
-  use_icons = true,         -- Requires nvim-web-devicons
-  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-  signs = {
-    fold_closed = "",
-    fold_open = "",
-  },
-  file_panel = {
-    position = "left",      -- One of 'left', 'right', 'top', 'bottom'
-    width = 35,             -- Only applies when position is 'left' or 'right'
-    height = 10,            -- Only applies when position is 'top' or 'bottom'
-  },
-  file_history_panel = {
-    position = "bottom",
-    width = 35,
-    height = 16,
-    log_options = {
-      max_count = 256,      -- Limit the number of commits
-      follow = false,       -- Follow renames (only for single file)
-      all = false,          -- Include all refs under 'refs/' including HEAD
-      merges = false,       -- List only merge commits
-      no_merges = false,    -- List no merge commits
-      reverse = false,      -- List commits in reverse order
-    },
-  },
-  key_bindings = {
-    disable_defaults = true,                   -- Disable the default key bindings
-    -- The `view` bindings are active in the diff buffers, only when the current
-    -- tabpage is a Diffview.
-    view = {
-      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
-      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
-      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
-      ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
-      ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
-      ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
-      ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
-    },
-    file_panel = {
-      ["j"]             = cb("next_entry"),         -- Bring the cursor to the next file entry
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),       -- Open the diff for the selected entry.
-      ["o"]             = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-      ["S"]             = cb("stage_all"),          -- Stage all entries.
-      ["U"]             = cb("unstage_all"),        -- Unstage all entries.
-      ["X"]             = cb("restore_entry"),      -- Restore entry to the state on the left side.
-      ["R"]             = cb("refresh_files"),      -- Update stats and entries in the file list.
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
-      ["gf"]            = cb("goto_file"),
-      ["<C-w><C-f>"]    = cb("goto_file_split"),
-      ["<C-w>gf"]       = cb("goto_file_tab"),
-      ["<leader>e"]     = cb("focus_files"),
-      ["<leader>b"]     = cb("toggle_files"),
-    },
-    file_history_panel = {
-      ["g!"]            = cb("options"),            -- Open the option panel
-      ["d"]         = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
-      ["zR"]            = cb("open_all_folds"),
-      ["zM"]            = cb("close_all_folds"),
-      ["j"]             = cb("next_entry"),
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),
-      ["o"]             = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
-      ["gf"]            = cb("goto_file"),
-      ["<C-w><C-f>"]    = cb("goto_file_split"),
-      ["<C-w>gf"]       = cb("goto_file_tab"),
-      ["<leader>e"]     = cb("focus_files"),
-      ["<leader>b"]     = cb("toggle_files"),
-    },
-    option_panel = {
-      ["<tab>"] = cb("select"),
-      ["q"]     = cb("close"),
-    },
-  },
-}
-EOF
-  catch
-    echom 'diffview not configured'
-  endtry
-endfunction
-
-augroup custom_diffview
-  autocmd!
-  autocmd VimEnter * call s:init_diffview()
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <Cmd>tabclose<cr>
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <Cmd>DiffviewToggleFiles<cr>
-augroup end
-
-" }}}
-" Package: nvim-web-icons {{{
-
-function! s:init_nvim_web_icons()
-  try
-lua << EOF
-require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    name = "Zsh"
-  }
- };
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
-}
-EOF
-  catch
-    echom 'nvim_web_icons not configured'
-  endtry
-endfunction
-
-augroup custom_nvim_web_icons
-  autocmd!
-  autocmd VimEnter * call s:init_nvim_web_icons()
-augroup end
 
 " }}}
 " Package: jinja2 {{{
@@ -2008,128 +2110,6 @@ endfunction
 
 " Keymappings set in keymappings section
 let g:textobj_sandwich_no_default_key_mappings = v:true
-
-" }}}
-" Package: nvim-autopairs {{{
-
-function! s:init_nvim_autopairs()
-  try
-lua << EOF
-local ok, _ = pcall(require, 'nvim-autopairs')
-if not ok then
-  print('nvim-autopairs does not exist, skipping...')
-  return
-end
-local npairs = require'nvim-autopairs'
-local Rule   = require'nvim-autopairs.rule'
-npairs.setup({
-  disable_filetype = { "TelescopePrompt" },
-})
-npairs.add_rules {
-  Rule(' ', ' ')
-    :with_pair(function (opts)
-      local pair = opts.line:sub(opts.col - 1, opts.col)
-      return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-    end),
-  Rule('( ', ' )')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%)') ~= nil
-      end)
-      :use_key(')'),
-  Rule('{ ', ' }')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%}') ~= nil
-      end)
-      :use_key('}'),
-  Rule('[ ', ' ]')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%]') ~= nil
-      end)
-      :use_key(']')
-}
-EOF
-  catch
-    echom 'nvim_autopairs not configured'
-  endtry
-endfunction
-
-augroup custom_nvim_autopairs
-  autocmd!
-  autocmd VimEnter * call s:init_nvim_autopairs()
-augroup end
-
-" }}}
-" Package: zen-mode.nvim {{{
-
-function! s:init_zen_mode()
-  try
-lua << EOF
-local ok, _ = pcall(require, 'zen-mode')
-if not ok then
-  print('zen-mode does not exist, skipping...')
-  return
-end
-require'zen-mode'.setup {
-  window = {
-    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-    -- height and width can be:
-    -- * an absolute number of cells when > 1
-    -- * a percentage of the width / height of the editor when <= 1
-    -- * a function that returns the width or the height
-    width = 120, -- width of the Zen window
-    height = 1, -- height of the Zen window
-    -- by default, no options are changed for the Zen window
-    -- uncomment any of the options below, or add other vim.wo options you want to apply
-    options = {
-      -- signcolumn = "no", -- disable signcolumn
-      -- number = false, -- disable number column
-      -- relativenumber = false, -- disable relative numbers
-      -- cursorline = false, -- disable cursorline
-      -- cursorcolumn = false, -- disable cursor column
-      -- foldcolumn = "0", -- disable fold column
-      -- list = false, -- disable whitespace characters
-    },
-  },
-  plugins = {
-    -- disable some global vim options (vim.o...)
-    -- comment the lines to not apply the options
-    options = {
-      enabled = true,
-      ruler = false, -- disables the ruler text in the cmd line area
-      showcmd = false, -- disables the command in the last line of the screen
-    },
-    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-    gitsigns = { enabled = false }, -- disables git signs
-    tmux = { enabled = false }, -- disables the tmux statusline
-    -- this will change the font size on kitty when in zen mode
-    -- to make this work, you need to set the following kitty options:
-    -- - allow_remote_control socket-only
-    -- - listen_on unix:/tmp/kitty
-    kitty = {
-      enabled = false,
-      font = "+4", -- font size increment
-    },
-  },
-  -- callback where you can add custom code when the Zen window opens
-  on_open = function(win)
-  end,
-  -- callback where you can add custom code when the Zen window closes
-  on_close = function()
-  end,
-}
-EOF
-  catch
-    echom 'zenmode not configured'
-  endtry
-endfunction
-
-augroup custom_zenmode
-  autocmd!
-  autocmd VimEnter * call s:init_zen_mode()
-augroup end
 
 " }}}
 " Package: nvim-repl {{{
