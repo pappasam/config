@@ -1474,10 +1474,7 @@ set diffopt+=internal,algorithm:patience
 " Package: diffview {{{
 
 function! s:init_diffview()
-  if !exists('g:diffview_nvim_loaded')
-    echom 'diffview does not exist, skipping...'
-    return
-  endif
+  try
 lua << EOF
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
@@ -1567,6 +1564,9 @@ require'diffview'.setup {
   },
 }
 EOF
+  catch
+    echom 'diffview not configured'
+  endtry
 endfunction
 
 augroup custom_diffview
@@ -1584,10 +1584,7 @@ augroup end
 " Package: nvim-web-icons {{{
 
 function! s:init_nvim_web_icons()
-  if !exists('g:loaded_devicons')
-    echom 'devicons does not exist, skipping...'
-    return
-  endif
+  try
 lua << EOF
 require'nvim-web-devicons'.setup {
  -- your personnal icons can go here (to override)
@@ -1604,6 +1601,9 @@ require'nvim-web-devicons'.setup {
  default = true;
 }
 EOF
+  catch
+    echom 'nvim_web_icons not configured'
+  endtry
 endfunction
 
 augroup custom_nvim_web_icons
@@ -2013,6 +2013,7 @@ let g:textobj_sandwich_no_default_key_mappings = v:true
 " Package: nvim-autopairs {{{
 
 function! s:init_nvim_autopairs()
+  try
 lua << EOF
 local ok, _ = pcall(require, 'nvim-autopairs')
 if not ok then
@@ -2050,6 +2051,9 @@ npairs.add_rules {
       :use_key(']')
 }
 EOF
+  catch
+    echom 'nvim_autopairs not configured'
+  endtry
 endfunction
 
 augroup custom_nvim_autopairs
@@ -2061,10 +2065,7 @@ augroup end
 " Package: zen-mode.nvim {{{
 
 function! s:init_zen_mode()
-  if !exists('g:loaded_commentary')
-    echom 'ts context commentstring does not exist, skipping...'
-    return
-  endif
+  try
 lua << EOF
 local ok, _ = pcall(require, 'zen-mode')
 if not ok then
@@ -2120,6 +2121,9 @@ require'zen-mode'.setup {
   end,
 }
 EOF
+  catch
+    echom 'zenmode not configured'
+  endtry
 endfunction
 
 augroup custom_zenmode
