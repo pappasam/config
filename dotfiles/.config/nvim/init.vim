@@ -621,7 +621,7 @@ require('nvim-treesitter.configs').setup({
 }})
 EOF
   catch
-    echo 'nvim-treesitter not configured'
+    echom 'Problem encountered configuring nvim_treesitter, skipping...'
   endtry
 endfunction
 
@@ -633,7 +633,7 @@ require('spellsitter').setup {
 }
 EOF
   catch
-    echo 'spellsitter not configured'
+    echom 'Problem encountered configuring spellsitter, skipping...'
   endtry
 endfunction
 
@@ -647,7 +647,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
   catch
-    echo 'ts_context_commentstring not configured'
+    echom 'Problem encountered configuring ts_context_commentstring, skipping...'
   endtry
 endfunction
 
@@ -666,7 +666,7 @@ function! s:init_colorizer()
   try
     lua require'colorizer'.setup()
   catch
-    echo 'colorizer not configured'
+    echom 'Problem encountered configuring colorizer, skipping...'
   endtry
 endfunction
 
@@ -763,7 +763,7 @@ require'diffview'.setup {
 }
 EOF
   catch
-    echom 'diffview not configured'
+    echom 'Problem encountered configuring diffview, skipping...'
   endtry
 endfunction
 
@@ -787,7 +787,7 @@ require'nvim-web-devicons'.setup {
 }
 EOF
   catch
-    echom 'nvim_web_icons not configured'
+    echom 'Problem encountered configuring nvim_web_icons, skipping...'
   endtry
 endfunction
 
@@ -832,7 +832,7 @@ npairs.add_rules {
 }
 EOF
   catch
-    echom 'nvim_autopairs not configured'
+    echom 'Problem encountered configuring nvim_autopairs, skipping...'
   endtry
 endfunction
 
@@ -840,11 +840,6 @@ endfunction
 function! s:init_zen_mode()
   try
 lua << EOF
-local ok, _ = pcall(require, 'zen-mode')
-if not ok then
-  print('zen-mode does not exist, skipping...')
-  return
-end
 require'zen-mode'.setup {
   window = {
     backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
@@ -895,7 +890,7 @@ require'zen-mode'.setup {
 }
 EOF
   catch
-    echom 'zenmode not configured'
+    echom 'Problem encountered configuring zen-mode, skipping...'
   endtry
 endfunction
 
