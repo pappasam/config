@@ -550,14 +550,53 @@ local py_injections = [[
   arguments: (argument_list (string) @regex))
  (#eq? @_re "re")
  (#match? @regex "^r.*"))
-
 (comment) @comment
 ]]
+local md_highlights = [[
+(setext_heading (setext_h1_underline)) @text.title.h1
+(setext_heading (setext_h2_underline)) @text.title.h2
+(atx_heading (atx_h1_marker)) @text.title.h1
+(atx_heading (atx_h2_marker)) @text.title.h2
+(atx_heading (atx_h3_marker)) @text.title.h3
+(atx_heading (atx_h4_marker)) @text.title.h4
+(atx_heading (atx_h5_marker)) @text.title.h5
+(atx_heading (atx_h6_marker)) @text.title.h6
+(code_fence_content) @none
+[
+  (indented_code_block)
+  (fenced_code_block)
+  (code_span)
+] @text.literal
+(emphasis) @text.emphasis
+(strong_emphasis) @text.strong
+(link_destination) @text.uri
+(link_label) @text.reference
+[
+  (list_marker_plus)
+  (list_marker_minus)
+  (list_marker_star)
+  (list_marker_dot)
+  (list_marker_parenthesis)
+] @punctuation.special
+[
+  (backslash_escape)
+  (hard_line_break)
+] @string.escape
+]]
 vim.treesitter.set_query('python', 'injections', py_injections)
+vim.treesitter.set_query('markdown', 'highlights', md_highlights)
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {"html", "svelte"}
+    disable = {"html", "svelte"},
+    custom_captures = {
+      ["text.title.h1"] = "htmlH1",
+      ["text.title.h2"] = "htmlH2",
+      ["text.title.h3"] = "htmlH3",
+      ["text.title.h4"] = "htmlH4",
+      ["text.title.h5"] = "htmlH5",
+      ["text.title.h6"] = "htmlH6",
+    },
   },
   indent = {
     enable = true,
