@@ -588,7 +588,7 @@ vim.treesitter.set_query('markdown', 'highlights', md_highlights)
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {"html", "svelte"},
+    disable = {"svelte"},
     custom_captures = {
       ["text.title.h1"] = "htmlH1",
       ["text.title.h2"] = "htmlH2",
