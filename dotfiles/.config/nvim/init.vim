@@ -1927,7 +1927,7 @@ function! s:preview()
     " from plantuml-previewer.vim
     exec 'PlantumlOpen'
   else
-    !gio open %:p
+    !gio open '%:p'
   endif
 endfunction
 
