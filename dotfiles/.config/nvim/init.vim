@@ -1915,19 +1915,19 @@ let g:mkdp_preview_options = {
 
 function! s:preview()
   if &filetype ==? 'rst'
-    exec 'terminal restview %'
-    exec "normal \<C-O>"
+    silent exec 'terminal restview %'
+    silent exec "normal \<C-O>"
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
-    exec 'MarkdownPreview'
+    silent exec 'MarkdownPreview'
   elseif &filetype ==? 'dot'
     " from wmgraphviz.vim
-    exec 'GraphvizInteractive'
+    silent exec 'GraphvizInteractive'
   elseif &filetype ==? 'plantuml'
     " from plantuml-previewer.vim
-    exec 'PlantumlOpen'
+    silent exec 'PlantumlOpen'
   else
-    !gio open '%:p'
+    silent !gio open '%:p'
   endif
 endfunction
 
