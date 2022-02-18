@@ -480,7 +480,6 @@ let g:coc_global_extensions = [
       \ 'coc-docker',
       \ 'coc-emoji',
       \ 'coc-go',
-      \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
