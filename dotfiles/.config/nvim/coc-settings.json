@@ -25,6 +25,7 @@
   ],
   "jedi.startupMessage": true,
   "html.autoClosingTags": false,
+  "html.completion.attributeDefaultValue": "empty",
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "java.enabled": false,
