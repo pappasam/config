@@ -473,7 +473,6 @@ let g:coc_filetype_map = {
 " Coc Global Extensions: automatically installed on Vim open
 let g:coc_global_extensions = [
       \ '@yaegassy/coc-nginx',
-      \ 'coc-angular',
       \ 'coc-css',
       \ 'coc-diagnostic',
       \ 'coc-dictionary',
