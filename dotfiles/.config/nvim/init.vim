@@ -500,6 +500,10 @@ let g:coc_global_extensions = [
       \ 'coc-yank',
       \ ]
 
+" Note: coc-angular requires `npm install @angular/language-service` in
+" project directory to stop coc from crashing. See:
+" <https://github.com/iamcco/coc-angular/issues/47>
+
 function! s:autocmd_custom_coc()
   if !exists("g:did_coc_loaded")
     return
