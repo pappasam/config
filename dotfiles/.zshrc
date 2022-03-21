@@ -975,7 +975,7 @@ function awscliglobal-install() {  ## Install latest version of aws cli (v2)
 }
 
 function goglobal-install() {  ## Install default golang dependencies
-  go get github.com/mattn/efm-langserver
+  go install github.com/mattn/efm-langserver@latest
   asdf reshim golang
 }
 
