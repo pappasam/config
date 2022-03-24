@@ -43,8 +43,8 @@
   },
   "yaml.schemas": {
     "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.23.3-standalone-strict/all.json": [
-      "/kubernetes/*.yml",
-      "/kubernetes/*.yaml"
+      "/*.yml",
+      "/*.yaml"
     ],
     "https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json": "/*docker-compose.yml",
     "https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json": "/*serverless.yml",
