@@ -590,6 +590,7 @@ alias gm='git commit'
 alias gma='git add --all && git commit'
 alias gp='git remote prune origin && git remote set-head origin -a'
 alias gdw='git diff --word-diff'
+alias gop='gh browse'
 
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
@@ -687,27 +688,6 @@ function gd() {
     git diff $@ | delta --light --line-numbers
   else
     git diff $@ | delta --dark  --line-numbers
-  fi
-}
-
-# open browser at current location
-function gop() {
-  if [ ! $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
-    echo "'$PWD' is not inside a git repository"
-    return 1
-  fi
-  local branch_current=$(git branch --show-current)
-  if [[ $# = 0 ]]; then
-    gh browse --branch "$branch_current"
-    return 0
-  fi
-  local git_root=$(git root)
-  local arg_expanded=$(readlink -f "$1")
-  local arg_relative=$(realpath --relative-base="$git_root" "$arg_expanded")
-  if [[ "$arg_relative" = '.' ]]; then
-    gh browse --branch "$branch_current"
-  else
-    gh browse "$arg_relative" --branch "$branch_current"
   fi
 }
 
