@@ -562,7 +562,7 @@ require('nvim-treesitter.configs').setup({
   },
   indent = {
     enable = true,
-    disable = { "python", "html", "css", "svelte"},
+    disable = { "python", "html", "css", "svelte", "markdown"},
   },
   textobjects = {
     select = {
@@ -1145,6 +1145,8 @@ augroup end
 
 augroup custom_indentation
   autocmd!
+  " Reset to 2 (something somewhere overrides...)
+  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   " 4 spaces per tab, not 2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   " Use hard tabs, not spaces
