@@ -558,15 +558,7 @@ vim.treesitter.set_query('python', 'injections', py_injections)
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {"svelte", "css", "html"},
-    custom_captures = {
-      ["text.title.h1"] = "htmlH1",
-      ["text.title.h2"] = "htmlH2",
-      ["text.title.h3"] = "htmlH3",
-      ["text.title.h4"] = "htmlH4",
-      ["text.title.h5"] = "htmlH5",
-      ["text.title.h6"] = "htmlH6",
-    },
+    disable = {"svelte", "css", "html", "markdown"},
   },
   indent = {
     enable = true,
