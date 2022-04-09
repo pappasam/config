@@ -1966,6 +1966,7 @@ function! s:autocmd_custom_defx()
         \ 'min_width': 10,
         \ 'max_width_percent': 90,
         \ })
+  call defx#custom#column('git', 'git_commit', 'main')
 endfunction
 
 function! s:open_defx_if_directory()
