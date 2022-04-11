@@ -883,6 +883,7 @@ function nodeglobal-install() {
     bash-language-server
     devspace
     dockerfile-language-server-nodejs
+    firebase-tools
     git+https://github.com/Perlence/tstags.git
     jsctags
     neovim
