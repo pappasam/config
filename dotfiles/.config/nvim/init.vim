@@ -573,6 +573,7 @@ require('nvim-treesitter.configs').setup({
     'json5',
     'jsonc',
     'julia',
+    'kotlin',
     'latex',
     'ledger',
     'lua',
