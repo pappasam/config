@@ -119,13 +119,14 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:goerz/jupytext.vim.git')
 
   " Syntax Highlighting:
-  call a:packager.add('git@github.com:peitalin/vim-jsx-typescript.git')
   call a:packager.add('git@github.com:Glench/Vim-Jinja2-Syntax')
   call a:packager.add('git@github.com:NLKNguyen/c-syntax.vim')
   call a:packager.add('git@github.com:StanAngeloff/php.vim')
+  call a:packager.add('git@github.com:aklt/plantuml-syntax.git')
   call a:packager.add('git@github.com:autowitch/hive.vim')
   call a:packager.add('git@github.com:calviken/vim-gdscript3')
   call a:packager.add('git@github.com:chr4/nginx.vim.git')
+  call a:packager.add('git@github.com:delphinus/vim-firestore.git')
   call a:packager.add('git@github.com:derekwyatt/vim-scala')
   call a:packager.add('git@github.com:evanleck/vim-svelte')
   call a:packager.add('git@github.com:farfanoide/vim-kivy')
@@ -135,10 +136,10 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:hashivim/vim-terraform')
   call a:packager.add('git@github.com:hashivim/vim-vagrant')
   call a:packager.add('git@github.com:jparise/vim-graphql')
+  call a:packager.add('git@github.com:jxnblk/vim-mdx-js.git')
   call a:packager.add('git@github.com:killphi/vim-ebnf')
   call a:packager.add('git@github.com:lervag/vimtex')
   call a:packager.add('git@github.com:marshallward/vim-restructuredtext')
-  call a:packager.add('git@github.com:jxnblk/vim-mdx-js.git')
   call a:packager.add('git@github.com:martinda/Jenkinsfile-vim-syntax')
   call a:packager.add('git@github.com:mattn/vim-xxdcursor')
   call a:packager.add('git@github.com:mopp/rik_octave.vim')
@@ -146,13 +147,13 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:neovimhaskell/haskell-vim')
   call a:packager.add('git@github.com:othree/html5.vim')
   call a:packager.add('git@github.com:pangloss/vim-javascript')
-  call a:packager.add('git@github.com:aklt/plantuml-syntax.git')
   call a:packager.add('git@github.com:pearofducks/ansible-vim')
+  call a:packager.add('git@github.com:peitalin/vim-jsx-typescript.git')
   call a:packager.add('git@github.com:raimon49/requirements.txt.vim')
-  call a:packager.add('git@github.com:tpope/vim-markdown.git')
   call a:packager.add('git@github.com:ron-rs/ron.vim')
   call a:packager.add('git@github.com:rust-lang/rust.vim')
   call a:packager.add('git@github.com:tomlion/vim-solidity')
+  call a:packager.add('git@github.com:tpope/vim-markdown.git')
   call a:packager.add('git@github.com:vim-scripts/SAS-Syntax')
   call a:packager.add('git@github.com:vimoutliner/vimoutliner')
 endfunction
@@ -1125,7 +1126,7 @@ augroup custom_indentation
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
   autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype ron setlocal cindent
+  autocmd Filetype firestore,ron setlocal cindent
         \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
         \ cinoptions+='(s,m2'
         \ cinoptions+='(s,U1'
