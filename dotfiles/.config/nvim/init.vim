@@ -275,36 +275,7 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
-  nnoremap <silent> <space>j <Cmd>Defx
-        \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename
-        \ -direction=topleft
-        \ -search=`expand('%:p')`
-        \ -session-file=`g:custom_defx_state`
-        \ -ignored-files=`g:defx_ignored_files`
-        \ -split=vertical
-        \ -toggle
-        \ -floating-preview
-        \ -vertical-preview
-        \ -preview-height=50
-        \ -preview-width=85
-        \ -winwidth=31
-        \ -root-marker=''
-        \ <CR>
-  nnoremap <silent> <space>J <Cmd>Defx `expand('%:p:h')`
-        \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename
-        \ -direction=topleft
-        \ -search=`expand('%:p')`
-        \ -ignored-files=`g:defx_ignored_files`
-        \ -split=vertical
-        \ -floating-preview
-        \ -vertical-preview
-        \ -preview-height=50
-        \ -preview-width=85
-        \ -winwidth=31
-        \ -root-marker=''
-        \ <CR>
+  nnoremap <silent> <space>j <Cmd>DefxToggle<CR>
   nnoremap <silent> <space>l <Cmd>CocOutline<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
@@ -1967,6 +1938,17 @@ function! s:autocmd_custom_defx()
         \ 'max_width_percent': 90,
         \ })
   call defx#custom#column('git', 'git_commit', 'main')
+  if @% == ''
+    " No filename for current buffer
+    Defx `expand('%:p')`
+        \ -buffer-name=defx
+        \ -columns=mark:git:indent:icons:space:filename
+        \ -ignored-files=`g:defx_ignored_files`
+        \ -floating-preview
+        \ -vertical-preview
+        \ -preview-height=50
+        \ -preview-width=85
+  endif
 endfunction
 
 function! s:open_defx_if_directory()
@@ -2003,6 +1985,34 @@ function! s:defx_buffer_remappings() abort
         \ echo '' . key . ': ' . value <BAR>
         \ endfor<CR>
 endfunction
+
+function! s:toggle_defx()
+  if &filetype == 'defx'
+    if winnr('$') == 1
+      echom 'Defx is last window, use :quit instead'
+    else
+      silent quit!
+    endif
+  else
+    Defx
+          \ -buffer-name=defx
+          \ -columns=mark:git:indent:icons:space:filename
+          \ -direction=topleft
+          \ -search=`expand('%:p')`
+          \ -session-file=`g:custom_defx_state`
+          \ -ignored-files=`g:defx_ignored_files`
+          \ -split=vertical
+          \ -toggle
+          \ -floating-preview
+          \ -vertical-preview
+          \ -preview-height=50
+          \ -preview-width=85
+          \ -winwidth=31
+          \ -root-marker=''
+  endif
+endfunction
+
+command! DefxToggle call s:toggle_defx()
 
 augroup custom_defx
   autocmd!
