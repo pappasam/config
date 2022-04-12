@@ -1992,7 +1992,7 @@ endfunction
 function! s:toggle_defx()
   if &filetype == 'defx'
     if winnr('$') == 1
-      echom 'Defx is last window, use :quit instead'
+      return
     else
       silent quit!
     endif
