@@ -2181,9 +2181,9 @@ let g:markdown_fenced_languages = [
       \ ]
 
 " Netrw: disable completely
-let g:loaded_netrw= v:true
-let g:netrw_loaded_netrwPlugin= v:true
-let g:netrw_nogx = v:true
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+let g:netrw_nogx = 1
 
 " UndoTree:
 let g:undotree_SetFocusWhenToggle = v:true
