@@ -1940,7 +1940,14 @@ function! s:autocmd_custom_defx()
         \ 'min_width': 10,
         \ 'max_width_percent': 90,
         \ })
-  call defx#custom#column('git', 'git_commit', 'main')
+  let git_branch_result = system('git branch --list main')
+  if !v:shell_error
+    if git_branch_result == ''
+      call defx#custom#column('git', 'git_commit', 'master')
+    else
+      call defx#custom#column('git', 'git_commit', 'main')
+    endif
+  endif
   if @% == ''
     " No filename for current buffer
     Defx `expand('%:p')`
