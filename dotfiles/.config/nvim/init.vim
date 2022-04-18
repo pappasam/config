@@ -1948,17 +1948,6 @@ function! s:autocmd_custom_defx()
       call defx#custom#column('git', 'git_commit', 'main')
     endif
   endif
-  if @% == ''
-    " No filename for current buffer
-    Defx `expand('%:p')`
-        \ -buffer-name=defx
-        \ -columns=mark:git:indent:icons:space:filename
-        \ -ignored-files=`g:defx_ignored_files`
-        \ -floating-preview
-        \ -vertical-preview
-        \ -preview-height=50
-        \ -preview-width=85
-  endif
 endfunction
 
 function! s:open_defx_if_directory()
