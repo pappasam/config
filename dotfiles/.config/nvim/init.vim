@@ -37,7 +37,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:kristijanhusak/defx-git')
   call a:packager.add('git@github.com:kristijanhusak/defx-icons')
   call a:packager.add('git@github.com:mbbill/undotree')
-  call a:packager.add('git@github.com:qpkorr/vim-bufkill')
   call a:packager.add('git@github.com:ryvnf/readline.vim.git')
   call a:packager.add('git@github.com:simeji/winresizer')
   call a:packager.add('git@github.com:sjl/strftimedammit.vim')
