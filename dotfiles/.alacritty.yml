@@ -156,6 +156,7 @@ shell:
 # Need scancodes. See: https://github.com/alacritty/alacritty/issues/4111
 # To get scancodes: `sudo showkey`
 key_bindings:
+  - {key: F11, action: ToggleFullscreen}
   - {key: LBracket, mods: Control, mode: Vi, action: ClearSelection}
   - {key: Q, mode: Vi, action: ScrollToBottom}
   - {key: Q, mode: Vi, action: ToggleViMode}

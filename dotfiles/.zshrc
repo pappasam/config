@@ -729,7 +729,7 @@ function upgrade() {
 # Alacritty Helpers
 function dark() {
   alacritty-colorscheme \
-    -c "$HOME/.alacritty.yml" \
+    -c "$HOME/dotfiles/dotfiles/.alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'ayu_dark.yaml'
   if [ ! -z "$TMUX" ]; then
@@ -739,7 +739,7 @@ function dark() {
 
 function light() {
   alacritty-colorscheme \
-    -c "$HOME/.alacritty.yml" \
+    -c "$HOME/dotfiles/dotfiles/.alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'papercolor_light.yaml'
   if [ ! -z "$TMUX" ]; then
