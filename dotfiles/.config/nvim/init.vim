@@ -2155,11 +2155,12 @@ augroup end
 " }}}
 " Package: misc global var config {{{
 
-" Languages: configure location of host
+" Languages: configure location of host. Currently only Python needed
+" others kept for posterity
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
-let g:ruby_host_prog = "$HOME/.asdf/shims/ruby"
-let g:node_host_prog = "$HOME/.asdf/shims/node"
-let g:perl_host_prog = "$HOME/.asdf/shims/perl"
+" let g:ruby_host_prog = "$HOME/.asdf/shims/ruby"
+" let g:node_host_prog = "$HOME/.asdf/shims/node"
+" let g:perl_host_prog = "$HOME/.asdf/shims/perl"
 
 " Configure clipboard explicitly. Speeds up startup
 let g:clipboard = {

@@ -887,6 +887,7 @@ function rubyglobal-install() {
 
 function perlglobal-install() {
   cpanm -n Neovim::Ext
+  cpanm -n App::cpanminus
   asdf reshim perl
 }
 
