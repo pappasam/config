@@ -1030,10 +1030,6 @@ augroup custom_nginx
   autocmd FileType zsh,sh set iskeyword+=-
 augroup end
 
-" Make Python support work better with asdf
-let g:python3_host_prog = "$HOME/.asdf/shims/python"
-let g:loaded_python_provider = 0
-
 " }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
@@ -2159,8 +2155,25 @@ augroup end
 " }}}
 " Package: misc global var config {{{
 
-" Python: disable python 2 support
-let g:loaded_python_provider = v:true
+" Languages: configure location of host
+let g:python3_host_prog = "$HOME/.asdf/shims/python"
+let g:ruby_host_prog = "$HOME/.asdf/shims/ruby"
+let g:node_host_prog = "$HOME/.asdf/shims/node"
+let g:perl_host_prog = "$HOME/.asdf/shims/perl"
+
+" Configure clipboard explicitly. Speeds up startup
+let g:clipboard = {
+      \ 'name': 'xsel',
+      \ 'copy': {
+      \    '+': 'xsel --clipboard --input',
+      \    '*': 'xsel --clipboard --input',
+      \  },
+      \ 'paste': {
+      \    '+': 'xsel --clipboard --output',
+      \    '*': 'xsel --clipboard --output',
+      \ },
+      \ 'cache_enabled': 0,
+      \ }
 
 " Markdown:
 let g:markdown_fenced_languages = [

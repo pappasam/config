@@ -41,6 +41,7 @@ asdf_setup golang latest
 asdf_setup java adopt-openjdk-13.0.2+8
 asdf_setup neovim nightly
 asdf_setup nodejs latest
+asdf_setup perl latest
 asdf_setup php latest
 asdf_setup poetry latest
 asdf_setup postgres 13.0

@@ -857,11 +857,13 @@ function cargodoc() {  # arg1: packagename
 }
 
 function global-install() {
-  rustglobal-install
-  nodeglobal-install
-  pyglobal-install
   awscliglobal-install
   goglobal-install
+  nodeglobal-install
+  perlglobal-install
+  pyglobal-install
+  rubyglobal-install
+  rustglobal-install
 }
 
 function rustglobal-install() {
@@ -876,6 +878,16 @@ function rustglobal-install() {
   cargo install ripgrep
   asdf reshim rust
   cargo install-update -a
+}
+
+function rubyglobal-install() {
+  gem install neovim
+  asdf reshim ruby
+}
+
+function perlglobal-install() {
+  cpanm -n Neovim::Ext
+  asdf reshim perl
 }
 
 function nodeglobal-install() {
