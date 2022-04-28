@@ -11,7 +11,6 @@ function! s:packager_init(packager) abort
 
   " TreeSitter:
   call a:packager.add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
-  call a:packager.add('git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git')
   call a:packager.add('git@github.com:lewis6991/spellsitter.nvim.git')
   call a:packager.add('git@github.com:nvim-treesitter/playground.git')
   call a:packager.add('git@github.com:windwp/nvim-ts-autotag.git')
@@ -62,30 +61,11 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:sodapopcan/vim-twiggy.git')
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
   call a:packager.add('git@github.com:nvim-lua/plenary.nvim.git')
-  call a:packager.add('git@github.com:sindrets/diffview.nvim.git')
   call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
 
   " Text Objects:
   call a:packager.add('git@github.com:machakann/vim-sandwich')
   call a:packager.add('git@github.com:kana/vim-textobj-user')
-  " support additional delimiters
-  call a:packager.add('git@github.com:EvanQuan/vim-textobj-delimiters.git')
-  " al/il for the current line
-  call a:packager.add('git@github.com:kana/vim-textobj-line')
-  " as/is for a sentence of prose (overrides hard-coded native object & motion)
-  call a:packager.add('git@github.com:reedes/vim-textobj-sentence')
-  " az/iz for a block of folded lines; iz does not include fold marker lines
-  call a:packager.add('git@github.com:somini/vim-textobj-fold')
-  " ao/io for a block of indentation (i.e. spaces)
-  call a:packager.add('git@github.com:glts/vim-textobj-indblock')
-  " ay/iy for a syntax group
-  call a:packager.add('git@github.com:kana/vim-textobj-syntax')
-  " ae/ie for entire buffers
-  call a:packager.add('git@github.com:kana/vim-textobj-entire.git')
-  " ai/ii for similarly indented, aI/iI for same indentation
-  call a:packager.add('git@github.com:kana/vim-textobj-indent.git')
-  " au/iu for a URI, also includes URI handlers and is easy to extend
-  call a:packager.add('git@github.com:jceb/vim-textobj-uri.git')
 
   " Writing:
   call a:packager.add('git@github.com:dkarter/bullets.vim')
@@ -130,7 +110,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:evanleck/vim-svelte')
   call a:packager.add('git@github.com:farfanoide/vim-kivy')
   call a:packager.add('git@github.com:gisraptor/vim-lilypond-integrator.git')
-  call a:packager.add('git@github.com:godlygeek/tabular')
   call a:packager.add('git@github.com:groenewege/vim-less')
   call a:packager.add('git@github.com:hashivim/vim-terraform')
   call a:packager.add('git@github.com:hashivim/vim-vagrant')
@@ -536,18 +515,6 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     disable = { "python", "html", "css", "svelte", "markdown"},
   },
-  textobjects = {
-    select = {
-      enable = true,
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-      },
-    },
-  },
   autotag = {
     enable = true,
   },
@@ -641,103 +608,6 @@ function! s:init_colorizer()
     lua require'colorizer'.setup()
   catch
     echom 'Problem encountered configuring colorizer, skipping...'
-  endtry
-endfunction
-
-" diffview
-function! s:init_diffview()
-  try
-lua << EOF
-local cb = require'diffview.config'.diffview_callback
-require'diffview'.setup {
-  diff_binaries = false,    -- Show diffs for binaries
-  use_icons = true,         -- Requires nvim-web-devicons
-  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-  signs = {
-    fold_closed = "",
-    fold_open = "",
-  },
-  file_panel = {
-    position = "left",      -- One of 'left', 'right', 'top', 'bottom'
-    width = 35,             -- Only applies when position is 'left' or 'right'
-    height = 10,            -- Only applies when position is 'top' or 'bottom'
-  },
-  file_history_panel = {
-    position = "bottom",
-    width = 35,
-    height = 16,
-    log_options = {
-      max_count = 256,      -- Limit the number of commits
-      follow = false,       -- Follow renames (only for single file)
-      all = false,          -- Include all refs under 'refs/' including HEAD
-      merges = false,       -- List only merge commits
-      no_merges = false,    -- List no merge commits
-      reverse = false,      -- List commits in reverse order
-    },
-  },
-  key_bindings = {
-    disable_defaults = true,                   -- Disable the default key bindings
-    -- The `view` bindings are active in the diff buffers, only when the current
-    -- tabpage is a Diffview.
-    view = {
-      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
-      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
-      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
-      ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
-      ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
-      ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
-      ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
-    },
-    file_panel = {
-      ["j"]             = cb("next_entry"),         -- Bring the cursor to the next file entry
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),       -- Open the diff for the selected entry.
-      ["o"]             = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-      ["S"]             = cb("stage_all"),          -- Stage all entries.
-      ["U"]             = cb("unstage_all"),        -- Unstage all entries.
-      ["X"]             = cb("restore_entry"),      -- Restore entry to the state on the left side.
-      ["R"]             = cb("refresh_files"),      -- Update stats and entries in the file list.
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
-      ["gf"]            = cb("goto_file"),
-      ["<C-w><C-f>"]    = cb("goto_file_split"),
-      ["<C-w>gf"]       = cb("goto_file_tab"),
-      ["<leader>e"]     = cb("focus_files"),
-      ["<leader>b"]     = cb("toggle_files"),
-    },
-    file_history_panel = {
-      ["g!"]            = cb("options"),            -- Open the option panel
-      ["d"]         = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
-      ["zR"]            = cb("open_all_folds"),
-      ["zM"]            = cb("close_all_folds"),
-      ["j"]             = cb("next_entry"),
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),
-      ["o"]             = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
-      ["gf"]            = cb("goto_file"),
-      ["<C-w><C-f>"]    = cb("goto_file_split"),
-      ["<C-w>gf"]       = cb("goto_file_tab"),
-      ["<leader>e"]     = cb("focus_files"),
-      ["<leader>b"]     = cb("toggle_files"),
-    },
-    option_panel = {
-      ["<tab>"] = cb("select"),
-      ["q"]     = cb("close"),
-    },
-  },
-}
-EOF
-  catch
-    echom 'Problem encountered configuring diffview, skipping...'
   endtry
 endfunction
 
@@ -871,20 +741,9 @@ endfunction
 augroup custom_general_lua_extensions
   autocmd!
   autocmd VimEnter * call s:init_colorizer()
-  autocmd VimEnter * call s:init_diffview()
   autocmd VimEnter * call s:init_nvim_web_icons()
   autocmd VimEnter * call s:init_nvim_autopairs()
   autocmd VimEnter * call s:init_zen_mode()
-augroup end
-
-augroup custom_diffview
-  autocmd!
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> q <Cmd>tabclose<cr>
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> q <SID>abbr_help('q', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qu <SID>abbr_help('qu', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> qui <SID>abbr_help('qui', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory cnoreabbrev <buffer> <silent> <expr> quit <SID>abbr_help('quit', 'tabclose')
-  autocmd FileType DiffviewFiles,DiffviewFileHistory nnoremap <buffer> <silent> <space>j <Cmd>DiffviewToggleFiles<cr>
 augroup end
 
 " }}}
@@ -1313,7 +1172,7 @@ endfunction
 augroup custom_writing
   autocmd!
   autocmd VimEnter * call s:abolish_correct()
-  autocmd FileType markdown,markdown.mdx,mdx,rst,text,gitcommit setlocal wrap linebreak nolist | call textobj#sentence#init()
+  autocmd FileType markdown,markdown.mdx,mdx,rst,text,gitcommit setlocal wrap linebreak nolist
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup end
