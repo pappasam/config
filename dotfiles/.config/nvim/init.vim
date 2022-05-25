@@ -647,7 +647,8 @@ end
 local npairs = require'nvim-autopairs'
 local Rule   = require'nvim-autopairs.rule'
 npairs.setup({
-  disable_filetype = { "TelescopePrompt" },
+  map_c_h = true,
+  map_c_w = true,
 })
 npairs.add_rules {
   Rule(' ', ' ')
