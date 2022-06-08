@@ -254,8 +254,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
 
   " TogglePluginWindows:
-  nnoremap <silent> <space>j <Cmd>NvimTreeToggle<CR>
-  nnoremap <silent> <space>J <Cmd>NvimTreeFindFileToggle<CR>
+  nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
+  nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>CocOutline<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
