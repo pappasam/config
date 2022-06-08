@@ -642,10 +642,11 @@ function! s:init_nvim_tree()
   try
 lua << EOF
 require'nvim-tree'.setup {
+  renderer = {
+    full_name = true,
+  },
   filters = {
     dotfiles = true,
-    custom = {},
-    exclude = {},
   },
 }
 EOF
