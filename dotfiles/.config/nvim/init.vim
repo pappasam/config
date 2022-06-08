@@ -949,14 +949,6 @@ augroup custom_colorscheme
   autocmd ColorScheme * highlight link CocHighlightText Underlined
 augroup end
 
-augroup custom_papercolorslim
-  autocmd!
-  autocmd ColorScheme PaperColorSlim
-        \ if &background == 'light' |
-        \ execute 'highlight Normal guibg=#fffff0' |
-        \ endif
-augroup end
-
 try
   colorscheme PaperColorSlim
 catch
