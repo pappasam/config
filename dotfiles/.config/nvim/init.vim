@@ -1206,6 +1206,7 @@ augroup end
 augroup custom_cursorline
   autocmd!
   autocmd FileType qf setlocal cursorline
+  autocmd BufEnter NvimTree* setlocal cursorline
 augroup end
 
 " }}}
