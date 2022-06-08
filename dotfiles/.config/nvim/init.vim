@@ -259,8 +259,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>l <Cmd>CocOutline<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
-  " Override <C-w>H to delete defx buffers
-  " nnoremap <C-w>H <Cmd>windo if &filetype == 'defx' <bar> close <bar> endif<CR><C-w>H
+  " Override <C-w>H to delete file explorer buffers
+  nnoremap <C-w>H <Cmd>windo if &filetype == 'NvimTree' <bar> close <bar> endif<CR><C-w>H
 
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
@@ -388,17 +388,11 @@ augroup custom_remap_rst
   autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
 augroup end
 
-" augroup custom_remap_defx
-"   autocmd!
-"   autocmd FileType defx call s:defx_buffer_remappings()
-"   autocmd FileType defx nmap     <buffer> <silent>        gp <Plug>(defx-git-prev)
-"   autocmd FileType defx nmap     <buffer> <silent>        gn <Plug>(defx-git-next)
-"   autocmd FileType defx nmap     <buffer> <silent>        gs <Plug>(defx-git-stage)
-"   autocmd FileType defx nmap     <buffer> <silent>        gu <Plug>(defx-git-reset)
-"   autocmd FileType defx nmap     <buffer> <silent>        gd <Plug>(defx-git-discard)
-"   autocmd FileType defx nnoremap <buffer> <silent> <expr> <C-l> defx#do_action('resize', winwidth(0)+2)
-"   autocmd FileType defx nnoremap <buffer> <silent> <expr> <C-h> defx#do_action('resize', winwidth(0)-2)
-" augroup end
+augroup custom_remap_nvim_tree_lua
+  autocmd!
+  autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
+  autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
+augroup end
 
 augroup custom_init_vim
   autocmd!
@@ -637,7 +631,7 @@ EOF
   endtry
 endfunction
 
-" nvim-tree
+" nvim-tree-lua
 function! s:init_nvim_tree()
   try
 lua << EOF
@@ -1029,10 +1023,10 @@ set statusline+=%*  " default color
 set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 
 " Status Line
-" augroup custom_statusline
-"   autocmd!
-"   autocmd FileType defx setlocal statusline=\ defx\ %#CursorLine#
-" augroup end
+augroup custom_statusline
+  autocmd!
+  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
+augroup end
 
 " }}}
 " General: environment variables {{{
