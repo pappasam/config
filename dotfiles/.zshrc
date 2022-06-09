@@ -1287,6 +1287,15 @@ function yamltojson() {
 }
 compdef '_files -g "*.(yml|yaml)"' yamltojson
 
+# Remove spaces from a filename
+function despace() {
+  if [ -z $1 ]; then
+    echo 'Must provide a file as the first (and only) argument'
+  else
+    mv "$1" $(printf "$1" | tr -s ' ' '_')
+  fi
+}
+
 # }}}
 # General: cat functions {{{
 
