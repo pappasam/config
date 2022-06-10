@@ -1287,12 +1287,17 @@ function yamltojson() {
 }
 compdef '_files -g "*.(yml|yaml)"' yamltojson
 
-# Remove spaces from a filename
+# Remove spaces from a filename. Accepts stdin and arguments, preferring
+# arguments if they are given.
 function despace() {
-  if [ -z $1 ]; then
-    echo 'Must provide a file as the first (and only) argument'
+  if [ $# -eq 0 ]; then
+    while read -r in; do
+      mv "$in" $(printf "$in" | tr -s ' ' '_')
+    done
   else
-    mv "$1" $(printf "$1" | tr -s ' ' '_')
+    for filename in "$@"; do
+      mv "$filename" $(printf "$filename" | tr -s ' ' '_')
+    done
   fi
 }
 
