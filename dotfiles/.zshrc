@@ -1291,12 +1291,12 @@ compdef '_files -g "*.(yml|yaml)"' yamltojson
 # arguments if they are given.
 function despace() {
   if [ $# -eq 0 ]; then
-    while read -r in; do
-      mv "$in" $(printf "$in" | tr -s ' ' '_')
+    while read -r filename; do
+      mv "$filename" $(echo -n "$filename" | tr -s ' ' '_')
     done
   else
     for filename in "$@"; do
-      mv "$filename" $(printf "$filename" | tr -s ' ' '_')
+      mv "$filename" $(echo -n "$filename" | tr -s ' ' '_')
     done
   fi
 }
