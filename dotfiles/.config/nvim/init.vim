@@ -62,6 +62,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
   call a:packager.add('git@github.com:nvim-lua/plenary.nvim.git')
   call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
+  call a:packager.add('git@github.com:lewis6991/gitsigns.nvim.git')
 
   " Text Objects:
   call a:packager.add('git@github.com:machakann/vim-sandwich')
@@ -753,6 +754,56 @@ EOF
   endtry
 endfunction
 
+" gitsigns
+function! s:init_gitsigns()
+  try
+lua << EOF
+require('gitsigns').setup{
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map({'n', 'v'}, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
+    map({'n', 'v'}, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({'o', 'x'}, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
+  end
+}
+EOF
+  catch
+    echom 'Problem encountered configuring gitsigns, skipping...'
+  endtry
+endfunction
+
 augroup custom_general_lua_extensions
   autocmd!
   autocmd VimEnter * call s:init_colorizer()
@@ -760,6 +811,7 @@ augroup custom_general_lua_extensions
   autocmd VimEnter * call s:init_nvim_autopairs()
   autocmd VimEnter * call s:init_zen_mode()
   autocmd VimEnter * call s:init_nvim_tree()
+  autocmd VimEnter * call s:init_gitsigns()
 augroup end
 
 " }}}
