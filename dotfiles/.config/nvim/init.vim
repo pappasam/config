@@ -602,7 +602,9 @@ augroup end
 " nvim-colorizer: ColorizerToggle
 function! s:init_colorizer()
   try
-    lua require'colorizer'.setup()
+lua << EOF
+require('colorizer').setup()
+EOF
   catch
     echom 'Problem encountered configuring colorizer, skipping...'
   endtry
@@ -612,7 +614,7 @@ endfunction
 function! s:init_nvim_web_icons()
   try
 lua << EOF
-require'nvim-web-devicons'.setup {
+require('nvim-web-devicons').setup {
  -- your personnal icons can go here (to override)
  -- DevIcon will be appended to `name`
  override = {
@@ -636,7 +638,7 @@ endfunction
 function! s:init_nvim_tree()
   try
 lua << EOF
-require'nvim-tree'.setup {
+require('nvim-tree').setup {
   renderer = {
     full_name = true,
   },
@@ -654,13 +656,8 @@ endfunction
 function! s:init_nvim_autopairs()
   try
 lua << EOF
-local ok, _ = pcall(require, 'nvim-autopairs')
-if not ok then
-  print('nvim-autopairs does not exist, skipping...')
-  return
-end
-local npairs = require'nvim-autopairs'
-local Rule   = require'nvim-autopairs.rule'
+local npairs = require('nvim-autopairs')
+local Rule   = require('nvim-autopairs.rule')
 npairs.setup({
   map_c_h = true,
   map_c_w = true,
@@ -700,54 +697,7 @@ endfunction
 function! s:init_zen_mode()
   try
 lua << EOF
-require'zen-mode'.setup {
-  window = {
-    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-    -- height and width can be:
-    -- * an absolute number of cells when > 1
-    -- * a percentage of the width / height of the editor when <= 1
-    -- * a function that returns the width or the height
-    width = 120, -- width of the Zen window
-    height = 1, -- height of the Zen window
-    -- by default, no options are changed for the Zen window
-    -- uncomment any of the options below, or add other vim.wo options you want to apply
-    options = {
-      -- signcolumn = "no", -- disable signcolumn
-      -- number = false, -- disable number column
-      -- relativenumber = false, -- disable relative numbers
-      -- cursorline = false, -- disable cursorline
-      -- cursorcolumn = false, -- disable cursor column
-      -- foldcolumn = "0", -- disable fold column
-      -- list = false, -- disable whitespace characters
-    },
-  },
-  plugins = {
-    -- disable some global vim options (vim.o...)
-    -- comment the lines to not apply the options
-    options = {
-      enabled = true,
-      ruler = false, -- disables the ruler text in the cmd line area
-      showcmd = false, -- disables the command in the last line of the screen
-    },
-    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-    gitsigns = { enabled = false }, -- disables git signs
-    tmux = { enabled = false }, -- disables the tmux statusline
-    -- this will change the font size on kitty when in zen mode
-    -- to make this work, you need to set the following kitty options:
-    -- - allow_remote_control socket-only
-    -- - listen_on unix:/tmp/kitty
-    kitty = {
-      enabled = false,
-      font = "+4", -- font size increment
-    },
-  },
-  -- callback where you can add custom code when the Zen window opens
-  on_open = function(win)
-  end,
-  -- callback where you can add custom code when the Zen window closes
-  on_close = function()
-  end,
-}
+require('zen-mode').setup()
 EOF
   catch
     echom 'Problem encountered configuring zen-mode, skipping...'
