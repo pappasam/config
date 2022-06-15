@@ -72,7 +72,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:dkarter/bullets.vim')
   call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
   call a:packager.add('git@github.com:jlesquembre/rst-tables.nvim')
-  call a:packager.add('git@github.com:junegunn/limelight.vim')
+  call a:packager.add('git@github.com:folke/twilight.nvim.git')
   call a:packager.add('git@github.com:moiatgit/vim-rst-sections')
 
   " Previewers:
@@ -265,7 +265,7 @@ function! s:default_key_mappings()
 
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
-  nnoremap <leader><leader>l <Cmd>Limelight!!<CR>
+  nnoremap <leader><leader>l <Cmd>Twilight<CR>
   nmap     <leader><leader>v <Plug>Veil
 
   " IndentLines: toggle if indent lines is visible
@@ -708,6 +708,19 @@ EOF
   endtry
 endfunction
 
+" twilight.nvim, a Limelight (limelight) replacement
+function! s:init_twilight()
+  try
+lua << EOF
+require('twilight').setup{
+}
+EOF
+  catch
+    echom 'Problem encountered configuring twilight, skipping...'
+  endtry
+endfunction
+
+
 " gitsigns
 function! s:init_gitsigns()
   try
@@ -766,6 +779,7 @@ augroup custom_general_lua_extensions
   autocmd VimEnter * call s:init_zen_mode()
   autocmd VimEnter * call s:init_nvim_tree()
   autocmd VimEnter * call s:init_gitsigns()
+  autocmd VimEnter * call s:init_twilight()
 augroup end
 
 " }}}
