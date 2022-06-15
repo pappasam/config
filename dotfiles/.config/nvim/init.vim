@@ -701,6 +701,9 @@ require('zen-mode').setup{
       list = false,
     },
   },
+  plugins = {
+    twilight = { enabled = false },
+  },
 }
 EOF
   catch
