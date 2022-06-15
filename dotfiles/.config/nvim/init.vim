@@ -654,6 +654,7 @@ npairs.setup({
   map_c_w = true,
 })
 npairs.add_rules {
+  -- BEGIN Rule: add spaces between parentheses
   Rule(' ', ' ')
     :with_pair(function (opts)
       local pair = opts.line:sub(opts.col - 1, opts.col)
@@ -677,6 +678,7 @@ npairs.add_rules {
           return opts.prev_char:match('.%]') ~= nil
       end)
       :use_key(']')
+  -- END Rule: add spaces between parentheses
 }
 EOF
   catch
