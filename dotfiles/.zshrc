@@ -857,7 +857,6 @@ function cargodoc() {  # arg1: packagename
 }
 
 function global-install() {
-  awscliglobal-install
   goglobal-install
   nodeglobal-install
   perlglobal-install
@@ -954,19 +953,6 @@ function pyglobal-install() {  ## Install global Python applications
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
-}
-
-function awscliglobal-install() {  ## Install latest version of aws cli (v2)
-  pushd
-  cd "$HOME/Downloads"
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  unzip awscliv2.zip
-  ./aws/install --install-dir "$HOME/.local/aws-cli" --bin-dir "$HOME/bin" --update
-  rm -r aws
-  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
-  sudo dpkg -i session-manager-plugin.deb
-  rm session-manager-plugin.deb
-  popd
 }
 
 function goglobal-install() {  ## Install default golang dependencies

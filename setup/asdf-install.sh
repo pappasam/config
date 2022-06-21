@@ -33,6 +33,7 @@ asdf_setup() {
 }
 
 asdf_setup act latest
+asdf_setup awscli latest
 asdf_setup direnv latest
 asdf_setup fzf latest
 asdf_setup github-cli latest
