@@ -188,6 +188,9 @@ function! s:default_key_mappings()
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
 
+  " Toggle gitsigns
+  nnoremap <silent> <leader>g <Cmd>GitsignsToggle<CR>
+
   " View Syntax Groups
   nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
 
@@ -787,6 +790,8 @@ augroup custom_general_lua_extensions
   autocmd VimEnter * call s:init_twilight()
 augroup end
 
+command! GitsignsToggle Gitsigns toggle_signs
+
 " }}}
 " General: syntax highlighting diagnostics {{{
 
@@ -828,7 +833,7 @@ set shortmess+=I
 set hidden
 
 " Sign Column: always show it
-set signcolumn=number
+set signcolumn=yes:2
 
 " Mouse: enable GUI mouse support in all modes
 set mouse=a
