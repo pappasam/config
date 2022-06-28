@@ -509,7 +509,7 @@ vim.treesitter.set_query('python', 'injections', py_injections)
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {"svelte", "css", "html", "markdown"},
+    disable = {"markdown"},
   },
   indent = {
     enable = true,
