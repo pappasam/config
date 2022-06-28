@@ -509,7 +509,6 @@ vim.treesitter.set_query('python', 'injections', py_injections)
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
-    disable = {"markdown"},
   },
   indent = {
     enable = true,
@@ -545,6 +544,7 @@ require('nvim-treesitter.configs').setup({
     'ledger',
     'lua',
     'markdown',
+    'markdown_inline',
     'ocaml',
     'php',
     'python',
@@ -560,6 +560,14 @@ require('nvim-treesitter.configs').setup({
     'vim',
     'yaml',
 }})
+require('nvim-treesitter.highlight').set_custom_captures({
+  ["text.title.h1"] = "htmlH1",
+  ["text.title.h2"] = "htmlH2",
+  ["text.title.h3"] = "htmlH3",
+  ["text.title.h4"] = "htmlH4",
+  ["text.title.h5"] = "htmlH5",
+  ["text.title.h6"] = "htmlH6",
+})
 EOF
   catch
     echom 'Problem encountered configuring nvim_treesitter, skipping...'
