@@ -993,6 +993,7 @@ endtry
 augroup custom_filetype_recognition
   autocmd!
   autocmd BufEnter *.asm set filetype=nasm
+  autocmd BufEnter *.scm set filetype=query
   autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf set filetype=dosini
   autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
   autocmd BufEnter *.handlebars set filetype=html
