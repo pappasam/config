@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# System install steps for display manager in Ubuntu 18.04
+# System install steps for display manager in Ubuntu 18.04. May work for more
+# recent versions of Ubuntu, but I haven't tested on these versions.
 
 set -e
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'Starting custom installs!'
+
 echo 'Downloading https://github.com/asdf-vm/asdf'
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 
@@ -18,3 +20,5 @@ echo 'Downloading https://plantuml.com/'
 mkdir -p ~/java
 wget -O ~/java/plantuml.jar \
   http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
+
+echo 'Finished custom installs!'
