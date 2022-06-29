@@ -1,6 +1,7 @@
-" General: packages {{{
+" General: packages (vim-packager) {{{
 
-" Note: vim-packager automatically executes UpdateRemotePlugins
+" Available Commands:
+"   PackagerStatus, PackagerInstall, PackagerUpdate, PackagerClean
 
 function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
@@ -141,12 +142,6 @@ packadd vim-packager
 call packager#setup(function('s:packager_init'), {
       \ 'window_cmd': 'edit',
       \ })
-
-command! PackInstall    PackagerInstall
-command! PackUpdate     PackagerUpdate
-command! PackClean      PackagerClean
-command! PackStatus     PackagerStatus
-command! PU             PackagerUpdate | PackagerClean
 
 " }}}
 " General: mappings {{{
@@ -477,17 +472,6 @@ augroup custom_coc_additional_keyword_characters
   autocmd!
   autocmd FileType nginx let b:coc_additional_keywords = ['$']
 augroup end
-
-" coc.nvim custom async update function
-function! s:CocUpdateCallback(err, ...) abort
-  if a:err
-    echo a:err
-  else
-    quitall
-  endif
-endfunction
-
-command! CocUpdateAsyncWaitThenQuit :call CocActionAsync('updateExtensions', v:false, function('<sid>CocUpdateCallback'))
 
 " }}}
 " Package: treesitter and its plugins {{{

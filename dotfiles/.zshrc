@@ -725,8 +725,7 @@ function upgrade() {
   asdf uninstall neovim nightly && \
     asdf install neovim nightly && \
     asdf global neovim nightly
-  nvim -c 'PU'
-  nvim -c 'CocUpdateAsyncWaitThenQuit'
+  nvim -c 'PackagerUpdate | PackagerClean | CocUpdate'
 }
 
 # Alacritty Helpers
