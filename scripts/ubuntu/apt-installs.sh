@@ -17,8 +17,6 @@ sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 sudo apt upgrade -y
 
-# dict-moby-thesaurus : this doesn't appear to be available on ubuntu?
-
 sudo apt install -y \
   apache2-utils \
   apt-transport-https \
