@@ -6,6 +6,10 @@ Samuel Roeca's various files to configure latest versions of Linux Mint and / or
 
 Files are separated into folders documented below.
 
+### docs/
+
+Document files for reference and automation. Includes Markdown-formatted notes, dictionaries, etc.
+
 ### dotfiles/
 
 My system [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) can be installed automatically with some useful tools.
@@ -21,10 +25,6 @@ sudo apt install git build-essential stow
 # Now place the dotfiles
 make
 ```
-
-### notes/
-
-Some general notes, in Markdown, for system setup and program usage.
 
 ### scripts/
 
