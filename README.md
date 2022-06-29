@@ -26,19 +26,19 @@ Now, using the `Makefile` in this directory with gnu, you can run the following 
 
 Files are separated into folders documented below.
 
-### bin/
+### [bin/](./bin)
 
 Executable scripts that are added, by default, to the PATH in my zshrc.
 
-### docs/
+### [docs/](./docs)
 
 Document files for reference and automation. Includes Markdown-formatted notes, dictionaries, etc.
 
-### dotfiles/
+### [dotfiles/](./dotfiles)
 
 My system [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) live here.
 
-### scripts/
+### [scripts/](./scripts)
 
 Useful automated scripts for things like system setup and program installation.
 
