@@ -940,7 +940,7 @@ endfunction
 
 call s:alacritty_set_background()
 call jobstart(
-      \ 'ls ' . $HOME . '/.alacritty.yml | entr -ps "echo alacritty_change"',
+      \ 'ls ' . $HOME . '/.config/alacritty/.alacritty.yml | entr -ps "echo alacritty_change"',
       \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
       \ )
 
