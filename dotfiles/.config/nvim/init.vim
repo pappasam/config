@@ -495,18 +495,7 @@ command! CocUpdateAsyncWaitThenQuit :call CocActionAsync('updateExtensions', v:f
 function! s:init_treesitter()
   try
 lua << EOF
--- nvim-treesitter/queries/python/injections.scm, with docstring
--- injections removed
-local py_injections = [[
-((call
-  function: (attribute object: (identifier) @_re)
-  arguments: (argument_list (string) @regex))
- (#eq? @_re "re")
- (#match? @regex "^r.*"))
-(comment) @comment
-]]
-vim.treesitter.set_query('python', 'injections', py_injections)
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter.configs').setup{
   highlight = {
     enable = true,
   },
@@ -559,15 +548,16 @@ require('nvim-treesitter.configs').setup({
     'typescript',
     'vim',
     'yaml',
-}})
-require('nvim-treesitter.highlight').set_custom_captures({
+  },
+}
+require('nvim-treesitter.highlight').set_custom_captures{
   ["text.title.h1"] = "htmlH1",
   ["text.title.h2"] = "htmlH2",
   ["text.title.h3"] = "htmlH3",
   ["text.title.h4"] = "htmlH4",
   ["text.title.h5"] = "htmlH5",
   ["text.title.h6"] = "htmlH6",
-})
+}
 EOF
   catch
     echom 'Problem encountered configuring nvim_treesitter, skipping...'
@@ -577,7 +567,7 @@ endfunction
 function! s:init_spellsitter()
   try
 lua << EOF
-require('spellsitter').setup {
+require('spellsitter').setup{
   enable = true,
 }
 EOF
@@ -589,7 +579,7 @@ endfunction
 function! s:init_ts_context_commentstring()
   try
 lua << EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup{
   context_commentstring = {
     enable = true
   }
@@ -625,7 +615,7 @@ endfunction
 function! s:init_nvim_web_icons()
   try
 lua << EOF
-require('nvim-web-devicons').setup {
+require('nvim-web-devicons').setup{
  -- globally enable default icons (default to false)
  -- will get overriden by `get_icons` option
  default = true;
@@ -640,7 +630,7 @@ endfunction
 function! s:init_nvim_tree()
   try
 lua << EOF
-require('nvim-tree').setup {
+require('nvim-tree').setup{
   renderer = {
     full_name = true,
   },
@@ -660,11 +650,11 @@ function! s:init_nvim_autopairs()
 lua << EOF
 local npairs = require('nvim-autopairs')
 local Rule   = require('nvim-autopairs.rule')
-npairs.setup({
+npairs.setup{
   map_c_h = true,
   map_c_w = true,
-})
-npairs.add_rules {
+}
+npairs.add_rules{
   -- BEGIN Rule: add spaces between parentheses
   Rule(' ', ' ')
     :with_pair(function (opts)
