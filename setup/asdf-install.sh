@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # After getting ASDF installed, run this script...
 
