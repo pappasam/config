@@ -1095,6 +1095,15 @@ function mkinstance() {
 EOL
 }
 
+function cat-pyproject() {
+  echo '[tool.black]'
+  echo 'line-length = 79'
+  echo ''
+  echo '[tool.isort]'
+  echo 'profile = "black"'
+  echo 'line_length = 79'
+}
+
 # Initialize Python Repo
 function poetry-init() {
   if [ -f pyproject.toml ]; then
@@ -1287,13 +1296,6 @@ function despace() {
       mv "$filename" $(echo -n "$filename" | tr -s ' ' '_')
     done
   fi
-}
-
-# }}}
-# General: cat functions {{{
-
-function cat-pyproject() {
-  cat "$HOME/config/cat-scripts/pyproject-top.toml"
 }
 
 # }}}
