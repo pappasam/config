@@ -1315,12 +1315,6 @@ if [[ -o interactive ]]; then
   # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
   stty -ixon
 
-  # kubectl autocompletion
-  # NOTE: commented out currently because this slows zsh load down a lot
-  # if [ $commands[kubectl] ]; then
-  #   source <(kubectl completion zsh)
-  # fi
-
   # direnv
   if [ $commands[direnv] ]; then
     eval "$(direnv hook zsh)"
@@ -1328,6 +1322,11 @@ if [[ -o interactive ]]; then
 
   # Try activate virtual environment, don't worry about console output
   va &> /dev/null
+
+  # Assigns permissions so that only I have read/write access for files, and
+  # read/write/search for directories I own. All others have read access only
+  # to my files, and read/search access to my directories.
+  umask 022
 fi
 
 # }}}
