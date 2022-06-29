@@ -73,9 +73,6 @@ The following keyboard shortcuts and mappings make it easier to do things withou
   - Hardware
     - Re-detect display devices: remove the Super+P shortcut (easy to hit accidentailly)
 - **Custom**
-  - Panel Toggle
-    - Command : ~/.panel-autohide.sh
-    - Shortcut : Ctrl+Alt+P
   - Alacritty
     - Command: /usr/bin/alacritty
     - Ctrl+Alt+i
