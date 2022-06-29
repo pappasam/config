@@ -2,7 +2,11 @@
 
 Samuel Roeca's various files to configure latest versions of Linux Mint and / or Ubuntu. Feel free to use anything you find useful.
 
-## dotfiles/
+## Directories
+
+Files are separated into folders documented below.
+
+### dotfiles/
 
 My system [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) can be installed automatically with some useful tools.
 
@@ -17,6 +21,14 @@ sudo apt install git build-essential stow
 # Now place the dotfiles
 make
 ```
+
+### notes/
+
+Some general notes, in Markdown, for system setup and program usage.
+
+### scripts/
+
+Useful automated scripts for things like system setup and program installation.
 
 ## Author
 
