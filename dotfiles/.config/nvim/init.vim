@@ -847,7 +847,7 @@ set incsearch
 set inccommand=nosplit
 
 " Spell Checking:
-set dictionary=$HOME/.american-english-with-propcase.txt
+set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set spelllang=en_us
 
 " Single Space After Punctuation: useful when doing :%j (the opposite of gq)
