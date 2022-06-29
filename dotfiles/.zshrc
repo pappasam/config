@@ -1,21 +1,4 @@
-# Samuel Roeca's '~/.zshrc'. Toggle folds with 'za'.
-# Environ: path functions {{{
-
-function path_ladd() {
-  # Takes 1 argument and adds it to the beginning of the PATH
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="$1${PATH:+":$PATH"}"
-  fi
-}
-
-function path_radd() {
-  # Takes 1 argument and adds it to the end of the PATH
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="${PATH:+"$PATH:"}$1"
-  fi
-}
-
-# }}}
+# Samuel Roeca's zshell configuration file. Toggle folds with 'za'.
 # Environ: ls_colors {{{
 
 # Colors when using the LS command
@@ -152,6 +135,20 @@ export BAT_PAGER=''
 # }}}
 # Environ: path appends + misc env setup {{{
 
+function path_ladd() {
+  # Takes 1 argument and adds it to the beginning of the PATH
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1${PATH:+":$PATH"}"
+  fi
+}
+
+function path_radd() {
+  # Takes 1 argument and adds it to the end of the PATH
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="${PATH:+"$PATH:"}$1"
+  fi
+}
+
 HOME_BIN="$HOME/bin"
 if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
@@ -173,6 +170,8 @@ OPAM_LOC="$HOME/.opam/default/bin"
 if [ -d "$OPAM_LOC" ]; then
   path_ladd "$OPAM_LOC"
 fi
+
+path_ladd "$HOME/config/bin"
 
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
