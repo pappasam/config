@@ -13,7 +13,7 @@ sudo apt install git build-essential stow
 - [GNU Stow](https://www.gnu.org/software/stow/) is used to [automate the placement of symbolic links in the home directory](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/).
 - [GNU Make](https://www.gnu.org/software/make/) manages the details.
 
-Now, using the `Makefile` in this directory with gnu, you can run the following commands:
+Now, using the `Makefile` in this directory with GNU Make, you can run the following commands:
 
 | Command             | Purpose                                                                                 |
 | ------------------- | --------------------------------------------------------------------------------------- |
