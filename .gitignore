@@ -1,4 +1,5 @@
 .venv/
 .vagrant/
+.vscode/
 .python-version
 dotfiles/.config/nvim/doc/tags
