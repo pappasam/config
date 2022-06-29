@@ -651,7 +651,7 @@ function t() {
     tmux -2 new-session -d -s $SESSION
     if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
       tmux -2 select-window -t $SESSION:1
-      tmux source-file ~/.tmux-light
+      tmux source-file ~/.config/tmux/tmux-light.conf
     fi
     tmux -2 attach -t $SESSION
   fi
@@ -735,7 +735,7 @@ function dark() {
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'ayu_dark.yaml'
   if [ ! -z "$TMUX" ]; then
-    tmux source-file ~/.tmux.conf
+    tmux source-file ~/.config/tmux/tmux.conf
   fi
 }
 
@@ -745,7 +745,7 @@ function light() {
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'papercolor_light.yaml'
   if [ ! -z "$TMUX" ]; then
-    tmux source-file ~/.tmux-light
+    tmux source-file ~/.config/tmux/tmux-light.conf
   fi
 }
 

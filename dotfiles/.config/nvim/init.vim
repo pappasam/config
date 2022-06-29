@@ -988,6 +988,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+  autocmd BufEnter tmux-light.conf set filetype=tmux
   autocmd BufEnter .zshrc set filetype=sh
 augroup end
 
