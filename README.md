@@ -1,10 +1,15 @@
-# dotfiles
+# System Configuration
 
-Samuel Roeca's personal [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) for Linux Mint / Ubuntu. Feel free to use anything you find useful.
+Samuel Roeca's various files to configure latest versions of Linux Mint and / or Ubuntu. Feel free to use anything you find useful.
 
-## Setup
+## dotfiles/
 
-GNU Stow [automates](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/) the placement of symbolic links in the home directory. [GNU Make](https://www.gnu.org/software/make/) manages the details. Read the `Makefile` for more information.
+My system [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) can be installed automatically with some useful tools.
+
+- [GNU Stow](https://www.gnu.org/software/stow/) is used to [automate the placement of symbolic links in the home directory](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/).
+- [GNU Make](https://www.gnu.org/software/make/) manages the details.
+
+Read the `Makefile` for more information.
 
 ```bash
 # Install system dependencies if not already installed

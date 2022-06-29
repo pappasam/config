@@ -1100,13 +1100,13 @@ cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
 cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 
 " Open init.vim
-cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/dotfiles/dotfiles/.config/nvim/init.vim')
+cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/config/dotfiles/.config/nvim/init.vim')
 
 " Open zshrc
-cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/dotfiles/dotfiles/.zshrc')
+cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/config/dotfiles/.zshrc')
 
 " Open settings for language server files
-cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/dotfiles/dotfiles/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/config/dotfiles/.config/nvim/coc-settings.json')
 cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'

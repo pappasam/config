@@ -546,8 +546,8 @@ alias f='nvim'
 compdef _vim f
 alias fn='nvim -u NORC --noplugin'
 compdef _vim fn
-alias v='nvim ~/dotfiles/dotfiles/.config/nvim/init.vim'
-alias z='nvim ~/dotfiles/dotfiles/.zshrc'
+alias v='nvim ~/config/dotfiles/.config/nvim/init.vim'
+alias z='nvim ~/config/dotfiles/.zshrc'
 alias shortcut='nvim -c "Shortcut"'
 alias standup='nvim -c "Standup"'
 alias mentor='nvim -c "Mentor"'
@@ -731,7 +731,7 @@ function upgrade() {
 # Alacritty Helpers
 function dark() {
   alacritty-colorscheme \
-    -c "$HOME/dotfiles/dotfiles/.alacritty.yml" \
+    -c "$HOME/config/dotfiles/.alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'ayu_dark.yaml'
   if [ ! -z "$TMUX" ]; then
@@ -741,7 +741,7 @@ function dark() {
 
 function light() {
   alacritty-colorscheme \
-    -c "$HOME/dotfiles/dotfiles/.alacritty.yml" \
+    -c "$HOME/config/dotfiles/.alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'papercolor_light.yaml'
   if [ ! -z "$TMUX" ]; then
@@ -1293,7 +1293,7 @@ function despace() {
 # General: cat functions {{{
 
 function cat-pyproject() {
-  cat "$HOME/dotfiles/cat-scripts/pyproject-top.toml"
+  cat "$HOME/config/cat-scripts/pyproject-top.toml"
 }
 
 # }}}
