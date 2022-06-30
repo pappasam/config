@@ -26,6 +26,10 @@ Download latest recommended version from: <www.greenwoodsoftware.com/less/downlo
 
 Use: <https://keeweb.info/>
 
+### Insomnia
+
+Install the latest version from: <https://insomnia.rest/download>
+
 ### Fonts
 
 Download relevant nerd fonts from here: <https://www.nerdfonts.com/font-downloads>
