@@ -46,7 +46,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
   " commit from September 18, 2021.
   " ab46827721d7a8d71918fd7cd0dceaa8c84d9579 breaks Neovim
-  call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git', {'commit': 'c5afbe91d29c5e3be81d5125ddcdc276fd1f1322'})
+  call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
   call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
 
   " KeywordPrg:
