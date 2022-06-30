@@ -11,6 +11,10 @@
 
 set -e
 
+source "${BASH_SOURCE%/*}/helpers.sh"
+
+echo_bold_italic_underline 'Installing system dependencies with "apt install"'
+
 sudo add-apt-repository -y ppa:peek-developers/stable
 sudo add-apt-repository -y ppa:git-core/ppa
 
