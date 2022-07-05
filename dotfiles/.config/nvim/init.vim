@@ -456,21 +456,21 @@ function! s:autocmd_custom_coc()
     return
   endif
   augroup custom_coc
+    autocmd FileType coctree set nowrap
+    autocmd FileType nginx let b:coc_additional_keywords = ['$']
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd User CocNvimInit call s:default_key_mappings()
+    autocmd User CocNvimInit highlight CocErrorHighlight gui=undercurl
+    autocmd User CocNvimInit highlight CocWarningHighlight gui=undercurl
+    autocmd User CocNvimInit highlight CocInfoHighlight gui=undercurl
+    autocmd User CocNvimInit highlight CocHintHighlight gui=undercurl
   augroup end
 endfunction
 
 augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
-  autocmd FileType coctree set nowrap
-augroup end
-
-augroup custom_coc_additional_keyword_characters
-  autocmd!
-  autocmd FileType nginx let b:coc_additional_keywords = ['$']
 augroup end
 
 " }}}
