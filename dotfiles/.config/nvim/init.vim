@@ -458,7 +458,6 @@ function! s:autocmd_custom_coc()
   augroup custom_coc
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    " Coc nvim might override my mappings. I call them again just in case.
     autocmd User CocNvimInit call s:default_key_mappings()
   augroup end
 endfunction
@@ -466,7 +465,6 @@ endfunction
 augroup custom_coc
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
-  autocmd User CocNvimInit call s:default_key_mappings()
   autocmd FileType coctree set nowrap
 augroup end
 
