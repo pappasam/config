@@ -586,192 +586,23 @@ augroup end
 " }}}
 " Package: lua extensions {{{
 
-" nvim-colorizer: ColorizerToggle
-function! s:init_colorizer()
+function! s:safe_require(package)
   try
-lua << EOF
-require('colorizer').setup()
-EOF
+    execute "lua require('" . a:package . "')"
   catch
-    echom 'Problem encountered configuring colorizer, skipping...'
-  endtry
-endfunction
-
-" nvim-web-icons
-function! s:init_nvim_web_icons()
-  try
-lua << EOF
-require('nvim-web-devicons').setup{
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
-}
-EOF
-  catch
-    echom 'Problem encountered configuring nvim_web_icons, skipping...'
-  endtry
-endfunction
-
-" nvim-tree-lua
-function! s:init_nvim_tree()
-  try
-lua << EOF
-require('nvim-tree').setup{
-  renderer = {
-    full_name = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-}
-EOF
-  catch
-    echom 'Problem encountered configuring nvim-tree, skipping...'
-  endtry
-endfunction
-
-" nvim-autopairs
-function! s:init_nvim_autopairs()
-  try
-lua << EOF
-local npairs = require('nvim-autopairs')
-local Rule   = require('nvim-autopairs.rule')
-npairs.setup{
-  map_c_h = true,
-  map_c_w = true,
-}
-npairs.add_rules{
-  -- BEGIN Rule: add spaces between parentheses
-  Rule(' ', ' ')
-    :with_pair(function (opts)
-      local pair = opts.line:sub(opts.col - 1, opts.col)
-      return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-    end),
-  Rule('( ', ' )')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%)') ~= nil
-      end)
-      :use_key(')'),
-  Rule('{ ', ' }')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%}') ~= nil
-      end)
-      :use_key('}'),
-  Rule('[ ', ' ]')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%]') ~= nil
-      end)
-      :use_key(']')
-  -- END Rule: add spaces between parentheses
-}
-EOF
-  catch
-    echom 'Problem encountered configuring nvim_autopairs, skipping...'
-  endtry
-endfunction
-
-" zen-mode.nvim , zenmode
-function! s:init_zen_mode()
-  try
-lua << EOF
-require('zen-mode').setup{
-  window = {
-    width = 79,
-    options = {
-      signcolumn = "no",
-      number = false,
-      relativenumber = false,
-      cursorline = false,
-      cursorcolumn = false,
-      foldcolumn = "0",
-      list = false,
-    },
-  },
-  plugins = {
-    twilight = { enabled = false },
-  },
-}
-EOF
-  catch
-    echom 'Problem encountered configuring zen-mode, skipping...'
-  endtry
-endfunction
-
-" twilight.nvim, a Limelight (limelight) replacement
-function! s:init_twilight()
-  try
-lua << EOF
-require('twilight').setup{
-}
-EOF
-  catch
-    echom 'Problem encountered configuring twilight, skipping...'
-  endtry
-endfunction
-
-
-" gitsigns
-function! s:init_gitsigns()
-  try
-lua << EOF
-require('gitsigns').setup{
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
-
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
-
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    -- Actions
-    map({'n', 'v'}, '<leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
-    map('n', '<leader>hS', gs.stage_buffer)
-    map('n', '<leader>hu', gs.undo_stage_hunk)
-    map('n', '<leader>hR', gs.reset_buffer)
-    map('n', '<leader>hp', gs.preview_hunk)
-    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-    map('n', '<leader>tb', gs.toggle_current_line_blame)
-    map('n', '<leader>hd', gs.diffthis)
-    map('n', '<leader>hD', function() gs.diffthis('~') end)
-    map('n', '<leader>td', gs.toggle_deleted)
-
-    -- Text object
-    map({'o', 'x'}, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
-  end
-}
-EOF
-  catch
-    echom 'Problem encountered configuring gitsigns, skipping...'
+    echom 'Problem encountered requiring ' . a:package . ', skipping...'
   endtry
 endfunction
 
 augroup custom_general_lua_extensions
   autocmd!
-  autocmd VimEnter * call s:init_colorizer()
-  autocmd VimEnter * call s:init_nvim_web_icons()
-  autocmd VimEnter * call s:init_nvim_autopairs()
-  autocmd VimEnter * call s:init_zen_mode()
-  autocmd VimEnter * call s:init_nvim_tree()
-  autocmd VimEnter * call s:init_gitsigns()
-  autocmd VimEnter * call s:init_twilight()
+  autocmd VimEnter * call s:safe_require('config.colorizer')
+  autocmd VimEnter * call s:safe_require('config.nvim-web-devicons')
+  autocmd VimEnter * call s:safe_require('config.nvim-tree')
+  autocmd VimEnter * call s:safe_require('config.nvim-autopairs')
+  autocmd VimEnter * call s:safe_require('config.zen-mode')
+  autocmd VimEnter * call s:safe_require('config.twilight')
+  autocmd VimEnter * call s:safe_require('config.gitsigns')
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
