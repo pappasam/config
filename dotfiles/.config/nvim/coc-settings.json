@@ -88,17 +88,18 @@
         "--score",
         "no",
         "--msg-template",
-        "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+        "'{line}:{end_line}:{column}:{end_column}:{category}:{msg} ({msg_id}:{symbol})'",
         "%file"
       ],
       "formatPattern": [
-        "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+        "^(\\d+?):(\\d+?):(\\d+?):(\\d+?):([a-z]+?):(.*)$",
         {
           "line": 1,
-          "column": 2,
-          "endColumn": 2,
-          "security": 3,
-          "message": 4
+          "endLine": 2,
+          "column": 3,
+          "endColumn": 4,
+          "security": 5,
+          "message": 6
         }
       ],
       "rootPatterns": ["pyproject.toml", "setup.py", ".git"],
