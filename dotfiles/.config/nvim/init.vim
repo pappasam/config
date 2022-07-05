@@ -476,114 +476,6 @@ augroup custom_coc_additional_keyword_characters
 augroup end
 
 " }}}
-" Package: treesitter and its plugins {{{
-
-function! s:init_treesitter()
-  try
-lua << EOF
-require('nvim-treesitter.configs').setup{
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-    disable = { "python", "html", "css", "svelte", "markdown"},
-  },
-  autotag = {
-    enable = true,
-  },
-  ensure_installed = {
-    'bash',
-    'bibtex',
-    'c',
-    'comment',
-    'cpp',
-    'css',
-    'dockerfile',
-    'dot',
-    'gdscript',
-    'go',
-    'gomod',
-    'graphql',
-    'hcl',
-    'html',
-    'java',
-    'javascript',
-    'jsdoc',
-    'json',
-    'json5',
-    'jsonc',
-    'julia',
-    'kotlin',
-    'latex',
-    'ledger',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'ocaml',
-    'php',
-    'python',
-    'query',
-    'regex',
-    'rst',
-    'ruby',
-    'rust',
-    'svelte',
-    'toml',
-    'tsx',
-    'typescript',
-    'vim',
-    'yaml',
-  },
-}
-require('nvim-treesitter.highlight').set_custom_captures{
-  ["text.title.h1"] = "htmlH1",
-  ["text.title.h2"] = "htmlH2",
-  ["text.title.h3"] = "htmlH3",
-  ["text.title.h4"] = "htmlH4",
-  ["text.title.h5"] = "htmlH5",
-  ["text.title.h6"] = "htmlH6",
-}
-EOF
-  catch
-    echom 'Problem encountered configuring nvim_treesitter, skipping...'
-  endtry
-endfunction
-
-function! s:init_spellsitter()
-  try
-lua << EOF
-require('spellsitter').setup{
-  enable = true,
-}
-EOF
-  catch
-    echom 'Problem encountered configuring spellsitter, skipping...'
-  endtry
-endfunction
-
-function! s:init_ts_context_commentstring()
-  try
-lua << EOF
-require('nvim-treesitter.configs').setup{
-  context_commentstring = {
-    enable = true
-  }
-}
-EOF
-  catch
-    echom 'Problem encountered configuring ts_context_commentstring, skipping...'
-  endtry
-endfunction
-
-augroup custom_treesitter
-  autocmd!
-  autocmd VimEnter * call s:init_treesitter()
-  autocmd VimEnter * call s:init_spellsitter()
-  autocmd VimEnter * call s:init_ts_context_commentstring()
-augroup end
-
-" }}}
 " Package: lua extensions {{{
 
 function! s:safe_require(package)
@@ -596,6 +488,9 @@ endfunction
 
 augroup custom_general_lua_extensions
   autocmd!
+  autocmd VimEnter * call s:safe_require('config.nvim-treesitter')
+  autocmd VimEnter * call s:safe_require('config.spellsitter')
+  autocmd VimEnter * call s:safe_require('config.nvim-ts-context-commentstring')
   autocmd VimEnter * call s:safe_require('config.colorizer')
   autocmd VimEnter * call s:safe_require('config.nvim-web-devicons')
   autocmd VimEnter * call s:safe_require('config.nvim-tree')
