@@ -3,6 +3,6 @@ require('nvim-tree').setup{
     full_name = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 }
