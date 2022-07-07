@@ -431,6 +431,7 @@ let g:coc_global_extensions = [
       \ 'coc-kotlin',
       \ 'coc-lists',
       \ 'coc-ltex',
+      \ 'coc-lua',
       \ 'coc-markdownlint',
       \ 'coc-rls',
       \ 'coc-sh',
