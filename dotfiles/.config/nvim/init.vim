@@ -332,6 +332,9 @@ function! s:default_key_mappings()
   inoremap <expr> <ScrollWheelDown>   pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
   inoremap <expr> <LeftMouse>         pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
+  " Open GitHub ssh url
+  nnoremap <silent> gx <Cmd>call <SID>gx_improved()<CR>
+
   " Auto-execute all filetypes
   let &filetype=&filetype
 endfunction
@@ -392,12 +395,6 @@ augroup custom_remap_nvim_tree_lua
   autocmd!
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
-augroup end
-
-augroup custom_init_vim
-  autocmd!
-  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gf <Cmd>call <SID>gf_vimrc_open_plugin()<CR>
-  autocmd BufNewFile,BufRead,BufEnter init.vim nnoremap <buffer> <silent> gx <Cmd>call <SID>gx_vimrc_open_plugin()<CR>
 augroup end
 
 " }}}
@@ -486,6 +483,9 @@ endfunction
 
 augroup custom_general_lua_extensions
   autocmd!
+  autocmd FileType vim setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+  autocmd FileType vim setlocal suffixesadd^=.lua
+  autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
   autocmd VimEnter * call s:safe_require('config.colorizer')
   autocmd VimEnter * call s:safe_require('config.gitsigns')
   autocmd VimEnter * call s:safe_require('config.nvim-autopairs')
@@ -781,36 +781,6 @@ let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 helptags ~/.config/nvim/doc
 
 " }}}
-" General: init.vim helpers {{{
-
-function! s:gf_vimrc_open_plugin()
-  let ssh_url = expand('<cfile>')
-  let ssh_components = split(ssh_url, '/')
-  if len(ssh_components) != 2
-    " do regular 'gf'
-    normal! gf
-    return
-  endif
-  let directory = ssh_components[1]
-  let parent_directory = directory == 'vim-packager' ? 'opt/' : 'start/'
-  let path = '~/.config/nvim/pack/packager/' . parent_directory . directory
-  execute 'tabe ' . path
-  execute 'lcd ' . path
-endfunction
-
-function! s:gx_vimrc_open_plugin()
-  let ssh_url = expand('<cfile>')
-  let ssh_components = split(ssh_url, ':')
-  if len(ssh_components) != 2
-    " do regular 'gx'
-    normal! gx
-    return
-  endif
-  let path = ssh_components[1]
-  execute 'OpenBrowser ' . 'https://github.com/' . path
-endfunction
-
-" }}}
 " General: abbreviations {{{
 
 " If in_command is at beginning of line : return out_command
@@ -925,6 +895,21 @@ augroup custom_writing
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup end
+
+" }}}
+" General: gx improved {{{
+
+function! s:gx_improved()
+  let ssh_url = expand('<cfile>')
+  let ssh_components = split(ssh_url, ':')
+  if len(ssh_components) != 2
+    " do regular 'gx'
+    normal! gx
+    return
+  endif
+  let path = ssh_components[1]
+  execute 'OpenBrowser ' . 'https://github.com/' . path
+endfunction
 
 " }}}
 " General: digraphs {{{
