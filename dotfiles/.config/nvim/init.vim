@@ -302,10 +302,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader>f <Cmd>FiletypeFormat<cr>
   vnoremap <silent> <leader>f :FiletypeFormat<cr>
 
-  " Open Browser: override netrw
-  nmap gx <Plug>(openbrowser-smart-search)
-  vmap gx <Plug>(openbrowser-smart-search)
-
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
 
@@ -333,7 +329,7 @@ function! s:default_key_mappings()
   inoremap <expr> <LeftMouse>         pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
   " Open GitHub ssh url
-  nnoremap <silent> gx <Cmd>call <SID>gx_improved()<CR>
+  nnoremap gx <Cmd>call <SID>gx_improved()<CR>
 
   " Auto-execute all filetypes
   let &filetype=&filetype
@@ -899,16 +895,21 @@ augroup end
 " }}}
 " General: gx improved {{{
 
+function! s:starts_with(longer, shorter)
+  echom 'hello'
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+
+let s:github_ssh_prefix = 'git@github.com:'
+let s:github_ssh_prefix_length = len(s:github_ssh_prefix)
+
 function! s:gx_improved()
-  let ssh_url = expand('<cfile>')
-  let ssh_components = split(ssh_url, ':')
-  if len(ssh_components) != 2
-    " do regular 'gx'
-    normal! gx
-    return
+  let cfile = expand('<cfile>')
+  if s:starts_with(cfile, s:github_ssh_prefix)
+    execute 'OpenBrowser https://github.com/' . cfile[s:github_ssh_prefix_length:]
+  else
+    execute 'OpenBrowser ' . cfile
   endif
-  let path = ssh_components[1]
-  execute 'OpenBrowser ' . 'https://github.com/' . path
 endfunction
 
 " }}}
@@ -1250,24 +1251,7 @@ command! Standup silent call s:skeleton('standup.md')
 command! Mentor silent call s:skeleton('mentor.md')
 
 " }}}
-" Package: git plugins: gv.vim, fugitive, git-messenger {{{
-
-" NOTES:
-" :GV to open commit browser
-"     You can pass git log options to the command, e.g. :GV -S foobar.
-" :GV! will only list commits that affected the current file
-" :GV? fills the location list with the revisions of the current file
-
-" :GV or :GV? can be used in visual mode to track the changes in the selected lines.
-" Mappings
-
-" o or <cr> on a commit to display the content of it
-" o or <cr> on commits to display the diff in the range
-" O opens a new tab instead
-" gb for :Gbrowse
-" ]] and [[ to move between commits
-" . to start command-line with :Git [CURSOR] SHA à la fugitive
-" q or gq to close
+" Package: git plugins fugitive & git-messenger {{{
 
 let g:git_messenger_always_into_popup = v:false
 let g:git_messenger_no_default_mappings = v:true
@@ -1300,27 +1284,6 @@ augroup custom_man_page
   autocmd!
   autocmd FileType man setlocal number
 augroup end
-
-" }}}
-" Package: gv.vim (GV) {{{
-
-" Commands:
-"   :GV  to open commit browser. You can pass git log options to the command,
-"        e.g. :GV -S foobar.
-"   :GV! will only list commits that affected the current file
-"   :GV? fills the location list with the revisions of the current file
-
-" :GV or :GV? can be used in visual mode to track the changes in the selected
-" lines.
-
-" Mappings:
-"     o or <cr> on a commit to display the content of it
-"     o or <cr> on commits to display the diff in the range
-"     O opens a new tab instead
-"     gb for :Gbrowse
-"     ]] and [[ to move between commits
-"     . to start command-line with :Git [CURSOR] SHA à la fugitive
-"     q/gq to close
 
 " }}}
 " Package: restructured text {{{
