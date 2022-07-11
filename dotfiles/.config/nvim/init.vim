@@ -829,7 +829,7 @@ augroup end
 augroup custom_colorcolumn
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
+  autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
 augroup end
 
 " }}}
