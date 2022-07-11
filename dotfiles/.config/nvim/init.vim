@@ -896,20 +896,17 @@ augroup end
 " General: gx improved {{{
 
 function! s:starts_with(longer, shorter)
-  echom 'hello'
   return a:longer[0:len(a:shorter)-1] ==# a:shorter
 endfunction
 
-let s:github_ssh_prefix = 'git@github.com:'
-let s:github_ssh_prefix_length = len(s:github_ssh_prefix)
-
 function! s:gx_improved()
   let cfile = expand('<cfile>')
-  if s:starts_with(cfile, s:github_ssh_prefix)
-    execute 'OpenBrowser https://github.com/' . cfile[s:github_ssh_prefix_length:]
+  if s:starts_with(cfile, 'git@github.com:')
+    let url = 'https://github.com/' . cfile[15:]
   else
-    execute 'OpenBrowser ' . cfile
+    let url = cfile
   endif
+  silent execute '!gio open ' . url
 endfunction
 
 " }}}
