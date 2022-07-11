@@ -12,6 +12,7 @@ ts.setup({
     mappings = {
       i = {
         ['<esc>'] = actions.close,
+        ['<C-u>'] = false,
       },
     },
   },
