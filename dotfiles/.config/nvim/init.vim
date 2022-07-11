@@ -54,8 +54,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:romainl/vim-devdocs.git')
 
   " Fuzzy Finder:
-  call a:packager.add('git@github.com:junegunn/fzf')
-  call a:packager.add('git@github.com:junegunn/fzf.vim')
+  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git')
 
   " Git:
   call a:packager.add('git@github.com:tpope/vim-fugitive')
@@ -293,11 +292,11 @@ function! s:default_key_mappings()
   xmap aq <Plug>(textobj-sandwich-query-a)
   omap aq <Plug>(textobj-sandwich-query-a)
 
-  " FZF: create shortcuts for finding stuff
-  nnoremap <silent> <C-p><C-p> <Cmd>call <SID>fzf_avoid_ft('NvimTree', 'Files')<CR>
-  nnoremap <silent> <C-p><C-b> <Cmd>call <SID>fzf_avoid_ft('NvimTree', 'Buffers')<CR>
-  nnoremap          <C-n><C-n> yiw:Rg <C-r>"<CR>
-  vnoremap          <C-n><C-n> y:Rg <C-r>"<CR>
+  " Telescope: create shortcuts for finding stuff
+  nnoremap <silent> <C-p><C-p> <Cmd>Telescope fd<CR>
+  nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
+  nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
+  nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <Cmd>FiletypeFormat<cr>
@@ -487,16 +486,17 @@ endfunction
 
 augroup custom_general_lua_extensions
   autocmd!
-  autocmd VimEnter * call s:safe_require('config.nvim-treesitter')
-  autocmd VimEnter * call s:safe_require('config.spellsitter')
-  autocmd VimEnter * call s:safe_require('config.nvim-ts-context-commentstring')
   autocmd VimEnter * call s:safe_require('config.colorizer')
-  autocmd VimEnter * call s:safe_require('config.nvim-web-devicons')
-  autocmd VimEnter * call s:safe_require('config.nvim-tree')
-  autocmd VimEnter * call s:safe_require('config.nvim-autopairs')
-  autocmd VimEnter * call s:safe_require('config.zen-mode')
-  autocmd VimEnter * call s:safe_require('config.twilight')
   autocmd VimEnter * call s:safe_require('config.gitsigns')
+  autocmd VimEnter * call s:safe_require('config.nvim-autopairs')
+  autocmd VimEnter * call s:safe_require('config.nvim-tree')
+  autocmd VimEnter * call s:safe_require('config.nvim-treesitter')
+  autocmd VimEnter * call s:safe_require('config.nvim-ts-context-commentstring')
+  autocmd VimEnter * call s:safe_require('config.nvim-web-devicons')
+  autocmd VimEnter * call s:safe_require('config.spellsitter')
+  autocmd VimEnter * call s:safe_require('config.telescope')
+  autocmd VimEnter * call s:safe_require('config.twilight')
+  autocmd VimEnter * call s:safe_require('config.zen-mode')
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
@@ -1624,67 +1624,6 @@ command! Preview call s:preview()
 "   autocmd BufLeave,BufWinLeave \[defx\]* silent call defx#call_action('add_session')
 "   autocmd FileType defx setlocal nonumber norelativenumber
 " augroup end
-
-" }}}
-" Package: fzf and fzf preview {{{
-
-" When in preview window, the following key mappings are relevant:
-" <C-s>
-"   - Toggle window size of fzf, normal size and full-screen
-" <C-d>
-"   - Preview page down
-" <C-u>
-"   - Preview page up
-" <C-t> or ?
-"   - Toggle Preview
-" <C-x>, <C-v>, <C-t>: open in split, vert, and tab
-
-let g:fzf_colors = {
-      \ 'fg': ['fg', 'Normal'],
-      \ 'bg': ['bg', 'Normal'],
-      \ 'hl': ['fg', 'Comment'],
-      \ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+': ['fg', 'Statement'],
-      \ 'info': ['fg', 'PreProc'],
-      \ 'border': ['fg', 'Ignore'],
-      \ 'prompt': ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker': ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header': ['fg', 'Comment'],
-      \ }
-
-" Execute fzf command, but avoid doing so in specific filetypes
-function! s:fzf_avoid_ft(ft, command)
-  if (&filetype == a:ft && winnr('$') > 1)
-    execute "normal! \<c-w>\<c-w>"
-  endif
-  execute a:command
-endfunction
-
-let g:fzf_preview_default_key_bindings =
-      \ 'ctrl-e:preview-page-down,ctrl-y:preview-page-up,?:toggle-preview'
-let $FZF_DEFAULT_OPTS = '-m --bind '
-      \ . g:fzf_preview_default_key_bindings . ' '
-      \ . '--reverse '
-      \ . '--prompt="> " '
-let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude ".git"'
-
-" Floating window
-let g:fzf_layout = { 'window': {
-      \ 'width': 0.9,
-      \ 'height': 0.6,
-      \ 'yoffset': 0.9,
-      \ 'highlight': 'Ignore',
-      \ } }
-
-let g:fzf_action = {
-      \ 'ctrl-o': 'edit',
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ }
 
 " }}}
 " Package: vim-tex {{{
