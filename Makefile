@@ -18,6 +18,7 @@ clean:  ## Remove stowed links
 
 .PHONY: setup-ubuntu
 setup-ubuntu:  ## Setup ubuntu for the first time
+	mkdir -p ~/.config/sensitive
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
 	bash ./scripts/ubuntu/asdf-installs.sh

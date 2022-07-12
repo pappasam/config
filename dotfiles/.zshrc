@@ -132,6 +132,9 @@ export WINIT_HIDPI_FACTOR=1.0
 # Bat
 export BAT_PAGER=''
 
+# asdf: for to use install-poetry script
+export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
+
 # }}}
 # Environ: path appends + misc env setup {{{
 
@@ -183,8 +186,8 @@ function include() {
   [[ -f "$1" ]] && source "$1"
 }
 
-include ~/.bash/sensitive
-include ~/.config/broot/launcher/bash/br
+include $HOME/.config/sensitive/secrets.sh
+include $HOME/.asdf/asdf.sh
 
 # }}}
 # Z-shell: plugins {{{
@@ -299,36 +302,6 @@ function precmd() {
   vcs_info
 }
 
-# Executed just after a command has been read and is about to be executed
-#   arg1: the string that the user typed OR an empty string
-#   arg2: a single-line, size-limited version of the command
-#     (with things like function bodies elided)
-#   arg3: full text that is being executed
-function preexec() {
-  # local user_string="$1"
-  # local cmd_single_line="$2"
-  # local cmd_full="$3"
-}
-
-
-# Executed when a history line is read interactively, but before it is executed
-#   arg1: the complete history line (terminating newlines are present
-function zshaddhistory() {
-  # local history_complete="$1"
-}
-
-# Executed at the point where the main shell is about to exit normally.
-function zshexit() {
-}
-
-# }}}
-# Imports: asdf (must be before z-shell autocompletion setup){{{
-
-# force usage of install-poetry script
-export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
-
-include $HOME/.asdf/asdf.sh
-
 # }}}
 # Z-shell: auto completion {{{
 
@@ -363,66 +336,6 @@ fi
 if command -v pipx > /dev/null; then
   eval "$(register-python-argcomplete pipx)"
 fi
-
-# }}}
-# Z-shell: compdef testing {{{
-
-# Example from:
-# https://mads-hartmann.com/2017/08/06/writing-zsh-completion-scripts.html
-
-function _hello {
-  local line
-
-  _arguments -C \
-    "-h [Show help information]" \
-    "--help[Show help information]" \
-    "-v[Print verbose message]" \
-    "--verbose[Print verbose message]" \
-    "1: :(quietly loudly)" \
-    "*::arg:->args"
-
-  case $line[1] in
-    loudly)
-      _hello_loudly
-      ;;
-    quietly)
-      _hello_quietly
-      ;;
-  esac
-}
-
-function _hello_quietly {
-  _arguments "--silent[Dont output anything]"
-}
-
-function _hello_loudly {
-  _arguments "--yolo=[Do that yolo thang]"
-}
-
-function hello() {
-  if [[ "$1" = '--help' ]]; then
-    echo "There is no help for you here."
-  elif [[ "$1" = '--verbose' ]]; then
-    echo "There is no verbosity here"
-  elif [[ "$1" = 'quietly' ]]; then
-    if [[ "$2" = "--silent" ]]; then
-      echo "You told me to say it quietly, but I can't!"
-    else
-      echo "hello"
-    fi
-  elif [[ "$1" = 'loudly' ]]; then
-    if [[ "$2" = "--yolo" ]]; then
-      echo "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-    else
-      echo "HELLO"
-    fi
-  else
-    echo "Hello"
-    return 1
-  fi
-}
-compdef _hello hello
-
 
 # }}}
 # Z-shell: key remapping {{{
@@ -503,22 +416,6 @@ SPACESHIP_VENV_SUFFIX=')'
 SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
-
-# }}}
-# General: post-asdf env setup {{{
-
-# NOTE: currently commented out because this slows down zsh load a lot
-# MANPATH: add asdf man pages to my man path
-# MANPATH="$HOME/man"
-# if [ -x "$(command -v fd)" ]; then
-#   for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
-#     MANPATH="$MANPATH:$(dirname $value)"
-#   done
-#   # colon at end. See "man manpath"
-#   export MANPATH="$MANPATH:"
-# fi
-
-# include ~/.asdf/plugins/java/set-java-home.sh
 
 # }}}
 # General: aliases {{{
@@ -1328,15 +1225,5 @@ if [[ -o interactive ]]; then
   # to my files, and read/search access to my directories.
   umask 022
 fi
-
-# }}}
-# Tidbits: helpful hints {{{
-
-# Searching for a specific man page
-#   1. apropros
-#   2. man -k
-#
-# Clearning "less" search results
-#   Alt-u
 
 # }}}
