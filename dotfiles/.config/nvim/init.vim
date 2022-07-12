@@ -1065,7 +1065,7 @@ function! s:clean_unicode()
   silent! %s/—/-/g
   silent! %s/…/.../g
   silent! %s/​//g
-endfunction()
+endfunction
 command! CleanUnicode call s:clean_unicode()
 
 " }}}
