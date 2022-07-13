@@ -503,7 +503,7 @@ function t() {
   if [ -n "$TMUX" ]; then
     echo 'Cannot run t() in tmux session'
     return 1
-  elif [[ $# > 0 ]]; then
+  elif [[ $# -gt 0 ]]; then
     SESSION=$1
   else
     SESSION=Main
@@ -523,13 +523,14 @@ function t() {
 function tmux-colors() {
   # output colors for tmux
   for i in {0..255}; do
+    # shellcheck disable=2059
     printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
   done
 }
 
 # Go to a Neovim plugin
 function vplug() {
-  cd ~/.config/nvim/pack/packager/start/$1
+  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
 }
 _vplug_completion() {
   _directories -W "$HOME/.config/nvim/pack/packager/start"
@@ -538,8 +539,8 @@ compdef _vplug_completion vplug
 
 # cd to the current git root
 function gr() {
-  if [ $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
-    cd $(git rev-parse --show-toplevel)
+  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    cd "$(git rev-parse --show-toplevel)" || return
   else
     echo "'$PWD' is not inside a git repository"
     return 1
@@ -549,23 +550,24 @@ function gr() {
 # git diff
 function gd() {
   if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-    git diff $@ | delta --light --line-numbers
+    git diff "$@" | delta --light --line-numbers
   else
-    git diff $@ | delta --dark  --line-numbers
+    git diff "$@" | delta --dark  --line-numbers
   fi
 }
 
 function gdl() {  # checkout origin default, pull, delete old branch, and prune
-  if [ ! $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
     echo "'$PWD' is not inside a git repository"
     return 1
   fi
-  local branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+  local branch_default
+  branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
   if [ -z "$branch_default" ]; then
     echo "Cannot connect to remote repo. Check internet connection..."
     return 2
   fi
-  local branch_current=$(git branch --show-current)
+  branch_current=$(git branch --show-current)
   git checkout "$branch_default" && \
     git pull && \
     git branch -d "$branch_current" && \
@@ -581,10 +583,10 @@ function upgrade() {
   asdf update
   asdf plugin-update --all
   pushd .
-  cd ~/src/lib/alacritty
+  cd ~/src/lib/alacritty || return
   git pull
   alacritty-install
-  popd
+  popd || return
   asdf uninstall neovim nightly && \
     asdf install neovim nightly && \
     asdf global neovim nightly
@@ -597,7 +599,7 @@ function dark() {
     -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'ayu_dark.yaml'
-  if [ ! -z "$TMUX" ]; then
+  if [ -n "$TMUX" ]; then
     tmux source-file ~/.config/tmux/tmux.conf
   fi
 }
@@ -607,7 +609,7 @@ function light() {
     -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
     -C "$HOME/src/lib/alacritty-theme/themes/" \
     apply 'papercolor_light.yaml'
-  if [ ! -z "$TMUX" ]; then
+  if [ -n "$TMUX" ]; then
     tmux source-file ~/.config/tmux/tmux-light.conf
   fi
 }
@@ -628,24 +630,6 @@ function alacritty-install() {
   sudo mkdir -p /usr/local/share/man/man1
   gzip -c extra/alacritty.man | \
     sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
-}
-
-# Fix window dimensions: tty mode
-# Set consolefonts to appropriate size based on monitor resolution
-# For each new monitor, you'll need to do this manually
-# Console fonts found here: /usr/share/consolefonts
-# Finally, suppress all messages from the kernel (and its drivers) except panic
-# messages from appearing on the console.
-function fix-console-window() {
-  echo "Getting window dimensions, waiting 5 seconds..."
-  MONITOR_RESOLUTIONS=$(sleep 5 && xrandr -d :0 | grep '*')
-  if $(echo $MONITOR_RESOLUTIONS | grep -q "3840x2160"); then
-    setfont Uni3-Terminus32x16.psf.gz
-  elif $(echo $MONITOR_RESOLUTIONS | grep -q "2560x1440"); then
-    setfont Uni3-Terminus24x12.psf.gz
-  fi
-  echo "Enter sudo password to disable kernel from sending console messages..."
-  sudo dmesg -n 1
 }
 
 function gitzip() {  # arg1: the git repository
