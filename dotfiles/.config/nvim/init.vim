@@ -772,11 +772,6 @@ augroup end
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 
 " }}}
-" General: helptags {{{
-
-helptags ~/.config/nvim/doc
-
-" }}}
 " General: abbreviations {{{
 
 " If in_command is at beginning of line : return out_command
