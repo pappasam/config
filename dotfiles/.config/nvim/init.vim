@@ -293,7 +293,7 @@ function! s:default_key_mappings()
   omap aq <Plug>(textobj-sandwich-query-a)
 
   " Telescope: create shortcuts for finding stuff
-  nnoremap <silent> <C-p><C-p> <Cmd>Telescope fd<CR>
+  nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
   nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
   nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
   nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
