@@ -10,12 +10,15 @@ if ! command -v asdf; then
   exit 1
 else
   echo_bold_italic_underline 'Installing asdf plugins & pulling latest.'
+  asdf_plugins=$(asdf plugin list)
 fi
 
 asdf_setup() {
   local plugin="$1"
   local version="$2"
-  asdf plugin add "$plugin"
+  if ! echo "$asdf_plugins" | grep "$plugin"; then
+    asdf plugin add "$plugin"
+  fi
   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
 
