@@ -462,9 +462,6 @@ alias gop='gh browse'
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
-# dynamodb
-alias docker-dynamodb="docker run -v /data:$HOME/data -p 8000:8000 dwmkerr/dynamodb -dbPath $HOME/data"
-
 # alias for say
 alias say='spd-say'
 compdef _dict_words say
