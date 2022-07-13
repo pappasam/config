@@ -1,93 +1,25 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator
-
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty it self.
-# env:
-# TERM variable
-#
-# This value is used to set the `$TERM` environment variable for
-# each instance of Alacritty. If it is not present, alacritty will
-# check the local terminfo database and use `alacritty` if it is
-# available, otherwise `xterm-256color` is used.
-# To install alacritty terminfo, run the following command from alacritty's
-# root folder:
-#   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-# TERM: alacritty
-
-window:
-  # Window dimensions in character columns and lines
-  # (changes require restart)
-  dimensions:
-    columns: 80
-    lines: 24
-  dynamic_title: true
-
-  # Adds this many blank pixels of padding around the window
-  # Units are physical pixels; this is not DPI aware.
-  # (change requires restart)
-  padding:
-    x: 2
-    y: 2
-
-  # Window decorations
-  # Setting this to none will result in window without borders and title bar.
-  decorations: full
-  opacity: 1.0
-
-# The FreeType rasterizer needs to know the device DPI for best results
-# (changes require restart)
-dpi:
-  x: 96.0
-  y: 96.0
-
-# When true, bold text is drawn using the bright variant of colors.
+shell:
+  program: /usr/bin/zsh
+# Key bindings: see alacritty's latest example config file for defaults
+# Need scancodes. See: https://github.com/alacritty/alacritty/issues/4111
+# To get scancodes: `sudo showkey`
+key_bindings:
+  - {key: F11, action: ToggleFullscreen}
+  - {key: LBracket, mods: Control, mode: Vi, action: ClearSelection}
+  - {key: Q, mode: Vi, action: ScrollToBottom}
+  - {key: Q, mode: Vi, action: ToggleViMode}
+  # Key: $ (scancode for 4)
+  - {key: 5, mods: Shift, mode: Vi, action: Last}
+  # Key: % (scancode for 5)
+  - {key: 6, mods: Shift, mode: Vi, action: Bracket}
+  # Key: ) (scancode for 0)
+  - {key: 11, mods: Shift, mode: Vi, action: FirstOccupied}
 draw_bold_text_with_bright_colors: true
-
-# Font configuration
 font:
   normal:
-    # this section handles bold AND italics
     family: FiraCode Nerd Font
     style: Retina
   size: 12.0
-
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
-  offset:
-    x: 0
-    y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increase the x offset to move the glyph to
-  # the right, increase the y offset to move the glyph upward.
-  glyph_offset:
-    x: 0
-    y: 0
-
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
-  use_thin_strokes: true
-
-debug:
-  # Should display the render timer
-  render_timer: false
-
-cursor:
-  # Cursor style
-  #
-  # Values for 'cursor.style':
-  #   - Block
-  #   - Underline
-  #   - Beam
-  style:
-    shape: Block
-    blinking: Never
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
-  unfocused_hollow: true
 
 # color_start
 # /home/sroeca/src/lib/alacritty-theme/themes/ayu_dark.yaml
@@ -120,49 +52,3 @@ colors:
     magenta: '0xFFEE99'
     cyan: '0x95E6CB'
     white: '0xFFFFFF'
-bell:
-  animation: EaseOutExpo
-  duration: 0
-
-scrolling:
-  # How many lines of scrollback to keep,
-  # '0' will disable scrolling.
-  history: 10000
-
-  # Number of lines the viewport will move for every line
-  # scrolled when scrollback is enabled (history > 0).
-  multiplier: 3
-
-# Mouse bindings
-mouse_bindings:
-  - {mouse: Middle, action: PasteSelection}
-
-mouse:
-  double_click: {threshold: 300}
-  triple_click: {threshold: 300}
-  hide_when_typing: false
-
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-# Live config reload
-live_config_reload: true
-
-# Shell
-shell:
-  program: /usr/bin/zsh
-
-# Key bindings: see alacritty's latest example config file for defaults
-# Need scancodes. See: https://github.com/alacritty/alacritty/issues/4111
-# To get scancodes: `sudo showkey`
-key_bindings:
-  - {key: F11, action: ToggleFullscreen}
-  - {key: LBracket, mods: Control, mode: Vi, action: ClearSelection}
-  - {key: Q, mode: Vi, action: ScrollToBottom}
-  - {key: Q, mode: Vi, action: ToggleViMode}
-  # Key: $ (scancode for 4)
-  - {key: 5, mods: Shift, mode: Vi, action: Last}
-  # Key: % (scancode for 5)
-  - {key: 6, mods: Shift, mode: Vi, action: Bracket}
-  # Key: ) (scancode for 0)
-  - {key: 11, mods: Shift, mode: Vi, action: FirstOccupied}
