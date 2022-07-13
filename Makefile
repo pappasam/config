@@ -21,4 +21,7 @@ setup-ubuntu:  ## Setup ubuntu for the first time
 	mkdir -p ~/.config/sensitive
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
+
+.PHONY: setup-asdf
+setup-asdf:  ## After asdf is installed, run this to install useful software
 	bash ./scripts/ubuntu/asdf-installs.sh

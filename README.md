@@ -15,12 +15,13 @@ sudo apt install git build-essential stow
 
 Now, using the `Makefile` in this directory with GNU Make, you can run the following commands:
 
-| Command             | Purpose                                                                       |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `make help`         | Prints each `Makefile` target and its associated help message                 |
-| `make stow`         | Runs `stow` on the `dotfiles/` directory, linking files to the user's `$HOME` |
-| `make clean`        | Removes `stow` managed links from the user's `$HOME`                          |
-| `make setup-ubuntu` | Setup Ubuntu for the first time, installing necessary software                |
+| Command             | Purpose                                                             |
+| ------------------- | ------------------------------------------------------------------- |
+| `make help`         | Prints each `Makefile` target and its associated help message       |
+| `make stow`         | Runs `stow` on the `dotfiles/` directory, linking to user's `$HOME` |
+| `make clean`        | Removes `stow` managed links from the user's `$HOME`                |
+| `make setup-ubuntu` | Setup Ubuntu for the first time, installing necessary software      |
+| `make setup-asdf`   | After `asdf` has been installed, use it to install plugins          |
 
 ## Directories
 
