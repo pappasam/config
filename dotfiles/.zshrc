@@ -115,12 +115,6 @@ export HISTFILE=~/.zsh_history
 # History: Number of history entries to save to disk
 export SAVEHIST=5000
 
-# FZF
-export FZF_COMPLETION_TRIGGER=''
-export FZF_DEFAULT_OPTS="--bind=ctrl-o:accept --ansi"
-FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_COMMAND
-
 # Python virtualenv (disable the prompt so I can configure it myself below)
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
@@ -207,7 +201,6 @@ if [ -f $HOME/.zplug/init.zsh ]; then
     use:spaceship.zsh, \
     from:github, \
     as:theme
-  zplug "junegunn/fzf", use:"shell/*.zsh", defer:2
 
   #END: List plugins
 
@@ -361,30 +354,6 @@ bindkey -M menuselect '^l' forward-char
 # delete function characters to include
 # Omitted: /=
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
-
-# }}}
-# Z-shell: fzf {{{
-
-# Use fd to generate the list for file and directory completion
-_fzf_compgen_path() {
-  fd -c always --hidden --follow --exclude ".git" . "$1"
-}
-
-_fzf_compgen_dir() {
-  fd -c always --hidden --type d --follow --exclude ".git" . "$1"
-}
-
-# <C-t> does fzf; <C-i> does normal stuff; <C-o> does the same thing as enter
-bindkey '^T' fzf-completion
-bindkey '^R' fzf-history-widget
-bindkey '^B' fzf-file-widget
-bindkey '^I' $fzf_default_completion
-
-# Widgets:
-# fzf-cd-widget
-# fzf-completion
-# fzf-file-widget
-# fzf-history-widget
 
 # }}}
 # Z-shell: shell prompt config {{{
