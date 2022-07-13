@@ -1223,31 +1223,6 @@ command! ToggleNumber call s:toggle_number()
 command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
-" General: skeleton templates {{{
-
-" https://vi.stackexchange.com/a/3833
-function! s:randnum(max) abort
-  return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
-endfunction
-
-" Create temporary file from skeleton
-function! s:skeleton(file_skeleton)
-  let parts = split(a:file_skeleton, '\.')
-  let fn = join([parts[0] . '-' . s:randnum(10000)] + parts[1:], '.')
-  execute 'edit ' . fn
-  execute 'read ' $HOME . '/.config/nvim/skeletons/' . a:file_skeleton
-  0delete_
-  /{{Cursor}}
-  normal! n
-  normal! da{
-  startinsert!
-endfunction
-
-command! Shortcut silent call s:skeleton('shortcut.md')
-command! Standup silent call s:skeleton('standup.md')
-command! Mentor silent call s:skeleton('mentor.md')
-
-" }}}
 " Package: git plugins fugitive & git-messenger {{{
 
 let g:git_messenger_always_into_popup = v:false

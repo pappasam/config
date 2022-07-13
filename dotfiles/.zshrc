@@ -414,9 +414,9 @@ alias fn='nvim -u NORC --noplugin'
 compdef _vim fn
 alias v='nvim -c "cd ~/config/dotfiles/.config/nvim" ~/config/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/config/dotfiles/.zshrc'
-alias shortcut='nvim -c "Shortcut"'
-alias standup='nvim -c "Standup"'
-alias mentor='nvim -c "Mentor"'
+alias shortcut='nvim -c "set filetype=markdown"'
+alias standup='nvim -c "set filetype=markdown"'
+alias mentor='nvim -c "set filetype=markdown"'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
