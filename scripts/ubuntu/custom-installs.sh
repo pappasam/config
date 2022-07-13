@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -euxo pipefail
+
+# shellcheck disable=SC01091
 source "${BASH_SOURCE%/*}/helpers.sh"
 
 echo_bold_italic_underline 'Downloading https://github.com/asdf-vm/asdf'

@@ -1,16 +1,8 @@
 #!/bin/bash
 
-# Purpose: Install programs using apt
-# System: Linux Mint 19.2
-# Instructions: ./manual.sh
-# Post-run:
-#   Reference "manual.sh" to learn meaning behind package names.
-#   Run individual lines in "manual.sh" after running this script.
-# Notes:
-#   When adding a program here, document its purpose in "manual.sh"
+set -euxo pipefail
 
-set -e
-
+# shellcheck disable=SC01091
 source "${BASH_SOURCE%/*}/helpers.sh"
 
 echo_bold_italic_underline 'Installing system dependencies with "apt install"'

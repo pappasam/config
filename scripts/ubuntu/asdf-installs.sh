@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# After getting ASDF installed, run this script...
+set -euxo pipefail
 
+# shellcheck disable=SC01091
 source "${BASH_SOURCE%/*}/helpers.sh"
+
+if ! command -v asdf; then
+  echo_bold_italic_underline 'Please install "asdf" before proceeding...'
+  exit 1
+else
+  echo_bold_italic_underline 'Installing asdf plugins & pulling latest.'
+fi
 
 asdf_setup() {
   local plugin="$1"
@@ -10,8 +18,6 @@ asdf_setup() {
   asdf plugin add "$plugin"
   asdf install "$plugin" "$version" && asdf global "$plugin" "$version"
 }
-
-echo_bold_italic_underline 'Installing asdf plugins & pulling latest versions.'
 
 asdf_setup act latest
 asdf_setup awscli latest
@@ -41,5 +47,5 @@ asdf_setup vim latest
 asdf_setup yarn latest
 
 # kubernetes
-asdf_setup kubectl 1.19.4
-asdf_setup minikube 1.15.1
+asdf_setup kubectl latest
+asdf_setup minikube latest
