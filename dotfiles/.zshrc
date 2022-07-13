@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # Samuel Roeca's zshell configuration file. Toggle folds with 'za'.
 # Environ: ls_colors {{{
 
@@ -890,6 +891,7 @@ function va() {  # No arguments
   done
   # If reached this step, no virtual environment found from here to root
   if [[ -z $VIRTUAL_ENV ]]; then
+    :
   else
     deactivate
     echo "Disabled existing virtualenv $old_venv"
@@ -1202,9 +1204,9 @@ if [[ -o interactive ]]; then
     # if you're in the first tmux pane within all of tmux
     quote
   elif [ -n "$TMUX" ]; then
-    # do nothing
+    :
   elif tmux has-session -t Main 2>/dev/null; then
-    # do nothing
+    :
   else
     echo 'Command "t" to enter tmux'
   fi
