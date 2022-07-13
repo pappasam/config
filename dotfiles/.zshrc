@@ -632,25 +632,10 @@ function alacritty-install() {
     sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 }
 
-function gitzip() {  # arg1: the git repository
-  if [ $# -eq 0 ]; then
-    local git_dir='.'
-  else
-    local git_dir="$1"
-  fi
-  pushd $git_dir > /dev/null
-  local git_root=$(git rev-parse --show-toplevel)
-  local git_name=$(basename $git_root)
-  local outfile="$git_root/../$git_name.zip"
-  git archive --format=zip --prefix="$git_name-from-zip/" HEAD -o "$outfile"
-  popd > /dev/null
-}
-compdef _directories gitzip
-
 # Pipe man stuff to neovim
 function m() {
-  man --location "$@" &> /dev/null
-  if [ $? -eq 0 ]; then
+  if man --location "$@" &> /dev/null; then
+    # shellcheck disable=SC2145
     nvim -c "Man $@" -c "only"
   else
     man "$@"
@@ -660,17 +645,18 @@ compdef _man m
 
 # dictionary lookups
 function def() {  # arg1: word
-  dict -d gcide $1
+  dict -d gcide "$1"
 }
 compdef _dict_words def
 
 function syn() {  # arg1: word
-  dict -d moby-thesaurus $1
+  dict -d moby-thesaurus "$1"
 }
 compdef _dict_words syn
 
 # I type cd so much, I'll just type d instead
 function d() { #arg1: directory
+  # shellcheck disable=SC2164,SC2086
   cd $1
 }
 compdef _directories d
@@ -678,12 +664,12 @@ compdef _directories d
 # Move up n directories using:  cd.. dir
 function cd_up() {  # arg1: number|word
   pushd . >/dev/null
-  cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" ) # cd up into path (if found)
+  cd "$( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )" || return  # cd up into path (if found)
 }
 
 # Open files with gnome-open
 function gn() {  # arg1: filename
-  gio open $1
+  gio open "$1"
 }
 
 # Open documentation files
@@ -698,7 +684,7 @@ function cargodoc() {  # arg1: packagename
   if [ $# -eq 0 ]; then
     cargo doc --open
   elif [ $# -eq 1 ]; then
-    cargo doc --open --package $1
+    cargo doc --open --package "$1"
   else
     echo 'usage: cargodoc [<package name>]'
     return 1
@@ -757,6 +743,7 @@ function nodeglobal-install() {
     tree-sitter-cli
     write-good
   )
+  # shellcheck disable=SC2128,SC2086
   npm install --no-save -g $env
   asdf reshim nodejs
 }
@@ -769,6 +756,7 @@ function pydev-install() {  ## Install default python dependencies
     pylint
     wheel
   )
+  # shellcheck disable=SC2128,SC2086
   pip install -U $for_pip
   asdf reshim python
 }
@@ -794,6 +782,7 @@ function pyglobal-install() {  ## Install global Python applications
     ueberzug
   )
   if command -v pipx > /dev/null; then
+    # shellcheck disable=SC2128
     for arg in $for_pipx; do
       # We avoid reinstall because it won't install uninstalled pacakges
       pipx uninstall "$arg"
@@ -811,12 +800,13 @@ function goglobal-install() {  ## Install default golang dependencies
 
 function _asdf_complete_plugins() {  ## zsh completion function for plugin-list
   local -a subcmds
+  # shellcheck disable=2034,2207
   subcmds=($(asdf plugin-list | tr '\n' ' '))
   _describe 'List installed plugins for zsh completion' subcmds
 }
 
 function asdfl() {  ## Install and set the latest version of asdf
-  asdf install $1 latest && asdf global $1 latest
+  asdf install "$1" latest && asdf global "$1" latest
 }
 compdef _asdf_complete_plugins asdfl
 
@@ -850,6 +840,7 @@ function va() {  # No arguments
 
 # Create and activate a virtual environment with all Python dependencies
 # installed. Optionally change Python interpreter.
+# shellcheck disable=SC2120
 function ve() {  # Optional arg: python interpreter name
   local venv_name="$VIRTUAL_ENV_DEFAULT"
   if [ -z "$1" ]; then
@@ -858,11 +849,10 @@ function ve() {  # Optional arg: python interpreter name
     local python_name="$1"
   fi
   if [ ! -d "$venv_name" ]; then
-    $python_name -m venv "$venv_name"
-    if [ $? -ne 0 ]; then
+    if ! $python_name -m venv "$venv_name"; then
       local error_code=$?
       echo "Virtualenv creation failed, aborting"
-      return error_code
+      return $error_code
     fi
     source "$venv_name/bin/activate"
     pip install -U pip
@@ -883,7 +873,8 @@ function vc() {  # Optional arg: python venv version
     echo "No virtualenv active, skipping backup"
   else
     mkdir -p venv.bak
-    local python_version=$(python --version | cut -d ' ' -f 2)
+    local python_version
+    python_version=$(python --version | cut -d ' ' -f 2)
     local bak_dir="venv.bak/$python_version"
     if [ ! -d "$bak_dir" ]; then
       mv "$VIRTUAL_ENV" "$bak_dir"
@@ -903,7 +894,7 @@ function vc() {  # Optional arg: python venv version
   mv "$choose_dir" .venv
 }
 _vc_completion() {
-  _directories -W $PWD/venv.bak
+  _directories -W "$PWD/venv.bak"
 }
 compdef _vc_completion vc
 
@@ -911,8 +902,8 @@ compdef _vc_completion vc
 export GITIGNORE_DIR=$HOME/src/lib/gitignore
 function gitignore() {
   if [ ! -d "$GITIGNORE_DIR" ]; then
-    mkdir -p $HOME/src/lib
-    git clone https://github.com/github/gitignore $GITIGNORE_DIR
+    mkdir -p "$HOME/src/lib"
+    git clone https://github.com/github/gitignore "$GITIGNORE_DIR"
     return 1
   elif [ $# -eq 0 ]; then
     echo "Usage: gitignore <file1> <file2> <file3> <file...n>"
@@ -924,7 +915,7 @@ function gitignore() {
       echo "#################################################################"
       echo "# $filevalue"
       echo "#################################################################"
-      cat $GITIGNORE_DIR/$filevalue
+      cat "$GITIGNORE_DIR/$filevalue"
       if [ $count -ne $# ]; then
         echo
       fi
@@ -976,7 +967,7 @@ function pynew() {
     return 1
   fi
   mkdir "$dir_name"
-  cd "$dir_name"
+  cd "$dir_name" || return
   poetry-init
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
@@ -1007,18 +998,20 @@ function nvim-profiler() {
 
 # GIT: git-clone keplergrp repos to src/ directory
 function klone() {
-  git clone git@github.com:KeplerGroup/$1
+  git clone "git@github.com:KeplerGroup/$1"
 }
 
 # GIT: push current branch from origin to current branch
 function push() {
-  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  local current_branch
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
   git push -u origin "$current_branch"
 }
 
 # GIT: pull current branch from origin to current branch
 function pull() {
-  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  local current_branch
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
   git pull origin "$current_branch"
 }
 
@@ -1027,38 +1020,13 @@ function github-list {
   local username=$1
   local organization=$2
   local page=$3
-  curl -u $username "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
-}
-
-# Timer
-function countdown-seconds(){
-  local date1=$((`date +%s` + $1));
-  while [ "$date1" -ge `date +%s` ]; do
-    ## Is this more than 24h away?
-    local days=$(($(($(( $date1 - $(date +%s))) * 1 ))/86400))
-    echo -ne "$days day(s) and $(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
-    sleep 0.1
-  done
-  echo ""
-  spd-say "Beep, beep, beeeeeeeep. Countdown is finished"
-}
-
-function countdown-minutes() {
-  countdown-seconds $(($1 * 60))
-}
-
-function stopwatch(){
-  local date1=`date +%s`;
-  while true; do
-    local days=$(( $(($(date +%s) - date1)) / 86400 ))
-    echo -ne "$days day(s) and $(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-    sleep 0.1
-  done
+  curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
 }
 
 function quote() {
-  local cowsay_word_message="$(shuf -n 1 ~/config/docs/dict/gre_words.txt)"
-  local cowsay_quote="$(fortune -s ~/config/docs/fortunes/ | grep -v '\-\-' | grep .)"
+  local cowsay_word_message cowsay_quote
+  cowsay_word_message="$(shuf -n 1 ~/config/docs/dict/gre_words.txt)"
+  cowsay_quote="$(fortune -s ~/config/docs/fortunes/ | grep -v '\-\-' | grep .)"
   echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
 }
 
@@ -1090,58 +1058,16 @@ function dat(){
   strfile -c % "$file_name" "$file_name.dat"
 }
 
-# Lint Jenkinsfile
-function jenkinsfilelint() {  # [arg1]: path to Jenkinsfile
-  if [ $# -eq 0 ]; then
-    local jenkinsfile_path='Jenkinsfile'
-  elif [ $# -eq 1 ]; then
-    local jenkinsfile_path=$1
-  else
-    echo 'lint-jenkinsfile [<path-to-jenkinsfile>|default is Jenkinsfile]'
-    return 1
-  fi
-  local result=$(curl -s -X POST -F "jenkinsfile=<$jenkinsfile_path" \
-    localhost:8080/pipeline-model-converter/validate )
-  if [[ $result == 'Jenkinsfile successfully validated.' ]]; then
-    echo $result
-    return 0
-  else
-    echo "error processing Jenkinsfile at '$jenkinsfile_path'"
-    if [[ $result != '' ]]; then
-      echo 'error message:'
-      echo $result
-    fi
-    return 1
-  fi
-}
-
-# Zoom
-function zoomy() {
-  if [ -z $1 ]; then
-    echo "Conference room number needed! 'zoomy 1234567890'"
-  else
-    gio open "zoommtg://zoom.us/join?action=join&confno=$1"
-  fi
-}
-
-# Yaml to JSON
-function yamltojson() {
-  local pycmd='import sys, yaml, json'
-  local pycmd="$pycmd;json.dump(yaml.load(sys.stdin), sys.stdout, indent=2)"
-  cat $1 | python -W ignore -c "$pycmd"
-}
-compdef '_files -g "*.(yml|yaml)"' yamltojson
-
 # Remove spaces from a filename. Accepts stdin and arguments, preferring
 # arguments if they are given.
 function despace() {
   if [ $# -eq 0 ]; then
     while read -r filename; do
-      mv "$filename" $(echo -n "$filename" | tr -s ' ' '_')
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
     done
   else
     for filename in "$@"; do
-      mv "$filename" $(echo -n "$filename" | tr -s ' ' '_')
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
     done
   fi
 }
@@ -1165,6 +1091,7 @@ if [[ -o interactive ]]; then
   stty -ixon
 
   # direnv
+  # shellcheck disable=2202,2086,1087
   if [ $commands[direnv] ]; then
     eval "$(direnv hook zsh)"
   fi
