@@ -1,4 +1,4 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC1090,SC1091
 # Samuel Roeca's zshell configuration file. Toggle folds with 'za'.
 # Environ: ls_colors {{{
 
@@ -181,14 +181,14 @@ function include() {
   [[ -f "$1" ]] && source "$1"
 }
 
-include $HOME/.config/sensitive/secrets.sh
-include $HOME/.asdf/asdf.sh
+include "$HOME/.config/sensitive/secrets.sh"
+include "$HOME/.asdf/asdf.sh"
 
 # }}}
 # Z-shell: plugins {{{
 
-if [ -f $HOME/.zplug/init.zsh ]; then
-  source $HOME/.zplug/init.zsh
+if [ -f "$HOME/.zplug/init.zsh" ]; then
+  source "$HOME/.zplug/init.zsh"
 
   # BEGIN: List plugins
 
@@ -207,7 +207,7 @@ if [ -f $HOME/.zplug/init.zsh ]; then
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
       printf "Install? [y/N]: "
-      if read -q; then
+      if read -rq; then
           echo; zplug install
       fi
   fi
