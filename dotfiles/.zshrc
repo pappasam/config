@@ -270,12 +270,24 @@ autoload -Uz zcalc
 # }}}
 # Z-shell: hook functions {{{
 
+export AUTO_VIRTUALENV=1
+
+function toggle_auto_virtualenv() {
+  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
+    export AUTO_VIRTUALENV=1
+  else
+    export AUTO_VIRTUALENV=0
+  fi
+}
+
 # NOTE: precmd is defined within the prompt section
 
 # Executed whenever the current working directory is changed
 function chpwd() {
   # Magically find Python's virtual environment based on name
-  va
+  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
+    va
+  fi
 }
 
 # Executed every $PERIOD seconds, just before a prompt.
@@ -285,7 +297,9 @@ function chpwd() {
 # Hence the set of functions is always called together.
 function periodic() {
   # Magically find Python's virtual environment based on name
-  va
+  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
+    va
+  fi
 }
 
 # Executed before each prompt. Note that precommand functions are not
