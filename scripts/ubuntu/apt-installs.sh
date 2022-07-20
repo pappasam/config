@@ -7,8 +7,9 @@ source "${BASH_SOURCE%/*}/helpers.sh"
 
 echo_bold_italic_underline 'Installing system dependencies with "apt install"'
 
-sudo add-apt-repository -y ppa:peek-developers/stable
 sudo add-apt-repository -y ppa:git-core/ppa
+sudo add-apt-repository -y ppa:inkscape.dev/stable
+sudo add-apt-repository -y ppa:peek-developers/stable
 
 sudo apt update
 sudo apt upgrade -y
@@ -47,6 +48,7 @@ sudo apt install -y \
   gthumb \
   htop \
   imagemagick \
+  inkscape \
   libbz2-dev \
   libclang-6.0-dev \
   libcurl4-openssl-dev \
