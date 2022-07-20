@@ -256,7 +256,7 @@ function! s:default_key_mappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
   nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
-  nnoremap <silent> <space>l <Cmd>CocOutline<CR>
+  nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
   nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
   " Override <C-w>H to delete file explorer buffers
@@ -360,9 +360,6 @@ augroup end
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  " make gO behave like CocOutline to man and help filetypes
-  " works in conjunction with vim-loclist-follow
-  autocmd FileType man,help nmap     <buffer> <silent> <space>l gO<C-w>L:vertical resize 37<cr>
   autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
   autocmd FileType man,help nnoremap <buffer> <expr>   d &modifiable == 0 ? '<C-d>' : 'd'
   autocmd FileType man,help nnoremap <buffer> <expr>   u &modifiable == 0 ? '<C-u>' : 'u'
@@ -459,6 +456,15 @@ function! s:autocmd_custom_coc()
     autocmd User CocNvimInit highlight CocInfoHighlight gui=undercurl
     autocmd User CocNvimInit highlight CocHintHighlight gui=undercurl
   augroup end
+endfunction
+
+function! s:coc_toggle_outline() abort
+  let winid = coc#window#find('cocViewId', 'OUTLINE')
+  if winid == -1
+    call CocActionAsync('showOutline', 1)
+  else
+    call coc#window#close(winid)
+  endif
 endfunction
 
 augroup custom_coc
