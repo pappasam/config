@@ -1,4 +1,4 @@
-" General: packages (vim-packager) {{{
+" General: package management {{{
 
 " Available Commands:
 "   PackagerStatus, PackagerInstall, PackagerUpdate, PackagerClean
@@ -102,7 +102,7 @@ call packager#setup(function('s:packager_init'), {
       \ })
 
 " }}}
-" General: mappings {{{
+" General: key mappings {{{
 
 let mapleader = ','
 
@@ -468,26 +468,6 @@ augroup vim_no_arguments
 augroup end
 
 " }}}
-" General: syntax highlighting diagnostics {{{
-
-function! s:vim_syntax_group()
-  let l:s = synID(line('.'), col('.'), 1)
-  if l:s == ''
-    echo 'none'
-  else
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-  endif
-endfun
-
-function! s:syntax_group()
-  if &syntax == ''
-    TSHighlightCapturesUnderCursor
-  else
-    call s:vim_syntax_group()
-  endif
-endfunction
-
-" }}}
 " General: options {{{
 
 " Enable filetype detection, plugin loading, and indentation loading
@@ -636,7 +616,24 @@ call jobstart(
       \ )
 
 " }}}
-" General: syntax and colorscheme {{{
+" General: syntax / colorscheme {{{
+
+function! s:vim_syntax_group()
+  let l:s = synID(line('.'), col('.'), 1)
+  if l:s == ''
+    echo 'none'
+  else
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+  endif
+endfun
+
+function! s:syntax_group()
+  if &syntax == ''
+    TSHighlightCapturesUnderCursor
+  else
+    call s:vim_syntax_group()
+  endif
+endfunction
 
 augroup custom_colorscheme
   autocmd!
