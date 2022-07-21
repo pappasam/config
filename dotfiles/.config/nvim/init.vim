@@ -1,3 +1,126 @@
+" General: options {{{
+
+" Enable filetype detection, plugin loading, and indentation loading
+filetype plugin indent on
+
+" Code Completion:
+set completeopt=menuone,longest
+set wildmode=longest:full
+set wildmenu
+
+" Messages:
+" c = don't give |ins-completion-menu| messages; they're noisy
+" I = ignore startup message
+set shortmess+=c
+set shortmess+=I
+
+" Hidden Buffer: enable instead of having to write each buffer
+set hidden
+
+" Sign Column: always show it
+set signcolumn=yes:2
+
+" Mouse: enable GUI mouse support in all modes
+set mouse=a
+
+" SwapFiles: prevent their creation
+set noswapfile
+
+" Command Line Height: higher for display for messages
+set cmdheight=2
+
+" Line Wrapping: do not wrap lines by default
+set nowrap
+
+" Indentation:
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=8
+
+" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
+set isfname+=@-@
+set isfname+=:
+
+" Highlight Search: do that
+" note: hlsearcha nd nohlsearch are defined in autocmd outside function
+set incsearch
+set inccommand=nosplit
+
+" Spell Checking:
+set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
+set spelllang=en_us
+
+" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
+set nojoinspaces
+
+set showtabline=2
+
+set autoread
+
+set grepprg=rg\ --vimgrep
+
+" Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
+set pastetoggle=<C-_>
+
+" Don't timeout on mappings
+set notimeout
+
+" Numbering:
+set number
+
+" Window Splitting: Set split settings (options: splitright, splitbelow)
+set splitright
+
+" Terminal Color Support: only set guicursor if truecolor
+if $COLORTERM ==# 'truecolor'
+  set termguicolors
+else
+  set guicursor=
+endif
+
+" Set Background: defaults do dark
+set background=dark
+
+" Colorcolumn:
+set colorcolumn=80
+
+" Status Line: specifics for custom status line
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+
+" ShowCommand: turn off character printing to vim status line
+set noshowcmd
+
+" Updatetime: time Vim waits to do something after I stop moving
+set updatetime=300
+
+" Linux Dev Path: system libraries
+set path+=/usr/include/x86_64-linux-gnu/
+
+" Vim History: for command line; can't imagine that more than 100 is needed
+set history=100
+
+" Redraw Window: whenever a window regains focus
+augroup custom_redraw_on_refocus
+  autocmd!
+  autocmd FocusGained * redraw!
+augroup end
+
+augroup custom_incsearch_highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? set hlsearch
+  autocmd CmdlineLeave /,\? set nohlsearch
+augroup end
+
+augroup custom_nginx
+  autocmd!
+  autocmd FileType nginx set iskeyword+=$
+  autocmd FileType zsh,sh set iskeyword+=-
+augroup end
+
+" }}}
 " General: package management {{{
 
 " Available Commands:
@@ -203,9 +326,6 @@ function! s:default_key_mappings()
         \:call repeat#set("\<Plug>NewLineComma")<CR>
   nmap <leader><CR> <Plug>NewLineComma
 
-  " Jinja2Toggle: the following mapping toggles jinja2 for any filetype
-  nnoremap <silent> <leader><leader>j <Cmd>Jinja2Toggle<CR>
-
   " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
@@ -353,9 +473,7 @@ let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
 let g:coc_start_at_startup = 1
 let g:coc_filetype_map = {
-      \ 'python.jinja2': 'python',
       \ 'markdown.mdx': 'markdown',
-      \ 'sql.jinja2': 'sql',
       \ 'yaml.ansible': 'yaml',
       \ 'yaml.docker-compose': 'yaml',
       \ 'jinja.html': 'html',
@@ -468,129 +586,6 @@ augroup vim_no_arguments
 augroup end
 
 " }}}
-" General: options {{{
-
-" Enable filetype detection, plugin loading, and indentation loading
-filetype plugin indent on
-
-" Code Completion:
-set completeopt=menuone,longest
-set wildmode=longest:full
-set wildmenu
-
-" Messages:
-" c = don't give |ins-completion-menu| messages; they're noisy
-" I = ignore startup message
-set shortmess+=c
-set shortmess+=I
-
-" Hidden Buffer: enable instead of having to write each buffer
-set hidden
-
-" Sign Column: always show it
-set signcolumn=yes:2
-
-" Mouse: enable GUI mouse support in all modes
-set mouse=a
-
-" SwapFiles: prevent their creation
-set noswapfile
-
-" Command Line Height: higher for display for messages
-set cmdheight=2
-
-" Line Wrapping: do not wrap lines by default
-set nowrap
-
-" Indentation:
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=8
-
-" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
-set isfname+=@-@
-set isfname+=:
-
-" Highlight Search: do that
-" note: hlsearcha nd nohlsearch are defined in autocmd outside function
-set incsearch
-set inccommand=nosplit
-
-" Spell Checking:
-set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
-set spelllang=en_us
-
-" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
-set nojoinspaces
-
-set showtabline=2
-
-set autoread
-
-set grepprg=rg\ --vimgrep
-
-" Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
-set pastetoggle=<C-_>
-
-" Don't timeout on mappings
-set notimeout
-
-" Numbering:
-set number
-
-" Window Splitting: Set split settings (options: splitright, splitbelow)
-set splitright
-
-" Terminal Color Support: only set guicursor if truecolor
-if $COLORTERM ==# 'truecolor'
-  set termguicolors
-else
-  set guicursor=
-endif
-
-" Set Background: defaults do dark
-set background=dark
-
-" Colorcolumn:
-set colorcolumn=80
-
-" Status Line: specifics for custom status line
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-
-" ShowCommand: turn off character printing to vim status line
-set noshowcmd
-
-" Updatetime: time Vim waits to do something after I stop moving
-set updatetime=300
-
-" Linux Dev Path: system libraries
-set path+=/usr/include/x86_64-linux-gnu/
-
-" Vim History: for command line; can't imagine that more than 100 is needed
-set history=100
-
-" Redraw Window: whenever a window regains focus
-augroup custom_redraw_on_refocus
-  autocmd!
-  autocmd FocusGained * redraw!
-augroup end
-
-augroup custom_incsearch_highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? set hlsearch
-  autocmd CmdlineLeave /,\? set nohlsearch
-augroup end
-
-augroup custom_nginx
-  autocmd!
-  autocmd FileType nginx set iskeyword+=$
-  autocmd FileType zsh,sh set iskeyword+=-
-augroup end
-
-" }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
 " set environment variables based on light or dark
@@ -616,7 +611,7 @@ call jobstart(
       \ )
 
 " }}}
-" General: syntax / colorscheme {{{
+" General: syntax & colorscheme {{{
 
 function! s:vim_syntax_group()
   let l:s = synID(line('.'), col('.'), 1)
@@ -665,8 +660,6 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.js,*.gs set filetype=javascript
   autocmd BufEnter *.min.js set filetype=none
   autocmd BufEnter *.m,*.oct set filetype=octave
-  autocmd BufEnter *.py.j2 set filetype=python.jinja2
-  autocmd BufEnter *.sql.j2 set filetype=sql.jinja2
   autocmd BufEnter *.toml set filetype=toml
   autocmd BufEnter *.tsv set filetype=tsv
   autocmd BufEnter .envrc set filetype=sh
@@ -1188,22 +1181,6 @@ let g:git_messenger_no_default_mappings = v:true
 
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
-
-" }}}
-" Package: jinja2 {{{
-
-function! s:jinja2_toggle()
-  let jinja2 = '.jinja2'
-  let jinja2_pattern = '\' . jinja2
-  if matchstr(&ft, jinja2_pattern) == ""
-    let new_filetype = &ft . jinja2
-  else
-    let new_filetype = substitute(&ft, jinja2_pattern, "", "")
-  endif
-  execute "set filetype=" . new_filetype
-endfunction
-
-command! Jinja2Toggle call s:jinja2_toggle()
 
 " }}}
 " Package: man pager {{{
