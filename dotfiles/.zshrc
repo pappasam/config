@@ -428,9 +428,6 @@ alias fn='nvim -u NORC --noplugin'
 compdef _vim fn
 alias v='nvim -c "cd ~/config/dotfiles/.config/nvim" ~/config/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/config/dotfiles/.zshrc'
-alias shortcut='nvim -c "set filetype=markdown"'
-alias standup='nvim -c "set filetype=markdown"'
-alias mentor='nvim -c "set filetype=markdown"'
 
 # Grep, but ignore annoying directories
 alias grep='grep --color=auto'
@@ -604,7 +601,7 @@ function upgrade() {
   asdf uninstall neovim nightly && \
     asdf install neovim nightly && \
     asdf global neovim nightly
-  nvim -c 'PackagerUpdate | PackagerClean | CocUpdate'
+  nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'
 }
 
 # Alacritty Helpers

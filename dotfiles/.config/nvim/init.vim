@@ -504,6 +504,14 @@ augroup end
 command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
+" General: Vim opened without arguments {{{
+
+augroup vim_no_arguments
+  autocmd!
+  autocmd VimEnter * :if argc() is 0 | set filetype=markdown | endif
+augroup end
+
+" }}}
 " General: syntax highlighting diagnostics {{{
 
 function! s:vim_syntax_group()
