@@ -1264,20 +1264,6 @@ command! Preview call s:preview()
 " }}}
 " Package: sandwich {{{
 
-" LatexNotes:
-"   textobject:
-"     replace inner text of `text' with cisl'
-"     if auto detection of nearest surrounding is fine cib
-"   add to text:
-"     saiwl' single apostrophes to get `text'
-"     The pattern of the command is sa{motion/textobject}{surrounding}
-"     means invoke operator add  surrounding on inner word and surround type
-"     is latex single quote.
-"   delete:
-"     with sdl' or with sdb
-"   change:
-"     with srl'l" or with srbl"
-
 " Keymappings set in keymappings section
 let g:textobj_sandwich_no_default_key_mappings = v:true
 
