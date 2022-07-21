@@ -91,10 +91,8 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:aklt/plantuml-syntax.git')
   call a:packager.add('git@github.com:chr4/nginx.vim.git')
   call a:packager.add('git@github.com:delphinus/vim-firestore.git')
-  call a:packager.add('git@github.com:evanleck/vim-svelte')
   call a:packager.add('git@github.com:mattn/vim-xxdcursor')
   call a:packager.add('git@github.com:neovimhaskell/haskell-vim')
-  call a:packager.add('git@github.com:pangloss/vim-javascript')
   call a:packager.add('git@github.com:vim-scripts/SAS-Syntax')
 endfunction
 
@@ -1423,10 +1421,6 @@ let g:vim_filetype_formatter_commands = {
 " }}}
 " Package: keywordprg helpers (vim-keywordprg-commands, etc) {{{
 
-let g:vim_keywordprg_commands = {
-      \ }
-" NOTE: latex is handled by vimtex
-
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
@@ -1437,12 +1431,8 @@ augroup end
 " }}}
 " Package: misc global var config {{{
 
-" Languages: configure location of host. Currently only Python needed
-" others kept for posterity
+" Languages: configure location of host
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
-" let g:ruby_host_prog = "$HOME/.asdf/shims/ruby"
-" let g:node_host_prog = "$HOME/.asdf/shims/node"
-" let g:perl_host_prog = "$HOME/.asdf/shims/perl"
 
 " Configure clipboard explicitly. Speeds up startup
 let g:clipboard = {
@@ -1476,20 +1466,6 @@ let g:haskell_enable_pattern_synonyms = v:true " to highlight `pattern`
 let g:haskell_enable_typeroles = v:true        " to highlight type roles
 let g:haskell_enable_static_pointers = v:true  " to highlight `static`
 
-" Python: highlighting
-let g:python_highlight_space_errors = v:false
-let g:python_highlight_all = v:true
-
-" Json: highlighting
-let g:vim_json_syntax_conceal = v:false
-
-" Ferret:
-" disable default mappings
-let g:FerretMap = v:false
-
-" VimJavascript:
-let g:javascript_plugin_flow = v:false
-
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
 
@@ -1504,15 +1480,9 @@ let g:bullets_enabled_file_types = [
       \ ]
 let g:bullets_outline_levels = ['num', 'std-']
 
-" RequirementsVim: filetype detection (begin with requirements)
-let g:requirements#detect_filename_pattern = 'requirements.*\.txt'
-
 " QuickScope: great plugin helping with f and t
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars = 10000
-
-" Go: random stuff
-let g:go_version_warning = v:false
 
 " HexMode: configure hex editing
 " relevant command: Hexmode
@@ -1523,13 +1493,13 @@ let g:hexmode_xxd_options = '-g 2'
 let g:omni_syntax_use_single_byte = v:false
 let g:omni_syntax_use_iskeyword_numeric = v:false
 
+" Makefile: global variable to prevent syntax highlighting of commands
+let g:make_no_commands = 1
+
 " LocListFollow:
 let g:loclist_follow = 1
 let g:loclist_follow_modes = 'n'
 let g:loclist_follow_target = 'previous'
-
-" Makefile: global variable to prevent syntax highlighting of commands
-let g:make_no_commands = 1
 
 augroup custom_loclistfollow
   autocmd!
