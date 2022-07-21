@@ -34,15 +34,10 @@ function! s:packager_init(packager) abort
   " General:
   call a:packager.add('git@github.com:bronson/vim-visual-star-search')
   call a:packager.add('git@github.com:fidian/hexmode')
-  call a:packager.add('git@github.com:junegunn/vader.vim')
   call a:packager.add('git@github.com:kh3phr3n/tabline')
-  call a:packager.add('git@github.com:mbbill/undotree')
-  call a:packager.add('git@github.com:ryvnf/readline.vim.git')
   call a:packager.add('git@github.com:simeji/winresizer')
   call a:packager.add('git@github.com:sjl/strftimedammit.vim')
   call a:packager.add('git@github.com:unblevable/quick-scope')
-  call a:packager.add('git@github.com:wincent/ferret')
-  call a:packager.add('git@github.com:yssl/QFEnter')
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
   " commit from September 18, 2021.
   " ab46827721d7a8d71918fd7cd0dceaa8c84d9579 breaks Neovim
@@ -257,7 +252,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
   nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
-  nnoremap <silent> <space>u <Cmd>UndotreeToggle<CR>
 
   " Override <C-w>H to delete file explorer buffers
   nnoremap <C-w>H <Cmd>windo if &filetype == 'NvimTree' <bar> close <bar> endif<CR><C-w>H
@@ -797,10 +791,6 @@ function! s:abbr_help(in_command, out_command)
     return a:in_command
   endif
 endfunction
-
-" Using Ack and Acks brings up quickfix automatically
-cnoreabbrev <expr> Ack <SID>abbr_help('Ack', 'Ack<C-f>i')
-cnoreabbrev <expr> Acks <SID>abbr_help('Acks', 'Acks<C-f>i')
 
 " Open init.vim
 cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/config/dotfiles/.config/nvim/init.vim')
@@ -1514,23 +1504,6 @@ let g:markdown_fenced_languages = [
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_nogx = 1
-
-" UndoTree:
-let g:undotree_SetFocusWhenToggle = v:true
-let g:undotree_WindowLayout = 3
-
-" QFEnter:
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.open = ['<CR>']
-let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-x>']
-let g:qfenter_keymap.topen = ['<C-t>']
-" do not copy quickfix when opened in new tab
-let g:qfenter_enable_autoquickfix = v:false
-" automatically move QuickFix window to fill entire bottom screen
-augroup custom_quickfix
-  autocmd FileType qf wincmd J
-augroup end
 
 " WinResize:
 let g:winresizer_start_key = '<C-\>'
