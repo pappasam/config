@@ -39,23 +39,17 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:sjl/strftimedammit.vim')
   call a:packager.add('git@github.com:unblevable/quick-scope')
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
-  " commit from September 18, 2021.
-  " ab46827721d7a8d71918fd7cd0dceaa8c84d9579 breaks Neovim
   call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
   call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
-  call a:packager.add('git@github.com:romainl/vim-devdocs.git')
 
   " Fuzzy Finder:
   call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git')
 
   " Git:
   call a:packager.add('git@github.com:tpope/vim-fugitive')
-  " Gives command :Flog , which opens git history of repo. Alternative go :GV
-  call a:packager.add('git@github.com:rbong/vim-flog.git')
-  call a:packager.add('git@github.com:sodapopcan/vim-twiggy.git')
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
   call a:packager.add('git@github.com:nvim-lua/plenary.nvim.git')
   call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
@@ -81,13 +75,11 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Repl Integration:
-  " call a:packager.add('git@github.com:jpalardy/vim-slime.git')
   call a:packager.add('git@github.com:pappasam/nvim-repl.git')
 
   " Indentation Only:
   call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent')
   call a:packager.add('git@github.com:Yggdroot/indentLine')
-  call a:packager.add('git@github.com:vim-scripts/groovyindent-unix')
 
   " Syntax Theme:
   call a:packager.add('git@github.com:pappasam/papercolor-theme-slim.git')
