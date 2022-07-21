@@ -429,37 +429,24 @@ compdef _vim fn
 alias v='nvim -c "cd ~/config/dotfiles/.config/nvim" ~/config/dotfiles/.config/nvim/init.vim'
 alias z='nvim ~/config/dotfiles/.zshrc'
 
-# Grep, but ignore annoying directories
-alias grep='grep --color=auto'
-
-# enable color support of ls and also add handy aliases
+# ls et al, with color support and handy aliases
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
-
 alias sl='ls'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
-# diff
-# r: recursively; u: shows line number; p: shows difference in C function
-# P: if multiple files then showing complete path
-alias diff='diff -rupP'
 
 # Set copy/paste helper functions
 # the perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
 alias pbpaste='xsel --clipboard --output'
 
-# Octave
-alias octave='octave --no-gui'
-
 # Public IP
 alias publicip='curl -s checkip.amazonaws.com'
 
-# Git
-# NOTE: git add --patch forces interactive consideration of all hunks; useful
+# Git shortcuts
 alias g='git status'
 alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --list'
@@ -473,22 +460,8 @@ alias gop='gh browse'
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
-# alias for say
-alias say='spd-say'
-compdef _dict_words say
-
 # reload zshrc
 alias so='source ~/.zshrc'
-
-# Cookiecutter (project boilerplate generator)
-alias cookiecutter-hovercraft='cookiecutter gh:pappasam/cookiecutter-hovercraft'
-
-# Rust
-
-# need cargo install cargo-update
-# NOTE: CARGO_INCREMENTAL=0 turns off incremental compilation
-alias cargo-update='cargo +nightly install-update -a'
-alias cargo-doc='cargo doc --open'
 
 # Python
 # Enable things like "pip install 'requests[security]'"
@@ -1005,11 +978,6 @@ function nvim-profiler() {
     --cmd 'profile start nvim_init_profile.txt' \
     --cmd 'profile! file ~/.config/nvim/init.vim' \
     "$@"
-}
-
-# GIT: git-clone keplergrp repos to src/ directory
-function klone() {
-  git clone "git@github.com:KeplerGroup/$1"
 }
 
 # GIT: push current branch from origin to current branch
