@@ -347,7 +347,7 @@ augroup custom_remap_nvim_tree_lua
 augroup end
 
 " }}}
-" Package: coc.nvim {{{
+" Package: language server protocol (LSP) with coc.nvim {{{
 
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
@@ -429,7 +429,7 @@ augroup custom_coc
 augroup end
 
 " }}}
-" Package: lua extensions {{{
+" Package: lua extensions for Neovim {{{
 
 function! s:safe_require(package)
   try
@@ -460,7 +460,7 @@ augroup end
 command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
-" General: Vim opened without arguments {{{
+" General: vim opened without arguments {{{
 
 augroup vim_no_arguments
   autocmd!
