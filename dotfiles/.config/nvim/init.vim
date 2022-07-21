@@ -148,12 +148,6 @@ function! s:packager_init(packager) abort
   " LocationList:
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
-  " Tim Pope: general, uncategorizable tim pope plugins
-  " Notes:
-  "   * abolish: convert to snake cases
-  call a:packager.add('git@github.com:tpope/vim-abolish')
-  call a:packager.add('git@github.com:tpope/vim-characterize.git')
-
   " Tree:
   call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git')
 
@@ -167,12 +161,13 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
   call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
   call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
+  call a:packager.add('git@github.com:tpope/vim-characterize.git')
 
   " KeywordPrg:
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
 
   " Fuzzy Finder:
-  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git', {'required': [
+  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git', {'requires': [
       \ 'git@github.com:nvim-lua/plenary.nvim.git',
       \ ]})
 
@@ -798,58 +793,8 @@ augroup end
 " }}}
 " General: writing {{{
 
-function! s:abolish_correct()
-  " Started from:
-  " https://github.com/tpope/tpope/blob/94b1f7c33ee4049866f0726f96d9a0fb5fdf868f/.vim/after/plugin/abolish_tpope.vim
-  if !exists('g:loaded_abolish')
-    echom 'Abolish does not exist, skipping...'
-    return
-  endif
-  Abolish Lidsa                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  Abolish Tqbf                        The quick, brown fox jumps over the lazy dog
-  Abolish adn                         and
-  Abolish afterword{,s}               afterward{}
-  Abolish anomol{y,ies}               anomal{}
-  Abolish austrail{a,an,ia,ian}       austral{ia,ian}
-  Abolish cal{a,e}nder{,s}            cal{e}ndar{}
-  Abolish delimeter{,s}               delimiter{}
-  Abolish despara{te,tely,tion}       despera{}
-  Abolish destionation{,s}            destination{}
-  Abolish d{e,i}screp{e,a}nc{y,ies}   d{i}screp{a}nc{}
-  Abolish euphamis{m,ms,tic,tically}  euphemis{}
-  Abolish hense                       hence
-  Abolish hte                         the
-  Abolish improvment{,s}              improvement{}
-  Abolish inherant{,ly}               inherent{}
-  Abolish lastest                     latest
-  Abolish nto                         not
-  Abolish nto                         not
-  Abolish ot                          to
-  Abolish persistan{ce,t,tly}         persisten{}
-  Abolish rec{co,com,o}mend{,s,ed,ing,ation} rec{om}mend{}
-  Abolish referesh{,es}               refresh{}
-  Abolish reproducable                reproducible
-  Abolish resouce{,s}                 resource{}
-  Abolish restraunt{,s}               restaurant{}
-  Abolish scflead                     supercalifragilisticexpialidocious
-  Abolish segument{,s,ed,ation}       segment{}
-  Abolish seperat{e,es,ed,ing,ely,ion,ions,or} separat{}
-  Abolish si                          is
-  Abolish teh                         the
-  Abolish {,in}consistan{cy,cies,t,tly} {}consisten{}
-  Abolish {,ir}releven{ce,cy,t,tly}   {}relevan{}
-  Abolish {,non}existan{ce,t}         {}existen{}
-  Abolish {,re}impliment{,s,ing,ed,ation} {}implement{}
-  Abolish {,un}nec{ce,ces,e}sar{y,ily} {}nec{es}sar{}
-  Abolish {,un}orgin{,al}             {}origin{}
-  Abolish {c,m}arraige{,s}            {}arriage{}
-  Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or} {despe,sepa}rat{}
-  Abolish {les,compar,compari}sion{,s} {les,compari,compari}son{}
-endfunction
-
 augroup custom_writing
   autocmd!
-  autocmd VimEnter * call s:abolish_correct()
   autocmd FileType markdown,markdown.mdx,mdx,rst,text,gitcommit setlocal wrap linebreak nolist
   autocmd FileType requirements setlocal nospell
   autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
