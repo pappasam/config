@@ -141,7 +141,9 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:lewis6991/spellsitter.nvim.git')
   call a:packager.add('git@github.com:nvim-treesitter/playground.git')
   call a:packager.add('git@github.com:windwp/nvim-ts-autotag.git')
-  call a:packager.add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git')
+  call a:packager.add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
+      \ 'git@github.com:tpope/vim-commentary',
+      \ ]})
 
   " LocationList:
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
@@ -151,8 +153,6 @@ function! s:packager_init(packager) abort
   "   * abolish: convert to snake cases
   call a:packager.add('git@github.com:tpope/vim-abolish')
   call a:packager.add('git@github.com:tpope/vim-characterize.git')
-  call a:packager.add('git@github.com:tpope/vim-commentary')
-  call a:packager.add('git@github.com:tpope/vim-repeat')
 
   " Tree:
   call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git')
@@ -172,12 +172,13 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
 
   " Fuzzy Finder:
-  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git')
+  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git', {'required': [
+      \ 'git@github.com:nvim-lua/plenary.nvim.git',
+      \ ]})
 
   " Git:
   call a:packager.add('git@github.com:tpope/vim-fugitive')
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
-  call a:packager.add('git@github.com:nvim-lua/plenary.nvim.git')
   call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
   call a:packager.add('git@github.com:lewis6991/gitsigns.nvim.git')
 
@@ -194,18 +195,17 @@ function! s:packager_init(packager) abort
 
   " Previewers:
   call a:packager.add('git@github.com:iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call a:packager.add('git@github.com:tyru/open-browser.vim')
-  call a:packager.add('git@github.com:weirongxu/plantuml-previewer.vim')
+  call a:packager.add('git@github.com:weirongxu/plantuml-previewer.vim', {'requires': [
+      \ 'git@github.com:tyru/open-browser.vim',
+      \ ]})
 
   " Code Formatters:
   call a:packager.add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Repl Integration:
-  call a:packager.add('git@github.com:pappasam/nvim-repl.git')
-
-  " Indentation Only:
-  call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent')
-  call a:packager.add('git@github.com:Yggdroot/indentLine')
+  call a:packager.add('git@github.com:pappasam/nvim-repl.git', {'requires': [
+        \ 'git@github.com:tpope/vim-repeat',
+        \ ]})
 
   " Syntax Theme:
   call a:packager.add('git@github.com:pappasam/papercolor-theme-slim.git')
@@ -213,7 +213,16 @@ function! s:packager_init(packager) abort
   " Jupyter Integration:
   call a:packager.add('git@github.com:goerz/jupytext.vim.git')
 
-  " Syntax Highlighting:
+  " Syntax Highlighting & Indentation:
+  call a:packager.add('git@github.com:evanleck/vim-svelte.git', {'requires': [
+      \ 'git@github.com:cakebaker/scss-syntax.vim.git',
+      \ 'git@github.com:groenewege/vim-less.git',
+      \ 'git@github.com:leafgarland/typescript-vim.git',
+      \ 'git@github.com:othree/html5.vim.git',
+      \ 'git@github.com:pangloss/vim-javascript.git',
+      \ ]})
+  call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent')
+  call a:packager.add('git@github.com:Yggdroot/indentLine')
   call a:packager.add('git@github.com:aklt/plantuml-syntax.git')
   call a:packager.add('git@github.com:chr4/nginx.vim.git')
   call a:packager.add('git@github.com:delphinus/vim-firestore.git')
