@@ -79,7 +79,7 @@ else
   set guicursor=
 endif
 
-" Set Background: defaults do dark
+" Set Background: defaults to dark
 set background=dark
 
 " Colorcolumn:
