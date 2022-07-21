@@ -102,6 +102,9 @@ set path+=/usr/include/x86_64-linux-gnu/
 " Vim History: for command line; can't imagine that more than 100 is needed
 set history=100
 
+" Set the diff expression to EnhancedDiff
+set diffopt+=internal,algorithm:patience
+
 " Redraw Window: whenever a window regains focus
 augroup custom_redraw_on_refocus
   autocmd!
@@ -1020,21 +1023,6 @@ endfunction
 command! CleanUnicode call s:clean_unicode()
 
 " }}}
-" General: neovim terminal {{{
-
-function! s:open_term_interactive(view_type)
-  execute a:view_type
-  terminal
-  setlocal nonumber nornu
-  startinsert
-endfunction
-
-command! Term call s:open_term_interactive('vsplit')
-command! VTerm call s:open_term_interactive('vsplit')
-command! STerm call s:open_term_interactive('split')
-command! Tterm call s:open_term_interactive('tabnew')
-
-" }}}
 " General: macro repeater {{{
 
 " Allow '.' to repeat macros. Finally!
@@ -1098,15 +1086,6 @@ function! QStart()
   endif
   return 'q'.s:qreg
 endfunction
-
-" }}}
-" General: command abbreviations {{{
-
-" Fix highlighting
-command! FixHighlight syntax sync fromstart
-
-" Save and quit all windows. Really easy to type and X is not mapped in Neovim
-command! X xa
 
 " }}}
 " General: view available colors {{{
@@ -1178,9 +1157,6 @@ command! ToggleRelativeNumber call s:toggle_relative_number()
 
 let g:git_messenger_always_into_popup = v:false
 let g:git_messenger_no_default_mappings = v:true
-
-" Set the diff expression to EnhancedDiff
-set diffopt+=internal,algorithm:patience
 
 " }}}
 " Package: man pager {{{
@@ -1332,24 +1308,6 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Package: vim-tex {{{
-
-let g:vimtex_compiler_latexmk = {'callback' : v:false}
-let g:tex_flavor = 'latex'
-let g:vimtex_imaps_enabled = v:false
-let g:vimtex_doc_handlers = ['MyVimTexDocHandler']
-
-function! MyVimTexDocHandler(context)
-  " Function called with using :VimtexDocPackage
-  " to pull up package documentation
-  call vimtex#doc#make_selection(a:context)
-  if !empty(a:context.selected)
-    execute '!texdoc ' . a:context.selected . ' &'
-  endif
-  return 1
-endfunction
-
-" }}}
 " Package: sandwich {{{
 
 " LatexNotes:
@@ -1398,8 +1356,6 @@ let g:vim_filetype_formatter_commands = {
 augroup custom_keywordprg
   autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
-  autocmd FileType typescript,typescriptreact setlocal keywordprg=:DD\ javascript
-  autocmd FileType terraform setlocal keywordprg=:DD\ terraform
 augroup end
 
 " }}}
