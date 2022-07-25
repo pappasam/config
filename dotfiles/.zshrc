@@ -1040,7 +1040,7 @@ function despace() {
 }
 
 # }}}
-# General: executed commands {{{
+# General: executed commands for interactive shell {{{
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
@@ -1057,7 +1057,6 @@ if [[ -o interactive ]]; then
   # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
   stty -ixon
 
-  # direnv
   # shellcheck disable=2202,2086,1087
   if [ $commands[direnv] ]; then
     eval "$(direnv hook zsh)"
