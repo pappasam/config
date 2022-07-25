@@ -130,7 +130,7 @@ export BAT_PAGER=''
 # asdf: for to use install-poetry script
 export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 
-# commands to execute before a bash prompt. Kept here for compatibility
+# commands to execute before a bash prompt. Kept here for bash compatibility
 export PROMPT_COMMAND='auto_venv_precmd'
 
 # }}}
@@ -432,15 +432,8 @@ alias gop='gh browse'
 # battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
-# reload zshrc
-alias so='source ~/.zshrc'
-
-# Python
-# Enable things like "pip install 'requests[security]'"
+# Python: enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
-alias poetry-clean='poetry cache:clear --all pypi'
-alias py='nvim -c "silent! normal! ggdG" -c "ReplToggle" /tmp/repl.py'
-alias pycache-clean='find . -name "*.pyc" -delete'
 
 # }}}
 # General: functions {{{
