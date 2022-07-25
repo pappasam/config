@@ -31,6 +31,7 @@ set cmdheight=2
 
 " Line Wrapping: do not wrap lines by default
 set nowrap
+set linebreak
 
 " Indentation:
 set expandtab
@@ -788,16 +789,6 @@ augroup custom_colorcolumn
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
   autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
-augroup end
-
-" }}}
-" General: writing {{{
-
-augroup custom_writing
-  autocmd!
-  autocmd FileType markdown,markdown.mdx,mdx,rst,text,gitcommit setlocal wrap linebreak nolist
-  autocmd FileType requirements setlocal nospell
-  autocmd BufNewFile,BufRead *.html,*.tex setlocal wrap linebreak nolist
 augroup end
 
 " }}}
