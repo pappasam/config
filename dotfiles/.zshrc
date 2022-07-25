@@ -130,6 +130,9 @@ export BAT_PAGER=''
 # asdf: for to use install-poetry script
 export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 
+# commands to execute before a bash prompt. Kept here for compatibility
+export PROMPT_COMMAND='auto_venv_precmd'
+
 # }}}
 # Environ: path appends + misc env setup {{{
 
@@ -270,44 +273,13 @@ autoload -Uz zcalc
 # }}}
 # Z-shell: hook functions {{{
 
-export AUTO_VIRTUALENV=1
-
-function toggle_auto_virtualenv() {
-  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
-    export AUTO_VIRTUALENV=1
-  else
-    export AUTO_VIRTUALENV=0
-  fi
-}
-
-# NOTE: precmd is defined within the prompt section
-
-# Executed whenever the current working directory is changed
-function chpwd() {
-  # Magically find Python's virtual environment based on name
-  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
-    va
-  fi
-}
-
-# Executed every $PERIOD seconds, just before a prompt.
-# NOTE: if multiple functions are defined using the array periodic_functions,
-# only  one  period  is applied to the complete set of functions, and the
-# scheduled time is not reset if the list of functions is altered.
-# Hence the set of functions is always called together.
-function periodic() {
-  # Magically find Python's virtual environment based on name
-  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
-    va
-  fi
-}
-
 # Executed before each prompt. Note that precommand functions are not
 # re-executed simply because the command line is redrawn, as happens, for
 # example, when a notification about an exiting job is displayed.
 function precmd() {
   # Gather information about the version control system
   vcs_info
+  eval "$PROMPT_COMMAND"
 }
 
 # }}}
@@ -820,6 +792,21 @@ function va() {  # No arguments
   else
     deactivate
     echo "Disabled existing virtualenv $old_venv"
+  fi
+}
+
+# Toggles whether the virtualenv is automatically set
+export AUTO_VIRTUALENV=1
+function toggle_auto_virtualenv() {
+  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
+    export AUTO_VIRTUALENV=1
+  else
+    export AUTO_VIRTUALENV=0
+  fi
+}
+function auto_venv_precmd() {
+  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
+    va
   fi
 }
 
