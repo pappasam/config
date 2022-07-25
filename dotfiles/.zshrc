@@ -773,7 +773,7 @@ function va() {  # No arguments
     if [ -d "$current_directory/$venv_name" ]; then
       source "$current_directory/$venv_name/bin/activate"
       if [[ "$old_venv" != "$VIRTUAL_ENV" ]]; then
-        echo "Activated $(python --version) virtualenv in $VIRTUAL_ENV"
+        :
       fi
       return
     fi
@@ -784,7 +784,6 @@ function va() {  # No arguments
     :
   else
     deactivate
-    echo "Disabled existing virtualenv $old_venv"
   fi
 }
 
@@ -1054,9 +1053,6 @@ if [[ -o interactive ]]; then
   if [ $commands[direnv] ]; then
     eval "$(direnv hook zsh)"
   fi
-
-  # Try activate virtual environment, don't worry about console output
-  va &> /dev/null
 
   # Assigns permissions so that only I have read/write access for files, and
   # read/write/search for directories I own. All others have read access only
