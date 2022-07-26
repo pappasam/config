@@ -596,7 +596,7 @@ command! GitsignsToggle Gitsigns toggle_signs
 
 augroup vim_no_arguments
   autocmd!
-  autocmd VimEnter * :if argc() is 0 | set filetype=markdown | endif
+  autocmd VimEnter * if argc() is 0 | set filetype=markdown | endif
 augroup end
 
 " }}}
