@@ -39,6 +39,7 @@ require("nvim-treesitter.configs").setup({
     "markdown_inline",
     "ocaml",
     "php",
+    "prisma",
     "python",
     "query",
     "regex",

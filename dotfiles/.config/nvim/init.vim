@@ -30,7 +30,7 @@ set cmdheight=2
 set nowrap linebreak
 
 " Indentation:
-set expandtab shiftwidth=2 softtabstop=2 tabstop=8
+set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
 
 " Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
 set isfname+=@-@ isfname+=:
@@ -496,6 +496,7 @@ let g:coc_global_extensions = [
       \ 'coc-ltex',
       \ 'coc-lua',
       \ 'coc-markdownlint',
+      \ 'coc-prisma',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
@@ -680,13 +681,17 @@ augroup custom_indentation
   " Reset to 2 (something somewhere overrides...)
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   " 4 spaces per tab, not 2
-  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3
+        \ setlocal shiftwidth=4 softtabstop=4
   " Use hard tabs, not spaces
-  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
+  autocmd Filetype make,tsv,votl,go,gomod
+        \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
-  autocmd Filetype dot setlocal autoindent cindent
-  autocmd Filetype firestore,ron setlocal cindent
+  " Use fancy c-like indentation
+  autocmd Filetype firestore,ron setlocal
+        \ cindent
+        \ autoindent
         \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
         \ cinoptions+='(s,m2'
         \ cinoptions+='(s,U1'
