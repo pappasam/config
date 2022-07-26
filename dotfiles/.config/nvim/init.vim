@@ -562,26 +562,31 @@ function! s:safe_require(package)
   try
     execute "lua require('" . a:package . "')"
   catch
-    echom 'Problem encountered requiring ' . a:package . ', skipping...'
+    echom "Error with lua require('" . a:package . "')"
   endtry
+endfunction
+
+function! s:setup_lua_packages()
+  call s:safe_require('config.colorizer')
+  call s:safe_require('config.gitsigns')
+  call s:safe_require('config.nvim-autopairs')
+  call s:safe_require('config.nvim-tree')
+  call s:safe_require('config.nvim-treesitter')
+  call s:safe_require('config.nvim-ts-context-commentstring')
+  call s:safe_require('config.nvim-web-devicons')
+  call s:safe_require('config.spellsitter')
+  call s:safe_require('config.telescope')
+  call s:safe_require('config.twilight')
+  call s:safe_require('config.zen-mode')
 endfunction
 
 augroup custom_general_lua_extensions
   autocmd!
-  autocmd FileType vim setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-  autocmd FileType vim setlocal suffixesadd^=.lua
+  autocmd VimEnter * call s:setup_lua_packages()
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
-  autocmd VimEnter * call s:safe_require('config.colorizer')
-  autocmd VimEnter * call s:safe_require('config.gitsigns')
-  autocmd VimEnter * call s:safe_require('config.nvim-autopairs')
-  autocmd VimEnter * call s:safe_require('config.nvim-tree')
-  autocmd VimEnter * call s:safe_require('config.nvim-treesitter')
-  autocmd VimEnter * call s:safe_require('config.nvim-ts-context-commentstring')
-  autocmd VimEnter * call s:safe_require('config.nvim-web-devicons')
-  autocmd VimEnter * call s:safe_require('config.spellsitter')
-  autocmd VimEnter * call s:safe_require('config.telescope')
-  autocmd VimEnter * call s:safe_require('config.twilight')
-  autocmd VimEnter * call s:safe_require('config.zen-mode')
+  autocmd FileType vim setlocal
+        \ includeexpr=substitute(v:fname,'\\.','/','g')
+        \ suffixesadd^=.lua
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
