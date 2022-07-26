@@ -602,12 +602,6 @@ augroup end
 " }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
-" set environment variables based on light or dark
-function! s:set_env_from_background()
-  let $BAT_THEME = &background == 'light' ?
-        \ 'Monokai Extended Light' : 'Monokai Extended'
-endfunction
-
 function! s:alacritty_set_background()
   let g:alacritty_background = system('alacritty-which-colorscheme')
   if !v:shell_error
@@ -615,7 +609,6 @@ function! s:alacritty_set_background()
   else
     echom 'Error calling "alacritty-which-colorscheme"'
   endif
-  call s:set_env_from_background()
 endfunction
 
 call s:alacritty_set_background()
