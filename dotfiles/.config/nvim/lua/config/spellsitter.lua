@@ -1,3 +1,3 @@
-require('spellsitter').setup{
+require("spellsitter").setup({
   enable = true,
-}
+})

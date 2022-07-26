@@ -571,9 +571,10 @@ function! s:setup_lua_packages()
   call s:safe_require('config.zen-mode')
 endfunction
 
+call s:setup_lua_packages()
+
 augroup custom_general_lua_extensions
   autocmd!
-  autocmd VimEnter * call s:setup_lua_packages()
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
   autocmd FileType vim setlocal
         \ includeexpr=substitute(v:fname,'\\.','/','g')

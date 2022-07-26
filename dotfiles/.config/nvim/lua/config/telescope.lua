@@ -1,6 +1,6 @@
 -- Telescope.nvim configuration
-local ts = require('telescope')
-local actions = require('telescope.actions')
+local ts = require("telescope")
+local actions = require("telescope.actions")
 
 ts.setup({
   defaults = {
@@ -15,8 +15,8 @@ ts.setup({
     layout_strategy = "vertical",
     mappings = {
       i = {
-        ['<esc>'] = actions.close,
-        ['<C-u>'] = false,
+        ["<esc>"] = actions.close,
+        ["<C-u>"] = false,
       },
     },
     prompt_prefix = " ",
