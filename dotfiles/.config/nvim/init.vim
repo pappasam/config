@@ -4,15 +4,12 @@
 filetype plugin indent on
 
 " Code Completion:
-set completeopt=menuone,longest
-set wildmode=longest:full
-set wildmenu
+set completeopt=menuone,longest wildmode=longest:full wildmenu
 
 " Messages:
 " c = don't give |ins-completion-menu| messages; they're noisy
 " I = ignore startup message
-set shortmess+=c
-set shortmess+=I
+set shortmess+=c shortmess+=I
 
 " Hidden Buffer: enable instead of having to write each buffer
 set hidden
@@ -30,23 +27,17 @@ set noswapfile
 set cmdheight=2
 
 " Line Wrapping: do not wrap lines by default
-set nowrap
-set linebreak
+set nowrap linebreak
 
 " Indentation:
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=8
+set expandtab shiftwidth=2 softtabstop=2 tabstop=8
 
 " Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
-set isfname+=@-@
-set isfname+=:
+set isfname+=@-@ isfname+=:
 
 " Highlight Search: do that
 " note: hlsearcha nd nohlsearch are defined in autocmd outside function
-set incsearch
-set inccommand=nosplit
+set incsearch inccommand=nosplit
 
 " Spell Checking:
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
@@ -87,9 +78,7 @@ set background=dark
 set colorcolumn=80
 
 " Status Line: specifics for custom status line
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
+set laststatus=2 ttimeoutlen=50 noshowmode
 
 " ShowCommand: turn off character printing to vim status line
 set noshowcmd
@@ -105,6 +94,9 @@ set history=100
 
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
+
+" Folding
+set foldenable foldmethod=marker foldnestmax=1
 
 " Redraw Window: whenever a window regains focus
 augroup custom_redraw_on_refocus
@@ -453,7 +445,6 @@ augroup end
 
 augroup custom_remap_rst
   autocmd!
-  autocmd FileType rst nnoremap <buffer>          <leader>w <Cmd>HovercraftSlide<CR>
   autocmd FileType rst nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 <Cmd>call RstSetSection(1)<CR>
@@ -782,12 +773,11 @@ augroup custom_comment_config
 augroup end
 
 " }}}
-" General: colorColumn different widths for different filetypes {{{
+" General: colorColumn adjustments for certain filetypes {{{
 
 augroup custom_colorcolumn
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-  autocmd Filetype html,text,markdown,rst setlocal colorcolumn=0
 augroup end
 
 " }}}
@@ -811,16 +801,6 @@ endfunction
 " General: digraphs {{{
 
 digraph jj 699  " Hawaiian character ʻ
-
-" }}}
-" General: folding {{{
-
-augroup custom_fold_settings
-  autocmd!
-  autocmd FileType vim,tmux,bash,zsh,sh setlocal foldenable foldmethod=marker foldnestmax=1
-  autocmd FileType markdown,rst setlocal nofoldenable
-  autocmd FileType yaml setlocal nofoldenable foldmethod=indent foldnestmax=1
-augroup end
 
 " }}}
 " General: cursorline {{{
@@ -1097,97 +1077,6 @@ command! ToggleNumber call s:toggle_number()
 command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
-" Package: git plugins fugitive & git-messenger {{{
-
-let g:git_messenger_always_into_popup = v:false
-let g:git_messenger_no_default_mappings = v:true
-
-" }}}
-" Package: man pager {{{
-
-let g:man_hardwrap = v:true
-
-augroup custom_man_page
-  autocmd!
-  autocmd FileType man setlocal number
-augroup end
-
-" }}}
-" Package: restructured text {{{
-
-" Vim Rst Sections: documentation
-" -----------------------------------------------------------------------
-" Shortcuts:
-" press your *leader* key followed by *s* and then:
-"   * a number from 0 to 6 to set the section level (RstSetSection(level))
-"   * k or j to jump to the previuos or next section
-"   * a or x to increase or decrease the section level
-"   * l to labelize
-
-" Conventional Markup Hierarchy:
-"   1. # with overline, for parts
-"   2. * with overline, for chapters
-"   3. =, for sections
-"   4. -, for subsections
-"   5. ^, for subsubsections
-"   6. ", for paragraphs
-
-" Source: https://stackoverflow.com/a/30772902
-function! s:line_match_count(pat,...)
-  " searches for pattern matches in the active buffer, with optional start and
-  " end line number specifications
-
-  " useful command-line for testing against last-used pattern within last-used
-  " visual selection: echo s:line_match_count(@/,getpos("'<")[1],getpos("'>")[1])
-
-  if (a:0 > 2) | echoerr 'too many arguments for function: s:line_match_count()'
-        \ | return| endif
-  let start = a:0 >= 1 ? a:000[0] : 1
-  let end = a:0 >= 2 ? a:000[1] : line('$')
-  "" validate args
-  if (type(start) != type(0))
-        \ | echoerr 'invalid type of argument: start' | return | endif
-  if (type(end) != type(0))
-        \ | echoerr 'invalid type of argument: end' | return | endif
-  if (end < start)| echoerr 'invalid arguments: end < start'| return | endif
-  "" save current cursor position
-  let wsv = winsaveview()
-  "" set cursor position to start (defaults to start-of-buffer)
-  call setpos('.',[0,start,1,0])
-  "" accumulate line count in local var
-  let lineCount = 0
-  "" keep searching until we hit end-of-buffer
-  let ret = search(a:pat,'cW')
-  while (ret != 0)
-    " break if the latest match was past end; must do this prior to
-    " incrementing lineCount for it, because if the match start is past end,
-    " it's not a valid match for the caller
-    if (ret > end)
-      break
-    endif
-    let lineCount += 1
-    " always move the cursor to the start of the line following the latest
-    " match; also, break if we're already at end; otherwise next search would
-    " be unnecessary, and could get stuck in an infinite loop if end ==
-    " line('$')
-    if (ret == end)
-      break
-    endif
-    call setpos('.',[0,ret+1,1,0])
-    let ret = search(a:pat,'cW')
-  endwhile
-  "" restore original cursor position
-  call winrestview(wsv)
-  "" return result
-  return lineCount
-endfunction
-
-command! HovercraftSlide echo 'Slide '
-      \ . s:line_match_count('^----$', 1, line('.'))
-
-let g:no_rst_sections_maps = 0
-
-" }}}
 " Package: markdown-preview.vim {{{
 
 let g:mkdp_auto_start = v:false
@@ -1252,43 +1141,6 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Package: sandwich {{{
-
-" Keymappings set in keymappings section
-let g:textobj_sandwich_no_default_key_mappings = v:true
-
-" }}}
-" Package: nvim-repl {{{
-
-let g:repl_filetype_commands = {
-      \ 'bash': 'bash',
-      \ 'javascript': 'node',
-      \ 'python': 'bpython -q',
-      \ 'sh': 'sh',
-      \ 'vim': 'nvim --clean -ERZM',
-      \ 'zsh': 'zsh',
-      \ }
-
-let g:repl_default = &shell
-
-" }}}
-" Package: vim-filetype-formatter {{{
-
-let g:vim_filetype_formatter_verbose = v:false
-let g:vim_filetype_formatter_ft_no_defaults = []
-let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -q - | isort -q - | docformatter -',
-      \ }
-
-" }}}
-" Package: keywordprg helpers (vim-keywordprg-commands, etc) {{{
-
-augroup custom_keywordprg
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
-  autocmd FileType python setlocal keywordprg=:Pydoc
-augroup end
-
-" }}}
 " Package: misc global var config {{{
 
 " Languages: configure location of host
@@ -1313,6 +1165,9 @@ let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_nogx = 1
 
+" Man Pager
+let g:man_hardwrap = v:true
+
 " WinResize:
 let g:winresizer_start_key = '<C-\>'
 let g:winresizer_vert_resize = 1
@@ -1325,6 +1180,12 @@ let g:haskell_enable_arrowsyntax = v:true      " to highlight `proc`
 let g:haskell_enable_pattern_synonyms = v:true " to highlight `pattern`
 let g:haskell_enable_typeroles = v:true        " to highlight type roles
 let g:haskell_enable_static_pointers = v:true  " to highlight `static`
+
+" Restructured Text
+let g:no_rst_sections_maps = 0
+
+" Sandwich
+let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
@@ -1360,6 +1221,34 @@ let g:make_no_commands = 1
 let g:loclist_follow = 1
 let g:loclist_follow_modes = 'n'
 let g:loclist_follow_target = 'previous'
+
+" vim-filetype-formatter:
+let g:vim_filetype_formatter_verbose = v:false
+let g:vim_filetype_formatter_ft_no_defaults = []
+let g:vim_filetype_formatter_commands = {
+      \ 'python': 'black -q - | isort -q - | docformatter -',
+      \ }
+
+" git-messenger:
+let g:git_messenger_always_into_popup = v:false
+let g:git_messenger_no_default_mappings = v:true
+
+" nvim-repl:
+let g:repl_filetype_commands = {
+      \ 'bash': 'bash',
+      \ 'javascript': 'node',
+      \ 'python': 'bpython -q',
+      \ 'sh': 'sh',
+      \ 'vim': 'nvim --clean -ERZM',
+      \ 'zsh': 'zsh',
+      \ }
+let g:repl_default = &shell
+
+" vim-keywordprg-commands:
+augroup custom_keywordprg
+  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
+  autocmd FileType python setlocal keywordprg=:Pydoc
+augroup end
 
 augroup custom_loclistfollow
   autocmd!
