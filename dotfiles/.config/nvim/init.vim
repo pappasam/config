@@ -150,7 +150,9 @@ function! s:packager_init(packager) abort
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
   " Tree:
-  call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git')
+  call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git', {'requires': [
+      \ 'git@github.com:kyazdani42/nvim-web-devicons.git',
+      \ ]})
 
   " General:
   call a:packager.add('git@github.com:bronson/vim-visual-star-search')
@@ -175,7 +177,6 @@ function! s:packager_init(packager) abort
   " Git:
   call a:packager.add('git@github.com:tpope/vim-fugitive')
   call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
-  call a:packager.add('git@github.com:kyazdani42/nvim-web-devicons.git')
   call a:packager.add('git@github.com:lewis6991/gitsigns.nvim.git')
 
   " Text Objects:
