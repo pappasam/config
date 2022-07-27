@@ -585,14 +585,6 @@ augroup end
 command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
-" General: vim opened without arguments {{{
-
-augroup vim_no_arguments
-  autocmd!
-  autocmd VimEnter * if argc() is 0 | set filetype=markdown | endif
-augroup end
-
-" }}}
 " General: alacritty callback for dynamic terminal color change {{{
 
 function! s:alacritty_set_background()
