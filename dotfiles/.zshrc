@@ -1,5 +1,5 @@
 # shellcheck disable=SC2148,SC1090,SC1091
-# Samuel Roeca's zshell configuration file. Toggle folds with 'za'.
+# Samuel Roeca's .zshrc. Toggle folds with 'za'.
 # Environ: ls_colors {{{
 
 # Colors when using the LS command
@@ -72,7 +72,7 @@ export LS_COLORS
 # React
 export REACT_EDITOR='less'
 
-# colored GCC warnings and errors
+# Colored GCC warnings and errors
 GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01"
 GCC_COLORS="$GCC_COLORS;32:locus=01:quote=01"
 export GCC_COLORS
@@ -101,8 +101,8 @@ export GIT_PAGER=less
 # Set default text editor
 export EDITOR=nvim
 
-# environment variable controlling difference between HI-DPI / Non HI_DPI
-# turn off because it messes up my pdf tooling
+# Environment variable controlling difference between HI-DPI / Non HI_DPI
+# Turn off because it messes up my pdf tooling
 export GDK_SCALE=0
 
 # History: How many lines of history to keep in memory
@@ -127,24 +127,24 @@ export WINIT_HIDPI_FACTOR=1.0
 # Bat
 export BAT_PAGER=''
 
-# asdf: for to use install-poetry script
+# Asdf: to use install-poetry script
 export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 
-# commands to execute before a bash prompt. Kept here for bash compatibility
+# Commands to execute before a bash prompt. Kept here for bash compatibility
 export PROMPT_COMMAND='auto_venv_precmd'
 
 # }}}
 # Environ: path appends + misc env setup {{{
 
+# Takes 1 argument and adds it to the beginning of the PATH
 function path_ladd() {
-  # Takes 1 argument and adds it to the beginning of the PATH
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="$1${PATH:+":$PATH"}"
   fi
 }
 
+# Takes 1 argument and adds it to the end of the PATH
 function path_radd() {
-  # Takes 1 argument and adds it to the end of the PATH
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="${PATH:+"$PATH:"}$1"
   fi
@@ -194,9 +194,7 @@ if [ -f "$HOME/.zplug/init.zsh" ]; then
   source "$HOME/.zplug/init.zsh"
 
   # BEGIN: List plugins
-
-  # use double quotes: the plugin manager author says we must for some reason
-  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+  zplug "zplug/zplug", hook-build: "zplug --self-manage"
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
   zplug "zdharma-zmirror/fast-syntax-highlighting", as:plugin
@@ -204,8 +202,7 @@ if [ -f "$HOME/.zplug/init.zsh" ]; then
     use:spaceship.zsh, \
     from:github, \
     as:theme
-
-  #END: List plugins
+  # END: List plugins
 
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
@@ -432,7 +429,7 @@ alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "
 alias pip='noglob pip'
 
 # }}}
-# Functions: general {{{
+# Functns: general {{{
 
 # dictionary definition lookup
 function def() {  # arg1: word
@@ -533,7 +530,7 @@ function despace() {
 }
 
 # }}}
-# Functions: alacritty {{{
+# Functns: alacritty {{{
 
 function dark() {
   alacritty-colorscheme \
@@ -556,7 +553,7 @@ function light() {
 }
 
 # }}}
-# Functions: tmux {{{
+# Functns: tmux {{{
 
 # Tmux Launch
 # NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
@@ -598,7 +595,7 @@ function tmux-colors() {
 }
 
 # }}}
-# Functions: git {{{
+# Functns: git {{{
 
 # cd to the current git root
 function gr() {
@@ -689,7 +686,7 @@ function github-list {
 }
 
 # }}}
-# Functions: vim {{{
+# Functns: vim {{{
 
 # go to a Neovim plugin
 function vplug() {
@@ -720,7 +717,7 @@ function nvim-profiler() {
 }
 
 # }}}
-# Functions: python dev {{{
+# Functns: python dev {{{
 
 # activate virtual environment from any directory from current and up
 VIRTUAL_ENV_DEFAULT=.venv  # Name of virtualenv
@@ -887,7 +884,7 @@ EOL
 }
 
 # }}}
-# Functions: upgrade/install {{{
+# Functns: upgrade/install {{{
 
 # upgrade relevant local systems
 function upgrade() {
@@ -1049,32 +1046,32 @@ function asdfl() {  ## Install and set the latest version of asdf
 compdef _asdf_complete_plugins asdfl
 
 # }}}
-# Interactive: executed commands for interactive shell {{{
+# Runtime: executed commands for interactive shell {{{
 
-if [[ -o interactive ]]; then
-  if [[ "$TMUX_PANE" == "%0" ]]; then
-    # if you're in the first tmux pane within all of tmux
-    quote
-  elif [ -n "$TMUX" ]; then
-    :
-  elif tmux has-session -t Main 2>/dev/null; then
-    :
-  else
-    echo 'Command "t" to enter tmux'
-  fi
+# Note: .zshrc is only read by zsh when the shell is interactive
 
-  # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-  stty -ixon
-
-  # shellcheck disable=2202,2086,1087
-  if [ $commands[direnv] ]; then
-    eval "$(direnv hook zsh)"
-  fi
-
-  # Assigns permissions so that only I have read/write access for files, and
-  # read/write/search for directories I own. All others have read access only
-  # to my files, and read/search access to my directories.
-  umask 022
+if [[ "$TMUX_PANE" == "%0" ]]; then
+  # if you're in the first tmux pane within all of tmux
+  quote
+elif [ -n "$TMUX" ]; then
+  :
+elif tmux has-session -t Main 2>/dev/null; then
+  :
+else
+  echo 'Command "t" to enter tmux'
 fi
+
+# turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
+stty -ixon
+
+# shellcheck disable=2202,2086,1087
+if [ $commands[direnv] ]; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Assigns permissions so that only I have read/write access for files, and
+# read/write/search for directories I own. All others have read access only
+# to my files, and read/search access to my directories.
+umask 022
 
 # }}}
