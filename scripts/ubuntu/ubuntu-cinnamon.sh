@@ -3,10 +3,11 @@
 # System install steps for display manager in Ubuntu 18.04. May work for more
 # recent versions of Ubuntu, but I haven't tested on these versions.
 
-set -euxo pipefail
+set -euo pipefail
 
-# shellcheck disable=SC01091
-source "${BASH_SOURCE%/*}/helpers.sh"
+function echo_bold_italic_underline() {
+  echo -e "\e[3m\e[1m\e[4m$1\e[0m"
+}
 
 echo_bold_italic_underline 'When prompted, choose "lightdm" as display manager'
 

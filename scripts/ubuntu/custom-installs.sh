@@ -1,11 +1,12 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
-# shellcheck disable=SC01091
-source "${BASH_SOURCE%/*}/helpers.sh"
+function echo_bold_italic_underline() {
+  echo -e "\e[3m\e[1m\e[4m$1\e[0m"
+}
 
-github_install() {
+function github_install() {
   local git_remote_url="$1"
   local local_path="$2"
   if [ ! -d "$local_path" ]; then
