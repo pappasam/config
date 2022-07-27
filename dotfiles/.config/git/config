@@ -10,14 +10,8 @@
 [alias]
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   root = rev-parse --show-toplevel
-[merge]
-  tool = diffconflicts
-  keepBackup = false
 [merge "ours"]
   driver = true
-[mergetool "diffconflicts"]
-  cmd = nvim -c DiffConflicts "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-  trustExitCode = true
 [pull]
   rebase = false
 [push]
