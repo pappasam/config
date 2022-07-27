@@ -390,9 +390,6 @@ alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
 
-# Restart Xserver (go to a tty to run, if necessary)
-alias restart-xserver='sudo systemctl restart display-manager'
-
 # Neovim
 alias f='nvim'
 compdef _vim f
@@ -450,9 +447,9 @@ function syn() {  # arg1: word
 compdef _dict_words syn
 
 # I type cd so much, I'll just type d instead
-function d() {  # arg1: directory
+function d() {
   # shellcheck disable=SC2164,SC2086
-  cd $1
+  cd "$@"
 }
 compdef _directories d
 
@@ -1052,7 +1049,7 @@ function asdfl() {  ## Install and set the latest version of asdf
 compdef _asdf_complete_plugins asdfl
 
 # }}}
-# General: executed commands for interactive shell {{{
+# Interactive: executed commands for interactive shell {{{
 
 if [[ -o interactive ]]; then
   if [[ "$TMUX_PANE" == "%0" ]]; then
