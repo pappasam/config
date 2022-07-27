@@ -374,7 +374,7 @@ SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
 
 # }}}
-# General: aliases {{{
+# Aliases: general {{{
 
 # Easier directory navigation for going up a directory tree
 alias 'a'='cd - &> /dev/null'
@@ -410,8 +410,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Set copy/paste helper functions
-# the perl step removes the final newline from the output
+# Copy/paste helpers: perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
 alias pbpaste='xsel --clipboard --output'
 
@@ -429,183 +428,29 @@ alias gp='git remote prune origin && git remote set-head origin -a'
 alias gdw='git diff --word-diff'
 alias gop='gh browse'
 
-# battery
+# Battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
 # Python: enable things like "pip install 'requests[security]'"
 alias pip='noglob pip'
 
 # }}}
-# General: functions {{{
+# Functions: general {{{
 
-# Tmux Launch
-# NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
-# necessary for proper Vim support in the Linux Console. My Vim colorscheme,
-# PaperColor, does a lot of smart translation for Color values between 256 and
-# terminal 16 color support, and this translation is lost otherwise.
-# Steps (assuming index of 1, which requires tmux config):
-# 1. Create session in detached mode
-# 2. Select first window
-# 3. Rename first window to 'edit'
-# 4. Attach to session newly-created session
-function t() {
-  if [ -n "$TMUX" ]; then
-    echo 'Cannot run t() in tmux session'
-    return 1
-  elif [[ $# -gt 0 ]]; then
-    SESSION=$1
-  else
-    SESSION=Main
-  fi
-  if tmux has-session -t $SESSION 2>/dev/null; then
-    echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
-  else
-    tmux -2 new-session -d -s $SESSION
-    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-      tmux -2 select-window -t $SESSION:1
-      tmux source-file ~/.config/tmux/tmux-light.conf
-    fi
-    tmux -2 attach -t $SESSION
-  fi
-}
-
-function tmux-colors() {
-  # output colors for tmux
-  for i in {0..255}; do
-    # shellcheck disable=2059
-    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
-  done
-}
-
-# Go to a Neovim plugin
-function vplug() {
-  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
-}
-_vplug_completion() {
-  _directories -W "$HOME/.config/nvim/pack/packager/start"
-}
-compdef _vplug_completion vplug
-
-# cd to the current git root
-function gr() {
-  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
-    cd "$(git rev-parse --show-toplevel)" || return
-  else
-    echo "'$PWD' is not inside a git repository"
-    return 1
-  fi
-}
-
-# git diff
-function gd() {
-  if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-    git diff "$@" | delta --light --line-numbers
-  else
-    git diff "$@" | delta --dark  --line-numbers
-  fi
-}
-
-function gdl() {  # checkout origin default, pull, delete old branch, and prune
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
-    echo "'$PWD' is not inside a git repository"
-    return 1
-  fi
-  local branch_default
-  branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
-  if [ -z "$branch_default" ]; then
-    echo "Cannot connect to remote repo. Check internet connection..."
-    return 2
-  fi
-  branch_current=$(git branch --show-current)
-  git checkout "$branch_default" && \
-    git pull && \
-    git branch -d "$branch_current" && \
-    git remote prune origin && \
-    git remote set-head origin -a
-}
-
-# upgrade relevant local systems
-function upgrade() {
-  sudo apt update
-  sudo apt upgrade -y
-  sudo apt autoremove -y
-  asdf update
-  asdf plugin-update --all
-  pushd .
-  cd ~/src/lib/alacritty || return
-  git pull
-  alacritty-install
-  popd || return
-  asdf uninstall neovim nightly && \
-    asdf install neovim nightly && \
-    asdf global neovim nightly
-  zplug update
-  nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'
-}
-
-# Alacritty Helpers
-function dark() {
-  alacritty-colorscheme \
-    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
-    -C "$HOME/src/lib/alacritty-theme/themes/" \
-    apply 'ayu_dark.yaml'
-  if [ -n "$TMUX" ]; then
-    tmux source-file ~/.config/tmux/tmux.conf
-  fi
-}
-
-function light() {
-  alacritty-colorscheme \
-    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
-    -C "$HOME/src/lib/alacritty-theme/themes/" \
-    apply 'papercolor_light.yaml'
-  if [ -n "$TMUX" ]; then
-    tmux source-file ~/.config/tmux/tmux-light.conf
-  fi
-}
-
-function alacritty-install() {
-  cargo build --release
-
-  # Install
-  sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
-  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-  sudo desktop-file-install extra/linux/Alacritty.desktop
-  sudo update-desktop-database
-
-  # terminfo
-  tic -xe alacritty,alacritty-direct extra/alacritty.info
-
-  # man page
-  sudo mkdir -p /usr/local/share/man/man1
-  gzip -c extra/alacritty.man | \
-    sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
-}
-
-# Pipe man stuff to neovim
-function m() {
-  if man --location "$@" &> /dev/null; then
-    # shellcheck disable=SC2145
-    nvim -c "Man $@" -c "only"
-  else
-    man "$@"
-  fi
-}
-compdef _man m
-
-# dictionary lookups
+# dictionary definition lookup
 function def() {  # arg1: word
   dict -d gcide "$1"
 }
 compdef _dict_words def
 
+# dictionary synonym lookup
 function syn() {  # arg1: word
   dict -d moby-thesaurus "$1"
 }
 compdef _dict_words syn
 
 # I type cd so much, I'll just type d instead
-function d() { #arg1: directory
+function d() {  # arg1: directory
   # shellcheck disable=SC2164,SC2086
   cd $1
 }
@@ -639,6 +484,431 @@ function cargodoc() {  # arg1: packagename
     echo 'usage: cargodoc [<package name>]'
     return 1
   fi
+}
+
+function quote() {
+  local cowsay_word_message cowsay_quote
+  cowsay_word_message="$(shuf -n 1 ~/config/docs/dict/gre_words.txt)"
+  cowsay_quote="$(fortune -s ~/config/docs/fortunes/ | grep -v '\-\-' | grep .)"
+  echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
+}
+
+function deshake-video() {
+  # see below link for documentation
+  # https://github.com/georgmartius/vid.stab
+  if [ $# -ne 2 ]; then
+    echo "deshake-video <infile> <outfile>"
+    exit 1
+  fi
+  local infile="$1"
+  local outfile="$2"
+  local transfile="$infile.trf"
+  if [ ! -f "$transfile" ]; then
+    echo "Generating $transfile ..."
+    ffmpeg2 -i "$infile" -vf vidstabdetect=result="$transfile" -f null -
+  fi
+  ffmpeg2 -i "$infile" -vf \
+    vidstabtransform=smoothing=10:input="$transfile" \
+    "$outfile"
+}
+
+function dat() {
+  if [ $# -ne 1 ]; then
+    echo "dat <file_name>"
+    return 1
+  fi
+  local file_name="$1"
+  strfile -c % "$file_name" "$file_name.dat"
+}
+
+# Remove spaces from a filename.
+# Accepts stdin and arguments, preferring arguments if they are given.
+function despace() {
+  if [ $# -eq 0 ]; then
+    while read -r filename; do
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
+    done
+  else
+    for filename in "$@"; do
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
+    done
+  fi
+}
+
+# }}}
+# Functions: alacritty {{{
+
+function dark() {
+  alacritty-colorscheme \
+    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
+    -C "$HOME/src/lib/alacritty-theme/themes/" \
+    apply 'ayu_dark.yaml'
+  if [ -n "$TMUX" ]; then
+    tmux source-file ~/.config/tmux/tmux.conf
+  fi
+}
+
+function light() {
+  alacritty-colorscheme \
+    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
+    -C "$HOME/src/lib/alacritty-theme/themes/" \
+    apply 'papercolor_light.yaml'
+  if [ -n "$TMUX" ]; then
+    tmux source-file ~/.config/tmux/tmux-light.conf
+  fi
+}
+
+# }}}
+# Functions: tmux {{{
+
+# Tmux Launch
+# NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
+# necessary for proper Vim support in the Linux Console. My Vim colorscheme,
+# PaperColor, does a lot of smart translation for Color values between 256 and
+# terminal 16 color support, and this translation is lost otherwise.
+# Steps (assuming index of 1, which requires tmux config):
+# 1. Create session in detached mode
+# 2. Select first window
+# 3. Rename first window to 'edit'
+# 4. Attach to session newly-created session
+function t() {
+  if [ -n "$TMUX" ]; then
+    echo 'Cannot run t() in tmux session'
+    return 1
+  elif [[ $# -gt 0 ]]; then
+    SESSION=$1
+  else
+    SESSION=Main
+  fi
+  if tmux has-session -t $SESSION 2>/dev/null; then
+    echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
+  else
+    tmux -2 new-session -d -s $SESSION
+    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+      tmux -2 select-window -t $SESSION:1
+      tmux source-file ~/.config/tmux/tmux-light.conf
+    fi
+    tmux -2 attach -t $SESSION
+  fi
+}
+
+# output colors for tmux
+function tmux-colors() {
+  for i in {0..255}; do
+    # shellcheck disable=2059
+    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+  done
+}
+
+# }}}
+# Functions: git {{{
+
+# cd to the current git root
+function gr() {
+  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    cd "$(git rev-parse --show-toplevel)" || return
+  else
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  fi
+}
+
+# git diff
+function gd() {
+  if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+    git diff "$@" | delta --light --line-numbers
+  else
+    git diff "$@" | delta --dark  --line-numbers
+  fi
+}
+
+# checkout origin default, pull, delete old branch, and prune
+function gdl() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  fi
+  local branch_default
+  branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+  if [ -z "$branch_default" ]; then
+    echo "Cannot connect to remote repo. Check internet connection..."
+    return 2
+  fi
+  branch_current=$(git branch --show-current)
+  git checkout "$branch_default" && \
+    git pull && \
+    git branch -d "$branch_current" && \
+    git remote prune origin && \
+    git remote set-head origin -a
+}
+
+# Print out the Github-recommended gitignore
+export GITIGNORE_DIR="$HOME/src/lib/gitignore"
+function gitignore() {
+  if [ ! -d "$GITIGNORE_DIR" ]; then
+    mkdir -p "$HOME/src/lib"
+    git clone https://github.com/github/gitignore "$GITIGNORE_DIR"
+    return 1
+  elif [ $# -eq 0 ]; then
+    echo "Usage: gitignore <file1> <file2> <file3> <file...n>"
+    return 1
+  else
+    # print all the files
+    local count=0
+    for filevalue in "$@"; do
+      echo "#################################################################"
+      echo "# $filevalue"
+      echo "#################################################################"
+      cat "$GITIGNORE_DIR/$filevalue"
+      if [ $count -ne $# ]; then
+        echo
+      fi
+      (( count++ ))
+    done
+  fi
+}
+compdef "_files -W $GITIGNORE_DIR/" gitignore
+
+# push current branch from origin to current branch
+function push() {
+  local current_branch
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git push -u origin "$current_branch"
+}
+
+# pull current branch from origin to current branch
+function pull() {
+  local current_branch
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git pull origin "$current_branch"
+}
+
+# list all of an organization's repositories
+function github-list {
+  local username=$1
+  local organization=$2
+  local page=$3
+  curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
+}
+
+# }}}
+# Functions: vim {{{
+
+# go to a Neovim plugin
+function vplug() {
+  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
+}
+_vplug_completion() {
+  _directories -W "$HOME/.config/nvim/pack/packager/start"
+}
+compdef _vplug_completion vplug
+
+# pipe man stuff to neovim
+function m() {
+  if man --location "$@" &> /dev/null; then
+    # shellcheck disable=SC2145
+    nvim -c "Man $@" -c "only"
+  else
+    man "$@"
+  fi
+}
+compdef _man m
+
+# get profiling information about neovim
+function nvim-profiler() {
+  nvim --startuptime nvim_startup.txt \
+    --cmd 'profile start nvim_init_profile.txt' \
+    --cmd 'profile! file ~/.config/nvim/init.vim' \
+    "$@"
+}
+
+# }}}
+# Functions: python dev {{{
+
+# activate virtual environment from any directory from current and up
+VIRTUAL_ENV_DEFAULT=.venv  # Name of virtualenv
+function va() {
+  local venv_name="$VIRTUAL_ENV_DEFAULT"
+  local old_venv=$VIRTUAL_ENV
+  local slashes=${PWD//[^\/]/}
+  local current_directory="$PWD"
+  for (( n=${#slashes}; n>0; --n ))
+  do
+    if [ -d "$current_directory/$venv_name" ]; then
+      source "$current_directory/$venv_name/bin/activate"
+      if [[ "$old_venv" != "$VIRTUAL_ENV" ]]; then
+        :
+      fi
+      return
+    fi
+    local current_directory="$current_directory/.."
+  done
+  # If reached this step, no virtual environment found from here to root
+  if [[ -z $VIRTUAL_ENV ]]; then
+    :
+  else
+    deactivate
+  fi
+}
+
+# Toggles whether the virtualenv is automatically set
+export AUTO_VIRTUALENV=1  # if not 1, then auto activation of venv disabled
+function toggle_auto_virtualenv() {
+  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
+    export AUTO_VIRTUALENV=1
+  else
+    export AUTO_VIRTUALENV=0
+  fi
+}
+function auto_venv_precmd() {
+  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
+    va
+  fi
+}
+
+# Create and activate a virtual environment with all Python dependencies
+# installed. Optionally change Python interpreter.
+# shellcheck disable=SC2120
+function ve() {  # arg1?: python interpreter name
+  local venv_name="$VIRTUAL_ENV_DEFAULT"
+  if [ -z "$1" ]; then
+    local python_name='python'
+  else
+    local python_name="$1"
+  fi
+  if [ ! -d "$venv_name" ]; then
+    if ! $python_name -m venv "$venv_name"; then
+      local error_code=$?
+      echo "Virtualenv creation failed, aborting"
+      return $error_code
+    fi
+    source "$venv_name/bin/activate"
+    pip install -U pip
+    pydev-install  # install dependencies for editing
+    deactivate
+  else
+    echo "$venv_name already exists, activating"
+  fi
+  source $venv_name/bin/activate
+}
+compdef _command ve
+
+# Choose a virtualenv from backed up virtualenvs
+# Assumes in current directory, set up with zsh auto completion based on
+# current directory.
+function vc() {  # arg1?: python venv version
+  if [ -z "$VIRTUAL_ENV" ]; then
+    echo "No virtualenv active, skipping backup"
+  else
+    mkdir -p venv.bak
+    local python_version
+    python_version=$(python --version | cut -d ' ' -f 2)
+    local bak_dir="venv.bak/$python_version"
+    if [ ! -d "$bak_dir" ]; then
+      mv "$VIRTUAL_ENV" "$bak_dir"
+    else
+      echo "ERROR: $bak_dir already exists"
+      return 1
+    fi
+  fi
+  if [ -z "$1" ]; then
+    return 0
+  fi
+  local choose_dir="venv.bak/$1"
+  if [ ! -d "$choose_dir" ]; then
+    echo "ERROR: no such virtualenv $1 backed up"
+    return 1
+  fi
+  mv "$choose_dir" .venv
+}
+_vc_completion() {
+  _directories -W "$PWD/venv.bak"
+}
+compdef _vc_completion vc
+
+function cat-pyproject() {
+  echo '[tool.black]'
+  echo 'line-length = 79'
+  echo ''
+  echo '[tool.isort]'
+  echo 'profile = "black"'
+  echo 'line_length = 79'
+}
+
+# initialize python repo
+function poetry-init() {
+  if [ -f pyproject.toml ]; then
+    echo "pyproject.toml exists, aborting"
+    return 1
+  fi
+  poetry init --no-interaction &> /dev/null
+  cat-pyproject >> pyproject.toml
+  toml-sort --in-place pyproject.toml
+  touch README.md
+}
+
+# create new python repo
+function pynew() {
+  if [ $# -ne 1 ]; then
+    echo "pynew <directory>"
+    return 1
+  fi
+  local dir_name="$1"
+  if [ -d "$dir_name" ]; then
+    echo "$dir_name already exists"
+    return 1
+  fi
+  mkdir "$dir_name"
+  cd "$dir_name" || return
+  poetry-init
+  gitignore Python.gitignore | grep -v instance/ > .gitignore
+  mkinstance
+  ve
+  poetry add \
+    -D mypy \
+    -D pylint \
+    -D black \
+    -D docformatter \
+    -D isort \
+    -D toml-sort
+  cat > main.py <<EOL
+"""The main module"""
+
+EOL
+  git init
+  git add .
+  git commit -m "Initial commit"
+}
+
+# create instance folder with only .gitignore ignored
+function mkinstance() {
+  mkdir instance
+  cat > instance/.gitignore <<EOL
+*
+!.gitignore
+EOL
+}
+
+# }}}
+# Functions: upgrade/install {{{
+
+# upgrade relevant local systems
+function upgrade() {
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt autoremove -y
+  asdf update
+  asdf plugin-update --all
+  pushd .
+  cd ~/src/lib/alacritty || return
+  git pull
+  alacritty-install
+  popd || return
+  asdf uninstall neovim nightly && \
+    asdf install neovim nightly && \
+    asdf global neovim nightly
+  zplug update
+  nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'
 }
 
 function global-install() {
@@ -699,7 +969,8 @@ function nodeglobal-install() {
   asdf reshim nodejs
 }
 
-function pydev-install() {  ## Install default python dependencies
+# install default python dependencies
+function pydev-install() {
   local for_pip=(
     bpython
     mypy
@@ -712,7 +983,8 @@ function pydev-install() {  ## Install default python dependencies
   asdf reshim python
 }
 
-function pyglobal-install() {  ## Install global Python applications
+# install global Python applications
+function pyglobal-install() {
   pip install -U pipx pynvim neovim-remote
   pydev-install
   asdf reshim python
@@ -744,9 +1016,27 @@ function pyglobal-install() {  ## Install global Python applications
   fi
 }
 
-function goglobal-install() {  ## Install default golang dependencies
+function goglobal-install() {
   go install github.com/mattn/efm-langserver@latest
   asdf reshim golang
+}
+
+function alacritty-install() {
+  cargo build --release
+
+  # Install
+  sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
+  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+  sudo desktop-file-install extra/linux/Alacritty.desktop
+  sudo update-desktop-database
+
+  # terminfo
+  tic -xe alacritty,alacritty-direct extra/alacritty.info
+
+  # man page
+  sudo mkdir -p /usr/local/share/man/man1
+  gzip -c extra/alacritty.man | \
+    sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 }
 
 function _asdf_complete_plugins() {  ## zsh completion function for plugin-list
@@ -760,277 +1050,6 @@ function asdfl() {  ## Install and set the latest version of asdf
   asdf install "$1" latest && asdf global "$1" latest
 }
 compdef _asdf_complete_plugins asdfl
-
-# activate virtual environment from any directory from current and up
-# Name of virtualenv
-VIRTUAL_ENV_DEFAULT=.venv
-function va() {  # No arguments
-  local venv_name="$VIRTUAL_ENV_DEFAULT"
-  local old_venv=$VIRTUAL_ENV
-  local slashes=${PWD//[^\/]/}
-  local current_directory="$PWD"
-  for (( n=${#slashes}; n>0; --n ))
-  do
-    if [ -d "$current_directory/$venv_name" ]; then
-      source "$current_directory/$venv_name/bin/activate"
-      if [[ "$old_venv" != "$VIRTUAL_ENV" ]]; then
-        :
-      fi
-      return
-    fi
-    local current_directory="$current_directory/.."
-  done
-  # If reached this step, no virtual environment found from here to root
-  if [[ -z $VIRTUAL_ENV ]]; then
-    :
-  else
-    deactivate
-  fi
-}
-
-# Toggles whether the virtualenv is automatically set
-export AUTO_VIRTUALENV=1
-function toggle_auto_virtualenv() {
-  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
-    export AUTO_VIRTUALENV=1
-  else
-    export AUTO_VIRTUALENV=0
-  fi
-}
-function auto_venv_precmd() {
-  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
-    va
-  fi
-}
-
-# Create and activate a virtual environment with all Python dependencies
-# installed. Optionally change Python interpreter.
-# shellcheck disable=SC2120
-function ve() {  # Optional arg: python interpreter name
-  local venv_name="$VIRTUAL_ENV_DEFAULT"
-  if [ -z "$1" ]; then
-    local python_name='python'
-  else
-    local python_name="$1"
-  fi
-  if [ ! -d "$venv_name" ]; then
-    if ! $python_name -m venv "$venv_name"; then
-      local error_code=$?
-      echo "Virtualenv creation failed, aborting"
-      return $error_code
-    fi
-    source "$venv_name/bin/activate"
-    pip install -U pip
-    pydev-install  # install dependencies for editing
-    deactivate
-  else
-    echo "$venv_name already exists, activating"
-  fi
-  source $venv_name/bin/activate
-}
-compdef _command ve
-
-# Choose a virtualenv from backed up virtualenvs
-# Assumes in current directory, set up with zsh auto completion based on
-# current directory.
-function vc() {  # Optional arg: python venv version
-  if [ -z "$VIRTUAL_ENV" ]; then
-    echo "No virtualenv active, skipping backup"
-  else
-    mkdir -p venv.bak
-    local python_version
-    python_version=$(python --version | cut -d ' ' -f 2)
-    local bak_dir="venv.bak/$python_version"
-    if [ ! -d "$bak_dir" ]; then
-      mv "$VIRTUAL_ENV" "$bak_dir"
-    else
-      echo "ERROR: $bak_dir already exists"
-      return 1
-    fi
-  fi
-  if [ -z "$1" ]; then
-    return 0
-  fi
-  local choose_dir="venv.bak/$1"
-  if [ ! -d "$choose_dir" ]; then
-    echo "ERROR: no such virtualenv $1 backed up"
-    return 1
-  fi
-  mv "$choose_dir" .venv
-}
-_vc_completion() {
-  _directories -W "$PWD/venv.bak"
-}
-compdef _vc_completion vc
-
-# Print out the Github-recommended gitignore
-export GITIGNORE_DIR=$HOME/src/lib/gitignore
-function gitignore() {
-  if [ ! -d "$GITIGNORE_DIR" ]; then
-    mkdir -p "$HOME/src/lib"
-    git clone https://github.com/github/gitignore "$GITIGNORE_DIR"
-    return 1
-  elif [ $# -eq 0 ]; then
-    echo "Usage: gitignore <file1> <file2> <file3> <file...n>"
-    return 1
-  else
-    # print all the files
-    local count=0
-    for filevalue in "$@"; do
-      echo "#################################################################"
-      echo "# $filevalue"
-      echo "#################################################################"
-      cat "$GITIGNORE_DIR/$filevalue"
-      if [ $count -ne $# ]; then
-        echo
-      fi
-      (( count++ ))
-    done
-  fi
-}
-compdef "_files -W $GITIGNORE_DIR/" gitignore
-
-# Create instance folder with only .gitignore ignored
-function mkinstance() {
-  mkdir instance
-  cat > instance/.gitignore <<EOL
-*
-!.gitignore
-EOL
-}
-
-function cat-pyproject() {
-  echo '[tool.black]'
-  echo 'line-length = 79'
-  echo ''
-  echo '[tool.isort]'
-  echo 'profile = "black"'
-  echo 'line_length = 79'
-}
-
-# Initialize Python Repo
-function poetry-init() {
-  if [ -f pyproject.toml ]; then
-    echo "pyproject.toml exists, aborting"
-    return 1
-  fi
-  poetry init --no-interaction &> /dev/null
-  cat-pyproject >> pyproject.toml
-  toml-sort --in-place pyproject.toml
-  touch README.md
-}
-
-# Create New Python Repo
-function pynew() {
-  if [ $# -ne 1 ]; then
-    echo "pynew <directory>"
-    return 1
-  fi
-  local dir_name="$1"
-  if [ -d "$dir_name" ]; then
-    echo "$dir_name already exists"
-    return 1
-  fi
-  mkdir "$dir_name"
-  cd "$dir_name" || return
-  poetry-init
-  gitignore Python.gitignore | grep -v instance/ > .gitignore
-  mkinstance
-  ve
-  poetry add \
-    -D mypy \
-    -D pylint \
-    -D black \
-    -D docformatter \
-    -D isort \
-    -D toml-sort
-  cat > main.py <<EOL
-"""The main module"""
-
-EOL
-  git init
-  git add .
-  git commit -m "Initial commit"
-}
-
-# Profiling neovim
-function nvim-profiler() {
-  nvim --startuptime nvim_startup.txt \
-    --cmd 'profile start nvim_init_profile.txt' \
-    --cmd 'profile! file ~/.config/nvim/init.vim' \
-    "$@"
-}
-
-# GIT: push current branch from origin to current branch
-function push() {
-  local current_branch
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  git push -u origin "$current_branch"
-}
-
-# GIT: pull current branch from origin to current branch
-function pull() {
-  local current_branch
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  git pull origin "$current_branch"
-}
-
-# GITHUB: list all of an organization's Repositories
-function github-list {
-  local username=$1
-  local organization=$2
-  local page=$3
-  curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
-}
-
-function quote() {
-  local cowsay_word_message cowsay_quote
-  cowsay_word_message="$(shuf -n 1 ~/config/docs/dict/gre_words.txt)"
-  cowsay_quote="$(fortune -s ~/config/docs/fortunes/ | grep -v '\-\-' | grep .)"
-  echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
-}
-
-function deshake-video() {
-  # see below link for documentation
-  # https://github.com/georgmartius/vid.stab
-  if [ $# -ne 2 ]; then
-    echo "deshake-video <infile> <outfile>"
-    exit 1
-  fi
-  local infile="$1"
-  local outfile="$2"
-  local transfile="$infile.trf"
-  if [ ! -f "$transfile" ]; then
-    echo "Generating $transfile ..."
-    ffmpeg2 -i "$infile" -vf vidstabdetect=result="$transfile" -f null -
-  fi
-  ffmpeg2 -i "$infile" -vf \
-    vidstabtransform=smoothing=10:input="$transfile" \
-    "$outfile"
-}
-
-function dat(){
-  if [ $# -ne 1 ]; then
-    echo "dat <file_name>"
-    return 1
-  fi
-  local file_name="$1"
-  strfile -c % "$file_name" "$file_name.dat"
-}
-
-# Remove spaces from a filename. Accepts stdin and arguments, preferring
-# arguments if they are given.
-function despace() {
-  if [ $# -eq 0 ]; then
-    while read -r filename; do
-      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
-    done
-  else
-    for filename in "$@"; do
-      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
-    done
-  fi
-}
 
 # }}}
 # General: executed commands for interactive shell {{{
