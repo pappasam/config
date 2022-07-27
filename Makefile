@@ -25,3 +25,9 @@ setup-ubuntu:  ## Setup ubuntu for the first time
 .PHONY: setup-asdf
 setup-asdf:  ## After asdf is installed, run this to install useful software
 	bash ./scripts/ubuntu/asdf-installs.sh
+
+.PHONY: setup-cinnamon-on-ubuntu
+setup-cinnamon-on-ubuntu:  ## Run commands to get cinnamon working, if relevant
+	bash ./scripts/ubuntu/ubuntu-cinnamon.sh
+
+

@@ -9,6 +9,11 @@ function echo_bold_italic_underline() {
   echo -e "\e[3m\e[1m\e[4m$1\e[0m"
 }
 
+if echo "$XDG_CURRENT_DESKTOP" | grep -q "Cinnamon"; then
+  echo_bold_italic_underline 'Already running cinnamon, aborting'
+  exit 1
+fi
+
 echo_bold_italic_underline 'When prompted, choose "lightdm" as display manager'
 
 apt install \

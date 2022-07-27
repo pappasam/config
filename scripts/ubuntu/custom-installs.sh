@@ -31,3 +31,8 @@ if [ ! -d "$HOME/.zplug" ]; then
     https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | \
     zsh
 fi
+
+echo_bold_italic_underline 'Done setting up custom software! Now:'
+echo_bold_italic_underline '  1. Close your shell (<C-d>)'
+echo_bold_italic_underline '  2. Re-open your shell'
+echo_bold_italic_underline '  3. run "make setup-asdf"'

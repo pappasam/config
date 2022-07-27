@@ -53,3 +53,5 @@ asdf_setup yarn latest
 # kubernetes
 asdf_setup kubectl latest
 asdf_setup minikube latest
+
+echo_bold_italic_underline 'Done installing asdf tools!'

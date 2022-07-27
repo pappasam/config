@@ -126,3 +126,5 @@ sudo apt install -y \
 
 sudo apt autoclean
 sudo apt autoremove
+
+echo_bold_italic_underline 'Done installing system tools!'
