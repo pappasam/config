@@ -415,20 +415,10 @@ endfunction
 
 call s:default_key_mappings()
 
-" helper to remap d, u, and q for readonly buffers
-function! s:key_mappings_readonly()
-  nnoremap <silent> <buffer> d <C-d>
-  nnoremap <silent> <buffer> u <C-u>
-  nnoremap <silent> <buffer> q <Cmd>q<CR>
-endfunction
-
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
   autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
-  autocmd FileType man,help nnoremap <buffer> <expr>   d &modifiable == 0 ? '<C-d>' : 'd'
-  autocmd FileType man,help nnoremap <buffer> <expr>   u &modifiable == 0 ? '<C-u>' : 'u'
-  autocmd FileType man,help nnoremap <buffer> <expr>   q &modifiable == 0 ? ':q<cr>' : 'q'
 augroup end
 
 augroup custom_remap_rst
@@ -1032,7 +1022,6 @@ function! s:vim_colors()
   %s/^\s*\(\d\+\)\s\+\(\d\+\)\s\+\(\d\+\)\s\+/\=printf(" %3d %3d %3d   #%02x%02x%02x   ", submatch(1), submatch(2), submatch(3), submatch(1), submatch(2), submatch(3))/
   1
   nohlsearch
-  call s:key_mappings_readonly()
   file VimColors
   set nomodifiable
 endfunction
