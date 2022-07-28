@@ -191,43 +191,48 @@ include "$HOME/.asdf/asdf.sh"
 # }}}
 # Bash: prompt {{{
 
-COLOR_BRIGHT_GREEN="\033[38;5;10m"
+# COLOR_BRIGHT_GREEN="\033[38;5;10m"
 COLOR_BRIGHT_BLUE="\033[38;5;115m"
 COLOR_RED="\033[0;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
-COLOR_PURPLE="\033[1;35m"
+# COLOR_PURPLE="\033[1;35m"
 COLOR_ORANGE="\033[38;5;202m"
-COLOR_BLUE="\033[34;5;115m"
-COLOR_WHITE="\033[0;37m"
+# COLOR_BLUE="\033[34;5;115m"
+# COLOR_WHITE="\033[0;37m"
 COLOR_GOLD="\033[38;5;142m"
 COLOR_SILVER="\033[38;5;248m"
 COLOR_RESET="\033[0m"
 BOLD="$(tput bold)"
 
-function git_color {
-  local git_status="$(git status 2> /dev/null)"
-  local branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-  local git_commit="$(git --no-pager diff --stat origin/${branch} 2>/dev/null)"
+function git_color() {
+  local git_status
+  local branch
+  local git_commit
+  git_status="$(git status 2> /dev/null)"
+  branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  git_commit="$(git --no-pager diff --stat "origin/${branch}" 2>/dev/null)"
   if [[ $git_status == "" ]]; then
-    echo -e $COLOR_SILVER
-  elif [[ ! $git_status =~ "working directory clean" ]]; then
-    echo -e $COLOR_RED
+    echo -e "$COLOR_SILVER"
+  elif [[ $git_status =~ "not staged for commit" ]]; then
+    echo -e "$COLOR_RED"
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo -e $COLOR_YELLOW
+    echo -e "$COLOR_YELLOW"
   elif [[ $git_status =~ "nothing to commit" ]] && \
-      [[ ! -n $git_commit ]]; then
-    echo -e $COLOR_GREEN
+      [[ -z $git_commit ]]; then
+    echo -e "$COLOR_GREEN"
   else
-    echo -e $COLOR_ORANGE
+    echo -e "$COLOR_ORANGE"
   fi
 }
 
-function git_branch {
-  local git_status="$(git status 2> /dev/null)"
-  local on_branch="On branch ([^${IFS}]*)"
-  local on_commit="HEAD detached at ([^${IFS}]*)"
-
+function git_branch() {
+  local git_status
+  local on_branch
+  local on_commit
+  git_status="$(git status 2> /dev/null)"
+  on_branch="On branch ([^${IFS}]*)"
+  on_commit="HEAD detached at ([^${IFS}]*)"
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
     echo "($branch)"
@@ -235,7 +240,7 @@ function git_branch {
     local commit=${BASH_REMATCH[1]}
     echo "($commit)"
   else
-    echo "(no git)"
+    echo ""
   fi
 }
 
