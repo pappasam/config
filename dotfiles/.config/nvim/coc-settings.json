@@ -55,8 +55,7 @@
   },
   "diagnostic-languageserver.filetypes": {
     "python": "pylint",
-    "nginx": "nginx-linter",
-    "terraform": "tflint"
+    "nginx": "nginx-linter"
   },
   "diagnostic-languageserver.linters": {
     "nginx-linter": {
@@ -114,47 +113,18 @@
       "offsetColumn": 1,
       "offsetColumnEnd": 1,
       "formatLines": 1
-    },
-    "write-good": {
-      "sourceName": "write-good",
-      "command": "write-good",
-      "debounce": 100,
-      "args": ["--text=%text"],
-      "offsetLine": 0,
-      "offsetColumn": 1,
-      "formatLines": 1,
-      "formatPattern": [
-        "(.*)\\s+on\\s+line\\s+(\\d+)\\s+at\\s+column\\s+(\\d+)\\s*$",
-        {
-          "line": 2,
-          "column": 3,
-          "message": 1
-        }
-      ]
-    },
-    "tflint": {
-      "sourceName": "tflint",
-      "command": "tflint-for-coc",
-      "debounce": 100,
-      "args": ["%file"],
-      "offsetLine": 0,
-      "offsetColumn": 0,
-      "formatLines": 1,
-      "formatPattern": [
-        "^[^:]*?:(\\d+?),(\\d+?)-(\\d+?):\\s+?(.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "endColumn": 3,
-          "message": 4
-        }
-      ]
     }
   },
   "languageserver": {
     "terraform-ls": {
       "command": "terraform-ls",
       "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "rootPatterns": ["Makefile", ".git"]
+    },
+    "tflint": {
+      "command": "tflint",
+      "args": ["--langserver"],
       "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"]
     },
