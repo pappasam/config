@@ -12,6 +12,9 @@ set completeopt=menuone,longest wildmode=longest:full wildmenu
 " I = ignore startup message
 set shortmess+=c shortmess+=I
 
+" K will lookup words from the english dictionary for all files
+set keywordprg=:DefEng
+
 " Hidden Buffer: enable instead of having to write each buffer
 set hidden
 
@@ -1210,12 +1213,6 @@ let g:repl_filetype_commands = {
       \ 'zsh': 'zsh',
       \ }
 let g:repl_default = &shell
-
-" vim-keywordprg-commands:
-augroup custom_keywordprg
-  autocmd FileType markdown,rst,tex,txt setlocal keywordprg=:DefEng
-  autocmd FileType python setlocal keywordprg=:Pydoc
-augroup end
 
 augroup custom_loclistfollow
   autocmd!
