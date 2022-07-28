@@ -1,6 +1,6 @@
 # shellcheck disable=SC2148,SC1090,SC1091
 # Samuel Roeca's .zshrc. Toggle folds with 'za'.
-# Bash: import bashrc {{{
+# Bash: try importing bashrc, but stop here if not found {{{
 
 if [[ -f "$HOME/.bashrc" ]]; then
   source "$HOME/.bashrc"
@@ -10,7 +10,7 @@ else
 fi
 
 # }}}
-# Environ: exported variables {{{
+# Environment: zsh overrides {{{
 
 export HISTFILE=~/.zsh_history
 

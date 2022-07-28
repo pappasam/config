@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
 # Samuel Roeca's .bashrc. Toggle folds with 'za'.
-# Environ: ls_colors {{{
+# Environment: ls_colors {{{
 
 # Colors when using the LS command
 # NOTE:
@@ -68,7 +68,7 @@ LS_COLORS+="*.rpm=90"
 export LS_COLORS
 
 # }}}
-# Environ: exported variables {{{
+# Environment: exported variables {{{
 
 # React
 export REACT_EDITOR='less'
@@ -135,7 +135,7 @@ export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 export PROMPT_COMMAND='auto_venv_precmd'
 
 # }}}
-# Environ: path appends + misc env setup {{{
+# Environment: path appends + misc env setup {{{
 
 # Takes 1 argument and adds it to the beginning of the PATH
 function path_ladd() {
