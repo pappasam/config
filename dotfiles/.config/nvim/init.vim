@@ -18,6 +18,8 @@ set hidden
 " Sign Column: always show it
 set signcolumn=yes:2
 
+set cursorline
+
 " Mouse: enable GUI mouse support in all modes
 set mouse=a
 
@@ -776,15 +778,6 @@ endfunction
 " General: digraphs {{{
 
 digraph jj 699  " Hawaiian character ʻ
-
-" }}}
-" General: cursorline {{{
-
-augroup custom_cursorline
-  autocmd!
-  autocmd FileType qf setlocal cursorline
-  autocmd BufEnter NvimTree* setlocal cursorline
-augroup end
 
 " }}}
 " General: trailing whitespace {{{
