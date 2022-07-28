@@ -26,6 +26,7 @@
   "jedi.startupMessage": true,
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "empty",
+  "svelte.enable-ts-plugin": true,
   "vimlsp.suggest.fromRuntimepath": true,
   "vimlsp.indexes.count": 50,
   "java.enabled": false,
@@ -42,7 +43,7 @@
     "<C-t>": "action:tabe"
   },
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.23.3-standalone-strict/all.json": [
+    "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.24.3-standalone-strict/all.json": [
       "/*.yml",
       "/*.yaml"
     ],
@@ -127,11 +128,6 @@
       "args": ["--langserver"],
       "filetypes": ["terraform", "tf"],
       "rootPatterns": ["Makefile", ".git"]
-    },
-    "cobol": {
-      "command": "cobol-language-server",
-      "filetypes": ["cobol"],
-      "initializationOptions": {}
     }
   },
   "suggest.completionItemKindLabels": {
@@ -160,6 +156,5 @@
     "snippet": "\ue60b",
     "typeParameter": "\uf728",
     "default": "\uf29c"
-  },
-  "svelte.enable-ts-plugin": true
+  }
 }
