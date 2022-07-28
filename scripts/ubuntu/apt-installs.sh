@@ -50,6 +50,7 @@ sudo apt install -y \
   htop \
   imagemagick \
   inkscape \
+  less \
   libbz2-dev \
   libclang-6.0-dev \
   libcurl4-openssl-dev \
