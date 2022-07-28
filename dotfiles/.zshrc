@@ -1,5 +1,5 @@
-# shellcheck disable=SC2148,SC1090,SC1091
-# Samuel Roeca's .zshrc. Toggle folds with 'za'.
+# shellcheck disable=SC2206,SC2128,SC2296,SC2148,SC1090,SC1091,SC2034
+# Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Bash: try importing bashrc, but stop here if not found {{{
 
 if [[ -f "$HOME/.bashrc" ]]; then
@@ -163,7 +163,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 zmodload -i zsh/complist
 
 # Add autocompletion path
-fpath+=~/.zfunc
+fpath+=(~/.zfunc)
 
 # Add autocompletion for aws-cli v2
 if command -v aws > /dev/null; then

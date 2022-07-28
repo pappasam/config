@@ -1,6 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
-# Samuel Roeca's .bashrc. Toggle folds with 'za'.
+# Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Environment: ls_colors {{{
 
 # Colors when using the LS command

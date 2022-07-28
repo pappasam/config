@@ -1,3 +1,4 @@
+" Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 " General: options {{{
 
 " Enable filetype detection, plugin loading, and indentation loading
@@ -1305,4 +1306,3 @@ augroup end
 " To lean more about the ex editor, type 'man ex'
 
 " }}}
-" Samuel Roeca's '~/.config/nvim/init.vim'. Toggle folds with 'za'.
