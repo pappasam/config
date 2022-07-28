@@ -1180,17 +1180,8 @@ let g:qs_max_chars = 10000
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 
-" Syntax Omni Completion:
-let g:omni_syntax_use_single_byte = v:false
-let g:omni_syntax_use_iskeyword_numeric = v:false
-
 " Makefile: global variable to prevent syntax highlighting of commands
 let g:make_no_commands = 1
-
-" LocListFollow:
-let g:loclist_follow = 1
-let g:loclist_follow_modes = 'n'
-let g:loclist_follow_target = 'previous'
 
 " vim-filetype-formatter:
 let g:vim_filetype_formatter_verbose = v:false
@@ -1213,10 +1204,5 @@ let g:repl_filetype_commands = {
       \ 'zsh': 'zsh',
       \ }
 let g:repl_default = &shell
-
-augroup custom_loclistfollow
-  autocmd!
-  autocmd FileType man,help LoclistFollowToggle
-augroup end
 
 " }}}
