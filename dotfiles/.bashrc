@@ -592,24 +592,16 @@ function nvim-profiler() {
 VIRTUAL_ENV_DEFAULT=.venv  # Name of virtualenv
 function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
-  local old_venv=$VIRTUAL_ENV
   local slashes=${PWD//[^\/]/}
   local current_directory="$PWD"
-  for (( n=${#slashes}; n>0; --n ))
-  do
+  for (( n=${#slashes}; n>0; --n )); do
     if [ -d "$current_directory/$venv_name" ]; then
       source "$current_directory/$venv_name/bin/activate"
-      if [[ "$old_venv" != "$VIRTUAL_ENV" ]]; then
-        :
-      fi
       return
     fi
     local current_directory="$current_directory/.."
   done
-  # If reached this step, no virtual environment found from here to root
-  if [[ -z $VIRTUAL_ENV ]]; then
-    :
-  else
+  if command -v deactivate > /dev/null; then
     deactivate
   fi
 }
@@ -676,6 +668,15 @@ function poetry-init() {
   touch README.md
 }
 
+# create instance folder with only .gitignore ignored
+function mkinstance() {
+  mkdir instance
+  cat > instance/.gitignore <<EOL
+*
+!.gitignore
+EOL
+}
+
 # create new python repo
 function pynew() {
   if [ $# -ne 1 ]; then
@@ -707,15 +708,6 @@ EOL
   git init
   git add .
   git commit -m "Initial commit"
-}
-
-# create instance folder with only .gitignore ignored
-function mkinstance() {
-  mkdir instance
-  cat > instance/.gitignore <<EOL
-*
-!.gitignore
-EOL
 }
 
 # }}}
