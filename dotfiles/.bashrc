@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
+# Samuel Roeca's .bashrc. Toggle folds with 'za'.
 # Environ: ls_colors {{{
 
 # Colors when using the LS command
@@ -110,7 +111,7 @@ export HISTSIZE=5000
 
 # History: ignore leading space, where to save history to disk
 export HISTCONTROL=ignorespace
-export HISTFILE=~/.zsh_history
+export HISTFILE=~/.bash_history
 
 # History: Number of history entries to save to disk
 export SAVEHIST=5000
@@ -269,7 +270,7 @@ alias ..........='cd ../../../../../../../../../..'
 alias f='nvim'
 alias fn='nvim -u NORC --noplugin'
 alias v='nvim -c "cd ~/config/dotfiles/.config/nvim" ~/config/dotfiles/.config/nvim/init.vim'
-alias z='nvim ~/config/dotfiles/.zshrc'
+alias b='nvim ~/config/dotfiles/.bashrc'
 
 # ls et al, with color support and handy aliases
 alias ls='ls --color=auto'
@@ -644,35 +645,6 @@ function ve() {  # arg1?: python interpreter name
     echo "$venv_name already exists, activating"
   fi
   source $venv_name/bin/activate
-}
-
-# Choose a virtualenv from backed up virtualenvs
-# Assumes in current directory, set up with zsh auto completion based on
-# current directory.
-function vc() {  # arg1?: python venv version
-  if [ -z "$VIRTUAL_ENV" ]; then
-    echo "No virtualenv active, skipping backup"
-  else
-    mkdir -p venv.bak
-    local python_version
-    python_version=$(python --version | cut -d ' ' -f 2)
-    local bak_dir="venv.bak/$python_version"
-    if [ ! -d "$bak_dir" ]; then
-      mv "$VIRTUAL_ENV" "$bak_dir"
-    else
-      echo "ERROR: $bak_dir already exists"
-      return 1
-    fi
-  fi
-  if [ -z "$1" ]; then
-    return 0
-  fi
-  local choose_dir="venv.bak/$1"
-  if [ ! -d "$choose_dir" ]; then
-    echo "ERROR: no such virtualenv $1 backed up"
-    return 1
-  fi
-  mv "$choose_dir" .venv
 }
 
 function cat-pyproject() {

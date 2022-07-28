@@ -10,16 +10,22 @@ else
 fi
 
 # }}}
+# Environ: exported variables {{{
+
+export HISTFILE=~/.zsh_history
+
+# }}}
+# Aliases: zsh overrides {{{
+
+alias z='nvim ~/config/dotfiles/.zshrc'
+
+# }}}
 # Z-shell: compdef {{{
 
 # helpers
 
 function _vplug_completion() {
   _directories -W "$HOME/.config/nvim/pack/packager/start"
-}
-
-function _vc_completion() {
-  _directories -W "$PWD/venv.bak"
 }
 
 function _asdf_complete_plugins() {
@@ -40,7 +46,6 @@ compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _vplug_completion vplug
 compdef _man m
 compdef _command ve
-compdef _vc_completion vc
 compdef _asdf_complete_plugins asdfl
 
 # }}}
