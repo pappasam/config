@@ -343,7 +343,6 @@ function! s:default_key_mappings()
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
   nnoremap <leader><leader>l <Cmd>Twilight<CR>
-  nmap     <leader><leader>v <Plug>Veil
 
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i <Cmd>IndentLinesToggle<CR>
