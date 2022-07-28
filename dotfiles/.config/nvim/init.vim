@@ -740,14 +740,13 @@ function! s:abbr_help(in_command, out_command)
   endif
 endfunction
 
-" Open init.vim
+" Open configuration files
 cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/config/dotfiles/.config/nvim/init.vim')
-
-" Open zshrc
 cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/config/dotfiles/.zshrc')
-
-" Open settings for language server files
+cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/config/dotfiles/.bashrc')
 cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/config/dotfiles/.config/nvim/coc-settings.json')
+
+" Edit snippet files
 cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
