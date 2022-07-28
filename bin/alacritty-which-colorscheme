@@ -1,9 +1,8 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
-local current=$(basename \
-  $(alacritty-colorscheme -c $HOME/.config/alacritty/alacritty.yml status))
+CURRENT=$(basename "$(alacritty-colorscheme -c "$HOME/.config/alacritty/alacritty.yml" status)")
 
-if [[ $current == 'papercolor_light.yaml' ]]; then
+if [[ $CURRENT == 'papercolor_light.yaml' ]]; then
   echo -n 'light'
 else
   echo -n 'dark'
