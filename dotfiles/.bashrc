@@ -189,19 +189,19 @@ include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 
 # }}}
-# Bash: prompt {{{
+# Bash: prompt (PS1) {{{
 
-COLOR_BRIGHT_BLUE="\033[38;5;115m"
-COLOR_RED="\033[0;31m"
-COLOR_YELLOW="\033[0;33m"
-COLOR_GREEN="\033[0;32m"
-COLOR_ORANGE="\033[38;5;202m"
-COLOR_GOLD="\033[38;5;142m"
-COLOR_SILVER="\033[38;5;248m"
-COLOR_RESET="\033[0m"
-BOLD="$(tput bold)"
+PS1_COLOR_BRIGHT_BLUE="\033[38;5;115m"
+PS1_COLOR_RED="\033[0;31m"
+PS1_COLOR_YELLOW="\033[0;33m"
+PS1_COLOR_GREEN="\033[0;32m"
+PS1_COLOR_ORANGE="\033[38;5;202m"
+PS1_COLOR_GOLD="\033[38;5;142m"
+PS1_COLOR_SILVER="\033[38;5;248m"
+PS1_COLOR_RESET="\033[0m"
+PS1_BOLD="$(tput bold)"
 
-function git_color() {
+function ps1_git_color() {
   local git_status
   local branch
   local git_commit
@@ -209,20 +209,20 @@ function git_color() {
   branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
   git_commit="$(git --no-pager diff --stat "origin/${branch}" 2>/dev/null)"
   if [[ $git_status == "" ]]; then
-    echo -e "$COLOR_SILVER"
+    echo -e "$PS1_COLOR_SILVER"
   elif [[ $git_status =~ "not staged for commit" ]]; then
-    echo -e "$COLOR_RED"
+    echo -e "$PS1_COLOR_RED"
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo -e "$COLOR_YELLOW"
+    echo -e "$PS1_COLOR_YELLOW"
   elif [[ $git_status =~ "nothing to commit" ]] && \
       [[ -z $git_commit ]]; then
-    echo -e "$COLOR_GREEN"
+    echo -e "$PS1_COLOR_GREEN"
   else
-    echo -e "$COLOR_ORANGE"
+    echo -e "$PS1_COLOR_ORANGE"
   fi
 }
 
-function git_branch() {
+function ps1_git_branch() {
   local git_status
   local on_branch
   local on_commit
@@ -231,24 +231,31 @@ function git_branch() {
   on_commit="HEAD detached at ([^${IFS}]*)"
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
-    echo "($branch)"
+    echo " $branch"
   elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
-    echo "($commit)"
+    echo " $commit"
   else
     echo ""
   fi
 }
 
-# Set Bash PS1
-PS1_DIR="\[$BOLD\]\[$COLOR_BRIGHT_BLUE\]\w"
-PS1_GIT="\[\$(git_color)\]\[$BOLD\]\$(git_branch)\[$BOLD\]\[$COLOR_RESET\]"
-PS1_USR="\[$BOLD\]\[$COLOR_GOLD\]\u@\h"
-PS1_END="\[$BOLD\]\[$COLOR_SILVER\]$ \[$COLOR_RESET\]"
+function ps1_python_virtualenv() {
+  if [[ -z $VIRTUAL_ENV ]]; then
+    echo ""
+  else
+    echo "($(basename "$VIRTUAL_ENV"))"
+  fi
+}
 
-PS1="${PS1_DIR} ${PS1_GIT}\
+PS1_DIR="\[$PS1_BOLD\]\[$PS1_COLOR_BRIGHT_BLUE\]\w"
+PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
+PS1_VIRTUAL_ENV="\[$PS1_BOLD\]\$(ps1_python_virtualenv)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
+# PS1_USR="\[$PS1_BOLD\]\[$PS1_COLOR_GOLD\]\u@\h"
+PS1_END="\[$PS1_BOLD\]\[$PS1_COLOR_SILVER\]$ \[$PS1_COLOR_RESET\]"
+PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}\
 
-${PS1_USR} ${PS1_END}"
+${PS1_END}"
 
 # }}}
 # Aliases: general {{{
