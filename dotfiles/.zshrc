@@ -20,35 +20,6 @@ export HISTFILE=~/.zsh_history
 alias z='nvim ~/config/dotfiles/.zshrc'
 
 # }}}
-# Z-shell: compdef {{{
-
-# helpers
-
-function _vplug_completion() {
-  _directories -W "$HOME/.config/nvim/pack/packager/start"
-}
-
-function _asdf_complete_plugins() {
-  local -a subcmds
-  # shellcheck disable=2034,2207
-  subcmds=($(asdf plugin-list | tr '\n' ' '))
-  _describe 'List installed plugins for zsh completion' subcmds
-}
-
-# definitions
-
-compdef _vim f
-compdef _vim fn
-compdef _dict_words def
-compdef _dict_words syn
-compdef _directories d
-compdef "_files -W $GITIGNORE_DIR/" gitignore
-compdef _vplug_completion vplug
-compdef _man m
-compdef _command ve
-compdef _asdf_complete_plugins asdfl
-
-# }}}
 # Z-shell: plugins {{{
 
 if [ -f "$HOME/.zplug/init.zsh" ]; then
@@ -230,6 +201,35 @@ SPACESHIP_VENV_SUFFIX=')'
 SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
+
+# }}}
+# Z-shell: compdef {{{
+
+# helpers
+
+function _vplug_completion() {
+  _directories -W "$HOME/.config/nvim/pack/packager/start"
+}
+
+function _asdf_complete_plugins() {
+  local -a subcmds
+  # shellcheck disable=2034,2207
+  subcmds=($(asdf plugin-list | tr '\n' ' '))
+  _describe 'List installed plugins for zsh completion' subcmds
+}
+
+# definitions
+
+compdef _vim f
+compdef _vim fn
+compdef _dict_words def
+compdef _dict_words syn
+compdef _directories d
+compdef "_files -W $GITIGNORE_DIR/" gitignore
+compdef _vplug_completion vplug
+compdef _man m
+compdef _command ve
+compdef _asdf_complete_plugins asdfl
 
 # }}}
 # Runtime: executed commands for interactive shell {{{
