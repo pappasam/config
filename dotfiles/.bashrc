@@ -253,8 +253,7 @@ PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1
 PS1_VIRTUAL_ENV="\[$PS1_BOLD\]\$(ps1_python_virtualenv)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
 # PS1_USR="\[$PS1_BOLD\]\[$PS1_COLOR_GOLD\]\u@\h"
 PS1_END="\[$PS1_BOLD\]\[$PS1_COLOR_GREEN\]$ \[$PS1_COLOR_RESET\]"
-PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}\
-
+PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}
 ${PS1_END}"
 
 # }}}
