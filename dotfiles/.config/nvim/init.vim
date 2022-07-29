@@ -147,6 +147,9 @@ function! s:packager_init(packager) abort
   " LocationList:
   call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
 
+  " Editorconfig:
+  call a:packager.add('git@github.com:gpanders/editorconfig.nvim.git')
+
   " Tree:
   call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git', {'requires': [
       \ 'git@github.com:kyazdani42/nvim-web-devicons.git',
