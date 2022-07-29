@@ -49,9 +49,8 @@ asdf_setup tfsec latest
 asdf_setup tmux latest
 asdf_setup vim latest
 asdf_setup yarn latest
-
-# kubernetes
 asdf_setup kubectl latest
 asdf_setup minikube latest
 
-echo_bold_italic_underline 'Done installing asdf tools!'
+echo_bold_italic_underline 'Done installing tools with asdf! To install tools in your asdf-managed tools, run:'
+echo_bold_italic_underline '$ global-install'
