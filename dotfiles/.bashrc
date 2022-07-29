@@ -131,7 +131,7 @@ export BAT_PAGER=''
 # Asdf: to use install-poetry script
 export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 
-# Commands to execute before a bash prompt. Kept here for bash compatibility
+# Commands to execute before a bash prompt.
 export PROMPT_COMMAND='auto_venv_precmd'
 
 # }}}
