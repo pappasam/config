@@ -259,15 +259,6 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>so <Cmd>CocList -A outline<cr>
   nnoremap <silent>        <leader>sw <Cmd>CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
-
-  nnoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
-  nnoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
-  inoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-e>"
-  inoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-y>"
-  vnoremap <silent> <nowait> <expr> <C-e> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-e>"
-  vnoremap <silent> <nowait> <expr> <C-y> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-y>"
-
-  imap     <silent> <expr> <C-l> coc#expandable() ? "<Plug>(coc-snippets-expand)" : "\<C-y>"
   inoremap <silent> <expr> <CR> pumvisible() ? '<CR>' : '<C-g>u<CR><c-r>=coc#on_enter()<CR>'
   nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggle')<CR>
   nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
@@ -616,6 +607,14 @@ augroup custom_colorscheme
   autocmd ColorScheme * highlight link ExtraWhitespace DiffText
   autocmd ColorScheme * highlight link HighlightedyankRegion Search
   autocmd ColorScheme * highlight link CocHighlightText Underlined
+  autocmd ColorScheme PaperColorSlim
+      \ if &background == 'light' |
+      \   execute 'highlight CocSearch guifg=#005f87' |
+      \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
+      \ else |
+      \   execute 'highlight CocSearch guifg=#5fafd7' |
+      \   execute 'highlight CocMenuSel guibg=#585858' |
+      \ endif
 augroup end
 
 try
