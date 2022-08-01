@@ -308,15 +308,15 @@ function! s:default_key_mappings()
   nmap <expr> q QStart()
 
   " MoveTabs: goto tab number. Same as Firefox
-  nnoremap <A-1> 1gt
-  nnoremap <A-2> 2gt
-  nnoremap <A-3> 3gt
-  nnoremap <A-4> 4gt
-  nnoremap <A-5> 5gt
-  nnoremap <A-6> 6gt
-  nnoremap <A-7> 7gt
-  nnoremap <A-8> 8gt
-  nnoremap <A-9> 9gt
+  nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
+  nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
+  nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
+  nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
+  nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
+  nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
+  nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
+  nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
+  nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
 
   " Substitute: replace word under cursor
   nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//g<Left><Left>
