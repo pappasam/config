@@ -491,10 +491,6 @@ function! s:autocmd_custom_coc()
     autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd User CocNvimInit call s:default_key_mappings()
-    autocmd User CocNvimInit highlight CocErrorHighlight gui=undercurl
-    autocmd User CocNvimInit highlight CocWarningHighlight gui=undercurl
-    autocmd User CocNvimInit highlight CocInfoHighlight gui=undercurl
-    autocmd User CocNvimInit highlight CocHintHighlight gui=undercurl
   augroup end
 endfunction
 
@@ -595,6 +591,12 @@ augroup custom_colorscheme
   autocmd ColorScheme * highlight link ExtraWhitespace DiffText
   autocmd ColorScheme * highlight link HighlightedyankRegion Search
   autocmd ColorScheme * highlight link CocHighlightText Underlined
+
+  autocmd ColorScheme * highlight CocErrorHighlight gui=undercurl
+  autocmd ColorScheme * highlight CocWarningHighlight gui=undercurl
+  autocmd ColorScheme * highlight CocInfoHighlight gui=undercurl
+  autocmd ColorScheme * highlight CocHintHighlight gui=undercurl
+
   autocmd ColorScheme PaperColorSlim
       \ if &background == 'light' |
       \   execute 'highlight CocSearch guifg=#005f87' |
