@@ -322,11 +322,6 @@ function! s:default_key_mappings()
   nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//g<Left><Left>
   vnoremap <leader><leader>s y:%s/<C-R>0//g<Left><Left>
 
-  " IndentComma: placing commas one line down; usable with repeat operator '.'
-  nnoremap <silent> <Plug>NewLineComma f,wi<CR><Esc>
-        \:call repeat#set("\<Plug>NewLineComma")<CR>
-  nmap <leader><CR> <Plug>NewLineComma
-
   " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
@@ -396,13 +391,6 @@ function! s:default_key_mappings()
 
   " Mouse Paste: make it come from the system register
   nnoremap <MiddleMouse> "+<MiddleMouse>
-
-  " Scrolling Dropdown: dropdown scrollable + click to select highlighted
-  inoremap <expr> <S-ScrollWheelUp>   pumvisible() ? '<C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p><C-p>' : '<Esc><S-ScrollWheelUp>'
-  inoremap <expr> <S-ScrollWheelDown> pumvisible() ? '<C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n><C-n>' : '<Esc><S-ScrollWheelDown>'
-  inoremap <expr> <ScrollWheelUp>     pumvisible() ? '<C-p>' : '<Esc><ScrollWheelUp>'
-  inoremap <expr> <ScrollWheelDown>   pumvisible() ? '<C-n>' : '<Esc><ScrollWheelDown>'
-  inoremap <expr> <LeftMouse>         pumvisible() ? '<CR><Backspace>' : '<Esc><LeftMouse>'
 
   " Toggle folds with mouse
   nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
