@@ -134,6 +134,9 @@ export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
 # Commands to execute before a bash prompt.
 export PROMPT_COMMAND='auto_venv_precmd'
 
+# Silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
+export MESA_DEBUG=silent
+
 # }}}
 # Environment: path appends + misc env setup {{{
 
