@@ -154,31 +154,12 @@ function path_radd() {
   fi
 }
 
-HOME_BIN="$HOME/bin"
-if [ -d "$HOME_BIN" ]; then
-  path_ladd "$HOME_BIN"
-fi
-
-HOME_BIN_HIDDEN="$HOME/.bin"
-if [ ! -d "$HOME_BIN_HIDDEN" ]; then
-  mkdir "$HOME_BIN_HIDDEN"
-fi
-path_ladd "$HOME_BIN_HIDDEN"
-
-HOME_LOCAL_BIN="$HOME/.local/bin"
-if [ ! -d "$HOME_LOCAL_BIN" ]; then
-  mkdir -p "$HOME_LOCAL_BIN"
-fi
-path_ladd "$HOME_LOCAL_BIN"
-
-OPAM_LOC="$HOME/.opam/default/bin"
-if [ -d "$OPAM_LOC" ]; then
-  path_ladd "$OPAM_LOC"
-fi
-
+path_ladd "$HOME/bin"
+path_ladd "$HOME/.bin"
+path_ladd "$HOME/.local/bin"
+path_ladd "$HOME/.opam/default/bin"
 path_ladd "$HOME/config/bin"
 
-# EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
 # }}}
