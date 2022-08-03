@@ -711,7 +711,7 @@ function upgrade() {
   asdf uninstall neovim nightly && \
     asdf install neovim nightly && \
     asdf global neovim nightly
-  if command -v zplug &> /dev/null; then
+  if command -v zplug > /dev/null; then
     zplug update
   fi
   nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'

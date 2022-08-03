@@ -6,7 +6,7 @@ function echo_bold_italic_underline() {
   echo -e "\e[3m\e[1m\e[4m$1\e[0m"
 }
 
-if ! command -v asdf; then
+if ! command -v asdf > /dev/null; then
   echo_bold_italic_underline 'Please install "asdf" before proceeding...'
   exit 1
 else

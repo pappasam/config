@@ -32,7 +32,7 @@ if [ ! -d "$HOME/.zplug" ]; then
     zsh
 fi
 
-if ! command -v docker; then
+if ! command -v docker > /dev/null; then
   # See: https://github.com/docker/docker-install
   echo_bold_italic_underline 'Installing docker, follow prompted instructions'
   curl -fsSL https://get.docker.com -o get-docker.sh
