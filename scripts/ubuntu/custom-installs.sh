@@ -35,9 +35,25 @@ fi
 if ! command -v docker > /dev/null; then
   # See: https://github.com/docker/docker-install
   echo_bold_italic_underline 'Installing docker, follow prompted instructions'
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sh get-docker.sh
+  curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+  sh /tmp/get-docker.sh
   sudo usermod -aG docker "$(whoami)"
+fi
+
+if ! command -v zoom > /dev/null; then
+  echo_bold_italic_underline 'Installing Zoom'
+  curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
+  sudo dpkg -i /tmp/zoom_amd64.deb
+fi
+
+if ! command -v slack > /dev/null; then
+  echo_bold_italic_underline 'Installing Slack'
+  sudo apt update
+  SLACK_VERSION=4.27.156
+  wget -O /tmp/slack-desktop.deb \
+    "https://downloads.slack-edge.com/releases/linux/$SLACK_VERSION/prod/x64/slack-desktop-$SLACK_VERSION-amd64.deb"
+  sudo apt install /tmp/slack-desktop.deb
+  sudo apt update && sudo apt upgrade slack-desktop
 fi
 
 echo_bold_italic_underline 'Done setting up custom software! Now:'
