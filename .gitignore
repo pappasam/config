@@ -2,4 +2,5 @@
 .vagrant/
 .vscode/
 .python-version
+get-docker.sh
 dotfiles/.config/nvim/doc/tags

@@ -32,6 +32,14 @@ if [ ! -d "$HOME/.zplug" ]; then
     zsh
 fi
 
+if ! command -v docker; then
+  # See: https://github.com/docker/docker-install
+  echo_bold_italic_underline 'Installing docker, follow prompted instructions'
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sh get-docker.sh
+  sudo usermod -aG docker "$(whoami)"
+fi
+
 echo_bold_italic_underline 'Done setting up custom software! Now:'
 echo_bold_italic_underline '  1. Close your shell (<C-d>)'
 echo_bold_italic_underline '  2. Re-open your shell'

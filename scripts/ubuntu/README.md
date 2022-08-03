@@ -43,7 +43,3 @@ Download relevant nerd fonts from here: <https://www.nerdfonts.com/font-download
 ### Pandoc
 
 The available version in software repository is not the latest build. Use the provided deb package under Pandoc releases <https://github.com/jgm/pandoc/releases>
-
-### Docker
-
-Follow instructions here: <https://docs.docker.com/engine/install/ubuntu/>
