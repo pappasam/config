@@ -129,104 +129,104 @@ augroup end
 "   PackagerStatus, PackagerInstall, PackagerUpdate, PackagerClean
 
 function! s:packager_init(packager) abort
-  call a:packager.add('git@github.com:kristijanhusak/vim-packager', {'type': 'opt'})
+  call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
 
   " Autocompletion And IDE Features:
-  call a:packager.add('git@github.com:neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
-  call a:packager.add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
+  call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
+  call a:packager.add('https://github.com/pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
-  call a:packager.add('git@github.com:nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
-  call a:packager.add('git@github.com:lewis6991/spellsitter.nvim.git')
-  call a:packager.add('git@github.com:nvim-treesitter/playground.git')
-  call a:packager.add('git@github.com:windwp/nvim-ts-autotag.git')
-  call a:packager.add('git@github.com:JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
-      \ 'git@github.com:tpope/vim-commentary',
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
+  call a:packager.add('https://github.com/lewis6991/spellsitter.nvim.git')
+  call a:packager.add('https://github.com/nvim-treesitter/playground.git')
+  call a:packager.add('https://github.com/windwp/nvim-ts-autotag.git')
+  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
+      \ 'https://github.com/tpope/vim-commentary',
       \ ]})
 
   " LocationList:
-  call a:packager.add('git@github.com:elbeardmorez/vim-loclist-follow.git')
+  call a:packager.add('https://github.com/elbeardmorez/vim-loclist-follow.git')
 
   " Editorconfig:
-  call a:packager.add('git@github.com:gpanders/editorconfig.nvim.git')
+  call a:packager.add('https://github.com/gpanders/editorconfig.nvim.git')
 
   " Tree:
-  call a:packager.add('git@github.com:kyazdani42/nvim-tree.lua.git', {'requires': [
-      \ 'git@github.com:kyazdani42/nvim-web-devicons.git',
+  call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git', {'requires': [
+      \ 'https://github.com/kyazdani42/nvim-web-devicons.git',
       \ ]})
 
   " General:
-  call a:packager.add('git@github.com:bronson/vim-visual-star-search')
-  call a:packager.add('git@github.com:fidian/hexmode')
-  call a:packager.add('git@github.com:kh3phr3n/tabline')
-  call a:packager.add('git@github.com:simeji/winresizer')
-  call a:packager.add('git@github.com:sjl/strftimedammit.vim')
-  call a:packager.add('git@github.com:unblevable/quick-scope')
-  call a:packager.add('git@github.com:windwp/nvim-autopairs.git')
-  call a:packager.add('git@github.com:ntpeters/vim-better-whitespace.git')
-  call a:packager.add('git@github.com:norcalli/nvim-colorizer.lua.git')
-  call a:packager.add('git@github.com:tpope/vim-characterize.git')
+  call a:packager.add('https://github.com/bronson/vim-visual-star-search')
+  call a:packager.add('https://github.com/fidian/hexmode')
+  call a:packager.add('https://github.com/kh3phr3n/tabline')
+  call a:packager.add('https://github.com/simeji/winresizer')
+  call a:packager.add('https://github.com/sjl/strftimedammit.vim')
+  call a:packager.add('https://github.com/unblevable/quick-scope')
+  call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
+  call a:packager.add('https://github.com/ntpeters/vim-better-whitespace.git')
+  call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua.git')
+  call a:packager.add('https://github.com/tpope/vim-characterize.git')
 
   " KeywordPrg:
-  call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
+  call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
 
   " Fuzzy Finder:
-  call a:packager.add('git@github.com:nvim-telescope/telescope.nvim.git', {'requires': [
-      \ 'git@github.com:nvim-lua/plenary.nvim.git',
+  call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git', {'requires': [
+      \ 'https://github.com/nvim-lua/plenary.nvim.git',
       \ ]})
 
   " Git:
-  call a:packager.add('git@github.com:tpope/vim-fugitive')
-  call a:packager.add('git@github.com:rhysd/git-messenger.vim.git')
-  call a:packager.add('git@github.com:lewis6991/gitsigns.nvim.git')
+  call a:packager.add('https://github.com/tpope/vim-fugitive')
+  call a:packager.add('https://github.com/rhysd/git-messenger.vim.git')
+  call a:packager.add('https://github.com/lewis6991/gitsigns.nvim.git')
 
   " Text Objects:
-  call a:packager.add('git@github.com:machakann/vim-sandwich')
-  call a:packager.add('git@github.com:kana/vim-textobj-user')
+  call a:packager.add('https://github.com/machakann/vim-sandwich')
+  call a:packager.add('https://github.com/kana/vim-textobj-user')
 
   " Writing:
-  call a:packager.add('git@github.com:dkarter/bullets.vim')
-  call a:packager.add('git@github.com:folke/zen-mode.nvim.git')
-  call a:packager.add('git@github.com:jlesquembre/rst-tables.nvim')
-  call a:packager.add('git@github.com:folke/twilight.nvim.git')
-  call a:packager.add('git@github.com:moiatgit/vim-rst-sections')
+  call a:packager.add('https://github.com/dkarter/bullets.vim')
+  call a:packager.add('https://github.com/folke/zen-mode.nvim.git')
+  call a:packager.add('https://github.com/jlesquembre/rst-tables.nvim')
+  call a:packager.add('https://github.com/folke/twilight.nvim.git')
+  call a:packager.add('https://github.com/moiatgit/vim-rst-sections')
 
   " Previewers:
-  call a:packager.add('git@github.com:iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call a:packager.add('git@github.com:weirongxu/plantuml-previewer.vim', {'requires': [
-      \ 'git@github.com:tyru/open-browser.vim',
+  call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
+  call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim', {'requires': [
+      \ 'https://github.com/tyru/open-browser.vim',
       \ ]})
 
   " Code Formatters:
-  call a:packager.add('git@github.com:pappasam/vim-filetype-formatter')
+  call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
 
   " Repl Integration:
-  call a:packager.add('git@github.com:pappasam/nvim-repl.git', {'requires': [
-        \ 'git@github.com:tpope/vim-repeat',
+  call a:packager.add('https://github.com/pappasam/nvim-repl.git', {'requires': [
+        \ 'https://github.com/tpope/vim-repeat',
         \ ]})
 
   " Syntax Theme:
-  call a:packager.add('git@github.com:pappasam/papercolor-theme-slim.git')
+  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
 
   " Jupyter Integration:
-  call a:packager.add('git@github.com:goerz/jupytext.vim.git')
+  call a:packager.add('https://github.com/goerz/jupytext.vim.git')
 
   " Syntax Highlighting & Indentation:
-  call a:packager.add('git@github.com:evanleck/vim-svelte.git', {'requires': [
-      \ 'git@github.com:cakebaker/scss-syntax.vim.git',
-      \ 'git@github.com:groenewege/vim-less.git',
-      \ 'git@github.com:leafgarland/typescript-vim.git',
-      \ 'git@github.com:othree/html5.vim.git',
-      \ 'git@github.com:pangloss/vim-javascript.git',
+  call a:packager.add('https://github.com/evanleck/vim-svelte.git', {'requires': [
+      \ 'https://github.com/cakebaker/scss-syntax.vim.git',
+      \ 'https://github.com/groenewege/vim-less.git',
+      \ 'https://github.com/leafgarland/typescript-vim.git',
+      \ 'https://github.com/othree/html5.vim.git',
+      \ 'https://github.com/pangloss/vim-javascript.git',
       \ ]})
-  call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent')
-  call a:packager.add('git@github.com:Yggdroot/indentLine')
-  call a:packager.add('git@github.com:aklt/plantuml-syntax.git')
-  call a:packager.add('git@github.com:chr4/nginx.vim.git')
-  call a:packager.add('git@github.com:delphinus/vim-firestore.git')
-  call a:packager.add('git@github.com:mattn/vim-xxdcursor')
-  call a:packager.add('git@github.com:neovimhaskell/haskell-vim')
-  call a:packager.add('git@github.com:vim-scripts/SAS-Syntax')
+  call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent')
+  call a:packager.add('https://github.com/Yggdroot/indentLine')
+  call a:packager.add('https://github.com/aklt/plantuml-syntax.git')
+  call a:packager.add('https://github.com/chr4/nginx.vim.git')
+  call a:packager.add('https://github.com/delphinus/vim-firestore.git')
+  call a:packager.add('https://github.com/mattn/vim-xxdcursor')
+  call a:packager.add('https://github.com/neovimhaskell/haskell-vim')
+  call a:packager.add('https://github.com/vim-scripts/SAS-Syntax')
 endfunction
 
 packadd vim-packager
@@ -755,18 +755,8 @@ augroup end
 " }}}
 " General: gx improved {{{
 
-function! s:starts_with(longer, shorter)
-  return a:longer[0:len(a:shorter)-1] ==# a:shorter
-endfunction
-
 function! s:gx_improved()
-  let cfile = expand('<cfile>')
-  if s:starts_with(cfile, 'git@github.com:')
-    let url = 'https://github.com/' . cfile[15:]
-  else
-    let url = cfile
-  endif
-  silent execute '!gio open ' . url
+  silent execute '!gio open ' . expand('<cfile>')
 endfunction
 
 " }}}
