@@ -376,7 +376,7 @@ function! s:default_key_mappings()
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
 
-  " Open GitHub ssh url
+  " Open <cfile> with gx
   nnoremap gx <Cmd>call <SID>gx_improved()<CR>
 
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
