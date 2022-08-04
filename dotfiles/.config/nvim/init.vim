@@ -349,18 +349,9 @@ function! s:default_key_mappings()
   nmap     <leader>e <Plug>ReplSendLine
   vmap     <leader>e <Plug>ReplSendVisual
 
-  " Sandwich: below mappings address the issue raised here:
-  " https://github.com/machakann/vim-sandwich/issues/62
-  xmap s  <Nop>
-  omap s  <Nop>
-  xmap ib <Plug>(textobj-sandwich-auto-i)
-  omap ib <Plug>(textobj-sandwich-auto-i)
-  xmap ab <Plug>(textobj-sandwich-auto-a)
-  omap ab <Plug>(textobj-sandwich-auto-a)
-  xmap iq <Plug>(textobj-sandwich-query-i)
-  omap iq <Plug>(textobj-sandwich-query-i)
-  xmap aq <Plug>(textobj-sandwich-query-a)
-  omap aq <Plug>(textobj-sandwich-query-a)
+  " Sandwich: plugin-recommended mappings
+  nmap s <Nop>
+  xmap s <Nop>
 
   " Telescope: create shortcuts for finding stuff
   nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
@@ -1120,9 +1111,6 @@ let g:haskell_enable_static_pointers = v:true  " to highlight `static`
 
 " Restructured Text
 let g:no_rst_sections_maps = 0
-
-" Sandwich
-let g:textobj_sandwich_no_default_key_mappings = v:true
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
