@@ -1055,9 +1055,6 @@ function! s:preview()
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
     silent exec 'MarkdownPreview'
-  elseif &filetype ==? 'dot'
-    " from wmgraphviz.vim
-    silent exec 'GraphvizInteractive'
   elseif &filetype ==? 'plantuml'
     " from plantuml-previewer.vim
     silent exec 'PlantumlOpen'
