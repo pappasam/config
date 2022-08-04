@@ -242,7 +242,6 @@ let mapleader = ','
 function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
-  nmap     <silent>        <C-LeftMouse> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
   inoremap <silent>        <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
   nnoremap <silent>        <C-w>f <Cmd>call coc#float#jump()<CR>
@@ -379,22 +378,9 @@ function! s:default_key_mappings()
   " Open <cfile> with gx
   nnoremap gx <Cmd>call <SID>gx_improved()<CR>
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Mouse Configuration: remaps mouse to work better in terminal
-
   " Clipboard Copy: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
-
-  " Mouse Copy: system copy mouse characteristics
-  vnoremap <RightMouse> "+y
-
-  " Mouse Paste: make it come from the system register
-  nnoremap <MiddleMouse> "+<MiddleMouse>
-
-  " Toggle folds with mouse
-  nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : '<LeftMouse>zo'
-  nnoremap        <RightMouse> <LeftMouse><LeftRelease>zc
 
   " Auto-execute all filetypes
   let &filetype=&filetype
