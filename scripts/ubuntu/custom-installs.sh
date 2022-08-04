@@ -42,8 +42,9 @@ fi
 
 if ! command -v zoom > /dev/null; then
   echo_bold_italic_underline 'Installing Zoom'
+  sudo apt update
   curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
-  sudo dpkg -i /tmp/zoom_amd64.deb
+  sudo apt install /tmp/zoom_amd64.deb
 fi
 
 if ! command -v slack > /dev/null; then
