@@ -288,7 +288,6 @@ alias gm='git commit'
 alias gma='git add --all && git commit'
 alias gp='git remote prune origin && git remote set-head origin -a'
 alias gdw='git diff --word-diff'
-alias gop='gh browse'
 
 # Battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
@@ -472,6 +471,17 @@ function gd() {
   else
     git diff "$@" | delta --dark  --line-numbers
   fi
+}
+
+# open git URL with browser
+function gop() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  fi
+  local git_url
+  git_url="$(gh browse --no-browser "$@")"
+  firefox "$git_url"
 }
 
 # checkout origin default, pull, delete old branch, and prune
