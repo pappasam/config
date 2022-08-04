@@ -473,15 +473,18 @@ function gd() {
   fi
 }
 
-# open git URL with browser
+# open git URL with Firefox browser
 function gop() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
     echo "'$PWD' is not inside a git repository"
     return 1
   fi
   local git_url
-  git_url="$(gh browse --no-browser "$@")"
-  firefox "$git_url"
+  if git_url=$(gh browse --no-browser "$@"); then
+    firefox "$git_url" > /dev/null 2>&1 &
+  else
+    return 1
+  fi
 }
 
 # checkout origin default, pull, delete old branch, and prune
