@@ -391,7 +391,6 @@ call s:default_key_mappings()
 augroup custom_remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-  autocmd FileType man,help nnoremap <buffer>          <C-LeftMouse> <C-LeftMouse>
 augroup end
 
 augroup custom_remap_rst
