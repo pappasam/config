@@ -636,15 +636,6 @@ augroup custom_indentation
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
-  " Use fancy c-like indentation
-  autocmd Filetype firestore,ron setlocal
-        \ cindent
-        \ autoindent
-        \ cinkeys=0{,0},0(,0),0[,0],:,0#,!^F,o,O,e
-        \ cinoptions+='(s,m2'
-        \ cinoptions+='(s,U1'
-        \ cinoptions+='j1'
-        \ cinoptions+='J1'
 augroup end
 
 " }}}
@@ -835,35 +826,6 @@ augroup custom_no_save_lcd
         \ unlet w:lcd |
         \ endif
 augroup end
-
-" }}}
-" General: delete hidden buffers {{{
-
-" From: https://stackoverflow.com/a/7321131
-
-function! s:delete_inactive_buffers()
-  "From tabpagebuflist() help, get a list of all buffers in all tabs
-  let tablist = []
-  for i in range(tabpagenr('$'))
-    call extend(tablist, tabpagebuflist(i + 1))
-  endfor
-
-  "Below originally inspired by Hara Krishna Dara and Keith Roberts
-  "http://tech.groups.yahoo.com/group/vim/message/56425
-  let nWipeouts = 0
-  for i in range(1, bufnr('$'))
-    if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
-      " bufno exists AND isn't modified
-      " AND isn't in the list of buffers open in windows and tabs
-      " Force buffer deletion (even for terminals)
-      silent exec 'bwipeout!' i
-      let nWipeouts = nWipeouts + 1
-    endif
-  endfor
-  echomsg nWipeouts . ' buffer(s) wiped out'
-endfunction
-
-command! DeleteInactiveBuffers call s:delete_inactive_buffers()
 
 " }}}
 " General: clean unicode {{{
