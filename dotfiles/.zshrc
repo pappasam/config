@@ -29,8 +29,8 @@ if [ -f "$HOME/.zplug/init.zsh" ]; then
   zplug "zplug/zplug", hook-build: "zplug --self-manage"
   zplug "greymd/docker-zsh-completion", as:plugin
   zplug "zsh-users/zsh-completions", as:plugin
-  zplug "zdharma-zmirror/fast-syntax-highlighting", as:plugin
-  zplug "denysdovhan/spaceship-prompt", \
+  zplug "zdharma/fast-syntax-highlighting", as:plugin
+  zplug "spaceship-prompt/spaceship-prompt", \
     use:spaceship.zsh, \
     from:github, \
     as:theme
