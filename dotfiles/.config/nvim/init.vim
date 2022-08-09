@@ -946,48 +946,6 @@ function! QStart()
 endfunction
 
 " }}}
-" General: view available colors {{{
-
-" From https://vim.fandom.com/wiki/View_all_colors_available_to_gvim
-" There are some sort options at the end you can uncomment to your preference
-"
-" Create a new scratch buffer:
-" - Read file $VIMRUNTIME/rgb.txt
-" - Delete lines where color name is not a single word (duplicates).
-" - Delete 'grey' lines (duplicate 'gray'; there are a few more 'gray').
-" Add syntax so each color name is highlighted in its color.
-function! s:vim_colors()
-  vnew
-  set modifiable
-  setlocal filetype=vimcolors buftype=nofile bufhidden=delete noswapfile
-  0read $VIMRUNTIME/rgb.txt
-  let find_color = '^\s*\(\d\+\s*\)\{3}\zs\w*$'
-  silent execute 'v/' . find_color . '/d'
-  silent g/grey/d
-  let namedcolors = []
-  1
-  while search(find_color, 'W') > 0
-    let word = expand('<cword>')
-    call add(namedcolors, word)
-  endwhile
-  for w in namedcolors
-    execute 'highlight col_' . w . ' guifg=black guibg=' . w
-    execute 'highlight col_' . w . '_fg guifg=' . w . ' guibg=NONE'
-    execute '%s/\<' . w . '\>/' . printf("%-36s%s", w, w . '_fg') . '/g'
-    execute 'syntax keyword col_' . w . ' ' . w
-    execute 'syntax keyword col_' . w . '_fg ' . w . '_fg'
-  endfor
-  " Add hex value column (and format columns nicely)
-  %s/^\s*\(\d\+\)\s\+\(\d\+\)\s\+\(\d\+\)\s\+/\=printf(" %3d %3d %3d   #%02x%02x%02x   ", submatch(1), submatch(2), submatch(3), submatch(1), submatch(2), submatch(3))/
-  1
-  nohlsearch
-  file VimColors
-  set nomodifiable
-endfunction
-
-command! VimColors silent call s:vim_colors()
-
-" }}}
 " General: toggle numbers {{{
 
 function! s:toggle_number()
