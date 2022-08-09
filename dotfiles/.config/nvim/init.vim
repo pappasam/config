@@ -407,6 +407,11 @@ augroup custom_remap_nvim_tree_lua
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
 augroup end
 
+augroup custom_remap_folds_open
+  autocmd!
+  autocmd BufEnter tmux.conf,init.vim,.bashrc,.zshrc nnoremap <buffer> <silent> <2-LeftMouse> za
+augroup end
+
 " }}}
 " Package: language server protocol (LSP) with coc.nvim {{{
 
