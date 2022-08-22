@@ -859,6 +859,12 @@ function alacritty-install() {
     sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
 }
 
+function zoom-install() {
+  sudo apt update
+  curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
+  sudo apt install /tmp/zoom_amd64.deb
+}
+
 function asdfl() {  ## Install and set the latest version of asdf
   asdf install "$1" latest && asdf global "$1" latest
 }
