@@ -28,6 +28,10 @@ Download the latest recommended version from: <www.greenwoodsoftware.com/less/do
 
 Use: <https://keeweb.info/>
 
+If you encouter errors opening application, add `--no-sandbox` to `/usr/share/applications/keeweb.desktop`. See <https://github.com/keeweb/keeweb/issues/1975>
+
+Relevant line: `Exec=keeweb --no-sandbox %u`
+
 ### Insomnia
 
 Install the latest version from: <https://insomnia.rest/download>
