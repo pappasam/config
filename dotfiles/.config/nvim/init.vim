@@ -330,9 +330,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
 
-  " Override <C-w>H to delete file explorer buffers
-  nnoremap <C-w>H <Cmd>windo if &filetype == 'NvimTree' <bar> close <bar> endif<CR><C-w>H
-
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
   nnoremap <leader><leader>l <Cmd>Twilight<CR>
