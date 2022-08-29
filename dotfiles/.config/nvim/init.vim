@@ -603,6 +603,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.handlebars set filetype=html
   autocmd BufEnter *.hql,*.q set filetype=hive
   autocmd BufEnter *.js,*.gs set filetype=javascript
+  autocmd BufEnter *.mdx set filetype=markdown
   autocmd BufEnter *.min.js set filetype=none
   autocmd BufEnter *.m,*.oct set filetype=octave
   autocmd BufEnter *.toml set filetype=toml
