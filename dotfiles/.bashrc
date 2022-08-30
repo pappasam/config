@@ -721,9 +721,9 @@ function upgrade() {
   git pull
   alacritty-install
   popd || return
-  asdf uninstall neovim nightly && \
-    asdf install neovim nightly && \
-    asdf global neovim nightly
+  # asdf uninstall neovim nightly && \
+  #   asdf install neovim nightly && \
+  #   asdf global neovim nightly
   if command -v zplug > /dev/null; then
     zplug update
   fi
