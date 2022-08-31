@@ -19,6 +19,10 @@ font:
     family: FiraCode Nerd Font
     style: Retina
   size: 12.0
+window:
+  title: Chez La Couve
+  dynamic_title: false
+  decorations_theme_variant: dark
 # color_start
 # /home/sroeca/src/lib/alacritty-theme/themes/ayu_dark.yaml
 # Colors (Ayu Dark)
