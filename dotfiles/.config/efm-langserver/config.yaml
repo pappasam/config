@@ -1,0 +1,11 @@
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+tools:
+  dict-gcide: &dict-gcide
+    hover-command: "dict -d gcide ${INPUT}"
+    hover-stdin: false
+languages:
+  markdown:
+    - <<: *dict-gcide

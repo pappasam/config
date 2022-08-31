@@ -117,6 +117,18 @@
     }
   },
   "languageserver": {
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["markdown"],
+      "initializationOptions": {
+        "documentFormatting": false,
+        "hover": true,
+        "documentSymbol": false,
+        "codeAction": false,
+        "completion": false
+      }
+    },
     "terraform-ls": {
       "command": "terraform-ls",
       "args": ["serve"],
