@@ -19,8 +19,6 @@ font:
     family: FiraCode Nerd Font
     style: Retina
   size: 12.0
-window:
-  decorations: None
 # color_start
 # /home/sroeca/src/lib/alacritty-theme/themes/ayu_dark.yaml
 # Colors (Ayu Dark)
