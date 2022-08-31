@@ -128,9 +128,6 @@ export WINIT_HIDPI_FACTOR=1.0
 # Bat
 export BAT_PAGER=''
 
-# Asdf: to use install-poetry script
-export ASDF_POETRY_INSTALL_URL=https://install.python-poetry.org
-
 # Commands to execute before a bash prompt.
 export PROMPT_COMMAND='auto_venv_precmd'
 
@@ -690,13 +687,13 @@ function pynew() {
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
-  poetry add \
-    -D mypy \
-    -D pylint \
-    -D black \
-    -D docformatter \
-    -D isort \
-    -D toml-sort
+  poetry add --group=dev \
+    mypy \
+    pylint \
+    black \
+    docformatter \
+    isort \
+    toml-sort
   cat > main.py <<EOL
 """The main module"""
 
