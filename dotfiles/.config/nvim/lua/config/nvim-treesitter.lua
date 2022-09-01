@@ -56,11 +56,3 @@ require("nvim-treesitter.configs").setup({
     "yaml",
   },
 })
-require("nvim-treesitter.highlight").set_custom_captures({
-  ["text.title.h1"] = "htmlH1",
-  ["text.title.h2"] = "htmlH2",
-  ["text.title.h3"] = "htmlH3",
-  ["text.title.h4"] = "htmlH4",
-  ["text.title.h5"] = "htmlH5",
-  ["text.title.h6"] = "htmlH6",
-})
