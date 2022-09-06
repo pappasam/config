@@ -179,8 +179,8 @@ SPACESHIP_PROMPT_ORDER=(
   user          # Username section
   host          # Hostname section
   dir           # Current directory section
-  git           # Git section (git_branch + git_status)
   venv          # virtualenv section
+  git           # Git section (git_branch + git_status)
   line_sep      # Line break
   char          # Prompt character
 )
@@ -197,7 +197,7 @@ SPACESHIP_USER_COLOR=yellow
 SPACESHIP_USER_SHOW=true
 SPACESHIP_USER_SUFFIX=
 SPACESHIP_VENV_PREFIX='('
-SPACESHIP_VENV_SUFFIX=')'
+SPACESHIP_VENV_SUFFIX=') '
 SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
