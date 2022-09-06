@@ -12,7 +12,7 @@ key_bindings:
   # Key: ) (scancode for 0)
   - {key: 11, mods: Shift, mode: Vi, action: FirstOccupied}
 shell:
-  program: /usr/bin/zsh
+  program: /usr/bin/bash
 draw_bold_text_with_bright_colors: true
 font:
   normal:
