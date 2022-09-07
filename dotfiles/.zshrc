@@ -106,8 +106,6 @@ autoload -Uz zcalc
 # re-executed simply because the command line is redrawn, as happens, for
 # example, when a notification about an exiting job is displayed.
 function precmd() {
-  # Gather information about the version control system
-  vcs_info
   eval "$PROMPT_COMMAND"
 }
 
@@ -201,6 +199,7 @@ SPACESHIP_VENV_SUFFIX=') '
 SPACESHIP_VENV_GENERIC_NAMES=()
 SPACESHIP_CHAR_COLOR_SUCCESS=green
 SPACESHIP_CHAR_COLOR_FAILURE=green
+SPACESHIP_NODE_SHOW=false
 
 # }}}
 # Z-shell: compdef {{{
