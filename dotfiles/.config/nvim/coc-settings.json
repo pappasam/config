@@ -20,6 +20,7 @@
     "fastcore",
     "matplotlib",
     "sqlalchemy",
+    "sympy",
     "django",
     "django.db"
   ],
