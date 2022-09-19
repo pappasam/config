@@ -133,7 +133,7 @@ function! s:packager_init(packager) abort
 
   " Autocompletion And IDE Features:
   call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
-  call a:packager.add('https://github.com/pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
+  call a:packager.add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
@@ -168,7 +168,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tpope/vim-characterize.git')
 
   " KeywordPrg:
-  call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
+  call a:packager.add('git@github.com:pappasam/vim-keywordprg-commands.git')
 
   " Fuzzy Finder:
   call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git', {'requires': [
@@ -198,15 +198,15 @@ function! s:packager_init(packager) abort
       \ ]})
 
   " Code Formatters:
-  call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
+  call a:packager.add('git@github.com:pappasam/vim-filetype-formatter')
 
   " Repl Integration:
-  call a:packager.add('https://github.com/pappasam/nvim-repl.git', {'requires': [
+  call a:packager.add('git@github.com:pappasam/nvim-repl.git', {'requires': [
         \ 'https://github.com/tpope/vim-repeat',
         \ ]})
 
   " Syntax Theme:
-  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
+  call a:packager.add('git@github.com:pappasam/papercolor-theme-slim.git')
 
   " Jupyter Integration:
   call a:packager.add('https://github.com/goerz/jupytext.vim.git')
