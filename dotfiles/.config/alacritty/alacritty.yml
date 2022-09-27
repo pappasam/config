@@ -23,6 +23,10 @@ window:
   title: Chez La Couve
   dynamic_title: false
   decorations_theme_variant: dark
+  padding:
+     x: 5
+     y: 5
+
 # color_start
 # /home/sroeca/src/lib/alacritty-theme/themes/ayu_dark.yaml
 # Colors (Ayu Dark)
