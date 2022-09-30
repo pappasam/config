@@ -24,7 +24,7 @@
     "django",
     "django.db"
   ],
-  "jedi.startupMessage": true,
+  "jedi.startupMessage": false,
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "empty",
   "svelte.enable-ts-plugin": true,
@@ -56,7 +56,7 @@
     ]
   },
   "diagnostic-languageserver.filetypes": {
-    "python": "pylint",
+    "python": ["mypy", "pylint"],
     "nginx": "nginx-linter"
   },
   "diagnostic-languageserver.linters": {
@@ -78,6 +78,31 @@
       "securities": {
         "error": "info"
       }
+    },
+    "mypy": {
+      "sourceName": "mypy",
+      "command": "mypy",
+      "args": [
+        "--no-color-output",
+        "--no-error-summary",
+        "--show-column-numbers",
+        "--follow-imports=silent",
+        "%file"
+      ],
+      "formatPattern": [
+        "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "securities": {
+        "error": "error"
+      },
+      "offsetColumnEnd": 1,
+      "rootPatterns": ["mypy.ini", "pyproject.toml", "setup.py", ".git"]
     },
     "pylint": {
       "sourceName": "pylint",
@@ -113,7 +138,6 @@
         "fatal": "error"
       },
       "offsetColumn": 1,
-      "offsetColumnEnd": 1,
       "formatLines": 1
     }
   },
