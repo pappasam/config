@@ -134,7 +134,7 @@ function! s:packager_init(packager) abort
   " Autocompletion And IDE Features:
   call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
   " Removing for now to test out pyright's features
-  " call a:packager.add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
+  call a:packager.add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
@@ -441,7 +441,6 @@ let g:coc_global_extensions = [
       \ 'coc-lua',
       \ 'coc-markdownlint',
       \ 'coc-prisma',
-      \ 'coc-pyright',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
