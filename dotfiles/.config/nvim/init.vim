@@ -19,7 +19,7 @@ set keywordprg=:DefEng
 set hidden
 
 " Sign Column: always show it
-set signcolumn=yes:2
+set signcolumn=number
 
 set cursorline
 
