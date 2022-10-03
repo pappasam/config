@@ -133,7 +133,6 @@ function! s:packager_init(packager) abort
 
   " Autocompletion And IDE Features:
   call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
-  " Removing for now to test out pyright's features
   call a:packager.add('git@github.com:pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
@@ -165,7 +164,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/unblevable/quick-scope')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
   call a:packager.add('https://github.com/ntpeters/vim-better-whitespace.git')
-  call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua.git')
+  call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:packager.add('https://github.com/tpope/vim-characterize.git')
 
   " KeywordPrg:
