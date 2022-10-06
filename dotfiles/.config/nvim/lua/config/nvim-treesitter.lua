@@ -35,7 +35,6 @@ require("nvim-treesitter.configs").setup({
     "kotlin",
     "latex",
     "ledger",
-    "lua",
     "make",
     "markdown",
     "markdown_inline",
@@ -53,7 +52,6 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "tsx",
     "typescript",
-    "vim",
     "yaml",
   },
 })
