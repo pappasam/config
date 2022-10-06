@@ -12,6 +12,7 @@
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": true,
+  "pullDiagnostic.onSave": true,
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "jedi.jediSettings.autoImportModules": [
