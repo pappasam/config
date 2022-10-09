@@ -654,6 +654,7 @@ set statusline+=%r
 set statusline+=%t
 set statusline+=%m
 set statusline+=%=
+set statusline+=\ %v:%l/%L\  " column, line number, total lines
 set statusline+=\ %y\  " file type
 set statusline+=%#CursorLine#
 set statusline+=\ %{&ff}\  " Unix or Dos
