@@ -815,6 +815,7 @@ function pyglobal-install() {
     jupyterlab
     jupytext
     nginx-language-server
+    pgcli
     pre-commit
     restview
     toml-sort
