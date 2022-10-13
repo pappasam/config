@@ -140,6 +140,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lewis6991/spellsitter.nvim.git')
   call a:packager.add('https://github.com/nvim-treesitter/playground.git')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag.git')
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-context')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
       \ 'https://github.com/tpope/vim-commentary',
       \ ]})
