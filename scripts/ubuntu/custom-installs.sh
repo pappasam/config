@@ -19,6 +19,7 @@ github_install https://github.com/asdf-vm/asdf.git ~/.asdf
 github_install https://github.com/kristijanhusak/vim-packager \
   ~/.config/nvim/pack/packager/opt/vim-packager
 github_install https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+github_install https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
 
 echo_bold_italic_underline 'Downloading https://plantuml.com/'
 mkdir -p ~/java
