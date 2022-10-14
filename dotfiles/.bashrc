@@ -872,7 +872,8 @@ function asdfl() {  ## Install and set the latest version of asdf
 # Runtime: executed commands for interactive shell {{{
 
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-# [[ $- == *i* ]] && stty -ixon
+# Turned off for now, messes with powerlevel10k
+# stty -ixon
 
 # Assigns permissions so that only I have read/write access for files, and
 # read/write/search for directories I own. All others have read access only

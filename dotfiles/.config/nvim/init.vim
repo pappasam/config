@@ -621,6 +621,15 @@ augroup custom_filetype_recognition
 augroup end
 
 " }}}
+" Folding overrides {{{
+
+" Warning: operates at the window level, so be careful with this setting
+augroup custom_fold_overrides
+  autocmd!
+  autocmd FileType gitcommit setlocal nofoldenable
+augroup end
+
+" }}}
 " General: indentation {{{
 
 augroup custom_indentation

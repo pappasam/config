@@ -180,39 +180,6 @@ bindkey -M menuselect '^l' forward-char
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}
-# Z-shell: shell prompt config {{{
-
-# https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
-
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  host          # Hostname section
-  dir           # Current directory section
-  venv          # virtualenv section
-  git           # Git section (git_branch + git_status)
-  line_sep      # Line break
-  char          # Prompt character
-)
-
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL='$ '
-SPACESHIP_DIR_PREFIX=
-SPACESHIP_DIR_TRUNC=0
-SPACESHIP_DIR_TRUNC_REPO=false
-SPACESHIP_HOST_COLOR=yellow
-SPACESHIP_HOST_PREFIX=@
-SPACESHIP_HOST_SHOW=true
-SPACESHIP_USER_COLOR=yellow
-SPACESHIP_USER_SHOW=true
-SPACESHIP_USER_SUFFIX=
-SPACESHIP_VENV_PREFIX='('
-SPACESHIP_VENV_SUFFIX=') '
-SPACESHIP_VENV_GENERIC_NAMES=()
-SPACESHIP_CHAR_COLOR_SUCCESS=green
-SPACESHIP_CHAR_COLOR_FAILURE=green
-SPACESHIP_NODE_SHOW=false
-
-# }}}
 # Z-shell: compdef {{{
 
 # helpers
