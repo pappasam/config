@@ -1,4 +1,4 @@
-# shellcheck disable=SC2206,SC2128,SC2296,SC2148,SC1090,SC1091,SC2034
+# shellcheck disable=SC2206,SC2128,SC2296,SC2148,SC1090,SC1091,SC2034,SC2298
 # Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Powerlevel10k: Configure instant prompt {{{
 
@@ -28,6 +28,15 @@ export HISTFILE=~/.zsh_history
 # Aliases: zsh overrides {{{
 
 alias z='nvim ~/config/dotfiles/.zshrc'
+
+# }}}
+# Functions: zsh overrides {{{
+
+function colormap {
+  for i in {0..255}; do
+    print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
+  done
+}
 
 # }}}
 # Z-shell: plugins {{{
