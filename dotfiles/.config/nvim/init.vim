@@ -726,13 +726,6 @@ augroup custom_comment_config
 augroup end
 
 " }}}
-" General: conceallevel {{{
-
-augroup custom_conceallevel
-  autocmd! FileType help set conceallevel=0
-augroup end
-
-" }}}
 " General: colorColumn adjustments for certain filetypes {{{
 
 augroup custom_colorcolumn
