@@ -1,5 +1,15 @@
 # shellcheck disable=SC2206,SC2128,SC2296,SC2148,SC1090,SC1091,SC2034
 # Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
+# Powerlevel10k: Configure instant prompt {{{
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# }}}
 # Bash: try importing bashrc, but stop here if not found {{{
 
 if [[ -f "$HOME/.bashrc" ]]; then
@@ -22,32 +32,24 @@ alias z='nvim ~/config/dotfiles/.zshrc'
 # }}}
 # Z-shell: plugins {{{
 
-if [ -f "$HOME/.zplug/init.zsh" ]; then
-  source "$HOME/.zplug/init.zsh"
+if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
+  source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
   # BEGIN: List plugins
-  zplug "zplug/zplug", hook-build: "zplug --self-manage"
-  zplug "greymd/docker-zsh-completion", as:plugin
-  zplug "zsh-users/zsh-completions", as:plugin
-  zplug "zdharma/fast-syntax-highlighting", as:plugin
-  zplug "spaceship-prompt/spaceship-prompt", \
-    use:spaceship.zsh, \
-    from:github, \
-    as:theme
-  # END: List plugins
+  zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+  zinit light zdharma/fast-syntax-highlighting
 
-  # Install plugins if there are plugins that have not been installed
-  if ! zplug check --verbose; then
-      printf "Install? [y/N]: "
-      if read -rq; then
-          echo; zplug install
-      fi
-  fi
+  zinit ice wait lucid
+  zinit light felixr/docker-zsh-completion
 
-  # Then, source plugins and add commands to $PATH
-  zplug load
-else
-  echo "zplug not installed, so no plugins available"
+  zinit ice wait lucid
+  zinit light zsh-users/zsh-completions
+
+  zinit ice depth=1
+  zinit light romkatv/powerlevel10k
+
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 
 # }}}

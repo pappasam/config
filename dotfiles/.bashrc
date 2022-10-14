@@ -871,19 +871,8 @@ function asdfl() {  ## Install and set the latest version of asdf
 # }}}
 # Runtime: executed commands for interactive shell {{{
 
-if [[ "$TMUX_PANE" == "%0" ]]; then
-  # if you're in the first tmux pane within all of tmux
-  quote
-elif [ -n "$TMUX" ]; then
-  :
-elif tmux has-session -t Main 2>/dev/null; then
-  :
-else
-  echo 'Command "t" to enter tmux'
-fi
-
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-stty -ixon
+# [[ $- == *i* ]] && stty -ixon
 
 # Assigns permissions so that only I have read/write access for files, and
 # read/write/search for directories I own. All others have read access only
