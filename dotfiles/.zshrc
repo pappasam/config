@@ -54,6 +54,9 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   zinit ice wait lucid
   zinit light zsh-users/zsh-completions
 
+  zinit ice wait lucid
+  zinit light hlissner/zsh-autopair
+
   zinit ice depth=1
   zinit light romkatv/powerlevel10k
 
