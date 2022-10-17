@@ -159,13 +159,13 @@
       "command": "terraform-ls",
       "args": ["serve"],
       "filetypes": ["terraform", "tf"],
-      "rootPatterns": ["Makefile", ".git"]
+      "rootPatterns": ["main.tf", "Makefile", ".git"]
     },
     "tflint": {
       "command": "tflint",
       "args": ["--langserver"],
       "filetypes": ["terraform", "tf"],
-      "rootPatterns": ["Makefile", ".git"]
+      "rootPatterns": ["main.tf", "Makefile", ".git"]
     }
   },
   "suggest.completionItemKindLabels": {
