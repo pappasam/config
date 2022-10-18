@@ -45,8 +45,8 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
   # BEGIN: List plugins
-  zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-  zinit light zdharma/fast-syntax-highlighting
+  zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+  zinit light z-shell/F-Sy-H
 
   zinit ice wait lucid
   zinit light felixr/docker-zsh-completion
