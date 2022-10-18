@@ -46,13 +46,16 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
 
   # BEGIN: List plugins
   zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-  zinit light z-shell/F-Sy-H
+  zinit light zsh-users/zsh-syntax-highlighting
 
   zinit ice wait lucid
   zinit light felixr/docker-zsh-completion
 
   zinit ice wait lucid
   zinit light zsh-users/zsh-completions
+
+  zinit ice wait lucid
+  zinit light zsh-users/zsh-autosuggestions
 
   zinit ice wait lucid
   zinit light hlissner/zsh-autopair
