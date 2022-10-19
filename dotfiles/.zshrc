@@ -1,4 +1,5 @@
-# shellcheck disable=SC2206,SC2128,SC2296,SC2148,SC1090,SC1091,SC2034,SC2298
+#!/usr/bin/zsh
+# shellcheck shell=sh disable=all
 # Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Powerlevel10k: Configure instant prompt {{{
 
