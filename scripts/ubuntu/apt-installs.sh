@@ -42,6 +42,9 @@ sudo apt install -y \
   flameshot \
   fortune \
   gettext \
+  gfortran \
+  gfortran-11 \
+  gfortran-12 \
   git \
   gnupg-agent \
   graphicsmagick \

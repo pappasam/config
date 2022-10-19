@@ -399,6 +399,11 @@ augroup custom_remap_rst
   autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
 augroup end
 
+augroup custom_remap_r
+  autocmd!
+  autocmd FileType r nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
+augroup end
+
 augroup custom_remap_nvim_tree_lua
   autocmd!
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
@@ -441,6 +446,7 @@ let g:coc_global_extensions = [
       \ 'coc-lua',
       \ 'coc-markdownlint',
       \ 'coc-prisma',
+      \ 'coc-r-lsp',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',

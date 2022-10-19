@@ -738,6 +738,10 @@ function rustglobal-install() {
   cargo install-update -a
 }
 
+function rglobal-install() {
+  R -e 'install.packages("languageserver")'
+}
+
 function rubyglobal-install() {
   gem install neovim
   asdf reshim ruby
