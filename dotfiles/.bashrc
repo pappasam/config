@@ -168,6 +168,7 @@ function include() {
 
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
+include "$HOME/.ghcup/env"
 
 # }}}
 # Bash: prompt (PS1) {{{

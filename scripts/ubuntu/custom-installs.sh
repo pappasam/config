@@ -58,6 +58,13 @@ if ! command -v slack > /dev/null; then
   sudo apt update && sudo apt upgrade slack-desktop
 fi
 
+if ! command -v ghcup > /dev/null; then
+  echo_bold_italic_underline 'Installing ghcup (haskell tooling)'
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+fi
+
+echo_bold_italic_underline 'Installing'
+
 echo_bold_italic_underline 'Done setting up custom software! Now:'
 echo_bold_italic_underline '  1. Close your shell (<C-d>)'
 echo_bold_italic_underline '  2. Re-open your shell'

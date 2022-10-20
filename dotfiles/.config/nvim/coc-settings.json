@@ -155,6 +155,18 @@
         "completion": false
       }
     },
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "filetypes": ["haskell", "lhaskell"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ]
+    },
     "terraform-ls": {
       "command": "terraform-ls",
       "args": ["serve"],
