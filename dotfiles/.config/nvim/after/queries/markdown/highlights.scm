@@ -1,3 +1,4 @@
+; extends
 (atx_heading (atx_h1_marker) @text.title.h1 (inline) @text.title.h1)
 (atx_heading (atx_h2_marker) @text.title.h2 (inline) @text.title.h2)
 (atx_heading (atx_h3_marker) @text.title.h3 (inline) @text.title.h3)
