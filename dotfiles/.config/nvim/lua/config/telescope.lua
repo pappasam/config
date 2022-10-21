@@ -9,10 +9,7 @@ ts.setup({
       ".git",
       ".venv",
     },
-    layout_config = {
-      vertical = { width = 0.90 },
-    },
-    layout_strategy = "vertical",
+    layout_strategy = "horizontal",
     mappings = {
       i = {
         ["<esc>"] = actions.close,

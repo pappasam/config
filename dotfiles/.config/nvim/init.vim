@@ -354,8 +354,10 @@ function! s:default_key_mappings()
   " Telescope: create shortcuts for finding stuff
   nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
   nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
+  nnoremap <silent> <C-p><C-g> <Cmd>Telescope git_status<CR>
   nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
   nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
+  nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <Cmd>FiletypeFormat<cr>
