@@ -404,9 +404,9 @@ augroup custom_remap_rst
   autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
 augroup end
 
-augroup custom_remap_r
+augroup custom_remap_lsp_format
   autocmd!
-  autocmd FileType r,haskell nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
+  autocmd FileType haskell nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
 augroup end
 
 augroup custom_remap_nvim_tree_lua

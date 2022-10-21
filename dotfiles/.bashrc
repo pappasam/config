@@ -741,6 +741,7 @@ function rustglobal-install() {
 
 function rglobal-install() {
   R -e 'install.packages("languageserver", repos="https://ftp.osuosl.org/pub/cran/")'
+  R -e 'install.packages("formatR", repos="https://ftp.osuosl.org/pub/cran/")'
 }
 
 function rubyglobal-install() {
