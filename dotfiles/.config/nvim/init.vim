@@ -373,6 +373,9 @@ function! s:default_key_mappings()
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
 
+  " Mouse: toggle folds
+  nnoremap <silent> <2-LeftMouse> za
+
   " Auto-execute all filetypes
   let &filetype=&filetype
 endfunction
