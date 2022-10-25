@@ -809,6 +809,7 @@ function pyglobal-install() {
     jupytext
     nginx-language-server
     pgcli
+    poetry
     pre-commit
     restview
     toml-sort
