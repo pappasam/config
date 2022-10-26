@@ -291,9 +291,6 @@ alias gop='gh browse'
 # Battery
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
 
-# Python: enable things like "pip install 'requests[security]'"
-alias pip='noglob pip'
-
 # }}}
 # Functions: general {{{
 

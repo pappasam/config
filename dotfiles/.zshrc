@@ -30,6 +30,9 @@ export HISTFILE=~/.zsh_history
 
 alias z='nvim ~/config/dotfiles/.zshrc'
 
+# Python: enable things like "pip install 'requests[security]'"
+alias pip='noglob pip'
+
 # }}}
 # Functions: zsh overrides {{{
 
