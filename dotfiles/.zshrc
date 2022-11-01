@@ -53,6 +53,9 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   zinit light zsh-users/zsh-syntax-highlighting
 
   zinit ice wait lucid
+  zinit light greymd/docker-zsh-completion
+
+  zinit ice wait lucid
   zinit light zsh-users/zsh-completions
   export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
