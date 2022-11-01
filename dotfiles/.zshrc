@@ -218,6 +218,7 @@ compdef _vplug_completion vplug
 compdef _man m
 compdef _command ve
 compdef _asdf_complete_plugins asdfl
+compdef _docker-compose dc
 
 # }}}
 # Runtime: executed commands for interactive shell {{{
