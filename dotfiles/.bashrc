@@ -278,7 +278,6 @@ alias pbpaste='xsel --clipboard --output'
 alias publicip='curl -s checkip.amazonaws.com'
 
 # Git shortcuts
-alias g='git status'
 alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
@@ -461,6 +460,11 @@ function gr() {
     echo "'$PWD' is not inside a git repository"
     return 1
   fi
+}
+
+# git root + git status
+function g() {
+  gr && git status
 }
 
 # git diff
