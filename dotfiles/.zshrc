@@ -166,6 +166,11 @@ if command -v pipx > /dev/null; then
   eval "$(register-python-argcomplete pipx)"
 fi
 
+# Add autocompletion for kubectl
+if command -v kubectl > /dev/null; then
+  source <(kubectl completion zsh)
+fi
+
 # }}}
 # Z-shell: key remapping {{{
 
