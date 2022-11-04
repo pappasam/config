@@ -70,18 +70,15 @@ export LS_COLORS
 # }}}
 # Environment: exported variables {{{
 
-# React
 export REACT_EDITOR='less'
 
-# Colored GCC warnings and errors
 GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01"
 GCC_COLORS="$GCC_COLORS;32:locus=01:quote=01"
 export GCC_COLORS
 
-# Configure less (de-initialization clears the screen)
-# Gives nicely-colored man pages
 LESS="--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS"
 LESS="$LESS --HILITE-UNREAD --tabs=4 --quit-if-one-screen"
+LESS="$LESS --mouse --wheel-lines=3"
 export LESS
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
@@ -92,14 +89,11 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
-# Configure Man Pager
 export MANWIDTH=79
 export MANPAGER=less
 
-# Git
 export GIT_PAGER=less
 
-# Set default text editor
 export EDITOR=nvim
 
 # Environment variable controlling difference between HI-DPI / Non HI_DPI
@@ -125,7 +119,6 @@ export BROWSER='/usr/bin/firefox'
 # Enable editor to scale with monitor's DPI
 export WINIT_HIDPI_FACTOR=1.0
 
-# Bat
 export BAT_PAGER=''
 
 # Commands to execute before a bash prompt.
