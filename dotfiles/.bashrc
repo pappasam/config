@@ -464,7 +464,7 @@ function gr() {
 
 # git root + git status
 function g() {
-  gr && git status
+  git status
 }
 
 # git diff
