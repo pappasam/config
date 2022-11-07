@@ -766,6 +766,7 @@ function nodeglobal-install() {
     nginxbeautifier
     npm
     prettier
+    prettier-plugin-prisma
     prettier-plugin-svelte
     tree-sitter-cli
     write-good
