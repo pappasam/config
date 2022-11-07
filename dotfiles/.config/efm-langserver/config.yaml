@@ -9,3 +9,5 @@ tools:
 languages:
   markdown:
     - <<: *dict-gcide
+  text:
+    - <<: *dict-gcide
