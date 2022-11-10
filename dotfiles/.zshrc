@@ -229,7 +229,7 @@ compdef _docker-compose dc
 
 # shellcheck disable=2202,2086,1087
 if [ $commands[direnv] ]; then
-  eval "$(direnv hook zsh)"
+  emulate zsh -c "$(direnv hook zsh)"
 fi
 
 # }}}

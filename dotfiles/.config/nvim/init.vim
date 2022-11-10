@@ -611,7 +611,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.asm set filetype=nasm
   autocmd BufEnter *.scm set filetype=query
   autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials set filetype=dosini
-  autocmd BufEnter *.config,.cookiecutterrc set filetype=yaml
+  autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION set filetype=yaml
   autocmd BufEnter *.handlebars set filetype=html
   autocmd BufEnter *.hql,*.q set filetype=hive
   autocmd BufEnter *.js,*.gs set filetype=javascript
