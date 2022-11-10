@@ -60,9 +60,6 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
   zinit ice wait lucid
-  zinit light zsh-users/zsh-autosuggestions
-
-  zinit ice wait lucid
   zinit light hlissner/zsh-autopair
 
   zinit ice depth=1
