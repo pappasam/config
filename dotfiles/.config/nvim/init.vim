@@ -331,6 +331,9 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
 
+  " Toggle Treesitter Context:
+  nnoremap <silent> <leader>c <Cmd>TSContextToggle<CR>
+
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
   nnoremap <leader><leader>l <Cmd>Twilight<CR>
@@ -519,6 +522,7 @@ function! s:setup_lua_packages()
   call s:safe_require('config.nvim-web-devicons')
   call s:safe_require('config.spellsitter')
   call s:safe_require('config.telescope')
+  call s:safe_require('config.treesitter-context')
   call s:safe_require('config.twilight')
   call s:safe_require('config.zen-mode')
 endfunction

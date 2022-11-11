@@ -1,1 +1,3 @@
-require("treesitter-context").setup()
+require("treesitter-context").setup({
+  enable = false,  -- disabled by default
+})
