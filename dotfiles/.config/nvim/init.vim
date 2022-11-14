@@ -691,11 +691,8 @@ augroup end
 " }}}
 " General: tabline {{{
 
-function! s:startswith(longer, shorter) abort
-  return a:longer[0:len(a:shorter)-1] ==# a:shorter
-endfunction
-
-function! MyTabLine()
+function! CustomTabLine()
+  " Initialize tabline string
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -707,7 +704,7 @@ function! MyTabLine()
     " set the tab page number (for mouse clicks)
     let s ..= '%' .. (i + 1) .. 'T'
     " the label is made by MyTabLabel()
-    let s ..= ' ' . (i + 1) . ':%{MyTabLabel(' .. (i + 1) .. ')} '
+    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
   endfor
   " after the last tab fill with TabLineFill and reset tab page nr
   let s ..= '%#TabLineFill#%T'
@@ -718,7 +715,7 @@ function! MyTabLine()
   return s
 endfunction
 
-function! MyTabLabel(n)
+function! CustomTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
   let bname = bufname(buflist[winnr - 1])
@@ -726,7 +723,7 @@ function! MyTabLabel(n)
   return bnamemodified
 endfunction
 
-set tabline=%!MyTabLine()
+set tabline=%!CustomTabLine()
 
 " }}}
 " General: environment variables {{{
