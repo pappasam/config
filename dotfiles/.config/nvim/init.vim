@@ -785,7 +785,7 @@ augroup end
 " General: gx improved {{{
 
 function! s:gx_improved()
-  silent execute '!gio open ' . expand('<cfile>')
+  silent execute '!firefox ' . fnameescape(expand('<cfile>'))
 endfunction
 
 " }}}
