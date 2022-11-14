@@ -661,7 +661,7 @@ augroup custom_indentation
 augroup end
 
 " }}}
-" General: statusline & tabline {{{
+" General: statusline {{{
 
 " Status Line
 set laststatus=2
@@ -691,7 +691,11 @@ augroup end
 " }}}
 " General: tabline {{{
 
-function MyTabLine()
+function! s:startswith(longer, shorter) abort
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+
+function! MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -703,7 +707,7 @@ function MyTabLine()
     " set the tab page number (for mouse clicks)
     let s ..= '%' .. (i + 1) .. 'T'
     " the label is made by MyTabLabel()
-    let s ..= ' %{MyTabLabel(' .. (i + 1) .. ')} '
+    let s ..= ' ' . (i + 1) . ':%{MyTabLabel(' .. (i + 1) .. ')} '
   endfor
   " after the last tab fill with TabLineFill and reset tab page nr
   let s ..= '%#TabLineFill#%T'
@@ -714,10 +718,12 @@ function MyTabLine()
   return s
 endfunction
 
-function MyTabLabel(n)
+function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
-  return bufname(buflist[winnr - 1])
+  let bname = bufname(buflist[winnr - 1])
+  let bnamemodified = fnamemodify(bname, ':t')
+  return bnamemodified
 endfunction
 
 set tabline=%!MyTabLine()
