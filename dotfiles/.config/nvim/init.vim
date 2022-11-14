@@ -625,7 +625,7 @@ augroup custom_filetype_recognition
   autocmd BufEnter *.tsv set filetype=tsv
   autocmd BufEnter .envrc set filetype=sh
   autocmd BufEnter .gitignore,.dockerignore set filetype=conf
-  autocmd BufEnter .jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
+  autocmd BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
   autocmd BufEnter Dockerfile.* set filetype=dockerfile
   autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
@@ -720,6 +720,9 @@ function! CustomTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   let bname = bufname(buflist[winnr - 1])
   let bnamemodified = fnamemodify(bname, ':t')
+  if bnamemodified == ''
+    return '[NO NAME]'
+  endif
   return bnamemodified
 endfunction
 

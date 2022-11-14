@@ -44,6 +44,7 @@ require("nvim-treesitter.configs").setup({
     "prisma",
     "python",
     "query",
+    "r",
     "regex",
     "rst",
     "ruby",
