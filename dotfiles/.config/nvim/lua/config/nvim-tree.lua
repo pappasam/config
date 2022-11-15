@@ -5,4 +5,11 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  view = {
+    mappings = {
+      list = {
+        { key = "c", action = "close_node" },
+      },
+    },
+  },
 })
