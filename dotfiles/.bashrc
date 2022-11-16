@@ -127,8 +127,9 @@ export PROMPT_COMMAND='auto_venv_precmd'
 # Silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
 export MESA_DEBUG=silent
 
-# For installing R through ASDF
+# For installing R through ASDF, need shared libraries in Python and R
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
+export PYTHON_CONFIGURE_OPTS='--enable-shared'
 
 # }}}
 # Environment: path appends + misc env setup {{{

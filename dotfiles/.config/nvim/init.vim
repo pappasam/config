@@ -1136,8 +1136,9 @@ let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
       \ 'python': 'bpython -q',
+      \ 'R': 'R',
       \ 'sh': 'sh',
-      \ 'vim': 'nvim --clean -ERZM',
+      \ 'vim': 'nvim --clean -ERM',
       \ 'zsh': 'zsh',
       \ }
 let g:repl_default = &shell
