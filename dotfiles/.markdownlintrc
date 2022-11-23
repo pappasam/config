@@ -1,5 +1,4 @@
 {
-  // The configuration file for markdownlint
   "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/master/schema/markdownlint-config-schema.json",
   "line-length": false,
   "first-line-h1": false,
