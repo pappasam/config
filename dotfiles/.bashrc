@@ -810,6 +810,7 @@ function pyglobal-install() {
     jupyterlab
     jupytext
     nginx-language-server
+    nginxfmt
     pgcli
     poetry
     pre-commit
