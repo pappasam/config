@@ -59,9 +59,6 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   zinit light zsh-users/zsh-completions
   export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
-  zinit ice wait lucid
-  zinit light hlissner/zsh-autopair
-
   zinit ice depth=1
   zinit light romkatv/powerlevel10k
 
