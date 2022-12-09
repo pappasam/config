@@ -131,6 +131,9 @@ export MESA_DEBUG=silent
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
 export PYTHON_CONFIGURE_OPTS='--enable-shared'
 
+# Kubernetes
+export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
+
 # }}}
 # Environment: path appends + misc env setup {{{
 

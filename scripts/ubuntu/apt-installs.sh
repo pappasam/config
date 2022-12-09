@@ -29,6 +29,7 @@ sudo apt install -y \
   cmatrix \
   cmus \
   cmus-plugin-ffmpeg \
+  colordiff \
   cowsay  \
   cpanminus \
   curl \
