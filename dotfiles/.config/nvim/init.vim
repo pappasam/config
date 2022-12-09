@@ -375,8 +375,13 @@ function! s:default_key_mappings()
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
 
-  " Mouse: toggle folds
-  nnoremap <silent> <2-LeftMouse> za
+  " Mouse: toggle folds with middle click (I never use it for paste)
+  noremap <silent> <MiddleMouse>   <LeftMouse>za
+  noremap <silent> <2-MiddleMouse> <LeftMouse>za
+  noremap <silent> <3-MiddleMouse> <LeftMouse>za
+  noremap <silent> <4-MiddleMouse> <LeftMouse>za
+  noremap <silent> <5-MiddleMouse> <LeftMouse>za
+  noremap <silent> <6-MiddleMouse> <LeftMouse>za
 
   " Auto-execute all filetypes
   let &filetype=&filetype
@@ -415,11 +420,6 @@ augroup custom_remap_nvim_tree_lua
   autocmd!
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
-augroup end
-
-augroup custom_remap_folds_open
-  autocmd!
-  autocmd BufEnter tmux.conf,init.vim,.bashrc,.zshrc nnoremap <buffer> <silent> <2-LeftMouse> za
 augroup end
 
 " }}}
