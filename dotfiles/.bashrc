@@ -819,7 +819,6 @@ function pyglobal-install() {
     pre-commit
     restview
     toml-sort
-    ueberzug
   )
   if command -v pipx > /dev/null; then
     # shellcheck disable=SC2128
