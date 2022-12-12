@@ -223,7 +223,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/delphinus/vim-firestore.git')
   call a:packager.add('https://github.com/mattn/vim-xxdcursor')
   call a:packager.add('https://github.com/neovimhaskell/haskell-vim')
-  call a:packager.add('https://github.com/vim-scripts/SAS-Syntax')
 endfunction
 
 packadd vim-packager
