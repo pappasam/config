@@ -145,9 +145,6 @@ function! s:packager_init(packager) abort
       \ 'https://github.com/tpope/vim-commentary',
       \ ]})
 
-  " LocationList:
-  call a:packager.add('https://github.com/elbeardmorez/vim-loclist-follow.git')
-
   " Editorconfig:
   call a:packager.add('https://github.com/gpanders/editorconfig.nvim.git')
 
