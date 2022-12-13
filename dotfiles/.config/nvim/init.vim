@@ -248,6 +248,7 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
   vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
   nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
+  nnoremap <silent>        <leader>sh <Cmd>call CocActionAsync('highlight')<CR>
   nnoremap <silent>        <leader>sp <Cmd>CocPrev<CR>
   nnoremap <silent>        <leader>sl <Cmd>CocListResume<CR>
   nnoremap <silent>        <leader>sc <Cmd>CocList commands<cr>
@@ -475,7 +476,6 @@ function! s:autocmd_custom_coc()
   augroup custom_coc
     autocmd FileType coctree set nowrap
     autocmd FileType nginx let b:coc_additional_keywords = ['$']
-    autocmd CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd User CocNvimInit call s:default_key_mappings()
   augroup end
