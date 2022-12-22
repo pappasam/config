@@ -453,7 +453,6 @@ let g:coc_global_extensions = [
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
-      \ 'coc-svelte',
       \ 'coc-svg',
       \ 'coc-syntax',
       \ 'coc-texlab',

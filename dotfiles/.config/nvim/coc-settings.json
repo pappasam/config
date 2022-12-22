@@ -178,6 +178,12 @@
       "args": ["--langserver"],
       "filetypes": ["terraform", "tf"],
       "rootPatterns": ["main.tf", "Makefile", ".git"]
+    },
+    "svelteserver": {
+      "command": "svelteserver",
+      "args": ["--stdio"],
+      "filetypes": ["svelte"],
+      "rootPatterns": ["package.json", ".git"]
     }
   },
   "suggest.completionItemKindLabels": {

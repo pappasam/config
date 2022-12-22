@@ -4,37 +4,31 @@ local Rule = require("nvim-autopairs.rule")
 npairs.setup({
   map_c_h = true,
   map_c_w = true,
+  map_cr = true,
+  enable_check_bracket_line = false,
 })
 
-npairs.add_rules({
-  -- BEGIN Rule: add spaces between parentheses
-  Rule(" ", " "):with_pair(function(opts)
-    local pair = opts.line:sub(opts.col - 1, opts.col)
-    return vim.tbl_contains({ "()", "[]", "{}" }, pair)
-  end),
-  Rule("( ", " )")
-    :with_pair(function()
-      return false
+-- BEGIN Rule: add spaces between parentheses
+local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+npairs.add_rules {
+  Rule(' ', ' ')
+    :with_pair(function (opts)
+      local pair = opts.line:sub(opts.col - 1, opts.col)
+      return vim.tbl_contains({
+        brackets[1][1]..brackets[1][2],
+        brackets[2][1]..brackets[2][2],
+        brackets[3][1]..brackets[3][2],
+      }, pair)
     end)
-    :with_move(function(opts)
-      return opts.prev_char:match(".%)") ~= nil
-    end)
-    :use_key(")"),
-  Rule("{ ", " }")
-    :with_pair(function()
-      return false
-    end)
-    :with_move(function(opts)
-      return opts.prev_char:match(".%}") ~= nil
-    end)
-    :use_key("}"),
-  Rule("[ ", " ]")
-    :with_pair(function()
-      return false
-    end)
-    :with_move(function(opts)
-      return opts.prev_char:match(".%]") ~= nil
-    end)
-    :use_key("]"),
-  -- END Rule: add spaces between parentheses
-})
+}
+for _,bracket in pairs(brackets) do
+  npairs.add_rules {
+    Rule(bracket[1]..' ', ' '..bracket[2])
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+        return opts.prev_char:match('.%'..bracket[2]) ~= nil
+      end)
+      :use_key(bracket[2])
+  }
+end
+-- END Rule: add spaces between parentheses

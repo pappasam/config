@@ -775,6 +775,7 @@ function nodeglobal-install() {
     prettier
     prettier-plugin-prisma
     prettier-plugin-svelte
+    svelte-language-server
     tree-sitter-cli
     write-good
   )
