@@ -787,7 +787,7 @@ function nodeglobal-install() {
 # install default python dependencies
 function pydev-install() {
   local for_pip=(
-    bpython
+    ipython
     mypy
     pip
     pylint
