@@ -376,8 +376,6 @@ function! s:default_key_mappings()
   noremap <silent> <2-MiddleMouse> <LeftMouse>za
   noremap <silent> <3-MiddleMouse> <LeftMouse>za
   noremap <silent> <4-MiddleMouse> <LeftMouse>za
-  noremap <silent> <5-MiddleMouse> <LeftMouse>za
-  noremap <silent> <6-MiddleMouse> <LeftMouse>za
 
   " Auto-execute all filetypes
   let &filetype=&filetype
