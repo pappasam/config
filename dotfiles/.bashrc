@@ -828,6 +828,7 @@ function pyglobal-install() {
       pipx uninstall "$arg"
       pipx install "$arg"
     done
+    pipx inject jupyterlab jupyterlab-vim
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
