@@ -473,6 +473,7 @@ function! s:autocmd_custom_coc()
   augroup custom_coc
     autocmd FileType coctree set nowrap
     autocmd FileType nginx let b:coc_additional_keywords = ['$']
+    autocmd FileType scss let b:coc_additional_keywords = ['@']
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd User CocNvimInit call s:default_key_mappings()
   augroup end
