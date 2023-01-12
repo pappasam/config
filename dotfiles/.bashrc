@@ -695,6 +695,10 @@ EOL
   git commit -m "Initial commit"
 }
 
+function bsympy() {
+  bpython --paste "$HOME/config/scripts/bpython/start-sympy-session.py"
+}
+
 # }}}
 # Functions: upgrade/install {{{
 
@@ -820,7 +824,6 @@ function pyglobal-install() {
     poetry
     pre-commit
     restview
-    sympy
     toml-sort
   )
   if command -v pipx > /dev/null; then
@@ -831,7 +834,6 @@ function pyglobal-install() {
       pipx install "$arg"
     done
     pipx inject jupyterlab jupyterlab-vim
-    pipx inject sympy ipython
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
