@@ -25,6 +25,9 @@
     "django",
     "django.db"
   ],
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.telemetry.enable": false,
+  "Lua.hint.enable": false,
   "jedi.startupMessage": false,
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "empty",
@@ -212,5 +215,5 @@
     "snippet": "\ue60b",
     "typeParameter": "\uf728",
     "default": "\uf29c"
-  }
+  },
 }
