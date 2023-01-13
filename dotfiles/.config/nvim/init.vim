@@ -313,10 +313,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
   nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
 
-  " Substitute: replace word under cursor
-  nnoremap <leader><leader>s yiw:%s/\<<C-R>0\>//g<Left><Left>
-  vnoremap <leader><leader>s y:%s/<C-R>0//g<Left><Left>
-
   " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
