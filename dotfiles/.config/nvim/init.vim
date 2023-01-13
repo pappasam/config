@@ -279,9 +279,6 @@ function! s:default_key_mappings()
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
 
-  " InsertModeHelpers: Insert one line above after enter
-  inoremap <M-CR> <CR><C-o>O
-
   " MoveVisual: up and down visually only if count is specified before
   nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
   vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
@@ -322,12 +319,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
 
-  " Toggle Treesitter Context:
-  nnoremap <silent> <leader>c <Cmd>TSContextToggle<CR>
-
   " Zenmode / Writing:
   nnoremap <leader><leader>g <Cmd>ZenMode<CR>
-  nnoremap <leader><leader>l <Cmd>Twilight<CR>
 
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i <Cmd>IndentLinesToggle<CR>
