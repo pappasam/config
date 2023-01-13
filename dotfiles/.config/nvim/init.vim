@@ -776,7 +776,7 @@ endfunction
 " }}}
 " General: digraphs {{{
 
-digraph jj 699  " Hawaiian character ʻ
+digraph '' 699  " Hawaiian character ʻ
 
 " }}}
 " General: trailing whitespace {{{
