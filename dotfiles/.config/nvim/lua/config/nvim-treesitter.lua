@@ -63,6 +63,7 @@ require("nvim-treesitter.configs").setup({
     "rust",
     "sql",
     "svelte",
+    "terraform",
     "toml",
     "tsx",
     "typescript",
