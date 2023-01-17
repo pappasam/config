@@ -1118,7 +1118,7 @@ let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
       \ 'python': 'ipython --no-autoindent',
-      \ 'R': 'R',
+      \ 'r': 'R',
       \ 'sh': 'sh',
       \ 'vim': 'nvim --clean -ERM',
       \ 'zsh': 'zsh',
