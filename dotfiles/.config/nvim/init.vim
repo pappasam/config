@@ -436,7 +436,7 @@ let g:coc_global_extensions = [
       \ 'coc-markdownlint',
       \ 'coc-prisma',
       \ 'coc-r-lsp',
-      \ 'coc-rls',
+      \ 'coc-rust-analyzer',
       \ 'coc-sh',
       \ 'coc-snippets',
       \ 'coc-sumneko-lua',

@@ -733,7 +733,7 @@ function global-install() {
 }
 
 function rustglobal-install() {
-  rustup component add rls
+  rustup component add rust-analyzer
   rustup component add rust-src
   cargo install bat
   cargo install cargo-deb
