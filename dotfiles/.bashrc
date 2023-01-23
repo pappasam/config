@@ -782,6 +782,7 @@ function nodeglobal-install() {
     svelte-language-server
     tree-sitter-cli
     write-good
+    yaml-language-server
   )
   # shellcheck disable=SC2128,SC2086
   npm install --no-save -g $env

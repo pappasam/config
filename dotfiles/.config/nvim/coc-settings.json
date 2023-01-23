@@ -45,19 +45,6 @@
     "<C-x>": "action:split",
     "<C-t>": "action:tabe"
   },
-  "yaml.schemas": {
-    "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.17-standalone-strict/all.json": [
-      "/kubernetes/*",
-      "/kubernetes/base/*",
-      "/kubernetes/environments/*"
-    ],
-    "https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json": "/*docker-compose.yml",
-    "https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json": "/*serverless.yml",
-    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
-      "/*open-api*.yml",
-      "/*open-api*.yaml"
-    ]
-  },
   "diagnostic-languageserver.filetypes": {
     "python": ["mypy", "pylint"],
     "nginx": "nginx-linter"
@@ -186,6 +173,25 @@
       "args": ["--stdio"],
       "filetypes": ["svelte"],
       "rootPatterns": ["package.json", ".git"]
+    },
+    "yaml": {
+      "command": "yaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["yaml"],
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "kubernetes": ["/kubernetes/**"],
+            "https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json": "/*docker-compose.yml",
+            "https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json": "/*serverless.yml",
+            "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
+              "/*open-api*.yml",
+              "/*open-api*.yaml"
+            ]
+          }
+        }
+      },
+      "rootPatterns": [".git"]
     }
   },
   "suggest.completionItemKindLabels": {
@@ -214,5 +220,5 @@
     "snippet": "\ue60b",
     "typeParameter": "\uf728",
     "default": "\uf29c"
-  },
+  }
 }
