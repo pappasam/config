@@ -544,6 +544,26 @@ function github-list {
   curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
 }
 
+function git-remote-convert-ssh(){
+  if git branch &>/dev/null
+  then
+    sed -r -i 's:https\://([^/]+)/(.*\.git):git@\1\:\2:g' "$(git rev-parse --git-dir)/config"
+  else
+    echo 'Not inside git project'
+    return 1
+  fi
+}
+
+function git-remote-convert-https(){
+  if git branch &>/dev/null
+  then
+    sed -r -i 's:git@([^/]+)\:(.*\.git):https\://\1/\2:g' "$(git rev-parse --git-dir)/config"
+  else
+    echo 'Not inside git project'
+    return 1
+  fi
+}
+
 # }}}
 # Functions: vim {{{
 
