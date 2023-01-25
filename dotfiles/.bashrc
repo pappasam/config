@@ -544,7 +544,7 @@ function github-list {
   curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
 }
 
-function git-remote-convert-ssh(){
+function git-remote-to-ssh(){
   if git branch &>/dev/null
   then
     sed -r -i 's:https\://([^/]+)/(.*\.git):git@\1\:\2:g' "$(git rev-parse --git-dir)/config"
@@ -554,7 +554,7 @@ function git-remote-convert-ssh(){
   fi
 }
 
-function git-remote-convert-https(){
+function git-remote-to-https(){
   if git branch &>/dev/null
   then
     sed -r -i 's:git@([^/]+)\:(.*\.git):https\://\1/\2:g' "$(git rev-parse --git-dir)/config"
