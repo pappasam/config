@@ -1056,9 +1056,6 @@ let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_nogx = 1
 
-" Man Pager
-let g:man_hardwrap = v:true
-
 " WinResize:
 let g:winresizer_start_key = '<C-\>'
 let g:winresizer_vert_resize = 1
