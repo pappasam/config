@@ -133,7 +133,6 @@ function! s:packager_init(packager) abort
 
   " Autocompletion And IDE Features:
   call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
-  call a:packager.add('https://github.com/pappasam/coc-jedi.git', {'do': 'yarn install --frozen-lockfile && yarn build'})
 
   " TreeSitter:
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
@@ -347,8 +346,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
 
   " FiletypeFormat: remap leader f to do filetype formatting
-  nnoremap <silent> <leader>f <Cmd>FiletypeFormat<cr>
-  vnoremap <silent> <leader>f :FiletypeFormat<cr>
+  nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+  vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
 
   " GitMessenger:
   nmap <leader>sg <Plug>(git-messenger)
@@ -435,6 +434,7 @@ let g:coc_global_extensions = [
       \ 'coc-ltex',
       \ 'coc-markdownlint',
       \ 'coc-prisma',
+      \ 'coc-pyright',
       \ 'coc-r-lsp',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',

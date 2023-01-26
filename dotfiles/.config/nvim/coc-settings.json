@@ -46,7 +46,6 @@
     "<C-t>": "action:tabe"
   },
   "diagnostic-languageserver.filetypes": {
-    "python": ["mypy", "pylint"],
     "nginx": "nginx-linter"
   },
   "diagnostic-languageserver.linters": {
@@ -71,12 +70,16 @@
     },
     "mypy": {
       "sourceName": "mypy",
-      "command": "mypy",
+      "command": "dmypy",
+      "debounce": 100,
       "args": [
+        "run",
+        "--log-file",
+        "/dev/null",
+        "--",
         "--no-color-output",
         "--no-error-summary",
         "--show-column-numbers",
-        "--follow-imports=silent",
         "%file"
       ],
       "formatPattern": [
