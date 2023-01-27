@@ -13,6 +13,8 @@
   "suggest.noselect": true,
   "diagnostic.enable": true,
   "pullDiagnostic.onSave": true,
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
