@@ -1113,7 +1113,7 @@ let g:git_messenger_no_default_mappings = v:true
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
-      \ 'python': 'ipython --no-autoindent',
+      \ 'python': 'bpython -q',
       \ 'r': 'R',
       \ 'sh': 'sh',
       \ 'vim': 'nvim --clean -ERM',

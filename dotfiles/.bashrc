@@ -785,13 +785,8 @@ function perlglobal-install() {
 
 function nodeglobal-install() {
   local env=(
-    @angular/cli
     bash-language-server
-    devspace
     dockerfile-language-server-nodejs
-    firebase-tools
-    git+https://github.com/Perlence/tstags.git
-    jsctags
     neovim
     nginx-linter
     nginxbeautifier
@@ -813,7 +808,6 @@ function nodeglobal-install() {
 function pydev-install() {
   local for_pip=(
     bpython
-    ipython
     mypy
     pip
     pylint
@@ -831,14 +825,11 @@ function pyglobal-install() {
   asdf reshim python
   local for_pipx=(
     alacritty-colorscheme
-    aws-sam-cli
     black
     cookiecutter
     docformatter
     docker-compose
     isort
-    jupyterlab
-    jupytext
     nginx-language-server
     nginxfmt
     pgcli
@@ -854,7 +845,6 @@ function pyglobal-install() {
       pipx uninstall "$arg"
       pipx install "$arg"
     done
-    pipx inject jupyterlab jupyterlab-vim
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
