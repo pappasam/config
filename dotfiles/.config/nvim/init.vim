@@ -58,9 +58,6 @@ set autoread
 
 set grepprg=rg\ --vimgrep
 
-" Paste: this is actually typed <C-/>, but term nvim thinks this is <C-_>
-set pastetoggle=<C-_>
-
 " Don't timeout on mappings
 set notimeout
 
@@ -116,7 +113,7 @@ augroup custom_incsearch_highlight
   autocmd CmdlineLeave /,\? set nohlsearch
 augroup end
 
-augroup custom_nginx
+augroup custom_iskeyword_overrides
   autocmd!
   autocmd FileType nginx set iskeyword+=$
   autocmd FileType zsh,sh set iskeyword+=-
@@ -246,8 +243,8 @@ function! s:default_key_mappings()
   nmap     <silent>        <leader>sr <Plug>(coc-rename)
   nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
   vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
-  nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
   nnoremap <silent>        <leader>sh <Cmd>call CocActionAsync('highlight')<CR>
+  nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
   nnoremap <silent>        <leader>sp <Cmd>CocPrev<CR>
   nnoremap <silent>        <leader>sl <Cmd>CocListResume<CR>
   nnoremap <silent>        <leader>sc <Cmd>CocList commands<cr>
@@ -264,9 +261,6 @@ function! s:default_key_mappings()
 
   " View Syntax Groups
   nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
-
-  " Escape: also clears highlighting
-  nnoremap <silent> <esc> <Cmd>noh<return><esc>
 
   " J: unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
@@ -315,7 +309,6 @@ function! s:default_key_mappings()
 
   " TogglePluginWindows:
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
-  nnoremap <silent> <space>J <Cmd>NvimTreeToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
 
   " Zenmode / Writing:
