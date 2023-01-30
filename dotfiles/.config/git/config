@@ -13,7 +13,7 @@
 [merge "ours"]
   driver = true
 [pull]
-  rebase = false
+  rebase = true
 [push]
   default = matching
 [commit]
