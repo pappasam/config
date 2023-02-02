@@ -23,7 +23,7 @@ window:
   title: Chez La Couve
   dynamic_title: false
   dynamic_padding: true
-  decorations_theme_variant: dark
+  decorations_theme_variant: Dark
   padding:
     x: 2
     y: 2
