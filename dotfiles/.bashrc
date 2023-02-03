@@ -700,7 +700,7 @@ function pynew() {
   mkinstance
   ve
   poetry add --group=dev \
-    mypy \
+    pyright \
     pylint \
     black \
     docformatter \
@@ -808,7 +808,7 @@ function nodeglobal-install() {
 function pydev-install() {
   local for_pip=(
     bpython
-    mypy
+    pyright
     pip
     pylint
     wheel
