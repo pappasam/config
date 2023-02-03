@@ -465,6 +465,8 @@ function gr() {
 # git root + git status
 function g() {
   git status
+  # I don't want this to return an error when used interactively
+  return 0
 }
 
 # git diff
