@@ -150,6 +150,11 @@
         "hie.yaml"
       ]
     },
+    "nginx-language-server": {
+      "command": "nginx-language-server",
+      "filetypes": ["nginx"],
+      "rootPatterns": ["nginx.conf", ".git"]
+    },
     "terraform-ls": {
       "command": "terraform-ls",
       "args": ["serve"],
