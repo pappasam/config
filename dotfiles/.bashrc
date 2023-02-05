@@ -860,6 +860,11 @@ function goglobal-install() {
 }
 
 function alacritty-install() {
+  # Run this 5 times because, when dependencies update, require multiple builds
+  cargo build --release
+  cargo build --release
+  cargo build --release
+  cargo build --release
   cargo build --release
 
   # Install
