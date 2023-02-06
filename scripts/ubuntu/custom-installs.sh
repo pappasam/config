@@ -16,22 +16,8 @@ function github_install() {
 }
 
 github_install https://github.com/asdf-vm/asdf.git ~/.asdf
-github_install https://github.com/kristijanhusak/vim-packager \
-  ~/.config/nvim/pack/packager/opt/vim-packager
 github_install https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 github_install https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
-
-echo_bold_italic_underline 'Downloading https://plantuml.com/'
-mkdir -p ~/java
-wget -O ~/java/plantuml.jar \
-  http://sourceforge.net/projects/plantuml/files/plantuml.jar/download
-
-if [ ! -d "$HOME/.zplug" ]; then
-  echo_bold_italic_underline 'Downloading https://github.com/zplug/zplug'
-  curl -sL --proto-redir -all,https \
-    https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | \
-    zsh
-fi
 
 if ! command -v docker > /dev/null; then
   # See: https://github.com/docker/docker-install

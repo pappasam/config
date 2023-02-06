@@ -122,6 +122,13 @@ augroup end
 " }}}
 " General: package management {{{
 
+" Automatically install nvim-packager
+call system([
+      \ 'git',
+      \ 'clone',
+      \ 'https://github.com/kristijanhusak/vim-packager',
+      \ $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
+
 " Available Commands:
 "   PackagerStatus, PackagerInstall, PackagerUpdate, PackagerClean
 
