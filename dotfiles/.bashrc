@@ -810,6 +810,7 @@ function nodeglobal-install() {
 function pydev-install() {
   local for_pip=(
     bpython
+    ipython
     pyright
     pip
     pylint
