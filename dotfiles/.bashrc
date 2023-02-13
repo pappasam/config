@@ -902,6 +902,7 @@ function asdfpurge() {  ## Purge every version from plugin except current
     echo "Uninstalling $plugin_name==$plugin_version..."
     asdf uninstall "$plugin_name" "$plugin_version"
   done
+  echo "Reshiming $plugin_name..."
   asdf reshim "$plugin_name"
 }
 
