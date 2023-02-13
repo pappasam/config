@@ -217,6 +217,7 @@ compdef _vplug_completion vplug
 compdef _man m
 compdef _command ve
 compdef _asdf_complete_plugins asdfl
+compdef _asdf_complete_plugins asdfpurge
 compdef _docker-compose dc
 
 # }}}

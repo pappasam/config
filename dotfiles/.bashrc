@@ -892,6 +892,19 @@ function asdfl() {  ## Install and set the latest version of asdf
   asdf install "$1" latest && asdf global "$1" latest
 }
 
+function asdfpurge() {  ## Purge every version from plugin except current
+  if [ $# -ne 1 ]; then
+    echo 'Usage: asdfpurge <plugin-name>'
+    return 1
+  fi
+  local plugin_name="$1"
+  for plugin_version in $(asdf list "$plugin_name" | grep -v '\*'); do
+    echo "Uninstalling $plugin_name==$plugin_version..."
+    asdf uninstall "$plugin_name" "$plugin_version"
+  done
+  asdf reshim "$plugin_name"
+}
+
 # }}}
 # Runtime: executed commands for interactive shell {{{
 
