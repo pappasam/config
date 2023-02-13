@@ -831,7 +831,6 @@ function pyglobal-install() {
     black
     cookiecutter
     docformatter
-    docker-compose
     isort
     nginx-language-server
     nginxfmt
