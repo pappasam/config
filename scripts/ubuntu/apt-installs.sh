@@ -63,6 +63,7 @@ sudo apt install -y \
   libffi-dev \
   libfreetype6-dev \
   libgd-dev \
+  libgraphviz-dev \
   libicu-dev \
   libjpeg-dev \
   libldap2-dev \
