@@ -752,6 +752,7 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 augroup custom_comment_config
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
   autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
