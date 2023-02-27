@@ -208,9 +208,6 @@ function! s:packager_init(packager) abort
   " Syntax Theme:
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
 
-  " Jupyter Integration:
-  call a:packager.add('https://github.com/goerz/jupytext.vim.git')
-
   " Syntax Highlighting & Indentation:
   call a:packager.add('https://github.com/evanleck/vim-svelte.git', {'requires': [
       \ 'https://github.com/cakebaker/scss-syntax.vim.git',
