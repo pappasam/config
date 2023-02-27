@@ -41,7 +41,7 @@ Install the latest version from: <https://insomnia.rest/download>
 Download relevant nerd fonts from here: <https://www.nerdfonts.com/font-downloads>
 
 1. Download a Nerd Font
-2. Unzip and copy to `~/.fonts`
+2. Unzip and copy to `~/.fonts`. Note: it's possible this has changed to `~/.fontconfig` in the latest versions of Ubuntu / Mint.
 3. Run the command `fc-cache -fv` to manually rebuild the font cache.
 
 ### Pandoc
