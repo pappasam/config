@@ -831,6 +831,7 @@ function pyglobal-install() {
     black
     cookiecutter
     docformatter
+    httpie
     isort
     nginx-language-server
     nginxfmt
