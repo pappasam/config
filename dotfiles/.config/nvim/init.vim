@@ -869,7 +869,7 @@ function! s:focus_writing()
   execute 'buffer ' . current_buffer
   let w:custom_focus_writing = 1
   setlocal number norelativenumber wrap nocursorline
-        \ fillchars=vert:\ ,eob:\  colorcolumn=0
+        \ fillchars=vert:\ ,eob:\  colorcolumn=0 nofoldenable
 endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
