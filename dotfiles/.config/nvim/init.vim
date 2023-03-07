@@ -192,9 +192,9 @@ function! s:packager_init(packager) abort
 
   " Previewers:
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim', {'requires': [
-      \ 'https://github.com/tyru/open-browser.vim',
-      \ ]})
+  " call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim', {'requires': [
+  "     \ 'https://github.com/tyru/open-browser.vim',
+  "     \ ]})
 
   " Code Formatters:
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
@@ -1046,9 +1046,6 @@ function! s:preview()
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
     silent exec 'MarkdownPreview'
-  elseif &filetype ==? 'plantuml'
-    " from plantuml-previewer.vim
-    silent exec 'PlantumlOpen'
   else
     silent !gio open '%:p'
   endif
