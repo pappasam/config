@@ -846,16 +846,30 @@ function! s:resize_window_height()
 endfunction
 
 function! s:focus_writing()
-  let current_buffer=bufnr("%")
-  silent tabe
-  silent set nonumber norelativenumber nocursorline colorcolumn=0
-  silent vsplit
-  silent vsplit
-  silent wincmd h
-  silent set winwidth=88
-  silent wincmd =
-  silent execute 'buffer ' . current_buffer
-  silent set number norelativenumber wrap nocursorline colorcolumn=0
+  if exists('w:custom_focus_writing')
+    tabclose
+    return
+  endif
+  let current_buffer = bufnr("%")
+  tabe
+  " Left Window
+  setlocal nonumber norelativenumber nocursorline
+        \ fillchars=vert:\ ,eob:\  colorcolumn=0
+        \ winhighlight=Normal:NormalFloat
+  vsplit
+  vsplit
+  " Right Window
+  setlocal nonumber norelativenumber nocursorline
+        \ fillchars=vert:\ ,eob:\  colorcolumn=0
+        \ winhighlight=Normal:NormalFloat
+  wincmd h
+  " Middle Window
+  setlocal winwidth=88
+  wincmd =
+  execute 'buffer ' . current_buffer
+  let w:custom_focus_writing = 1
+  setlocal number norelativenumber wrap nocursorline
+        \ fillchars=vert:\ ,eob:\  colorcolumn=0
 endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
