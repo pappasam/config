@@ -186,7 +186,6 @@ function! s:packager_init(packager) abort
 
   " Writing:
   call a:packager.add('https://github.com/dkarter/bullets.vim')
-  call a:packager.add('https://github.com/folke/zen-mode.nvim.git')
   call a:packager.add('https://github.com/jlesquembre/rst-tables.nvim')
   call a:packager.add('https://github.com/folke/twilight.nvim.git')
   call a:packager.add('https://github.com/moiatgit/vim-rst-sections')
@@ -316,8 +315,8 @@ function! s:default_key_mappings()
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
 
-  " Zenmode / Writing:
-  nnoremap <leader><leader>g <Cmd>ZenMode<CR>
+  " Writing:
+  nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
 
   " IndentLines: toggle if indent lines is visible
   nnoremap <silent> <leader>i <Cmd>IndentLinesToggle<CR>
@@ -502,7 +501,6 @@ function! s:setup_lua_packages()
   call s:safe_require('config.telescope')
   call s:safe_require('config.treesitter-context')
   call s:safe_require('config.twilight')
-  call s:safe_require('config.zen-mode')
 endfunction
 
 call s:setup_lua_packages()
@@ -803,7 +801,7 @@ augroup custom_fix_whitespace_save
 augroup end
 
 " }}}
-" General: resize window {{{
+" General: window resizing / manipulation functions {{{
 
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
@@ -847,8 +845,22 @@ function! s:resize_window_height()
   endif
 endfunction
 
+function! s:focus_writing()
+  let current_buffer=bufnr("%")
+  silent tabe
+  silent set nonumber norelativenumber nocursorline colorcolumn=0
+  silent vsplit
+  silent vsplit
+  silent wincmd h
+  silent set winwidth=88
+  silent wincmd =
+  silent execute 'buffer ' . current_buffer
+  silent set number norelativenumber wrap nocursorline colorcolumn=0
+endfunction
+
 command! ResizeWindowWidth call s:resize_window_width()
 command! ResizeWindowHeight call s:resize_window_height()
+command! FocusWriting call s:focus_writing()
 
 " }}}
 " General: avoid saving 'lcd' {{{
