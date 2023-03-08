@@ -891,15 +891,15 @@ function! s:focus_writing()
         \ winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
-  setlocal winwidth=88
-  wincmd =
+  vertical resize 88
   execute 'buffer ' . current_buffer
   let w:custom_focus_writing = 1
   " Note: stlnc uses <C-k>NS to enter a space character in statusline
-  setlocal number norelativenumber wrap nocursorline
+  setlocal number norelativenumber wrap nocursorline winfixwidth
         \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
         \ nofoldenable winhighlight=StatusLine:StatusLineNC
   let g:custom_focus_writing = win_getid()
+  wincmd =
   augroup custom_focus_writing
     autocmd!
     autocmd WinEnter customfocuswriting call s:autocmd_focuswriting()
