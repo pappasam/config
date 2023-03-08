@@ -687,7 +687,7 @@ function! CustomTabLine()
   let s ..= '%#TabLineFill#%T'
   " right-align the label to close the current tab page
   if tabpagenr('$') > 1
-    let s ..= '%=%#TabLine#%999Xclose'
+    let s ..= '%=%#TabLine#%999X ✗ '
   endif
   return s
 endfunction
