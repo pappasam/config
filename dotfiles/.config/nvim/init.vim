@@ -845,18 +845,10 @@ function! s:resize_window_height()
   endif
 endfunction
 
-function! s:focus_writing()
+function! s:focuswriting()
   if exists('w:custom_focus_writing')
-    try
-      tabclose
-    catch
-      quitall
-    endtry
-    augroup custom_focus_writing
-      autocmd!
-    augroup end
-    augroup! custom_focus_writing
-    unlet g:custom_focus_writing
+    call s:focuswriting_close()
+    call s:focuswriting_clean()
     return
   endif
   let current_buffer = bufnr('%')
@@ -864,16 +856,10 @@ function! s:focus_writing()
     let success = win_gotoid(g:custom_focus_writing)
     if (success)
       execute 'buffer ' . current_buffer
-      setlocal number norelativenumber wrap nocursorline
-            \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
-            \ nofoldenable winhighlight=StatusLine:StatusLineNC
+      call s:focuswriting_settings_middle()
       return
     else
-      augroup custom_focus_writing
-        autocmd!
-      augroup end
-      augroup! custom_focus_writing
-      unlet g:custom_focus_writing
+      call s:focuswriting_clean()
     endif
   endif
   tabe
@@ -884,45 +870,59 @@ function! s:focus_writing()
   endtry
   setlocal nobuflisted
   " Left Window
-  setlocal nonumber norelativenumber nocursorline
-        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
-        \ winhighlight=Normal:NormalFloat
+  call s:focuswriting_settings_side()
   vsplit
   vsplit
   " Right Window
-  setlocal nonumber norelativenumber nocursorline
-        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
-        \ winhighlight=Normal:NormalFloat
+  call s:focuswriting_settings_side()
   wincmd h
   " Middle Window
   vertical resize 88
   execute 'buffer ' . current_buffer
   let w:custom_focus_writing = 1
-  " Note: stlnc uses <C-k>NS to enter a space character in statusline
-  setlocal number norelativenumber wrap nocursorline winfixwidth
-        \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
-        \ nofoldenable winhighlight=StatusLine:StatusLineNC
+  call s:focuswriting_settings_middle()
   let g:custom_focus_writing = win_getid()
   wincmd =
   augroup custom_focus_writing
     autocmd!
-    autocmd WinEnter customfocuswriting call s:autocmd_focuswriting()
+    autocmd WinEnter customfocuswriting call s:focuswriting_autocmd()
   augroup end
 endfunction
 
-function! s:autocmd_focuswriting()
+function! s:focuswriting_settings_side()
+  setlocal nonumber norelativenumber nocursorline
+        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
+        \ winhighlight=Normal:NormalFloat
+endfunction
+
+function! s:focuswriting_settings_middle()
+  " Note: stlnc uses <C-k>NS to enter a space character in statusline
+  setlocal number norelativenumber wrap nocursorline winfixwidth
+        \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
+        \ nofoldenable winhighlight=StatusLine:StatusLineNC
+endfunction
+
+function! s:focuswriting_clean()
+  augroup custom_focus_writing
+    autocmd!
+  augroup end
+  augroup! custom_focus_writing
+  unlet g:custom_focus_writing
+endfunction
+
+function! s:focuswriting_close()
+  if tabpagenr('$') == 1
+    quitall
+  else
+    tabclose
+  endif
+endfunction
+
+function! s:focuswriting_autocmd()
   wincmd p
   if bufname('%') == 'customfocuswriting'
-    try
-      tabclose
-    catch
-      quitall
-    endtry
-    augroup custom_focus_writing
-      autocmd!
-    augroup end
-    augroup! custom_focus_writing
-    unlet g:custom_focus_writing
+    call s:focuswriting_close()
+    call s:focuswriting_clean()
   else
     wincmd =
   endif
@@ -930,7 +930,7 @@ endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
 command! ResizeWindowHeight call s:resize_window_height()
-command! FocusWriting call s:focus_writing()
+command! FocusWriting call s:focuswriting()
 
 " }}}
 " General: avoid saving 'lcd' {{{
