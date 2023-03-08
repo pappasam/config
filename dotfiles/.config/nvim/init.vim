@@ -854,13 +854,13 @@ function! s:focus_writing()
   tabe
   " Left Window
   setlocal nonumber norelativenumber nocursorline
-        \ fillchars=vert:\ ,eob:\  colorcolumn=0
+        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
         \ winhighlight=Normal:NormalFloat
   vsplit
   vsplit
   " Right Window
   setlocal nonumber norelativenumber nocursorline
-        \ fillchars=vert:\ ,eob:\  colorcolumn=0
+        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
         \ winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
