@@ -847,7 +847,11 @@ endfunction
 
 function! s:focus_writing()
   if exists('w:custom_focus_writing')
-    tabclose
+    try
+      tabclose
+    catch
+      quitall
+    endtry
     augroup custom_focus_writing
       autocmd!
     augroup end
@@ -909,7 +913,11 @@ endfunction
 function! s:autocmd_focuswriting()
   wincmd p
   if bufname('%') == 'customfocuswriting'
-    tabclose
+    try
+      tabclose
+    catch
+      quitall
+    endtry
     augroup custom_focus_writing
       autocmd!
     augroup end
