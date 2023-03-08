@@ -857,12 +857,20 @@ function! s:focus_writing()
   endif
   let current_buffer = bufnr('%')
   if exists('g:custom_focus_writing')
-    call win_gotoid(g:custom_focus_writing)
-    execute 'buffer ' . current_buffer
-    setlocal number norelativenumber wrap nocursorline
-          \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
-          \ nofoldenable winhighlight=StatusLine:StatusLineNC
-    return
+    let success = win_gotoid(g:custom_focus_writing)
+    if (success)
+      execute 'buffer ' . current_buffer
+      setlocal number norelativenumber wrap nocursorline
+            \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
+            \ nofoldenable winhighlight=StatusLine:StatusLineNC
+      return
+    else
+      augroup custom_focus_writing
+        autocmd!
+      augroup end
+      augroup! custom_focus_writing
+      unlet g:custom_focus_writing
+    endif
   endif
   tabe
   try
