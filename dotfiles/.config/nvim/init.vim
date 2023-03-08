@@ -868,8 +868,10 @@ function! s:focus_writing()
   wincmd =
   execute 'buffer ' . current_buffer
   let w:custom_focus_writing = 1
+  " Note: stlnc uses <C-k>NS to enter a space character in statusline
   setlocal number norelativenumber wrap nocursorline
-        \ fillchars=vert:\ ,eob:\  colorcolumn=0 nofoldenable
+        \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable
+        \ winhighlight=StatusLine:StatusLineNC
 endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
