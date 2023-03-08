@@ -912,7 +912,7 @@ endfunction
 
 function! s:focuswriting_close()
   if tabpagenr('$') == 1
-    quitall
+    wqall
   else
     tabclose
   endif
