@@ -764,6 +764,7 @@ function rustglobal-install() {
   cargo install fd-find
   cargo install git-delta
   cargo install ripgrep
+  cargo install sd
   cargo install stylua --features lua52 --features luau
   asdf reshim rust
   cargo install-update -a
