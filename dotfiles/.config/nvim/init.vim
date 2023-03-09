@@ -695,12 +695,20 @@ endfunction
 function! CustomTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
+  let postfix = ''
+  for buf in buflist
+    if bufname(buf) == 'customfocuswriting'
+      let postfix = '🎯'
+      break
+    endif
+  endfor
   let bname = bufname(buflist[winnr - 1])
   let bnamemodified = fnamemodify(bname, ':t')
   if bnamemodified == ''
-    return '[NO NAME]'
+    return '[No Name]' . postfix
+  else
+    return bnamemodified . postfix
   endif
-  return bnamemodified
 endfunction
 
 set tabline=%!CustomTabLine()
