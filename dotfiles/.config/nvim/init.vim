@@ -77,8 +77,8 @@ endif
 " Set Background: defaults to dark
 set background=dark
 
-" Colorcolumn:
-set colorcolumn=80
+" Colorcolumn: off by default
+set colorcolumn=
 
 " Status Line: specifics for custom status line
 set laststatus=2 ttimeoutlen=50 noshowmode
