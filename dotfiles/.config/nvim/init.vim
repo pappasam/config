@@ -720,11 +720,6 @@ augroup custom_comment_config
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup end
 
-augroup custom_colorcolumn
-  autocmd!
-  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-augroup end
-
 " }}}
 " General: abbreviations {{{
 
