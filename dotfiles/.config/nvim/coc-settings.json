@@ -9,6 +9,7 @@
     "text"
   ],
   "coc.source.word.filetypes": ["gitcommit", "html", "markdown", "rst", "text"],
+  "snippets.priority": 100000,
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": true,
