@@ -1,9 +1,0 @@
-#!/bin/bash
-
-CURRENT=$(basename "$(alacritty-colorscheme -c "$HOME/.config/alacritty/alacritty.yml" status)")
-
-if [[ $CURRENT == 'papercolor_light.yaml' ]]; then
-  echo -n 'light'
-else
-  echo -n 'dark'
-fi

@@ -407,6 +407,16 @@ function light() {
   fi
 }
 
+function alacritty-which-colorscheme() {
+  local current
+  current=$(basename "$(alacritty-colorscheme -c "$HOME/.config/alacritty/alacritty.yml" status)")
+  if [[ $current == 'papercolor_light.yaml' ]]; then
+    echo -n 'light'
+  else
+    echo -n 'dark'
+  fi
+}
+
 # }}}
 # Functions: tmux {{{
 

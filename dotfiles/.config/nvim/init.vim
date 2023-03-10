@@ -1,125 +1,4 @@
 " Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
-" General: options {{{
-
-" Enable filetype detection, plugin loading, and indentation loading
-filetype plugin indent on
-
-" Code Completion:
-set completeopt=menuone,longest wildmode=longest:full wildmenu
-
-" Messages:
-" c = don't give |ins-completion-menu| messages; they're noisy
-" I = ignore startup message
-set shortmess+=c shortmess+=I
-
-" K will lookup words from the english dictionary for all files
-set keywordprg=:DefEng
-
-" Hidden Buffer: enable instead of having to write each buffer
-set hidden
-
-" Sign Column: always show it
-set signcolumn=number
-
-set cursorline
-
-" Mouse: enable GUI mouse support in all modes
-set mouse=a
-
-" SwapFiles: prevent their creation
-set noswapfile
-
-" Command Line Height: higher for display for messages
-set cmdheight=2
-
-" Line Wrapping: do not wrap lines by default
-set nowrap linebreak
-
-" Indentation:
-set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
-
-" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
-set isfname+=@-@ isfname+=:
-
-" Highlight Search: do that
-" note: hlsearcha nd nohlsearch are defined in autocmd outside function
-set incsearch inccommand=nosplit
-
-" Spell Checking:
-set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
-set spelllang=en_us
-
-" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
-set nojoinspaces
-
-set showtabline=2
-
-set autoread
-
-set grepprg=rg\ --vimgrep
-
-" Don't timeout on mappings
-set notimeout
-
-" Numbering:
-set number
-
-" Window Splitting: Set split settings (options: splitright, splitbelow)
-set splitright
-
-" Terminal Color Support: only set guicursor if truecolor
-if $COLORTERM ==# 'truecolor'
-  set termguicolors
-else
-  set guicursor=
-endif
-
-" Set Background: defaults to dark
-set background=dark
-
-" Colorcolumn: off by default
-set colorcolumn=
-
-" Status Line: specifics for custom status line
-set laststatus=2 ttimeoutlen=50 noshowmode
-
-" ShowCommand: turn off character printing to vim status line
-set noshowcmd
-
-" Updatetime: time Vim waits to do something after I stop moving
-set updatetime=300
-
-" Linux Dev Path: system libraries
-set path+=/usr/include/x86_64-linux-gnu/
-
-" Vim History: for command line; can't imagine that more than 100 is needed
-set history=100
-
-" Set the diff expression to EnhancedDiff
-set diffopt+=internal,algorithm:patience
-
-" Folding
-set foldenable foldmethod=marker foldnestmax=1
-
-" Redraw Window: whenever a window regains focus
-augroup custom_redraw_on_refocus
-  autocmd!
-  autocmd FocusGained * redraw!
-augroup end
-
-augroup custom_incsearch_highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? set hlsearch
-  autocmd CmdlineLeave /,\? set nohlsearch
-augroup end
-
-augroup custom_iskeyword_overrides
-  autocmd!
-  autocmd FileType nginx set iskeyword+=$
-  autocmd FileType zsh,sh set iskeyword+=-
-augroup end
-
-" }}}
 " General: package management {{{
 
 " Automatically install nvim-packager
@@ -231,7 +110,211 @@ call packager#setup(function('s:packager_init'), {
       \ })
 
 " }}}
-" General: key mappings {{{
+" General: environment variables {{{
+
+" Path: add node_modules for language servers / linters / other stuff
+let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+
+" }}}
+" General: options {{{
+
+" Enable filetype detection, plugin loading, and indentation loading
+filetype plugin indent on
+
+" Code Completion:
+set completeopt=menuone,longest wildmode=longest:full wildmenu
+
+" Messages:
+" c = don't give |ins-completion-menu| messages; they're noisy
+" I = ignore startup message
+set shortmess+=c shortmess+=I
+
+" K will lookup words from the english dictionary for all files
+set keywordprg=:DefEng
+
+" Hidden Buffer: enable instead of having to write each buffer
+set hidden
+
+" Sign Column: always show it
+set signcolumn=number
+
+set cursorline
+
+" Mouse: enable GUI mouse support in all modes
+set mouse=a
+
+" SwapFiles: prevent their creation
+set noswapfile
+
+" Command Line Height: higher for display for messages
+set cmdheight=2
+
+" Line Wrapping: do not wrap lines by default
+set nowrap linebreak
+
+" Indentation:
+set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
+
+" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
+set isfname+=@-@ isfname+=:
+
+" Highlight Search: do that
+" note: hlsearcha nd nohlsearch are defined in autocmd outside function
+set incsearch inccommand=nosplit
+
+" Spell Checking:
+set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
+set spelllang=en_us
+
+" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
+set nojoinspaces
+
+set showtabline=2
+
+set autoread
+
+set grepprg=rg\ --vimgrep
+
+" Don't timeout on mappings
+set notimeout
+
+" Numbering:
+set number
+
+" Window Splitting: Set split settings (options: splitright, splitbelow)
+set splitright
+
+" Terminal Color Support: only set guicursor if truecolor
+if $COLORTERM ==# 'truecolor'
+  set termguicolors
+else
+  set guicursor=
+endif
+
+" Set Background: defaults to dark
+set background=dark
+
+" Colorcolumn: off by default
+set colorcolumn=
+
+" Status Line: specifics for custom status line
+set laststatus=2 ttimeoutlen=50 noshowmode
+
+" ShowCommand: turn off character printing to vim status line
+set noshowcmd
+
+" Updatetime: time Vim waits to do something after I stop moving
+set updatetime=300
+
+" Linux Dev Path: system libraries
+set path+=/usr/include/x86_64-linux-gnu/
+
+" Vim History: for command line; can't imagine that more than 100 is needed
+set history=100
+
+" Set the diff expression to EnhancedDiff
+set diffopt+=internal,algorithm:patience
+
+" Folding
+set foldenable foldmethod=marker foldnestmax=1
+
+" }}}
+" General: statusline {{{
+
+" Status Line
+set laststatus=2
+set statusline=
+set statusline+=%#CursorLine#
+set statusline+=\ %{mode()}
+set statusline+=\ %*\  " Color separator + space
+set statusline+=%{&paste?'[P]':''}
+set statusline+=%{&spell?'[S]':''}
+set statusline+=%r
+set statusline+=%t
+set statusline+=%m
+set statusline+=%=
+set statusline+=\ %v:%l/%L\  " column, line number, total lines
+set statusline+=\ %y\  " file type
+set statusline+=%#CursorLine#
+set statusline+=\ %{&ff}\  " Unix or Dos
+set statusline+=%*  " default color
+set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
+
+" Status Line
+augroup custom_statusline
+  autocmd!
+  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
+augroup end
+
+" }}}
+" General: tabline {{{
+
+function! CustomTabLine()
+  " Initialize tabline string
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s ..= '%#TabLineSel#'
+    else
+      let s ..= '%#TabLine#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s ..= '%' .. (i + 1) .. 'T'
+    " the label is made by MyTabLabel()
+    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
+  endfor
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s ..= '%#TabLineFill#%T'
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s ..= '%=%#TabLine#%999X ✗ '
+  endif
+  return s
+endfunction
+
+function! CustomTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let postfix = ''
+  for buf in buflist
+    if bufname(buf) == 'customfocuswriting'
+      let postfix = '🎯'
+      break
+    endif
+  endfor
+  let bname = bufname(buflist[winnr - 1])
+  let bnamemodified = fnamemodify(bname, ':t')
+  if bnamemodified == ''
+    return '[No Name]' . postfix
+  else
+    return bnamemodified . postfix
+  endif
+endfunction
+
+set tabline=%!CustomTabLine()
+
+" }}}
+" General: autocmds (global, generic) {{{
+
+augroup custom_redraw_on_refocus
+  autocmd!
+  autocmd FocusGained * redraw!
+augroup end
+
+augroup custom_vim_resized
+  autocmd!
+  autocmd VimResized * wincmd =
+augroup end
+
+augroup custom_incsearch_highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? set hlsearch
+  autocmd CmdlineLeave /,\? set nohlsearch
+augroup end
+
+" }}}
+" General: key mappings (global and filetype-specific) {{{
 
 let mapleader = ','
 
@@ -402,7 +485,7 @@ augroup custom_remap_nvim_tree_lua
 augroup end
 
 " }}}
-" Package: language server protocol (LSP) with coc.nvim {{{
+" Package: lsp with coc.nvim {{{
 
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
@@ -479,7 +562,7 @@ augroup custom_coc
 augroup end
 
 " }}}
-" Package: lua extensions for Neovim {{{
+" Package: lua extensions {{{
 
 function! s:safe_require(package)
   try
@@ -514,24 +597,6 @@ augroup custom_general_lua_extensions
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
-
-" }}}
-" General: alacritty callback for dynamic terminal color change {{{
-
-function! s:alacritty_set_background()
-  let g:alacritty_background = system('alacritty-which-colorscheme')
-  if !v:shell_error
-    let &background = g:alacritty_background
-  else
-    echom 'Error calling "alacritty-which-colorscheme"'
-  endif
-endfunction
-
-call s:alacritty_set_background()
-call jobstart(
-      \ 'ls ' . $HOME . '/.config/alacritty/alacritty.yml | entr -ps "echo alacritty_change"',
-      \ {'on_stdout': { j, d, e -> s:alacritty_set_background() }}
-      \ )
 
 " }}}
 " General: syntax & colorscheme {{{
@@ -584,7 +649,7 @@ catch
 endtry
 
 " }}}
-" General: filetype {{{
+" General: filetype assignment {{{
 
 augroup custom_filetype_recognition
   autocmd!
@@ -612,16 +677,19 @@ augroup custom_filetype_recognition
 augroup end
 
 " }}}
-" Folding overrides {{{
+" General: autocmds (filetype-specific, generic) {{{
 
-" Warning: operates at the window level, so be careful with this setting
-augroup custom_fold_overrides
+augroup custom_iskeyword_overrides
   autocmd!
-  autocmd FileType gitcommit setlocal nofoldenable
+  autocmd FileType nginx set iskeyword+=$
+  autocmd FileType zsh,sh set iskeyword+=-
 augroup end
 
-" }}}
-" General: indentation {{{
+augroup custom_fold_overrides
+  autocmd!
+  " Warning: operates at the window level, so be careful with this setting
+  autocmd FileType gitcommit setlocal nofoldenable
+augroup end
 
 augroup custom_indentation
   autocmd!
@@ -637,87 +705,25 @@ augroup custom_indentation
   autocmd Filetype yaml setlocal indentkeys-=<:>
 augroup end
 
-" }}}
-" General: statusline {{{
-
-" Status Line
-set laststatus=2
-set statusline=
-set statusline+=%#CursorLine#
-set statusline+=\ %{mode()}
-set statusline+=\ %*\  " Color separator + space
-set statusline+=%{&paste?'[P]':''}
-set statusline+=%{&spell?'[S]':''}
-set statusline+=%r
-set statusline+=%t
-set statusline+=%m
-set statusline+=%=
-set statusline+=\ %v:%l/%L\  " column, line number, total lines
-set statusline+=\ %y\  " file type
-set statusline+=%#CursorLine#
-set statusline+=\ %{&ff}\  " Unix or Dos
-set statusline+=%*  " default color
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
-
-" Status Line
-augroup custom_statusline
+augroup custom_comment_config
+  " Notes:
+  " commentstring: read by vim-commentary; must be one template
+  " comments: csv of comments.
+  " formatoptions: influences how Vim formats text
+  "   ':help fo-table' will get the desired result
   autocmd!
-  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
+  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
+  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
+  autocmd FileType sh setlocal formatoptions=jcroql
+  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 augroup end
 
-" }}}
-" General: tabline {{{
-
-function! CustomTabLine()
-  " Initialize tabline string
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s ..= '%#TabLineSel#'
-    else
-      let s ..= '%#TabLine#'
-    endif
-    " set the tab page number (for mouse clicks)
-    let s ..= '%' .. (i + 1) .. 'T'
-    " the label is made by MyTabLabel()
-    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
-  endfor
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s ..= '%#TabLineFill#%T'
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s ..= '%=%#TabLine#%999X ✗ '
-  endif
-  return s
-endfunction
-
-function! CustomTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let postfix = ''
-  for buf in buflist
-    if bufname(buf) == 'customfocuswriting'
-      let postfix = '🎯'
-      break
-    endif
-  endfor
-  let bname = bufname(buflist[winnr - 1])
-  let bnamemodified = fnamemodify(bname, ':t')
-  if bnamemodified == ''
-    return '[No Name]' . postfix
-  else
-    return bnamemodified . postfix
-  endif
-endfunction
-
-set tabline=%!CustomTabLine()
-
-" }}}
-" General: environment variables {{{
-
-" Path: add node_modules for language servers / linters / other stuff
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+augroup custom_colorcolumn
+  autocmd!
+  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
+augroup end
 
 " }}}
 " General: abbreviations {{{
@@ -743,32 +749,6 @@ cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets
 
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
-
-" }}}
-" General: comment & text format options {{{
-
-" Notes:
-" commentstring: read by vim-commentary; must be one template
-" comments: csv of comments.
-" formatoptions: influences how Vim formats text
-"   ':help fo-table' will get the desired result
-augroup custom_comment_config
-  autocmd!
-  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
-  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
-  autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-augroup end
-
-" }}}
-" General: colorColumn adjustments for certain filetypes {{{
-
-augroup custom_colorcolumn
-  autocmd!
-  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-augroup end
 
 " }}}
 " General: gx improved {{{
@@ -974,6 +954,7 @@ function! s:clean_unicode()
   silent! %s/…/.../g
   silent! %s/​//g
 endfunction
+
 command! CleanUnicode call s:clean_unicode()
 
 " }}}
