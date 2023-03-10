@@ -853,6 +853,12 @@ function! s:resize_window_height()
   endif
 endfunction
 
+command! ResizeWindowWidth call s:resize_window_width()
+command! ResizeWindowHeight call s:resize_window_height()
+
+" }}}
+" General: focus writing {{{
+
 function! s:focuswriting()
   if exists('w:custom_focus_writing')
     call s:focuswriting_close()
@@ -936,8 +942,6 @@ function! s:focuswriting_autocmd()
   endif
 endfunction
 
-command! ResizeWindowWidth call s:resize_window_width()
-command! ResizeWindowHeight call s:resize_window_height()
 command! FocusWriting call s:focuswriting()
 
 " }}}
