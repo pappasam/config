@@ -66,7 +66,6 @@ function! s:packager_init(packager) abort
   " Writing:
   call a:packager.add('https://github.com/dkarter/bullets.vim')
   call a:packager.add('https://github.com/jlesquembre/rst-tables.nvim')
-  call a:packager.add('https://github.com/folke/twilight.nvim.git')
   call a:packager.add('https://github.com/moiatgit/vim-rst-sections')
 
   " Previewers:
@@ -583,7 +582,6 @@ function! s:setup_lua_packages()
   call s:safe_require('config.spellsitter')
   call s:safe_require('config.telescope')
   call s:safe_require('config.treesitter-context')
-  call s:safe_require('config.twilight')
 endfunction
 
 call s:setup_lua_packages()
