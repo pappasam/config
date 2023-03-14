@@ -407,14 +407,9 @@ function light() {
   fi
 }
 
-function alacritty-which-colorscheme() {
-  local current
-  current=$(basename "$(alacritty-colorscheme -c "$HOME/.config/alacritty/alacritty.yml" status)")
-  if [[ $current == 'papercolor_light.yaml' ]]; then
-    echo -n 'light'
-  else
-    echo -n 'dark'
-  fi
+# return 0 if background is dark, 1 if background is light
+function alacritty-is-dark() {
+  grep -qs 'COLORSCHEME: ayu_dark.yaml' "$HOME/.config/alacritty/alacritty.yml"
 }
 
 # }}}
@@ -443,7 +438,7 @@ function t() {
     echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
   else
     tmux -2 new-session -d -s $SESSION
-    if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
+    if ! alacritty-is-dark; then
       tmux -2 select-window -t $SESSION:1
       tmux source-file ~/.config/tmux/tmux-light.conf
     fi
@@ -481,10 +476,10 @@ function g() {
 
 # git diff
 function gd() {
-  if [[ "$(alacritty-which-colorscheme)" = 'light' ]]; then
-    git diff "$@" | delta --light --line-numbers
-  else
+  if alacritty-is-dark; then
     git diff "$@" | delta --dark  --line-numbers
+  else
+    git diff "$@" | delta --light --line-numbers
   fi
 }
 
