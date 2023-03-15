@@ -70,9 +70,6 @@ function! s:packager_init(packager) abort
 
   " Previewers:
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  " call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim', {'requires': [
-  "     \ 'https://github.com/tyru/open-browser.vim',
-  "     \ ]})
 
   " Code Formatters:
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
