@@ -237,7 +237,7 @@ set statusline+=%*  " default color
 set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 
 " Status Line
-augroup custom_statusline
+augroup statusline_overrides
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
 augroup end
@@ -291,22 +291,103 @@ endfunction
 set tabline=%!CustomTabLine()
 
 " }}}
-" General: autocmds (global, generic) {{{
+" General: autocmds {{{
 
-augroup custom_redraw_on_refocus
+augroup redraw_on_refocus
   autocmd!
   autocmd FocusGained * redraw!
 augroup end
 
-augroup custom_vim_resized
+augroup vim_resized
   autocmd!
   autocmd VimResized * wincmd =
 augroup end
 
-augroup custom_incsearch_highlight
+augroup incsearch_highlight
   autocmd!
   autocmd CmdlineEnter /,\? set hlsearch
   autocmd CmdlineLeave /,\? set nohlsearch
+augroup end
+
+augroup filetype_assignment
+  autocmd!
+  autocmd BufEnter *.asm set filetype=nasm
+  autocmd BufEnter *.scm set filetype=query
+  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials set filetype=dosini
+  autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
+  autocmd BufEnter *.handlebars set filetype=html
+  autocmd BufEnter *.hql,*.q set filetype=hive
+  autocmd BufEnter *.js,*.gs set filetype=javascript
+  autocmd BufEnter *.mdx set filetype=markdown
+  autocmd BufEnter *.min.js set filetype=none
+  autocmd BufEnter *.m,*.oct set filetype=octave
+  autocmd BufEnter *.toml set filetype=toml
+  autocmd BufEnter *.tsv set filetype=tsv
+  autocmd BufEnter .envrc set filetype=sh
+  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
+  autocmd BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
+  autocmd BufEnter Dockerfile.* set filetype=dockerfile
+  autocmd BufEnter Makefile.* set filetype=make
+  autocmd BufEnter poetry.lock,Pipfile set filetype=toml
+  autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+  autocmd BufEnter tmux-light.conf set filetype=tmux
+  autocmd BufEnter .zshrc set filetype=sh
+augroup end
+
+augroup keyword_overrides
+  autocmd!
+  autocmd FileType nginx set iskeyword+=$
+  autocmd FileType zsh,sh set iskeyword+=-
+augroup end
+
+augroup fold_overrides
+  autocmd!
+  " Warning: operates at the window level, so be careful with this setting
+  autocmd FileType gitcommit setlocal nofoldenable
+augroup end
+
+augroup indentation
+  autocmd!
+  " Reset to 2 (something somewhere overrides...)
+  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
+  " 4 spaces per tab, not 2
+  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3
+        \ setlocal shiftwidth=4 softtabstop=4
+  " Use hard tabs, not spaces
+  autocmd Filetype make,tsv,votl,go,gomod
+        \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
+  " Prevent auto-indenting from occuring
+  autocmd Filetype yaml setlocal indentkeys-=<:>
+augroup end
+
+augroup comment_config
+  " Notes:
+  " commentstring: read by vim-commentary; must be one template
+  " comments: csv of comments.
+  " formatoptions: influences how Vim formats text
+  "   ':help fo-table' will get the desired result
+  autocmd!
+  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
+  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
+  autocmd FileType sh setlocal formatoptions=jcroql
+  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+augroup end
+
+augroup no_save_lcd
+  " General: avoid saving 'lcd'... not sure why this is here tbh
+  autocmd!
+  autocmd User BufStaySavePre
+        \ if haslocaldir() |
+        \ let w:lcd = getcwd() |
+        \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
+        \ endif
+  autocmd User BufStaySavePost
+        \ if exists('w:lcd') |
+        \ execute 'lcd' fnameescape(w:lcd) |
+        \ unlet w:lcd |
+        \ endif
 augroup end
 
 " }}}
@@ -447,12 +528,12 @@ endfunction
 
 call s:default_key_mappings()
 
-augroup custom_remap_man_help
+augroup remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
 augroup end
 
-augroup custom_remap_rst
+augroup remap_rst
   autocmd!
   autocmd FileType rst nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
   autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
@@ -469,12 +550,12 @@ augroup custom_remap_rst
   autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
 augroup end
 
-augroup custom_remap_lsp_format
+augroup remap_lsp_format
   autocmd!
   autocmd FileType haskell nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
 augroup end
 
-augroup custom_remap_nvim_tree_lua
+augroup remap_nvim_tree_lua
   autocmd!
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
   autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
@@ -552,7 +633,7 @@ function! s:coc_toggle_outline() abort
   endif
 endfunction
 
-augroup custom_coc
+augroup coc_custom
   autocmd!
   autocmd VimEnter * call s:autocmd_custom_coc()
 augroup end
@@ -583,7 +664,7 @@ endfunction
 
 call s:setup_lua_packages()
 
-augroup custom_general_lua_extensions
+augroup general_lua_extensions
   autocmd!
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
   autocmd FileType vim setlocal
@@ -613,7 +694,7 @@ function! s:syntax_group()
   endif
 endfunction
 
-augroup custom_colorscheme
+augroup colorscheme_overrides
   autocmd!
   " typescriptParens are stupidly linked to 'Normal' in Neovim.
   " This causes problems with hover windows in coc and is solved here
@@ -642,78 +723,6 @@ try
 catch
   echo 'An error occurred while configuring Papercolor'
 endtry
-
-" }}}
-" General: filetype assignment {{{
-
-augroup custom_filetype_recognition
-  autocmd!
-  autocmd BufEnter *.asm set filetype=nasm
-  autocmd BufEnter *.scm set filetype=query
-  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials set filetype=dosini
-  autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufEnter *.handlebars set filetype=html
-  autocmd BufEnter *.hql,*.q set filetype=hive
-  autocmd BufEnter *.js,*.gs set filetype=javascript
-  autocmd BufEnter *.mdx set filetype=markdown
-  autocmd BufEnter *.min.js set filetype=none
-  autocmd BufEnter *.m,*.oct set filetype=octave
-  autocmd BufEnter *.toml set filetype=toml
-  autocmd BufEnter *.tsv set filetype=tsv
-  autocmd BufEnter .envrc set filetype=sh
-  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
-  autocmd BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
-  autocmd BufEnter Dockerfile.* set filetype=dockerfile
-  autocmd BufEnter Makefile.* set filetype=make
-  autocmd BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
-  autocmd BufEnter tmux-light.conf set filetype=tmux
-  autocmd BufEnter .zshrc set filetype=sh
-augroup end
-
-" }}}
-" General: autocmds (filetype-specific, generic) {{{
-
-augroup custom_iskeyword_overrides
-  autocmd!
-  autocmd FileType nginx set iskeyword+=$
-  autocmd FileType zsh,sh set iskeyword+=-
-augroup end
-
-augroup custom_fold_overrides
-  autocmd!
-  " Warning: operates at the window level, so be careful with this setting
-  autocmd FileType gitcommit setlocal nofoldenable
-augroup end
-
-augroup custom_indentation
-  autocmd!
-  " Reset to 2 (something somewhere overrides...)
-  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
-  " 4 spaces per tab, not 2
-  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3
-        \ setlocal shiftwidth=4 softtabstop=4
-  " Use hard tabs, not spaces
-  autocmd Filetype make,tsv,votl,go,gomod
-        \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " Prevent auto-indenting from occuring
-  autocmd Filetype yaml setlocal indentkeys-=<:>
-augroup end
-
-augroup custom_comment_config
-  " Notes:
-  " commentstring: read by vim-commentary; must be one template
-  " comments: csv of comments.
-  " formatoptions: influences how Vim formats text
-  "   ':help fo-table' will get the desired result
-  autocmd!
-  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
-  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
-  autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-augroup end
 
 " }}}
 " General: abbreviations {{{
@@ -773,7 +782,7 @@ endfunction
 
 command! TrimWhitespace call s:trim_whitespace()
 
-augroup custom_fix_whitespace_save
+augroup fix_whitespace_on_save
   autocmd!
   autocmd BufWritePre * TrimWhitespace
 augroup end
@@ -913,23 +922,6 @@ function! s:focuswriting_autocmd()
 endfunction
 
 command! FocusWriting call s:focuswriting()
-
-" }}}
-" General: avoid saving 'lcd' {{{
-
-augroup custom_no_save_lcd
-  autocmd!
-  autocmd User BufStaySavePre
-        \ if haslocaldir() |
-        \ let w:lcd = getcwd() |
-        \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
-        \ endif
-  autocmd User BufStaySavePost
-        \ if exists('w:lcd') |
-        \ execute 'lcd' fnameescape(w:lcd) |
-        \ unlet w:lcd |
-        \ endif
-augroup end
 
 " }}}
 " General: clean unicode {{{
