@@ -755,6 +755,7 @@ function global-install() {
   nodeglobal-install
   perlglobal-install
   pyglobal-install
+  pipx-install
   rubyglobal-install
   rustglobal-install
 }
@@ -827,11 +828,14 @@ function pydev-install() {
   asdf reshim python
 }
 
-# install global Python applications
+# install global Python dependencies
 function pyglobal-install() {
   pip install -U pipx pynvim neovim-remote
   pydev-install
-  asdf reshim python
+}
+
+# install global Python applications
+function pipx-install() {
   local for_pipx=(
     alacritty-colorscheme
     black
