@@ -334,19 +334,7 @@ augroup filetype_assignment
   autocmd BufEnter .zshrc set filetype=sh
 augroup end
 
-augroup keyword_overrides
-  autocmd!
-  autocmd FileType nginx set iskeyword+=$
-  autocmd FileType zsh,sh set iskeyword+=-
-augroup end
-
-augroup fold_overrides
-  autocmd!
-  " Warning: operates at the window level, so be careful with this setting
-  autocmd FileType gitcommit setlocal nofoldenable
-augroup end
-
-augroup indentation
+augroup indentation_overrides
   autocmd!
   " Reset to 2 (something somewhere overrides...)
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
@@ -373,6 +361,18 @@ augroup comment_config
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+augroup end
+
+augroup keyword_overrides
+  autocmd!
+  autocmd FileType nginx set iskeyword+=$
+  autocmd FileType zsh,sh set iskeyword+=-
+augroup end
+
+augroup fold_overrides
+  autocmd!
+  " Warning: operates at the window level, so be careful with this setting
+  autocmd FileType gitcommit setlocal nofoldenable
 augroup end
 
 augroup no_save_lcd
