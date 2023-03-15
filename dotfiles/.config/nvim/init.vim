@@ -615,7 +615,7 @@ function! s:autocmd_custom_coc()
   if !exists("g:did_coc_loaded")
     return
   endif
-  augroup custom_coc
+  augroup coc_custom
     autocmd FileType coctree set nowrap
     autocmd FileType nginx let b:coc_additional_keywords = ['$']
     autocmd FileType scss let b:coc_additional_keywords = ['@']
