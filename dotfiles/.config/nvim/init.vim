@@ -390,6 +390,14 @@ augroup no_save_lcd
         \ endif
 augroup end
 
+augroup commit_newtab
+  autocmd!
+  autocmd FileType gitcommit
+        \ if winnr("$") > 1 |
+        \ wincmd T |
+        \ endif
+augroup end
+
 " }}}
 " General: key mappings (global and filetype-specific) {{{
 
@@ -1166,7 +1174,7 @@ let g:git_messenger_no_default_mappings = v:true
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
-      \ 'python': 'ipython --no-autoindent',
+      \ 'python': 'python',
       \ 'r': 'R',
       \ 'sh': 'sh',
       \ 'vim': 'nvim --clean -ERM',
