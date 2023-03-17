@@ -783,6 +783,7 @@ function rglobal-install() {
 
 function rubyglobal-install() {
   gem install neovim
+  gem install license_finder
   asdf reshim ruby
 }
 
