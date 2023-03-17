@@ -1,5 +1,5 @@
 @-moz-document domain(app.shortcut.com) {
-  #sidebar {
-    width: 400px !important; /* sidebar is now always wide enough to read */
-  }
+  /* #sidebar { */
+  /*   width: 400px !important; /1* sidebar is now always wide enough to read *1/ */
+  /* } */
 }
