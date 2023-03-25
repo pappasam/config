@@ -891,15 +891,19 @@ function! s:focuswriting_settings_middle()
 endfunction
 
 function! s:focuswriting_autocmd()
-  wincmd p
-  if bufname('%') == 'customfocuswriting'
-    if tabpagenr('$') == 1
-      wqall
-    else
-      tabclose
+  echom 'hello'
+  let window_id = 1
+  while window_id <= winnr('$')
+    if bufname(winbufnr(window_id)) != 'customfocuswriting'
+      execute window_id . 'wincmd w'
+      return
     endif
+    let window_id = window_id + 1
+  endwhile
+  if tabpagenr('$') == 1
+    wqall
   else
-    wincmd =
+    tabclose
   endif
 endfunction
 
