@@ -847,22 +847,11 @@ command! ResizeWindowHeight call s:resize_window_height()
 " General: focus writing {{{
 
 function! s:focuswriting()
-  if exists('w:custom_focus_writing')
-    call s:focuswriting_close()
-    call s:focuswriting_clean()
-    return
-  endif
+  augroup custom_focus_writing
+    autocmd!
+  augroup end
+  augroup! custom_focus_writing
   let current_buffer = bufnr('%')
-  if exists('g:custom_focus_writing')
-    let success = win_gotoid(g:custom_focus_writing)
-    if (success)
-      execute 'buffer ' . current_buffer
-      call s:focuswriting_settings_middle()
-      return
-    else
-      call s:focuswriting_clean()
-    endif
-  endif
   tabe
   try
     file customfocuswriting
@@ -880,9 +869,7 @@ function! s:focuswriting()
   " Middle Window
   vertical resize 88
   execute 'buffer ' . current_buffer
-  let w:custom_focus_writing = 1
   call s:focuswriting_settings_middle()
-  let g:custom_focus_writing = win_getid()
   wincmd =
   augroup custom_focus_writing
     autocmd!
@@ -903,27 +890,14 @@ function! s:focuswriting_settings_middle()
         \ nofoldenable winhighlight=StatusLine:StatusLineNC
 endfunction
 
-function! s:focuswriting_clean()
-  augroup custom_focus_writing
-    autocmd!
-  augroup end
-  augroup! custom_focus_writing
-  unlet g:custom_focus_writing
-endfunction
-
-function! s:focuswriting_close()
-  if tabpagenr('$') == 1
-    wqall
-  else
-    tabclose
-  endif
-endfunction
-
 function! s:focuswriting_autocmd()
   wincmd p
   if bufname('%') == 'customfocuswriting'
-    call s:focuswriting_close()
-    call s:focuswriting_clean()
+    if tabpagenr('$') == 1
+      wqall
+    else
+      tabclose
+    endif
   else
     wincmd =
   endif
