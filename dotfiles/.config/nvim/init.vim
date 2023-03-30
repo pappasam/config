@@ -327,7 +327,7 @@ augroup filetype_assignment
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
   autocmd BufEnter tmux-light.conf set filetype=tmux
-  autocmd BufEnter .zshrc set filetype=sh
+  autocmd BufEnter .zshrc set filetype=zsh
 augroup end
 
 augroup indentation_overrides
