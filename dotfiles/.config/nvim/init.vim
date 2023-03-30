@@ -64,7 +64,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kana/vim-textobj-user')
 
   " Writing:
-  call a:packager.add('https://github.com/dkarter/bullets.vim')
   call a:packager.add('https://github.com/jlesquembre/rst-tables.nvim')
   call a:packager.add('https://github.com/moiatgit/vim-rst-sections')
 
@@ -1113,17 +1112,6 @@ let g:no_rst_sections_maps = 0
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
-
-" BulletsVim:
-let g:bullets_enabled_file_types = [
-      \ 'gitcommit',
-      \ 'markdown',
-      \ 'markdown.mdx',
-      \ 'scratch',
-      \ 'text',
-      \ 'rst',
-      \ ]
-let g:bullets_outline_levels = ['num', 'std-']
 
 " QuickScope: great plugin helping with f and t
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
