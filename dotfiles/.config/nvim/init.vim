@@ -40,7 +40,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/simeji/winresizer')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
-  call a:packager.add('https://github.com/unblevable/quick-scope')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
   call a:packager.add('https://github.com/ntpeters/vim-better-whitespace.git')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
@@ -1112,10 +1111,6 @@ let g:no_rst_sections_maps = 0
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
-
-" QuickScope: great plugin helping with f and t
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_max_chars = 10000
 
 " HexMode: configure hex editing
 " relevant command: Hexmode
