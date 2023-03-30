@@ -36,7 +36,6 @@ function! s:packager_init(packager) abort
       \ ]})
 
   " General:
-  call a:packager.add('https://github.com/bronson/vim-visual-star-search')
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/simeji/winresizer')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
@@ -55,7 +54,6 @@ function! s:packager_init(packager) abort
 
   " Git:
   call a:packager.add('https://github.com/tpope/vim-fugitive')
-  call a:packager.add('https://github.com/rhysd/git-messenger.vim.git')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim.git')
 
   " Text Objects:
@@ -511,9 +509,6 @@ function! s:default_key_mappings()
   " FiletypeFormat: remap leader f to do filetype formatting
   nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
   vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-
-  " GitMessenger:
-  nmap <leader>sg <Plug>(git-messenger)
 
   " Open <cfile> with gx
   nnoremap gx <Cmd>call <SID>gx_improved()<CR>
@@ -1126,10 +1121,6 @@ let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q - | isort -q - | docformatter -',
       \ }
-
-" git-messenger:
-let g:git_messenger_always_into_popup = v:false
-let g:git_messenger_no_default_mappings = v:true
 
 " nvim-repl:
 let g:repl_filetype_commands = {
