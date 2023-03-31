@@ -282,7 +282,6 @@ function! CustomTabLabel(n)
     return '👻🤡' . postfix
   elseif bnamemodified =~ 'NvimTree'
     return '🌲🌳' . postfix
-
   else
     return bnamemodified . postfix
   endif
