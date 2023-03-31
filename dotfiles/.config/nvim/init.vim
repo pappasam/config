@@ -750,6 +750,9 @@ cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets
 " 'c' is abbreviation for 'close'. I use it way more often than 'change'
 cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 
+" 'help' to open in new tab
+cnoreabbrev <expr> h <SID>abbr_help('h', 'tab help')
+
 " }}}
 " General: gx improved {{{
 
