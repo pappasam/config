@@ -270,7 +270,7 @@ function! CustomTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   let postfix = ''
   for buf in buflist
-    if bufname(buf) == 'customfocuswriting'
+    if bufname(buf) == 'focuswriting_abcdefg'
       let postfix = '🎯'
       break
     endif
@@ -843,16 +843,15 @@ command! ResizeWindowHeight call s:resize_window_height()
 " General: focus writing {{{
 
 function! s:focuswriting()
-  augroup custom_focus_writing
+  augroup focuswriting
     autocmd!
   augroup end
-  augroup! custom_focus_writing
   let current_buffer = bufnr('%')
   tabe
   try
-    file customfocuswriting
+    file focuswriting_abcdefg
   catch
-    edit customfocuswriting
+    edit focuswriting_abcdefg
   endtry
   setlocal nobuflisted
   " Left Window
@@ -867,9 +866,9 @@ function! s:focuswriting()
   execute 'buffer ' . current_buffer
   call s:focuswriting_settings_middle()
   wincmd =
-  augroup custom_focus_writing
+  augroup focuswriting
     autocmd!
-    autocmd WinEnter customfocuswriting call s:focuswriting_autocmd()
+    autocmd WinEnter focuswriting_abcdefg call s:focuswriting_autocmd()
   augroup end
 endfunction
 
@@ -887,10 +886,9 @@ function! s:focuswriting_settings_middle()
 endfunction
 
 function! s:focuswriting_autocmd()
-  echom 'hello'
   let window_id = 1
   while window_id <= winnr('$')
-    if bufname(winbufnr(window_id)) != 'customfocuswriting'
+    if bufname(winbufnr(window_id)) != 'focuswriting_abcdefg'
       execute window_id . 'wincmd w'
       return
     endif
