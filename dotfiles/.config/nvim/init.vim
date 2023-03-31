@@ -278,7 +278,11 @@ function! CustomTabLabel(n)
   let bname = bufname(buflist[winnr - 1])
   let bnamemodified = fnamemodify(bname, ':t')
   if bnamemodified == ''
-    return '[No Name]' . postfix
+    " No name
+    return '👻🤡' . postfix
+  elseif bnamemodified =~ 'NvimTree'
+    return '🌲🌳' . postfix
+
   else
     return bnamemodified . postfix
   endif
