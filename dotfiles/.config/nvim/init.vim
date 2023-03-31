@@ -886,18 +886,16 @@ function! s:focuswriting_settings_middle()
 endfunction
 
 function! s:focuswriting_autocmd()
-  let window_id = 1
-  while window_id <= winnr('$')
-    if bufname(winbufnr(window_id)) != 'focuswriting_abcdefg'
-      execute window_id . 'wincmd w'
+  for windowid in range(1, winnr('$'))
+    if bufname(winbufnr(windowid)) != 'focuswriting_abcdefg'
+      execute windowid .. 'wincmd w'
       return
     endif
-    let window_id = window_id + 1
-  endwhile
-  if tabpagenr('$') == 1
-    wqall
-  else
+  endfor
+  if tabpagenr('$') > 1
     tabclose
+  else
+    wqall
   endif
 endfunction
 
