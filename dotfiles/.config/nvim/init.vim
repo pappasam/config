@@ -279,9 +279,9 @@ function! CustomTabLabel(n)
   let bnamemodified = fnamemodify(bname, ':t')
   if bnamemodified == ''
     " No name
-    return '👻🤡' . postfix
+    return '👻' . postfix
   elseif bnamemodified =~ 'NvimTree'
-    return '🌲🌳' . postfix
+    return '🌲' . postfix
   else
     return bnamemodified . postfix
   endif
