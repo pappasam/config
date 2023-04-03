@@ -917,6 +917,17 @@ function asdfpurge() {  ## Purge every version from plugin except current
 }
 
 # }}}
+# Functions: nodejs scaffolding {{{
+
+function npm-create-svelte() {
+  if [[ $# -ne 1 ]]; then
+    echo '1 argument is required'
+    return 1
+  fi
+  npm create svelte@latest "$1"
+}
+
+# }}}
 # Runtime: executed commands for interactive shell {{{
 
 # turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
