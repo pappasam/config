@@ -668,16 +668,20 @@ endfunction
 
 call s:setup_lua_packages()
 
+function! s:nvimtree_vimenter()
+  let cliargs = argv()
+  if exists(':NvimTreeOpen') && len(cliargs) == 1 && isdirectory(cliargs[0])
+    execute 'NvimTreeOpen ' . cliargs[0]
+  endif
+endfunction
+
 augroup lua_extension_config
   autocmd!
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
   autocmd FileType vim setlocal
         \ includeexpr=substitute(v:fname,'\\.','/','g')
         \ suffixesadd^=.lua
-  autocmd VimEnter *
-        \ if exists(':NvimTreeOpen') && isdirectory(expand('%:p'))
-        \ | NvimTreeOpen
-        \ | endif
+  autocmd VimEnter * call s:nvimtree_vimenter()
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
