@@ -668,12 +668,16 @@ endfunction
 
 call s:setup_lua_packages()
 
-augroup general_lua_extensions
+augroup lua_extension_config
   autocmd!
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
   autocmd FileType vim setlocal
         \ includeexpr=substitute(v:fname,'\\.','/','g')
         \ suffixesadd^=.lua
+  autocmd VimEnter *
+        \ if exists(':NvimTreeOpen') && isdirectory(expand('%:p'))
+        \ | NvimTreeOpen
+        \ | endif
 augroup end
 
 command! GitsignsToggle Gitsigns toggle_signs
