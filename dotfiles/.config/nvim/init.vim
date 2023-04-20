@@ -375,21 +375,6 @@ augroup fold_overrides
   autocmd FileType gitcommit setlocal nofoldenable
 augroup end
 
-augroup no_save_lcd
-  " General: avoid saving 'lcd'... not sure why this is here tbh
-  autocmd!
-  autocmd User BufStaySavePre
-        \ if haslocaldir() |
-        \ let w:lcd = getcwd() |
-        \ execute 'cd '.fnameescape(getcwd(-1, -1)) |
-        \ endif
-  autocmd User BufStaySavePost
-        \ if exists('w:lcd') |
-        \ execute 'lcd' fnameescape(w:lcd) |
-        \ unlet w:lcd |
-        \ endif
-augroup end
-
 augroup commit_newtab
   autocmd!
   autocmd FileType gitcommit
