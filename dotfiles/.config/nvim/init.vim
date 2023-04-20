@@ -523,21 +523,25 @@ augroup remap_man_help
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
 augroup end
 
+function! s:mappings_rst()
+  nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
+  nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
+  nnoremap <buffer> <silent> <leader>s1 <Cmd>call RstSetSection(1)<CR>
+  nnoremap <buffer> <silent> <leader>s2 <Cmd>call RstSetSection(2)<CR>
+  nnoremap <buffer> <silent> <leader>s3 <Cmd>call RstSetSection(3)<CR>
+  nnoremap <buffer> <silent> <leader>s4 <Cmd>call RstSetSection(4)<CR>
+  nnoremap <buffer> <silent> <leader>s5 <Cmd>call RstSetSection(5)<CR>
+  nnoremap <buffer> <silent> <leader>s6 <Cmd>call RstSetSection(6)<CR>
+  nnoremap <buffer> <silent> <leader>sk <Cmd>call RstGoPrevSection()<CR>
+  nnoremap <buffer> <silent> <leader>sj <Cmd>call RstGoNextSection()<CR>
+  nnoremap <buffer> <silent> <leader>sa <Cmd>call RstIncrSectionLevel()<CR>
+  nnoremap <buffer> <silent> <leader>sx <Cmd>call RstDecrSectionLevel()<CR>
+  nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
+endfunction
+
 augroup remap_rst
   autocmd!
-  autocmd FileType rst nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s1 <Cmd>call RstSetSection(1)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s2 <Cmd>call RstSetSection(2)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s3 <Cmd>call RstSetSection(3)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s4 <Cmd>call RstSetSection(4)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s5 <Cmd>call RstSetSection(5)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>s6 <Cmd>call RstSetSection(6)<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sk <Cmd>call RstGoPrevSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sj <Cmd>call RstGoNextSection()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sa <Cmd>call RstIncrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sx <Cmd>call RstDecrSectionLevel()<CR>
-  autocmd FileType rst nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
+  autocmd FileType rst call s:mappings_rst()
 augroup end
 
 augroup remap_lsp_format
@@ -545,10 +549,14 @@ augroup remap_lsp_format
   autocmd FileType haskell nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
 augroup end
 
+function! s:mappings_nvim_tree_lua()
+  nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
+  nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
+endfunction
+
 augroup remap_nvim_tree_lua
   autocmd!
-  autocmd FileType NvimTree nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
-  autocmd FileType NvimTree nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
+  autocmd FileType NvimTree call s:mappings_nvim_tree_lua()
 augroup end
 
 " }}}
