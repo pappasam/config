@@ -207,7 +207,7 @@ set history=100
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
 
-" Show characters by default
+" Show default :list characters by default
 set list
 
 " Folding
