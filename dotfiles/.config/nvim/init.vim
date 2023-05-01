@@ -704,25 +704,21 @@ endfunction
 
 augroup colorscheme_overrides
   autocmd!
-  " typescriptParens are stupidly linked to 'Normal' in Neovim.
-  " This causes problems with hover windows in coc and is solved here
-  autocmd ColorScheme * highlight link typescriptParens cleared
-  autocmd ColorScheme * highlight link HighlightedyankRegion Search
-  autocmd ColorScheme * highlight link CocHighlightText Underlined
-
-  autocmd ColorScheme * highlight CocErrorHighlight gui=undercurl
-  autocmd ColorScheme * highlight CocWarningHighlight gui=undercurl
-  autocmd ColorScheme * highlight CocInfoHighlight gui=undercurl
-  autocmd ColorScheme * highlight CocHintHighlight gui=undercurl
-
+  autocmd ColorScheme *
+        \ highlight link HighlightedyankRegion Search |
+        \ highlight link CocHighlightText Underlined |
+        \ highlight CocErrorHighlight gui=undercurl |
+        \ highlight CocWarningHighlight gui=undercurl |
+        \ highlight CocInfoHighlight gui=undercurl |
+        \ highlight CocHintHighlight gui=undercurl
   autocmd ColorScheme PaperColorSlim
-      \ if &background == 'light' |
-      \   execute 'highlight CocSearch guifg=#005f87' |
-      \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
-      \ else |
-      \   execute 'highlight CocSearch guifg=#5fafd7' |
-      \   execute 'highlight CocMenuSel guibg=#585858' |
-      \ endif
+        \ if &background == 'light' |
+        \   execute 'highlight CocSearch guifg=#005f87' |
+        \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
+        \ else |
+        \   execute 'highlight CocSearch guifg=#5fafd7' |
+        \   execute 'highlight CocMenuSel guibg=#585858' |
+        \ endif
 augroup end
 
 try
