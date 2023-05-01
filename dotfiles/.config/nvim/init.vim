@@ -207,8 +207,9 @@ set history=100
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
 
-" Show default :list characters by default
+" Show :list characters, configure with a nice default
 set list
+set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 
 " Folding
 set foldenable foldmethod=marker foldnestmax=1
