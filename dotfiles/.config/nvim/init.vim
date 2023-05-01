@@ -41,7 +41,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/simeji/winresizer')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
-  call a:packager.add('https://github.com/ntpeters/vim-better-whitespace.git')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:packager.add('https://github.com/tpope/vim-characterize.git')
 
@@ -207,6 +206,9 @@ set history=100
 
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
+
+" Show characters by default
+set list
 
 " Folding
 set foldenable foldmethod=marker foldnestmax=1
@@ -705,7 +707,6 @@ augroup colorscheme_overrides
   " typescriptParens are stupidly linked to 'Normal' in Neovim.
   " This causes problems with hover windows in coc and is solved here
   autocmd ColorScheme * highlight link typescriptParens cleared
-  autocmd ColorScheme * highlight link ExtraWhitespace DiffText
   autocmd ColorScheme * highlight link HighlightedyankRegion Search
   autocmd ColorScheme * highlight link CocHighlightText Underlined
 
