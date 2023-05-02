@@ -201,8 +201,8 @@ set updatetime=300
 " Linux Dev Path: system libraries
 set path+=/usr/include/x86_64-linux-gnu/
 
-" Vim History: for command line; can't imagine that more than 100 is needed
-set history=100
+" Vim History: for command line
+set history=10
 
 " Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
