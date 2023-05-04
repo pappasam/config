@@ -651,16 +651,16 @@ function! s:safe_require(package)
 endfunction
 
 function! s:setup_lua_packages()
-  call s:safe_require('config.colorizer')
-  call s:safe_require('config.gitsigns')
-  call s:safe_require('config.nvim-autopairs')
-  call s:safe_require('config.nvim-tree')
-  call s:safe_require('config.nvim-treesitter')
-  call s:safe_require('config.nvim-ts-context-commentstring')
-  call s:safe_require('config.nvim-web-devicons')
-  call s:safe_require('config.spellsitter')
-  call s:safe_require('config.telescope')
-  call s:safe_require('config.treesitter-context')
+  call s:safe_require('config/colorizer')
+  call s:safe_require('config/gitsigns')
+  call s:safe_require('config/nvim-autopairs')
+  call s:safe_require('config/nvim-tree')
+  call s:safe_require('config/nvim-treesitter')
+  call s:safe_require('config/nvim-ts-context-commentstring')
+  call s:safe_require('config/nvim-web-devicons')
+  call s:safe_require('config/spellsitter')
+  call s:safe_require('config/telescope')
+  call s:safe_require('config/treesitter-context')
 endfunction
 
 call s:setup_lua_packages()
@@ -674,10 +674,9 @@ endfunction
 
 augroup lua_extension_config
   autocmd!
-  autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
-  autocmd FileType vim setlocal
-        \ includeexpr=substitute(v:fname,'\\.','/','g')
-        \ suffixesadd^=.lua
+  autocmd FileType vim
+        \ let &l:path .= ','.stdpath('config').'/lua' |
+        \ setlocal suffixesadd^=.lua
   autocmd VimEnter * call s:nvimtree_vimenter()
 augroup end
 
