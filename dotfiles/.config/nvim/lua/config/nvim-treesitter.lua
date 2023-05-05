@@ -11,9 +11,9 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
     disable = function(lang, bufnr)
-      if lang == "python" then
-        return true
-      end
+      -- if lang == "python" then
+      --   return true
+      -- end
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
   },

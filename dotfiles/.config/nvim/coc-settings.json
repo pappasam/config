@@ -21,6 +21,10 @@
   "signature.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
   "Lua.telemetry.enable": false,
+  "Lua.workspace.checkThirdParty": true,
+  "Lua.workspace.library": [
+    "${3rd}/luv/library"
+  ],
   "Lua.hint.enable": false,
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "empty",
