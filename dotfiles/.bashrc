@@ -221,12 +221,6 @@ alias gp='git remote prune origin && git remote set-head origin -a'
 alias gdw='git diff --word-diff'
 alias gop='gh browse'
 
-# Battery
-alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|time\ to\ full|percentage"'
-
-# docker compose
-alias dc='docker compose'
-
 # }}}
 # Functions: general {{{
 
