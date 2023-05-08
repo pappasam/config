@@ -695,6 +695,7 @@ function rustglobal-install() {
   cargo install cargo-deb
   cargo install cargo-edit
   cargo install cargo-update
+  cargo install csvlens
   cargo install fd-find
   cargo install git-delta
   cargo install ripgrep
