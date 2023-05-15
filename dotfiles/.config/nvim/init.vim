@@ -20,7 +20,6 @@ function! s:packager_init(packager) abort
 
   " TreeSitter:
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
-  call a:packager.add('https://github.com/lewis6991/spellsitter.nvim.git')
   call a:packager.add('https://github.com/nvim-treesitter/playground.git')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag.git')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-context')
@@ -658,7 +657,6 @@ function! s:setup_lua_packages()
   call s:safe_require('config/nvim-treesitter')
   call s:safe_require('config/nvim-ts-context-commentstring')
   call s:safe_require('config/nvim-web-devicons')
-  call s:safe_require('config/spellsitter')
   call s:safe_require('config/telescope')
   call s:safe_require('config/treesitter-context')
 endfunction
