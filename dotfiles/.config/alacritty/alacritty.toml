@@ -1,0 +1,86 @@
+[colors]
+
+[colors.bright]
+black = '0x686868'
+red = '0xF07178'
+green = '0xC2D94C'
+yellow = '0xFFB454'
+blue = '0x59C2FF'
+magenta = '0xFFEE99'
+cyan = '0x95E6CB'
+white = '0xFFFFFF'
+
+[colors.normal]
+black = '0x01060E'
+red = '0xEA6C73'
+green = '0x91B362'
+yellow = '0xF9AF4F'
+blue = '0x53BDFA'
+magenta = '0xFAE994'
+cyan = '0x90E1C6'
+white = '0xC7C7C7'
+
+[colors.primary]
+background = '0x0A0E14'
+foreground = '0xB3B1AD'
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Retina"
+
+[keyboard]
+
+[[keyboard.bindings]]
+key = "F11"
+action = "ToggleFullscreen"
+
+[[keyboard.bindings]]
+key = "LBracket"
+mods = "Control"
+mode = "Vi"
+action = "ClearSelection"
+
+[[keyboard.bindings]]
+key = "Q"
+mode = "Vi"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "Q"
+mode = "Vi"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = 5
+mods = "Shift"
+mode = "Vi"
+action = "Last"
+
+[[keyboard.bindings]]
+key = 6
+mods = "Shift"
+mode = "Vi"
+action = "Bracket"
+
+[[keyboard.bindings]]
+key = 11
+mods = "Shift"
+mode = "Vi"
+action = "FirstOccupied"
+
+[shell]
+program = "/usr/bin/zsh"
+draw_bold_text_with_bright_colors = true
+
+[window]
+title = "Chez La Couve"
+dynamic_title = false
+dynamic_padding = true
+decorations_theme_variant = "Dark"
+
+[window.padding]
+x = 2
+y = 2
