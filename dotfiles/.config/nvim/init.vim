@@ -410,7 +410,7 @@ function! s:default_key_mappings()
   nnoremap <silent>        <leader>so <Cmd>CocList -A outline<cr>
   nnoremap <silent>        <leader>sw <Cmd>CocList -A -I symbols<cr>
   inoremap <silent> <expr> <c-space> coc#refresh()
-  nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggle')<CR>
+  nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
   nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
