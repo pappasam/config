@@ -86,6 +86,7 @@ function! s:packager_init(packager) abort
       \ 'https://github.com/pangloss/vim-javascript.git',
       \ ]})
   call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent')
+  call a:packager.add('https://github.com/osohq/polar.vim')
   call a:packager.add('https://github.com/Yggdroot/indentLine')
   call a:packager.add('https://github.com/aklt/plantuml-syntax.git')
   call a:packager.add('https://github.com/chr4/nginx.vim.git')
