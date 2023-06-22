@@ -70,6 +70,10 @@ export PYTHON_CONFIGURE_OPTS='--enable-shared'
 # Kubernetes
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
+# CUDA Drivers
+export LD_LIBRARY_PATH="/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$HOME/src/lib/nccl_2.18.3-1+cuda11.0_x86_64/lib:$LD_LIBRARY_PATH"
+
 # }}}
 # Environment: path appends + misc env setup {{{
 
