@@ -1126,7 +1126,7 @@ let g:vim_filetype_formatter_commands = {
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
-      \ 'python': 'python',
+      \ 'python': 'ipython --quiet --no-autoindent',
       \ 'r': 'R',
       \ 'sh': 'sh',
       \ 'vim': 'nvim --clean -ERM',
