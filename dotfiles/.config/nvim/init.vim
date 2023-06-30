@@ -349,6 +349,9 @@ augroup indentation_overrides
         \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Prevent auto-indenting from occuring
   autocmd Filetype yaml setlocal indentkeys-=<:>
+  " Fix weird stuff with snippet indentation
+  autocmd Filetype snippets setlocal tabstop=4 softtabstop=0 shiftwidth=0
+        \ noexpandtab noautoindent nosmartindent
 augroup end
 
 augroup comment_config
