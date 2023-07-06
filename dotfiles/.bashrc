@@ -504,6 +504,20 @@ function git-remote-to-https(){
   fi
 }
 
+# Show which git files have been modified most recently
+# Note: %ad means the modified date. I add .. because {} begins with a .
+function git-mod() {
+  if git branch &>/dev/null
+  then
+    fd --type f --exec git log -1 --format="/%ad..{}" --date=short {} \
+      | tree --fromfile -rC . \
+      | less -r
+  else
+    echo 'Not inside git project'
+    return 1
+  fi
+}
+
 # }}}
 # Functions: vim {{{
 
