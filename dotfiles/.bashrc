@@ -654,11 +654,12 @@ function pynew() {
   mkinstance
   ve
   poetry add --group=dev \
-    pyright \
-    pylint \
     black \
     docformatter \
     isort \
+    mypy \
+    pyright \
+    ruff \
     toml-sort
   cat > main.py <<EOL
 """The main module"""
@@ -768,9 +769,10 @@ function pydev-install() {
   local for_pip=(
     bpython
     ipython
-    pyright
+    mypy
     pip
-    pylint
+    pyright
+    ruff
     wheel
   )
   # shellcheck disable=SC2128,SC2086
