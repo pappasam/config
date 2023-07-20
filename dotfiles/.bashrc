@@ -689,10 +689,9 @@ function upgrade() {
   git pull
   alacritty-install
   popd || return
-  # Errors with GitHub SSL for now
-  # asdf uninstall neovim nightly && \
-  #   asdf install neovim nightly && \
-  #   asdf global neovim nightly
+  asdf uninstall neovim nightly && \
+    asdf install neovim nightly && \
+    asdf global neovim nightly
   if command -v zinit > /dev/null; then
     zinit update --all
   fi
