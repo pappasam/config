@@ -486,8 +486,8 @@ function! s:default_key_mappings()
 
   " Repl: my very own repl plugin
   nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
-  nmap     <space><space>    <Plug>ReplSendLine
-  vmap     <space><space>    <Plug>ReplSendVisual
+  nmap     <leader>e         <Plug>ReplSendLine
+  vmap     <leader>e         <Plug>ReplSendVisual
 
   " Sandwich: plugin-recommended mappings
   nmap s <Nop>
