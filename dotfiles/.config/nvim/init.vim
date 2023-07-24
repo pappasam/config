@@ -1122,7 +1122,7 @@ let g:make_no_commands = 1
 let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'ruff check -q --fix - | black -q - | isort -q - | docformatter -',
+      \ 'python': 'ruff check -q --fix-only - | black -q - | isort -q - | docformatter -',
       \ }
 
 " nvim-repl:
