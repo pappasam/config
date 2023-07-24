@@ -607,12 +607,33 @@ function ve() {  # arg1?: python interpreter name
 }
 
 function cat-pyproject() {
-  echo '[tool.black]'
-  echo 'line-length = 79'
-  echo ''
-  echo '[tool.isort]'
-  echo 'profile = "black"'
-  echo 'line_length = 79'
+  cat << EOF
+[tool.black]
+line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+enable_error_code = [
+  "ignore-without-code",
+]
+
+[tool.ruff]
+line-length = 79
+select = ["ALL"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.pylint]
+max-statements = 20
+max-returns = 3
+EOF
 }
 
 # initialize python repo
