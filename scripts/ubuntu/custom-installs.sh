@@ -16,7 +16,6 @@ function github_install() {
 }
 
 github_install https://github.com/asdf-vm/asdf.git ~/.asdf
-github_install https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 github_install https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
 
 if ! command -v docker > /dev/null; then
@@ -37,7 +36,7 @@ fi
 if ! command -v slack > /dev/null; then
   echo_bold_italic_underline 'Installing Slack'
   sudo apt update
-  SLACK_VERSION=4.27.156
+  SLACK_VERSION=4.33.73
   wget -O /tmp/slack-desktop.deb \
     "https://downloads.slack-edge.com/releases/linux/$SLACK_VERSION/prod/x64/slack-desktop-$SLACK_VERSION-amd64.deb"
   sudo apt install /tmp/slack-desktop.deb
@@ -48,17 +47,6 @@ if ! command -v ghcup > /dev/null; then
   echo_bold_italic_underline 'Installing ghcup (haskell tooling)'
   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 fi
-
-# if ! command -v rtx > /dev/null; then
-#   echo_bold_italic_underline 'Installing rtx'
-#   wget -qO - https://rtx.pub/gpg-key.pub | \
-#     gpg --dearmor | \
-#     sudo tee /usr/share/keyrings/rtx-archive-keyring.gpg 1> /dev/null
-#   echo "deb [signed-by=/usr/share/keyrings/rtx-archive-keyring.gpg arch=amd64] https://rtx.pub/deb stable main" | \
-#     sudo tee /etc/apt/sources.list.d/rtx.list
-#   sudo apt update
-#   sudo apt install -y rtx
-# fi
 
 echo_bold_italic_underline 'Done setting up custom software! Now:'
 echo_bold_italic_underline '  1. Close your shell (<C-d>)'
