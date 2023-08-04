@@ -821,6 +821,7 @@ function pipx-install() {
     poetry
     pre-commit
     restview
+    ruff
     toml-sort
   )
   if command -v pipx > /dev/null; then
