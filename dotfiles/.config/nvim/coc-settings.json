@@ -20,11 +20,8 @@
   "signature.hideOnTextChange": true,
   "signature.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
-  "Lua.telemetry.enable": false,
   "Lua.workspace.checkThirdParty": true,
-  "Lua.workspace.library": [
-    "${3rd}/luv/library"
-  ],
+  "Lua.workspace.library": ["${3rd}/luv/library"],
   "Lua.hint.enable": false,
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "empty",
@@ -45,6 +42,13 @@
   "diagnostic-languageserver.filetypes": {
     "nginx": "nginx-linter"
   },
+  "ltex.dictionary": {
+    "en-US": [
+      "Roeca",
+      "dotfiles",
+      "Dotfiles",
+    ],
+  },
   "diagnostic-languageserver.linters": {
     "nginx-linter": {
       "sourceName": "nginx-linter",
@@ -64,71 +68,6 @@
       "securities": {
         "error": "info"
       }
-    },
-    "mypy": {
-      "sourceName": "mypy",
-      "command": "dmypy",
-      "debounce": 100,
-      "args": [
-        "run",
-        "--log-file",
-        "/dev/null",
-        "--",
-        "--no-color-output",
-        "--no-error-summary",
-        "--show-column-numbers",
-        "%file"
-      ],
-      "formatPattern": [
-        "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "security": 3,
-          "message": 4
-        }
-      ],
-      "securities": {
-        "error": "error"
-      },
-      "offsetColumnEnd": 1,
-      "rootPatterns": ["mypy.ini", "pyproject.toml", "setup.py", ".git"]
-    },
-    "pylint": {
-      "sourceName": "pylint",
-      "command": "pylint",
-      "debounce": 100,
-      "args": [
-        "--output-format",
-        "text",
-        "--score",
-        "no",
-        "--msg-template",
-        "'{line}:{end_line}:{column}:{end_column}:{category}:{msg} ({msg_id}:{symbol})'",
-        "%file"
-      ],
-      "formatPattern": [
-        "^(\\d+?):(\\d+?):(\\d+?):(\\d+?):([a-z]+?):(.*)$",
-        {
-          "line": 1,
-          "endLine": 2,
-          "column": 3,
-          "endColumn": 4,
-          "security": 5,
-          "message": 6
-        }
-      ],
-      "rootPatterns": ["pyproject.toml", "setup.py", ".git"],
-      "securities": {
-        "informational": "hint",
-        "refactor": "info",
-        "convention": "info",
-        "warning": "warning",
-        "error": "error",
-        "fatal": "error"
-      },
-      "offsetColumn": 1,
-      "formatLines": 1
     }
   },
   "languageserver": {

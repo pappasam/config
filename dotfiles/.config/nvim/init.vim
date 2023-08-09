@@ -743,10 +743,10 @@ function! s:abbr_help(in_command, out_command)
 endfunction
 
 " Open configuration files
-cnoreabbrev <expr> v <SID>abbr_help('v', 'edit ~/config/dotfiles/.config/nvim/init.vim')
-cnoreabbrev <expr> z <SID>abbr_help('z', 'edit ~/config/dotfiles/.zshrc')
-cnoreabbrev <expr> b <SID>abbr_help('b', 'edit ~/config/dotfiles/.bashrc')
-cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/config/dotfiles/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> v   <SID>abbr_help('v',   'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/.config/nvim/coc-settings.json')
+cnoreabbrev <expr> z   <SID>abbr_help('z',   'edit ~/.zshrc')
+cnoreabbrev <expr> b   <SID>abbr_help('b',   'edit ~/.bashrc')
 
 " Edit snippet files
 cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
