@@ -776,14 +776,14 @@ function! s:trim_whitespace()
   let l:save = winsaveview()
   if &ft == 'markdown'
     " Replace lines with only trailing spaces
-    %s/^\s\+$//e
+    silent! execute '%s/^\s\+$//e'
     " Replace lines with exactly one trailing space with no trailing spaces
-    %g/\S\s$/s/\s$//g
+    silent! execute '%g/\S\s$/s/\s$//g'
     " Replace lines with more than 2 trailing spaces with 2 trailing spaces
-    %s/\s\s\s\+$/  /e
+    silent! execute '%s/\s\s\s\+$/  /e'
   else
     " Remove all trailing spaces
-    %s/\s\+$//e
+    silent! execute '%s/\s\+$//e'
   endif
   call winrestview(l:save)
 endfunction
@@ -910,13 +910,13 @@ command! FocusWriting call s:focuswriting()
 
 " Replace unicode symbols with cleaned, ascii versions
 function! s:clean_unicode()
-  silent! %s/”/"/g
-  silent! %s/“/"/g
-  silent! %s/’/'/g
-  silent! %s/‘/'/g
-  silent! %s/—/-/g
-  silent! %s/…/.../g
-  silent! %s/​//g
+  silent! execute '%s/”/"/g'
+  silent! execute '%s/“/"/g'
+  silent! execute "%s/’/'/g"
+  silent! execute "%s/‘/'/g"
+  silent! execute '%s/—/-/g'
+  silent! execute '%s/…/.../g'
+  silent! execute '%s/​//g'
 endfunction
 
 command! CleanUnicode call s:clean_unicode()
@@ -1054,13 +1054,13 @@ let g:mkdp_preview_options = {
 
 function! s:preview()
   if &filetype ==? 'rst'
-    silent exec 'terminal restview %'
-    silent exec "normal \<C-O>"
+    silent! execute 'terminal restview %'
+    silent! execute "normal \<C-O>"
   elseif &filetype ==? 'markdown'
     " from markdown-preview.vim
-    silent exec 'MarkdownPreview'
+    silent! execute 'MarkdownPreview'
   else
-    silent !gio open '%:p'
+    silent! execute "!gio open '%:p'"
   endif
 endfunction
 
