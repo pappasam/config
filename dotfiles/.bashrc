@@ -196,7 +196,7 @@ alias ..........='cd ../../../../../../../../../..'
 # Neovim
 alias f='nvim'
 alias fn='nvim -u NORC --noplugin'
-alias v='nvim -c "cd ~/config/dotfiles/.config/nvim" ~/config/dotfiles/.config/nvim/init.vim'
+alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
 
 # ls et al, with color support and handy aliases
@@ -222,7 +222,6 @@ alias gll='git --no-pager branch --verbose --remotes --list'
 alias gm='git commit'
 alias gma='git add --all && git commit'
 alias gp='git remote prune origin && git remote set-head origin -a'
-alias gdw='git diff --word-diff'
 alias gop='gh browse'
 
 # }}}
@@ -410,7 +409,7 @@ function g() {
 # git diff
 function gd() {
   if alacritty-is-dark; then
-    git diff "$@" | delta --dark  --line-numbers
+    git diff "$@" | delta --dark --line-numbers
   else
     git diff "$@" | delta --light --line-numbers
   fi
