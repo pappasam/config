@@ -50,6 +50,7 @@ asdf_setup tmux latest
 asdf_setup vim latest
 asdf_setup yarn latest
 asdf_setup kubectl latest
+asdf_setup k9s 0.26.7
 asdf_setup minikube latest
 
 echo_bold_italic_underline 'Done installing tools with asdf! To install tools in your asdf-managed tools, run:'
