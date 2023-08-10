@@ -369,11 +369,6 @@ function t() {
     echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
   else
     tmux -2 new-session -d -s "$SESSION"
-    # Wait until we fix tmux colorscheme
-    # if ! alacritty-is-dark; then
-    #   tmux -2 select-window -t $SESSION:1
-    #   tmux source-file ~/.config/tmux/tmux-light.conf
-    # fi
     tmux -2 attach -t "$SESSION"
   fi
 }
