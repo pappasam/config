@@ -346,22 +346,13 @@ function alacritty-is-dark() {
 # }}}
 # Functions: tmux {{{
 
-# Tmux Launch
-# NOTE: I use the option "-2" to force Tmux to accept 256 colors. This is
-# necessary for proper Vim support in the Linux Console. My Vim colorscheme,
-# PaperColor, does a lot of smart translation for Color values between 256 and
-# terminal 16 color support, and this translation is lost otherwise.
-# Steps (assuming index of 1, which requires tmux config):
-# 1. Create session in detached mode
-# 2. Select first window
-# 3. Rename first window to 'edit'
-# 4. Attach to session newly-created session
+# Launch tmux
 function t() {
   if [ -n "$TMUX" ]; then
     echo 'Cannot run t() in tmux session'
     return 1
   elif [[ $# -gt 0 ]]; then
-    SESSION=$1
+    SESSION="$1"
   else
     SESSION=Main
   fi
@@ -373,11 +364,10 @@ function t() {
   fi
 }
 
-# output colors for tmux
+# Output colors for tmux
 function tmux-colors() {
   for i in {0..255}; do
-    # shellcheck disable=2059
-    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+    printf "\x1b[38;5;%smcolour%s\x1b[0m\n" "$i" "$i"
   done
 }
 
