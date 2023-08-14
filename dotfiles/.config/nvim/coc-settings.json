@@ -43,7 +43,16 @@
     "nginx": "nginx-linter"
   },
   "ltex.dictionary": {
-    "en-US": ["Roeca", "dotfiles", "Dotfiles"]
+    "en-US": [
+      "DAG",
+      "DAGs",
+      "Dotfiles",
+      "EKS",
+      "PyCQA",
+      "Roeca",
+      "dotfiles",
+      "ingestions"
+    ]
   },
   "diagnostic-languageserver.linters": {
     "nginx-linter": {
