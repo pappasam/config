@@ -316,34 +316,6 @@ function despace() {
 }
 
 # }}}
-# Functions: alacritty {{{
-
-function dark() {
-  alacritty-colorscheme \
-    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
-    -C "$HOME/src/lib/alacritty-theme/themes/" \
-    apply 'ayu_dark.yaml'
-  if [ -n "$TMUX" ]; then
-    tmux source-file ~/.config/tmux/tmux.conf
-  fi
-}
-
-function light() {
-  alacritty-colorscheme \
-    -c "$HOME/config/dotfiles/.config/alacritty/alacritty.yml" \
-    -C "$HOME/src/lib/alacritty-theme/themes/" \
-    apply 'papercolor_light.yaml'
-  if [ -n "$TMUX" ]; then
-    tmux source-file ~/.config/tmux/tmux-light.conf
-  fi
-}
-
-# return 0 if background is dark, 1 if background is light
-function alacritty-is-dark() {
-  grep -qs 'COLORSCHEME: ayu_dark.yaml' "$HOME/.config/alacritty/alacritty.yml"
-}
-
-# }}}
 # Functions: tmux {{{
 
 # Launch tmux
@@ -393,11 +365,7 @@ function g() {
 
 # git diff
 function gd() {
-  if alacritty-is-dark; then
-    git diff "$@" | delta --dark --line-numbers
-  else
-    git diff "$@" | delta --light --line-numbers
-  fi
+  git diff "$@" | delta --dark --line-numbers
 }
 
 # checkout origin default, pull, delete old branch, and prune
@@ -793,7 +761,6 @@ function pyglobal-install() {
 # install global Python applications
 function pipx-install() {
   local for_pipx=(
-    alacritty-colorscheme
     black
     cookiecutter
     docformatter
