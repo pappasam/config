@@ -666,6 +666,7 @@ function upgrade() {
     asdf install neovim nightly && \
     asdf global neovim nightly
   if command -v zinit > /dev/null; then
+    zinit self-update
     zinit update --all
   fi
   nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'
