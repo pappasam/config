@@ -67,6 +67,8 @@ export MESA_DEBUG=silent
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
 export PYTHON_CONFIGURE_OPTS='--enable-shared'
 
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+
 # Kubernetes
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
@@ -672,16 +674,6 @@ function upgrade() {
   nvim -c 'PackagerClean | PackagerUpdate | CocUpdate'
 }
 
-function global-install() {
-  goglobal-install
-  nodeglobal-install
-  perlglobal-install
-  pyglobal-install
-  pipx-install
-  rubyglobal-install
-  rustglobal-install
-}
-
 function rustglobal-install() {
   rustup component add rust-analyzer
   rustup component add rust-src
@@ -791,7 +783,18 @@ function pipx-install() {
 function goglobal-install() {
   go install github.com/jedib0t/go-wordle@latest
   go install github.com/nishanths/license/v5@latest
+  go install github.com/jesseduffield/lazygit@latest
   asdf reshim golang
+}
+
+function global-install() {
+  goglobal-install
+  nodeglobal-install
+  perlglobal-install
+  pyglobal-install
+  pipx-install
+  rubyglobal-install
+  rustglobal-install
 }
 
 function alacritty-install() {
