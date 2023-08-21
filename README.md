@@ -1,4 +1,4 @@
-# System Configuration
+# ⚙ System Configuration
 
 Samuel Roeca's dotfiles / notes / scripts to configure the latest versions of Ubuntu and Linux Mint. Feel free to use anything you find useful.
 
@@ -7,7 +7,7 @@ Samuel Roeca's dotfiles / notes / scripts to configure the latest versions of Ub
 - Linux Mint: <https://en.wikipedia.org/wiki/Linux_Mint>
 - Cinnamon: <https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment)>
 
-## Commands
+## 📜 Commands
 
 This repository can automatically configure your system. As a prerequisite, run:
 
@@ -34,28 +34,28 @@ Now, using the [Makefile] in this directory with GNU Make, you can run the follo
 
 [$home]: https://en.wikipedia.org/wiki/Environment_variable#$HOME
 
-## Directories
+## 🔱 Directories
 
 Files are separated into folders documented below.
 
-### [bin/](./bin)
+### [📁 bin/](./bin)
 
 Executable scripts that are added, by default, to the [PATH].
 
 [path]: https://en.wikipedia.org/wiki/PATH_(variable)
 
-### [docs/](./docs)
+### [📁 docs/](./docs)
 
 Document files for reference and automation. Includes Markdown-formatted notes, dictionaries, etc.
 
-### [dotfiles/](./dotfiles)
+### [📁 dotfiles/](./dotfiles)
 
 User dotfiles - used to configure various tools - live here.
 
-### [scripts/](./scripts)
+### [📁 scripts/](./scripts)
 
 Useful automated scripts for things like system setup and program installation.
 
-## Author
+## 🧑 Author
 
 [Samuel Roeca](https://samroeca.com/)
