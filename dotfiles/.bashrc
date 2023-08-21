@@ -790,7 +790,6 @@ function pipx-install() {
 
 function goglobal-install() {
   go install github.com/jedib0t/go-wordle@latest
-  go install github.com/mattn/efm-langserver@latest
   go install github.com/nishanths/license/v5@latest
   asdf reshim golang
 }
