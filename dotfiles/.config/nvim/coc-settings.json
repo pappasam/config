@@ -76,18 +76,6 @@
     }
   },
   "languageserver": {
-    "efm": {
-      "command": "efm-langserver",
-      "args": [],
-      "filetypes": ["markdown"],
-      "initializationOptions": {
-        "documentFormatting": false,
-        "hover": true,
-        "documentSymbol": false,
-        "codeAction": false,
-        "completion": false
-      }
-    },
     "haskell": {
       "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],

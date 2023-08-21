@@ -121,9 +121,6 @@ set completeopt=menuone,longest wildmode=longest:full wildmenu
 " I = ignore startup message
 set shortmess+=c shortmess+=I
 
-" K will lookup words from the english dictionary for all files
-set keywordprg=:DefEng
-
 " Hidden Buffer: enable instead of having to write each buffer
 set hidden
 
@@ -373,6 +370,11 @@ augroup keyword_overrides
   autocmd!
   autocmd FileType nginx set iskeyword+=$
   autocmd FileType zsh,sh set iskeyword+=-
+augroup end
+
+augroup keywordprg_overiddes
+  autocmd!
+  autocmd FileType markdown setlocal keywordprg=:DefEng
 augroup end
 
 augroup fold_overrides
