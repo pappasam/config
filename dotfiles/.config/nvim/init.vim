@@ -1121,9 +1121,7 @@ let g:hexmode_xxd_options = '-g 2'
 let g:make_no_commands = 1
 
 " vim-filetype-formatter:
-let g:vim_filetype_formatter_verbose = v:false
-let g:vim_filetype_formatter_ft_no_defaults = []
-function! s:_ft_formatter_python()
+function! s:formatter_python()
   let filename = expand('%:p')
   return printf(
         \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
@@ -1133,9 +1131,8 @@ function! s:_ft_formatter_python()
         \ filename, filename, filename
         \ )
 endfunction
-let s:ft_formatter_python = funcref('s:_ft_formatter_python')
 let g:vim_filetype_formatter_commands = {
-      \ 'python': s:ft_formatter_python,
+      \ 'python': funcref('s:formatter_python')
       \ }
 
 " nvim-repl:
