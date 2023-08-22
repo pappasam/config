@@ -1124,12 +1124,13 @@ let g:make_no_commands = 1
 let g:vim_filetype_formatter_verbose = v:false
 let g:vim_filetype_formatter_ft_no_defaults = []
 function! s:_ft_formatter_python()
+  let filename = expand('%:p')
   return printf(
-        \ 'ruff check -q --fix-only --stdin-filename=%s - ' .
-        \ '| black -q - ' .
-        \ '| isort -q - ' .
+        \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
+        \ '| black -q --stdin-filename="%s" - ' .
+        \ '| isort -q --filename="%s" - ' .
         \ '| docformatter -',
-        \ expand('%:p')
+        \ filename, filename, filename
         \ )
 endfunction
 let s:ft_formatter_python = funcref('s:_ft_formatter_python')
