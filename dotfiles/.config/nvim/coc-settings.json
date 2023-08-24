@@ -45,12 +45,19 @@
   "ltex.dictionary": {
     "en-US": [
       "DAG",
+      "isort",
+      "docformatter",
+      "Neovim",
+      "coc",
+      "nvim",
       "DAGs",
       "Dotfiles",
       "EKS",
+      "Filetype",
       "PyCQA",
       "Roeca",
       "dotfiles",
+      "filetype",
       "ingestions"
     ]
   },
