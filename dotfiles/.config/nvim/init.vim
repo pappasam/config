@@ -27,9 +27,6 @@ function! s:packager_init(packager) abort
       \ 'https://github.com/tpope/vim-commentary',
       \ ]})
 
-  " Editorconfig:
-  call a:packager.add('https://github.com/gpanders/editorconfig.nvim.git')
-
   " Tree:
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git', {'requires': [
       \ 'https://github.com/kyazdani42/nvim-web-devicons.git',
@@ -312,7 +309,7 @@ augroup filetype_assignment
   autocmd!
   autocmd BufEnter *.asm set filetype=nasm
   autocmd BufEnter *.scm set filetype=query
-  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials set filetype=dosini
+  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials,.editorconfig set filetype=dosini
   autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
   autocmd BufEnter *.handlebars set filetype=html
   autocmd BufEnter *.hql,*.q set filetype=hive

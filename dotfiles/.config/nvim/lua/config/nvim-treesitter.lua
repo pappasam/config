@@ -37,6 +37,7 @@ require("nvim-treesitter.configs").setup({
     "haskell",
     "hcl",
     "html",
+    "ini",
     "java",
     "javascript",
     "jsdoc",
