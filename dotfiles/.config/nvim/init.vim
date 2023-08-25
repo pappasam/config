@@ -70,9 +70,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
 
   " Syntax Highlighting & Indentation:
-  call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent')
-  call a:packager.add('https://github.com/osohq/polar.vim')
-  call a:packager.add('https://github.com/Yggdroot/indentLine')
   call a:packager.add('https://github.com/chr4/nginx.vim.git')
   call a:packager.add('https://github.com/delphinus/vim-firestore.git')
   call a:packager.add('https://github.com/mattn/vim-xxdcursor')
@@ -462,9 +459,6 @@ function! s:default_key_mappings()
 
   " Writing:
   nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
-
-  " IndentLines: toggle if indent lines is visible
-  nnoremap <silent> <leader>i <Cmd>IndentLinesToggle<CR>
 
   " ResizeWindow: up and down; relies on custom functions
   nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
