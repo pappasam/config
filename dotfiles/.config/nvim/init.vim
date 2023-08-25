@@ -1049,17 +1049,6 @@ let g:winresizer_start_key = '<C-\>'
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
 
-" Haskell: 'neovimhaskell/haskell-vim'
-let g:haskell_enable_quantification = v:true   " to highlight `forall`
-let g:haskell_enable_recursivedo = v:true      " to highlight `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = v:true      " to highlight `proc`
-let g:haskell_enable_pattern_synonyms = v:true " to highlight `pattern`
-let g:haskell_enable_typeroles = v:true        " to highlight type roles
-let g:haskell_enable_static_pointers = v:true  " to highlight `static`
-
-" IndentLines:
-let g:indentLine_enabled = v:false  " indentlines disabled by default
-
 " HexMode: configure hex editing
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
