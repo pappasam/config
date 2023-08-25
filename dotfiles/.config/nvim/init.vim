@@ -38,7 +38,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
-  call a:packager.add('https://github.com/tpope/vim-characterize.git')
 
   " KeywordPrg:
   call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
@@ -55,10 +54,6 @@ function! s:packager_init(packager) abort
   " Text Objects:
   call a:packager.add('https://github.com/machakann/vim-sandwich')
   call a:packager.add('https://github.com/kana/vim-textobj-user')
-
-  " Writing:
-  call a:packager.add('https://github.com/jlesquembre/rst-tables.nvim')
-  call a:packager.add('https://github.com/moiatgit/vim-rst-sections')
 
   " Previewers:
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
@@ -525,27 +520,6 @@ call s:default_key_mappings()
 augroup remap_man_help
   autocmd!
   autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-augroup end
-
-function! s:mappings_rst()
-  nnoremap <buffer>          <leader>f <Cmd>TableRstFormat<CR>
-  nnoremap <buffer> <silent> <leader>s0 <Cmd>call RstSetSection(0)<CR>
-  nnoremap <buffer> <silent> <leader>s1 <Cmd>call RstSetSection(1)<CR>
-  nnoremap <buffer> <silent> <leader>s2 <Cmd>call RstSetSection(2)<CR>
-  nnoremap <buffer> <silent> <leader>s3 <Cmd>call RstSetSection(3)<CR>
-  nnoremap <buffer> <silent> <leader>s4 <Cmd>call RstSetSection(4)<CR>
-  nnoremap <buffer> <silent> <leader>s5 <Cmd>call RstSetSection(5)<CR>
-  nnoremap <buffer> <silent> <leader>s6 <Cmd>call RstSetSection(6)<CR>
-  nnoremap <buffer> <silent> <leader>sk <Cmd>call RstGoPrevSection()<CR>
-  nnoremap <buffer> <silent> <leader>sj <Cmd>call RstGoNextSection()<CR>
-  nnoremap <buffer> <silent> <leader>sa <Cmd>call RstIncrSectionLevel()<CR>
-  nnoremap <buffer> <silent> <leader>sx <Cmd>call RstDecrSectionLevel()<CR>
-  nnoremap <buffer> <silent> <leader>sl <Cmd>call RstSectionLabelize()<CR>
-endfunction
-
-augroup remap_rst
-  autocmd!
-  autocmd FileType rst call s:mappings_rst()
 augroup end
 
 augroup remap_lsp_format
@@ -1051,10 +1025,7 @@ let g:mkdp_preview_options = {
 " Package: preview compiled stuff in viewer {{{
 
 function! s:preview()
-  if &filetype ==? 'rst'
-    silent! execute 'terminal restview %'
-    silent! execute "normal \<C-O>"
-  elseif &filetype ==? 'markdown'
+  if &filetype ==? 'markdown'
     " from markdown-preview.vim
     silent! execute 'MarkdownPreview'
   else
@@ -1101,9 +1072,6 @@ let g:haskell_enable_arrowsyntax = v:true      " to highlight `proc`
 let g:haskell_enable_pattern_synonyms = v:true " to highlight `pattern`
 let g:haskell_enable_typeroles = v:true        " to highlight type roles
 let g:haskell_enable_static_pointers = v:true  " to highlight `static`
-
-" Restructured Text
-let g:no_rst_sections_maps = 0
 
 " IndentLines:
 let g:indentLine_enabled = v:false  " indentlines disabled by default
