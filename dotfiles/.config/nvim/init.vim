@@ -1,20 +1,15 @@
 " Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 " General: package management {{{
+" | :PackagerStatus | :PackagerInstall | :PackagerUpdate | :PackagerClean |
 
-" Automatically install nvim-packager
 call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
-
-" Available Commands:
-"   PackagerStatus, PackagerInstall, PackagerUpdate, PackagerClean
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
-
-  " Autocompletion And IDE Features:
+  " Autocompletion And IDE Features
   call a:packager.add('https://github.com/neoclide/coc.nvim.git', {'do': 'yarn install --frozen-lockfile'})
   call a:packager.add('https://github.com/pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' })
-
-  " TreeSitter:
+  " TreeSitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter.git', {'do': ':TSUpdate'})
   call a:packager.add('https://github.com/nvim-treesitter/playground.git')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag.git')
@@ -22,55 +17,45 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
       \ 'https://github.com/tpope/vim-commentary',
       \ ]})
-
-  " Tree:
+  " Tree
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git', {'requires': [
       \ 'https://github.com/kyazdani42/nvim-web-devicons.git',
       \ ]})
-
-  " General:
+  " General
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/simeji/winresizer')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
-
-  " KeywordPrg:
+  " KeywordPrg
   call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
-
-  " Fuzzy Finder:
+  " Fuzzy Finder
   call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git', {'requires': [
       \ 'https://github.com/nvim-lua/plenary.nvim.git',
       \ ]})
-
-  " Git:
+  " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim.git')
-
-  " Text Objects:
+  " Text Objects
   call a:packager.add('https://github.com/machakann/vim-sandwich')
   call a:packager.add('https://github.com/kana/vim-textobj-user')
-
-  " Previewers:
+  " Previewers
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-
-  " Code Formatters:
+  " Code Formatters
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
-
-  " Repl Integration:
+  " Repl Integration
   call a:packager.add('https://github.com/pappasam/nvim-repl.git', {'requires': [
         \ 'https://github.com/tpope/vim-repeat',
         \ ]})
-
-  " Syntax Theme:
+  " Syntax Theme
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
-
-  " Syntax Highlighting & Indentation:
+  " Syntax Highlighting & Indentation
   call a:packager.add('https://github.com/chr4/nginx.vim.git')
   call a:packager.add('https://github.com/delphinus/vim-firestore.git')
 endfunction
 
 packadd vim-packager
+
 call packager#setup(function('s:packager_init'), {
       \ 'window_cmd': 'edit',
       \ })
