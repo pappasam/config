@@ -111,6 +111,7 @@ sudo apt install -y \
   python-openssl \
   qpdf \
   re2c \
+  scdoc \
   screenkey \
   shellcheck \
   software-properties-common \
