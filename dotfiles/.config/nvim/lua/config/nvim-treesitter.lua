@@ -56,6 +56,7 @@ require("nvim-treesitter.configs").setup({
     "query",
     "r",
     "regex",
+    "requirements",
     "rst",
     "ruby",
     "rust",
