@@ -70,13 +70,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
 
   " Syntax Highlighting & Indentation:
-  call a:packager.add('https://github.com/evanleck/vim-svelte.git', {'requires': [
-      \ 'https://github.com/cakebaker/scss-syntax.vim.git',
-      \ 'https://github.com/groenewege/vim-less.git',
-      \ 'https://github.com/leafgarland/typescript-vim.git',
-      \ 'https://github.com/othree/html5.vim.git',
-      \ 'https://github.com/pangloss/vim-javascript.git',
-      \ ]})
   call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent')
   call a:packager.add('https://github.com/osohq/polar.vim')
   call a:packager.add('https://github.com/Yggdroot/indentLine')
