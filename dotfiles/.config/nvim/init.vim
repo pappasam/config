@@ -463,9 +463,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
   vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
 
-  " Open <cfile> with gx
-  nnoremap gx <Cmd>call <SID>gx_improved()<CR>
-
   " Clipboard Copy: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
@@ -693,13 +690,6 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 
 " 'help' to open in new tab
 cnoreabbrev <expr> h <SID>abbr_help('h', 'tab help')
-
-" }}}
-" General: gx improved {{{
-
-function! s:gx_improved()
-  silent execute '!firefox ' . fnameescape(expand('<cfile>'))
-endfunction
 
 " }}}
 " General: digraphs {{{
