@@ -58,113 +58,42 @@ call packager#setup(function('s:packager_init'), {
       \ })
 
 " }}}
-" General: environment variables {{{
+" General: options / environment variables {{{
 
-" Path: add node_modules for language servers / linters / other stuff
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
-
-" }}}
-" General: options {{{
-
-" Enable filetype detection, plugin loading, and indentation loading
 filetype plugin indent on
-
-" Code Completion:
 set completeopt=menuone,longest wildmode=longest:full wildmenu
-
-" Messages:
-" c = don't give |ins-completion-menu| messages; they're noisy
-" I = ignore startup message
 set shortmess+=c shortmess+=I
-
-" Hidden Buffer: enable instead of having to write each buffer
 set hidden
-
-" Sign Column: always show it
 set signcolumn=number
-
 set cursorline
-
-" Mouse: enable GUI mouse support in all modes
 set mouse=a
-
-" SwapFiles: prevent their creation
 set noswapfile
-
-" Command Line Height: higher for display for messages
 set cmdheight=2
-
-" Line Wrapping: do not wrap lines by default
 set nowrap linebreak
-
-" Indentation:
 set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
-
-" Filename: for gf (@-@='@', see: https://stackoverflow.com/a/45244758)
 set isfname+=@-@ isfname+=:
-
-" Highlight Search: do that
-" note: hlsearcha nd nohlsearch are defined in autocmd outside function
 set incsearch inccommand=nosplit
-
-" Spell Checking:
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set spelllang=en_us
-
-" Single Space After Punctuation: useful when doing :%j (the opposite of gq)
 set nojoinspaces
-
 set showtabline=2
-
 set autoread
-
 set grepprg=rg\ --vimgrep
-
-" Don't timeout on mappings
 set notimeout
-
-" Numbering:
 set number
-
-" Window Splitting: Set split settings (options: splitright, splitbelow)
 set splitright
-
-" Terminal Color Support: only set guicursor if truecolor
-if $COLORTERM ==# 'truecolor'
-  set termguicolors
-else
-  set guicursor=
-endif
-
-" Set Background: defaults to dark
+set termguicolors
 set background=dark
-
-" Colorcolumn: off by default
 set colorcolumn=
-
-" Status Line: specifics for custom status line
 set laststatus=2 ttimeoutlen=50 noshowmode
-
-" ShowCommand: turn off character printing to vim status line
 set noshowcmd
-
-" Updatetime: time Vim waits to do something after I stop moving
 set updatetime=300
-
-" Linux Dev Path: system libraries
 set path+=/usr/include/x86_64-linux-gnu/
-
-" Vim History: for command line
 set history=10
-
-" Set the diff expression to EnhancedDiff
 set diffopt+=internal,algorithm:patience
-
-" Show :list characters, configure with a nice default
 set list
 set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
-
-" Folding
 set foldenable foldmethod=marker foldnestmax=1
 
 " }}}
@@ -581,27 +510,15 @@ augroup end
 " }}}
 " Package: lua extensions {{{
 
-function! s:safe_require(package)
-  try
-    execute "lua require('" . a:package . "')"
-  catch
-    echom "Error with lua require('" . a:package . "')"
-  endtry
-endfunction
-
-function! s:setup_lua_packages()
-  call s:safe_require('config/colorizer')
-  call s:safe_require('config/gitsigns')
-  call s:safe_require('config/nvim-autopairs')
-  call s:safe_require('config/nvim-tree')
-  call s:safe_require('config/nvim-treesitter')
-  call s:safe_require('config/nvim-ts-context-commentstring')
-  call s:safe_require('config/nvim-web-devicons')
-  call s:safe_require('config/telescope')
-  call s:safe_require('config/treesitter-context')
-endfunction
-
-call s:setup_lua_packages()
+lua require('config/colorizer')
+lua require('config/gitsigns')
+lua require('config/nvim-autopairs')
+lua require('config/nvim-tree')
+lua require('config/nvim-treesitter')
+lua require('config/nvim-ts-context-commentstring')
+lua require('config/nvim-web-devicons')
+lua require('config/telescope')
+lua require('config/treesitter-context')
 
 function! s:nvimtree_vimenter()
   let cliargs = argv()
