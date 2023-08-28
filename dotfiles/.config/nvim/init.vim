@@ -23,7 +23,6 @@ function! s:packager_init(packager) abort
       \ ]})
   " General
   call a:packager.add('https://github.com/fidian/hexmode')
-  call a:packager.add('https://github.com/simeji/winresizer')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
@@ -500,6 +499,11 @@ augroup remap_nvim_tree_lua
 augroup end
 
 " }}}
+" General: digraphs {{{
+
+digraph '' 699  " Hawaiian character ʻ
+
+" }}}
 " Package: lsp with coc.nvim {{{
 
 let g:coc_snippet_next = '<C-j>'
@@ -690,11 +694,6 @@ cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
 
 " 'help' to open in new tab
 cnoreabbrev <expr> h <SID>abbr_help('h', 'tab help')
-
-" }}}
-" General: digraphs {{{
-
-digraph '' 699  " Hawaiian character ʻ
 
 " }}}
 " General: trailing whitespace {{{
@@ -1015,18 +1014,10 @@ let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 let g:netrw_nogx = 1
 
-" WinResize:
-let g:winresizer_start_key = '<C-\>'
-let g:winresizer_vert_resize = 1
-let g:winresizer_horiz_resize = 1
-
 " HexMode: configure hex editing
 " relevant command: Hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
-
-" Makefile: global variable to prevent syntax highlighting of commands
-let g:make_no_commands = 1
 
 " vim-filetype-formatter:
 function! s:formatter_python()
