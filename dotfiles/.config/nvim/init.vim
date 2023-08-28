@@ -58,7 +58,7 @@ call packager#setup(function('s:packager_init'), {
       \ })
 
 " }}}
-" General: options / environment variables {{{
+" General: options / environment / global settings {{{
 
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 filetype plugin indent on
@@ -95,6 +95,7 @@ set diffopt+=internal,algorithm:patience
 set list
 set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 set foldenable foldmethod=marker foldnestmax=1
+digraph '' 699  " Hawaiian character ʻ
 
 " }}}
 " General: statusline {{{
@@ -426,11 +427,6 @@ augroup remap_nvim_tree_lua
 augroup end
 
 " }}}
-" General: digraphs {{{
-
-digraph '' 699  " Hawaiian character ʻ
-
-" }}}
 " Package: lsp with coc.nvim {{{
 
 let g:coc_snippet_next = '<C-j>'
@@ -585,9 +581,7 @@ endtry
 " }}}
 " General: abbreviations {{{
 
-" If in_command is at beginning of line : return out_command
-" Else : return in_command.
-function! s:abbr_help(in_command, out_command)
+function! s:abbr_only_beginning(in_command, out_command)
   if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
     return a:out_command
   else
@@ -595,20 +589,9 @@ function! s:abbr_help(in_command, out_command)
   endif
 endfunction
 
-" Open configuration files
-cnoreabbrev <expr> v   <SID>abbr_help('v',   'edit ~/.config/nvim/init.vim')
-cnoreabbrev <expr> coc <SID>abbr_help('coc', 'edit ~/.config/nvim/coc-settings.json')
-cnoreabbrev <expr> z   <SID>abbr_help('z',   'edit ~/.zshrc')
-cnoreabbrev <expr> b   <SID>abbr_help('b',   'edit ~/.bashrc')
-
-" Edit snippet files
-cnoreabbrev <expr> snip <SID>abbr_help('snip', 'CocCommand snippets.editSnippets')
-
-" 'c' is abbreviation for 'close'. I use it way more often than 'change'
-cnoreabbrev <expr> c <SID>abbr_help('c', 'close')
-
-" 'help' to open in new tab
-cnoreabbrev <expr> h <SID>abbr_help('h', 'tab help')
+cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
+cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
 
 " }}}
 " General: trailing whitespace {{{
@@ -749,7 +732,6 @@ command! FocusWriting call s:focuswriting()
 " }}}
 " General: clean unicode {{{
 
-" Replace unicode symbols with cleaned, ascii versions
 function! s:clean_unicode()
   silent! execute '%s/”/"/g'
   silent! execute '%s/“/"/g'
@@ -850,47 +832,6 @@ command! ToggleNumber call s:toggle_number()
 command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
-" Package: markdown-preview.vim {{{
-
-let g:mkdp_auto_start = v:false
-let g:mkdp_auto_close = v:false
-
-" set to 1, the vim will just refresh markdown when save the buffer or
-" leave from insert mode, default 0 is auto refresh markdown as you edit or
-" move the cursor
-" default: 0
-let g:mkdp_refresh_slow = v:false
-
-" set to 1, the MarkdownPreview command can be use for all files,
-" by default it just can be use in markdown file
-" default: 0
-let g:mkdp_command_for_global = v:false
-
-" a custom vim function name to open preview page
-" this function will receive url as param
-" default is empty
-let g:mkdp_browserfunc = ''
-
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-let g:mkdp_preview_options = {
-      \ 'mkit': {},
-      \ 'katex': {},
-      \ 'uml': {},
-      \ 'maid': {},
-      \ 'disable_sync_scroll': 0,
-      \ 'sync_scroll_type': 'middle'
-      \ }
-
-" }}}
 " Package: preview compiled stuff in viewer {{{
 
 function! s:preview()
@@ -960,5 +901,20 @@ let g:repl_filetype_commands = {
       \ 'zsh': 'zsh',
       \ }
 let g:repl_default = &shell
+
+" markdown-preview: <https://github.com/iamcco/markdown-preview.nvim>
+let g:mkdp_auto_start = v:false
+let g:mkdp_auto_close = v:false
+let g:mkdp_refresh_slow = v:false
+let g:mkdp_command_for_global = v:false
+let g:mkdp_browserfunc = ''
+let g:mkdp_preview_options = {
+      \ 'mkit': {},
+      \ 'katex': {},
+      \ 'uml': {},
+      \ 'maid': {},
+      \ 'disable_sync_scroll': 0,
+      \ 'sync_scroll_type': 'middle'
+      \ }
 
 " }}}
