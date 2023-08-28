@@ -200,6 +200,7 @@ alias f='nvim'
 alias fn='nvim -u NORC --noplugin'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
+alias m="MANPAGER='nvim +Man!' man"
 
 # ls et al, with color support and handy aliases
 alias ls='ls --color=auto'
@@ -478,16 +479,6 @@ function git-mod() {
 # go to a Neovim plugin
 function vplug() {
   cd "$HOME/.config/nvim/pack/packager/start/$1" || return
-}
-
-# pipe man stuff to neovim
-function m() {
-  if man --location "$@" &> /dev/null; then
-    # shellcheck disable=SC2145
-    nvim -c "Man $@" -c "only"
-  else
-    man "$@"
-  fi
 }
 
 # get profiling information about neovim
