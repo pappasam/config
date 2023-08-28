@@ -1,6 +1,5 @@
 " Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 " General: package management {{{
-" | :PackagerStatus | :PackagerInstall | :PackagerUpdate | :PackagerClean |
 
 call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
 
@@ -49,7 +48,6 @@ function! s:packager_init(packager) abort
   " Syntax Theme
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
   " Syntax Highlighting & Indentation
-  call a:packager.add('https://github.com/chr4/nginx.vim.git')
   call a:packager.add('https://github.com/delphinus/vim-firestore.git')
 endfunction
 
