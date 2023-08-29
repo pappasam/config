@@ -1,11 +1,6 @@
 # ⚙ System Configuration
 
-Samuel Roeca's dotfiles / notes / scripts to configure the latest versions of Ubuntu and Linux Mint. Feel free to use anything you find useful.
-
-- Dotfiles: <https://wiki.archlinux.org/index.php/Dotfiles>
-- Ubuntu: <https://en.wikipedia.org/wiki/Ubuntu>
-- Linux Mint: <https://en.wikipedia.org/wiki/Linux_Mint>
-- Cinnamon: <https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment)>
+[Samuel Roeca](https://samroeca.com)'s notes / scripts / [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) to configure the latest versions of [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu) and [Linux Mint](https://en.wikipedia.org/wiki/Linux_Mint). Feel free to use anything you find useful.
 
 ## 📜 Commands
 
@@ -30,9 +25,10 @@ Now, using the [Makefile] in this directory with GNU Make, you can run the follo
 | `make clean`                    | Removes `stow` managed links from the user's [$HOME]                |
 | `make setup-ubuntu`             | Setup Ubuntu for the first time, installing necessary software      |
 | `make setup-asdf`               | After `asdf` has been installed, use it to install plugins          |
-| `make setup-cinnamon-on-ubuntu` | If desired, make cinnamon Ubuntu's default desktop environment      |
+| `make setup-cinnamon-on-ubuntu` | If desired, make [Cinnamon] Ubuntu's default desktop environment      |
 
 [$home]: https://en.wikipedia.org/wiki/Environment_variable#$HOME
+[Cinnamon]: https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment)
 
 ## 🔱 Directories
 
@@ -55,7 +51,3 @@ User dotfiles - used to configure various tools - live here.
 ### [📁 scripts/](./scripts)
 
 Useful automated scripts for things like system setup and program installation.
-
-## 🧑 Author
-
-[Samuel Roeca](https://samroeca.com/)
