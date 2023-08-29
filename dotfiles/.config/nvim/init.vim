@@ -1,8 +1,6 @@
 " Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 " General: package management {{{
 
-call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
-
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
   " Autocompletion And IDE Features
@@ -13,13 +11,11 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/nvim-treesitter/playground.git')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag.git')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-context')
-  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git', {'requires': [
-      \ 'https://github.com/tpope/vim-commentary',
-      \ ]})
+  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring.git')
+  call a:packager.add('https://github.com/tpope/vim-commentary')
   " Tree
-  call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git', {'requires': [
-      \ 'https://github.com/kyazdani42/nvim-web-devicons.git',
-      \ ]})
+  call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git')
+  call a:packager.add('https://github.com/kyazdani42/nvim-web-devicons.git')
   " General
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
@@ -28,9 +24,8 @@ function! s:packager_init(packager) abort
   " KeywordPrg
   call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
   " Fuzzy Finder
-  call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git', {'requires': [
-      \ 'https://github.com/nvim-lua/plenary.nvim.git',
-      \ ]})
+  call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git')
+  call a:packager.add('https://github.com/nvim-lua/plenary.nvim.git')
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim.git')
@@ -42,20 +37,16 @@ function! s:packager_init(packager) abort
   " Code Formatters
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
   " Repl Integration
-  call a:packager.add('https://github.com/pappasam/nvim-repl.git', {'requires': [
-        \ 'https://github.com/tpope/vim-repeat',
-        \ ]})
+  call a:packager.add('https://github.com/pappasam/nvim-repl.git')
+  call a:packager.add('https://github.com/tpope/vim-repeat')
   " Syntax Theme
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
   " Syntax Highlighting & Indentation
   call a:packager.add('https://github.com/delphinus/vim-firestore.git')
 endfunction
-
+call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
 packadd vim-packager
-
-call packager#setup(function('s:packager_init'), {
-      \ 'window_cmd': 'edit',
-      \ })
+call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
 
 " }}}
 " General: options / environment / global settings {{{
