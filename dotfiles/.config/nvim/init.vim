@@ -16,37 +16,37 @@ function! s:packager_init(packager) abort
   " Tree
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua.git')
   call a:packager.add('https://github.com/kyazdani42/nvim-web-devicons.git')
-  " General
-  call a:packager.add('https://github.com/fidian/hexmode')
-  call a:packager.add('https://github.com/sjl/strftimedammit.vim')
-  call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
-  call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
-  " KeywordPrg
-  call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
   " Fuzzy Finder
   call a:packager.add('https://github.com/nvim-telescope/telescope.nvim.git')
   call a:packager.add('https://github.com/nvim-lua/plenary.nvim.git')
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim.git')
+  " Repl
+  call a:packager.add('https://github.com/pappasam/nvim-repl.git')
+  call a:packager.add('https://github.com/tpope/vim-repeat')
+  " Syntax
+  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
+  call a:packager.add('https://github.com/delphinus/vim-firestore.git')
   " Text Objects
   call a:packager.add('https://github.com/machakann/vim-sandwich')
   call a:packager.add('https://github.com/kana/vim-textobj-user')
-  " Previewers
+  " Miscellaneous
+  call a:packager.add('https://github.com/fidian/hexmode')
+  call a:packager.add('https://github.com/sjl/strftimedammit.vim')
+  call a:packager.add('https://github.com/windwp/nvim-autopairs.git')
+  call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
+  call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands.git')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  " Code Formatters
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
-  " Repl Integration
-  call a:packager.add('https://github.com/pappasam/nvim-repl.git')
-  call a:packager.add('https://github.com/tpope/vim-repeat')
-  " Syntax Theme
-  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim.git')
-  " Syntax Highlighting & Indentation
-  call a:packager.add('https://github.com/delphinus/vim-firestore.git')
 endfunction
-call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
-packadd vim-packager
-call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+
+augroup init_vim_setup
+  autocmd!
+  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
+        \ | packadd vim-packager
+        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+augroup end
 
 " }}}
 " General: options / environment / global settings {{{
