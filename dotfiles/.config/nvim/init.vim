@@ -273,6 +273,35 @@ augroup end
 
 let mapleader = ','
 
+" <https://stackoverflow.com/a/61486601>
+function! s:get_visual_selection(mode)
+  " call with visualmode() as the argument
+  let [line_start, column_start] = getpos("'<")[1:2]
+  let [line_end, column_end]     = getpos("'>")[1:2]
+  let lines = getline(line_start, line_end)
+  if a:mode ==# 'v'
+    " Must trim the end before the start, the beginning will shift left.
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+  elseif a:mode ==# 'V'
+    " Line mode no need to trim start or end
+  elseif a:mode == "\<c-v>"
+    " Block mode, trim every line
+    let new_lines = []
+    let i = 0
+    for line in lines
+      let lines[i] = line[column_start - 1: column_end - (&selection == 'inclusive' ? 1 : 2)]
+      let i = i + 1
+    endfor
+  else
+    return ''
+  endif
+  for line in lines
+    echom line
+  endfor
+  return join(lines, "\n")
+endfunction
+
 function! s:default_key_mappings()
   " Coc: settings for coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
@@ -352,6 +381,10 @@ function! s:default_key_mappings()
   " TogglePluginWindows:
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
   nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
+
+  " Better gx
+  nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
+  xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
 
   " Writing:
   nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
