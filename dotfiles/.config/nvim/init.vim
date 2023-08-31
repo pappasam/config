@@ -344,12 +344,10 @@ function! s:default_key_mappings()
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
 
   " MoveVisual: up and down visually only if count is specified before
-  " Commented out for now because I'd like to see how it feels moving away
-  " from this
-  " nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  " vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  " nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  " vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
   " Macro Repeater:
   " Enable calling a function within the mapping for @
