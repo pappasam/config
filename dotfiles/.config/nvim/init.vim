@@ -91,7 +91,6 @@ digraph '' 699  " Hawaiian character ʻ
 " }}}
 " General: statusline {{{
 
-" Status Line
 set laststatus=2
 set statusline=
 set statusline+=%#CursorLine#
@@ -110,7 +109,6 @@ set statusline+=\ %{&ff}\  " Unix or Dos
 set statusline+=%*  " default color
 set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
 
-" Status Line
 augroup statusline_overrides
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
