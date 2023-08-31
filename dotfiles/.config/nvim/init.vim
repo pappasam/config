@@ -890,7 +890,6 @@ let g:clipboard = {
 " Netrw: disable completely
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
-let g:netrw_nogx = 1
 
 " HexMode: configure hex editing
 " relevant command: Hexmode
