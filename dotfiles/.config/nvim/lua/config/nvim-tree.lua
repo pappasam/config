@@ -3,6 +3,9 @@ require("nvim-tree").setup({
     full_name = true,
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
+    exclude = {
+      "/config",
+    }
   },
 })
