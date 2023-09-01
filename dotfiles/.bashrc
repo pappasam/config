@@ -703,13 +703,13 @@ function perlglobal-install() {
 }
 
 function nodeglobal-install() {
+  # Temporary removals: npm
   local env=(
     bash-language-server
     dockerfile-language-server-nodejs
     neovim
     nginx-linter
     nginxbeautifier
-    npm
     prettier
     prettier-plugin-prisma
     prettier-plugin-svelte
