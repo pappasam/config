@@ -25,7 +25,7 @@ Now, using the [Makefile] in this directory with GNU Make, you can run the follo
 | `make clean`                    | Removes `stow` managed links from the user's [$HOME]                |
 | `make setup-ubuntu`             | Setup Ubuntu for the first time, installing necessary software      |
 | `make setup-asdf`               | After `asdf` has been installed, use it to install plugins          |
-| `make setup-cinnamon-on-ubuntu` | If desired, make [Cinnamon] Ubuntu's default desktop environment      |
+| `make setup-cinnamon-on-ubuntu` | If desired, make [Cinnamon] Ubuntu's default desktop environment    |
 
 [$home]: https://en.wikipedia.org/wiki/Environment_variable#$HOME
 [Cinnamon]: https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment)
