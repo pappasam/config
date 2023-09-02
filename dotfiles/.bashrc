@@ -655,12 +655,9 @@ function upgrade() {
   git pull
   alacritty-install
   popd || return
-  # commenting out for now because nightly breaks telescope
-  # <https://github.com/neovim/neovim/issues/24897>
-  # <https://github.com/nvim-telescope/telescope.nvim/issues/2667>
-  # asdf uninstall neovim nightly && \
-  #   asdf install neovim nightly && \
-  #   asdf global neovim nightly
+  asdf uninstall neovim nightly && \
+    asdf install neovim nightly && \
+    asdf global neovim nightly
   if command -v zinit > /dev/null; then
     zinit self-update
     zinit update --all
