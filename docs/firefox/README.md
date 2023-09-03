@@ -8,3 +8,7 @@ Step-by-step instructions to configure local files that customize Firefox.
 3. Now edit the `userContent.css` file in this directory's `chrome` folder
 4. Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
 5. Close all open Firefox windows, then re-open them. Changes should take effect!
+
+## Plugins
+
+- <https://addons.mozilla.org/en-US/firefox/addon/linkhints/>
