@@ -49,73 +49,7 @@ augroup init_vim_setup
 augroup end
 
 " }}}
-" General: options / environment / global settings {{{
-
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
-filetype plugin indent on
-set completeopt=menuone,longest wildmode=longest:full wildmenu
-set shortmess+=c shortmess+=I
-set hidden
-set signcolumn=number
-set cursorline
-set mouse=a
-set noswapfile
-set cmdheight=2
-set nowrap linebreak
-set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
-set isfname+=@-@ isfname+=:
-set incsearch inccommand=nosplit
-set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
-set spelllang=en_us
-set nojoinspaces
-set showtabline=2
-set autoread
-set grepprg=rg\ --vimgrep
-set notimeout
-set number
-set splitright
-set termguicolors
-set background=dark
-set colorcolumn=
-set laststatus=2 ttimeoutlen=50 noshowmode
-set noshowcmd
-set updatetime=300
-set path+=/usr/include/x86_64-linux-gnu/
-set history=10
-set diffopt+=internal,algorithm:patience
-set list
-set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
-set foldenable foldmethod=marker foldnestmax=1
-digraph '' 699  " Hawaiian character ʻ
-
-" }}}
-" General: statusline {{{
-
-set laststatus=2
-set statusline=
-set statusline+=%#CursorLine#
-set statusline+=\ %{mode()}
-set statusline+=\ %*\  " Color separator + space
-set statusline+=%{&paste?'[P]':''}
-set statusline+=%{&spell?'[S]':''}
-set statusline+=%r
-set statusline+=%t
-set statusline+=%m
-set statusline+=%=
-set statusline+=\ %v:%l/%L\  " column, line number, total lines
-set statusline+=\ %y\  " file type
-set statusline+=%#CursorLine#
-set statusline+=\ %{&ff}\  " Unix or Dos
-set statusline+=%*  " default color
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
-
-augroup statusline_overrides
-  autocmd!
-  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
-augroup end
-
-" }}}
-" General: tabline {{{
+" General: tabline functions {{{
 
 function! CustomTabLine()
   " Initialize tabline string
@@ -163,14 +97,72 @@ function! CustomTabLabel(n)
   endif
 endfunction
 
+" }}}
+" General: options / environment / global settings {{{
+
+let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+filetype plugin indent on
+set completeopt=menuone,longest wildmode=longest:full wildmenu
+set shortmess+=c shortmess+=I
+set hidden
+set signcolumn=number
+set cursorline
+set mouse=a
+set noswapfile
+set cmdheight=2
+set nowrap linebreak
+set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
+set isfname+=@-@ isfname+=:
+set incsearch inccommand=nosplit
+set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
+set spelllang=en_us
+set nojoinspaces
+set showtabline=2
+set autoread
+set grepprg=rg\ --vimgrep
+set notimeout
+set number
+set splitright
+set termguicolors
+set background=dark
+set colorcolumn=
+set laststatus=2 ttimeoutlen=50 noshowmode
+set noshowcmd
+set updatetime=300
+set path+=/usr/include/x86_64-linux-gnu/
+set history=10
+set diffopt+=internal,algorithm:patience
+set list
+set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+set foldenable foldmethod=marker foldnestmax=1
 set tabline=%!CustomTabLine()
+set laststatus=2
+set statusline=
+set statusline+=%#CursorLine#
+set statusline+=\ %{mode()}
+set statusline+=\ %*\  " Color separator + space
+set statusline+=%{&paste?'[P]':''}
+set statusline+=%{&spell?'[S]':''}
+set statusline+=%r
+set statusline+=%t
+set statusline+=%m
+set statusline+=%=
+set statusline+=\ %v:%l/%L\  " column, line number, total lines
+set statusline+=\ %y\  " file type
+set statusline+=%#CursorLine#
+set statusline+=\ %{&ff}\  " Unix or Dos
+set statusline+=%*  " default color
+set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
+digraph '' 699  " Hawaiian character ʻ
+aunmenu PopUp.How-to\ disable\ mouse
+aunmenu PopUp.-1-
 
 " }}}
 " General: autocmds {{{
 
-augroup redraw_on_refocus
+augroup statusline_overrides
   autocmd!
-  autocmd FocusGained * redraw!
+  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
 augroup end
 
 augroup vim_resized
@@ -211,27 +203,21 @@ augroup end
 
 augroup indentation_overrides
   autocmd!
-  " Reset to 2 (something somewhere overrides...)
+  " Overrides to ensure correct default indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   " 4 spaces per tab, not 2
-  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3
-        \ setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   " Use hard tabs, not spaces
-  autocmd Filetype make,tsv,votl,go,gomod
-        \ setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " Prevent auto-indenting from occuring
-  autocmd Filetype yaml setlocal indentkeys-=<:>
+  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " Fix weird stuff with snippet indentation
-  autocmd Filetype snippets setlocal tabstop=4 softtabstop=0 shiftwidth=0
-        \ noexpandtab noautoindent nosmartindent
+  autocmd Filetype snippets setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab noautoindent nosmartindent
 augroup end
 
 augroup comment_config
-  " Notes:
   " commentstring: read by vim-commentary; must be one template
   " comments: csv of comments.
   " formatoptions: influences how Vim formats text
-  "   ':help fo-table' will get the desired result
+  " ':help fo-table' will get the desired result
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
   autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
@@ -254,16 +240,41 @@ augroup end
 
 augroup fold_overrides
   autocmd!
-  " Warning: operates at the window level, so be careful with this setting
   autocmd FileType gitcommit setlocal nofoldenable
 augroup end
 
 augroup commit_newtab
   autocmd!
-  autocmd FileType gitcommit
-        \ if winnr("$") > 1 |
-        \ wincmd T |
+  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+augroup end
+
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+augroup end
+
+augroup colorscheme_overrides
+  autocmd!
+  autocmd ColorScheme *
+        \ highlight link HighlightedyankRegion Search |
+        \ highlight link CocHighlightText Underlined |
+        \ highlight CocErrorHighlight gui=undercurl |
+        \ highlight CocWarningHighlight gui=undercurl |
+        \ highlight CocInfoHighlight gui=undercurl |
+        \ highlight CocHintHighlight gui=undercurl
+  autocmd ColorScheme PaperColorSlim
+        \ if &background == 'light' |
+        \   execute 'highlight CocSearch guifg=#005f87' |
+        \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
+        \ else |
+        \   execute 'highlight CocSearch guifg=#5fafd7' |
+        \   execute 'highlight CocMenuSel guibg=#585858' |
         \ endif
+augroup end
+
+augroup fix_whitespace_on_save
+  autocmd!
+  autocmd BufWritePre * TrimWhitespace
 augroup end
 
 " }}}
@@ -428,26 +439,6 @@ endfunction
 
 call s:default_key_mappings()
 
-augroup remap_man_help
-  autocmd!
-  autocmd FileType man,help nnoremap <buffer> <silent> <C-]> <C-]>
-augroup end
-
-augroup remap_lsp_format
-  autocmd!
-  autocmd FileType haskell nmap <buffer> <silent> <leader>f <Cmd>call CocAction('format')<CR>
-augroup end
-
-function! s:mappings_nvim_tree_lua()
-  nnoremap <buffer> <silent> <C-l> <Cmd>NvimTreeResize +2<CR>
-  nnoremap <buffer> <silent> <C-h> <Cmd>NvimTreeResize -2<CR>
-endfunction
-
-augroup remap_nvim_tree_lua
-  autocmd!
-  autocmd FileType NvimTree call s:mappings_nvim_tree_lua()
-augroup end
-
 " }}}
 " Package: lsp with coc.nvim {{{
 
@@ -575,25 +566,6 @@ function! s:syntax_group()
   endif
 endfunction
 
-augroup colorscheme_overrides
-  autocmd!
-  autocmd ColorScheme *
-        \ highlight link HighlightedyankRegion Search |
-        \ highlight link CocHighlightText Underlined |
-        \ highlight CocErrorHighlight gui=undercurl |
-        \ highlight CocWarningHighlight gui=undercurl |
-        \ highlight CocInfoHighlight gui=undercurl |
-        \ highlight CocHintHighlight gui=undercurl
-  autocmd ColorScheme PaperColorSlim
-        \ if &background == 'light' |
-        \   execute 'highlight CocSearch guifg=#005f87' |
-        \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
-        \ else |
-        \   execute 'highlight CocSearch guifg=#5fafd7' |
-        \   execute 'highlight CocMenuSel guibg=#585858' |
-        \ endif
-augroup end
-
 try
   colorscheme PaperColorSlim
 catch
@@ -635,11 +607,6 @@ function! s:trim_whitespace()
 endfunction
 
 command! TrimWhitespace call s:trim_whitespace()
-
-augroup fix_whitespace_on_save
-  autocmd!
-  autocmd BufWritePre * TrimWhitespace
-augroup end
 
 " }}}
 " General: window resizing / manipulation functions {{{
