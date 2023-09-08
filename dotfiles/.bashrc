@@ -767,6 +767,7 @@ function pipx-install() {
       pipx uninstall "$arg"
       pipx install "$arg"
     done
+    pipx inject poetry poetry-plugin-up
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi
