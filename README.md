@@ -10,12 +10,7 @@
 
 ```bash
 sudo apt install git build-essential stow # Install prerequisites
-make # Echo Makefile targets and associated help messages
-make stow # Run stow on "dotfiles/" directory, linking user's $HOME
-make clean # Remove stow managed links from user's $HOME
-make setup-ubuntu # Set up Ubuntu for the first time
-make setup-asdf # Install asdf plugins
-make setup-cinnamon-on-ubuntu # Use the Cinnamon desktop environment
+make help # Describe Makefile targets and associated help messages
 ```
 
 | Directory                  | Purpose                                                        |
