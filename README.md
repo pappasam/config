@@ -2,22 +2,14 @@
 
 [Samuel Roeca](https://samroeca.com)'s notes / scripts / [dotfiles](https://wiki.archlinux.org/index.php/Dotfiles) to configure the latest versions of [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu) and [Linux Mint](https://en.wikipedia.org/wiki/Linux_Mint).
 
-```bash
-# Run this before doing anything else
-sudo apt install git build-essential stow
-```
-
-| Tool                                           | Purpose                                                                                                                        |
+| Prerequisite                                   | Purpose                                                                                                                        |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | [Git](https://git-scm.com/)                    | Used to version control this code repository.                                                                                  |
 | [GNU Stow](https://www.gnu.org/software/stow/) | [Automates the placement of symbolic links in the home directory](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/). |
 | [GNU Make](https://www.gnu.org/software/make/) | Manages the above details.                                                                                                     |
 
-Now, using the [Makefile] in this directory with GNU Make, you can run the following commands:
-
-[makefile]: https://en.wikipedia.org/wiki/Make_(software)#Makefile
-
 ```bash
+sudo apt install git build-essential stow # Install prerequisites
 make # Echo Makefile targets and associated help messages
 make stow # Run stow on "dotfiles/" directory, linking user's $HOME
 make clean # Remove stow managed links from user's $HOME
@@ -25,8 +17,6 @@ make setup-ubuntu # Set up Ubuntu for the first time
 make setup-asdf # Install asdf plugins
 make setup-cinnamon-on-ubuntu # Use the Cinnamon desktop environment
 ```
-
-Files are separated into directories documented below.
 
 | Directory                  | Purpose                                                        |
 | -------------------------- | -------------------------------------------------------------- |
