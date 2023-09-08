@@ -10,7 +10,7 @@
 
 ```bash
 sudo apt install git build-essential stow # Install prerequisites
-make help # Describe Makefile targets and associated help messages
+make help # Describe all available Makefile targets
 ```
 
 | Directory                  | Purpose                                                        |
