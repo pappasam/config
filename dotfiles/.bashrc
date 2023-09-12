@@ -137,8 +137,7 @@ function ps1_git_color() {
     echo -e "$PS1_COLOR_RED"
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo -e "$PS1_COLOR_YELLOW"
-  elif [[ $git_status =~ "nothing to commit" ]] && \
-      [[ -z $git_commit ]]; then
+  elif [[ $git_status =~ "nothing to commit" ]] && [[ -z $git_commit ]]; then
     echo -e "$PS1_COLOR_GREEN"
   else
     echo -e "$PS1_COLOR_ORANGE"
