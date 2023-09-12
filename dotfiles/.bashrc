@@ -26,7 +26,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export PAGER=less
 
 export MANWIDTH=79
-export MANPAGER=less
+export MANPAGER='nvim +Man!'
 
 export GIT_PAGER=less
 
@@ -199,7 +199,6 @@ alias f='nvim'
 alias fn='nvim -u NORC --noplugin'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
-alias m="MANPAGER='nvim +Man!' man"
 
 # ls et al, with color support and handy aliases
 alias ls='ls --color=auto'
