@@ -214,7 +214,7 @@ compdef _dict_words syn
 compdef _directories d
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _vplug_completion vplug
-compdef _man m
+# compdef _man m
 compdef _command ve
 compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
