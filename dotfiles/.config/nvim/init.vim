@@ -137,22 +137,7 @@ set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 set foldenable foldmethod=marker foldnestmax=1
 set tabline=%!CustomTabLine()
 set laststatus=2
-set statusline=
-set statusline+=%#CursorLine#
-set statusline+=\ %{mode()}
-set statusline+=\ %*\  " Color separator + space
-set statusline+=%{&paste?'[P]':''}
-set statusline+=%{&spell?'[S]':''}
-set statusline+=%r
-set statusline+=%t
-set statusline+=%m
-set statusline+=%=
-set statusline+=\ %v:%l/%L\  " column, line number, total lines
-set statusline+=\ %y\  " file type
-set statusline+=%#CursorLine#
-set statusline+=\ %{&ff}\  " Unix or Dos
-set statusline+=%*  " default color
-set statusline+=\ %{strlen(&fenc)?&fenc:'none'}\  " file encoding
+set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ \ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
 digraph '' 699  " Hawaiian character ʻ
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
