@@ -881,13 +881,6 @@ let g:mkdp_auto_close = v:false
 let g:mkdp_refresh_slow = v:false
 let g:mkdp_command_for_global = v:false
 let g:mkdp_browserfunc = ''
-let g:mkdp_preview_options = {
-      \ 'mkit': {},
-      \ 'katex': {},
-      \ 'uml': {},
-      \ 'maid': {},
-      \ 'disable_sync_scroll': 0,
-      \ 'sync_scroll_type': 'middle'
-      \ }
+let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 
 " }}}
