@@ -137,7 +137,7 @@ set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 set foldenable foldmethod=marker foldnestmax=1
 set tabline=%!CustomTabLine()
 set laststatus=2
-set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ \ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
 digraph '' 699  " Hawaiian character ʻ
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
