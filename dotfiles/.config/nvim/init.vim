@@ -49,55 +49,6 @@ augroup init_vim_setup
 augroup end
 
 " }}}
-" Tabline functions {{{
-
-function! CustomTabLine()
-  " Initialize tabline string
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s ..= '%#TabLineSel#'
-    else
-      let s ..= '%#TabLine#'
-    endif
-    " set the tab page number (for mouse clicks)
-    let s ..= '%' .. (i + 1) .. 'T'
-    " the label is made by MyTabLabel()
-    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
-  endfor
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s ..= '%#TabLineFill#%T'
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s ..= '%=%#TabLine#%999X ✗ '
-  endif
-  return s
-endfunction
-
-function! CustomTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let postfix = ''
-  for buf in buflist
-    if bufname(buf) == 'focuswriting_abcdefg'
-      let postfix = '🎯'
-      break
-    endif
-  endfor
-  let bname = bufname(buflist[winnr - 1])
-  let bnamemodified = fnamemodify(bname, ':t')
-  if bnamemodified == ''
-    " No name
-    return '👻' . postfix
-  elseif bnamemodified =~ 'NvimTree'
-    return '🌲' . postfix
-  else
-    return bnamemodified . postfix
-  endif
-endfunction
-
-" }}}
 " Settings {{{
 
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
@@ -532,6 +483,55 @@ catch
 endtry
 
 " }}}
+" Tabline {{{
+
+function! CustomTabLine()
+  " Initialize tabline string
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s ..= '%#TabLineSel#'
+    else
+      let s ..= '%#TabLine#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s ..= '%' .. (i + 1) .. 'T'
+    " the label is made by MyTabLabel()
+    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
+  endfor
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s ..= '%#TabLineFill#%T'
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s ..= '%=%#TabLine#%999X ✗ '
+  endif
+  return s
+endfunction
+
+function! CustomTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let postfix = ''
+  for buf in buflist
+    if bufname(buf) == 'focuswriting_abcdefg'
+      let postfix = '🎯'
+      break
+    endif
+  endfor
+  let bname = bufname(buflist[winnr - 1])
+  let bnamemodified = fnamemodify(bname, ':t')
+  if bnamemodified == ''
+    " No name
+    return '👻' . postfix
+  elseif bnamemodified =~ 'NvimTree'
+    return '🌲' . postfix
+  else
+    return bnamemodified . postfix
+  endif
+endfunction
+
+" }}}
 " Abbreviations {{{
 
 function! s:abbr_only_beginning(in_command, out_command)
@@ -794,7 +794,7 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Global variables {{{
+" Globals {{{
 
 " Built-in options
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
