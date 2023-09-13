@@ -418,6 +418,16 @@ function! s:default_key_mappings()
   noremap <silent> <3-MiddleMouse> <LeftMouse>za
   noremap <silent> <4-MiddleMouse> <LeftMouse>za
 
+  augroup map_filetype_overrides
+    autocmd!
+    autocmd FileType man,help
+          \ nnoremap <buffer> d <C-d> |
+          \ nnoremap <buffer> D <C-d> |
+          \ nnoremap <buffer> u <C-u> |
+          \ nnoremap <buffer> U <C-u>
+    autocmd FileType help nnoremap <buffer><silent> q <Cmd>close<CR>
+  augroup end
+
   " Auto-execute all filetypes
   let &filetype=&filetype
 endfunction
