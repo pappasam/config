@@ -51,7 +51,6 @@ augroup end
 " }}}
 " Settings {{{
 
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 filetype plugin indent on
 set completeopt=menuone,longest wildmode=longest:full wildmenu
 set shortmess+=c shortmess+=I
@@ -92,10 +91,8 @@ set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''
 digraph '' 699  " Hawaiian character ʻ
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
-
-" }}}
-" Globals {{{
-
+let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+let g:mapleader = ','
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
 let g:clipboard = {
       \ 'name': 'xsel',
@@ -262,8 +259,6 @@ augroup end
 
 " }}}
 " Mappings {{{
-
-let mapleader = ','
 
 function! s:default_key_mappings()
   nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
