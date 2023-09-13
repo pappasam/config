@@ -297,7 +297,7 @@ function! s:get_visual_selection(mode)
 endfunction
 
 function! s:default_key_mappings()
-  " Coc: settings for coc.nvim
+  " https://github.com/neoclide/coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
   inoremap <silent>        <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
@@ -320,44 +320,44 @@ function! s:default_key_mappings()
   nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
   nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
-
-  " Toggle gitsigns
+  nnoremap <silent>        <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
+  " https://github.com/lewis6991/gitsigns.nvim
   nnoremap <silent> <leader>g <Cmd>GitsignsToggle<CR>
-
-  " View Syntax Groups
+  " https://github.com/pappasam/nvim-repl
+  nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
+  nmap     <leader>e         <Plug>ReplSendLine
+  vmap     <leader>e         <Plug>ReplSendVisual
+  " https://github.com/machakann/vim-sandwich
+  nmap s <Nop>
+  xmap s <Nop>
+  " https://github.com/nvim-telescope/telescope.nvim
+  nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
+  nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
+  nnoremap <silent> <C-p><C-g> <Cmd>Telescope git_status<CR>
+  nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
+  nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
+  nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
+  " https://github.com/pappasam/vim-filetype-formatter
+  nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+  vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+  " https://github.com/kyazdani42/nvim-tree.lua
+  nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
+  " General
   nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
-
-  " J: unmap in normal mode unless range explicitly specified
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
-
-  " SearchBackward: remap comma to single quote
   nnoremap ' ,
-
-  " Exit: Preview, Help, QuickFix, and Location List
   inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
   nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
-
-  " MoveVisual: up and down visually only if count is specified before
   nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
   vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
   nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
   vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-
-  " Macro Repeater:
-  " Enable calling a function within the mapping for @
   nnoremap <expr> <plug>@init AtInit()
-  " A macro could, albeit unusually, end in Insert mode.
   inoremap <expr> <plug>@init "\<c-o>".AtInit()
   nnoremap <expr> <plug>qstop QStop()
   inoremap <expr> <plug>qstop "\<c-o>".QStop()
-  " The following code allows pressing . immediately after
-  " recording a macro to play it back.
   nmap <expr> @ AtReg()
-  " Finally, remap q! Recursion is actually useful here I think,
-  " otherwise I would use 'nnoremap'.
   nmap <expr> q QStart()
-
-  " MoveTabs: goto tab number. Same as Firefox
   nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
   nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
   nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
@@ -367,53 +367,16 @@ function! s:default_key_mappings()
   nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
   nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
   nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
-
-  " ToggleRelativeNumber: uses custom functions
   nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
   nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
-
-  " TogglePluginWindows:
-  nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
-  nnoremap <silent> <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
-
-  " Better gx
   nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
   xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
-
-  " Writing:
   nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
-
-  " ResizeWindow: up and down; relies on custom functions
   nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
   nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
-
-  " Repl: my very own repl plugin
-  nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
-  nmap     <leader>e         <Plug>ReplSendLine
-  vmap     <leader>e         <Plug>ReplSendVisual
-
-  " Sandwich: plugin-recommended mappings
-  nmap s <Nop>
-  xmap s <Nop>
-
-  " Telescope: create shortcuts for finding stuff
-  nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
-  nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
-  nnoremap <silent> <C-p><C-g> <Cmd>Telescope git_status<CR>
-  nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
-  nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
-  nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
-
-  " FiletypeFormat: remap leader f to do filetype formatting
-  nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-  vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-
-  " Clipboard Copy: Visual mode copy is pretty simple
   vnoremap <leader>y "+y
   nnoremap <leader>y "+y
-
-  " Mouse: toggle folds with middle click (I never use it for paste)
-  noremap <silent> <MiddleMouse>   <LeftMouse>za
+  noremap <silent> <MiddleMouse> <LeftMouse>za
   noremap <silent> <2-MiddleMouse> <LeftMouse>za
   noremap <silent> <3-MiddleMouse> <LeftMouse>za
   noremap <silent> <4-MiddleMouse> <LeftMouse>za
@@ -429,7 +392,6 @@ function! s:default_key_mappings()
     autocmd FileType help nnoremap <buffer><silent> q <Cmd>close<CR>
   augroup end
 
-  " Auto-execute all filetypes
   let &filetype=&filetype
 endfunction
 
