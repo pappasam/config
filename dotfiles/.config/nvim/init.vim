@@ -265,35 +265,6 @@ augroup end
 
 let mapleader = ','
 
-" https://stackoverflow.com/a/61486601
-function! s:get_visual_selection(mode)
-  " call with visualmode() as the argument
-  let [line_start, column_start] = getpos("'<")[1:2]
-  let [line_end, column_end]     = getpos("'>")[1:2]
-  let lines = getline(line_start, line_end)
-  if a:mode ==# 'v'
-    " Must trim the end before the start, the beginning will shift left.
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-  elseif a:mode ==# 'V'
-    " Line mode no need to trim start or end
-  elseif a:mode == "\<c-v>"
-    " Block mode, trim every line
-    let new_lines = []
-    let i = 0
-    for line in lines
-      let lines[i] = line[column_start - 1: column_end - (&selection == 'inclusive' ? 1 : 2)]
-      let i = i + 1
-    endfor
-  else
-    return ''
-  endif
-  for line in lines
-    echom line
-  endfor
-  return join(lines, "\n")
-endfunction
-
 function! s:default_key_mappings()
   nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
   nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
@@ -330,6 +301,9 @@ function! s:default_key_mappings()
   noremap <silent> <2-MiddleMouse> <LeftMouse>za
   noremap <silent> <3-MiddleMouse> <LeftMouse>za
   noremap <silent> <4-MiddleMouse> <LeftMouse>za
+  cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
+  cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
+  cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
   " https://github.com/neoclide/coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
@@ -391,6 +365,65 @@ function! s:default_key_mappings()
 endfunction
 
 call s:default_key_mappings()
+
+" https://stackoverflow.com/a/61486601
+function! s:get_visual_selection(mode)
+  " call with visualmode() as the argument
+  let [line_start, column_start] = getpos("'<")[1:2]
+  let [line_end, column_end]     = getpos("'>")[1:2]
+  let lines = getline(line_start, line_end)
+  if a:mode ==# 'v'
+    " Must trim the end before the start, the beginning will shift left.
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+  elseif a:mode ==# 'V'
+    " Line mode no need to trim start or end
+  elseif a:mode == "\<c-v>"
+    " Block mode, trim every line
+    let new_lines = []
+    let i = 0
+    for line in lines
+      let lines[i] = line[column_start - 1: column_end - (&selection == 'inclusive' ? 1 : 2)]
+      let i = i + 1
+    endfor
+  else
+    return ''
+  endif
+  for line in lines
+    echom line
+  endfor
+  return join(lines, "\n")
+endfunction
+
+function! s:abbr_only_beginning(in_command, out_command)
+  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
+    return a:out_command
+  else
+    return a:in_command
+  endif
+endfunction
+
+" }}}
+" Colorscheme {{{
+
+function! s:vim_syntax_group()
+  let l:s = synID(line('.'), col('.'), 1)
+  if l:s == ''
+    echo 'none'
+  else
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+  endif
+endfun
+
+function! s:syntax_group()
+  if &syntax == ''
+    TSHighlightCapturesUnderCursor
+  else
+    call s:vim_syntax_group()
+  endif
+endfunction
+
+colorscheme PaperColorSlim
 
 " }}}
 " Coc {{{
@@ -501,28 +534,6 @@ augroup end
 command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
-" Colorscheme {{{
-
-function! s:vim_syntax_group()
-  let l:s = synID(line('.'), col('.'), 1)
-  if l:s == ''
-    echo 'none'
-  else
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-  endif
-endfun
-
-function! s:syntax_group()
-  if &syntax == ''
-    TSHighlightCapturesUnderCursor
-  else
-    call s:vim_syntax_group()
-  endif
-endfunction
-
-colorscheme PaperColorSlim
-
-" }}}
 " Tabline {{{
 
 function! CustomTabLine()
@@ -570,21 +581,6 @@ function! CustomTabLabel(n)
     return bnamemodified . postfix
   endif
 endfunction
-
-" }}}
-" Abbreviations {{{
-
-function! s:abbr_only_beginning(in_command, out_command)
-  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
-    return a:out_command
-  else
-    return a:in_command
-  endif
-endfunction
-
-cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
-cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
-cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
 
 " }}}
 " Trailing whitespace {{{
