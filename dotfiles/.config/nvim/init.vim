@@ -94,6 +94,53 @@ aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 
 " }}}
+" Globals {{{
+
+let g:python3_host_prog = "$HOME/.asdf/shims/python"
+let g:clipboard = {
+      \ 'name': 'xsel',
+      \ 'copy': {
+      \    '+': 'xsel --clipboard --input',
+      \    '*': 'xsel --clipboard --input',
+      \  },
+      \ 'paste': {
+      \    '+': 'xsel --clipboard --output',
+      \    '*': 'xsel --clipboard --output',
+      \ },
+      \ 'cache_enabled': 0,
+      \ }
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+" https://github.com/fidian/hexmode
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+let g:hexmode_xxd_options = '-g 2'
+" https://github.com/pappasam/vim-filetype-formatter
+function! s:formatter_python()
+  let filename = expand('%:p')
+  return printf(
+        \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
+        \ '| black -q --stdin-filename="%s" - ' .
+        \ '| isort -q --filename="%s" - ' .
+        \ '| docformatter -',
+        \ filename, filename, filename
+        \ )
+endfunction
+let g:vim_filetype_formatter_commands = {'python': funcref('s:formatter_python')}
+" https://github.com/pappasam/nvim-repl
+let g:repl_filetype_commands = {
+      \ 'bash': 'bash',
+      \ 'javascript': 'node',
+      \ 'python': 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""',
+      \ 'r': 'R',
+      \ 'sh': 'sh',
+      \ 'vim': 'nvim --clean -ERM',
+      \ 'zsh': 'zsh',
+      \ }
+let g:repl_default = &shell
+" https://github.com/iamcco/markdown-preview.nvim
+let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
+
+" }}}
 " Autocmds {{{
 
 augroup statusline_overrides
@@ -218,7 +265,7 @@ augroup end
 
 let mapleader = ','
 
-" <https://stackoverflow.com/a/61486601>
+" https://stackoverflow.com/a/61486601
 function! s:get_visual_selection(mode)
   " call with visualmode() as the argument
   let [line_start, column_start] = getpos("'<")[1:2]
@@ -248,6 +295,41 @@ function! s:get_visual_selection(mode)
 endfunction
 
 function! s:default_key_mappings()
+  nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
+  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
+  nnoremap ' ,
+  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
+  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
+  nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+  nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+  nnoremap <expr> <plug>@init AtInit()
+  inoremap <expr> <plug>@init "\<c-o>".AtInit()
+  nnoremap <expr> <plug>qstop QStop()
+  inoremap <expr> <plug>qstop "\<c-o>".QStop()
+  nmap <expr> @ AtReg()
+  nmap <expr> q QStart()
+  nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
+  nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
+  nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
+  nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
+  nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
+  nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
+  nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
+  nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
+  nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
+  nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
+  xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
+  nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
+  nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
+  nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
+  vnoremap <leader>y "+y
+  nnoremap <leader>y "+y
+  noremap <silent> <MiddleMouse> <LeftMouse>za
+  noremap <silent> <2-MiddleMouse> <LeftMouse>za
+  noremap <silent> <3-MiddleMouse> <LeftMouse>za
+  noremap <silent> <4-MiddleMouse> <LeftMouse>za
   " https://github.com/neoclide/coc.nvim
   nmap     <silent>        <C-]> <Plug>(coc-definition)
   nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
@@ -293,42 +375,6 @@ function! s:default_key_mappings()
   vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
   " https://github.com/kyazdani42/nvim-tree.lua
   nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
-  " General
-  nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
-  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
-  nnoremap ' ,
-  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
-  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
-  nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  nnoremap <expr> <plug>@init AtInit()
-  inoremap <expr> <plug>@init "\<c-o>".AtInit()
-  nnoremap <expr> <plug>qstop QStop()
-  inoremap <expr> <plug>qstop "\<c-o>".QStop()
-  nmap <expr> @ AtReg()
-  nmap <expr> q QStart()
-  nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
-  nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
-  nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
-  nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
-  nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
-  nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
-  nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
-  nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
-  nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
-  nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
-  xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
-  nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
-  nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
-  nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
-  vnoremap <leader>y "+y
-  nnoremap <leader>y "+y
-  noremap <silent> <MiddleMouse> <LeftMouse>za
-  noremap <silent> <2-MiddleMouse> <LeftMouse>za
-  noremap <silent> <3-MiddleMouse> <LeftMouse>za
-  noremap <silent> <4-MiddleMouse> <LeftMouse>za
 
   augroup map_filetype_overrides
     autocmd!
@@ -764,57 +810,5 @@ function! s:preview()
 endfunction
 
 command! Preview call s:preview()
-
-" }}}
-" Globals {{{
-
-" Built-in options
-let g:python3_host_prog = "$HOME/.asdf/shims/python"
-let g:clipboard = {
-      \ 'name': 'xsel',
-      \ 'copy': {
-      \    '+': 'xsel --clipboard --input',
-      \    '*': 'xsel --clipboard --input',
-      \  },
-      \ 'paste': {
-      \    '+': 'xsel --clipboard --output',
-      \    '*': 'xsel --clipboard --output',
-      \ },
-      \ 'cache_enabled': 0,
-      \ }
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-
-" https://github.com/fidian/hexmode
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-let g:hexmode_xxd_options = '-g 2'
-
-" https://github.com/pappasam/vim-filetype-formatter
-function! s:formatter_python()
-  let filename = expand('%:p')
-  return printf(
-        \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
-        \ '| black -q --stdin-filename="%s" - ' .
-        \ '| isort -q --filename="%s" - ' .
-        \ '| docformatter -',
-        \ filename, filename, filename
-        \ )
-endfunction
-let g:vim_filetype_formatter_commands = {'python': funcref('s:formatter_python')}
-
-" https://github.com/pappasam/nvim-repl
-let g:repl_filetype_commands = {
-      \ 'bash': 'bash',
-      \ 'javascript': 'node',
-      \ 'python': 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""',
-      \ 'r': 'R',
-      \ 'sh': 'sh',
-      \ 'vim': 'nvim --clean -ERM',
-      \ 'zsh': 'zsh',
-      \ }
-let g:repl_default = &shell
-
-" https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 
 " }}}
