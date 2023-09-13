@@ -94,7 +94,9 @@ aunmenu PopUp.-1-
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 let g:mapleader = ','
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
-let g:clipboard = {'name': 'xsel', 'cache_enabled': 0,
+let g:clipboard = {
+      \ 'name': 'xsel',
+      \ 'cache_enabled': 0,
       \ 'copy' : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
       \ 'paste': {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
       \ }
@@ -104,10 +106,9 @@ let g:loaded_netrwPlugin = 1
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 " https://github.com/pappasam/vim-filetype-formatter
-function! s:formatter_python()
-  return printf('ruff check -q --fix-only --stdin-filename="%1$s" - | black -q --stdin-filename="%1$s" - | isort -q --filename="%1$s" - | docformatter -', expand('%:p'))
-endfunction
-let g:vim_filetype_formatter_commands = {'python': function('s:formatter_python')}
+let g:vim_filetype_formatter_commands = {
+      \ 'python': {-> printf('ruff check -q --fix-only --stdin-filename="%1$s" - | black -q --stdin-filename="%1$s" - | isort -q --filename="%1$s" - | docformatter -', expand('%:p'))},
+      \ }
 " https://github.com/pappasam/nvim-repl
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
@@ -120,7 +121,10 @@ let g:repl_filetype_commands = {
       \ }
 let g:repl_default = &shell
 " https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
+let g:mkdp_preview_options = {
+      \ 'disable_sync_scroll': 0,
+      \ 'sync_scroll_type': 'middle',
+      \ }
 
 " }}}
 " Autocmds {{{
