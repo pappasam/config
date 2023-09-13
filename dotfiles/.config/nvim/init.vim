@@ -1,5 +1,5 @@
 " Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
-" General: package management {{{
+" Package management {{{
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
@@ -49,7 +49,7 @@ augroup init_vim_setup
 augroup end
 
 " }}}
-" General: tabline functions {{{
+" Tabline functions {{{
 
 function! CustomTabLine()
   " Initialize tabline string
@@ -98,7 +98,7 @@ function! CustomTabLabel(n)
 endfunction
 
 " }}}
-" General: options / environment / global settings {{{
+" Settings {{{
 
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 filetype plugin indent on
@@ -143,7 +143,7 @@ aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 
 " }}}
-" General: autocmds {{{
+" Autocmds {{{
 
 augroup statusline_overrides
   autocmd!
@@ -263,7 +263,7 @@ augroup fix_whitespace_on_save
 augroup end
 
 " }}}
-" General: key mappings (global and filetype-specific) {{{
+" Mappings {{{
 
 let mapleader = ','
 
@@ -436,8 +436,9 @@ endfunction
 call s:default_key_mappings()
 
 " }}}
-" Package: lsp with coc.nvim {{{
+" Coc {{{
 
+" https://github.com/neoclide/coc.nvim
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
 let g:coc_start_at_startup = 1
@@ -513,7 +514,7 @@ augroup coc_custom
 augroup end
 
 " }}}
-" Package: lua extensions {{{
+" Lua {{{
 
 lua require('config/colorizer')
 lua require('config/gitsigns')
@@ -543,7 +544,7 @@ augroup end
 command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
-" General: syntax & colorscheme {{{
+" Colorscheme {{{
 
 function! s:vim_syntax_group()
   let l:s = synID(line('.'), col('.'), 1)
@@ -569,7 +570,7 @@ catch
 endtry
 
 " }}}
-" General: abbreviations {{{
+" Abbreviations {{{
 
 function! s:abbr_only_beginning(in_command, out_command)
   if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
@@ -584,7 +585,7 @@ cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
 cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
 
 " }}}
-" General: trailing whitespace {{{
+" Trailing whitespace {{{
 
 function! s:trim_whitespace()
   let l:save = winsaveview()
@@ -605,7 +606,7 @@ endfunction
 command! TrimWhitespace call s:trim_whitespace()
 
 " }}}
-" General: window resizing / manipulation functions {{{
+" Window resizing {{{
 
 " WindowWidth: Resize window to a couple more than longest line
 " modified function from:
@@ -653,7 +654,7 @@ command! ResizeWindowWidth call s:resize_window_width()
 command! ResizeWindowHeight call s:resize_window_height()
 
 " }}}
-" General: focus writing {{{
+" Focus writing {{{
 
 function! s:focuswriting()
   augroup focuswriting
@@ -715,7 +716,7 @@ endfunction
 command! FocusWriting call s:focuswriting()
 
 " }}}
-" General: clean unicode {{{
+" Clean unicode {{{
 
 function! s:clean_unicode()
   silent! execute '%s/”/"/g'
@@ -730,7 +731,7 @@ endfunction
 command! CleanUnicode call s:clean_unicode()
 
 " }}}
-" General: macro repeater {{{
+" Macro repeater {{{
 
 " Allow '.' to repeat macros. Finally!
 " Taken from here:
@@ -795,7 +796,7 @@ function! QStart()
 endfunction
 
 " }}}
-" General: toggle numbers {{{
+" Toggle numbers {{{
 
 function! s:toggle_number()
   if &number == 0
@@ -817,7 +818,7 @@ command! ToggleNumber call s:toggle_number()
 command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
-" Package: preview compiled stuff in viewer {{{
+" Previewers {{{
 
 function! s:preview()
   if &filetype ==? 'markdown'
@@ -831,12 +832,10 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Package: misc global var config {{{
+" Global variables {{{
 
-" Languages: configure location of host
+" Built-in options
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
-
-" Configure clipboard explicitly. Speeds up startup
 let g:clipboard = {
       \ 'name': 'xsel',
       \ 'copy': {
@@ -849,17 +848,14 @@ let g:clipboard = {
       \ },
       \ 'cache_enabled': 0,
       \ }
-
-" Netrw: disable completely
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
-" HexMode: configure hex editing
-" relevant command: Hexmode
+" https://github.com/fidian/hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 
-" vim-filetype-formatter:
+" https://github.com/pappasam/vim-filetype-formatter
 function! s:formatter_python()
   let filename = expand('%:p')
   return printf(
@@ -870,11 +866,9 @@ function! s:formatter_python()
         \ filename, filename, filename
         \ )
 endfunction
-let g:vim_filetype_formatter_commands = {
-      \ 'python': funcref('s:formatter_python')
-      \ }
+let g:vim_filetype_formatter_commands = {'python': funcref('s:formatter_python')}
 
-" nvim-repl:
+" https://github.com/pappasam/nvim-repl
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
       \ 'javascript': 'node',
@@ -886,7 +880,7 @@ let g:repl_filetype_commands = {
       \ }
 let g:repl_default = &shell
 
-" markdown-preview: <https://github.com/iamcco/markdown-preview.nvim>
+" https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 
 " }}}
