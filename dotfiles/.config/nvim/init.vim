@@ -424,7 +424,8 @@ function! s:default_key_mappings()
           \ nnoremap <buffer> d <C-d> |
           \ nnoremap <buffer> D <C-d> |
           \ nnoremap <buffer> u <C-u> |
-          \ nnoremap <buffer> U <C-u>
+          \ nnoremap <buffer> U <C-u> |
+          \ nnoremap <buffer> <C-]> <C-]>
     autocmd FileType help nnoremap <buffer><silent> q <Cmd>close<CR>
   augroup end
 
