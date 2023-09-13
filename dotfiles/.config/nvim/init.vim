@@ -318,8 +318,6 @@ function! s:default_key_mappings()
   nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
   nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
   nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
-  nnoremap <silent> <leader>R <Cmd>ToggleNumber<CR>
-  nnoremap <silent> <leader>r <Cmd>ToggleRelativeNumber<CR>
   nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
   xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
   nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
@@ -756,28 +754,6 @@ function! QStart()
   endif
   return 'q'.s:qreg
 endfunction
-
-" }}}
-" Toggle numbers {{{
-
-function! s:toggle_number()
-  if &number == 0
-    set number
-  else
-    set nonumber
-  endif
-endfunction
-
-function! s:toggle_relative_number()
-  if &relativenumber == 0
-    set relativenumber
-  else
-    set norelativenumber
-  endif
-endfunction
-
-command! ToggleNumber call s:toggle_number()
-command! ToggleRelativeNumber call s:toggle_relative_number()
 
 " }}}
 " Previewers {{{
