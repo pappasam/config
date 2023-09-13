@@ -474,11 +474,7 @@ function! s:syntax_group()
   endif
 endfunction
 
-try
-  colorscheme PaperColorSlim
-catch
-  echo 'An error occurred while configuring Papercolor'
-endtry
+colorscheme PaperColorSlim
 
 " }}}
 " Tabline {{{
