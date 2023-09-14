@@ -1,4 +1,3 @@
-" Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 " Package management {{{
 
 function! s:packager_init(packager) abort
@@ -40,13 +39,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
 endfunction
-
-augroup init_vim_setup
-  autocmd!
-  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
-        \ | packadd vim-packager
-        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-augroup end
 
 " }}}
 " Settings {{{
@@ -128,6 +120,22 @@ let g:mkdp_preview_options = {
 
 " }}}
 " Autocmds {{{
+
+augroup init_vim_setup
+  autocmd!
+  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
+        \ | packadd vim-packager
+        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+        \ | let &l:path .= ','.stdpath('config').'/lua'
+        \ | setlocal suffixesadd^=.lua
+augroup end
+
+augroup nvim_tree_open_directory_on_vimenter
+  autocmd!
+  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
+        \ | execute 'NvimTreeOpen ' . argv(0)
+        \ | endif
+augroup end
 
 augroup statusline_overrides
   autocmd!
@@ -246,6 +254,24 @@ augroup fix_whitespace_on_save
   autocmd BufWritePre * TrimWhitespace
 augroup end
 
+augroup coc_custom
+  autocmd!
+  autocmd VimEnter * call s:autocmd_custom_coc()
+augroup end
+
+function! s:autocmd_custom_coc()
+  if !exists("g:did_coc_loaded")
+    return
+  endif
+  augroup coc_custom
+    autocmd FileType coctree set nowrap
+    autocmd FileType nginx let b:coc_additional_keywords = ['$']
+    autocmd FileType scss let b:coc_additional_keywords = ['@']
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd User CocNvimInit call s:default_key_mappings()
+  augroup end
+endfunction
+
 " }}}
 " Mappings {{{
 
@@ -313,7 +339,7 @@ function! s:default_key_mappings()
   nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
   nnoremap <silent>        <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
   " https://github.com/lewis6991/gitsigns.nvim
-  nnoremap <silent> <leader>g <Cmd>GitsignsToggle<CR>
+  nnoremap <silent> <leader>g <Cmd>Gitsigns toggle_signs<CR>
   " https://github.com/pappasam/nvim-repl
   nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
   nmap     <leader>e         <Plug>ReplSendLine
@@ -456,23 +482,6 @@ let g:coc_global_extensions = [
       \ 'coc-yank',
       \ ]
 
-" Note: coc-angular requires `npm install @angular/language-service` in
-" project directory to stop coc from crashing. See:
-" <https://github.com/iamcco/coc-angular/issues/47>
-
-function! s:autocmd_custom_coc()
-  if !exists("g:did_coc_loaded")
-    return
-  endif
-  augroup coc_custom
-    autocmd FileType coctree set nowrap
-    autocmd FileType nginx let b:coc_additional_keywords = ['$']
-    autocmd FileType scss let b:coc_additional_keywords = ['@']
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    autocmd User CocNvimInit call s:default_key_mappings()
-  augroup end
-endfunction
-
 function! s:coc_toggle_outline() abort
   let winid = coc#window#find('cocViewId', 'OUTLINE')
   if winid == -1
@@ -481,11 +490,6 @@ function! s:coc_toggle_outline() abort
     call coc#window#close(winid)
   endif
 endfunction
-
-augroup coc_custom
-  autocmd!
-  autocmd VimEnter * call s:autocmd_custom_coc()
-augroup end
 
 " }}}
 " Lua {{{
@@ -499,23 +503,6 @@ lua require('config/nvim-ts-context-commentstring')
 lua require('config/nvim-web-devicons')
 lua require('config/telescope')
 lua require('config/treesitter-context')
-
-function! s:nvimtree_vimenter()
-  let cliargs = argv()
-  if exists(':NvimTreeOpen') && len(cliargs) == 1 && isdirectory(cliargs[0])
-    execute 'NvimTreeOpen ' . cliargs[0]
-  endif
-endfunction
-
-augroup lua_extension_config
-  autocmd!
-  autocmd FileType vim
-        \ let &l:path .= ','.stdpath('config').'/lua' |
-        \ setlocal suffixesadd^=.lua
-  autocmd VimEnter * call s:nvimtree_vimenter()
-augroup end
-
-command! GitsignsToggle Gitsigns toggle_signs
 
 " }}}
 " Tabline {{{

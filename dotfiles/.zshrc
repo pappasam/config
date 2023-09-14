@@ -1,6 +1,5 @@
 #!/usr/bin/zsh
 # shellcheck shell=sh disable=all
-# Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Powerlevel10k: Configure instant prompt {{{
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
-# Usage: toggle fold in Vim with 'za'. 'zR' to open all folds, 'zM' to close
 # Environment: exported variables {{{
 
 # Run 'dircolors --print-database' for more info about this.
