@@ -1,4 +1,4 @@
-" Package management {{{
+" Packages {{{
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
@@ -39,6 +39,16 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
 endfunction
+
+lua require('config/colorizer')
+lua require('config/gitsigns')
+lua require('config/nvim-autopairs')
+lua require('config/nvim-tree')
+lua require('config/nvim-treesitter')
+lua require('config/nvim-ts-context-commentstring')
+lua require('config/nvim-web-devicons')
+lua require('config/telescope')
+lua require('config/treesitter-context')
 
 " }}}
 " Settings {{{
@@ -482,19 +492,6 @@ function! s:coc_toggle_outline() abort
 endfunction
 
 " }}}
-" Lua {{{
-
-lua require('config/colorizer')
-lua require('config/gitsigns')
-lua require('config/nvim-autopairs')
-lua require('config/nvim-tree')
-lua require('config/nvim-treesitter')
-lua require('config/nvim-ts-context-commentstring')
-lua require('config/nvim-web-devicons')
-lua require('config/telescope')
-lua require('config/treesitter-context')
-
-" }}}
 " Commands {{{
 
 function! s:trim_whitespace()
@@ -629,72 +626,7 @@ endfunction
 command! Preview call s:preview()
 
 " }}}
-" Macro repeater {{{
-
-" Allow '.' to repeat macros. Finally!
-" Taken from here:
-" https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
-" SR took it from GitHub: ckarnell/Antonys-macro-repeater
-"
-" When . repeats g@, repeat the last macro.
-function! AtRepeat(_)
-  " If no count is supplied use the one saved in s:atcount.
-  " Otherwise save the new count in s:atcount, so it will be
-  " applied to repeats.
-  let s:atcount = v:count ? v:count : s:atcount
-  " feedkeys() rather than :normal allows finishing in Insert
-  " mode, should the macro do that. @@ is remapped, so 'opfunc'
-  " will be correct, even if the macro changes it.
-  call feedkeys(s:atcount.'@@')
-endfunction
-
-function! AtSetRepeat(_)
-  set operatorfunc=AtRepeat
-endfunction
-
-" Called by g@ being invoked directly for the first time. Sets
-" 'opfunc' ready for repeats with . by calling AtSetRepeat().
-function! AtInit()
-  " Make sure setting 'opfunc' happens here, after initial playback
-  " of the macro recording, in case 'opfunc' is set there.
-  set operatorfunc=AtSetRepeat
-  return 'g@l'
-endfunction
-
-function! AtReg()
-  let s:atcount = v:count1
-  let l:c = nr2char(getchar())
-  return '@'.l:c."\<plug>@init"
-endfunction
-
-function! QRepeat(_)
-  call feedkeys('@'.s:qreg)
-endfunction
-
-function! QSetRepeat(_)
-  set operatorfunc=QRepeat
-endfunction
-
-function! QStop()
-  set operatorfunc=QSetRepeat
-  return 'g@l'
-endfunction
-
-let s:qrec = 0
-function! QStart()
-  if s:qrec == 1
-    let s:qrec = 0
-    return "q\<plug>qstop"
-  endif
-  let s:qreg = nr2char(getchar())
-  if s:qreg =~# '[0-9a-zA-Z"]'
-    let s:qrec = 1
-  endif
-  return 'q'.s:qreg
-endfunction
-
-" }}}
-" Tabline {{{
+" Functions {{{
 
 function! CustomTabLine()
   " Initialize tabline string
@@ -719,7 +651,6 @@ function! CustomTabLine()
   endif
   return s
 endfunction
-
 function! CustomTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
@@ -740,6 +671,60 @@ function! CustomTabLabel(n)
   else
     return bnamemodified . postfix
   endif
+endfunction
+
+" Allow '.' to repeat macros. Finally!
+" Taken from here:
+" https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
+" SR took it from GitHub: ckarnell/Antonys-macro-repeater
+" When . repeats g@, repeat the last macro.
+function! AtRepeat(_)
+  " If no count is supplied use the one saved in s:atcount.
+  " Otherwise save the new count in s:atcount, so it will be
+  " applied to repeats.
+  let s:atcount = v:count ? v:count : s:atcount
+  " feedkeys() rather than :normal allows finishing in Insert
+  " mode, should the macro do that. @@ is remapped, so 'opfunc'
+  " will be correct, even if the macro changes it.
+  call feedkeys(s:atcount.'@@')
+endfunction
+function! AtSetRepeat(_)
+  set operatorfunc=AtRepeat
+endfunction
+" Called by g@ being invoked directly for the first time. Sets
+" 'opfunc' ready for repeats with . by calling AtSetRepeat().
+function! AtInit()
+  " Make sure setting 'opfunc' happens here, after initial playback
+  " of the macro recording, in case 'opfunc' is set there.
+  set operatorfunc=AtSetRepeat
+  return 'g@l'
+endfunction
+function! AtReg()
+  let s:atcount = v:count1
+  let l:c = nr2char(getchar())
+  return '@'.l:c."\<plug>@init"
+endfunction
+function! QRepeat(_)
+  call feedkeys('@'.s:qreg)
+endfunction
+function! QSetRepeat(_)
+  set operatorfunc=QRepeat
+endfunction
+function! QStop()
+  set operatorfunc=QSetRepeat
+  return 'g@l'
+endfunction
+let s:qrec = 0
+function! QStart()
+  if s:qrec == 1
+    let s:qrec = 0
+    return "q\<plug>qstop"
+  endif
+  let s:qreg = nr2char(getchar())
+  if s:qreg =~# '[0-9a-zA-Z"]'
+    let s:qrec = 1
+  endif
+  return 'q'.s:qreg
 endfunction
 
 " }}}
