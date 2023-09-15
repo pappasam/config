@@ -80,6 +80,7 @@ set foldenable foldmethod=marker foldnestmax=1
 set tabline=%!CustomTabLine()
 set laststatus=2
 set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
@@ -413,9 +414,6 @@ function! s:abbr_only_beginning(in_command, out_command)
   endif
 endfunction
 
-" }}}
-" Colorscheme {{{
-
 function! s:vim_syntax_group()
   let l:s = synID(line('.'), col('.'), 1)
   if l:s == ''
@@ -432,8 +430,6 @@ function! s:syntax_group()
     call s:vim_syntax_group()
   endif
 endfunction
-
-colorscheme PaperColorSlim
 
 " }}}
 " Coc {{{
