@@ -494,6 +494,7 @@ endfunction
 " }}}
 " Commands {{{
 
+command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
   let l:save = winsaveview()
   if &ft == 'markdown'
@@ -509,8 +510,8 @@ function! s:trim_whitespace()
   endif
   call winrestview(l:save)
 endfunction
-command! TrimWhitespace call s:trim_whitespace()
 
+command! ResizeWindowWidth call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
     echo 'run `:set nowrap` before resizing window'
@@ -525,8 +526,8 @@ function! s:resize_window_width()
   execute ':vertical resize ' . adjustment
   normal! ``
 endfunction
-command! ResizeWindowWidth call s:resize_window_width()
 
+command! ResizeWindowHeight call s:resize_window_height()
 function! s:resize_window_height()
   normal! m`
   let initial = winnr()
@@ -547,8 +548,8 @@ function! s:resize_window_height()
     return
   endif
 endfunction
-command! ResizeWindowHeight call s:resize_window_height()
 
+command! FocusWriting call s:focuswriting()
 function! s:focuswriting()
   augroup focuswriting
     autocmd!
@@ -602,8 +603,8 @@ function! s:focuswriting_autocmd()
     wqall
   endif
 endfunction
-command! FocusWriting call s:focuswriting()
 
+command! CleanUnicode call s:clean_unicode()
 function! s:clean_unicode()
   silent! execute '%s/”/"/g'
   silent! execute '%s/“/"/g'
@@ -613,8 +614,8 @@ function! s:clean_unicode()
   silent! execute '%s/…/.../g'
   silent! execute '%s/​//g'
 endfunction
-command! CleanUnicode call s:clean_unicode()
 
+command! Preview call s:preview()
 function! s:preview()
   if &filetype ==? 'markdown'
     " from markdown-preview.vim
@@ -623,7 +624,6 @@ function! s:preview()
     silent! execute "!gio open '%:p'"
   endif
 endfunction
-command! Preview call s:preview()
 
 " }}}
 " Functions {{{
