@@ -660,7 +660,7 @@ function upgrade() {
     zinit self-update
     zinit update --all
   fi
-  nvim -c 'PackagerClean | PackagerUpdate | CocUpdate' ~/.config/nvim/init.vim
+  nvim -c 'PackagerClean | PackagerUpdate | CocUpdate | TSUpdate' ~/.config/nvim/init.vim
 }
 
 function rustglobal-install() {
