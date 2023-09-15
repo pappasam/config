@@ -618,7 +618,7 @@ endfunction
 command! Preview call s:preview()
 function! s:preview()
   if &filetype ==? 'markdown'
-    " from markdown-preview.vim
+    " https://github.com/iamcco/markdown-preview.nvim
     silent! execute 'MarkdownPreview'
   else
     silent! execute "!gio open '%:p'"
