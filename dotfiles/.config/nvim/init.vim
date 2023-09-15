@@ -495,56 +495,7 @@ lua require('config/telescope')
 lua require('config/treesitter-context')
 
 " }}}
-" Tabline {{{
-
-function! CustomTabLine()
-  " Initialize tabline string
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s ..= '%#TabLineSel#'
-    else
-      let s ..= '%#TabLine#'
-    endif
-    " set the tab page number (for mouse clicks)
-    let s ..= '%' .. (i + 1) .. 'T'
-    " the label is made by MyTabLabel()
-    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
-  endfor
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s ..= '%#TabLineFill#%T'
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s ..= '%=%#TabLine#%999X ✗ '
-  endif
-  return s
-endfunction
-
-function! CustomTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let postfix = ''
-  for buf in buflist
-    if bufname(buf) == 'focuswriting_abcdefg'
-      let postfix = '🎯'
-      break
-    endif
-  endfor
-  let bname = bufname(buflist[winnr - 1])
-  let bnamemodified = fnamemodify(bname, ':t')
-  if bnamemodified == ''
-    " No name
-    return '👻' . postfix
-  elseif bnamemodified =~ 'NvimTree'
-    return '🌲' . postfix
-  else
-    return bnamemodified . postfix
-  endif
-endfunction
-
-" }}}
-" Trailing whitespace {{{
+" Commands {{{
 
 function! s:trim_whitespace()
   let l:save = winsaveview()
@@ -561,15 +512,8 @@ function! s:trim_whitespace()
   endif
   call winrestview(l:save)
 endfunction
-
 command! TrimWhitespace call s:trim_whitespace()
 
-" }}}
-" Window resizing {{{
-
-" WindowWidth: Resize window to a couple more than longest line
-" modified function from:
-" https://stackoverflow.com/questions/2075276/longest-line-in-vim
 function! s:resize_window_width()
   if &wrap
     echo 'run `:set nowrap` before resizing window'
@@ -584,12 +528,11 @@ function! s:resize_window_width()
   execute ':vertical resize ' . adjustment
   normal! ``
 endfunction
+command! ResizeWindowWidth call s:resize_window_width()
 
 function! s:resize_window_height()
   normal! m`
   let initial = winnr()
-
-  " this duplicates code but avoids polluting global namespace
   wincmd k
   if winnr() != initial
     execute initial . 'wincmd w'
@@ -598,7 +541,6 @@ function! s:resize_window_height()
     normal! ``
     return
   endif
-
   wincmd j
   if winnr() != initial
     execute initial . 'wincmd w'
@@ -608,12 +550,7 @@ function! s:resize_window_height()
     return
   endif
 endfunction
-
-command! ResizeWindowWidth call s:resize_window_width()
 command! ResizeWindowHeight call s:resize_window_height()
-
-" }}}
-" Focus writing {{{
 
 function! s:focuswriting()
   augroup focuswriting
@@ -644,20 +581,17 @@ function! s:focuswriting()
     autocmd WinEnter focuswriting_abcdefg call s:focuswriting_autocmd()
   augroup end
 endfunction
-
 function! s:focuswriting_settings_side()
   setlocal nonumber norelativenumber nocursorline
         \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
         \ winhighlight=Normal:NormalFloat
 endfunction
-
 function! s:focuswriting_settings_middle()
   " Note: stlnc uses <C-k>NS to enter a space character in statusline
   setlocal number norelativenumber wrap nocursorline winfixwidth
         \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
         \ nofoldenable winhighlight=StatusLine:StatusLineNC
 endfunction
-
 function! s:focuswriting_autocmd()
   for windowid in range(1, winnr('$'))
     if bufname(winbufnr(windowid)) != 'focuswriting_abcdefg'
@@ -671,11 +605,7 @@ function! s:focuswriting_autocmd()
     wqall
   endif
 endfunction
-
 command! FocusWriting call s:focuswriting()
-
-" }}}
-" Clean unicode {{{
 
 function! s:clean_unicode()
   silent! execute '%s/”/"/g'
@@ -686,8 +616,17 @@ function! s:clean_unicode()
   silent! execute '%s/…/.../g'
   silent! execute '%s/​//g'
 endfunction
-
 command! CleanUnicode call s:clean_unicode()
+
+function! s:preview()
+  if &filetype ==? 'markdown'
+    " from markdown-preview.vim
+    silent! execute 'MarkdownPreview'
+  else
+    silent! execute "!gio open '%:p'"
+  endif
+endfunction
+command! Preview call s:preview()
 
 " }}}
 " Macro repeater {{{
@@ -755,17 +694,52 @@ function! QStart()
 endfunction
 
 " }}}
-" Previewers {{{
+" Tabline {{{
 
-function! s:preview()
-  if &filetype ==? 'markdown'
-    " from markdown-preview.vim
-    silent! execute 'MarkdownPreview'
-  else
-    silent! execute "!gio open '%:p'"
+function! CustomTabLine()
+  " Initialize tabline string
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s ..= '%#TabLineSel#'
+    else
+      let s ..= '%#TabLine#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s ..= '%' .. (i + 1) .. 'T'
+    " the label is made by MyTabLabel()
+    let s ..= ' ' . (i + 1) . ':%{CustomTabLabel(' .. (i + 1) .. ')} '
+  endfor
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s ..= '%#TabLineFill#%T'
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s ..= '%=%#TabLine#%999X ✗ '
   endif
+  return s
 endfunction
 
-command! Preview call s:preview()
+function! CustomTabLabel(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let postfix = ''
+  for buf in buflist
+    if bufname(buf) == 'focuswriting_abcdefg'
+      let postfix = '🎯'
+      break
+    endif
+  endfor
+  let bname = bufname(buflist[winnr - 1])
+  let bnamemodified = fnamemodify(bname, ':t')
+  if bnamemodified == ''
+    " No name
+    return '👻' . postfix
+  elseif bnamemodified =~ 'NvimTree'
+    return '🌲' . postfix
+  else
+    return bnamemodified . postfix
+  endif
+endfunction
 
 " }}}
