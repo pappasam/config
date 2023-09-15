@@ -118,6 +118,47 @@ let g:mkdp_preview_options = {
       \ 'disable_sync_scroll': 0,
       \ 'sync_scroll_type': 'middle',
       \ }
+" https://github.com/neoclide/coc.nvim
+let g:coc_global_extensions = [
+      \ '@yaegassy/coc-marksman',
+      \ 'coc-css',
+      \ 'coc-diagnostic',
+      \ 'coc-dictionary',
+      \ 'coc-docker',
+      \ 'coc-emoji',
+      \ 'coc-go',
+      \ 'coc-html',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-kotlin',
+      \ 'coc-lists',
+      \ 'coc-ltex',
+      \ 'coc-markdownlint',
+      \ 'coc-prisma',
+      \ 'coc-pyright',
+      \ 'coc-r-lsp',
+      \ 'coc-rust-analyzer',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-sumneko-lua',
+      \ 'coc-svg',
+      \ 'coc-syntax',
+      \ 'coc-texlab',
+      \ 'coc-toml',
+      \ 'coc-tsserver',
+      \ 'coc-vimlsp',
+      \ 'coc-word',
+      \ 'coc-yank',
+      \ ]
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
+let g:coc_start_at_startup = 1
+let g:coc_filetype_map = {
+      \ 'markdown.mdx': 'markdown',
+      \ 'yaml.ansible': 'yaml',
+      \ 'yaml.docker-compose': 'yaml',
+      \ 'jinja.html': 'html',
+      \ }
 
 " }}}
 " Autocmds {{{
@@ -430,53 +471,6 @@ function! s:syntax_group()
     call s:vim_syntax_group()
   endif
 endfunction
-
-" }}}
-" Coc {{{
-
-" https://github.com/neoclide/coc.nvim
-let g:coc_snippet_next = '<C-j>'
-let g:coc_snippet_prev = '<C-k>'
-let g:coc_start_at_startup = 1
-let g:coc_filetype_map = {
-      \ 'markdown.mdx': 'markdown',
-      \ 'yaml.ansible': 'yaml',
-      \ 'yaml.docker-compose': 'yaml',
-      \ 'jinja.html': 'html',
-      \ }
-
-" Coc Global Extensions: automatically installed on Vim open
-let g:coc_global_extensions = [
-      \ '@yaegassy/coc-marksman',
-      \ 'coc-css',
-      \ 'coc-diagnostic',
-      \ 'coc-dictionary',
-      \ 'coc-docker',
-      \ 'coc-emoji',
-      \ 'coc-go',
-      \ 'coc-html',
-      \ 'coc-java',
-      \ 'coc-json',
-      \ 'coc-kotlin',
-      \ 'coc-lists',
-      \ 'coc-ltex',
-      \ 'coc-markdownlint',
-      \ 'coc-prisma',
-      \ 'coc-pyright',
-      \ 'coc-r-lsp',
-      \ 'coc-rust-analyzer',
-      \ 'coc-sh',
-      \ 'coc-snippets',
-      \ 'coc-sumneko-lua',
-      \ 'coc-svg',
-      \ 'coc-syntax',
-      \ 'coc-texlab',
-      \ 'coc-toml',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-word',
-      \ 'coc-yank',
-      \ ]
 
 function! s:coc_toggle_outline() abort
   let winid = coc#window#find('cocViewId', 'OUTLINE')
