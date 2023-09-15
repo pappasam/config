@@ -1,5 +1,15 @@
 " Packages {{{
 
+lua require('config/colorizer')
+lua require('config/gitsigns')
+lua require('config/nvim-autopairs')
+lua require('config/nvim-tree')
+lua require('config/nvim-treesitter')
+lua require('config/nvim-ts-context-commentstring')
+lua require('config/nvim-web-devicons')
+lua require('config/telescope')
+lua require('config/treesitter-context')
+
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
   " Autocompletion And IDE Features
@@ -39,16 +49,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
 endfunction
-
-lua require('config/colorizer')
-lua require('config/gitsigns')
-lua require('config/nvim-autopairs')
-lua require('config/nvim-tree')
-lua require('config/nvim-treesitter')
-lua require('config/nvim-ts-context-commentstring')
-lua require('config/nvim-web-devicons')
-lua require('config/telescope')
-lua require('config/treesitter-context')
 
 " }}}
 " Settings {{{
