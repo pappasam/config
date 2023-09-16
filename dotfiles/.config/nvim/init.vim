@@ -53,10 +53,8 @@ endfunction
 " }}}
 " Settings {{{
 
-filetype plugin indent on
-set completeopt=menuone,longest wildmode=longest:full wildmenu
+set completeopt=menuone,longest wildmode=longest:full
 set shortmess+=c shortmess+=I
-set hidden
 set signcolumn=number
 set cursorline
 set mouse=a
@@ -65,20 +63,16 @@ set cmdheight=2
 set nowrap linebreak
 set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
 set isfname+=@-@ isfname+=:
-set incsearch inccommand=nosplit
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set spelllang=en_us
-set nojoinspaces
 set showtabline=2
-set autoread
 set grepprg=rg\ --vimgrep
 set notimeout
 set number
 set splitright
 set termguicolors
-set background=dark
 set colorcolumn=
-set laststatus=2 ttimeoutlen=50 noshowmode
+set noshowmode
 set noshowcmd
 set updatetime=300
 set path+=/usr/include/x86_64-linux-gnu/
@@ -197,12 +191,6 @@ augroup end
 augroup vim_resized
   autocmd!
   autocmd VimResized * wincmd =
-augroup end
-
-augroup incsearch_highlight
-  autocmd!
-  autocmd CmdlineEnter /,\? set hlsearch
-  autocmd CmdlineLeave /,\? set nohlsearch
 augroup end
 
 augroup filetype_assignment
