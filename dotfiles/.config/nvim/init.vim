@@ -53,41 +53,39 @@ endfunction
 " }}}
 " Settings {{{
 
-set completeopt=menuone,longest wildmode=longest:full
-set shortmess+=c shortmess+=I
-set signcolumn=number
-set cursorline
-set mouse=a
-set noswapfile
-set cmdheight=2
-set nowrap linebreak
-set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
-set isfname+=@-@ isfname+=:
-set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
-set spelllang=en_us
-set showtabline=2
-set grepprg=rg\ --vimgrep
-set notimeout
-set number
-set splitright
-set termguicolors
-set colorcolumn=
-set noshowmode
-set noshowcmd
-set updatetime=300
-set path+=/usr/include/x86_64-linux-gnu/
-set history=10
-set diffopt+=internal,algorithm:patience
-set list
-set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
-set foldenable foldmethod=marker foldnestmax=1
-set tabline=%!CustomTabLine()
-set laststatus=2
-set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+aunmenu PopUp.-1-
+aunmenu PopUp.How-to\ disable\ mouse
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
-aunmenu PopUp.How-to\ disable\ mouse
-aunmenu PopUp.-1-
+set cmdheight=2
+set completeopt=menuone,longest wildmode=longest:full
+set cursorline
+set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
+set diffopt+=internal,algorithm:patience
+set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
+set foldenable foldmethod=marker foldnestmax=1
+set grepprg=rg\ --vimgrep
+set history=10
+set isfname+=@-@,:
+set list
+set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+set mouse=a
+set noshowcmd
+set noshowmode
+set noswapfile
+set notimeout
+set nowrap linebreak
+set number
+set path+=/usr/include/x86_64-linux-gnu/
+set shortmess+=cI
+set showtabline=2
+set signcolumn=number
+set spelllang=en_us
+set splitright
+set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v:%l/%L\ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+set tabline=%!CustomTabLine()
+set termguicolors
+set updatetime=300
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 let g:mapleader = ','
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
