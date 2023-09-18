@@ -165,14 +165,7 @@ let g:coc_filetype_map = {
 " }}}
 " Autocmds {{{
 
-augroup vimenter_custom
-  autocmd!
-  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
-        \ | execute 'NvimTreeOpen ' . argv(0)
-        \ | endif
-augroup end
-
-augroup filetype_assignment
+augroup bufenter_filetype_assignment
   autocmd!
   autocmd BufEnter *.asm set filetype=nasm
   autocmd BufEnter *.scm set filetype=query
@@ -235,23 +228,10 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
 augroup end
 
-augroup statusline_overrides
+augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
-augroup end
-
-augroup vimresized_custom
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup end
-
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-augroup end
-
-augroup colorscheme_overrides
-  autocmd!
+  autocmd BufWritePre * TrimWhitespace
   autocmd ColorScheme *
         \ highlight link HighlightedyankRegion Search |
         \ highlight link CocHighlightText Underlined |
@@ -259,11 +239,11 @@ augroup colorscheme_overrides
         \ highlight CocWarningHighlight gui=undercurl |
         \ highlight CocInfoHighlight gui=undercurl |
         \ highlight CocHintHighlight gui=undercurl
-augroup end
-
-augroup fix_whitespace_on_save
-  autocmd!
-  autocmd BufWritePre * TrimWhitespace
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
+        \ | execute 'NvimTreeOpen ' . argv(0)
+        \ | endif
+  autocmd VimResized * wincmd =
 augroup end
 
 " }}}
