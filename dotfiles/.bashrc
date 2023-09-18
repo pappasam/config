@@ -198,6 +198,7 @@ alias f='nvim'
 alias fn='nvim -u NORC --noplugin'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
+alias c='cd ~/config/dotfiles && nvim .'
 
 # ls et al, with color support and handy aliases
 alias ls='ls --color=auto'
