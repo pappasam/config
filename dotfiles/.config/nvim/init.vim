@@ -247,12 +247,12 @@ function! s:default_key_mappings()
   vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
   nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
   vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  nnoremap <expr> <plug>@init AtInit()
-  inoremap <expr> <plug>@init "\<c-o>".AtInit()
-  nnoremap <expr> <plug>qstop QStop()
-  inoremap <expr> <plug>qstop "\<c-o>".QStop()
-  nmap <expr> @ AtReg()
-  nmap <expr> q QStart()
+  nnoremap <expr> <plug>@init <SID>mr_at_init()
+  inoremap <expr> <plug>@init "\<c-o>".<SID>mr_at_init()
+  nnoremap <expr> <plug>qstop <SID>mr_q_stop()
+  inoremap <expr> <plug>qstop "\<c-o>".<SID>mr_q_stop()
+  nmap <expr> @ <SID>mr_at_reg()
+  nmap <expr> q <SID>mr_q_start()
   nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
   nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
   nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
@@ -401,49 +401,39 @@ function! s:coc_toggle_outline() abort
   endif
 endfunction
 
-" Allow '.' to repeat macros. Finally!
-" Taken from here:
-" https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
-" SR took it from GitHub: ckarnell/Antonys-macro-repeater
-" When . repeats g@, repeat the last macro.
-function! AtRepeat(_)
-  " If no count is supplied use the one saved in s:atcount.
-  " Otherwise save the new count in s:atcount, so it will be
-  " applied to repeats.
+" Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
+function! s:mr_at_repeat(_)
+  " If no count is supplied use the one saved in s:atcount. Otherwise save the new count in s:atcount, so it will be applied to repeats.
   let s:atcount = v:count ? v:count : s:atcount
-  " feedkeys() rather than :normal allows finishing in Insert
-  " mode, should the macro do that. @@ is remapped, so 'opfunc'
-  " will be correct, even if the macro changes it.
+  " feedkeys() rather than :normal allows finishing in Insert mode, should the macro do that. @@ is remapped, so 'opfunc' will be correct, even if the macro changes it.
   call feedkeys(s:atcount.'@@')
 endfunction
-function! AtSetRepeat(_)
-  set operatorfunc=AtRepeat
+function! s:mr_at_set_repeat(_)
+  set operatorfunc=<SID>mr_at_repeat
 endfunction
-" Called by g@ being invoked directly for the first time. Sets
-" 'opfunc' ready for repeats with . by calling AtSetRepeat().
-function! AtInit()
-  " Make sure setting 'opfunc' happens here, after initial playback
-  " of the macro recording, in case 'opfunc' is set there.
-  set operatorfunc=AtSetRepeat
+" Called by g@ being invoked directly for the first time. Sets 'opfunc' ready for repeats with . by calling AtSetRepeat().
+function! s:mr_at_init()
+  " Make sure setting 'opfunc' happens here, after initial playback of the macro recording, in case 'opfunc' is set there.
+  set operatorfunc=<SID>mr_at_set_repeat
   return 'g@l'
 endfunction
-function! AtReg()
+function! s:mr_at_reg()
   let s:atcount = v:count1
   let l:c = nr2char(getchar())
   return '@'.l:c."\<plug>@init"
 endfunction
-function! QRepeat(_)
+function! s:mr_q_repeat(_)
   call feedkeys('@'.s:qreg)
 endfunction
-function! QSetRepeat(_)
-  set operatorfunc=QRepeat
+function! s:mr_q_set_repeat(_)
+  set operatorfunc=<SID>mr_q_repeat
 endfunction
-function! QStop()
-  set operatorfunc=QSetRepeat
+function! s:mr_q_stop()
+  set operatorfunc=<SID>mr_q_set_repeat
   return 'g@l'
 endfunction
 let s:qrec = 0
-function! QStart()
+function! s:mr_q_start()
   if s:qrec == 1
     let s:qrec = 0
     return "q\<plug>qstop"
