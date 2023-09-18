@@ -400,13 +400,13 @@ function! s:default_key_mappings()
 
   augroup map_filetype_overrides
     autocmd!
-    autocmd FileType man,help
+    autocmd FileType man,help,qf
           \ nnoremap <buffer> d <C-d> |
           \ nnoremap <buffer> D <C-d> |
           \ nnoremap <buffer> u <C-u> |
           \ nnoremap <buffer> U <C-u> |
-          \ nnoremap <buffer> <C-]> <C-]>
-    autocmd FileType help nnoremap <buffer><silent> q <Cmd>close<CR>
+          \ nnoremap <buffer> <C-]> <C-]> |
+          \ nnoremap <buffer> q <Cmd>quit<CR>
   augroup end
 
   let &filetype=&filetype
