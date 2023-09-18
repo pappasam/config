@@ -167,27 +167,16 @@ let g:coc_filetype_map = {
 
 augroup bufenter_filetype_assignment
   autocmd!
-  autocmd BufEnter *.asm set filetype=nasm
-  autocmd BufEnter *.scm set filetype=query
   autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials,.editorconfig set filetype=dosini
   autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufEnter *.handlebars set filetype=html
-  autocmd BufEnter *.hql,*.q set filetype=hive
-  autocmd BufEnter *.js,*.gs set filetype=javascript
   autocmd BufEnter *.mdx set filetype=markdown
   autocmd BufEnter *.min.js set filetype=none
-  autocmd BufEnter *.m,*.oct set filetype=octave
-  autocmd BufEnter *.toml set filetype=toml
-  autocmd BufEnter *.tsv set filetype=tsv
+  autocmd BufEnter *.oct set filetype=octave
   autocmd BufEnter .envrc set filetype=sh
-  autocmd BufEnter .gitignore,.dockerignore set filetype=conf
+  autocmd BufEnter .dockerignore set filetype=conf
   autocmd BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
-  autocmd BufEnter Dockerfile.* set filetype=dockerfile
-  autocmd BufEnter Makefile.* set filetype=make
   autocmd BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
-  autocmd BufEnter tmux-light.conf set filetype=tmux
-  autocmd BufEnter .zshrc set filetype=zsh
 augroup end
 
 augroup filetype_custom
@@ -207,7 +196,6 @@ augroup filetype_custom
   "   comments: csv of comments.
   "   formatoptions: influences how Vim formats text
   "   ':help fo-table' will get the desired result
-  autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
   autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
   autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
