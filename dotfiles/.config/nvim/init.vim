@@ -165,30 +165,11 @@ let g:coc_filetype_map = {
 " }}}
 " Autocmds {{{
 
-augroup init_vim_setup
-  autocmd!
-  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
-        \ | packadd vim-packager
-        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-        \ | let &l:path .= ','.stdpath('config').'/lua'
-        \ | setlocal suffixesadd^=.lua
-augroup end
-
-augroup nvim_tree_open_directory_on_vimenter
+augroup vimenter_custom
   autocmd!
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
         \ | execute 'NvimTreeOpen ' . argv(0)
         \ | endif
-augroup end
-
-augroup statusline_overrides
-  autocmd!
-  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
-augroup end
-
-augroup vim_resized
-  autocmd!
-  autocmd VimResized * wincmd =
 augroup end
 
 augroup filetype_assignment
@@ -216,23 +197,23 @@ augroup filetype_assignment
   autocmd BufEnter .zshrc set filetype=zsh
 augroup end
 
-augroup indentation_overrides
+augroup filetype_custom
   autocmd!
-  " Overrides to ensure correct default indentation
+  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
+        \ | packadd vim-packager
+        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+        \ | let &l:path .= ','.stdpath('config').'/lua'
+        \ | setlocal suffixesadd^=.lua
+  " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
-  " 4 spaces per tab, not 2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
-  " Use hard tabs, not spaces
   autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " Fix weird stuff with snippet indentation
   autocmd Filetype snippets setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab noautoindent nosmartindent
-augroup end
-
-augroup comment_config
-  " commentstring: read by vim-commentary; must be one template
-  " comments: csv of comments.
-  " formatoptions: influences how Vim formats text
-  " ':help fo-table' will get the desired result
+  " commentstring + comments + formatoptions
+  "   commentstring: read by vim-commentary; must be one template
+  "   comments: csv of comments.
+  "   formatoptions: influences how Vim formats text
+  "   ':help fo-table' will get the desired result
   autocmd!
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
   autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
@@ -240,27 +221,28 @@ augroup comment_config
   autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
   autocmd FileType sh setlocal formatoptions=jcroql
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-augroup end
-
-augroup keyword_overrides
-  autocmd!
-  autocmd FileType nginx set iskeyword+=$
-  autocmd FileType zsh,sh set iskeyword+=-
-augroup end
-
-augroup keywordprg_overiddes
-  autocmd!
+  " iskeyword
+  autocmd FileType nginx setlocal iskeyword+=$
+  autocmd FileType zsh,sh,css setlocal iskeyword+=-
+  autocmd FileType scss setlocal iskeyword+=@-@
+  " keywordprg
   autocmd FileType markdown setlocal keywordprg=:DefEng
-augroup end
-
-augroup fold_overrides
-  autocmd!
+  " wrap
+  autocmd FileType coctree setlocal nowrap
+  " foldenable
   autocmd FileType gitcommit setlocal nofoldenable
+  " window opening
+  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
 augroup end
 
-augroup commit_newtab
+augroup statusline_overrides
   autocmd!
-  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
+augroup end
+
+augroup vimresized_custom
+  autocmd!
+  autocmd VimResized * wincmd =
 augroup end
 
 augroup highlight_yank
@@ -283,24 +265,6 @@ augroup fix_whitespace_on_save
   autocmd!
   autocmd BufWritePre * TrimWhitespace
 augroup end
-
-augroup coc_custom
-  autocmd!
-  autocmd VimEnter * call s:autocmd_custom_coc()
-augroup end
-
-function! s:autocmd_custom_coc()
-  if !exists("g:did_coc_loaded")
-    return
-  endif
-  augroup coc_custom
-    autocmd FileType coctree set nowrap
-    autocmd FileType nginx let b:coc_additional_keywords = ['$']
-    autocmd FileType scss let b:coc_additional_keywords = ['@']
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    autocmd User CocNvimInit call s:default_key_mappings()
-  augroup end
-endfunction
 
 " }}}
 " Mappings {{{
