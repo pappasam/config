@@ -277,14 +277,6 @@ augroup colorscheme_overrides
         \ highlight CocWarningHighlight gui=undercurl |
         \ highlight CocInfoHighlight gui=undercurl |
         \ highlight CocHintHighlight gui=undercurl
-  autocmd ColorScheme PaperColorSlim
-        \ if &background == 'light' |
-        \   execute 'highlight CocSearch guifg=#005f87' |
-        \   execute 'highlight CocMenuSel guibg=#bcbcbc' |
-        \ else |
-        \   execute 'highlight CocSearch guifg=#5fafd7' |
-        \   execute 'highlight CocMenuSel guibg=#585858' |
-        \ endif
 augroup end
 
 augroup fix_whitespace_on_save
