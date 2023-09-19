@@ -93,8 +93,8 @@ function! CustomTabLine()
   let tabnumber_current = tabpagenr()
   for i in range(1, tabnumber_max)
     let s ..= tabnumber_current == i ? '%#TabLineSel#' : '%#TabLine#'
-    let s ..= '%' .. i .. 'T' .. ' ' . i . ':%{CustomTabLabel(' .. i .. ')}'
-    let s ..= tabnumber_max == 1 ? ' ' : '%' . i . 'X ✗ %X'
+    let s ..= '%' .. i .. 'T' .. ' ' .. i .. ':%{CustomTabLabel(' .. i .. ')}'
+    let s ..= tabnumber_max == 1 ? ' ' : '%' .. i .. 'X ✗ %X'
   endfor
   let s ..= '%#TabLineFill#%T%=%#TabLine#%10@CustomTabCloseVim@ ✗ %X'
   return s
@@ -112,11 +112,11 @@ function! CustomTabLabel(n)
   let bname = bufname(buflist[winnr - 1])
   let bnamemodified = fnamemodify(bname, ':t')
   if bnamemodified == ''
-    return '👻' . postfix
+    return '👻' .. postfix
   elseif bnamemodified =~ 'NvimTree'
-    return '🌲' . postfix
+    return '🌲' .. postfix
   else
-    return bnamemodified . postfix
+    return bnamemodified .. postfix
   endif
 endfunction
 function! CustomTabCloseVim(n1, n2, n3, n4)
@@ -217,10 +217,10 @@ augroup end
 
 augroup filetype_custom
   autocmd!
-  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME . '/.config/nvim/pack/packager/opt/vim-packager'])
+  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME .. '/.config/nvim/pack/packager/opt/vim-packager'])
         \ | packadd vim-packager
         \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-        \ | let &l:path .= ','.stdpath('config').'/lua'
+        \ | let &l:path .= ','..stdpath('config')..'/lua'
         \ | setlocal suffixesadd^=.lua
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
@@ -265,7 +265,7 @@ augroup miscellaneous_custom
         \ highlight CocHintHighlight gui=undercurl
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
-        \ | execute 'NvimTreeOpen ' . argv(0)
+        \ | execute 'NvimTreeOpen ' .. argv(0)
         \ | endif
   autocmd VimResized * wincmd =
 augroup end
@@ -378,7 +378,7 @@ call s:default_key_mappings()
 function! s:get_visual_selection(mode)
   " call with visualmode() as the argument
   let [line_start, column_start] = getpos("'<")[1:2]
-  let [line_end, column_end]     = getpos("'>")[1:2]
+  let [line_end, column_end] = getpos("'>")[1:2]
   let lines = getline(line_start, line_end)
   if a:mode ==# 'v'
     " Must trim the end before the start, the beginning will shift left.
@@ -404,7 +404,7 @@ function! s:get_visual_selection(mode)
 endfunction
 
 function! s:abbr_only_beginning(in_command, out_command)
-  if (getcmdtype() == ':' && getcmdline() =~ '^' . a:in_command . '$')
+  if (getcmdtype() == ':' && getcmdline() =~ '^' .. a:in_command .. '$')
     return a:out_command
   else
     return a:in_command
@@ -416,7 +416,7 @@ function! s:vim_syntax_group()
   if l:s == ''
     echo 'none'
   else
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+    echo synIDattr(l:s, 'name') .. ' -> ' .. synIDattr(synIDtrans(l:s), 'name')
   endif
 endfun
 
@@ -456,10 +456,10 @@ endfunction
 function! s:mr_at_reg()
   let s:atcount = v:count1
   let l:c = nr2char(getchar())
-  return '@'.l:c."\<plug>@init"
+  return '@' .. l:c .. "\<plug>@init"
 endfunction
 function! s:mr_q_repeat(_)
-  call feedkeys('@'.s:qreg)
+  call feedkeys('@' .. s:qreg)
 endfunction
 function! s:mr_q_set_repeat(_)
   set operatorfunc=<SID>mr_q_repeat
@@ -478,7 +478,7 @@ function! s:mr_q_start()
   if s:qreg =~# '[0-9a-zA-Z"]'
     let s:qrec = 1
   endif
-  return 'q'.s:qreg
+  return 'q' .. s:qreg
 endfunction
 
 " }}}
@@ -513,7 +513,7 @@ function! s:resize_window_width()
         \ ? maxlength + max([len(max_line + ''), 2]) + 1
         \ : maxlength - 1
   normal! m`
-  execute ':vertical resize ' . adjustment
+  execute ':vertical resize ' .. adjustment
   normal! ``
 endfunction
 
@@ -523,17 +523,17 @@ function! s:resize_window_height()
   let initial = winnr()
   wincmd k
   if winnr() != initial
-    execute initial . 'wincmd w'
+    execute initial .. 'wincmd w'
     1
-    execute 'resize ' . (line('$') + 1)
+    execute 'resize ' .. (line('$') + 1)
     normal! ``
     return
   endif
   wincmd j
   if winnr() != initial
-    execute initial . 'wincmd w'
+    execute initial .. 'wincmd w'
     1
-    execute 'resize ' . (line('$') + 1)
+    execute 'resize ' .. (line('$') + 1)
     normal! ``
     return
   endif
@@ -561,7 +561,7 @@ function! s:focuswriting()
   wincmd h
   " Middle Window
   vertical resize 88
-  execute 'buffer ' . current_buffer
+  execute 'buffer ' .. current_buffer
   call s:focuswriting_settings_middle()
   wincmd =
   augroup focuswriting
