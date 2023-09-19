@@ -10,6 +10,7 @@
   ],
   "coc.source.word.filetypes": ["gitcommit", "html", "markdown", "rst", "text"],
   "snippets.priority": 100000,
+  "snippets.ultisnips.enable": false,
   "suggest.autoTrigger": "always",
   "suggest.noselect": true,
   "diagnostic.enable": true,

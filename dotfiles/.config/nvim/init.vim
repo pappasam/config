@@ -115,13 +115,13 @@ function! CustomTabCloseVim(n1, n2, n3, n4)
 endfunction
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:mapleader = ','
-let g:python3_host_prog = "$HOME/.asdf/shims/python"
 let g:clipboard = {
       \ 'name': 'xsel',
       \ 'cache_enabled': 0,
       \ 'copy' : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
       \ 'paste': {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
       \ }
+let g:loaded_python3_provider = 0
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 " https://github.com/fidian/hexmode
