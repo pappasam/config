@@ -119,7 +119,7 @@ function! CustomTabLabel(n)
   endif
 endfunction
 function! CustomTabCloseVim(n1, n2, n3, n4)
-  quit
+  quitall
 endfunction
 let $PATH = $PWD . '/node_modules/.bin:' . $PATH
 let g:mapleader = ','
