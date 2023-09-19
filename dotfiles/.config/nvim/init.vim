@@ -84,7 +84,8 @@ set spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
-set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%=\ %v/%{strwidth(getline('.'))}:%l/%L\ %y\ %#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m
+set statusline+=%=%v/%{strwidth(getline('.'))}:%l/%L%y%#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
 set tabline=%!CustomTabLine()
 function! CustomTabLine()
   let s = ''
