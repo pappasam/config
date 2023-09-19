@@ -216,8 +216,7 @@ augroup filetype_custom
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
-  autocmd Filetype make,tsv,votl,go,gomod setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  autocmd Filetype snippets setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab noautoindent nosmartindent
+  autocmd Filetype go,gomod,make,snippets,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " commentstring + comments + formatoptions
   "   commentstring: read by vim-commentary; must be one template
   "   comments: csv of comments.

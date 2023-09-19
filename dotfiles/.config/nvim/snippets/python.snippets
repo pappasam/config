@@ -1,82 +1,51 @@
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-
 snippet pt_module "pytorch nn.module"
-import torch
-from torch import nn
+	import torch
+	from torch import nn
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+	device = "cuda" if torch.cuda.is_available() else "cpu"
 
-class ${1:Model}(nn.Module):
-    """Neural network module."""
+	class ${1:Model}(nn.Module):
+		"""Neural network module."""
 
-    def __init__(self) -> None:
-        """Initialize the network's parameter layers."""
-        super().__init__()
-        # takes in 2 features (X), produces 5 features
-        self.layer_1 = nn.Linear(in_features=2, out_features=5)
-        # takes in 5 features, produces 1 feature (y)
-        self.layer_2 = nn.Linear(in_features=5, out_features=1)
+		def __init__(self) -> None:
+			"""Initialize the network's parameter layers."""
+			super().__init__()
+			# takes in 2 features (X), produces 5 features
+			self.layer_1 = nn.Linear(in_features=2, out_features=5)
+			# takes in 5 features, produces 1 feature (y)
+			self.layer_2 = nn.Linear(in_features=5, out_features=1)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Do the forward pass."""
-        # computation goes through layer_1 first then the output of layer_1 goes through layer_2
-        x = self.layer_1(x)
-        x = self.layer_2(x)
-        return x
+		def forward(self, x: torch.Tensor) -> torch.Tensor:
+			"""Do the forward pass."""
+			# computation goes through layer_1 first then the output of layer_1 goes through layer_2
+			x = self.layer_1(x)
+			x = self.layer_2(x)
+			return x
 
-model = $1().to(device)
-endsnippet
-
+	model = $1().to(device)
 snippet pt_sequential "pytorch nn.Sequential"
-import torch
-from torch import nn
+	import torch
+	from torch import nn
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+	device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = nn.Sequential(
-    nn.Linear(in_features=2, out_features=5),
-    nn.Linear(in_features=5, out_features=1)
-).to(device)
-endsnippet
-
+	model = nn.Sequential(
+		nn.Linear(in_features=2, out_features=5),
+		nn.Linear(in_features=5, out_features=1)
+	).to(device)
 snippet pt_trainingloop "pytorch training loop"
-# 1. FORWARD PASS - The model goes through all of the training data once,
-#    performing its forward() function calculations (model(x_train)).
-# 2. CALCULATE THE LOSS - The model's outputs (predictions) are compared to the
-#    ground truth and evaluated to see how wrong they are
-#    (loss = loss_fn(y_pred, y_train).
-# 3. ZERO GRADIENTS - The optimizers gradients are set to zero (they are
-#    accumulated by default) so they can be recalculated for the specific
-#    training step (optimizer.zero_grad()).
-# 4. BACKPROPAGATION ON THE LOSS - Computes the gradient of the loss
-#    with respect for every model parameter to be updated (each parameter with
-#    requires_grad=True). This is known as backpropagation, hence "backwards"
-#    (loss.backward()).
-# 5. STEP THE OPTIMIZER (gradient descent) - Update the parameters with
-#    requires_grad=True with respect to the loss gradients in order to improve
-#    them (optimizer.step()).
-endsnippet
+	# 1. FORWARD PASS - The model goes through all of the training data once,
+	#    performing its forward() function calculations (model(x_train)).
+	# 2. CALCULATE THE LOSS - The model's outputs (predictions) are compared to the
+	#    ground truth and evaluated to see how wrong they are
+	#    (loss = loss_fn(y_pred, y_train).
+	# 3. ZERO GRADIENTS - The optimizers gradients are set to zero (they are
+	#    accumulated by default) so they can be recalculated for the specific
+	#    training step (optimizer.zero_grad()).
+	# 4. BACKPROPAGATION ON THE LOSS - Computes the gradient of the loss
+	#    with respect for every model parameter to be updated (each parameter with
+	#    requires_grad=True). This is known as backpropagation, hence "backwards"
+	#    (loss.backward()).
+	# 5. STEP THE OPTIMIZER (gradient descent) - Update the parameters with
+	#    requires_grad=True with respect to the loss gradients in order to improve
+	#    them (optimizer.step()).

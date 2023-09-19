@@ -1,69 +1,38 @@
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet mentor "Mentor / mentee goals discussion"
+	Mentor/Mentee Goals Discussion: ${1:YYYY-MM-DD}
 
-snippet mentor "Mentor / mentee goals discussion" b
-Mentor/Mentee Goals Discussion: ${1:YYYY-MM-DD}
+	## 1 or 2 abstract goals
 
-## 1 or 2 abstract goals
+	- ${2:Goals}
 
-- ${2:Goals}
+	## 1 or 2 discrete methods
 
-## 1 or 2 discrete methods
+	- ${3:Discrete_Methods}
 
-- ${3:Discrete_Methods}
+	## 1 of the aforementioned methods
 
-## 1 of the aforementioned methods
+	- ${4:Aforementioned_Methods}
+snippet shortcut "Create a shortcut story"
+	## Objective
 
-- ${4:Aforementioned_Methods}
-endsnippet
+	${1}
 
-snippet shortcut "Create a shortcut story" b
-## Objective
+	## Value
 
-${1}
+	${2}
 
-## Value
+	## Acceptance Criteria
 
-${2}
+	${3}
+snippet standup "Create a standup message"
+	*Yesterday:*
 
-## Acceptance Criteria
+	- ${1}
 
-${3}
-endsnippet
+	*Today:*
 
-snippet standup "Create a standup message" b
-*Yesterday:*
+	- ${2}
 
-- ${1}
+	*Blockers/Reminders:*
 
-*Today:*
-
-- ${2}
-
-*Blockers/Reminders:*
-
-- ${3}
-endsnippet
+	- ${3}
