@@ -122,7 +122,7 @@ endfunction
 function! CustomTabCloseVim(n1, n2, n3, n4)
   quitall
 endfunction
-let $PATH = $PWD . '/node_modules/.bin:' . $PATH
+let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:mapleader = ','
 let g:python3_host_prog = "$HOME/.asdf/shims/python"
 let g:clipboard = {
