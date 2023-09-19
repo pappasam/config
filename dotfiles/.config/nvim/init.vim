@@ -94,7 +94,7 @@ function! CustomTabLine()
   for i in range(1, tabnumber_max)
     let s ..= tabnumber_current == i ? '%#TabLineSel#' : '%#TabLine#'
     let s ..= '%' .. i .. 'T' .. ' ' . i . ':%{CustomTabLabel(' .. i .. ')}'
-    let s ..= tabnumber_max == 1 ? '%10@CustomTabCloseVim@ ✗ %X' : '%' . i . 'X ✗ %X'
+    let s ..= tabnumber_max == 1 ? ' ' : '%' . i . 'X ✗ %X'
   endfor
   let s ..= '%#TabLineFill#%T%=%#TabLine#%10@CustomTabCloseVim@ ✗ %X'
   return s
