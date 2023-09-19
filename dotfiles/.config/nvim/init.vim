@@ -1,14 +1,6 @@
 " Packages {{{
 
-lua require('config/colorizer')
-lua require('config/gitsigns')
-lua require('config/nvim-autopairs')
-lua require('config/nvim-tree')
-lua require('config/nvim-treesitter')
-lua require('config/nvim-ts-context-commentstring')
-lua require('config/nvim-web-devicons')
-lua require('config/telescope')
-lua require('config/treesitter-context')
+lua require('packages')
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
@@ -19,7 +11,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:packager.add('https://github.com/nvim-treesitter/playground')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
-  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-context')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   call a:packager.add('https://github.com/tpope/vim-commentary')
   " Tree
