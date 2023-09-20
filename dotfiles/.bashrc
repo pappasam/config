@@ -687,13 +687,11 @@ function rglobal-install() {
 }
 
 function rubyglobal-install() {
-  gem install neovim
   gem install license_finder
   asdf reshim ruby
 }
 
 function perlglobal-install() {
-  cpanm -n Neovim::Ext
   cpanm -n App::cpanminus
   asdf reshim perl
 }
@@ -703,7 +701,6 @@ function nodeglobal-install() {
   local env=(
     bash-language-server
     dockerfile-language-server-nodejs
-    neovim
     nginx-linter
     nginxbeautifier
     prettier
@@ -737,7 +734,7 @@ function pydev-install() {
 
 # install global Python dependencies
 function pyglobal-install() {
-  pip install -U pipx pynvim neovim-remote
+  pip install -U pipx
   pydev-install
 }
 
