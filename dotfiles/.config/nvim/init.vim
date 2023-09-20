@@ -122,6 +122,9 @@ let g:clipboard = {
       \ 'paste': {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
       \ }
 let g:loaded_python3_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 " https://github.com/fidian/hexmode
@@ -237,7 +240,7 @@ augroup filetype_custom
   " wrap
   autocmd FileType coctree setlocal nowrap
   " foldenable
-  autocmd FileType gitcommit setlocal nofoldenable
+  autocmd FileType gitcommit,checkhealth setlocal nofoldenable
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
 augroup end
