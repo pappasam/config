@@ -249,13 +249,6 @@ augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
   autocmd BufWritePre * TrimWhitespace
-  autocmd ColorScheme *
-        \ highlight link HighlightedyankRegion Search |
-        \ highlight link CocHighlightText Underlined |
-        \ highlight CocErrorHighlight gui=undercurl |
-        \ highlight CocWarningHighlight gui=undercurl |
-        \ highlight CocInfoHighlight gui=undercurl |
-        \ highlight CocHintHighlight gui=undercurl
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
         \ | execute 'NvimTreeOpen ' .. argv(0)
