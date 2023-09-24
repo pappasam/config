@@ -146,10 +146,7 @@ let g:repl_filetype_commands = {
       \ }
 let g:repl_default = &shell
 " https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_preview_options = {
-      \ 'disable_sync_scroll': 0,
-      \ 'sync_scroll_type': 'middle',
-      \ }
+let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 " https://github.com/neoclide/coc.nvim
 let g:coc_global_extensions = [
       \ '@yaegassy/coc-marksman',
@@ -250,9 +247,7 @@ augroup miscellaneous_custom
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0))
-        \ | execute 'NvimTreeOpen ' .. argv(0)
-        \ | endif
+  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
   autocmd VimResized * wincmd =
 augroup end
 
@@ -495,9 +490,7 @@ function! s:resize_window_width()
   endif
   let max_line = line('$')
   let maxlength = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
-  let adjustment = &number
-        \ ? maxlength + max([len(max_line + ''), 2]) + 1
-        \ : maxlength - 1
+  let adjustment = &number ? maxlength + max([len(max_line + ''), 2]) + 1 : maxlength - 1
   normal! m`
   execute ':vertical resize ' .. adjustment
   normal! ``
@@ -556,15 +549,10 @@ function! s:focuswriting()
   augroup end
 endfunction
 function! s:focuswriting_settings_side()
-  setlocal nonumber norelativenumber nocursorline
-        \ fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0
-        \ winhighlight=Normal:NormalFloat
+  setlocal nonumber norelativenumber nocursorline fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
 endfunction
 function! s:focuswriting_settings_middle()
-  " Note: stlnc uses <C-k>NS to enter a space character in statusline
-  setlocal number norelativenumber wrap nocursorline winfixwidth
-        \ fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0
-        \ nofoldenable winhighlight=StatusLine:StatusLineNC
+  setlocal number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
 endfunction
 function! s:focuswriting_autocmd()
   for windowid in range(1, winnr('$'))
