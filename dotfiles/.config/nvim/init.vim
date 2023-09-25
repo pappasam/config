@@ -240,6 +240,14 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  " mappings
+  autocmd FileType man,help,qf
+        \ nnoremap <buffer> d <C-d> |
+        \ nnoremap <buffer> D <C-d> |
+        \ nnoremap <buffer> u <C-u> |
+        \ nnoremap <buffer> U <C-u> |
+        \ nnoremap <buffer> <C-]> <C-]> |
+        \ nnoremap <buffer> q <Cmd>quit<CR>
 augroup end
 
 augroup miscellaneous_custom
@@ -254,106 +262,89 @@ augroup end
 " }}}
 " Mappings {{{
 
-function! s:default_key_mappings()
-  nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
-  nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
-  nnoremap ' ,
-  inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
-  nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
-  nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-  nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-  nnoremap <expr> <plug>@init <SID>mr_at_init()
-  inoremap <expr> <plug>@init "\<c-o>".<SID>mr_at_init()
-  nnoremap <expr> <plug>qstop <SID>mr_q_stop()
-  inoremap <expr> <plug>qstop "\<c-o>".<SID>mr_q_stop()
-  nmap <expr> @ <SID>mr_at_reg()
-  nmap <expr> q <SID>mr_q_start()
-  nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
-  nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
-  nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
-  nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
-  nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
-  nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
-  nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
-  nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
-  nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
-  nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
-  xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
-  nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
-  nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
-  nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
-  vnoremap <leader>y "+y
-  nnoremap <leader>y "+y
-  noremap <silent> <MiddleMouse> <LeftMouse>za
-  noremap <silent> <2-MiddleMouse> <LeftMouse>za
-  noremap <silent> <3-MiddleMouse> <LeftMouse>za
-  noremap <silent> <4-MiddleMouse> <LeftMouse>za
-  cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
-  cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
-  cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
-  " https://github.com/neoclide/coc.nvim
-  nmap     <silent>        <C-]> <Plug>(coc-definition)
-  nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
-  inoremap <silent>        <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
-  nnoremap <silent>        <C-w>f <Cmd>call coc#float#jump()<CR>
-  nmap     <silent>        <leader>st <Plug>(coc-type-definition)
-  nmap     <silent>        <leader>si <Plug>(coc-implementation)
-  nmap     <silent>        <leader>su <Plug>(coc-references)
-  nmap     <silent>        <leader>sr <Plug>(coc-rename)
-  nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
-  vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
-  nnoremap <silent>        <leader>sh <Cmd>call CocActionAsync('highlight')<CR>
-  nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
-  nnoremap <silent>        <leader>sp <Cmd>CocPrev<CR>
-  nnoremap <silent>        <leader>sl <Cmd>CocListResume<CR>
-  nnoremap <silent>        <leader>sc <Cmd>CocList commands<cr>
-  nnoremap <silent>        <leader>so <Cmd>CocList -A outline<cr>
-  nnoremap <silent>        <leader>sw <Cmd>CocList -A -I symbols<cr>
-  inoremap <silent> <expr> <c-space> coc#refresh()
-  nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
-  nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
-  nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
-  nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
-  nnoremap <silent>        <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
-  " https://github.com/lewis6991/gitsigns.nvim
-  nnoremap <silent> <leader>g <Cmd>Gitsigns toggle_signs<CR>
-  " https://github.com/pappasam/nvim-repl
-  nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
-  nmap     <leader>e         <Plug>ReplSendLine
-  vmap     <leader>e         <Plug>ReplSendVisual
-  " https://github.com/machakann/vim-sandwich
-  nmap s <Nop>
-  xmap s <Nop>
-  " https://github.com/nvim-telescope/telescope.nvim
-  nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
-  nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
-  nnoremap <silent> <C-p><C-g> <Cmd>Telescope git_status<CR>
-  nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
-  nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
-  nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
-  " https://github.com/pappasam/vim-filetype-formatter
-  nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-  vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-  " https://github.com/kyazdani42/nvim-tree.lua
-  nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
-
-  augroup map_filetype_overrides
-    autocmd!
-    autocmd FileType man,help,qf
-          \ nnoremap <buffer> d <C-d> |
-          \ nnoremap <buffer> D <C-d> |
-          \ nnoremap <buffer> u <C-u> |
-          \ nnoremap <buffer> U <C-u> |
-          \ nnoremap <buffer> <C-]> <C-]> |
-          \ nnoremap <buffer> q <Cmd>quit<CR>
-  augroup end
-
-  let &filetype=&filetype
-endfunction
-
-call s:default_key_mappings()
+nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
+nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
+nnoremap ' ,
+inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
+nnoremap <silent> <C-c> :pclose <BAR> cclose <BAR> lclose <CR>
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> <plug>@init <SID>mr_at_init()
+inoremap <expr> <plug>@init "\<c-o>".<SID>mr_at_init()
+nnoremap <expr> <plug>qstop <SID>mr_q_stop()
+inoremap <expr> <plug>qstop "\<c-o>".<SID>mr_q_stop()
+nmap <expr> @ <SID>mr_at_reg()
+nmap <expr> q <SID>mr_q_start()
+nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
+nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
+nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
+nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
+nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
+nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
+nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
+nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
+nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
+nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
+xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
+nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
+nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
+nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+noremap <silent> <MiddleMouse> <LeftMouse>za
+noremap <silent> <2-MiddleMouse> <LeftMouse>za
+noremap <silent> <3-MiddleMouse> <LeftMouse>za
+noremap <silent> <4-MiddleMouse> <LeftMouse>za
+cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
+cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
+" https://github.com/neoclide/coc.nvim
+nmap     <silent>        <C-]> <Plug>(coc-definition)
+nnoremap <silent>        <C-k> <Cmd>call CocActionAsync('doHover')<CR>
+inoremap <silent>        <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
+nnoremap <silent>        <C-w>f <Cmd>call coc#float#jump()<CR>
+nmap     <silent>        <leader>st <Plug>(coc-type-definition)
+nmap     <silent>        <leader>si <Plug>(coc-implementation)
+nmap     <silent>        <leader>su <Plug>(coc-references)
+nmap     <silent>        <leader>sr <Plug>(coc-rename)
+nmap     <silent>        <leader>sa v<Plug>(coc-codeaction-selected)
+vmap     <silent>        <leader>sa <Plug>(coc-codeaction-selected)
+nnoremap <silent>        <leader>sh <Cmd>call CocActionAsync('highlight')<CR>
+nnoremap <silent>        <leader>sn <Cmd>CocNext<CR>
+nnoremap <silent>        <leader>sp <Cmd>CocPrev<CR>
+nnoremap <silent>        <leader>sl <Cmd>CocListResume<CR>
+nnoremap <silent>        <leader>sc <Cmd>CocList commands<cr>
+nnoremap <silent>        <leader>so <Cmd>CocList -A outline<cr>
+nnoremap <silent>        <leader>sw <Cmd>CocList -A -I symbols<cr>
+inoremap <silent> <expr> <c-space> coc#refresh()
+nnoremap                 <leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
+nnoremap                 <leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
+nmap     <silent>        ]g <Plug>(coc-diagnostic-next)
+nmap     <silent>        [g <Plug>(coc-diagnostic-prev)
+nnoremap <silent>        <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
+" https://github.com/lewis6991/gitsigns.nvim
+nnoremap <silent> <leader>g <Cmd>Gitsigns toggle_signs<CR>
+" https://github.com/pappasam/nvim-repl
+nnoremap <leader><leader>e <Cmd>ReplToggle<CR>
+nmap     <leader>e         <Plug>ReplSendLine
+vmap     <leader>e         <Plug>ReplSendVisual
+" https://github.com/machakann/vim-sandwich
+nmap s <Nop>
+xmap s <Nop>
+" https://github.com/nvim-telescope/telescope.nvim
+nnoremap <silent> <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
+nnoremap <silent> <C-p><C-b> <Cmd>Telescope buffers<CR>
+nnoremap <silent> <C-p><C-g> <Cmd>Telescope git_status<CR>
+nnoremap <silent> <C-n><C-n> <Cmd>Telescope live_grep<CR>
+nnoremap <silent> <C-n><C-w> <Cmd>Telescope grep_string<CR>
+nnoremap <silent> <C-n><C-h> <Cmd>Telescope help_tags<CR>
+" https://github.com/pappasam/vim-filetype-formatter
+nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+" https://github.com/kyazdani42/nvim-tree.lua
+nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
 
 " https://stackoverflow.com/a/61486601
 function! s:get_visual_selection(mode)
