@@ -404,7 +404,7 @@ endfunction
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
 function! s:mr_at_repeat(_)
   let s:atcount = v:count ? v:count : s:atcount
-  call feedkeys(s:atcount.'@@')
+  call feedkeys(s:atcount .. '@@')
 endfunction
 function! s:mr_at_set_repeat(_)
   set operatorfunc=<SID>mr_at_repeat
@@ -415,8 +415,7 @@ function! s:mr_at_init()
 endfunction
 function! s:mr_at_reg()
   let s:atcount = v:count1
-  let c = nr2char(getchar())
-  return '@' .. c .. "\<plug>@init"
+  return '@' .. nr2char(getchar()) .. "\<plug>@init"
 endfunction
 function! s:mr_q_repeat(_)
   call feedkeys('@' .. s:qreg)
