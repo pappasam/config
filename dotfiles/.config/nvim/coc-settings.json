@@ -49,6 +49,7 @@
       "isort",
       "docformatter",
       "Neovim",
+      "Elrond",
       "coc",
       "nvim",
       "DAGs",
