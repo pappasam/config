@@ -348,18 +348,14 @@ nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
 
 " https://stackoverflow.com/a/61486601
 function! s:get_visual_selection(mode)
-  " call with visualmode() as the argument
   let [line_start, column_start] = getpos("'<")[1:2]
   let [line_end, column_end] = getpos("'>")[1:2]
   let lines = getline(line_start, line_end)
   if a:mode ==# 'v'
-    " Must trim the end before the start, the beginning will shift left.
     let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
     let lines[0] = lines[0][column_start - 1:]
   elseif a:mode ==# 'V'
-    " Line mode no need to trim start or end
   elseif a:mode == "\<c-v>"
-    " Block mode, trim every line
     let new_lines = []
     let i = 0
     for line in lines
@@ -383,20 +379,16 @@ function! s:abbr_only_beginning(in_command, out_command)
   endif
 endfunction
 
-function! s:vim_syntax_group()
-  let l:s = synID(line('.'), col('.'), 1)
-  if l:s == ''
-    echo 'none'
-  else
-    echo synIDattr(l:s, 'name') .. ' -> ' .. synIDattr(synIDtrans(l:s), 'name')
-  endif
-endfun
-
 function! s:syntax_group()
   if &syntax == ''
     TSHighlightCapturesUnderCursor
   else
-    call s:vim_syntax_group()
+    let s = synID(line('.'), col('.'), 1)
+    if s == ''
+      echo 'none'
+    else
+      echo synIDattr(s, 'name') .. ' -> ' .. synIDattr(synIDtrans(s), 'name')
+    endif
   endif
 endfunction
 
@@ -411,24 +403,20 @@ endfunction
 
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
 function! s:mr_at_repeat(_)
-  " If no count is supplied use the one saved in s:atcount. Otherwise save the new count in s:atcount, so it will be applied to repeats.
   let s:atcount = v:count ? v:count : s:atcount
-  " feedkeys() rather than :normal allows finishing in Insert mode, should the macro do that. @@ is remapped, so 'opfunc' will be correct, even if the macro changes it.
   call feedkeys(s:atcount.'@@')
 endfunction
 function! s:mr_at_set_repeat(_)
   set operatorfunc=<SID>mr_at_repeat
 endfunction
-" Called by g@ being invoked directly for the first time. Sets 'opfunc' ready for repeats with . by calling AtSetRepeat().
 function! s:mr_at_init()
-  " Make sure setting 'opfunc' happens here, after initial playback of the macro recording, in case 'opfunc' is set there.
   set operatorfunc=<SID>mr_at_set_repeat
   return 'g@l'
 endfunction
 function! s:mr_at_reg()
   let s:atcount = v:count1
-  let l:c = nr2char(getchar())
-  return '@' .. l:c .. "\<plug>@init"
+  let c = nr2char(getchar())
+  return '@' .. c .. "\<plug>@init"
 endfunction
 function! s:mr_q_repeat(_)
   call feedkeys('@' .. s:qreg)
@@ -458,7 +446,7 @@ endfunction
 
 command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
-  let l:save = winsaveview()
+  let save = winsaveview()
   if &ft == 'markdown'
     " Replace lines with only trailing spaces
     silent! execute '%s/^\s\+$//e'
@@ -470,7 +458,7 @@ function! s:trim_whitespace()
     " Remove all trailing spaces
     silent! execute '%s/\s\+$//e'
   endif
-  call winrestview(l:save)
+  call winrestview(save)
 endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
