@@ -568,6 +568,15 @@ enable_error_code = [
   "ignore-without-code",
 ]
 
+[tool.poetry.group.dev.dependencies]
+black = "*"
+docformatter = "*"
+isort = "*"
+mypy = "*"
+pyright = "*"
+ruff = "*"
+toml-sort = "*"
+
 [tool.ruff]
 line-length = 79
 select = ["ALL"]
@@ -617,14 +626,7 @@ function pynew() {
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   mkinstance
   ve
-  poetry add --group=dev \
-    black \
-    docformatter \
-    isort \
-    mypy \
-    pyright \
-    ruff \
-    toml-sort
+  poetry install
   cat > main.py <<EOL
 """The main module"""
 
