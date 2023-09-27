@@ -22,13 +22,11 @@ function! s:packager_init(packager) abort
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
-  " Syntax
-  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim')
-  call a:packager.add('https://github.com/delphinus/vim-firestore')
   " Text Objects
   call a:packager.add('https://github.com/machakann/vim-sandwich')
   call a:packager.add('https://github.com/kana/vim-textobj-user')
   " Miscellaneous
+  call a:packager.add('https://github.com/pappasam/papercolor-theme-slim')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
