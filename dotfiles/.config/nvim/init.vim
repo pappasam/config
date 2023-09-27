@@ -284,8 +284,8 @@ nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
 nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
 nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
 nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
-nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
-xnoremap gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
+nnoremap <silent> gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
+xnoremap <silent> gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
 nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
 nnoremap <silent> <leader><leader>h <Cmd>ResizeWindowHeight<CR>
 nnoremap <silent> <leader><leader>w <Cmd>ResizeWindowWidth<CR>
@@ -363,9 +363,6 @@ function! s:get_visual_selection(mode)
   else
     return ''
   endif
-  for line in lines
-    echom line
-  endfor
   return join(lines, "\n")
 endfunction
 
