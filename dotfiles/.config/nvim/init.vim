@@ -9,7 +9,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' })
   " TreeSitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
-  call a:packager.add('https://github.com/nvim-treesitter/playground')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   call a:packager.add('https://github.com/tpope/vim-commentary')
@@ -258,7 +257,7 @@ augroup end
 " }}}
 " Mappings {{{
 
-nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
+nnoremap <silent> zS <cmd>Inspect<CR>
 nnoremap <silent> <expr> J v:count == 0 ? '<esc>' : 'J'
 nnoremap ' ,
 inoremap <silent> <C-c> <Esc>:pclose <BAR> cclose <BAR> lclose <CR>a
@@ -369,19 +368,6 @@ function! s:abbr_only_beginning(in_command, out_command)
     return a:out_command
   else
     return a:in_command
-  endif
-endfunction
-
-function! s:syntax_group()
-  if &syntax == ''
-    TSHighlightCapturesUnderCursor
-  else
-    let s = synID(line('.'), col('.'), 1)
-    if s == ''
-      echo 'none'
-    else
-      echo synIDattr(s, 'name') .. ' -> ' .. synIDattr(synIDtrans(s), 'name')
-    endif
   endif
 endfunction
 
