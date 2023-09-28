@@ -1,9 +1,11 @@
--- https://github.com/NvChad/nvim-colorizer.lua {{{
+-- nvim-colorizer.lua {{{
+-- https://github.com/NvChad/nvim-colorizer.lua
 
 require("colorizer").setup()
 
 -- }}}
--- https://github.com/lewis6991/gitsigns.nvim {{{
+-- gitsigns.nvim {{{
+-- https://github.com/lewis6991/gitsigns.nvim
 
 require("gitsigns").setup({
   attach_to_untracked = false,
@@ -64,7 +66,8 @@ require("gitsigns").setup({
 })
 
 -- }}}
--- https://github.com/windwp/nvim-autopairs {{{
+-- nvim-autopairs {{{
+-- https://github.com/windwp/nvim-autopairs
 
 local npairs = require("nvim-autopairs")
 local Rule = require("nvim-autopairs.rule")
@@ -103,7 +106,8 @@ end
 -- END Rule: add spaces between parentheses
 
 -- }}}
--- https://github.com/kyazdani42/nvim-tree.lua {{{
+-- nvim-tree.lua {{{
+-- https://github.com/kyazdani42/nvim-tree.lua
 
 require("nvim-tree").setup({
   renderer = {
@@ -119,7 +123,8 @@ require("nvim-tree").setup({
 })
 
 -- }}}
--- https://github.com/nvim-treesitter/nvim-treesitter {{{
+-- nvim-treesitter {{{
+-- https://github.com/nvim-treesitter/nvim-treesitter
 
 require("nvim-treesitter.configs").setup({
   highlight = {
@@ -195,12 +200,14 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- }}}
--- https://github.com/JoosepAlviste/nvim-ts-context-commentstring {{{
+-- nvim-ts-context-commentstring {{{
+-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 
 require("ts_context_commentstring").setup()
 
 -- }}}
--- https://github.com/kyazdani42/nvim-web-devicons {{{
+-- nvim-web-devicons {{{
+-- https://github.com/kyazdani42/nvim-web-devicons
 
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
@@ -209,7 +216,8 @@ require("nvim-web-devicons").setup({
 })
 
 -- }}}
--- https://github.com/nvim-telescope/telescope.nvim {{{
+-- telescope.nvim {{{
+-- https://github.com/nvim-telescope/telescope.nvim
 
 local ts = require("telescope")
 local actions = require("telescope.actions")
