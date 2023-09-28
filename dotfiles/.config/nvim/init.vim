@@ -426,10 +426,10 @@ function! s:resize_window_width()
     return
   endif
   let max_line = line('$')
-  let maxlength = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
-  let adjustment = &number ? maxlength + max([len(max_line + ''), 2]) + 1 : maxlength - 1
+  let max_length = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
+  let leading_space = getwininfo(win_getid())[0].textoff
   normal! m`
-  execute ':vertical resize ' .. adjustment
+  execute ':vertical resize ' .. (max_length + leading_space)
   normal! ``
 endfunction
 
