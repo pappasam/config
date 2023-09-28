@@ -425,8 +425,7 @@ function! s:resize_window_width()
     echo 'run `:set nowrap` before resizing window'
     return
   endif
-  let max_line = line('$')
-  let max_length = max(map(range(1, max_line), "virtcol([v:val, '$'])"))
+  let max_length = max(map(range(1, line('$')), "virtcol([v:val, '$'])"))
   let leading_space = getwininfo(win_getid())[0].textoff
   normal! m`
   execute ':vertical resize ' .. (max_length + leading_space)
