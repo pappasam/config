@@ -90,7 +90,7 @@ function! CustomTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   let postfix = ''
   for buf in buflist
-    if bufname(buf) == 'focuswriting_abcdefg'
+    if bufname(buf) ==# 'focuswriting_abcdefg'
       let postfix = '🎯'
       break
     endif
@@ -343,8 +343,8 @@ nnoremap <silent> <space>j <Cmd>NvimTreeFindFileToggle<CR>
 
 " https://stackoverflow.com/a/61486601
 function! s:get_visual_selection(mode)
-  if a:mode !=# 'v' && a:mode !=# 'V' && a:mode != "\<c-v>"
-    return ''
+  if a:mode !=? 'v' && a:mode !=? "\<c-v>"
+    throw 'Mode "' .. a:mode .. '" is not a valid Visual mode.'
   endif
   let [line_start, column_start] = getpos("'<")[1:2]
   let [line_end, column_end] = getpos("'>")[1:2]
@@ -352,7 +352,7 @@ function! s:get_visual_selection(mode)
   if a:mode ==# 'v'
     let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
     let lines[0] = lines[0][column_start - 1:]
-  elseif a:mode == "\<c-v>"
+  elseif a:mode ==? "\<c-v>"
     for i in range(len(lines))
       let lines[i] = lines[i][column_start - 1: column_end - (&selection == 'inclusive' ? 1 : 2)]
     endfor
@@ -418,23 +418,6 @@ endfunction
 
 " }}}
 " Commands {{{
-
-command! TrimWhitespace call s:trim_whitespace()
-function! s:trim_whitespace()
-  let save = winsaveview()
-  if &ft == 'markdown'
-    " Replace lines with only trailing spaces
-    silent! execute '%s/^\s\+$//e'
-    " Replace lines with exactly one trailing space with no trailing spaces
-    silent! execute '%g/\S\s$/s/\s$//g'
-    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
-    silent! execute '%s/\s\s\s\+$/  /e'
-  else
-    " Remove all trailing spaces
-    silent! execute '%s/\s\+$//e'
-  endif
-  call winrestview(save)
-endfunction
 
 command! ResizeWindowWidth call s:resize_window_width()
 function! s:resize_window_width()
@@ -531,6 +514,23 @@ function! s:clean_unicode()
   silent! execute '%s/—/-/g'
   silent! execute '%s/…/.../g'
   silent! execute '%s/​//g'
+endfunction
+
+command! TrimWhitespace call s:trim_whitespace()
+function! s:trim_whitespace()
+  let save = winsaveview()
+  if &filetype ==? 'markdown'
+    " Replace lines with only trailing spaces
+    silent! execute '%s/^\s\+$//e'
+    " Replace lines with exactly one trailing space with no trailing spaces
+    silent! execute '%g/\S\s$/s/\s$//g'
+    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
+    silent! execute '%s/\s\s\s\+$/  /e'
+  else
+    " Remove all trailing spaces
+    silent! execute '%s/\s\+$//e'
+  endif
+  call winrestview(save)
 endfunction
 
 command! Preview call s:preview()
