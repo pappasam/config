@@ -108,6 +108,7 @@ end
 require("nvim-tree").setup({
   renderer = {
     full_name = true,
+    symlink_destination = false,
   },
   filters = {
     dotfiles = true,
