@@ -272,15 +272,15 @@ nnoremap <expr> <plug>qstop <SID>mr_q_stop()
 inoremap <expr> <plug>qstop "\<c-o>".<SID>mr_q_stop()
 nmap <expr> @ <SID>mr_at_reg()
 nmap <expr> q <SID>mr_q_start()
-nnoremap <silent> <A-1> <Cmd>silent! 1tabnext<CR>
-nnoremap <silent> <A-2> <Cmd>silent! 2tabnext<CR>
-nnoremap <silent> <A-3> <Cmd>silent! 3tabnext<CR>
-nnoremap <silent> <A-4> <Cmd>silent! 4tabnext<CR>
-nnoremap <silent> <A-5> <Cmd>silent! 5tabnext<CR>
-nnoremap <silent> <A-6> <Cmd>silent! 6tabnext<CR>
-nnoremap <silent> <A-7> <Cmd>silent! 7tabnext<CR>
-nnoremap <silent> <A-8> <Cmd>silent! 8tabnext<CR>
-nnoremap <silent> <A-9> <Cmd>silent! $tabnext<CR>
+nnoremap <expr> <silent> <A-1> '<Cmd>silent! 1tabnext<CR>'
+nnoremap <expr> <silent> <A-2> '<Cmd>silent! 2tabnext<CR>'
+nnoremap <expr> <silent> <A-3> '<Cmd>silent! 3tabnext<CR>'
+nnoremap <expr> <silent> <A-4> '<Cmd>silent! 4tabnext<CR>'
+nnoremap <expr> <silent> <A-5> '<Cmd>silent! 5tabnext<CR>'
+nnoremap <expr> <silent> <A-6> '<Cmd>silent! 6tabnext<CR>'
+nnoremap <expr> <silent> <A-7> '<Cmd>silent! 7tabnext<CR>'
+nnoremap <expr> <silent> <A-8> '<Cmd>silent! 8tabnext<CR>'
+nnoremap <expr> <silent> <A-9> '<Cmd>silent! $tabnext<CR>'
 nnoremap <silent> gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap <silent> gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
 nnoremap <leader><leader>g <Cmd>FocusWriting<CR>
