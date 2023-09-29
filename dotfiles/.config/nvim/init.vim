@@ -48,7 +48,7 @@ set completeopt=menuone,longest wildmode=longest:full
 set cursorline
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
-set expandtab autoindent smartindent shiftwidth=2 softtabstop=2 tabstop=8
+set expandtab autoindent shiftwidth=2 softtabstop=2 tabstop=8
 set foldenable foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
