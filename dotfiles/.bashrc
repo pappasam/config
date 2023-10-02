@@ -652,8 +652,13 @@ function upgrade() {
   asdf plugin-update --all
   pushd .
   cd ~/src/lib/alacritty || return
-  git pull
-  alacritty-install
+  git fetch origin
+  if [[ $(git diff origin/master) ]]; then
+    git merge origin/master
+    alacritty-install
+  else
+    echo 'No Alacritty updates, skipping build...'
+  fi
   popd || return
   asdf install neovim latest
   asdf uninstall neovim nightly && \
