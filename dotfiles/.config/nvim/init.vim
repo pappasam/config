@@ -237,7 +237,7 @@ augroup filetype_custom
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " mappings
-  autocmd FileType man,help,qf
+  autocmd FileType man,help,qf,coctree
         \ nnoremap <buffer> d <C-d> |
         \ nnoremap <buffer> D <C-d> |
         \ nnoremap <buffer> u <C-u> |
@@ -318,7 +318,7 @@ nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
 nnoremap <Leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
 nmap ]g <Plug>(coc-diagnostic-next)
 nmap [g <Plug>(coc-diagnostic-prev)
-nnoremap <space>l <Cmd>call <SID>coc_toggle_outline()<CR>
+nnoremap <space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
 " https://github.com/lewis6991/gitsigns.nvim
 nnoremap <Leader>g <Cmd>Gitsigns toggle_signs<CR>
 " https://github.com/pappasam/nvim-repl
@@ -365,15 +365,6 @@ function! s:abbr_only_beginning(in_command, out_command)
     return a:out_command
   else
     return a:in_command
-  endif
-endfunction
-
-function! s:coc_toggle_outline() abort
-  let winid = coc#window#find('cocViewId', 'OUTLINE')
-  if winid == -1
-    call CocActionAsync('showOutline', 1)
-  else
-    call coc#window#close(winid)
   endif
 endfunction
 
