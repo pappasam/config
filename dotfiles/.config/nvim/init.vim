@@ -292,6 +292,7 @@ noremap <2-MiddleMouse> <LeftMouse>za
 noremap <3-MiddleMouse> <LeftMouse>za
 noremap <4-MiddleMouse> <LeftMouse>za
 cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
+cnoreabbrev <expr> coc <SID>abbr_only_beginning('coc', 'edit ~/.config/nvim/coc-settings.json')
 cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
 cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
 " https://github.com/neoclide/coc.nvim
