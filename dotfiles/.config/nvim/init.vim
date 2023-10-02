@@ -63,6 +63,7 @@ set notimeout
 set nowrap linebreak
 set number
 set path+=/usr/include/x86_64-linux-gnu/
+set shadafile=NONE
 set shortmess+=cI
 set showtabline=2
 set signcolumn=number
