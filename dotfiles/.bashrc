@@ -643,34 +643,6 @@ function bsympy() {
 # }}}
 # Functions: upgrade/install {{{
 
-# upgrade relevant local systems
-function upgrade() {
-  sudo apt update
-  sudo apt upgrade -y
-  sudo apt autoremove -y
-  asdf update
-  asdf plugin-update --all
-  pushd .
-  cd ~/src/lib/alacritty || return
-  git fetch origin
-  if [[ $(git diff origin/master) ]]; then
-    git merge origin/master
-    alacritty-install
-  else
-    echo 'No Alacritty updates, skipping build...'
-  fi
-  popd || return
-  asdf install neovim latest
-  asdf uninstall neovim nightly && \
-    asdf install neovim nightly && \
-    asdf global neovim nightly
-  if command -v zinit > /dev/null; then
-    zinit self-update
-    zinit update --all
-  fi
-  nvim -c 'PackagerClean | PackagerUpdate | TSUpdate | CocUpdate' ~/.config/nvim/init.vim
-}
-
 function rustglobal-install() {
   rustup component add rust-analyzer
   rustup component add rust-src
@@ -840,6 +812,34 @@ function asdfpurge() {  ## Purge every version from plugin except current
   done
   echo "Reshiming $plugin_name..."
   asdf reshim "$plugin_name"
+}
+
+# upgrade relevant local systems
+function upgrade() {
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt autoremove -y
+  asdf update
+  asdf plugin-update --all
+  pushd .
+  cd ~/src/lib/alacritty || return
+  git fetch origin
+  if [[ $(git diff origin/master) ]]; then
+    git merge origin/master
+    alacritty-install
+  else
+    echo 'No Alacritty updates, skipping build...'
+  fi
+  popd || return
+  asdf install neovim latest
+  asdf uninstall neovim nightly && \
+    asdf install neovim nightly && \
+    asdf global neovim nightly
+  if command -v zinit > /dev/null; then
+    zinit self-update
+    zinit update --all
+  fi
+  nvim -c 'PackagerClean | PackagerUpdate | TSUpdate | CocUpdate' ~/.config/nvim/init.vim
 }
 
 # }}}
