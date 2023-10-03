@@ -51,8 +51,7 @@ set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list
-set listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+set list listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 set mouse=a
 set noshowcmd
 set noshowmode
