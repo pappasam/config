@@ -288,10 +288,6 @@ noremap <MiddleMouse> <LeftMouse>za
 noremap <2-MiddleMouse> <LeftMouse>za
 noremap <3-MiddleMouse> <LeftMouse>za
 noremap <4-MiddleMouse> <LeftMouse>za
-cnoreabbrev <expr> v <SID>abbr_only_beginning('v', 'edit ~/.config/nvim/init.vim')
-cnoreabbrev <expr> coc <SID>abbr_only_beginning('coc', 'edit ~/.config/nvim/coc-settings.json')
-cnoreabbrev <expr> z <SID>abbr_only_beginning('z', 'edit ~/.zshrc')
-cnoreabbrev <expr> b <SID>abbr_only_beginning('b', 'edit ~/.bashrc')
 " https://github.com/neoclide/coc.nvim
 nmap <C-]> <Plug>(coc-definition)
 nnoremap <C-k> <Cmd>call CocActionAsync('doHover')<CR>
@@ -357,14 +353,6 @@ function! s:get_visual_selection(mode)
   return join(lines, "\n")
 endfunction
 
-function! s:abbr_only_beginning(in_command, out_command)
-  if (getcmdtype() == ':' && getcmdline() =~ '^' .. a:in_command .. '$')
-    return a:out_command
-  else
-    return a:in_command
-  endif
-endfunction
-
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
 function! s:mr_at_repeat(_)
   let s:atcount = v:count ? v:count : s:atcount
@@ -406,6 +394,11 @@ endfunction
 
 " }}}
 " Commands {{{
+
+command! V edit ~/.config/nvim/init.vim
+command! COC edit ~/.config/nvim/coc-settings.json
+command! Z edit ~/.zshrc
+command! B edit ~/.bashrc
 
 command! ResizeWindowWidth call s:resize_window_width()
 function! s:resize_window_width()
