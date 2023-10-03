@@ -72,9 +72,9 @@ set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''
 set statusline+=%=%v/%{strwidth(getline('.'))}:%l/%L%y%#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
 set tabline=%!CustomTabLine()
 function! CustomTabLine()
-  let s = ''
   let tabnumber_max = tabpagenr('$')
   let tabnumber_current = tabpagenr()
+  let s = ''
   for i in range(1, tabnumber_max)
     let s ..= tabnumber_current == i ? '%#TabLineSel#' : '%#TabLine#'
     let s ..= '%' .. i .. 'T' .. ' ' .. i .. ':%{CustomTabLabel(' .. i .. ')}'
