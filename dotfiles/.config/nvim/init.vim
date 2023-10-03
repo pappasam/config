@@ -21,9 +21,6 @@ function! s:packager_init(packager) abort
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
-  " Text Objects
-  call a:packager.add('https://github.com/machakann/vim-sandwich')
-  call a:packager.add('https://github.com/kana/vim-textobj-user')
   " Miscellaneous
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
@@ -34,6 +31,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
+  call a:packager.add('https://github.com/machakann/vim-sandwich')
 endfunction
 
 " }}}
