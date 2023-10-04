@@ -267,12 +267,6 @@ vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 nnoremap <expr> J v:count == 0 ? '<esc>' : 'J'
-nnoremap <expr> <Plug>@init <SID>mr_at_init()
-inoremap <expr> <Plug>@init "\<c-o>".<SID>mr_at_init()
-nnoremap <expr> <Plug>qstop <SID>mr_q_stop()
-inoremap <expr> <Plug>qstop "\<c-o>".<SID>mr_q_stop()
-nmap <expr> @ <SID>mr_at_reg()
-nmap <expr> q <SID>mr_q_start()
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -338,8 +332,14 @@ nnoremap <Leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent
 vnoremap <Leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
-
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
+nnoremap <expr> <Plug>@init <SID>mr_at_init()
+inoremap <expr> <Plug>@init "\<c-o>".<SID>mr_at_init()
+nnoremap <expr> <Plug>qstop <SID>mr_q_stop()
+inoremap <expr> <Plug>qstop "\<c-o>".<SID>mr_q_stop()
+nmap <expr> @ <SID>mr_at_reg()
+nmap <expr> q <SID>mr_q_start()
+
 function! s:mr_at_repeat(_)
   let s:atcount = v:count ? v:count : s:atcount
   call feedkeys(s:atcount .. '@@')
