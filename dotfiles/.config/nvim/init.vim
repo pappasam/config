@@ -187,7 +187,7 @@ let g:coc_filetype_map = {
 
 augroup bufenter_filetype_assignment
   autocmd!
-  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,config,credentials,.editorconfig set filetype=dosini
+  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
   autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
   autocmd BufEnter *.mdx set filetype=markdown
   autocmd BufEnter *.min.js set filetype=none

@@ -208,16 +208,12 @@ function _asdf_complete_plugins() {
 
 compdef _vim f
 compdef _vim fn
-compdef _dict_words def
-compdef _dict_words syn
 compdef _directories d
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _vplug_completion vplug
-# compdef _man m
 compdef _command ve
 compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
-compdef _docker-compose dc
 
 # }}}
 # Runtime: executed commands for interactive shell {{{

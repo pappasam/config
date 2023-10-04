@@ -1,119 +1,66 @@
 #!/bin/bash
 # shellcheck disable=SC1090,SC1091
-# Environment: exported variables {{{
+# Environment {{{
 
-# Run 'dircolors --print-database' for more info about this.
-export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
-
-export REACT_EDITOR='less'
-
-GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01"
-GCC_COLORS="$GCC_COLORS;32:locus=01:quote=01"
-export GCC_COLORS
-
-LESS="--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS"
-LESS="$LESS --HILITE-UNREAD --tabs=4 --quit-if-one-screen"
-LESS="$LESS --mouse --wheel-lines=3"
-export LESS
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export BROWSER='/usr/bin/firefox'
+export DELTA_PAGER="less -RF"
+export EDITOR=nvim
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
+export HISTCONTROL=ignorespace # ignore leading space, where to save history to disk
+export HISTFILE=~/.bash_history
+export HISTSIZE=5000 # how many lines of history to keep in memory
+export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
+export LD_LIBRARY_PATH="$HOME/src/lib/nccl_2.18.3-1+cuda11.0_x86_64/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH"
+export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --mouse --wheel-lines=3'
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-export PAGER=less
-
-export MANWIDTH=79
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
 export MANPAGER='nvim +Man!'
+export MANWIDTH=79
+export MESA_DEBUG=silent # silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
+export PAGER=less
+export PROMPT_COMMAND='auto_venv_precmd' # commands to execute before a bash prompt.
+export PYTHON_CONFIGURE_OPTS='--enable-shared' # For installing R through ASDF, need shared libraries in Python and R
+export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
+export SAVEHIST=5000 # how many lines of history to save to disk
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # disable python venv prompt so I can configure myself
+export WINIT_HIDPI_FACTOR=1.0 # enable editor to scale with monitor's DPI
 
-export GIT_PAGER=less
-
-export EDITOR=nvim
-
-# Environment variable controlling difference between HI-DPI / Non HI_DPI
-# Turn off because it messes up my pdf tooling
-export GDK_SCALE=0
-
-# History: How many lines of history to keep in memory
-export HISTSIZE=5000
-
-# History: ignore leading space, where to save history to disk
-export HISTCONTROL=ignorespace
-export HISTFILE=~/.bash_history
-
-# History: Number of history entries to save to disk
-export SAVEHIST=5000
-
-# Python virtualenv (disable the prompt so I can configure it myself below)
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-# Default browser for some programs (eg, urlview)
-export BROWSER='/usr/bin/firefox'
-
-# Enable editor to scale with monitor's DPI
-export WINIT_HIDPI_FACTOR=1.0
-
-export BAT_PAGER=''
-
-# Commands to execute before a bash prompt.
-export PROMPT_COMMAND='auto_venv_precmd'
-
-# Silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
-export MESA_DEBUG=silent
-
-# For installing R through ASDF, need shared libraries in Python and R
-export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
-export PYTHON_CONFIGURE_OPTS='--enable-shared'
-
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-
-# Kubernetes
-export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-# CUDA Drivers
-export LD_LIBRARY_PATH="/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="$HOME/src/lib/nccl_2.18.3-1+cuda11.0_x86_64/lib:$LD_LIBRARY_PATH"
-
-# }}}
-# Environment: path appends + misc env setup {{{
-
-# Takes 1 argument and adds it to the beginning of the PATH
+# PATH
 function path_ladd() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="$1${PATH:+":$PATH"}"
   fi
 }
-
-# Takes 1 argument and adds it to the end of the PATH
 function path_radd() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="${PATH:+"$PATH:"}$1"
   fi
 }
-
 path_ladd "$HOME/bin"
 path_ladd "$HOME/.bin"
 path_ladd "$HOME/.local/bin"
 path_ladd "$HOME/.opam/default/bin"
 path_ladd "$HOME/config/bin"
-
 export PATH
 
-# }}}
-# Imports: script sourcing {{{
-
+# Script sourcing
 function include() {
   [[ -f "$1" ]] && source "$1"
 }
-
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
 
-# }}}
-# Bash: prompt (PS1) {{{
-
+# PS1: bash prompt
 PS1_COLOR_BRIGHT_BLUE="\033[38;5;115m"
 PS1_COLOR_RED="\033[0;31m"
 PS1_COLOR_YELLOW="\033[0;33m"
@@ -177,11 +124,9 @@ PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}
 ${PS1_END}"
 
 # }}}
-# Aliases: general {{{
+# Aliases {{{
 
-# Easier directory navigation for going up a directory tree
-alias 'a'='cd - &> /dev/null'
-alias 'cd..'='cd_up'  # can not name function 'cd..'; references cd_up below
+# Navigation
 alias .='cd ..'
 alias ..='cd ../..'
 alias ...='cd ../../..'
@@ -192,22 +137,16 @@ alias .......='cd ../../../../../../..'
 alias ........='cd ../../../../../../../..'
 alias .........='cd ../../../../../../../../..'
 alias ..........='cd ../../../../../../../../../..'
+alias ls='ls -CF --color=auto'
+alias sl='ls'
+alias ll='ls -al'
+alias d='cd'
+alias gn='gio open'
 
-# Neovim
+# Files
 alias f='nvim'
-alias fn='nvim -u NORC --noplugin'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
-alias c='cd ~/config/dotfiles && nvim .'
-
-# ls et al, with color support and handy aliases
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias sl='ls'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Copy/paste helpers: perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
@@ -216,66 +155,21 @@ alias pbpaste='xsel --clipboard --output'
 # Public IP
 alias publicip='curl -s checkip.amazonaws.com'
 
-# Git shortcuts
+# Git
+alias g='git status || return 0'
+alias gd='git diff'
 alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gm='git commit'
 alias gma='git add --all && git commit'
-alias gp='git remote prune origin && git remote set-head origin -a'
 alias gop='gh browse'
+alias gp='git remote prune origin && git remote set-head origin -a'
 
 # }}}
-# Functions: general {{{
-
-# dictionary definition lookup
-function def() {  # arg1: word
-  dict -d gcide "$1"
-}
-
-# dictionary synonym lookup
-function syn() {  # arg1: word
-  dict -d moby-thesaurus "$1"
-}
-
-# I type cd so much, I'll just type d instead
-function d() {
-  # shellcheck disable=SC2164,SC2086
-  cd "$@"
-}
-
-# Move up n directories using:  cd.. dir
-function cd_up() {  # arg1: number|word
-  pushd . >/dev/null
-  cd "$( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )" || return  # cd up into path (if found)
-}
-
-# Open files with gnome-open
-function gn() {  # arg1: filename
-  gio open "$1"
-}
-
-# Cargo local documentation for crates
-function cargodoc() {  # arg1: packagename
-  if [ $# -eq 0 ]; then
-    cargo doc --open
-  elif [ $# -eq 1 ]; then
-    cargo doc --open --package "$1"
-  else
-    echo 'usage: cargodoc [<package name>]'
-    return 1
-  fi
-}
-
-function quote() {
-  local cowsay_word_message cowsay_quote
-  cowsay_word_message="$(shuf -n 1 ~/config/docs/dict/gre_words.txt)"
-  cowsay_quote="$(fortune -s ~/config/docs/fortunes/ | grep -v '\-\-' | grep .)"
-  echo -e "$cowsay_word_message\n\n$cowsay_quote" | cowsay
-}
+# Functions {{{
 
 function deshake-video() {
-  # see below link for documentation
   # https://github.com/georgmartius/vid.stab
   if [ $# -ne 2 ]; then
     echo "deshake-video <infile> <outfile>"
@@ -293,18 +187,7 @@ function deshake-video() {
     "$outfile"
 }
 
-function dat() {
-  if [ $# -ne 1 ]; then
-    echo "dat <file_name>"
-    return 1
-  fi
-  local file_name="$1"
-  strfile -c % "$file_name" "$file_name.dat"
-}
-
-# Remove spaces from a filename.
-# Accepts stdin and arguments, preferring arguments if they are given.
-function despace() {
+function despace-filename() {
   if [ $# -eq 0 ]; then
     while read -r filename; do
       mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
@@ -316,10 +199,6 @@ function despace() {
   fi
 }
 
-# }}}
-# Functions: tmux {{{
-
-# Launch tmux
 function t() {
   if [ -n "$TMUX" ]; then
     echo 'Cannot run t() in tmux session'
@@ -335,38 +214,6 @@ function t() {
     tmux -2 new-session -d -s "$SESSION"
     tmux -2 attach -t "$SESSION"
   fi
-}
-
-# Output colors for tmux
-function tmux-colors() {
-  for i in {0..255}; do
-    printf "\x1b[38;5;%smcolour%s\x1b[0m\n" "$i" "$i"
-  done
-}
-
-# }}}
-# Functions: git {{{
-
-# cd to the current git root
-function gr() {
-  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
-    cd "$(git rev-parse --show-toplevel)" || return
-  else
-    echo "'$PWD' is not inside a git repository"
-    return 1
-  fi
-}
-
-# git root + git status
-function g() {
-  git status
-  # I don't want this to return an error when used interactively
-  return 0
-}
-
-# git diff
-function gd() {
-  git diff "$@" | delta --dark --line-numbers
 }
 
 # checkout origin default, pull, delete old branch, and prune
@@ -437,26 +284,6 @@ function github-list {
   curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
 }
 
-function git-remote-to-ssh(){
-  if git branch &>/dev/null
-  then
-    sed -r -i 's:https\://([^/]+)/(.*\.git):git@\1\:\2:g' "$(git rev-parse --git-dir)/config"
-  else
-    echo 'Not inside git project'
-    return 1
-  fi
-}
-
-function git-remote-to-https(){
-  if git branch &>/dev/null
-  then
-    sed -r -i 's:git@([^/]+)\:(.*\.git):https\://\1/\2:g' "$(git rev-parse --git-dir)/config"
-  else
-    echo 'Not inside git project'
-    return 1
-  fi
-}
-
 # Show which git files have been modified most recently
 # Note: %ad means the modified date. I add .. because {} begins with a .
 function git-mod() {
@@ -470,9 +297,6 @@ function git-mod() {
     return 1
   fi
 }
-
-# }}}
-# Functions: vim {{{
 
 # go to a Neovim plugin
 function vplug() {
@@ -488,7 +312,7 @@ function nvim-profiler() {
 }
 
 # }}}
-# Functions: python dev {{{
+# Functions: python {{{
 
 # activate virtual environment from any directory from current and up
 VIRTUAL_ENV_DEFAULT=.venv  # Name of virtualenv
@@ -634,10 +458,6 @@ EOL
   git init
   git add .
   git commit -m "Initial commit"
-}
-
-function bsympy() {
-  bpython --paste "$HOME/config/scripts/bpython/start-sympy-session.py"
 }
 
 # }}}

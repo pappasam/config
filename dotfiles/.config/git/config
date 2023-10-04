@@ -5,6 +5,15 @@
   editor = nvim
   autocrlf = input
   safecrlf = true
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  side-by-side = true
+  light = false
+[diff]
+    colorMoved = default
 [init]
   defaultBranch = main
 [alias]
@@ -12,6 +21,7 @@
   root = rev-parse --show-toplevel
 [merge "ours"]
   driver = true
+  conflictstyle = diff3
 [pull]
   rebase = true
 [push]
