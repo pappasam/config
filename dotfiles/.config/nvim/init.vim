@@ -233,6 +233,9 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  " override listchars
+  autocmd FileType gitcommit
+        \ setlocal listchars=tab:>\  " necessary comment for whitespace
   " mappings
   autocmd FileType man,help,qf,coctree
         \ nnoremap <buffer> d <C-d> |
