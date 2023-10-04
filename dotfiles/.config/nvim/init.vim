@@ -283,7 +283,7 @@ nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
-xnoremap <silent> gx :<C-u> call jobstart(['firefox', <SID>get_visual_selection(visualmode())])<CR><Esc>`<
+xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
 nnoremap <Leader><Leader>g <Cmd>FocusWriting<CR>
 nnoremap <Leader><Leader>h <Cmd>ResizeWindowHeight<CR>
 nnoremap <Leader><Leader>w <Cmd>ResizeWindowWidth<CR>
@@ -338,25 +338,6 @@ nnoremap <Leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent
 vnoremap <Leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
-
-" https://stackoverflow.com/a/61486601
-function! s:get_visual_selection(mode)
-  if a:mode !=? 'v' && a:mode !=? "\<c-v>"
-    throw 'Mode "' .. a:mode .. '" is not a valid Visual mode.'
-  endif
-  let [line_start, column_start] = getpos("'<")[1:2]
-  let [line_end, column_end] = getpos("'>")[1:2]
-  let lines = getline(line_start, line_end)
-  if a:mode ==# 'v'
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-  elseif a:mode ==? "\<c-v>"
-    for i in range(len(lines))
-      let lines[i] = lines[i][column_start - 1: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    endfor
-  endif
-  return join(lines, "\n")
-endfunction
 
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
 function! s:mr_at_repeat(_)
