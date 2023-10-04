@@ -1,3 +1,4 @@
+vim.loader.enable() -- experimental lua loader enabled
 -- nvim-colorizer.lua {{{
 -- https://github.com/NvChad/nvim-colorizer.lua
 

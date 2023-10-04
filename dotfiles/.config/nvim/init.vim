@@ -10,7 +10,7 @@ function! s:packager_init(packager) abort
   " TreeSitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
-  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
+  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring', {'name': 'ntcc'}) " required for vim.loader.enable()
   call a:packager.add('https://github.com/tpope/vim-commentary')
   " Tree
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
@@ -250,13 +250,12 @@ augroup miscellaneous_custom
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
   autocmd VimResized * wincmd =
+  " https://github.com/neovim/neovim/issues/20456
+  autocmd! ColorScheme,VimEnter *
+        \ highlight! link luaParenError Normal |
+        \ highlight! link luaError Normal |
+        \ highlight! link luaTable Normal
 augroup end
-
-" Until this issue is solved: https://github.com/neovim/neovim/issues/20456
-augroup MyLuaHLBugFix
-  autocmd!
-  autocmd! ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal
-augroup END
 
 " }}}
 " Mappings {{{
