@@ -252,6 +252,12 @@ augroup miscellaneous_custom
   autocmd VimResized * wincmd =
 augroup end
 
+" Until this issue is solved: https://github.com/neovim/neovim/issues/20456
+augroup MyLuaHLBugFix
+  autocmd!
+  autocmd! ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal
+augroup END
+
 " }}}
 " Mappings {{{
 
