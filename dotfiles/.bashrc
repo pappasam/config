@@ -34,17 +34,8 @@ export SAVEHIST=5000 # how many lines of history to save to disk
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # disable python venv prompt so I can configure myself
 export WINIT_HIDPI_FACTOR=1.0 # enable editor to scale with monitor's DPI
 
-# PATH
-function path_ladd() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="$1${PATH:+":$PATH"}"
-  fi
-}
-function path_radd() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-    PATH="${PATH:+"$PATH:"}$1"
-  fi
-}
+function path_ladd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="$1${PATH:+":$PATH"}"; fi; }
+function path_radd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="${PATH:+"$PATH:"}$1"; fi; }
 path_ladd "$HOME/bin"
 path_ladd "$HOME/.bin"
 path_ladd "$HOME/.local/bin"
@@ -52,10 +43,7 @@ path_ladd "$HOME/.opam/default/bin"
 path_ladd "$HOME/config/bin"
 export PATH
 
-# Script sourcing
-function include() {
-  [[ -f "$1" ]] && source "$1"
-}
+function include() { [[ -f "$1" ]] && source "$1" ; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
@@ -108,13 +96,7 @@ function ps1_git_branch() {
   fi
 }
 
-function ps1_python_virtualenv() {
-  if [[ -z $VIRTUAL_ENV ]]; then
-    echo ""
-  else
-    echo "($(basename "$VIRTUAL_ENV"))"
-  fi
-}
+function ps1_python_virtualenv() { if [[ -z $VIRTUAL_ENV ]]; then echo ""; else echo "($(basename "$VIRTUAL_ENV"))"; fi ; }
 
 PS1_DIR="\[$PS1_BOLD\]\[$PS1_COLOR_BRIGHT_BLUE\]\w"
 PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
