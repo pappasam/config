@@ -151,25 +151,11 @@ alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
 # }}}
 # Functions {{{
 
-function deshake-video() { # infile, outfile. https://github.com/georgmartius/vid.stab
-  if [ $# -ne 2 ]; then
-    echo "deshake-video <infile> <outfile>" && exit 1
-  fi
-  if [ ! -f "$1.trf" ]; then
-    echo "Generating $1.trf ..." && ffmpeg2 -i "$1" -vf vidstabdetect=result="$1.trf" -f null -
-  fi
-  ffmpeg2 -i "$1" -vf vidstabtransform=smoothing=10:input="$1.trf" "$2"
-}
-
 function despace-filename() {
   if [ $# -eq 0 ]; then
-    while read -r filename; do
-      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
-    done
+    while read -r filename; do mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"; done
   else
-    for filename in "$@"; do
-      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
-    done
+    for filename in "$@"; do mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"; done
   fi
 }
 
@@ -308,19 +294,15 @@ function pynew() {
   if [ $# -ne 1 ]; then
     echo "pynew <directory>" && return 1
   fi
-  local dir_name="$1"
-  if [ -d "$dir_name" ]; then
-    echo "$dir_name already exists" && return 1
+  if [ -d "$1" ]; then
+    echo "$1 already exists" && return 1
   fi
-  mkdir "$dir_name"
-  cd "$dir_name" || return
-  poetry-init
+  mkdir "$1" && cd "$1" && poetry-init || return
   gitignore Python.gitignore | grep -v instance/ > .gitignore
-  python -m venv .venv
-  va
-  poetry install
+  python -m venv .venv && va && poetry install || return
   cat > main.py <<EOL
 """The main module."""
+
 
 def main() -> str:
     """A welcome message."""
@@ -329,9 +311,7 @@ def main() -> str:
 
 print(main())
 EOL
-  git init
-  git add .
-  git commit -m "Initial commit"
+  git init && git add . && git commit -m "Initial commit"
 }
 
 # }}}
