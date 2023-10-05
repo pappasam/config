@@ -9,8 +9,8 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
-  navigate = true
-  side-by-side = true
+  navigate = false
+  side-by-side = false
   light = false
 [diff]
     colorMoved = default

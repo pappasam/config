@@ -320,8 +320,8 @@ nnoremap <C-n><C-n> <Cmd>Telescope live_grep<CR>
 nnoremap <C-n><C-w> <Cmd>Telescope grep_string<CR>
 nnoremap <C-n><C-h> <Cmd>Telescope help_tags<CR>
 " https://github.com/pappasam/vim-filetype-formatter
-nnoremap <Leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-xnoremap <Leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+nnoremap <Leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
+xnoremap <Leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
