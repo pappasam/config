@@ -105,6 +105,8 @@ PS1_END="\[$PS1_BOLD\]\[$PS1_COLOR_GREEN\]$ \[$PS1_COLOR_RESET\]"
 PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}
 ${PS1_END}"
 
+umask 022 # Default access: files (rw-r--r--) & dirs (rwxr-xr-x) with umask 022
+
 # }}}
 # Aliases {{{
 
@@ -198,7 +200,6 @@ function t() {
   fi
 }
 
-# checkout origin default, pull, delete old branch, and prune
 function gdl() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
     echo "'$PWD' is not inside a git repository"
@@ -222,7 +223,6 @@ function gdl() {
     git remote set-head origin -a
 }
 
-# Print out the Github-recommended gitignore
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
 function gitignore() {
   if [ ! -d "$GITIGNORE_DIR" ]; then
@@ -248,21 +248,18 @@ function gitignore() {
   fi
 }
 
-# push current branch from origin to current branch
 function push() {
   local current_branch
   current_branch="$(git rev-parse --abbrev-ref HEAD)"
   git push -u origin "$current_branch"
 }
 
-# pull current branch from origin to current branch
 function pull() {
   local current_branch
   current_branch="$(git rev-parse --abbrev-ref HEAD)"
   git pull origin "$current_branch"
 }
 
-# list all of an organization's repositories
 function github-list {
   local username=$1
   local organization=$2
@@ -270,11 +267,10 @@ function github-list {
   curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
 }
 
-# Show which git files have been modified most recently
-# Note: %ad means the modified date. I add .. because {} begins with a .
 function git-mod() {
   if git branch &>/dev/null
   then
+    # %ad means the modified date. Add .. because {} begins with a .
     fd --type f --exec git log -1 --format="/%ad..{}" --date=short {} \
       | tree --fromfile -rC . \
       | less -r
@@ -284,12 +280,10 @@ function git-mod() {
   fi
 }
 
-# go to a Neovim plugin
 function vplug() {
   cd "$HOME/.config/nvim/pack/packager/start/$1" || return
 }
 
-# get profiling information about neovim
 function nvim-profiler() {
   nvim --startuptime nvim_startup.txt \
     --cmd 'profile start nvim_init_profile.txt' \
@@ -297,11 +291,7 @@ function nvim-profiler() {
     "$@"
 }
 
-# }}}
-# Functions: python {{{
-
-# activate virtual environment from any directory from current and up
-VIRTUAL_ENV_DEFAULT=.venv  # Name of virtualenv
+VIRTUAL_ENV_DEFAULT=.venv
 function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
   local slashes=${PWD//[^\/]/}
@@ -318,46 +308,8 @@ function va() {
   fi
 }
 
-# Toggles whether the virtualenv is automatically set
-export AUTO_VIRTUALENV=1  # if not 1, then auto activation of venv disabled
-function toggle_auto_virtualenv() {
-  if [ "$AUTO_VIRTUALENV" -eq "0" ]; then
-    export AUTO_VIRTUALENV=1
-  else
-    export AUTO_VIRTUALENV=0
-  fi
-}
-function auto_venv_precmd() {
-  if [ "$AUTO_VIRTUALENV" -ne "0" ]; then
-    va
-  fi
-}
-
-# Create and activate a virtual environment with all Python dependencies
-# installed. Optionally change Python interpreter.
-# shellcheck disable=SC2120
-function ve() {  # arg1?: python interpreter name
-  local venv_name="$VIRTUAL_ENV_DEFAULT"
-  if [ -z "$1" ]; then
-    local python_name='python'
-  else
-    local python_name="$1"
-  fi
-  if [ ! -d "$venv_name" ]; then
-    if ! $python_name -m venv "$venv_name"; then
-      local error_code=$?
-      echo "Virtualenv creation failed, aborting"
-      return $error_code
-    fi
-    source "$venv_name/bin/activate"
-    pip install -U pip
-    pydev-install  # install dependencies for editing
-    deactivate
-  else
-    echo "$venv_name already exists, activating"
-  fi
-  source $venv_name/bin/activate
-}
+export AUTO_VIRTUALENV=1
+function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq "1" ]; then va; fi ; }
 
 function cat-pyproject() {
   cat << EOF
@@ -398,7 +350,6 @@ max-returns = 3
 EOF
 }
 
-# initialize python repo
 function poetry-init() {
   if [ -f pyproject.toml ]; then
     echo "pyproject.toml exists, aborting"
@@ -410,16 +361,6 @@ function poetry-init() {
   touch README.md
 }
 
-# create instance folder with only .gitignore ignored
-function mkinstance() {
-  mkdir instance
-  cat > instance/.gitignore <<EOL
-*
-!.gitignore
-EOL
-}
-
-# create new python repo
 function pynew() {
   if [ $# -ne 1 ]; then
     echo "pynew <directory>"
@@ -434,12 +375,18 @@ function pynew() {
   cd "$dir_name" || return
   poetry-init
   gitignore Python.gitignore | grep -v instance/ > .gitignore
-  mkinstance
-  ve
+  python -m venv .venv
+  va
   poetry install
   cat > main.py <<EOL
-"""The main module"""
+"""The main module."""
 
+def main() -> str:
+    """A welcome message."""
+    return "hello, world!"
+
+
+print(main())
 EOL
   git init
   git add .
@@ -447,7 +394,7 @@ EOL
 }
 
 # }}}
-# Functions: upgrade/install {{{
+# Installs {{{
 
 function rustglobal-install() {
   rustup component add rust-analyzer
@@ -501,7 +448,6 @@ function nodeglobal-install() {
   asdf reshim nodejs
 }
 
-# install default python dependencies
 function pydev-install() {
   local for_pip=(
     black
@@ -519,13 +465,11 @@ function pydev-install() {
   asdf reshim python
 }
 
-# install global Python dependencies
 function pyglobal-install() {
   pip install -U pipx
   pydev-install
 }
 
-# install global Python applications
 function pipx-install() {
   local for_pipx=(
     cookiecutter
@@ -601,11 +545,11 @@ function zoom-install() {
   sudo apt install /tmp/zoom_amd64.deb
 }
 
-function asdfl() {  ## Install and set the latest version of asdf
+function asdfl() {
   asdf install "$1" latest && asdf global "$1" latest
 }
 
-function asdfpurge() {  ## Purge every version from plugin except current
+function asdfpurge() {
   if [ $# -ne 1 ]; then
     echo 'Usage: asdfpurge <plugin-name>'
     return 1
@@ -619,7 +563,6 @@ function asdfpurge() {  ## Purge every version from plugin except current
   asdf reshim "$plugin_name"
 }
 
-# upgrade relevant local systems
 function upgrade() {
   sudo apt update
   sudo apt upgrade -y
@@ -646,17 +589,5 @@ function upgrade() {
   fi
   nvim -c 'PackagerClean | PackagerUpdate | TSUpdate | CocUpdate' ~/.config/nvim/init.vim
 }
-
-# }}}
-# Runtime: executed commands for interactive shell {{{
-
-# turn off ctrl-s and ctrl-q from freezing / unfreezing terminal
-# Turned off for now, messes with powerlevel10k
-# stty -ixon
-
-# Assigns permissions so that only I have read/write access for files, and
-# read/write/search for directories I own. All others have read access only
-# to my files, and read/search access to my directories.
-umask 022
 
 # }}}
