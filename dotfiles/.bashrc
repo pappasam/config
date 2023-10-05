@@ -120,20 +120,12 @@ alias ls='ls --color=auto'
 alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
-alias gn='gio open'
 
 # Neovim
 alias f='nvim'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
-
-# Copy/paste helpers: perl step removes the final newline from the output
-alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
-alias pbpaste='xsel --clipboard --output'
-
-# Public IP
-alias publicip='curl -s checkip.amazonaws.com'
 
 # Git
 alias g='git status || return 0'
@@ -147,6 +139,12 @@ alias gop='gh browse'
 alias gp='git remote prune origin && git remote set-head origin -a'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+
+# General
+alias gn='gio open'
+alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
+alias pbpaste='xsel --clipboard --output'
+alias publicip='curl -s checkip.amazonaws.com'
 
 # }}}
 # Functions {{{
