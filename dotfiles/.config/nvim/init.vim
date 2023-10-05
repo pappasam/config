@@ -477,14 +477,11 @@ command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
   let save = winsaveview()
   if &filetype ==? 'markdown'
-    " Replace lines with only trailing spaces
+    " Only trailing spaces, exactly one trailing space, and 2+ trailing spaces
     silent! %s/^\s\+$//e
-    " Replace lines with exactly one trailing space with no trailing spaces
     silent! %g/\S\s$/s/\s$//g
-    " Replace lines with more than 2 trailing spaces with 2 trailing spaces
     silent! %s/\s\s\s\+$/  /e
   else
-    " Remove all trailing spaces
     silent! %s/\s\+$//e
   endif
   call winrestview(save)
