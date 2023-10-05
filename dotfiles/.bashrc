@@ -3,7 +3,7 @@
 
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
-export DELTA_PAGER="less -RF"
+export DELTA_PAGER=cat
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
