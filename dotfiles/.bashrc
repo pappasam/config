@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC1090,SC1091
 # Environment {{{
 
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
@@ -43,12 +42,12 @@ path_ladd "$HOME/.opam/default/bin"
 path_ladd "$HOME/config/bin"
 export PATH
 
+# shellcheck source=/dev/null
 function include() { [[ -f "$1" ]] && source "$1" ; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
 
-# PS1: bash prompt
 PS1_COLOR_BRIGHT_BLUE="\033[38;5;115m"
 PS1_COLOR_RED="\033[0;31m"
 PS1_COLOR_YELLOW="\033[0;33m"
@@ -57,7 +56,6 @@ PS1_COLOR_ORANGE="\033[38;5;202m"
 PS1_COLOR_SILVER="\033[38;5;248m"
 PS1_COLOR_RESET="\033[0m"
 PS1_BOLD="$(tput bold)"
-
 function ps1_git_color() {
   local git_status
   local branch
@@ -77,7 +75,6 @@ function ps1_git_color() {
     echo -e "$PS1_COLOR_ORANGE"
   fi
 }
-
 function ps1_git_branch() {
   local git_status
   local on_branch
@@ -95,9 +92,7 @@ function ps1_git_branch() {
     echo ""
   fi
 }
-
 function ps1_python_virtualenv() { if [[ -z $VIRTUAL_ENV ]]; then echo ""; else echo "($(basename "$VIRTUAL_ENV"))"; fi ; }
-
 PS1_DIR="\[$PS1_BOLD\]\[$PS1_COLOR_BRIGHT_BLUE\]\w"
 PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
 PS1_VIRTUAL_ENV="\[$PS1_BOLD\]\$(ps1_python_virtualenv)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
@@ -127,10 +122,11 @@ alias ll='ls -al'
 alias d='cd'
 alias gn='gio open'
 
-# Files
+# Neovim
 alias f='nvim'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias b='nvim ~/config/dotfiles/.bashrc'
+alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
 
 # Copy/paste helpers: perl step removes the final newline from the output
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
@@ -149,26 +145,20 @@ alias gm='git commit'
 alias gma='git add --all && git commit'
 alias gop='gh browse'
 alias gp='git remote prune origin && git remote set-head origin -a'
+alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
 
 # }}}
 # Functions {{{
 
-function deshake-video() {
-  # https://github.com/georgmartius/vid.stab
+function deshake-video() { # infile, outfile. https://github.com/georgmartius/vid.stab
   if [ $# -ne 2 ]; then
-    echo "deshake-video <infile> <outfile>"
-    exit 1
+    echo "deshake-video <infile> <outfile>" && exit 1
   fi
-  local infile="$1"
-  local outfile="$2"
-  local transfile="$infile.trf"
-  if [ ! -f "$transfile" ]; then
-    echo "Generating $transfile ..."
-    ffmpeg2 -i "$infile" -vf vidstabdetect=result="$transfile" -f null -
+  if [ ! -f "$1.trf" ]; then
+    echo "Generating $1.trf ..." && ffmpeg2 -i "$1" -vf vidstabdetect=result="$1.trf" -f null -
   fi
-  ffmpeg2 -i "$infile" -vf \
-    vidstabtransform=smoothing=10:input="$transfile" \
-    "$outfile"
+  ffmpeg2 -i "$1" -vf vidstabtransform=smoothing=10:input="$1.trf" "$2"
 }
 
 function despace-filename() {
@@ -185,8 +175,7 @@ function despace-filename() {
 
 function t() {
   if [ -n "$TMUX" ]; then
-    echo 'Cannot run t() in tmux session'
-    return 1
+    echo 'Cannot run t() in tmux session' && return 1
   elif [[ $# -gt 0 ]]; then
     SESSION="$1"
   else
@@ -202,7 +191,6 @@ function t() {
 
 function gdl() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
-    echo "'$PWD' is not inside a git repository"
     return 1
   fi
   local branch_default
@@ -211,27 +199,20 @@ function gdl() {
   else
     branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
     if [ -z "$branch_default" ]; then
-      echo "Cannot connect to remote repo. Check internet connection..."
-      return 2
+      echo "Cannot connect to remote repo. Check internet connection..." && return 2
     fi
   fi
   branch_current=$(git branch --show-current)
-  git checkout "$branch_default" && \
-    git pull && \
-    git branch -d "$branch_current" && \
-    git remote prune origin && \
-    git remote set-head origin -a
+  git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
 function gitignore() {
   if [ ! -d "$GITIGNORE_DIR" ]; then
     mkdir -p "$HOME/src/lib"
-    git clone https://github.com/github/gitignore "$GITIGNORE_DIR"
-    return 1
+    git clone https://github.com/github/gitignore "$GITIGNORE_DIR" && return 1
   elif [ $# -eq 0 ]; then
-    echo "Usage: gitignore <file1> <file2> <file3> <file...n>"
-    return 1
+    echo "Usage: gitignore <file1> <file2> <file3> <file...n>" && return 1
   else
     # print all the files
     local count=0
@@ -248,48 +229,11 @@ function gitignore() {
   fi
 }
 
-function push() {
-  local current_branch
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  git push -u origin "$current_branch"
-}
+function github-list { curl -u "$1" "https://api.github.com/orgs/$2/repos?per_page=100&page=$3"; } # username, organization, page
 
-function pull() {
-  local current_branch
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  git pull origin "$current_branch"
-}
+function git-mod() { if git branch &>/dev/null; then fd --type f --exec git log -1 --format="/%ad..{}" --date=short {} | tree --fromfile -rC . | less -r; else return 1; fi; }
 
-function github-list {
-  local username=$1
-  local organization=$2
-  local page=$3
-  curl -u "$username" "https://api.github.com/orgs/$organization/repos?per_page=100&page=$page"
-}
-
-function git-mod() {
-  if git branch &>/dev/null
-  then
-    # %ad means the modified date. Add .. because {} begins with a .
-    fd --type f --exec git log -1 --format="/%ad..{}" --date=short {} \
-      | tree --fromfile -rC . \
-      | less -r
-  else
-    echo 'Not inside git project'
-    return 1
-  fi
-}
-
-function vplug() {
-  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
-}
-
-function nvim-profiler() {
-  nvim --startuptime nvim_startup.txt \
-    --cmd 'profile start nvim_init_profile.txt' \
-    --cmd 'profile! file ~/.config/nvim/init.vim' \
-    "$@"
-}
+function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
 
 VIRTUAL_ENV_DEFAULT=.venv
 function va() {
@@ -298,8 +242,8 @@ function va() {
   local current_directory="$PWD"
   for (( n=${#slashes}; n>0; --n )); do
     if [ -d "$current_directory/$venv_name" ]; then
-      source "$current_directory/$venv_name/bin/activate"
-      return
+      # shellcheck source=/dev/null
+      source "$current_directory/$venv_name/bin/activate" && return
     fi
     local current_directory="$current_directory/.."
   done
@@ -352,8 +296,7 @@ EOF
 
 function poetry-init() {
   if [ -f pyproject.toml ]; then
-    echo "pyproject.toml exists, aborting"
-    return 1
+    echo "pyproject.toml exists, aborting" && return 1
   fi
   poetry init --no-interaction &> /dev/null
   cat-pyproject >> pyproject.toml
@@ -363,13 +306,11 @@ function poetry-init() {
 
 function pynew() {
   if [ $# -ne 1 ]; then
-    echo "pynew <directory>"
-    return 1
+    echo "pynew <directory>" && return 1
   fi
   local dir_name="$1"
   if [ -d "$dir_name" ]; then
-    echo "$dir_name already exists"
-    return 1
+    echo "$dir_name already exists" && return 1
   fi
   mkdir "$dir_name"
   cd "$dir_name" || return
@@ -551,8 +492,7 @@ function asdfl() {
 
 function asdfpurge() {
   if [ $# -ne 1 ]; then
-    echo 'Usage: asdfpurge <plugin-name>'
-    return 1
+    echo 'Usage: asdfpurge <plugin-name>' && return 1
   fi
   local plugin_name="$1"
   for plugin_version in $(asdf list "$plugin_name" | grep -v '\*'); do
