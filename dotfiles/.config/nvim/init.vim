@@ -28,7 +28,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/pappasam/nvim-repl')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
-  call a:packager.add('https://github.com/pappasam/vim-keywordprg-commands')
   call a:packager.add('https://github.com/sjl/strftimedammit.vim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/machakann/vim-sandwich')
@@ -225,8 +224,6 @@ augroup filetype_custom
   autocmd FileType nginx setlocal iskeyword+=$
   autocmd FileType zsh,sh,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
-  " keywordprg
-  autocmd FileType markdown setlocal keywordprg=:DefEng
   " wrap
   autocmd FileType coctree setlocal nowrap
   " foldenable
