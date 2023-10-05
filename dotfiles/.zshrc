@@ -204,6 +204,16 @@ function _asdf_complete_plugins() {
   _describe 'List installed plugins for zsh completion' subcmds
 }
 
+function _git_branches() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    return 0
+  fi
+  local -a subcmds
+  # shellcheck disable=2034,2207
+  subcmds=($(git branch | awk '{print $NF}'))
+  _describe 'Select an existing git branch' subcmds
+}
+
 # definitions
 
 compdef _vim f
@@ -214,6 +224,7 @@ compdef _vplug_completion vplug
 compdef _command ve
 compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
+compdef _git_branches gdl
 
 # }}}
 # Runtime: executed commands for interactive shell {{{

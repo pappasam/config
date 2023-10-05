@@ -205,10 +205,14 @@ function gdl() {
     return 1
   fi
   local branch_default
-  branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
-  if [ -z "$branch_default" ]; then
-    echo "Cannot connect to remote repo. Check internet connection..."
-    return 2
+  if [[ $# -gt 0 ]]; then
+    branch_default="$1"
+  else
+    branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+    if [ -z "$branch_default" ]; then
+      echo "Cannot connect to remote repo. Check internet connection..."
+      return 2
+    fi
   fi
   branch_current=$(git branch --show-current)
   git checkout "$branch_default" && \
