@@ -266,9 +266,9 @@ augroup end
 nnoremap zS <Cmd>Inspect<CR>
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 nnoremap <expr> J v:count == 0 ? '<esc>' : 'J'
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
@@ -281,10 +281,7 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
-nnoremap <Leader><Leader>g <Cmd>FocusWriting<CR>
-nnoremap <Leader><Leader>h <Cmd>ResizeWindowHeight<CR>
-nnoremap <Leader><Leader>w <Cmd>ResizeWindowWidth<CR>
-vnoremap <Leader>y "+y
+xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 noremap <MiddleMouse> <LeftMouse>za
 noremap <2-MiddleMouse> <LeftMouse>za
@@ -299,18 +296,10 @@ nmap <Leader>st <Plug>(coc-type-definition)
 nmap <Leader>si <Plug>(coc-implementation)
 nmap <Leader>su <Plug>(coc-references)
 nmap <Leader>sr <Plug>(coc-rename)
-nmap <Leader>sa v<Plug>(coc-codeaction-selected)
-vmap <Leader>sa <Plug>(coc-codeaction-selected)
-nnoremap <Leader>sh <Cmd>call CocActionAsync('highlight')<CR>
-nnoremap <Leader>sn <Cmd>CocNext<CR>
-nnoremap <Leader>sp <Cmd>CocPrev<CR>
-nnoremap <Leader>sl <Cmd>CocListResume<CR>
-nnoremap <Leader>sc <Cmd>CocList commands<cr>
-nnoremap <Leader>so <Cmd>CocList -A outline<cr>
-nnoremap <Leader>sw <Cmd>CocList -A -I symbols<cr>
+nmap <Leader>sa <Plug>(coc-codeaction-selected)
+xmap <Leader>sa <Plug>(coc-codeaction-selected)
 inoremap <expr> <c-space> coc#refresh()
 nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
-nnoremap <Leader>D <Cmd>call CocActionAsync('diagnosticPreview')<CR>
 nmap ]g <Plug>(coc-diagnostic-next)
 nmap [g <Plug>(coc-diagnostic-prev)
 nnoremap <space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
@@ -319,7 +308,7 @@ nnoremap <Leader>g <Cmd>Gitsigns toggle_signs<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader><Leader>e <Cmd>ReplToggle<CR>
 nmap <Leader>e <Plug>ReplSendLine
-vmap <Leader>e <Plug>ReplSendVisual
+xmap <Leader>e <Plug>ReplSendVisual
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
@@ -332,7 +321,7 @@ nnoremap <C-n><C-w> <Cmd>Telescope grep_string<CR>
 nnoremap <C-n><C-h> <Cmd>Telescope help_tags<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-vnoremap <Leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+xnoremap <Leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
@@ -389,7 +378,7 @@ command! COC edit ~/.config/nvim/coc-settings.json
 command! Z edit ~/.zshrc
 command! B edit ~/.bashrc
 
-command! ResizeWindowWidth call s:resize_window_width()
+command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
     echo 'run `:set nowrap` before resizing window'
@@ -402,7 +391,7 @@ function! s:resize_window_width()
   normal! ``
 endfunction
 
-command! ResizeWindowHeight call s:resize_window_height()
+command! FitHeight call s:resize_window_height()
 function! s:resize_window_height()
   normal! m`
   let initial = winnr()
@@ -424,7 +413,7 @@ function! s:resize_window_height()
   endif
 endfunction
 
-command! FocusWriting call s:focuswriting()
+command! Focus call s:focuswriting()
 function! s:focuswriting()
   augroup focuswriting
     autocmd!
@@ -476,13 +465,15 @@ endfunction
 
 command! CleanUnicode call s:clean_unicode()
 function! s:clean_unicode()
-  silent! execute '%s/”/"/g'
-  silent! execute '%s/“/"/g'
-  silent! execute "%s/’/'/g"
-  silent! execute "%s/‘/'/g"
-  silent! execute '%s/—/-/g'
-  silent! execute '%s/…/.../g'
-  silent! execute '%s/​//g'
+  let save = winsaveview()
+  silent! %s/”/"/g
+  silent! %s/“/"/g
+  silent! %s/’/'/g
+  silent! %s/‘/'/g
+  silent! %s/—/-/g
+  silent! %s/…/.../g
+  silent! %s/​//g
+  call winrestview(save)
 endfunction
 
 command! TrimWhitespace call s:trim_whitespace()
@@ -490,14 +481,14 @@ function! s:trim_whitespace()
   let save = winsaveview()
   if &filetype ==? 'markdown'
     " Replace lines with only trailing spaces
-    silent! execute '%s/^\s\+$//e'
+    silent! %s/^\s\+$//e
     " Replace lines with exactly one trailing space with no trailing spaces
-    silent! execute '%g/\S\s$/s/\s$//g'
+    silent! %g/\S\s$/s/\s$//g
     " Replace lines with more than 2 trailing spaces with 2 trailing spaces
-    silent! execute '%s/\s\s\s\+$/  /e'
+    silent! %s/\s\s\s\+$/  /e
   else
     " Remove all trailing spaces
-    silent! execute '%s/\s\+$//e'
+    silent! %s/\s\+$//e
   endif
   call winrestview(save)
 endfunction
@@ -506,7 +497,7 @@ command! Preview call s:preview()
 function! s:preview()
   if &filetype ==? 'markdown'
     " https://github.com/iamcco/markdown-preview.nvim
-    silent! execute 'MarkdownPreview'
+    silent! MarkdownPreview
   else
     silent! execute "!gio open '%:p'"
   endif

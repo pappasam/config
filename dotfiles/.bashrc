@@ -500,8 +500,10 @@ function nodeglobal-install() {
 # install default python dependencies
 function pydev-install() {
   local for_pip=(
+    black
     bpython
     ipython
+    isort
     mypy
     pip
     pyright
@@ -522,18 +524,15 @@ function pyglobal-install() {
 # install global Python applications
 function pipx-install() {
   local for_pipx=(
-    black
     cookiecutter
     docformatter
     httpie
-    isort
     nginx-language-server
     nginxfmt
     pgcli
     poetry
     pre-commit
     restview
-    ruff
     toml-sort
   )
   if command -v pipx > /dev/null; then
