@@ -295,11 +295,11 @@ nmap <Leader>su <Plug>(coc-references)
 nmap <Leader>sr <Plug>(coc-rename)
 nmap <Leader>sa <Plug>(coc-codeaction-selected)
 xmap <Leader>sa <Plug>(coc-codeaction-selected)
-inoremap <expr> <c-space> coc#refresh()
+inoremap <silent> <expr> <C-Space> coc#refresh()
 nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
 nmap ]g <Plug>(coc-diagnostic-next)
 nmap [g <Plug>(coc-diagnostic-prev)
-nnoremap <space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
+nnoremap <Space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
 " https://github.com/lewis6991/gitsigns.nvim
 nnoremap <Leader>g <Cmd>Gitsigns toggle_signs<CR>
 " https://github.com/pappasam/nvim-repl
