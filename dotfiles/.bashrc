@@ -3,7 +3,7 @@
 
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
-export DELTA_PAGER=cat
+export DELTA_PAGER='less -R --quit-if-one-screen'
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
@@ -25,7 +25,7 @@ export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.
 export MANPAGER='nvim +Man!'
 export MANWIDTH=79
 export MESA_DEBUG=silent # silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
-export PAGER=less
+export PAGER='less -R'
 export PROMPT_COMMAND='auto_venv_precmd' # commands to execute before a bash prompt.
 export PYTHON_CONFIGURE_OPTS='--enable-shared' # For installing R through ASDF, need shared libraries in Python and R
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
