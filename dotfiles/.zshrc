@@ -1,25 +1,14 @@
 #!/usr/bin/zsh
 # shellcheck shell=sh disable=all
-
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-if [[ -f "$HOME/.bashrc" ]]; then
-  source "$HOME/.bashrc"
-else
-  echo "$HOME/.bashrc not found, zsh loading default shell"
-  return 0
-fi
-
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"; fi
+if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
 export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
-
+export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 alias z='nvim ~/config/dotfiles/.zshrc'
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
-
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
@@ -28,12 +17,10 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   zinit light greymd/docker-zsh-completion
   zinit ice wait lucid
   zinit light zsh-users/zsh-completions
-  export ZSH_AUTOSUGGEST_STRATEGY=(completion)
   zinit ice depth=1
   zinit light romkatv/powerlevel10k
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
-
 setopt PROMPT_SUBST # enable functions to operate in PS1
 setopt AUTO_LIST
 setopt LIST_AMBIGUOUS
@@ -61,17 +48,14 @@ zstyle ':completion:*' matcher-list '' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' \
   'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
-
 if command -v aws > /dev/null; then complete -C aws_completer aws; fi
 if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
 if command -v kubectl > /dev/null; then source <(kubectl completion zsh); fi
-
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
-
 function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
 function _asdf_complete_plugins() {
   local -a subcmds
@@ -93,5 +77,4 @@ compdef _command ve
 compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
 compdef _git_branches gdl
-
 if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
