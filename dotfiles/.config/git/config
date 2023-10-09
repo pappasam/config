@@ -13,7 +13,7 @@
   side-by-side = false
   light = false
 [diff]
-    colorMoved = default
+  colorMoved = default
 [init]
   defaultBranch = main
 [alias]
