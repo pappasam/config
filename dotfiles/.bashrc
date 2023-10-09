@@ -505,7 +505,8 @@ function upgrade() {
     zinit self-update
     zinit update --all
   fi
-  nvim -c 'PackagerClean | PackagerUpdate | TSUpdate | CocUpdate' ~/.config/nvim/init.vim
+  nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
+  nvim -c 'TSUpdate | CocUpdate' ~/.config/nvim/init.vim
 }
 
 # }}}
