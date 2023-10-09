@@ -300,8 +300,6 @@ nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
 nmap ]g <Plug>(coc-diagnostic-next)
 nmap [g <Plug>(coc-diagnostic-prev)
 nnoremap <Space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
-" https://github.com/lewis6991/gitsigns.nvim
-nnoremap <Leader>g <Cmd>Gitsigns toggle_signs<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader><Leader>e <Cmd>ReplToggle<CR>
 nmap <Leader>e <Plug>ReplSendLine
@@ -312,10 +310,9 @@ xmap s <Nop>
 " https://github.com/nvim-telescope/telescope.nvim
 nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
 nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
-nnoremap <C-p><C-g> <Cmd>Telescope git_status<CR>
-nnoremap <C-n><C-n> <Cmd>Telescope live_grep<CR>
-nnoremap <C-n><C-w> <Cmd>Telescope grep_string<CR>
-nnoremap <C-n><C-h> <Cmd>Telescope help_tags<CR>
+nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
+nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
+nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
 xnoremap <Leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
