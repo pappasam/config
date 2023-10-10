@@ -367,10 +367,10 @@ endfunction
 " }}}
 " Commands {{{
 
-command! Vimrc edit ~/.config/nvim/init.vim
-command! CocSettings edit ~/.config/nvim/coc-settings.json
-command! Zshrc edit ~/.zshrc
-command! Bashrc edit ~/.bashrc
+command! Jv edit ~/.config/nvim/init.vim
+command! Jc edit ~/.config/nvim/coc-settings.json
+command! Jz edit ~/.zshrc
+command! Jb edit ~/.bashrc
 
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
