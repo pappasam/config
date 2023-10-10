@@ -22,6 +22,9 @@ magenta = '0xFAE994'
 cyan = '0x90E1C6'
 white = '0xC7C7C7'
 
+[env]
+TERM = "tmux-256color"
+
 [font]
 size = 12.0
 normal = {family = "Fira Mono Nerd Font Mono", style = "Medium"}
