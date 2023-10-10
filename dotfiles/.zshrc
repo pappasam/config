@@ -2,6 +2,7 @@
 # shellcheck shell=sh disable=all
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"; fi
 if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
+fpath=(${ASDF_DIR}/completions /usr/local/share/zsh-completions $fpath $HOME/.zfunc)
 export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
@@ -11,42 +12,22 @@ alias z='nvim ~/config/dotfiles/.zshrc'
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-  zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-  zinit light zsh-users/zsh-syntax-highlighting
-  zinit ice wait lucid
-  zinit light greymd/docker-zsh-completion
-  zinit ice wait lucid
-  zinit light zsh-users/zsh-completions
-  zinit ice depth=1
-  zinit light romkatv/powerlevel10k
+  zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" && zinit light zsh-users/zsh-syntax-highlighting
+  zinit ice wait lucid && zinit light greymd/docker-zsh-completion
+  zinit ice wait lucid && zinit light zsh-users/zsh-completions
+  zinit ice depth=1 && zinit light romkatv/powerlevel10k
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
-setopt PROMPT_SUBST # enable functions to operate in PS1
-setopt AUTO_LIST
-setopt LIST_AMBIGUOUS
-setopt LIST_BEEP
-setopt COMPLETE_ALIASES
-setopt AUTOCD # automatically CD without typing cd
-setopt HIST_IGNORE_SPACE
-setopt APPENDHISTORY
-setopt SHAREHISTORY
-setopt INCAPPENDHISTORY
-unsetopt MENU_COMPLETE # do not automatically complete
-unsetopt AUTO_REMOVE_SLASH # do not automatically remove the slash
+setopt PROMPT_SUBST AUTOCD AUTO_LIST LIST_AMBIGUOUS LIST_BEEP COMPLETE_ALIASES HIST_IGNORE_SPACE APPENDHISTORY SHAREHISTORY INCAPPENDHISTORY
+unsetopt MENU_COMPLETE AUTO_REMOVE_SLASH
+function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
 autoload -Uz zcalc # enables zshell calculator: type with zcalc
-function precmd() { eval "$PROMPT_COMMAND"; }
-fpath=(${ASDF_DIR}/completions $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
-fpath+=(~/.zfunc)
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-A-Z}={A-Z\_a-z}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' \
-  'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
+zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
 if command -v aws > /dev/null; then complete -C aws_completer aws; fi
 if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
