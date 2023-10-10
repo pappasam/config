@@ -157,22 +157,6 @@ function despace-filename() {
   fi
 }
 
-function t() {
-  if [ -n "$TMUX" ]; then
-    echo 'Cannot run t() in tmux session' && return 1
-  elif [[ $# -gt 0 ]]; then
-    SESSION="$1"
-  else
-    SESSION=Main
-  fi
-  if tmux has-session -t "$SESSION" 2>/dev/null; then
-    echo "session '$SESSION' already exists, attach with: tmux -2 attach -t $SESSION"
-  else
-    tmux -2 new-session -d -s "$SESSION"
-    tmux -2 attach -t "$SESSION"
-  fi
-}
-
 function gdl() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
     return 1
