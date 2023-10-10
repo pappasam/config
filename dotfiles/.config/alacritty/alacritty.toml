@@ -1,6 +1,6 @@
 [colors]
 draw_bold_text_with_bright_colors = true
-primary = {background = '0x0A0E14', foreground = '0xB3B1AD'}
+primary = {background = "#0A0E14", foreground = "#B3B1AD"}
 
 [colors.bright]
 black = "#686868"
