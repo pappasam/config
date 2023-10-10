@@ -41,7 +41,7 @@ bindings = [
 ]
 
 [shell]
-program = "/usr/bin/zsh"
+program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 
 [window]
 title = "Chez La Couve"

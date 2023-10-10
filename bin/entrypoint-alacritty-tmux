@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if ! command -v /home/sroeca/.asdf/installs/tmux/3.3a/bin/tmux &> /dev/null; then
+  /usr/bin/zsh
+elif /home/sroeca/.asdf/installs/tmux/3.3a/bin/tmux has-session -t Main 2>/dev/null; then
+  /usr/bin/zsh
+else
+  /home/sroeca/.asdf/installs/tmux/3.3a/bin/tmux -2 new-session -d -s Main
+  /home/sroeca/.asdf/installs/tmux/3.3a/bin/tmux -2 attach -t Main
+fi
