@@ -53,6 +53,7 @@
       "isort",
       "docformatter",
       "Anat",
+      "Anshu",
       "Neovim",
       "Elrond",
       "coc",
