@@ -4,23 +4,21 @@ Parts of Linux Mint are configured manually through a GUI. Since I cannot script
 
 ## Shortcuts
 
-- Restart cinnamon
-  - Alt + F2, then type 'r' and enter
+| Action           | Command             |
+| ---------------- | ------------------- |
+| Restart cinnamon | `<A-F2>`, r, `<CR>` |
 
 ## Themes
 
 I'm using Jade-1 + Mint-Y. Jade-1 provides window borders that make the currently active window easy to identify.
 
-- Window borders
-  - Jade-1
-- Icons
-  - Mint-Y
-- Controls
-  - Mint-Y
-- Mouse Pointer
-  - DMZ-White
-- Desktop
-  - Mint-Y
+| Section        | Setting   |
+| -------------- | --------- |
+| Window borders | Jade-1    |
+| Icons          | Mint-Y    |
+| Controls       | Mint-Y    |
+| Mouse Pointer  | DMZ-White |
+| Desktop        | Mint-Y    |
 
 ## Effects
 
