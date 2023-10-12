@@ -167,7 +167,7 @@ function gdl() {
   else
     branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
     if [ -z "$branch_default" ]; then
-      echo "Cannot connect to remote repo. Check internet connection..." && return 2
+      echo 'Cannot connect to remote repo. Check internet connection...' && return 2
     fi
   fi
   branch_current=$(git branch --show-current)
@@ -180,14 +180,14 @@ function gitignore() {
     mkdir -p "$HOME/src/lib"
     git clone https://github.com/github/gitignore "$GITIGNORE_DIR" && return 1
   elif [ $# -eq 0 ]; then
-    echo "Usage: gitignore <file1> <file2> <file3> <file...n>" && return 1
+    echo 'Usage: gitignore <file1> <file2> <file3> <file...n>' && return 1
   else
     # print all the files
     local count=0
     for filevalue in "$@"; do
-      echo "#################################################################"
+      echo '#################################################################'
       echo "# $filevalue"
-      echo "#################################################################"
+      echo '#################################################################'
       cat "$GITIGNORE_DIR/$filevalue"
       if [ $count -ne $# ]; then
         echo
@@ -199,7 +199,7 @@ function gitignore() {
 
 function github-list { curl -u "$1" "https://api.github.com/orgs/$2/repos?per_page=100&page=$3"; } # username, organization, page
 
-function git-mod() { if git branch &>/dev/null; then fd --type f --exec git log -1 --format="/%ad..{}" --date=short {} | tree --fromfile -rC . | less -r; else return 1; fi; }
+function git-mod() { if git branch &>/dev/null; then fd --type f --exec git log -1 --format='/%ad..{}' --date=short {} | tree --fromfile -rC . | less -r; else return 1; fi; }
 
 function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
 
@@ -221,7 +221,7 @@ function va() {
 }
 
 export AUTO_VIRTUALENV=1
-function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq "1" ]; then va; fi ; }
+function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi ; }
 
 function cat-pyproject() {
   cat << EOF
@@ -264,7 +264,7 @@ EOF
 
 function poetry-init() {
   if [ -f pyproject.toml ]; then
-    echo "pyproject.toml exists, aborting" && return 1
+    echo 'pyproject.toml exists, aborting' && return 1
   fi
   poetry init --no-interaction &> /dev/null
   cat-pyproject >> pyproject.toml
@@ -274,7 +274,7 @@ function poetry-init() {
 
 function pynew() {
   if [ $# -ne 1 ]; then
-    echo "pynew <directory>" && return 1
+    echo 'pynew <directory>' && return 1
   fi
   if [ -d "$1" ]; then
     echo "$1 already exists" && return 1
@@ -293,7 +293,7 @@ def main() -> str:
 
 print(main())
 EOL
-  git init && git add . && git commit -m "Initial commit"
+  git init && git add . && git commit -m 'Initial commit'
 }
 
 # }}}
