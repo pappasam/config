@@ -1,0 +1,295 @@
+*strftimedammit.txt*   Strftime Documentation for various formats
+
+==============================================================================
+CONTENTS                                             *strftimedammit-contents*
+
+    1. Django .......................... |strftime-django|
+    2. Java (Joda) ..................... |strftime-java-joda|
+    3. Perl   .......................... |strftime-perl|
+    4. Python .......................... |strftime-python|
+    5. Ruby   .......................... |strftime-ruby|
+
+==============================================================================
+1. Django                        *strftime-django* *django-date* *django-time*
+
+Times >
+    H  Hour, 24-hour format                                           00 to 23
+    G  Hour, 24-hour format without leading zeros                      0 to 23
+
+    h  Hour, 12-hour format                                           01 to 12
+    g  Hour, 12-hour format without leading zeros                      1 to 12
+
+    a  a.m. or p.m.                                                       a.m.
+    A  AM or PM                                                             AM
+
+    i  Minutes, 2 digits with leading zeros                           00 to 59
+    s  Seconds, 2 digits with leading zeros                           00 to 59
+    u  Microseconds                                                0 to 999999
+
+    f  Time, in 12-hour hours and minutes, with minutes                1, 1:30
+       left off if they're zero
+
+Days >
+    z  Day of the year                                                0 to 365
+
+    d  Day of the month, 2 digits with leading zeros                  01 to 31
+    j  Day of the month without leading zeros                          1 to 31
+
+    l  Day of the week, textual, long                                   Friday
+    D  Day of the week, textual, 3 letters                                 Fri
+    w  Day of the week, digits without leading zeros           0 (Sunday) to 6
+
+    S  English ordinal suffix for day of the month              st, nd, rd, th
+
+Months >
+    m  Month, 2 digits with leading zeros                             01 to 12
+    n  Month without leading zeros                                     1 to 12
+
+    F  Month, textual, long                                            January
+    M  Month, textual, 3 letters, capitalized                              Jan
+    b  Month, textual, 3 letters, lowercase                                jan
+    N  Month abbreviation in Associated Press style                       Jan.
+
+    E  Month, locale specific alternative representation
+       usually used for long date representation.
+       'listopada' (for Polish locale, as opposed to 'Listopad')
+
+Weeks >
+    W  ISO-8601 week number of year, with weeks starting on Monday       1, 53
+
+Years >
+    y  Year, 2 digits                                                       99
+    Y  Year, 4 digits                                                     1999
+
+Combinations >
+    c  ISO 8601 Format                              2008-01-02T10:30:00.000123
+    r  RFC 2822 formatted date                 Thu, 21 Dec 2000 16:01:07 +0200
+
+    P  Time, in 12-hour hours, minutes and 'a.m.'/'p.m.',               1 a.m.
+       with minutes left off if they're zero and the                 1:30 p.m.
+       special-case strings 'midnight' and 'noon' if                  midnight
+       appropriate
+
+    O  Difference to Greenwich time in hours                             +0200
+
+Others >
+    Z  Time zone offset in seconds. The offset for timezones
+       west of UTC is always negative, and for those east of
+       UTC is always positive
+
+    U  Seconds since the Unix Epoch (January 1 1970 00:00:00 UTC)
+
+    T  Time zone of this machine                                           EST
+    t  Number of days in the given month                              28 to 31
+    L  Boolean for whether it's a leap year                      True or False
+
+==============================================================================
+2. Java (Joda)                            *strftime-java-joda* *strftime-joda*
+
+Times >
+    H  Hour, 24-hour format                                                  0
+
+    h  Hour, 12-hour format                                                 12
+    a  AM or PM                                                             PM
+
+    m  Minute of hour                                                       30
+    s  Second of minute                                                     55
+    S  Fraction of second                                                  978
+
+    K  Hour, 12-hour format, indexed from 0 (0-11)                           0
+    k  Hour, 24-hour format, indexed from 1 (1-24)                          24
+
+Days >
+    d  Day of month                                                         10
+
+    e  Day of week, numeric                                                  2
+    E  Day of week, textual                                       Tuesday; Tue
+
+    D  Day of year                                                         189
+
+Months >
+    M  Month of year                                             July; Jul; 07
+
+Weeks >
+    w  Week number of year                                                  27
+    x  "Weekyear", whatever the hell that means                           1996
+
+Years >
+    y  Year                                                               1996
+
+    G  Era                                                                  AD
+    Y  Year of era (>=0)                                                  1996
+    C  Century of era (>=0)                                                 20
+
+Others >
+    z  Time zone                                    Pacific Standard Time; PST
+    Z  Time zone offset/id                  -0800; -08:00; America/Los_Angeles
+
+    '  Escape for text
+    '' Single quote                                                          '
+
+==============================================================================
+3. Perl                                                        *strftime-perl*
+
+Note: You need to import strftime from Perl's POSIX module >
+    use POSIX qw/strftime/;
+<
+
+Since Perl relies on the POSIX C function, I'm only mentioning portable choices,
+as per http://perltraining.com.au/tips/2009-02-26.html. (Well, actually I added
+%F because I can't live without it.)
+
+Times >
+    %H  Hour (24-hour clock) as a decimal number                      00 to 23
+    %I  Hour (12-hour clock) as a decimal number                      01 to 12
+
+    %M  Minute of the hour                                            00 to 59
+    %S  Second of the minute                                          00 to 61
+
+    %p  Locale dependent strings for 'AM' and 'PM'                    AM or PM
+
+Days >
+    %a  Abbreviated weekday name                                           Wed
+    %A  Full weekday name                                            Wednesday
+
+    %d  Day of the month as a decimal number                          01 to 31
+    %j  Day of the year as a decimal number                         001 to 366
+
+    %w  Weekday as a decimal number                            0 (Sunday) to 6
+
+Months >
+    %b  Abbreviated month name                                             Oct
+    %B  Full month name                                                October
+
+    %m  Month as a decimal number                                     01 to 12
+
+Weeks >
+    %U  Week number of the year (Sunday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Sunday are considered to be in week 0.
+
+    %W  Week number of the year (Monday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Monday are considered to be in week 0.
+
+Years >
+    %y  Year without century as a decimal number                            11
+    %Y  Year with century as a decimal number                             2011
+
+Combinations >
+    %F  %Y-%m-%d (ISO 8601 date format)                             2011-03-08
+
+Others >
+    %s  Seconds since 1970-01-01 00:00:00 UTC (the Epoch)           1299616963
+    %%  A literal '%' character                                              %
+
+==============================================================================
+4. Python                                                    *strftime-python*
+
+Times >
+    %H  Hour (24-hour clock) as a decimal number                      00 to 23
+    %I  Hour (12-hour clock) as a decimal number                      01 to 12
+
+    %M  Minute as a decimal number                                    00 to 59
+    %S  Second as a decimal number                                    00 to 61
+
+    %p  Locale's equivalent of either AM or PM                              AM
+
+Days >
+    %a  Abbreviated weekday name                                           Wed
+    %A  Full weekday name                                            Wednesday
+
+    %d  Day of the month as a decimal number                          01 to 31
+    %j  Day of the year as a decimal number                         001 to 366
+
+    %w  Weekday as a decimal number                            0 (Sunday) to 6
+
+Months >
+    %b  Abbreviated month name                                             Oct
+    %B  Full month name                                                October
+
+    %m  Month as a decimal number                                     01 to 12
+
+Weeks >
+    %U  Week number of the year (Sunday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Sunday are considered to be in week 0.
+
+    %W  Week number of the year (Monday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Monday are considered to be in week 0.
+
+Years >
+    %y  Year without century as a decimal number                            11
+    %Y  Year with century as a decimal number                             2011
+
+Combinations >
+    %x  Locale's appropriate date representation
+    %X  Locale's appropriate time representation
+    %c  Locale's appropriate date and time representation
+
+Others >
+    %Z  Time zone name (no characters if no time zone exists)
+    %%  A literal '%' character                                              %
+
+==============================================================================
+5. Ruby                                                        *strftime-ruby*
+
+Times >
+    %H  Hour (24-hour clock) as a decimal number                      00 to 23
+    %I  Hour (12-hour clock) as a decimal number                      01 to 12
+
+    %M  Minute of the hour                                            00 to 59
+    %S  Second of the minute                                          00 to 61
+
+    %T  time, 24-hour (%H:%M:%S)                                      15:39:09
+    %r  time, 12-hour (%I:%M:%S %p)                                03:39:09 PM
+    %R  time, 24-hour (%H:%M)                                            15:39
+
+    %p  Meridian indicator in uppercase                               AM or PM
+    %P  Meridian indicator in lowercase                               am or pm
+
+Days >
+    %a  Abbreviated weekday name                                           Wed
+    %A  Full weekday name                                            Wednesday
+
+    %d  Day of the month as a decimal number                          01 to 31
+    %j  Day of the year as a decimal number                         001 to 366
+
+    %w  Weekday as a decimal number                            0 (Sunday) to 6
+
+Months >
+    %b  Abbreviated month name                                             Oct
+    %B  Full month name                                                October
+
+    %m  Month as a decimal number                                     01 to 12
+
+Weeks >
+    %U  Week number of the year (Sunday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Sunday are considered to be in week 0.
+
+    %W  Week number of the year (Monday as the first day of the       00 to 53
+        week) as a decimal number. All days in a new year
+        preceding the first Monday are considered to be in week 0.
+
+Years >
+    %y  Year without century as a decimal number                            11
+    %Y  Year with century as a decimal number                             2011
+    %C  Century                                                             20
+
+Combinations >
+    %x  Locale's date representation, no time                         03/08/11
+    %X  Locale's time representation, no date                         15:44:30
+    %c  Locale's date and time representation         Tue Mar  8 15:44:59 2011
+    %F  %Y-%m-%d (ISO 8601 date format)                             2011-03-08
+
+Others >
+    %Z  Time zone name (no characters if no time zone exists)              EST
+    %z  Time zone as hour offset from UTC                                -0500
+    %s  Seconds since 1970-01-01 00:00:00 UTC (the Epoch)           1299616963
+    %%  A literal '%' character                                              %
+
+Note: taken from <https://github.com/sjl/strftimedammit.vim>
+
+vim:tw=78:ts=8:ft=help:norl:nolist:
