@@ -209,11 +209,7 @@ augroup filetype_custom
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   autocmd Filetype go,gomod,make,snippets,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " commentstring + comments + formatoptions
-  "   commentstring: read by vim-commentary; must be one template
-  "   comments: csv of comments.
-  "   formatoptions: influences how Vim formats text
-  "   ':help fo-table' will get the desired result
+  " comments
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
   autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
   autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
