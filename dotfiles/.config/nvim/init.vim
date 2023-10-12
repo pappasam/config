@@ -281,25 +281,25 @@ noremap <2-MiddleMouse> <LeftMouse>za
 noremap <3-MiddleMouse> <LeftMouse>za
 noremap <4-MiddleMouse> <LeftMouse>za
 " https://github.com/neoclide/coc.nvim
-nmap <C-]> <Plug>(coc-definition)
+nmap <silent> <C-]> <Plug>(coc-definition)
 nnoremap <C-k> <Cmd>call CocActionAsync('doHover')<CR>
 inoremap <C-s> <Cmd>call CocActionAsync('showSignatureHelp')<CR>
 nnoremap <C-w>f <Cmd>call coc#float#jump()<CR>
-nmap <Leader>st <Plug>(coc-type-definition)
-nmap <Leader>si <Plug>(coc-implementation)
-nmap <Leader>su <Plug>(coc-references)
-nmap <Leader>sr <Plug>(coc-rename)
-nmap <Leader>sa <Plug>(coc-codeaction-selected)
-xmap <Leader>sa <Plug>(coc-codeaction-selected)
+nmap <silent> <Leader>st <Plug>(coc-type-definition)
+nmap <silent> <Leader>si <Plug>(coc-implementation)
+nmap <silent> <Leader>su <Plug>(coc-references)
+nmap <silent> <Leader>sr <Plug>(coc-rename)
+nmap <silent> <Leader>sa <Plug>(coc-codeaction-cursor)
+xmap <silent> <Leader>sa <Plug>(coc-codeaction-selected)
 inoremap <silent> <expr> <C-Space> coc#refresh()
 nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
-nmap ]g <Plug>(coc-diagnostic-next)
-nmap [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <Space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader><Leader>e <Cmd>ReplToggle<CR>
-nmap <Leader>e <Plug>ReplSendLine
-xmap <Leader>e <Plug>ReplSendVisual
+nmap <silent> <Leader>e <Plug>ReplSendLine
+xmap <silent> <Leader>e <Plug>ReplSendVisual
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
