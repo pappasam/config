@@ -368,10 +368,7 @@ function pydev-install() {
   asdf reshim python
 }
 
-function pyglobal-install() {
-  pip install -U pipx
-  pydev-install
-}
+function pyglobal-install() { pip install -U pipx && pydev-install; }
 
 function pipx-install() {
   local for_pipx=(
@@ -417,12 +414,7 @@ function global-install() {
 }
 
 function alacritty-install() {
-  # Run this 5 times because, when dependencies update, require multiple builds
-  cargo build --release
-  cargo build --release
-  cargo build --release
-  cargo build --release
-  cargo build --release
+  cargo build --release && cargo build --release && cargo build --release && cargo build --release && cargo build --release # 5 builds required
 
   # Install
   sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
@@ -442,15 +434,9 @@ function alacritty-install() {
   scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/ala
 }
 
-function zoom-install() {
-  sudo apt update
-  curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
-  sudo apt install /tmp/zoom_amd64.deb
-}
+function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
 
-function asdfl() {
-  asdf install "$1" latest && asdf global "$1" latest
-}
+function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
 
 function asdfpurge() {
   if [ $# -ne 1 ]; then
