@@ -227,8 +227,7 @@ augroup filetype_custom
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " override listchars
-  autocmd FileType gitcommit
-        \ setlocal listchars=tab:>\  " necessary comment for whitespace
+  autocmd FileType gitcommit setlocal listchars=tab:>\  " necessary comment for whitespace
   " mappings
   autocmd FileType man,help,qf,coctree
         \ nnoremap <buffer> d <C-d> |
@@ -247,10 +246,7 @@ augroup miscellaneous_custom
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
   autocmd VimResized * wincmd =
   " https://github.com/neovim/neovim/issues/20456
-  autocmd! ColorScheme,VimEnter *
-        \ highlight! link luaParenError Normal |
-        \ highlight! link luaError Normal |
-        \ highlight! link luaTable Normal
+  autocmd! ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
 augroup end
 
 " }}}
@@ -315,12 +311,12 @@ xnoremap <Leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<CR><Cmd>silent! Co
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
 " Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
-nnoremap <expr> <Plug>@init <SID>mr_at_init()
-inoremap <expr> <Plug>@init "\<c-o>".<SID>mr_at_init()
-nnoremap <expr> <Plug>qstop <SID>mr_q_stop()
-inoremap <expr> <Plug>qstop "\<c-o>".<SID>mr_q_stop()
-nmap <expr> @ <SID>mr_at_reg()
-nmap <expr> q <SID>mr_q_start()
+nnoremap <silent> <expr> <Plug>@init <SID>mr_at_init()
+inoremap <silent> <expr> <Plug>@init "\<c-o>".<SID>mr_at_init()
+nnoremap <silent> <expr> <Plug>qstop <SID>mr_q_stop()
+inoremap <silent> <expr> <Plug>qstop "\<c-o>".<SID>mr_q_stop()
+nmap <silent> <expr> @ <SID>mr_at_reg()
+nmap <silent> <expr> q <SID>mr_q_start()
 
 function! s:mr_at_repeat(_)
   let s:atcount = v:count ? v:count : s:atcount
