@@ -177,6 +177,8 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+vim.treesitter.language.register("terraform", "terraform-vars")
+
 -- }}}
 -- nvim-ts-context-commentstring {{{
 -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
