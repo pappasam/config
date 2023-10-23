@@ -308,51 +308,6 @@ nnoremap <Leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<CR><Cmd>silent
 xnoremap <Leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
-" Macro Repeater (mr): https://vi.stackexchange.com/questions/11210/can-i-repeat-a-macro-with-the-dot-operator
-nnoremap <silent> <expr> <Plug>@init <SID>mr_at_init()
-inoremap <silent> <expr> <Plug>@init "\<c-o>".<SID>mr_at_init()
-nnoremap <silent> <expr> <Plug>qstop <SID>mr_q_stop()
-inoremap <silent> <expr> <Plug>qstop "\<c-o>".<SID>mr_q_stop()
-nmap <silent> <expr> @ <SID>mr_at_reg()
-nmap <silent> <expr> q <SID>mr_q_start()
-
-function! s:mr_at_repeat(_)
-  let s:atcount = v:count ? v:count : s:atcount
-  call feedkeys(s:atcount .. '@@')
-endfunction
-function! s:mr_at_set_repeat(_)
-  set operatorfunc=<SID>mr_at_repeat
-endfunction
-function! s:mr_at_init()
-  set operatorfunc=<SID>mr_at_set_repeat
-  return 'g@l'
-endfunction
-function! s:mr_at_reg()
-  let s:atcount = v:count1
-  return '@' .. nr2char(getchar()) .. "\<plug>@init"
-endfunction
-function! s:mr_q_repeat(_)
-  call feedkeys('@' .. s:qreg)
-endfunction
-function! s:mr_q_set_repeat(_)
-  set operatorfunc=<SID>mr_q_repeat
-endfunction
-function! s:mr_q_stop()
-  set operatorfunc=<SID>mr_q_set_repeat
-  return 'g@l'
-endfunction
-let s:qrec = 0
-function! s:mr_q_start()
-  if s:qrec == 1
-    let s:qrec = 0
-    return "q\<plug>qstop"
-  endif
-  let s:qreg = nr2char(getchar())
-  if s:qreg =~# '[0-9a-zA-Z"]'
-    let s:qrec = 1
-  endif
-  return 'q' .. s:qreg
-endfunction
 
 " }}}
 " Commands {{{
