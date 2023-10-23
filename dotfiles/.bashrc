@@ -31,7 +31,6 @@ export PYTHON_CONFIGURE_OPTS='--enable-shared' # For installing R through ASDF, 
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
 export SAVEHIST=5000 # how many lines of history to save to disk
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # disable python venv prompt so I can configure myself
-export WINIT_HIDPI_FACTOR=1.0 # enable editor to scale with monitor's DPI
 
 function path_ladd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="$1${PATH:+":$PATH"}"; fi; }
 function path_radd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="${PATH:+"$PATH:"}$1"; fi; }

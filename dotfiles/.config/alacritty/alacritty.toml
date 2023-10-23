@@ -27,6 +27,7 @@ blinking = "Never"
 
 [env]
 TERM = "tmux-256color"
+WINIT_X11_SCALE_FACTOR = "1.0"
 
 [font]
 size = 12.0
