@@ -49,7 +49,7 @@ set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list listchars=tab:>\ ,nbsp:+,multispace:-,lead:\|
+set list listchars=tab:>\ ,nbsp:+,lead:│
 set mouse=a
 set noshowcmd
 set noshowmode
@@ -225,8 +225,6 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " override listchars
-  autocmd FileType gitcommit setlocal listchars=tab:>\  " necessary comment for whitespace
   " mappings
   autocmd FileType man,help,qf,coctree
         \ nnoremap <buffer> d <C-d> |
@@ -240,7 +238,7 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
-  autocmd BufWinEnter * silent! execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
+  autocmd BufWinEnter * execute printf('setlocal listchars+=multispace:│%1$s,leadmultispace:│%1$s', repeat('\ ', &shiftwidth - 1))
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
