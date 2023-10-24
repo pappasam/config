@@ -5,15 +5,6 @@
   editor = nvim
   autocrlf = input
   safecrlf = true
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  navigate = false
-  side-by-side = false
-  light = false
-[diff]
-  colorMoved = default
 [init]
   defaultBranch = main
 [alias]

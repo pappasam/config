@@ -49,7 +49,7 @@ set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+set list listchars=tab:>\ ,nbsp:+,multispace:-,lead:\|
 set mouse=a
 set noshowcmd
 set noshowmode
@@ -240,6 +240,7 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
+  autocmd BufWinEnter * silent! execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif

@@ -3,7 +3,6 @@
 
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
-export DELTA_PAGER='less -R --quit-if-one-screen'
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
@@ -307,7 +306,6 @@ function rustglobal-install() {
   cargo install cargo-update
   cargo install csvlens
   cargo install fd-find
-  cargo install git-delta
   cargo install ripgrep
   cargo install sd
   cargo install stylua --features lua52 --features luau
