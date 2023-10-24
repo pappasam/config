@@ -2,7 +2,15 @@ vim.loader.enable() -- experimental lua loader enabled
 -- nvim-colorizer.lua {{{
 -- https://github.com/NvChad/nvim-colorizer.lua
 
-require("colorizer").setup()
+require("colorizer").setup({
+  filetypes = { "*" },
+  user_default_options = {
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    AARRGGBB = true, -- 0xAARRGGBB hex codes
+    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
+  },
+})
 
 -- }}}
 -- gitsigns.nvim {{{
