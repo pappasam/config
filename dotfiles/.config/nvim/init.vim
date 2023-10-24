@@ -421,11 +421,11 @@ function! s:trim_whitespace()
   let save = winsaveview()
   if &filetype ==? 'markdown'
     " Only trailing spaces, exactly one trailing space, and 2+ trailing spaces
-    silent! %s/^\s\+$//e
-    silent! %g/\S\s$/s/\s$//g
-    silent! %s/\s\s\s\+$/  /e
+    silent! execute '%s/^\s\+$//e'
+    silent! execute '%g/\S\s$/s/\s$//g'
+    silent! execute '%s/\s\s\s\+$/  /e'
   else
-    silent! %s/\s\+$//e
+    silent! execute '%s/\s\+$//e'
   endif
   call winrestview(save)
 endfunction
