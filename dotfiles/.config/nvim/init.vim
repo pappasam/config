@@ -222,11 +222,11 @@ augroup filetype_custom
   autocmd FileType scss setlocal iskeyword+=@-@
   " wrap
   autocmd FileType coctree setlocal nowrap
-  " foldenable
+  " nofoldenable
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " list
+  " nolist
   autocmd Filetype gitcommit setlocal nolist
   " mappings
   autocmd FileType man,help,qf,coctree
