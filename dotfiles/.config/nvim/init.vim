@@ -124,7 +124,7 @@ let g:hexmode_xxd_options = '-g 2'
 " https://github.com/pappasam/vim-filetype-formatter
 " old: 'python': {-> printf('ruff check -q --fix-only --stdin-filename="%1$s" - | black -q --stdin-filename="%1$s" - | isort -q --filename="%1$s" - | docformatter -', expand('%:p'))},
 let g:vim_filetype_formatter_commands = {
-      \ 'python': {-> printf('ruff check -q --fix-only --stdin-filename="%1$s" - | ruff format -q --stdin-filename="%1$s" -', expand('%:p'))},
+      \ 'python': {-> printf('ruff check --unsafe-fixes -q --fix-only --stdin-filename="%1$s" - | ruff format -q --stdin-filename="%1$s" -', expand('%:p'))},
       \ }
 " https://github.com/pappasam/nvim-repl
 let g:repl_filetype_commands = {
