@@ -223,13 +223,6 @@ function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi ; }
 
 function cat-pyproject() {
   cat << EOF
-[tool.black]
-line-length = 79
-
-[tool.isort]
-profile = "black"
-line_length = 79
-
 [tool.mypy]
 python_version = "3.11"
 check_untyped_defs = true
@@ -241,9 +234,7 @@ enable_error_code = [
 ]
 
 [tool.poetry.group.dev.dependencies]
-black = "*"
 docformatter = "*"
-isort = "*"
 mypy = "*"
 pyright = "*"
 ruff = "*"
@@ -251,8 +242,13 @@ toml-sort = "*"
 
 [tool.ruff]
 line-length = 79
-select = ["ALL"]
-ignore = ["D203", "D213"]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = [
+  "E501" # line-too-long
+]
 
 [tool.ruff.pylint]
 max-statements = 20
@@ -350,10 +346,9 @@ function nodeglobal-install() {
 
 function pydev-install() {
   local for_pip=(
-    black
     bpython
+    docformatter
     ipython
-    isort
     mypy
     pip
     pyright
@@ -370,7 +365,6 @@ function pyglobal-install() { pip install -U pipx && pydev-install; }
 function pipx-install() {
   local for_pipx=(
     cookiecutter
-    docformatter
     httpie
     nginx-language-server
     nginxfmt
