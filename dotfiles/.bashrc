@@ -221,47 +221,12 @@ function va() {
 export AUTO_VIRTUALENV=1
 function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi ; }
 
-function cat-pyproject() {
-  cat << EOF
-[tool.mypy]
-python_version = "3.11"
-check_untyped_defs = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-warn_return_any = true
-enable_error_code = [
-  "ignore-without-code",
-]
-
-[tool.poetry.group.dev.dependencies]
-docformatter = "*"
-mypy = "*"
-pyright = "*"
-ruff = "*"
-toml-sort = "*"
-
-[tool.ruff]
-line-length = 79
-target-version = "py311"
-
-[tool.ruff.lint]
-select = ["E", "F", "I"]
-ignore = [
-  "E501" # line-too-long
-]
-
-[tool.ruff.pylint]
-max-statements = 20
-max-returns = 3
-EOF
-}
-
 function poetry-init() {
   if [ -f pyproject.toml ]; then
     echo 'pyproject.toml exists, aborting' && return 1
   fi
   poetry init --no-interaction &> /dev/null
-  cat-pyproject >> pyproject.toml
+  cat ~/config/docs/samples/base-pyproject.toml >> pyproject.toml
   toml-sort --in-place pyproject.toml
   touch README.md
 }
@@ -276,17 +241,7 @@ function pynew() {
   mkdir "$1" && cd "$1" && poetry-init || return
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   python -m venv .venv && va && poetry install || return
-  cat > main.py <<EOL
-"""The main module."""
-
-
-def main() -> str:
-    """A welcome message."""
-    return "hello, world!"
-
-
-print(main())
-EOL
+  cat ~/config/docs/samples/base-main.py > main.py
   git init && git add . && git commit -m 'Initial commit'
 }
 
