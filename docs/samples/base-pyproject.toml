@@ -7,7 +7,6 @@ warn_return_any = true
 enable_error_code = ["ignore-without-code"]
 
 [tool.poetry.group.dev.dependencies]
-docformatter = "*"
 mypy = "*"
 pyright = "*"
 ruff = "*"
@@ -16,6 +15,7 @@ toml-sort = "*"
 [tool.ruff]
 line-length = 79
 target-version = "py311"
+unsafe-fixes = true
 
 [tool.ruff.lint]
 select = [
