@@ -19,18 +19,18 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = [
-  "d", # pydocstyle
-  "e", # pycodestyle
-  "f", # pyflakes
-  "i" # isort
+  "D", # pydocstyle
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I" # isort
 ]
 ignore = [
-  "d206", # indent-with-spaces
-  "d300", # triple-single-quotes
-  "e111", # indentation-with-invalid-multiple
-  "e114", # indentation-with-invalid-multiple-comment
-  "e117", # over-indented
-  "e501" # line-too-long
+  "D206", # indent-with-spaces
+  "D300", # triple-single-quotes
+  "E111", # indentation-with-invalid-multiple
+  "E114", # indentation-with-invalid-multiple-comment
+  "E117", # over-indented
+  "E501" # line-too-long
 ]
 
 [tool.ruff.pydocstyle]
