@@ -121,6 +121,9 @@ let g:loaded_netrwPlugin = 1
 " https://github.com/fidian/hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
+" https://github.com/pappasam/vim-filetype-formatter
+packadd vim-filetype-formatter
+let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['ruff']
 " https://github.com/pappasam/nvim-repl
 let g:repl_filetype_commands = {
       \ 'bash': 'bash',
@@ -435,25 +438,5 @@ function! s:preview()
     silent! execute "!gio open '%:p'"
   endif
 endfunction
-
-" }}}
-" Unsorted {{{
-
-" https://github.com/pappasam/vim-filetype-formatter
-function s:formatter_python()
-  " old:
-  " return printf(
-  "       \ 'ruff check -q --fix-only --stdin-filename="%1$s" - | ' ..
-  "       \ 'black -q --stdin-filename="%1$s" - | ' ..
-  "       \ 'isort -q --filename="%1$s" - | ' ..
-  "       \ 'docformatter -',
-  "       \ expand('%:p'))
-  return printf(
-        \ 'ruff check --unsafe-fixes -q --fix-only --stdin-filename="%1$s" - | ' ..
-        \ 'ruff format -q --stdin-filename="%1$s" -',
-        \ expand('%:p'))
-endfunction
-
-let g:vim_filetype_formatter_commands = {'python': function('s:formatter_python')}
 
 " }}}
