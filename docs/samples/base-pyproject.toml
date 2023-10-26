@@ -8,7 +8,9 @@ enable_error_code = ["ignore-without-code"]
 
 [tool.poetry.group.dev.dependencies]
 mypy = "*"
+nox = "*"
 pyright = "*"
+pytest = "*"
 ruff = "*"
 toml-sort = "*"
 

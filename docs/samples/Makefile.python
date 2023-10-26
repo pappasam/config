@@ -1,0 +1,20 @@
+.PHONY: help
+help: ## Prints each target and its associated help message
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: fix
+fix: ## Fix all files in-place
+	poetry run nox -s $@
+
+.PHONY: lint
+lint: ## Run linters on all files
+	poetry run nox -s $@
+
+.PHONY: typecheck
+typecheck: ## Run static type checks
+	poetry run nox -s $@
+
+.PHONY: unittests
+unittests: ## Run unit tests
+	poetry run nox -s $@

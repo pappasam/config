@@ -241,7 +241,9 @@ function pynew() {
   mkdir "$1" && cd "$1" && poetry-init || return
   gitignore Python.gitignore | grep -v instance/ > .gitignore
   python -m venv .venv && va && poetry install || return
-  cat ~/config/docs/samples/base-main.py > main.py
+  cp ~/config/docs/samples/base-main.py ./main.py
+  cp ~/config/docs/samples/noxfile.py .
+  cp ~/config/docs/samples/Makefile.python ./Makefile
   git init && git add . && git commit -m 'Initial commit'
 }
 
