@@ -105,6 +105,7 @@ sudo apt install -y \
   paprefs \
   peek \
   perl \
+  pinfo \
   pkg-config \
   pulseaudio-module-gsettings \
   pulseaudio-module-raop \
