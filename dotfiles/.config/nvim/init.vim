@@ -270,10 +270,10 @@ nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
-noremap <MiddleMouse> <LeftMouse>za
-noremap <2-MiddleMouse> <LeftMouse>za
-noremap <3-MiddleMouse> <LeftMouse>za
-noremap <4-MiddleMouse> <LeftMouse>za
+nnoremap <RightMouse> <LeftMouse>za
+nnoremap <2-RightMouse> <LeftMouse>za
+nnoremap <3-RightMouse> <LeftMouse>za
+nnoremap <4-RightMouse> <LeftMouse>za
 " https://github.com/neoclide/coc.nvim
 nmap <silent> <C-]> <Plug>(coc-definition)
 nnoremap <C-k> <Cmd>call CocActionAsync('doHover')<CR>
