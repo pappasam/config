@@ -239,7 +239,7 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
-  autocmd BufWinEnter * execute printf('setlocal listchars+=leadmultispace:│%1$s', repeat('\ ', &shiftwidth - 1))
+  autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
