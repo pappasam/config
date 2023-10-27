@@ -43,7 +43,8 @@ KEY_TOP_1=KEY_HOME
 KEY_TOP_2='g'
 KEY_BACK_1=KEY_LEFT
 KEY_BACK_2='h'
-KEY_FOLLOWLINK_1=KEY_RIGHT
+# 10 is the code for <Return>
+KEY_FOLLOWLINK_1=10
 KEY_FOLLOWLINK_2='l'
 # 12 is a code for ctrl+l
 KEY_REFRESH_1=12
@@ -58,24 +59,3 @@ KEY_GOLINE_1='L'
 KEY_GOLINE_2=0
 KEY_PRINT_1=']'
 KEY_PRINT_2=0
-# Final options
-# MANUAL=false
-# CUT-MAN-HEADERS=true
-# CUT-EMPTY-MAN-LINES=true
-# RAW-FILENAME=false
-# APROPOS=false
-# DONT-HANDLE-WITHOUT-TAG-TABLE=false
-# LONG-MANUAL-LINKS=false
-# FILTER-0xB7=true
-# QUIT-CONFIRMATION=false
-# QUIT-CONFIRM-DEFAULT=no
-# CLEAR-SCREEN-AT-EXIT=true
-# STDERR-REDIRECTION="2> /dev/null"
-# HTTPVIEWER=lynx
-# FTPVIEWER=lynx
-# MAILEDITOR=pine
-# MANLINKS=1:8:2:3:4:5:6:7:9:n:p:o:3X11:3Xt
-# INFOPATH=/usr/info:/usr/share/info:/usr/local/info
-# HIGHLIGHTREGEXP=Bash.*has
-# SAFE-USER=nobody
-# SAFE-GROUP=nobody
