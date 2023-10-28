@@ -219,16 +219,14 @@ augroup filetype_custom
   autocmd FileType nginx setlocal iskeyword+=$
   autocmd FileType zsh,sh,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
-  " wrap
+  " nowrap
   autocmd FileType coctree setlocal nowrap
-  " nofoldenable
-  autocmd FileType gitcommit,checkhealth setlocal nofoldenable
+  " nofoldenable nolist
+  autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " nolist
-  autocmd Filetype gitcommit setlocal nolist
   " mappings
-  autocmd FileType man,help,qf,coctree
+  autocmd FileType man,info,help,qf,coctree
         \ nnoremap <buffer> d <C-d> |
         \ nnoremap <buffer> D <C-d> |
         \ nnoremap <buffer> u <C-u> |

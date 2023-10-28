@@ -247,6 +247,10 @@ function pynew() {
   git init && git add . && git commit -m 'Initial commit'
 }
 
+function info () { # https://github.com/HiPhish/info.vim#other-cool-stuff
+  nvim -R -M -c "Info $1 $2" +only
+}
+
 # }}}
 # Installs {{{
 
