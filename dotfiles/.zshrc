@@ -49,6 +49,11 @@ function _git_branches() {
   subcmds=($(git branch | awk '{print $NF}'))
   _describe 'Select an existing git branch' subcmds
 }
+function _info() {
+  local -a subcmds
+  subcmds=($(ls /usr/share/info/ | awk -F'.' '{print $1}' | sort | uniq))
+  _describe 'Describe info pages' subcmds
+}
 compdef _vim f
 compdef _vim fn
 compdef _directories d
@@ -58,4 +63,5 @@ compdef _command ve
 compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
 compdef _git_branches gdl
+compdef _info info
 if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
