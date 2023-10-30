@@ -57,6 +57,7 @@ set noshowmode
 set noswapfile
 set notimeout
 set nowrap linebreak
+set nowrapscan
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
