@@ -233,6 +233,7 @@ augroup filetype_custom
         \ nnoremap <buffer> U <C-u> |
         \ nnoremap <buffer> <C-]> <C-]> |
         \ nnoremap <buffer> q <Cmd>quit<CR>
+  autocmd FileType info nmap <buffer> <CR> K
 augroup end
 
 augroup miscellaneous_custom

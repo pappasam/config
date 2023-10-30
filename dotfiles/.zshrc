@@ -51,7 +51,7 @@ function _git_branches() {
 }
 function _info() {
   local -a subcmds
-  subcmds=($(ls /usr/share/info/ | awk -F'.' '{print $1}' | sort | uniq))
+  subcmds=($(/usr/bin/info --output=- --subnodes '(dir)' 2>/dev/null | grep '^\* ' | awk -F: '{print $1}' | sed 's/^* //' | sort | uniq))
   _describe 'Describe info pages' subcmds
 }
 compdef _vim f

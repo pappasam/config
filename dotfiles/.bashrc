@@ -247,8 +247,18 @@ function pynew() {
   git init && git add . && git commit -m 'Initial commit'
 }
 
-function info () { # https://github.com/HiPhish/info.vim#other-cool-stuff
-  nvim -R -M -c "Info $1 $2" +only
+function info() { # https://github.com/HiPhish/info.vim
+  if [[ "$1" =~ ^-.* ]]; then
+    echo 'Options not accepted. If options are needed, use /usr/bin/info instead'
+    return 1
+  fi
+  local file
+  file=$(/usr/bin/info --where "$1")
+  if [[ "$file" == '' ]]; then
+    echo 'Entry not found'
+    return 2
+  fi
+  nvim -R -M -c "Info $(basename "$file" .info.gz) $1" +only
 }
 
 # }}}
