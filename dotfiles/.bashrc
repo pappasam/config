@@ -248,6 +248,10 @@ function pynew() {
 }
 
 function info() { # https://github.com/HiPhish/info.vim
+  if [ $# -ne 1 ]; then
+    nvim -R -M -c 'Info' +only
+    return 0
+  fi
   if [[ "$1" =~ ^-.* ]]; then
     echo 'Options not accepted. If options are needed, use /usr/bin/info instead'
     return 1
