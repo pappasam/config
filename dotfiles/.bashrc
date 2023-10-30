@@ -248,21 +248,26 @@ function pynew() {
 }
 
 function info() { # https://github.com/HiPhish/info.vim
-  if [ $# -ne 1 ]; then
+  if [ $# -eq 0 ]; then
     nvim -R -M -c 'Info' +only
     return 0
-  fi
-  if [[ "$1" =~ ^-.* ]]; then
-    echo 'Options not accepted. If options are needed, use /usr/bin/info instead'
+  elif [ $# -ne 1 ]; then
+    echo 'Usage: info <node>. If options are needed, use /usr/bin/info instead'
+    return 1
+  elif [[ "$1" =~ ^-.* ]]; then
+    echo 'Usage: info <node>. If options are needed, use /usr/bin/info instead'
     return 1
   fi
   local file
   file=$(/usr/bin/info --where "$1")
   if [[ "$file" == '' ]]; then
-    echo 'Entry not found'
+    echo 'Search node not found'
     return 2
+  elif [[ "$file" == '*manpages*' ]]; then
+    man "$1"
+  else
+    nvim -R -M -c "Info $(basename "$file" .info.gz) $1" +only
   fi
-  nvim -R -M -c "Info $(basename "$file" .info.gz) $1" +only
 }
 
 # }}}
