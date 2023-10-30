@@ -252,21 +252,34 @@ function info() { # https://github.com/HiPhish/info.vim
     nvim -R -M -c 'Info' +only
     return 0
   elif [ $# -ne 1 ]; then
-    echo 'Usage: info <node>. If options are needed, use /usr/bin/info instead'
+    echo 'Usage: info <node>. If options are needed, use /bin/info instead'
     return 1
   elif [[ "$1" =~ ^-.* ]]; then
-    echo 'Usage: info <node>. If options are needed, use /usr/bin/info instead'
+    echo 'Usage: info <node>. If options are needed, use /bin/info instead'
     return 1
   fi
+  local node_spaces
+  # shellcheck disable=SC2001
+  node_spaces="$(echo "$1" | sed 's/%20/ /g')"
   local file
-  file=$(/usr/bin/info --where "$1")
+  file=$(/bin/info --where "$node_spaces")
   if [[ "$file" == '' ]]; then
     echo 'Search node not found'
     return 2
   elif [[ "$file" == '*manpages*' ]]; then
     man "$1"
   else
-    nvim -R -M -c "Info $(basename "$file" .info.gz) $1" +only
+    local infofile
+    infofile=$(basename "$file" .info.gz)
+    local nodelower
+    nodelower=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    if [[ "$infofile" == "$nodelower" ]]; then
+      nvim -R -M -c "Info $infofile" +only
+    elif [[ "$node_spaces" != "$1" ]]; then
+      nvim -R -M -c "Info $infofile" +only
+    else
+      nvim -R -M -c "Info $infofile $1" +only
+    fi
   fi
 }
 

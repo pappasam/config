@@ -51,7 +51,7 @@ function _git_branches() {
 }
 function _info() {
   local -a subcmds
-  subcmds=($(/usr/bin/info --output=- --subnodes '(dir)' 2>/dev/null | grep '^\* ' | awk -F: '{print $1}' | sed 's/^* //' | sort | uniq))
+  subcmds=($(/bin/info --output=- --subnodes '(dir)' 2>/dev/null | grep '^\* ' | awk -F: '{print $1}' | sed 's/^* //' | sort | uniq | sed 's/ /%20/g'))
   _describe 'Describe info pages' subcmds
 }
 compdef _vim f
