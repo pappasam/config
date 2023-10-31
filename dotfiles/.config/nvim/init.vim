@@ -274,6 +274,10 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
+nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>gc <Cmd>edit ~/.config/nvim/coc-settings.json<CR>
+nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
+nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <RightMouse> <LeftMouse>za
@@ -318,11 +322,6 @@ nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
 " }}}
 " Commands {{{
 
-command! V edit ~/.config/nvim/init.vim
-command! C edit ~/.config/nvim/coc-settings.json
-command! Z edit ~/.zshrc
-command! B edit ~/.bashrc
-
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
@@ -334,28 +333,6 @@ function! s:resize_window_width()
   normal! m`
   execute ':vertical resize ' .. (max_length + leading_space)
   normal! ``
-endfunction
-
-command! FitHeight call s:resize_window_height()
-function! s:resize_window_height()
-  normal! m`
-  let initial = winnr()
-  wincmd k
-  if winnr() != initial
-    execute initial .. 'wincmd w'
-    1
-    execute 'resize ' .. (line('$') + 1)
-    normal! ``
-    return
-  endif
-  wincmd j
-  if winnr() != initial
-    execute initial .. 'wincmd w'
-    1
-    execute 'resize ' .. (line('$') + 1)
-    normal! ``
-    return
-  endif
 endfunction
 
 command! Focus call s:focuswriting()
