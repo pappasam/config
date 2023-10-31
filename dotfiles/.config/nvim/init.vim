@@ -233,6 +233,10 @@ augroup filetype_custom
         \ nnoremap <buffer> u <C-u> |
         \ nnoremap <buffer> U <C-u> |
         \ nnoremap <buffer> <C-]> <C-]> |
+        \ nnoremap <buffer> <RightMouse> <C-o> |
+        \ nnoremap <buffer> <2-RightMouse> <C-o> |
+        \ nnoremap <buffer> <3-RightMouse> <C-o> |
+        \ nnoremap <buffer> <4-RightMouse> <C-o> |
         \ nnoremap <buffer> q <Cmd>quit<CR>
   autocmd FileType info nmap <buffer> <CR> K
 augroup end
