@@ -12,13 +12,19 @@ Step-by-step instructions to configure local files that customize Firefox.
 ## Plugins
 
 - <https://addons.mozilla.org/en-US/firefox/addon/linkhints/>
+- <https://addons.mozilla.org/en-US/firefox/addon/markdown-here/>
+- <https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/>
+- <https://addons.mozilla.org/en-US/firefox/addon/react-devtools/>
+- <https://addons.mozilla.org/en-US/firefox/addon/svelte-devtools/>
+- <https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/>
 
 ## Bookmarklets
 
-### Don't Fuck with Paste
+### Don't Mess with Paste
 
 <https://github.com/jswanner/DontF-WithPaste#bookmarklet>
 
+<!-- prettier-ignore -->
 ```javascript
 javascript:forceBrowserDefault=(e=>{e.stopImmediatePropagation();return true;});['copy','cut','paste'].forEach(e=>document.addEventListener(e,forceBrowserDefault,true));
 ```
