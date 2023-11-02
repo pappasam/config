@@ -221,7 +221,7 @@ function va() {
 export AUTO_VIRTUALENV=1
 function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi ; }
 
-function poetry-init() {
+function poetryinit() {
   if [ -f pyproject.toml ]; then
     echo 'pyproject.toml exists, aborting' && return 1
   fi
@@ -231,6 +231,15 @@ function poetry-init() {
   touch README.md
 }
 
+function pyinit() {
+  poetryinit || return 1
+  gitignore Python.gitignore | grep -v instance/ > .gitignore
+  python -m venv .venv && va && poetry install || return
+  cp ~/config/docs/samples/base-main.py ./main.py
+  cp ~/config/docs/samples/noxfile.py .
+  cp ~/config/docs/samples/Makefile.python ./Makefile
+}
+
 function pynew() {
   if [ $# -ne 1 ]; then
     echo 'pynew <directory>' && return 1
@@ -238,12 +247,7 @@ function pynew() {
   if [ -d "$1" ]; then
     echo "$1 already exists" && return 1
   fi
-  mkdir "$1" && cd "$1" && poetry-init || return
-  gitignore Python.gitignore | grep -v instance/ > .gitignore
-  python -m venv .venv && va && poetry install || return
-  cp ~/config/docs/samples/base-main.py ./main.py
-  cp ~/config/docs/samples/noxfile.py .
-  cp ~/config/docs/samples/Makefile.python ./Makefile
+  mkdir "$1" && cd "$1" && pyinit || return
   git init && git add . && git commit -m 'Initial commit'
 }
 
