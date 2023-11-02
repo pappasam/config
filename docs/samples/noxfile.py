@@ -21,9 +21,11 @@ def lint(session: nox.Session):
 
 @NOX_SESSION
 def typecheck(session: nox.Session):
-    session.run("mypy", "app")
+    """Check types with static type checker."""
+    session.run("mypy", "kepler_license_checker")
 
 
 @NOX_SESSION
 def unittests(session: nox.Session):
+    """Run unittests."""
     session.run("pytest", "tests/unit")

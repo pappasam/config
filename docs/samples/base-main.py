@@ -2,7 +2,7 @@
 
 
 def main() -> str:
-    """A welcome message."""
+    """Run welcome message program."""
     return "hello, world!"
 
 
