@@ -338,6 +338,7 @@ endfunction
 
 command! Focus call s:focuswriting()
 function! s:focuswriting()
+  normal! ma
   augroup focuswriting
     autocmd!
   augroup end
@@ -365,6 +366,7 @@ function! s:focuswriting()
     autocmd!
     autocmd WinEnter focuswriting_abcdefg call s:focuswriting_autocmd()
   augroup end
+  normal! `azz
 endfunction
 function! s:focuswriting_settings_side()
   setlocal nonumber norelativenumber nocursorline fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
