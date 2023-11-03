@@ -331,9 +331,9 @@ function! s:resize_window_width()
   endif
   let max_length = max(map(range(1, line('$')), "virtcol([v:val, '$'])"))
   let leading_space = getwininfo(win_getid())[0].textoff
-  normal! m`
+  normal! ma
   execute ':vertical resize ' .. (max_length + leading_space)
-  normal! ``
+  normal! `a
 endfunction
 
 command! Focus call s:focuswriting()
