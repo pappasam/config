@@ -302,9 +302,9 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nnoremap <Space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader>rt <Cmd>ReplToggle<CR>
-nmap <Leader>rc <Plug>ReplSendCell
-nmap <Leader>rr <Plug>ReplSendLine
-xmap <Leader>r <Plug>ReplSendVisual
+nmap <silent> <Leader>rc <Plug>ReplSendCell
+nmap <silent> <Leader>rr <Plug>ReplSendLine
+xmap <silent> <Leader>r <Plug>ReplSendVisual
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
