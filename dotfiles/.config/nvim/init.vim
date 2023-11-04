@@ -5,14 +5,13 @@ lua require('packages')
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
   " Autocompletion And IDE Features
-  " call a:packager.add('https://github.com/neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
-  " call a:packager.add('https://github.com/pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' })
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
+  call a:packager.add('https://github.com/simrat39/symbols-outline.nvim')
   call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
   call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
   call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
   call a:packager.add('https://github.com/hrsh7th/cmp-path')
-  call a:packager.add('https://github.com/hrsh7th/cmp-cmdline')
+  call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
   " TreeSitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
@@ -187,6 +186,7 @@ let g:coc_filetype_map = {
       \ 'yaml.docker-compose': 'yaml',
       \ 'jinja.html': 'html',
       \ }
+let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 
 " }}}
 " Autocmds {{{
@@ -291,43 +291,24 @@ nnoremap <RightMouse> <LeftMouse>za
 nnoremap <2-RightMouse> <LeftMouse>za
 nnoremap <3-RightMouse> <LeftMouse>za
 nnoremap <4-RightMouse> <LeftMouse>za
-" https://github.com/neoclide/coc.nvim
-" vim.lsp.buf.hover
-" vim.lsp.buf.format
-" vim.lsp.buf.rename
-" vim.lsp.buf.completion
-" vim.lsp.buf.definition
-" vim.lsp.buf.references
-" vim.lsp.buf.code_action
-" vim.lsp.buf.declaration
-" vim.lsp.buf.server_ready
-" vim.lsp.buf.implementation
-" vim.lsp.buf.incoming_calls
-" vim.lsp.buf.outgoing_calls
-" vim.lsp.buf.signature_help
-" vim.lsp.buf.document_symbol
-" vim.lsp.buf.execute_command
-" vim.lsp.buf.type_definition
-" vim.lsp.buf.clear_references
-" vim.lsp.buf.workspace_symbol
-" vim.lsp.buf.document_highlight
-" vim.lsp.buf.add_workspace_folder
-" vim.lsp.buf.list_workspace_folders
-" vim.lsp.buf.remove_workspace_folder
-
 nnoremap <C-]> <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
 inoremap <C-s> <Cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <C-w>f <Cmd>call coc#float#jump()<CR>
 nnoremap <Leader>su <Cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <Leader>sr <Cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <Leader>sa <Plug>(coc-codeaction-cursor)
-xnoremap <Leader>sa <Plug>(coc-codeaction-selected)
-inoremap <silent> <expr> <C-Space> coc#refresh()
-nnoremap <Leader>d <Cmd>call CocActionAsync('diagnosticToggleBuffer')<CR>
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <Space>l <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
+nnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
+xnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <Leader>dd <Cmd>lua vim.diagnostic.disable()<CR>
+nnoremap <Leader>de <Cmd>lua vim.diagnostic.enable()<CR>
+nnoremap ]g <Cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap [g <Cmd>lua vim.diagnostic.goto_prev()<CR>
+" https://github.com/simrat39/symbols-outline.nvim
+nnoremap <Space>l <Cmd>SymbolsOutline<CR>
+" https://github.com/hrsh7th/vim-vsnip
+imap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+smap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
+imap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
+smap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader>rt <Cmd>ReplToggle<CR>
 nmap <silent> <Leader>rc <Plug>ReplSendCell
