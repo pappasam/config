@@ -30,6 +30,7 @@ asdf_setup fzf latest
 asdf_setup github-cli latest
 asdf_setup golang latest
 asdf_setup java adopt-openjdk-13.0.2+8
+asdf_setup lua-language-server latest
 asdf_setup neovim nightly
 asdf_setup nodejs latest
 asdf_setup perl latest
