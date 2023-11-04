@@ -267,7 +267,6 @@ local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- https://github.com/neovim/nvim-lspconfig
 
 local lspconfig = require("lspconfig")
-
 ---@diagnostic disable-next-line: undefined-field
 local fs_stat = vim.loop.fs_stat
 
@@ -302,6 +301,14 @@ lspconfig.lua_ls.setup({
   end,
 })
 
+lspconfig.bashls.setup({
+  capabilities = cmp_capabilities,
+})
+
+lspconfig.dockerls.setup({
+  capabilities = cmp_capabilities,
+})
+
 lspconfig.pyright.setup({
   capabilities = cmp_capabilities,
 })
@@ -310,7 +317,16 @@ lspconfig.svelte.setup({
   capabilities = cmp_capabilities,
 })
 
+lspconfig.terraformls.setup({
+  capabilities = cmp_capabilities,
+})
+
 lspconfig.vimls.setup({
+  capabilities = cmp_capabilities,
+})
+
+-- stylua: ignore
+lspconfig.yamlls.setup({
   capabilities = cmp_capabilities,
 })
 

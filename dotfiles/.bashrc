@@ -290,6 +290,19 @@ function info() { # https://github.com/HiPhish/info.vim
 # }}}
 # Installs {{{
 
+function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
+
+function languageserver-install() {
+  npm install --no-save -g \
+    bash-language-server \
+    dockerfile-language-server-nodejs \
+    svelte-language-server \
+    vim-language-server \
+    yaml-language-server
+  asdfl lua-language-server
+  asdfl terraform-ls
+}
+
 function rustglobal-install() {
   rustup component add rust-analyzer
   rustup component add rust-src
@@ -304,15 +317,6 @@ function rustglobal-install() {
   cargo install stylua --features lua52 --features luau
   asdf reshim rust
   cargo install-update -a
-}
-
-function languageserver-install() {
-  npm install --no-save -g \
-    bash-language-server \
-    dockerfile-language-server-nodejs \
-    svelte-language-server \
-    vim-language-server \
-    yaml-language-server
 }
 
 function rglobal-install() {
@@ -423,7 +427,6 @@ function alacritty-install() {
 
 function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
 
-function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
 
 function asdfpurge() {
   if [ $# -ne 1 ]; then
@@ -462,6 +465,7 @@ function upgrade() {
     zinit self-update
     zinit update --all
   fi
+  languageserver-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
   nvim -c 'TSUpdate' ~/.config/nvim/init.vim
 }
