@@ -267,14 +267,6 @@ local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require("lspconfig")
 
-lspconfig.pyright.setup({
-  capabilities = cmp_capabilities,
-})
-
-lspconfig.vimls.setup({
-  capabilities = cmp_capabilities,
-})
-
 lspconfig.lua_ls.setup({
   capabilities = cmp_capabilities,
   on_init = function(client)
@@ -304,6 +296,18 @@ lspconfig.lua_ls.setup({
     end
     return true
   end,
+})
+
+lspconfig.pyright.setup({
+  capabilities = cmp_capabilities,
+})
+
+lspconfig.svelte.setup({
+  capabilities = cmp_capabilities,
+})
+
+lspconfig.vimls.setup({
+  capabilities = cmp_capabilities,
 })
 
 -- }}}
