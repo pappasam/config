@@ -306,6 +306,15 @@ function rustglobal-install() {
   cargo install-update -a
 }
 
+function languageserver-install() {
+  npm install --no-save -g \
+    bash-language-server \
+    dockerfile-language-server-nodejs \
+    svelte-language-server \
+    vim-language-server \
+    yaml-language-server
+}
+
 function rglobal-install() {
   R -e 'install.packages("languageserver", repos="https://ftp.osuosl.org/pub/cran/")'
   R -e 'install.packages("formatR", repos="https://ftp.osuosl.org/pub/cran/")'
@@ -322,25 +331,15 @@ function perlglobal-install() {
 }
 
 function nodeglobal-install() {
-  # Temporary removals: npm
-  local env=(
-    bash-language-server
-    dockerfile-language-server-nodejs
-    nginx-linter
-    nginxbeautifier
-    prettier
-    prettier-plugin-prisma
-    prettier-plugin-svelte
-    svelte-language-server
-    tree-sitter-cli
-    vim-language-server
+  npm install --no-save -g \
+    nginx-linter \
+    nginxbeautifier \
+    prettier \
+    prettier-plugin-prisma \
+    prettier-plugin-svelte \
+    tree-sitter-cli \
     write-good
-    yaml-language-server
-  )
-  # shellcheck disable=SC2128,SC2086
-  npm install --no-save -g $env
-  asdf reshim nodejs
-}
+  }
 
 function pydev-install() {
   local for_pip=(
