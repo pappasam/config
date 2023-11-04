@@ -118,6 +118,7 @@ require("nvim-treesitter.configs").setup({
   },
   indent = {
     enable = true,
+    ---@diagnostic disable-next-line: unused-local
     disable = function(lang, bufnr)
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
@@ -267,13 +268,15 @@ local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require("lspconfig")
 
+---@diagnostic disable-next-line: undefined-field
+local fs_stat = vim.loop.fs_stat
+
 lspconfig.lua_ls.setup({
   capabilities = cmp_capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if
-      not vim.loop.fs_stat(path .. "/.luarc.json")
-      and not vim.loop.fs_stat(path .. "/.luarc.jsonc")
+      not fs_stat(path .. "/.luarc.json") and fs_stat(path .. "/.luarc.jsonc")
     then
       client.config.settings =
         vim.tbl_deep_extend("force", client.config.settings, {
