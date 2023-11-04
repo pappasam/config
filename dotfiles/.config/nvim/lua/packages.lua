@@ -118,6 +118,7 @@ require("nvim-treesitter.configs").setup({
   },
   indent = {
     enable = true,
+    ---@diagnostic disable-next-line: unused-local
     disable = function(lang, bufnr)
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
@@ -227,5 +228,114 @@ ts.setup({
     prompt_prefix = " ",
   },
 })
+
+-- }}}
+-- nvim-cmp {{{
+
+local cmp = require("cmp")
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "vsnip" },
+    { name = "path" },
+    { name = "buffer" },
+  }),
+})
+
+-- Set up lspconfig.
+local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- }}}
+-- nvim-lspconfig {{{
+-- https://github.com/neovim/nvim-lspconfig
+
+local lspconfig = require("lspconfig")
+---@diagnostic disable-next-line: undefined-field
+local fs_stat = vim.loop.fs_stat
+
+lspconfig.lua_ls.setup({
+  capabilities = cmp_capabilities,
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if
+      not fs_stat(path .. "/.luarc.json")
+      and not fs_stat(path .. "/.luarc.jsonc")
+    then
+      client.config.settings =
+        vim.tbl_deep_extend("force", client.config.settings, {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+              },
+            },
+          },
+        })
+      client.notify(
+        "workspace/didChangeConfiguration",
+        { settings = client.config.settings }
+      )
+    end
+    return true
+  end,
+})
+lspconfig.bashls.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.dockerls.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.ltex.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.pyright.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.rust_analyzer.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.svelte.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.terraformls.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.tsserver.setup({
+  capabilities = cmp_capabilities,
+})
+lspconfig.vimls.setup({
+  capabilities = cmp_capabilities,
+})
+-- stylua: ignore
+lspconfig.yamlls.setup({
+  capabilities = cmp_capabilities,
+})
+
+-- }}}
+-- symbols-outline.nvim_lsp {{{
+-- https://github.com/simrat39/symbols-outline.nvim_lsp
+
+require("symbols-outline").setup()
 
 -- }}}

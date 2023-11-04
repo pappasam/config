@@ -290,6 +290,26 @@ function info() { # https://github.com/HiPhish/info.vim
 # }}}
 # Installs {{{
 
+function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
+
+function languageserver-install() {
+  npm install --no-save -g \
+    bash-language-server \
+    dockerfile-language-server-nodejs \
+    svelte-language-server \
+    typescript \
+    typescript-language-server \
+    vim-language-server \
+    yaml-language-server
+  asdfl lua-language-server
+  asdfl terraform-ls
+}
+
+function ltex-install() {
+  curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz > ./ltex.tar.gz
+  tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
+}
+
 function rustglobal-install() {
   rustup component add rust-analyzer
   rustup component add rust-src
@@ -322,24 +342,15 @@ function perlglobal-install() {
 }
 
 function nodeglobal-install() {
-  # Temporary removals: npm
-  local env=(
-    bash-language-server
-    dockerfile-language-server-nodejs
-    nginx-linter
-    nginxbeautifier
-    prettier
-    prettier-plugin-prisma
-    prettier-plugin-svelte
-    svelte-language-server
-    tree-sitter-cli
+  npm install --no-save -g \
+    nginx-linter \
+    nginxbeautifier \
+    prettier \
+    prettier-plugin-prisma \
+    prettier-plugin-svelte \
+    tree-sitter-cli \
     write-good
-    yaml-language-server
-  )
-  # shellcheck disable=SC2128,SC2086
-  npm install --no-save -g $env
-  asdf reshim nodejs
-}
+  }
 
 function pydev-install() {
   local for_pip=(
@@ -423,7 +434,6 @@ function alacritty-install() {
 
 function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
 
-function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
 
 function asdfpurge() {
   if [ $# -ne 1 ]; then
@@ -462,8 +472,9 @@ function upgrade() {
     zinit self-update
     zinit update --all
   fi
+  languageserver-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
-  nvim -c 'TSUpdate | CocUpdate' ~/.config/nvim/init.vim
+  nvim -c 'TSUpdate' ~/.config/nvim/init.vim
 }
 
 # }}}
