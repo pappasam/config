@@ -271,6 +271,10 @@ lspconfig.pyright.setup({
   capabilities = cmp_capabilities,
 })
 
+lspconfig.vimls.setup({
+  capabilities = cmp_capabilities,
+})
+
 lspconfig.lua_ls.setup({
   capabilities = cmp_capabilities,
   on_init = function(client)

@@ -333,6 +333,7 @@ function nodeglobal-install() {
     prettier-plugin-svelte
     svelte-language-server
     tree-sitter-cli
+    vim-language-server
     write-good
     yaml-language-server
   )
