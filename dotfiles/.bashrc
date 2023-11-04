@@ -297,10 +297,17 @@ function languageserver-install() {
     bash-language-server \
     dockerfile-language-server-nodejs \
     svelte-language-server \
+    typescript \
+    typescript-language-server \
     vim-language-server \
     yaml-language-server
   asdfl lua-language-server
   asdfl terraform-ls
+}
+
+function ltex-install() {
+  curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz > ./ltex.tar.gz
+  tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
 }
 
 function rustglobal-install() {

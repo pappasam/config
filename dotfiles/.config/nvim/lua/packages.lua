@@ -300,31 +300,33 @@ lspconfig.lua_ls.setup({
     return true
   end,
 })
-
 lspconfig.bashls.setup({
   capabilities = cmp_capabilities,
 })
-
 lspconfig.dockerls.setup({
   capabilities = cmp_capabilities,
 })
-
+lspconfig.ltex.setup({
+  capabilities = cmp_capabilities,
+})
 lspconfig.pyright.setup({
   capabilities = cmp_capabilities,
 })
-
+lspconfig.rust_analyzer.setup({
+  capabilities = cmp_capabilities,
+})
 lspconfig.svelte.setup({
   capabilities = cmp_capabilities,
 })
-
 lspconfig.terraformls.setup({
   capabilities = cmp_capabilities,
 })
-
+lspconfig.tsserver.setup({
+  capabilities = cmp_capabilities,
+})
 lspconfig.vimls.setup({
   capabilities = cmp_capabilities,
 })
-
 -- stylua: ignore
 lspconfig.yamlls.setup({
   capabilities = cmp_capabilities,
