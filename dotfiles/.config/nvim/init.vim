@@ -11,6 +11,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
   call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
   call a:packager.add('https://github.com/hrsh7th/cmp-path')
+  call a:packager.add('https://github.com/hrsh7th/cmp-emoji')
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
   " TreeSitter
