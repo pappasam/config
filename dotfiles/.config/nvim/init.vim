@@ -18,7 +18,7 @@ function! s:packager_init(packager) abort
   " TreeSitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
-  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring', {'name': 'ntcc'}) " required for vim.loader.enable()
+  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   call a:packager.add('https://github.com/tpope/vim-commentary')
   " Tree
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
