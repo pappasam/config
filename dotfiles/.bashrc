@@ -303,7 +303,9 @@ function languageserver-install() {
     vim-language-server \
     vscode-langservers-extracted \
     yaml-language-server
-  pip install -U nginx-language-server
+  pip install -U \
+    nginx-language-server \
+    pyright
   asdfl lua-language-server
   asdfl terraform-ls
   cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
@@ -363,7 +365,6 @@ function pydev-install() {
     ipython
     mypy
     pip
-    pyright
     ruff
     wheel
   )
