@@ -302,9 +302,12 @@ function languageserver-install() {
     vim-language-server \
     vscode-langservers-extracted \
     yaml-language-server
+  pip install -U nginx-language-server
   asdfl lua-language-server
   asdfl terraform-ls
   sudo snap install marksman
+  cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
+  go install golang.org/x/tools/gopls@latest && asdf reshim golang
 }
 
 function ltex-install() {
