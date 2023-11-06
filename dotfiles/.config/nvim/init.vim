@@ -189,14 +189,12 @@ augroup filetype_custom
   autocmd FileType nginx setlocal iskeyword+=$
   autocmd FileType zsh,sh,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
-  " nowrap
-  autocmd FileType coctree setlocal nowrap
   " nofoldenable nolist
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " mappings
-  autocmd FileType man,info,help,qf,coctree
+  autocmd FileType man,info,help,qf
         \ nnoremap <buffer> d <C-d> |
         \ nnoremap <buffer> D <C-d> |
         \ nnoremap <buffer> u <C-u> |
@@ -245,7 +243,6 @@ nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
 nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
-nnoremap <Leader>gc <Cmd>edit ~/.config/nvim/coc-settings.json<CR>
 nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
