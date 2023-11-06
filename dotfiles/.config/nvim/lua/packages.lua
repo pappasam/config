@@ -285,6 +285,13 @@ local default_on_attach = function(client)
   client.server_capabilities.semanticTokensProvider = nil
 end
 
+local getPythonPath = function()
+  if (vim.env.VIRTUAL_ENV == nil) then
+    return nil
+  end
+  return vim.env.VIRTUAL_ENV .. "/bin/python"
+end
+
 local default_language_servers = { -- no special modifications required
   "bashls",
   "cssls",
@@ -386,9 +393,7 @@ lspconfig.pyright.setup({
         useLibraryCodeForTypes = true,
         diagnosticMode = "openFilesOnly",
       },
-      pythonPath = vim.env.VIRTUAL_ENV
-          and (vim.env.VIRTUAL_ENV .. "/bin/python")
-        or nil,
+      pythonPath = getPythonPath()
     },
   },
 })
