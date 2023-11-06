@@ -360,6 +360,7 @@ lspconfig.ltex.setup({
 lspconfig.yamlls.setup({
   capabilities = cmp_capabilities,
   on_attach = default_on_attach,
+  filetypes = { "yaml" },
   settings = {
     yaml = {
       schemas = {

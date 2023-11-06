@@ -182,18 +182,19 @@ let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 " }}}
 " Autocmds {{{
 
-augroup bufenter_filetype_assignment
+augroup filetype_assignment
   autocmd!
-  autocmd BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
-  autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufEnter *.mdx set filetype=markdown
-  autocmd BufEnter *.min.js set filetype=none
-  autocmd BufEnter *.oct set filetype=octave
-  autocmd BufEnter .envrc set filetype=sh
-  autocmd BufEnter .dockerignore set filetype=conf
-  autocmd BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
-  autocmd BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+  autocmd BufRead,BufNewFile,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
+  autocmd BufRead,BufNewFile,BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
+  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml.docker-compose
+  autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown
+  autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
+  autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave
+  autocmd BufRead,BufNewFile,BufEnter .envrc set filetype=sh
+  autocmd BufRead,BufNewFile,BufEnter .dockerignore set filetype=conf
+  autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
+  autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
+  autocmd BufRead,BufNewFile,BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
 augroup end
 
 augroup filetype_custom
