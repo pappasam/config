@@ -279,7 +279,6 @@ local default_language_servers = { -- no special modifications required
   "docker_compose_language_service",
   "dockerls",
   "jsonls",
-  "ltex",
   "marksman",
   "pyright",
   "rust_analyzer",
@@ -287,7 +286,6 @@ local default_language_servers = { -- no special modifications required
   "terraformls",
   "tsserver",
   "vimls",
-  "yamlls",
 }
 for _, value in ipairs(default_language_servers) do
   lspconfig[value].setup({
@@ -295,7 +293,6 @@ for _, value in ipairs(default_language_servers) do
     on_attach = default_on_attach,
   })
 end
-
 lspconfig.lua_ls.setup({
   capabilities = cmp_capabilities,
   on_attach = default_on_attach,
@@ -326,6 +323,56 @@ lspconfig.lua_ls.setup({
     end
     return true
   end,
+})
+lspconfig.ltex.setup({
+  capabilities = cmp_capabilities,
+  on_attach = default_on_attach,
+  settings = {
+    ltex = {
+      language = "en-US",
+      disabledRules = { ["en-US"] = { "ENGLISH_WORD_REPEAT_BEGINNING_RULE" } },
+      dictionary = {
+        ["en-US"] = {
+          "DAG",
+          "Brayan",
+          "isort",
+          "docformatter",
+          "Anat",
+          "Anshu",
+          "Neovim",
+          "Elrond",
+          "coc",
+          "nvim",
+          "DAGs",
+          "Dotfiles",
+          "EKS",
+          "Filetype",
+          "PyCQA",
+          "Roeca",
+          "dotfiles",
+          "filetype",
+          "ingestions",
+        },
+      },
+    },
+  },
+})
+lspconfig.yamlls.setup({
+  capabilities = cmp_capabilities,
+  on_attach = default_on_attach,
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = "/kubernetes/**",
+        -- ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
+        ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
+        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
+          "/*open-api*.yml",
+          "/*open-api*.yaml",
+        },
+      },
+    },
+  },
 })
 
 -- }}}
