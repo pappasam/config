@@ -209,6 +209,13 @@ augroup filetype_custom
         \ nmap <buffer> <CR> K
 augroup end
 
+augroup custom_lsp
+  autocmd!
+  autocmd LspAttach * echom 'LSP ' .. &ft .. ': starting...'
+  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom 'LSP ' .. &ft .. ': started!'
+  autocmd LspProgress * lua vim.notify(vim.lsp.status())
+augroup end
+
 augroup miscellaneous_custom
   autocmd!
   autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
@@ -216,7 +223,6 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
-  autocmd LspProgress * lua vim.notify(vim.lsp.status())
   " https://github.com/neovim/neovim/issues/20456
   autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
 augroup end
