@@ -296,7 +296,6 @@ local default_language_servers = { -- no special modifications required
   "mdx_analyzer",
   "nginx_language_server",
   "prismals",
-  "pyright",
   "r_language_server",
   "rust_analyzer",
   "svelte",
@@ -374,6 +373,22 @@ lspconfig.ltex.setup({
           "ingestions",
         },
       },
+    },
+  },
+})
+lspconfig.pyright.setup({
+  capabilities = cmp_capabilities,
+  on_attach = default_on_attach,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "openFilesOnly",
+      },
+      pythonPath = vim.env.VIRTUAL_ENV
+          and (vim.env.VIRTUAL_ENV .. "/bin/python")
+        or nil,
     },
   },
 })
