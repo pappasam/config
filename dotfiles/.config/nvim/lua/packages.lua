@@ -283,7 +283,6 @@ local default_language_servers = { -- no special modifications required
   "gopls",
   "html",
   "jsonls",
-  "marksman",
   "mdx_analyzer",
   "nginx_language_server",
   "prismals",
@@ -339,7 +338,9 @@ lspconfig.ltex.setup({
   settings = {
     ltex = {
       language = "en-US",
-      disabledRules = { ["en-US"] = { "ENGLISH_WORD_REPEAT_BEGINNING_RULE" } },
+      disabledRules = {
+        ["en-US"] = { "ENGLISH_WORD_REPEAT_BEGINNING_RULE", "WHITESPACE_RULE" },
+      },
       dictionary = {
         ["en-US"] = {
           "DAG",

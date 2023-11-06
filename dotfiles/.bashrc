@@ -306,7 +306,6 @@ function languageserver-install() {
   pip install -U nginx-language-server
   asdfl lua-language-server
   asdfl terraform-ls
-  sudo snap install marksman
   cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
 }

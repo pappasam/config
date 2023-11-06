@@ -146,39 +146,8 @@ let g:repl_filetype_commands = {
 let g:repl_default = &shell
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
-" https://github.com/neoclide/coc.nvim
-let g:coc_global_extensions = [
-      \ '@yaegassy/coc-marksman',
-      \ 'coc-css',
-      \ 'coc-diagnostic',
-      \ 'coc-dictionary',
-      \ 'coc-docker',
-      \ 'coc-emoji',
-      \ 'coc-go',
-      \ 'coc-html',
-      \ 'coc-java',
-      \ 'coc-json',
-      \ 'coc-kotlin',
-      \ 'coc-lists',
-      \ 'coc-ltex',
-      \ 'coc-markdownlint',
-      \ 'coc-prisma',
-      \ 'coc-pyright',
-      \ 'coc-r-lsp',
-      \ 'coc-rust-analyzer',
-      \ 'coc-sh',
-      \ 'coc-snippets',
-      \ 'coc-sumneko-lua',
-      \ 'coc-svg',
-      \ 'coc-syntax',
-      \ 'coc-texlab',
-      \ 'coc-toml',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-word',
-      \ 'coc-yank',
-      \ ]
-let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
+" https://github.com/hrsh7th/vim-vsnip
+let g:vsnip_snippet_dir = expand('~/.config/nvim/snippets')
 
 " }}}
 " Autocmds {{{
@@ -275,6 +244,7 @@ nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
 nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
 nnoremap <Leader>gc <Cmd>edit ~/.config/nvim/coc-settings.json<CR>
 nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
@@ -317,8 +287,8 @@ nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
 nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
 " https://github.com/pappasam/vim-filetype-formatter
-nnoremap <Leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
-xnoremap <Leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<CR><Cmd>silent! CocEnable<CR>
+nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
+xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
 
