@@ -286,7 +286,7 @@ local default_on_attach = function(client)
 end
 
 local getPythonPath = function()
-  if (vim.env.VIRTUAL_ENV == nil) then
+  if vim.env.VIRTUAL_ENV == nil then
     return nil
   end
   return vim.env.VIRTUAL_ENV .. "/bin/python"
@@ -393,7 +393,7 @@ lspconfig.pyright.setup({
         useLibraryCodeForTypes = true,
         diagnosticMode = "openFilesOnly",
       },
-      pythonPath = getPythonPath()
+      pythonPath = getPythonPath(),
     },
   },
 })
