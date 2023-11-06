@@ -300,6 +300,7 @@ function languageserver-install() {
     typescript \
     typescript-language-server \
     vim-language-server \
+    vscode-langservers-extracted \
     yaml-language-server
   asdfl lua-language-server
   asdfl terraform-ls

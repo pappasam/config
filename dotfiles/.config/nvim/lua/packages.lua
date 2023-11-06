@@ -1,4 +1,3 @@
-vim.loader.enable() -- experimental lua loader enabled
 -- nvim-colorizer.lua {{{
 -- https://github.com/NvChad/nvim-colorizer.lua
 
@@ -267,14 +266,19 @@ local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- https://github.com/neovim/nvim-lspconfig
 
 local lspconfig = require("lspconfig")
+
 ---@diagnostic disable-next-line: undefined-field
 local fs_stat = vim.loop.fs_stat
+
 local default_on_attach = function(client)
   client.server_capabilities.semanticTokensProvider = nil
 end
+
 local default_language_servers = { -- no special modifications required
   "bashls",
+  "docker_compose_language_service",
   "dockerls",
+  "jsonls",
   "ltex",
   "pyright",
   "rust_analyzer",

@@ -177,15 +177,6 @@ let g:coc_global_extensions = [
       \ 'coc-word',
       \ 'coc-yank',
       \ ]
-let g:coc_snippet_next = '<C-j>'
-let g:coc_snippet_prev = '<C-k>'
-let g:coc_start_at_startup = v:false
-let g:coc_filetype_map = {
-      \ 'markdown.mdx': 'markdown',
-      \ 'yaml.ansible': 'yaml',
-      \ 'yaml.docker-compose': 'yaml',
-      \ 'jinja.html': 'html',
-      \ }
 let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 
 " }}}
