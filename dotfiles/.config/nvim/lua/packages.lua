@@ -269,9 +269,31 @@ local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 ---@diagnostic disable-next-line: undefined-field
 local fs_stat = vim.loop.fs_stat
+local default_on_attach = function(client)
+  client.server_capabilities.semanticTokensProvider = nil
+end
+local default_language_servers = { -- no special modifications required
+  "bashls",
+  "dockerls",
+  "ltex",
+  "pyright",
+  "rust_analyzer",
+  "svelte",
+  "terraformls",
+  "tsserver",
+  "vimls",
+  "yamlls",
+}
+for _, value in ipairs(default_language_servers) do
+  lspconfig[value].setup({
+    capabilities = cmp_capabilities,
+    on_attach = default_on_attach,
+  })
+end
 
 lspconfig.lua_ls.setup({
   capabilities = cmp_capabilities,
+  on_attach = default_on_attach,
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if
@@ -299,37 +321,6 @@ lspconfig.lua_ls.setup({
     end
     return true
   end,
-})
-lspconfig.bashls.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.dockerls.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.ltex.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.pyright.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.rust_analyzer.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.svelte.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.terraformls.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.tsserver.setup({
-  capabilities = cmp_capabilities,
-})
-lspconfig.vimls.setup({
-  capabilities = cmp_capabilities,
-})
--- stylua: ignore
-lspconfig.yamlls.setup({
-  capabilities = cmp_capabilities,
 })
 
 -- }}}
