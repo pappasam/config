@@ -280,6 +280,7 @@ local default_language_servers = { -- no special modifications required
   "dockerls",
   "jsonls",
   "ltex",
+  "marksman",
   "pyright",
   "rust_analyzer",
   "svelte",

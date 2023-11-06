@@ -304,6 +304,7 @@ function languageserver-install() {
     yaml-language-server
   asdfl lua-language-server
   asdfl terraform-ls
+  sudo snap install marksman
 }
 
 function ltex-install() {
