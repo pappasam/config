@@ -216,8 +216,9 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
+  autocmd LspProgress * lua vim.notify(vim.lsp.status())
   " https://github.com/neovim/neovim/issues/20456
-  autocmd! ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
+  autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
 augroup end
 
 " }}}
