@@ -379,7 +379,6 @@ function pipx-install() {
   local for_pipx=(
     cookiecutter
     httpie
-    nginx-language-server
     nginxfmt
     pgcli
     poetry
