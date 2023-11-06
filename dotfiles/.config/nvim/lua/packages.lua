@@ -230,8 +230,12 @@ ts.setup({
 
 -- }}}
 -- nvim-cmp {{{
+-- https://github.com/hrsh7th/nvim-cmp
+-- https://github.com/hrsh7th/cmp-nvim-lsp
 
 local cmp = require("cmp")
+
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 cmp.setup({
   snippet = {
@@ -259,16 +263,21 @@ cmp.setup({
   }),
 })
 
--- Set up lspconfig.
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 -- }}}
 -- lsp.txt {{{
 -- :help lsp.txt
 
+-- Set up lspconfig.
+local default_capabilities = vim.tbl_deep_extend(
+  "force",
+  vim.lsp.protocol.make_client_capabilities(),
+  cmp_nvim_lsp.default_capabilities()
+)
+-- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
+default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
+  false
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, cmp.config.window.bordered())
-
 vim.lsp.handlers["textDocument/signatureHelp"] =
   vim.lsp.with(vim.lsp.handlers.signature_help, cmp.config.window.bordered())
 
@@ -313,12 +322,12 @@ local default_language_servers = { -- no special modifications required
 }
 for _, value in ipairs(default_language_servers) do
   lspconfig[value].setup({
-    capabilities = cmp_capabilities,
+    capabilities = default_capabilities,
     on_attach = default_on_attach,
   })
 end
 lspconfig.lua_ls.setup({
-  capabilities = cmp_capabilities,
+  capabilities = default_capabilities,
   on_attach = default_on_attach,
   on_init = function(client)
     local path = client.workspace_folders[1].name
@@ -349,7 +358,7 @@ lspconfig.lua_ls.setup({
   end,
 })
 lspconfig.ltex.setup({
-  capabilities = cmp_capabilities,
+  capabilities = default_capabilities,
   on_attach = default_on_attach,
   settings = {
     ltex = {
@@ -384,7 +393,7 @@ lspconfig.ltex.setup({
   },
 })
 lspconfig.pyright.setup({
-  capabilities = cmp_capabilities,
+  capabilities = default_capabilities,
   on_attach = default_on_attach,
   settings = {
     python = {
@@ -398,7 +407,7 @@ lspconfig.pyright.setup({
   },
 })
 lspconfig.yamlls.setup({
-  capabilities = cmp_capabilities,
+  capabilities = default_capabilities,
   on_attach = default_on_attach,
   filetypes = { "yaml" },
   settings = {
