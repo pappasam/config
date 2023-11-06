@@ -283,6 +283,7 @@ local default_language_servers = { -- no special modifications required
   "html",
   "jsonls",
   "marksman",
+  "mdx_analyzer",
   "nginx_language_server",
   "prismals",
   "pyright",
