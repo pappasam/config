@@ -4,9 +4,10 @@ lua require('packages')
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
-  " Autocompletion And IDE Features
+  " Language Server (LSP)
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
   call a:packager.add('https://github.com/simrat39/symbols-outline.nvim')
+  " Autocompletion
   call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
   call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
   call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
