@@ -301,129 +301,119 @@ local getPythonPath = function()
   return vim.env.VIRTUAL_ENV .. "/bin/python"
 end
 
-local default_language_servers = { -- no special modifications required
-  "bashls",
-  "cssls",
-  "docker_compose_language_service",
-  "dockerls",
-  "gopls",
-  "html",
-  "jsonls",
-  "mdx_analyzer",
-  "nginx_language_server",
-  "prismals",
-  "r_language_server",
-  "rust_analyzer",
-  "svelte",
-  "taplo",
-  "terraformls",
-  "tsserver",
-  "vimls",
-}
-for _, value in ipairs(default_language_servers) do
-  lspconfig[value].setup({
-    capabilities = default_capabilities,
-    on_attach = default_on_attach,
-  })
-end
-lspconfig.lua_ls.setup({
-  capabilities = default_capabilities,
-  on_attach = default_on_attach,
-  on_init = function(client)
-    local path = client.workspace_folders[1].name
-    if
-      not fs_stat(path .. "/.luarc.json")
-      and not fs_stat(path .. "/.luarc.jsonc")
-    then
-      client.config.settings =
-        vim.tbl_deep_extend("force", client.config.settings, {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                vim.env.VIMRUNTIME,
+local language_servers = {
+  bashls = {},
+  cssls = {},
+  docker_compose_language_service = {},
+  dockerls = {},
+  gopls = {},
+  html = {},
+  jsonls = {},
+  ltex = {
+    settings = {
+      ltex = {
+        language = "en-US",
+        disabledRules = {
+          ["en-US"] = {
+            "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
+            "WHITESPACE_RULE",
+          },
+        },
+        dictionary = {
+          ["en-US"] = {
+            "DAG",
+            "Brayan",
+            "isort",
+            "docformatter",
+            "Anat",
+            "Anshu",
+            "Neovim",
+            "Elrond",
+            "coc",
+            "nvim",
+            "DAGs",
+            "Dotfiles",
+            "EKS",
+            "Filetype",
+            "PyCQA",
+            "Roeca",
+            "dotfiles",
+            "filetype",
+            "ingestions",
+          },
+        },
+      },
+    },
+  },
+  lua_ls = {
+    on_init = function(client)
+      local path = client.workspace_folders[1].name
+      if
+        not fs_stat(path .. "/.luarc.json")
+        and not fs_stat(path .. "/.luarc.jsonc")
+      then
+        client.config.settings =
+          vim.tbl_deep_extend("force", client.config.settings, {
+            Lua = {
+              runtime = {
+                version = "LuaJIT",
+              },
+              workspace = {
+                checkThirdParty = false,
+                library = {
+                  vim.env.VIMRUNTIME,
+                },
               },
             },
+          })
+        client.notify(
+          "workspace/didChangeConfiguration",
+          { settings = client.config.settings }
+        )
+      end
+      return true
+    end,
+  },
+  mdx_analyzer = {},
+  nginx_language_server = {},
+  prismals = {},
+  pyright = {
+    settings = {
+      python = {
+        pythonPath = getPythonPath(),
+      },
+    },
+  },
+  r_language_server = {},
+  rust_analyzer = {},
+  svelte = {},
+  taplo = {},
+  terraformls = {},
+  tsserver = {},
+  vimls = {},
+  yamlls = {
+    filetypes = { "yaml" },
+    settings = {
+      yaml = {
+        schemas = {
+          kubernetes = "/kubernetes/**",
+          -- ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
+          ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
+          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
+            "/*open-api*.yml",
+            "/*open-api*.yaml",
           },
-        })
-      client.notify(
-        "workspace/didChangeConfiguration",
-        { settings = client.config.settings }
-      )
-    end
-    return true
-  end,
-})
-lspconfig.ltex.setup({
-  capabilities = default_capabilities,
-  on_attach = default_on_attach,
-  settings = {
-    ltex = {
-      language = "en-US",
-      disabledRules = {
-        ["en-US"] = { "ENGLISH_WORD_REPEAT_BEGINNING_RULE", "WHITESPACE_RULE" },
-      },
-      dictionary = {
-        ["en-US"] = {
-          "DAG",
-          "Brayan",
-          "isort",
-          "docformatter",
-          "Anat",
-          "Anshu",
-          "Neovim",
-          "Elrond",
-          "coc",
-          "nvim",
-          "DAGs",
-          "Dotfiles",
-          "EKS",
-          "Filetype",
-          "PyCQA",
-          "Roeca",
-          "dotfiles",
-          "filetype",
-          "ingestions",
         },
       },
     },
   },
-})
-lspconfig.pyright.setup({
-  capabilities = default_capabilities,
-  on_attach = default_on_attach,
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = "openFilesOnly",
-      },
-      pythonPath = getPythonPath(),
-    },
-  },
-})
-lspconfig.yamlls.setup({
-  capabilities = default_capabilities,
-  on_attach = default_on_attach,
-  filetypes = { "yaml" },
-  settings = {
-    yaml = {
-      schemas = {
-        kubernetes = "/kubernetes/**",
-        -- ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
-        ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
-        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
-          "/*open-api*.yml",
-          "/*open-api*.yaml",
-        },
-      },
-    },
-  },
-})
+}
+for server, server_config in pairs(language_servers) do
+  lspconfig[server].setup(vim.tbl_deep_extend("force", {
+    capabilities = default_capabilities,
+    on_attach = default_on_attach,
+  }, server_config))
+end
 
 -- }}}
 -- symbols-outline.nvim_lsp {{{
