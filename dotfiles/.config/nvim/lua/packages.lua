@@ -310,6 +310,20 @@ local language_servers = {
   html = {},
   jsonls = {},
   ltex = {
+    filetypes = {
+      "bib",
+      "gitcommit",
+      "markdown",
+      "markdown.mdx",
+      "org",
+      "pandoc",
+      "plaintex",
+      "quarto",
+      "rmd",
+      "rnoweb",
+      "rst",
+      "tex",
+    },
     settings = {
       ltex = {
         language = "en-US",
