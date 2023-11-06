@@ -31,20 +31,27 @@ export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installin
 export SAVEHIST=5000 # how many lines of history to save to disk
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # disable python venv prompt so I can configure myself
 
-function path_ladd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="$1${PATH:+":$PATH"}"; fi; }
-function path_radd() { if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then PATH="${PATH:+"$PATH:"}$1"; fi; }
-path_ladd "$HOME/bin"
-path_ladd "$HOME/.bin"
-path_ladd "$HOME/.local/bin"
-path_ladd "$HOME/.opam/default/bin"
-path_ladd "$HOME/config/bin"
-export PATH
-
 # shellcheck source=/dev/null
 function include() { [[ -f "$1" ]] && source "$1" ; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
+function rm_from_path() { # $1: path to remove
+  PATH=$(echo "$PATH" | tr ':' '\n' | grep -v "^${1}$" | tr '\n' ':' | sed 's/:$//')
+}
+function path_ladd() { # $1 path to add
+  rm_from_path "$1"
+  PATH="$1${PATH:+":$PATH"}"
+}
+function path_radd() { # $1 path to add
+  rm_from_path "$1"
+  PATH="${PATH:+"$PATH:"}$1"
+}
+path_ladd "$HOME/bin"
+path_ladd "$HOME/.bin"
+path_ladd "$HOME/.local/bin"
+path_ladd "$HOME/config/bin"
+export PATH
 
 PS1_COLOR_BRIGHT_BLUE="\033[38;5;115m"
 PS1_COLOR_RED="\033[0;31m"
@@ -303,13 +310,19 @@ function languageserver-install() {
     vim-language-server \
     vscode-langservers-extracted \
     yaml-language-server
-  pip install -U \
-    nginx-language-server \
-    pyright
   asdfl lua-language-server
   asdfl terraform-ls
   cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
+  local for_pipx=(
+    nginx-language-server
+    pyright
+  )
+  # shellcheck disable=SC2128
+  for arg in $for_pipx; do
+    pipx install "$arg"
+    pipx upgrade "$arg"
+  done
 }
 
 function ltex-install() {
@@ -390,8 +403,8 @@ function pipx-install() {
     # shellcheck disable=SC2128
     for arg in $for_pipx; do
       # We avoid reinstall because it won't install uninstalled pacakges
-      pipx uninstall "$arg"
       pipx install "$arg"
+      pipx upgrade "$arg"
     done
     pipx inject poetry poetry-plugin-up
   else
