@@ -294,6 +294,7 @@ function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
 
 function languageserver-install() {
   npm install --no-save -g \
+    @prisma/language-server \
     bash-language-server \
     dockerfile-language-server-nodejs \
     svelte-language-server \

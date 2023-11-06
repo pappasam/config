@@ -284,6 +284,7 @@ local default_language_servers = { -- no special modifications required
   "jsonls",
   "marksman",
   "nginx_language_server",
+  "prismals",
   "pyright",
   "r_language_server",
   "rust_analyzer",
