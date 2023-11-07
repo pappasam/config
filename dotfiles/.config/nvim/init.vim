@@ -211,8 +211,8 @@ augroup end
 
 augroup custom_lsp
   autocmd!
-  autocmd LspAttach * echom 'LSP ' .. &ft .. ': starting...'
-  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom 'LSP ' .. &ft .. ': started!'
+  autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
+  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
   autocmd LspProgress * lua vim.notify(vim.lsp.status())
 augroup end
 
