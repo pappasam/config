@@ -271,7 +271,7 @@ nnoremap <Leader>de <Cmd>lua vim.diagnostic.enable()<CR>
 nnoremap ]g <Cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap [g <Cmd>lua vim.diagnostic.goto_prev()<CR>
 " https://github.com/simrat39/symbols-outline.nvim
-nnoremap <Space>l <Cmd>SymbolsOutline<CR>
+nnoremap <Space>l zR<Cmd>SymbolsOutline<CR>
 " https://github.com/hrsh7th/vim-vsnip
 imap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
 smap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
