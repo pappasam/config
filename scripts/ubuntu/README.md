@@ -6,14 +6,6 @@ Most of these scripts will work on the latest stable versions of Ubuntu. Unless 
 
 This section of the README describes useful programs you will need to install - or configure - manually, when the time is right.
 
-### Default shell as zsh
-
-If you would like to make zsh your default shell, migrate your `.bashrc` to `.zshrc` and run the following (one time) from your terminal:
-
-```bash
-chsh -s "$(which zsh)"
-```
-
 ### Less
 
 If you'd like to use the latest version of `less`, do the following:
@@ -31,10 +23,6 @@ Use: <https://keeweb.info/>
 If you encouter errors opening application, add `--no-sandbox` to `/usr/share/applications/keeweb.desktop`. See <https://github.com/keeweb/keeweb/issues/1975>
 
 Relevant line: `Exec=keeweb --no-sandbox %u`
-
-### Insomnia
-
-Install the latest version from: <https://insomnia.rest/download>
 
 ### Fonts
 

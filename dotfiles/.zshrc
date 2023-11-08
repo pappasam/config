@@ -18,6 +18,7 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   zinit ice depth=1 && zinit light romkatv/powerlevel10k
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
+function zinit-update { zinit self-update && zinit update --all ; }
 setopt PROMPT_SUBST AUTOCD AUTO_LIST LIST_AMBIGUOUS LIST_BEEP COMPLETE_ALIASES HIST_IGNORE_SPACE APPENDHISTORY SHAREHISTORY INCAPPENDHISTORY
 unsetopt MENU_COMPLETE AUTO_REMOVE_SLASH
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook

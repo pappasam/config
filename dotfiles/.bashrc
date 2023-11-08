@@ -502,10 +502,6 @@ function upgrade() {
   asdf uninstall neovim nightly && \
     asdf install neovim nightly && \
     asdf global neovim nightly
-  if command -v zinit > /dev/null; then
-    zinit self-update
-    zinit update --all
-  fi
   languageserver-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
   nvim -c 'TSUpdate' ~/.config/nvim/init.vim
