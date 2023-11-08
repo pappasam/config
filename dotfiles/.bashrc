@@ -140,7 +140,6 @@ alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gm='git commit'
 alias gma='git add --all && git commit'
-alias gop='gh browse'
 alias gp='git remote prune origin && git remote set-head origin -a'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
@@ -177,6 +176,21 @@ function gdl() {
   fi
   branch_current=$(git branch --show-current)
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
+}
+
+function gop() {
+  local giturl
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+    return 1
+  elif ! giturl=$(gh browse --no-browser "$1"); then
+    echo 'Error finding url'
+    return 1
+  fi
+  ( nohup firefox "$giturl" > /dev/null 2>&1 & ) > /dev/null 2>&1
+  # shellcheck disable=SC2181
+  if [ $? -ne 0 ]; then
+    return $?
+  fi
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
