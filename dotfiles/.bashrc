@@ -186,7 +186,7 @@ function gop() {
     echo 'Error finding url'
     return 1
   fi
-  ( nohup firefox "$giturl" > /dev/null 2>&1 & ) > /dev/null 2>&1
+  ( nohup firefox --new-window "$giturl" > /dev/null 2>&1 & ) > /dev/null 2>&1
   # shellcheck disable=SC2181
   if [ $? -ne 0 ]; then
     return $?
