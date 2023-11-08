@@ -5,7 +5,7 @@ export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
+export GDK_SCALE=0             # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
 export HISTCONTROL=ignorespace # ignore leading space, where to save history to disk
 export HISTFILE=~/.bash_history
 export HISTSIZE=5000 # how many lines of history to keep in memory
@@ -25,14 +25,14 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=79
 export MESA_DEBUG=silent # silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
 export PAGER='less -R'
-export PROMPT_COMMAND='auto_venv_precmd' # commands to execute before a bash prompt.
-export PYTHON_CONFIGURE_OPTS='--enable-shared' # For installing R through ASDF, need shared libraries in Python and R
+export PROMPT_COMMAND='auto_venv_precmd'                         # commands to execute before a bash prompt.
+export PYTHON_CONFIGURE_OPTS='--enable-shared'                   # For installing R through ASDF, need shared libraries in Python and R
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
-export SAVEHIST=5000 # how many lines of history to save to disk
-export VIRTUAL_ENV_DISABLE_PROMPT=1 # disable python venv prompt so I can configure myself
+export SAVEHIST=5000                                             # how many lines of history to save to disk
+export VIRTUAL_ENV_DISABLE_PROMPT=1                              # disable python venv prompt so I can configure myself
 
 # shellcheck source=/dev/null
-function include() { [[ -f "$1" ]] && source "$1" ; }
+function include() { [[ -f "$1" ]] && source "$1"; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
@@ -65,8 +65,8 @@ function ps1_git_color() {
   local git_status
   local branch
   local git_commit
-  git_status="$(git status 2> /dev/null)"
-  branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  git_status="$(git status 2>/dev/null)"
+  branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
   git_commit="$(git --no-pager diff --stat "origin/${branch}" 2>/dev/null)"
   if [[ $git_status == "" ]]; then
     echo -e "$PS1_COLOR_SILVER"
@@ -84,7 +84,7 @@ function ps1_git_branch() {
   local git_status
   local on_branch
   local on_commit
-  git_status="$(git status 2> /dev/null)"
+  git_status="$(git status 2>/dev/null)"
   on_branch="On branch ([^${IFS}]*)"
   on_commit="HEAD detached at ([^${IFS}]*)"
   if [[ $git_status =~ $on_branch ]]; then
@@ -97,7 +97,7 @@ function ps1_git_branch() {
     echo ""
   fi
 }
-function ps1_python_virtualenv() { if [[ -z $VIRTUAL_ENV ]]; then echo ""; else echo "($(basename "$VIRTUAL_ENV"))"; fi ; }
+function ps1_python_virtualenv() { if [[ -z $VIRTUAL_ENV ]]; then echo ""; else echo "($(basename "$VIRTUAL_ENV"))"; fi; }
 PS1_DIR="\[$PS1_BOLD\]\[$PS1_COLOR_BRIGHT_BLUE\]\w"
 PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
 PS1_VIRTUAL_ENV="\[$PS1_BOLD\]\$(ps1_python_virtualenv)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
@@ -162,7 +162,7 @@ function despace-filename() {
 }
 
 function gdl() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   fi
   local branch_default
@@ -180,13 +180,13 @@ function gdl() {
 
 function gop() {
   local giturl
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   elif ! giturl=$(gh browse --no-browser "$1"); then
     echo 'Error finding url'
     return 1
   fi
-  ( nohup firefox --new-window "$giturl" > /dev/null 2>&1 & ) > /dev/null 2>&1
+  (nohup firefox --new-window "$giturl" >/dev/null 2>&1 &) >/dev/null 2>&1
   # shellcheck disable=SC2181
   if [ $? -ne 0 ]; then
     return $?
@@ -211,7 +211,7 @@ function gitignore() {
       if [ $count -ne $# ]; then
         echo
       fi
-      (( count++ ))
+      ((count++))
     done
   fi
 }
@@ -227,34 +227,34 @@ function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
   local slashes=${PWD//[^\/]/}
   local current_directory="$PWD"
-  for (( n=${#slashes}; n>0; --n )); do
+  for ((n = ${#slashes}; n > 0; --n)); do
     if [ -d "$current_directory/$venv_name" ]; then
       # shellcheck source=/dev/null
       source "$current_directory/$venv_name/bin/activate" && return
     fi
     local current_directory="$current_directory/.."
   done
-  if command -v deactivate > /dev/null; then
+  if command -v deactivate >/dev/null; then
     deactivate
   fi
 }
 
 export AUTO_VIRTUALENV=1
-function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi ; }
+function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi; }
 
 function poetryinit() {
   if [ -f pyproject.toml ]; then
     echo 'pyproject.toml exists, aborting' && return 1
   fi
-  poetry init --no-interaction &> /dev/null
-  cat ~/config/docs/samples/base-pyproject.toml >> pyproject.toml
+  poetry init --no-interaction &>/dev/null
+  cat ~/config/docs/samples/base-pyproject.toml >>pyproject.toml
   toml-sort --in-place pyproject.toml
   touch README.md
 }
 
 function pyinit() {
   poetryinit || return 1
-  gitignore Python.gitignore | grep -v instance/ > .gitignore
+  gitignore Python.gitignore | grep -v instance/ >.gitignore
   python -m venv .venv && va && poetry install || return
   cp ~/config/docs/samples/base-main.py ./main.py
   cp ~/config/docs/samples/noxfile.py .
@@ -342,7 +342,7 @@ function languageserver-install() {
 }
 
 function ltex-install() {
-  curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz > ./ltex.tar.gz
+  curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz >./ltex.tar.gz
   tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
 }
 
@@ -386,7 +386,7 @@ function nodeglobal-install() {
     prettier-plugin-svelte \
     tree-sitter-cli \
     write-good
-  }
+}
 
 function pydev-install() {
   local for_pip=(
@@ -415,7 +415,7 @@ function pipx-install() {
     ruff
     toml-sort
   )
-  if command -v pipx > /dev/null; then
+  if command -v pipx >/dev/null; then
     # shellcheck disable=SC2128
     for arg in $for_pipx; do
       # We avoid reinstall because it won't install uninstalled pacakges
@@ -430,8 +430,9 @@ function pipx-install() {
 
 function goglobal-install() {
   go install github.com/jedib0t/go-wordle@latest
-  go install github.com/nishanths/license/v5@latest
   go install github.com/jesseduffield/lazygit@latest
+  go install github.com/nishanths/license/v5@latest
+  go install mvdan.cc/sh/v3/cmd/shfmt@latest
   asdf reshim golang
 }
 
@@ -460,14 +461,13 @@ function alacritty-install() {
   # man page
   sudo mkdir -p /usr/local/share/man/man1
   sudo mkdir -p /usr/local/share/man/man5
-  scdoc < extra/man/alacritty.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
-  scdoc < extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
-  scdoc < extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz > /dev/null
-  scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/ala
+  scdoc <extra/man/alacritty.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty.1.gz >/dev/null
+  scdoc <extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz >/dev/null
+  scdoc <extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz >/dev/null
+  scdoc <extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/ala
 }
 
 function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
-
 
 function asdfpurge() {
   if [ $# -ne 1 ]; then
@@ -499,8 +499,8 @@ function upgrade() {
   fi
   popd || return
   asdf install neovim latest
-  asdf uninstall neovim nightly && \
-    asdf install neovim nightly && \
+  asdf uninstall neovim nightly &&
+    asdf install neovim nightly &&
     asdf global neovim nightly
   languageserver-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
