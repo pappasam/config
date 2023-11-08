@@ -394,7 +394,6 @@ function pydev-install() {
     ipython
     mypy
     pip
-    ruff
     wheel
   )
   # shellcheck disable=SC2128,SC2086
@@ -413,6 +412,7 @@ function pipx-install() {
     poetry
     pre-commit
     restview
+    ruff
     toml-sort
   )
   if command -v pipx > /dev/null; then
