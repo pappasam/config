@@ -1,6 +1,6 @@
 " Packages {{{
 
-lua require('packages')
+lua require('packages') -- ~/.config/nvim/lua/packages.lua
 
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
@@ -172,8 +172,6 @@ augroup filetype_custom
   autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME .. '/.config/nvim/pack/packager/opt/vim-packager'])
         \ | packadd vim-packager
         \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-        \ | let &l:path .= ','..stdpath('config')..'/lua'
-        \ | setlocal suffixesadd^=.lua
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
@@ -213,13 +211,10 @@ augroup custom_lsp
   autocmd!
   autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
   autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
-  " commented out because it generates lots of messages
-  " autocmd LspProgress * lua vim.notify(vim.lsp.status())
 augroup end
 
 augroup miscellaneous_custom
   autocmd!
-  autocmd BufEnter NvimTree* setlocal statusline=\ NvimTree\ %#CursorLine#
   autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
