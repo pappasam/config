@@ -71,7 +71,7 @@ set shadafile=NONE
 set shortmess+=cI
 set showtabline=2
 set signcolumn=number
-set spell spelllang=en_us
+set spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
@@ -191,6 +191,8 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  " spell
+  autocmd FileType markdown* setlocal spell
   " mappings
   autocmd FileType man,info,help,qf
         \ nnoremap <buffer> d <C-d> |
