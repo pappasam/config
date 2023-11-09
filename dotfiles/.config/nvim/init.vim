@@ -15,7 +15,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/hrsh7th/cmp-emoji')
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
-  " TreeSitter
+  " Tree Sitter
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
@@ -71,7 +71,7 @@ set shadafile=NONE
 set shortmess+=cI
 set showtabline=2
 set signcolumn=number
-set spelllang=en_us
+set spell spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300

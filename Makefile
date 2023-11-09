@@ -17,7 +17,7 @@ clean: ## Remove stowed links
 	stow --target $(HOME) -D dotfiles
 
 .PHONY: setup-ubuntu
-setup-ubuntu: ## Setup ubuntu for the first time
+setup-ubuntu: ## Setup Ubuntu for the first time
 	mkdir -p ~/.config/sensitive
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
