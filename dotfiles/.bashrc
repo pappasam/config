@@ -180,6 +180,7 @@ function gdl() {
 
 function gop() {
   local giturl
+  local return_result
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   elif ! giturl=$(gh browse --no-browser "$1"); then
@@ -187,9 +188,9 @@ function gop() {
     return 1
   fi
   (nohup firefox --new-window "$giturl" >/dev/null 2>&1 &) >/dev/null 2>&1
-  # shellcheck disable=SC2181
-  if [ $? -ne 0 ]; then
-    return $?
+  return_result=$?
+  if [ $return_result -ne 0 ]; then
+    return $return_result
   fi
 }
 
