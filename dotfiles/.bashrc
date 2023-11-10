@@ -332,6 +332,7 @@ function languageserver-install() {
   cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
   local for_pipx=(
+    jedi-language-server
     nginx-language-server
     pyright
   )
