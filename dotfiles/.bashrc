@@ -141,8 +141,10 @@ alias gll='git --no-pager branch --verbose --remotes --list'
 alias gm='git commit'
 alias gma='git add --all && git commit'
 alias gp='git remote prune origin && git remote set-head origin -a'
-alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+# alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
+# alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias push='git push -u'
+alias pull='git pull'
 
 # General
 alias gn='gio open'
@@ -155,9 +157,13 @@ alias publicip='curl -s checkip.amazonaws.com'
 
 function despace-filename() {
   if [ $# -eq 0 ]; then
-    while read -r filename; do mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"; done
+    while read -r filename; do
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
+    done
   else
-    for filename in "$@"; do mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"; done
+    for filename in "$@"; do
+      mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
+    done
   fi
 }
 
@@ -217,11 +223,21 @@ function gitignore() {
   fi
 }
 
-function github-list { curl -u "$1" "https://api.github.com/orgs/$2/repos?per_page=100&page=$3"; } # username, organization, page
+function github-list { # username, organization, page
+  curl -u "$1" "https://api.github.com/orgs/$2/repos?per_page=100&page=$3"
+}
 
-function git-mod() { if git branch &>/dev/null; then fd --type f --exec git log -1 --format='/%ad..{}' --date=short {} | tree --fromfile -rC . | less -r; else return 1; fi; }
+function git-mod() {
+  if git branch &>/dev/null; then
+    fd --type f --exec git log -1 --format='/%ad..{}' --date=short {} | tree --fromfile -rC . | less -r
+  else
+    return 1
+  fi
+}
 
-function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
+function vplug() {
+  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
+}
 
 VIRTUAL_ENV_DEFAULT=.venv
 function va() {
