@@ -369,9 +369,7 @@ require("nvim-tree").setup({
   renderer = {
     full_name = true,
     symlink_destination = false,
-    root_folder_label = function(path)
-      return vim.fn.fnamemodify(path, ":t")
-    end,
+    root_folder_label = false,
   },
   filters = {
     dotfiles = true,

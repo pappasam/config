@@ -292,7 +292,7 @@ nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
-nnoremap <space>j <Cmd>NvimTreeFindFileToggle<CR>
+nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>pwd<CR>
 
 " }}}
 " Commands {{{
