@@ -143,7 +143,7 @@ alias gma='git add --all && git commit'
 alias gp='git remote prune origin && git remote set-head origin -a'
 # alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 # alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias push='git push -u'
+alias push='git push'
 alias pull='git pull'
 
 # General

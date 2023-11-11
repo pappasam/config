@@ -17,6 +17,7 @@
   rebase = true
 [push]
   default = matching
+  autoSetupRemote = true
 [commit]
   verbose = true
 [credential "https://github.com"]
