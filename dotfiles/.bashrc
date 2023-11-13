@@ -133,7 +133,7 @@ alias b='nvim ~/config/dotfiles/.bashrc'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
 
 # Git
-alias g='git status || return 0'
+alias g='git status'
 alias gd='git diff'
 alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --list'
