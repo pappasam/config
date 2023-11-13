@@ -21,7 +21,7 @@ sudo apt install -y \
   autoconf \
   automake \
   bison \
-  bsdgames  \
+  bsdgames \
   bsdgames-nonfree \
   build-essential \
   ca-certificates \
@@ -30,7 +30,7 @@ sudo apt install -y \
   cmus \
   cmus-plugin-ffmpeg \
   colordiff \
-  cowsay  \
+  cowsay \
   cpanminus \
   curl \
   dict \
