@@ -365,13 +365,13 @@ endfunction
 command! CleanUnicode call s:clean_unicode()
 function! s:clean_unicode()
   let save = winsaveview()
-  silent! %s/”/"/g
-  silent! %s/“/"/g
-  silent! %s/’/'/g
-  silent! %s/‘/'/g
-  silent! %s/—/-/g
-  silent! %s/…/.../g
-  silent! %s/​//g
+  silent! %substitute/”/"/g
+  silent! %substitute/“/"/g
+  silent! %substitute/’/'/g
+  silent! %substitute/‘/'/g
+  silent! %substitute/—/-/g
+  silent! %substitute/…/.../g
+  silent! %substitute/​//g
   call winrestview(save)
 endfunction
 
@@ -379,11 +379,11 @@ command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
   let save = winsaveview()
   if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
-    silent! execute '%s/^\s\+$//e'
-    silent! execute '%g/\S\s$/s/\s$//g'
-    silent! execute '%s/\s\s\s\+$/  /e'
+    silent!              %substitute/^\s\+$//e
+    silent! %global/\S\s$/substitute/\s$//g
+    silent!              %substitute/\s\s\s\+$/  /e
   else
-    silent! execute '%s/\s\+$//e'
+    silent! %substitute/\s\+$//e
   endif
   call winrestview(save)
 endfunction
