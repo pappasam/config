@@ -378,8 +378,7 @@ endfunction
 command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
   let save = winsaveview()
-  if &filetype ==? 'markdown'
-    " Only trailing spaces, exactly one trailing space, and 2+ trailing spaces
+  if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
     silent! execute '%s/^\s\+$//e'
     silent! execute '%g/\S\s$/s/\s$//g'
     silent! execute '%s/\s\s\s\+$/  /e'
@@ -391,11 +390,10 @@ endfunction
 
 command! Preview call s:preview()
 function! s:preview()
-  if &filetype ==? 'markdown'
-    " https://github.com/iamcco/markdown-preview.nvim
+  if &filetype ==? 'markdown' " https://github.com/iamcco/markdown-preview.nvim
     silent! MarkdownPreview
   else
-    silent! execute "!gio open '%:p'"
+    echohl WarningMsg | echom ':Preview not supported for this filetype' | echohl None
   endif
 endfunction
 
