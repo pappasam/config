@@ -393,7 +393,7 @@ function! s:preview()
   if &filetype ==? 'markdown' " https://github.com/iamcco/markdown-preview.nvim
     silent! MarkdownPreview
   elseif &filetype ==? 'mermaid'
-    let tempfile = printf('/tmp/preview-%i.pdf', rand())
+    let tempfile = printf('/tmp/preview-mermaid-%i.pdf', rand())
     call jobstart(printf("echo '%1$s' | entr -ns 'mmdc --pdfFit -i \'%1$s\' -o %2$s'", expand('%'), tempfile))
     call jobstart(printf('while [ ! -f %1$s ]; do sleep 0.5; done; zathura %1$s', tempfile))
   else
