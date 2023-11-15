@@ -396,6 +396,7 @@ function perlglobal-install() {
 
 function nodeglobal-install() {
   npm install --no-save -g \
+    @mermaid-js/mermaid-cli \
     nginx-linter \
     nginxbeautifier \
     prettier \
