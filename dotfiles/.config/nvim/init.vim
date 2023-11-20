@@ -228,7 +228,6 @@ augroup end
 " }}}
 " Mappings {{{
 
-nnoremap zS <Cmd>Inspect<CR>
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
