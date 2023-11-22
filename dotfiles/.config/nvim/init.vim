@@ -172,6 +172,10 @@ augroup filetype_custom
   autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME .. '/.config/nvim/pack/packager/opt/vim-packager'])
         \ | packadd vim-packager
         \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+  " quickfix
+  autocmd FileType qf nnoremap <buffer> <C-v> <Cmd>QfVsplit<CR>
+  autocmd FileType qf nnoremap <buffer> <C-x> <Cmd>QfSplit<CR>
+  autocmd FileType qf nnoremap <buffer> <C-t> <Cmd>QfTabedit<CR>
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
@@ -293,6 +297,7 @@ xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>pwd<CR>
 
+
 " }}}
 " Commands {{{
 
@@ -398,6 +403,43 @@ function! s:preview()
   else
     echohl WarningMsg | echom ':Preview not supported for this filetype' | echohl None
   endif
+endfunction
+
+command! QfVsplit call s:quickfix_vsplit()
+function! s:quickfix_vsplit()
+  set lazyredraw
+  execute "normal \<CR>"
+  vsplit
+  wincmd h
+  execute "normal \<C-o>"
+  wincmd l
+  set nolazyredraw
+endfunction
+
+command! QfSplit call s:quickfix_split()
+function! s:quickfix_split()
+  set lazyredraw
+  execute "normal \<CR>"
+  split
+  wincmd j
+  execute "normal \<C-o>"
+  wincmd k
+  set nolazyredraw
+endfunction
+
+command! QfTabedit call s:quickfix_tabedit()
+function! s:quickfix_tabedit()
+  set lazyredraw
+  execute "normal \<CR>"
+  split
+  wincmd j
+  execute "normal \<C-o>"
+  wincmd k
+  wincmd T
+  wincmd gT
+  wincmd j
+  wincmd gt
+  set nolazyredraw
 endfunction
 
 " }}}
