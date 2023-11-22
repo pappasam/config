@@ -521,6 +521,7 @@ function upgrade() {
     asdf install neovim nightly &&
     asdf global neovim nightly
   languageserver-install
+  nodeglobal-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
   nvim -c 'TSUpdate' ~/.config/nvim/init.vim
 }
