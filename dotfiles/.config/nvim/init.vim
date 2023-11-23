@@ -173,9 +173,10 @@ augroup filetype_custom
         \ | packadd vim-packager
         \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   " quickfix
-  autocmd FileType qf nnoremap <buffer> <C-v> <Cmd>QfVsplit<CR>
-  autocmd FileType qf nnoremap <buffer> <C-x> <Cmd>QfSplit<CR>
-  autocmd FileType qf nnoremap <buffer> <C-t> <Cmd>QfTabedit<CR>
+  autocmd FileType qf
+        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
+        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
+        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
@@ -297,7 +298,6 @@ xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>pwd<CR>
 
-
 " }}}
 " Commands {{{
 
@@ -405,41 +405,47 @@ function! s:preview()
   endif
 endfunction
 
-command! QfVsplit call s:quickfix_vsplit()
 function! s:quickfix_vsplit()
   set lazyredraw
-  execute "normal \<CR>"
-  vsplit
-  wincmd h
-  execute "normal \<C-o>"
-  wincmd l
-  set nolazyredraw
+  try
+    execute "normal \<CR>"
+    vsplit
+    wincmd h
+    execute "normal \<C-o>"
+    wincmd l
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
-command! QfSplit call s:quickfix_split()
 function! s:quickfix_split()
   set lazyredraw
-  execute "normal \<CR>"
-  split
-  wincmd j
-  execute "normal \<C-o>"
-  wincmd k
-  set nolazyredraw
+  try
+    execute "normal \<CR>"
+    split
+    wincmd j
+    execute "normal \<C-o>"
+    wincmd k
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
-command! QfTabedit call s:quickfix_tabedit()
 function! s:quickfix_tabedit()
   set lazyredraw
-  execute "normal \<CR>"
-  split
-  wincmd j
-  execute "normal \<C-o>"
-  wincmd k
-  wincmd T
-  wincmd gT
-  wincmd j
-  wincmd gt
-  set nolazyredraw
+  try
+    execute "normal \<CR>"
+    split
+    wincmd j
+    execute "normal \<C-o>"
+    wincmd k
+    wincmd T
+    wincmd gT
+    wincmd j
+    wincmd gt
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 " }}}
