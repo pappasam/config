@@ -271,7 +271,7 @@ function poetryinit() {
 function pyinit() {
   poetryinit || return 1
   gitignore Python.gitignore | grep -v instance/ >.gitignore
-  python -m venv .venv && va && poetry install || return
+  python -m venv .venv && va && poetry install --no-root || return
   cp ~/config/docs/samples/base-main.py ./main.py
   cp ~/config/docs/samples/noxfile.py .
   cp ~/config/docs/samples/Makefile.python ./Makefile
