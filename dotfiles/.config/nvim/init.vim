@@ -192,6 +192,8 @@ augroup filetype_custom
   autocmd FileType nginx setlocal iskeyword+=$
   autocmd FileType zsh,sh,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
+  " keywordprg
+  autocmd FileType vim setlocal keywordprg=:help
   " nofoldenable nolist
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
