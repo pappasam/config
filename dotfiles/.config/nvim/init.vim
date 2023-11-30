@@ -172,11 +172,6 @@ augroup filetype_custom
   autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME .. '/.config/nvim/pack/packager/opt/vim-packager'])
         \ | packadd vim-packager
         \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-  " quickfix
-  autocmd FileType qf
-        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
-        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
-        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
@@ -214,6 +209,12 @@ augroup filetype_custom
         \ nnoremap <buffer> <3-RightMouse> <C-o> |
         \ nnoremap <buffer> <4-RightMouse> <C-o> |
         \ nmap <buffer> <CR> K
+  autocmd FileType qf
+        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
+        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
+        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
+  autocmd FileType NvimTree
+        \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
 augroup end
 
 augroup custom_lsp
@@ -298,7 +299,7 @@ nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
-nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>pwd<CR>
+nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
 
 " }}}
 " Commands {{{
