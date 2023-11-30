@@ -1,3 +1,5 @@
+live_config_reload = false
+
 [colors]
 draw_bold_text_with_bright_colors = true
 primary = {background = "#0A0E14", foreground = "#B3B1AD"}
@@ -39,6 +41,7 @@ bindings = [
   {key = "LBracket", mods = "Control", mode = "Vi", action = "ClearSelection"},
   {key = "Q", mode = "Vi", action = "ScrollToBottom"},
   {key = "Q", mode = "Vi", action = "ToggleViMode"},
+  {key = "Space", mods = "Shift|Control", action = "None"},
   {key = 5, mods = "Shift", mode = "Vi", action = "Last"},
   {key = 6, mods = "Shift", mode = "Vi", action = "Bracket"},
   {key = 11, mods = "Shift", mode = "Vi", action = "FirstOccupied"}
