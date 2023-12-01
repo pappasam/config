@@ -76,6 +76,7 @@ local language_servers = {
   docker_compose_language_service = {},
   dockerls = {},
   gopls = {},
+  graphql = {},
   html = {},
   jsonls = {},
   ltex = {

@@ -354,6 +354,7 @@ function languageserver-install() {
     @prisma/language-server \
     bash-language-server \
     dockerfile-language-server-nodejs \
+    graphql-language-service-cli \
     svelte-language-server \
     typescript \
     typescript-language-server \
