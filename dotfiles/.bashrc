@@ -426,19 +426,21 @@ function nodeglobal-install() {
 }
 
 function pydev-install() {
-  local for_pip=(
-    bpython
-    ipython
-    mypy
-    pip
-    wheel
-  )
-  # shellcheck disable=SC2128,SC2086
-  pip install -U $for_pip
-  asdf reshim python
+  pip install -U \
+    bpython \
+    ipython \
+    mypy \
+    pip \
+    wheel \
+    && asdf reshim python
 }
 
-function pyglobal-install() { pip install -U pipx && pydev-install; }
+function pyglobal-install() {
+  pip install -U \
+    argcomplete \
+    pipx \
+    && pydev-install
+}
 
 function pipx-install() {
   local for_pipx=(
