@@ -157,7 +157,7 @@ augroup filetype_assignment
   autocmd!
   autocmd BufRead,BufNewFile,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
   autocmd BufRead,BufNewFile,BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml.docker-compose
+  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml
   autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown.mdx
   autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
   autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave

@@ -73,7 +73,6 @@ end
 local language_servers = {
   bashls = {},
   cssls = {},
-  docker_compose_language_service = {},
   dockerls = {},
   gopls = {},
   graphql = {},
@@ -159,7 +158,7 @@ local language_servers = {
       yaml = {
         schemas = {
           kubernetes = "/kubernetes/**",
-          -- ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
+          ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
           ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
           ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
             "/*open-api*.yml",
