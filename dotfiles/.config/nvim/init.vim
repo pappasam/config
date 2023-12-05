@@ -31,6 +31,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
   " Miscellaneous
   call a:packager.add('https://github.com/pappasam/papercolor-theme-slim')
+  call a:packager.add('https://github.com/Glench/Vim-Jinja2-Syntax')
   call a:packager.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:packager.add('https://github.com/fidian/hexmode')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
