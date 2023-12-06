@@ -367,7 +367,6 @@ require("nvim-autopairs").setup({
 
 require("nvim-tree").setup({
   disable_netrw = true,
-  hijack_directories = { enable = false },
   renderer = {
     full_name = true,
     symlink_destination = false,
