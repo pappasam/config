@@ -6,7 +6,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
   " Language Server (LSP)
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
-  call a:packager.add('https://github.com/simrat39/symbols-outline.nvim')
+  call a:packager.add('https://github.com/hedyhli/outline.nvim')
   " Autocompletion
   call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
   call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
@@ -275,8 +275,8 @@ nnoremap <Leader>dd <Cmd>lua vim.diagnostic.disable()<CR>
 nnoremap <Leader>de <Cmd>lua vim.diagnostic.enable()<CR>
 nnoremap ]g <Cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap [g <Cmd>lua vim.diagnostic.goto_prev()<CR>
-" https://github.com/simrat39/symbols-outline.nvim
-nnoremap <Space>l zR<Cmd>SymbolsOutline<CR>
+" https://github.com/hedyhli/outline.nvim
+nnoremap <Space>l zR<Cmd>Outline<CR>
 " https://github.com/hrsh7th/vim-vsnip
 imap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
 smap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
