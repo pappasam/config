@@ -85,10 +85,9 @@ function! CustomTabLine()
   let s = ''
   for i in range(1, tabnumber_max)
     let s ..= tabnumber_current == i ? '%#TabLineSel#' : '%#TabLine#'
-    let s ..= '%' .. i .. 'T' .. ' ' .. i .. ':%{CustomTabLabel(' .. i .. ')}'
-    let s ..= tabnumber_max == 1 ? ' ' : '%' .. i .. 'X ✗ %X'
+    let s ..= '%' .. i .. 'T' .. ' ' .. i .. ':%{CustomTabLabel(' .. i .. ')} '
   endfor
-  let s ..= '%#TabLineFill#%T%=%#TabLine#%10@CustomTabCloseVim@ ✗ %X'
+  let s ..= '%#TabLineFill#%T%=%#TabLine#'
   return s
 endfunction
 function! CustomTabLabel(n)
@@ -110,9 +109,6 @@ function! CustomTabLabel(n)
   else
     return bnamemodified .. postfix
   endif
-endfunction
-function! CustomTabCloseVim(n1, n2, n3, n4)
-  quitall
 endfunction
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:mapleader = ','
