@@ -96,16 +96,16 @@ function! CustomTabLabel(n)
   let postfix = ''
   for buf in buflist
     if bufname(buf) ==# 'focuswriting_abcdefg'
-      let postfix = '🎯'
+      let postfix = ':Focus'
       break
     endif
   endfor
   let bname = bufname(buflist[winnr - 1])
   let bnamemodified = fnamemodify(bname, ':t')
   if bnamemodified == ''
-    return '👻' .. postfix
+    return 'NONAME' .. postfix
   elseif bnamemodified =~ 'NvimTree'
-    return '🌲' .. postfix
+    return 'NvimTree' .. postfix
   else
     return bnamemodified .. postfix
   endif
@@ -250,10 +250,10 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
-nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
-nnoremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
-nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
-nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
+noremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
+noremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+noremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
+noremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <RightMouse> <LeftMouse>za
