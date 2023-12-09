@@ -301,6 +301,18 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), 
 " }}}
 " Commands {{{
 
+command! Q q
+command! Qa qa
+command! QA qa
+command! W w
+command! Wa wa
+command! WA wa
+command! Wq wq
+command! WQ wq
+command! Wqa wqa
+command! WQa wqa
+command! WQA wqa
+
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
