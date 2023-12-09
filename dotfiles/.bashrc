@@ -140,8 +140,11 @@ alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gp='git remote prune origin && git remote set-head origin -a'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
-# alias pull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias pull='git pull'
+alias gm='git commit'
+alias gmv='git commit --verbose'
+alias gma='git add . && git commit'
+alias gmav='git add . && git commit --verbose'
 
 # General
 alias gn='gio open'
@@ -195,26 +198,6 @@ function gop() {
   if [ $return_result -ne 0 ]; then
     return $return_result
   fi
-}
-
-function gm() {
-  local numlines
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
-  elif ! numlines=$(git diff --cached --numstat | awk '{added += $1; removed += $2} END {print added + removed}'); then
-    return 2
-  elif [ "$numlines" -gt 500 ]; then
-    git commit
-  else
-    git commit --verbose
-  fi
-}
-
-function gma() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
-  fi
-  git add --all && gm
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"

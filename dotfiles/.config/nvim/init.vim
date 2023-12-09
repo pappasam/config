@@ -312,6 +312,10 @@ command! WQ wq
 command! Wqa wqa
 command! WQa wqa
 command! WQA wqa
+command! Gm Git commit
+command! Gmv Git commit --verbose
+command! Gma Git add . | Git commit
+command! Gmav Git add . | Git commit --verbose
 
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
