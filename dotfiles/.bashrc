@@ -390,6 +390,7 @@ function rustglobal-install() {
   cargo install cargo-update
   cargo install csvlens
   cargo install fd-find
+  cargo install mdbook
   cargo install ripgrep
   cargo install sd
   cargo install stylua --features lua52 --features luau
