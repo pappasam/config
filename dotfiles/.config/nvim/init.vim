@@ -301,9 +301,9 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), 
 " }}}
 " Commands {{{
 
-command! Q q
-command! Qa qa
-command! QA qa
+command! -bang Q q<bang>
+command! -bang Qa qa<bang>
+command! -bang QA qa<bang>
 command! W w
 command! Wa wa
 command! WA wa
