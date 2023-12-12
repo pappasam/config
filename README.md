@@ -2,7 +2,7 @@
 
 [Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest versions of [Ubuntu] and [Linux Mint].
 
-| Concept    | Purpose                                                            |
+| Tool       | Purpose                                                            |
 | ---------- | ------------------------------------------------------------------ |
 | [Git]      | Used to version control this code repository.                      |
 | [GNU Stow] | Automates the [placement of symbolic links] in the home directory. |
