@@ -524,6 +524,7 @@ function upgrade() {
   asdf uninstall neovim nightly &&
     asdf install neovim nightly &&
     asdf global neovim nightly
+  asdf install github-cli latest && asdf global github-cli latest
   languageserver-install
   nodeglobal-install
   nvim -c 'PackagerClean | call packager#update({ "on_finish": "quitall" })' ~/.config/nvim/init.vim
