@@ -192,26 +192,6 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " spell
   autocmd FileType markdown* setlocal spell
-  " mappings
-  autocmd FileType man,info,help,qf
-        \ nnoremap <buffer> d <C-d> |
-        \ nnoremap <buffer> D <C-d> |
-        \ nnoremap <buffer> u <C-u> |
-        \ nnoremap <buffer> U <C-u> |
-        \ nnoremap <buffer> q <Cmd>quit<CR>
-  autocmd FileType man,info,help
-        \ nnoremap <buffer> <C-]> <C-]> |
-        \ nnoremap <buffer> <RightMouse> <C-o> |
-        \ nnoremap <buffer> <2-RightMouse> <C-o> |
-        \ nnoremap <buffer> <3-RightMouse> <C-o> |
-        \ nnoremap <buffer> <4-RightMouse> <C-o> |
-        \ nmap <buffer> <CR> K
-  autocmd FileType qf
-        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
-        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
-        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
-  autocmd FileType NvimTree
-        \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
 augroup end
 
 augroup custom_lsp
@@ -297,6 +277,28 @@ nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
+" FileType-specific mappings
+augroup filetype_remap
+  autocmd FileType man,info,help,qf
+        \ nnoremap <buffer> d <C-d> |
+        \ nnoremap <buffer> D <C-d> |
+        \ nnoremap <buffer> u <C-u> |
+        \ nnoremap <buffer> U <C-u> |
+        \ nnoremap <buffer> q <Cmd>quit<CR>
+  autocmd FileType man,info,help
+        \ nnoremap <buffer> <C-]> <C-]> |
+        \ nnoremap <buffer> <RightMouse> <C-o> |
+        \ nnoremap <buffer> <2-RightMouse> <C-o> |
+        \ nnoremap <buffer> <3-RightMouse> <C-o> |
+        \ nnoremap <buffer> <4-RightMouse> <C-o> |
+        \ nmap <buffer> <CR> K
+  autocmd FileType qf
+        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
+        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
+        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
+  autocmd FileType NvimTree
+        \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
+augroup end
 
 " }}}
 " Commands {{{
