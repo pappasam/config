@@ -204,7 +204,6 @@ augroup miscellaneous_custom
   autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-  autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   " https://github.com/neovim/neovim/issues/20456
   autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
