@@ -3,7 +3,7 @@
 lua require('packages') -- ~/.config/nvim/lua/packages.lua
 
 function! s:packager_init(packager) abort
-  call a:packager.add('https://github.com/kristijanhusak/vim-packager', {'type': 'opt'})
+  call a:packager.add('https://github.com/kristijanhusak/vim-packager')
   " Language Server (LSP)
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
   call a:packager.add('https://github.com/hedyhli/outline.nvim')
@@ -41,6 +41,8 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/machakann/vim-sandwich')
   call a:packager.add('https://github.com/HiPhish/info.vim')
 endfunction
+
+call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', expand('~/.config/nvim/pack/packager/start/vim-packager')])
 
 " }}}
 " Settings {{{
@@ -166,9 +168,6 @@ augroup end
 
 augroup filetype_custom
   autocmd!
-  autocmd Filetype vim call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', $HOME .. '/.config/nvim/pack/packager/opt/vim-packager'])
-        \ | packadd vim-packager
-        \ | call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
@@ -206,6 +205,7 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * if exists(':NvimTreeOpen') && len(argv()) == 1 && isdirectory(argv(0)) | execute 'NvimTreeOpen ' .. argv(0) | endif
+  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   " https://github.com/neovim/neovim/issues/20456
   autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
 augroup end
