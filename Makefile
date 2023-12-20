@@ -1,12 +1,12 @@
 MKDIR_CONFIG = $(subst dotfiles, ~, $(wildcard dotfiles/.config/*))
 
 .PHONY: help
-help: ## Prints each target and its associated help message
+help: ## Print each target and its associated help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: stow
-stow: ## Run stow in dotfiles directory, linking files to home directory
+stow: ## Run stow on dotfiles directory, linking files to home directory
 	@mkdir -p $(MKDIR_CONFIG)
 	@echo "\033[1m\033[31mNOTE\033[0m: Ignore BUG warnings, they're spurious"
 	stow --target $(HOME) --restow dotfiles
@@ -23,7 +23,7 @@ setup-ubuntu: ## Setup Ubuntu for the first time
 	bash ./scripts/ubuntu/custom-installs.sh
 
 .PHONY: setup-asdf
-setup-asdf: ## After asdf is installed, run this to install useful software
+setup-asdf: ## Install useful software post asdf installation
 	bash ./scripts/ubuntu/asdf-installs.sh
 
 .PHONY: setup-cinnamon-on-ubuntu
