@@ -19,14 +19,24 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 function zinit-update { zinit self-update && zinit update --all ; }
-setopt PROMPT_SUBST AUTOCD AUTO_LIST LIST_AMBIGUOUS LIST_BEEP COMPLETE_ALIASES HIST_IGNORE_SPACE APPENDHISTORY SHAREHISTORY INCAPPENDHISTORY
-unsetopt MENU_COMPLETE AUTO_REMOVE_SLASH
+setopt APPENDHISTORY
+setopt AUTOCD
+setopt AUTO_LIST
+setopt COMPLETE_ALIASES
+setopt HIST_IGNORE_SPACE
+setopt INCAPPENDHISTORY
+# setopt LIST_AMBIGUOUS
+# setopt LIST_BEEP
+setopt MENU_COMPLETE
+setopt PROMPT_SUBST
+setopt SHAREHISTORY
+# unsetopt AUTO_REMOVE_SLASH
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
 autoload -Uz zcalc # enables zshell calculator: type with zcalc
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select incremental search
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
