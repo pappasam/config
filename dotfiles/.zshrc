@@ -25,12 +25,9 @@ setopt AUTO_LIST
 setopt COMPLETE_ALIASES
 setopt HIST_IGNORE_SPACE
 setopt INCAPPENDHISTORY
-# setopt LIST_AMBIGUOUS
-# setopt LIST_BEEP
 setopt MENU_COMPLETE
 setopt PROMPT_SUBST
 setopt SHAREHISTORY
-# unsetopt AUTO_REMOVE_SLASH
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
 autoload -Uz zcalc # enables zshell calculator: type with zcalc
 autoload -U compinit && compinit
