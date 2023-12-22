@@ -371,9 +371,9 @@ require("nvim-autopairs").setup({
 
 require("nvim-tree").setup({
   disable_netrw = true,
-  view = {
-    width = 40,
-  },
+  -- view = {
+  --   width = 40,
+  -- },
   renderer = {
     full_name = true,
     symlink_destination = false,
