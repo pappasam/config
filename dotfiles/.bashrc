@@ -414,15 +414,15 @@ function pydev-install() {
     ipython \
     mypy \
     pip \
-    wheel \
-    && asdf reshim python
+    wheel &&
+    asdf reshim python
 }
 
 function pyglobal-install() {
   pip install -U \
     argcomplete \
-    pipx \
-    && pydev-install
+    pipx &&
+    pydev-install
 }
 
 function pipx-install() {

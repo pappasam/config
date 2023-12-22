@@ -110,7 +110,6 @@ function! CustomTabLabel(n)
   endif
 endfunction
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:mapleader = ','
 let g:clipboard = {
       \ 'name': 'xsel',
       \ 'cache_enabled': 0,
@@ -209,6 +208,7 @@ augroup end
 " }}}
 " Mappings {{{
 
+let g:mapleader = ','
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
