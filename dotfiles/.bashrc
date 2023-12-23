@@ -527,8 +527,8 @@ function upgrade() {
   asdf install github-cli latest && asdf global github-cli latest
   languageserver-install
   nodeglobal-install
-  nvim -c 'PackagerClean | PackagerUpdate' ~/.config/nvim/init.vim &&
-    nvim -c 'TSUpdate' ~/.config/nvim/init.vim
+  # nvim +PackagerClean +PackagerUpdate ~/.config/nvim/init.vim &&
+  #   nvim +TSUpdate ~/.config/nvim/init.vim
 }
 
 # }}}
