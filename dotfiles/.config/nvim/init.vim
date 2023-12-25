@@ -51,6 +51,7 @@ aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
+set completeopt=menuone,longest wildmode=longest:full
 set cursorline
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
