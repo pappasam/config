@@ -51,7 +51,7 @@ bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
-bindkey -M menuselect '^m' accept-line-and-down-history
+bindkey -M menuselect '^m' accept-line
 bindkey '^y' c-y-hack-accept-search
 function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
 function _asdf_complete_plugins() {
