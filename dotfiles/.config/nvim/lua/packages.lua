@@ -150,7 +150,6 @@ local language_servers = {
   svelte = {},
   taplo = {},
   terraformls = {},
-  tsserver = {},
   vimls = {},
   yamlls = {
     filetypes = { "yaml" },
@@ -175,6 +174,14 @@ for server, server_config in pairs(language_servers) do
     on_attach = default_on_attach,
   }, server_config))
 end
+
+-- }}}
+-- typescript-tools.nvim {{{
+
+require("typescript-tools").setup({
+  capabilities = default_capabilities,
+  on_attach = default_on_attach,
+})
 
 -- }}}
 -- outline.nvim {{{

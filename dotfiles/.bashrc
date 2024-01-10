@@ -339,7 +339,6 @@ function languageserver-install() {
     graphql-language-service-cli \
     svelte-language-server \
     typescript \
-    typescript-language-server \
     vim-language-server \
     vscode-langservers-extracted \
     yaml-language-server

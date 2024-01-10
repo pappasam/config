@@ -6,6 +6,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager')
   " Language Server (LSP)
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
+  call a:packager.add('https://github.com/pmizio/typescript-tools.nvim')
   call a:packager.add('https://github.com/hedyhli/outline.nvim')
   " Autocompletion
   call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
