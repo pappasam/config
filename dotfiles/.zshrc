@@ -13,7 +13,6 @@ alias pip='noglob pip' # Python: enable things like "pip install 'requests[secur
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" && zinit light zsh-users/zsh-syntax-highlighting
-  zinit ice wait lucid && zinit light greymd/docker-zsh-completion
   zinit ice wait lucid && zinit light zsh-users/zsh-completions
   zinit ice depth=1 && zinit light romkatv/powerlevel10k
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -81,3 +80,5 @@ compdef _asdf_complete_plugins asdfpurge
 compdef _git_branches gdl
 compdef _info info
 if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
+# https://github.com/rsteube/carapace-bin/releases
+if [ $commands[carapace] ]; then source <(carapace _carapace); fi
