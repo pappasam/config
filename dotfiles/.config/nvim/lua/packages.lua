@@ -59,10 +59,6 @@ local lspconfig = require("lspconfig")
 ---@diagnostic disable-next-line: undefined-field
 local fs_stat = vim.loop.fs_stat
 
-local default_on_attach = function(client)
-  client.server_capabilities.semanticTokensProvider = nil
-end
-
 local getPythonPath = function()
   if vim.env.VIRTUAL_ENV == nil then
     return nil
@@ -171,7 +167,6 @@ local language_servers = {
 for server, server_config in pairs(language_servers) do
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
     capabilities = default_capabilities,
-    on_attach = default_on_attach,
   }, server_config))
 end
 
@@ -180,7 +175,6 @@ end
 
 require("typescript-tools").setup({
   capabilities = default_capabilities,
-  on_attach = default_on_attach,
 })
 
 -- }}}
