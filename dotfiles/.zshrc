@@ -81,4 +81,8 @@ compdef _git_branches gdl
 compdef _info info
 if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
 # https://github.com/rsteube/carapace-bin/releases
-if [ $commands[carapace] ]; then source <(carapace _carapace); fi
+# https://rsteube.github.io/carapace-bin/completers.html
+if [ $commands[carapace] ]; then
+  source <(carapace docker)
+  source <(carapace docker-compose)
+fi
