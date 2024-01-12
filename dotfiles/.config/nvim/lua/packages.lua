@@ -172,6 +172,7 @@ end
 
 -- }}}
 -- typescript-tools.nvim {{{
+-- https://github.com/pmizio/typescript-tools.nvim
 
 require("typescript-tools").setup({
   capabilities = default_capabilities,
