@@ -1,11 +1,9 @@
--- nvim-cmp {{{
+-- nvim-lspconfig + nvim-cmp + lsp.txt + other lsp stuff {{{
+
 -- https://github.com/hrsh7th/nvim-cmp
 -- https://github.com/hrsh7th/cmp-nvim-lsp
-
 local cmp = require("cmp")
-
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -32,11 +30,7 @@ cmp.setup({
   }),
 })
 
--- }}}
--- lsp.txt {{{
 -- :help lsp.txt
-
--- Set up lspconfig.
 local default_capabilities = vim.tbl_deep_extend(
   "force",
   vim.lsp.protocol.make_client_capabilities(),
@@ -50,10 +44,7 @@ vim.lsp.handlers["textDocument/hover"] =
 vim.lsp.handlers["textDocument/signatureHelp"] =
   vim.lsp.with(vim.lsp.handlers.signature_help, cmp.config.window.bordered())
 
--- }}}
--- nvim-lspconfig {{{
 -- https://github.com/neovim/nvim-lspconfig
-
 local lspconfig = require("lspconfig")
 
 ---@diagnostic disable-next-line: undefined-field
@@ -170,24 +161,18 @@ for server, server_config in pairs(language_servers) do
   }, server_config))
 end
 
--- }}}
--- typescript-tools.nvim {{{
 -- https://github.com/pmizio/typescript-tools.nvim
-
 require("typescript-tools").setup({
   capabilities = default_capabilities,
 })
 
--- }}}
--- outline.nvim {{{
 -- https://github.com/hedyhli/outline.nvim
-
 require("outline").setup()
 
 -- }}}
--- nvim-treesitter {{{
--- https://github.com/nvim-treesitter/nvim-treesitter
+-- nvim-treesitter + nvim-ts-context-commentstring {{{
 
+-- https://github.com/nvim-treesitter/nvim-treesitter
 require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true,
@@ -271,16 +256,13 @@ require("nvim-treesitter.configs").setup({
 
 vim.treesitter.language.register("terraform", "terraform-vars")
 
--- }}}
--- nvim-ts-context-commentstring {{{
 -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-
 require("ts_context_commentstring").setup()
 
 -- }}}
 -- nvim-colorizer.lua {{{
--- https://github.com/NvChad/nvim-colorizer.lua
 
+-- https://github.com/NvChad/nvim-colorizer.lua
 require("colorizer").setup({
   filetypes = { "*" },
   user_default_options = {
@@ -297,8 +279,8 @@ require("colorizer").setup({
 
 -- }}}
 -- gitsigns.nvim {{{
--- https://github.com/lewis6991/gitsigns.nvim
 
+-- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup({
   attach_to_untracked = false,
   signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
@@ -359,8 +341,8 @@ require("gitsigns").setup({
 
 -- }}}
 -- nvim-autopairs {{{
--- https://github.com/windwp/nvim-autopairs
 
+-- https://github.com/windwp/nvim-autopairs
 require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
@@ -370,8 +352,8 @@ require("nvim-autopairs").setup({
 
 -- }}}
 -- nvim-tree.lua {{{
--- https://github.com/kyazdani42/nvim-tree.lua
 
+-- https://github.com/kyazdani42/nvim-tree.lua
 require("nvim-tree").setup({
   disable_netrw = true,
   -- view = {
@@ -392,8 +374,8 @@ require("nvim-tree").setup({
 
 -- }}}
 -- nvim-web-devicons {{{
--- https://github.com/kyazdani42/nvim-web-devicons
 
+-- https://github.com/kyazdani42/nvim-web-devicons
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
@@ -402,8 +384,8 @@ require("nvim-web-devicons").setup({
 
 -- }}}
 -- telescope.nvim {{{
--- https://github.com/nvim-telescope/telescope.nvim
 
+-- https://github.com/nvim-telescope/telescope.nvim
 local ts = require("telescope")
 local actions = require("telescope.actions")
 
