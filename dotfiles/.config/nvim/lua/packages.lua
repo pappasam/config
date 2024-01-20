@@ -44,6 +44,17 @@ vim.lsp.handlers["textDocument/hover"] =
 vim.lsp.handlers["textDocument/signatureHelp"] =
   vim.lsp.with(vim.lsp.handlers.signature_help, cmp.config.window.bordered())
 
+-- Disable semantic tokens for all language servers
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+});
+
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require("lspconfig")
 
