@@ -4,6 +4,9 @@
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local cmp_winhighlight = cmp.config.window.bordered({
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+})
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -11,8 +14,8 @@ cmp.setup({
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = cmp_winhighlight,
+    documentation = cmp_winhighlight,
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-k>"] = cmp.mapping.scroll_docs(-4),
@@ -53,7 +56,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
     client.server_capabilities.semanticTokensProvider = nil
   end,
-});
+})
 
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require("lspconfig")
