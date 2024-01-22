@@ -367,7 +367,7 @@ function! s:focuswriting_settings_side()
   setlocal nonumber norelativenumber nocursorline fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
 endfunction
 function! s:focuswriting_settings_middle()
-  setlocal number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
+  setlocal conceallevel=3 concealcursor=nc number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
 endfunction
 function! s:focuswriting_autocmd()
   for windowid in range(1, winnr('$'))
