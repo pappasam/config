@@ -320,10 +320,7 @@ command! Gmav Git add . | Git commit --verbose
 
 command! ToggleConceal call s:toggle_conceal()
 function! s:toggle_conceal()
-  if !exists('w:custom_toggle_conceal')
-    let w:custom_toggle_conceal = 0
-  endif
-  if w:custom_toggle_conceal == 0
+  if !exists('w:custom_toggle_conceal') || w:custom_toggle_conceal == 0
     set conceallevel=3 concealcursor=nc
     let w:custom_toggle_conceal = 1
   else
