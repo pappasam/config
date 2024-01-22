@@ -1,5 +1,7 @@
 " Packages {{{
 
+lua require('packages') -- ~/.config/nvim/lua/packages.lua
+
 function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/kristijanhusak/vim-packager')
   " Language Server (LSP)
@@ -202,7 +204,6 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-  autocmd VimEnter * lua require('packages') -- ~/.config/nvim/lua/packages.lua
   " https://github.com/neovim/neovim/issues/20456
   autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
 augroup end
