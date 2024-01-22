@@ -14,13 +14,13 @@ If you'd like to use the latest version of `less`, do the following:
 sudo apt remove less
 ```
 
-Download the latest recommended version from: <www.greenwoodsoftware.com/less/download.html>. Follow installation instructions to compile from source.
+Download the latest recommended version from: <https://www.greenwoodsoftware.com/less/download.html>. Follow installation instructions to compile from source.
 
 ### Keepass
 
 Use: <https://keeweb.info/>
 
-If you encouter errors opening application, add `--no-sandbox` to `/usr/share/applications/keeweb.desktop`. See <https://github.com/keeweb/keeweb/issues/1975>
+If you encounter errors opening application, add `--no-sandbox` to `/usr/share/applications/keeweb.desktop`. See <https://github.com/keeweb/keeweb/issues/1975>
 
 Relevant line: `Exec=keeweb --no-sandbox %u`
 

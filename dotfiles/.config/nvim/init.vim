@@ -318,6 +318,20 @@ command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
 
+command! ToggleConceal call s:toggle_conceal()
+function! s:toggle_conceal()
+  if !exists('w:custom_toggle_conceal')
+    let w:custom_toggle_conceal = 0
+  endif
+  if w:custom_toggle_conceal == 0
+    set conceallevel=3 concealcursor=nc
+    let w:custom_toggle_conceal = 1
+  else
+    set conceallevel=0 concealcursor=
+    let w:custom_toggle_conceal = 0
+  endif
+endfunction
+
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
@@ -367,7 +381,8 @@ function! s:focuswriting_settings_side()
   setlocal nonumber norelativenumber nocursorline fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
 endfunction
 function! s:focuswriting_settings_middle()
-  setlocal conceallevel=3 concealcursor=nc number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
+  setlocal number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
+  ToggleConceal
 endfunction
 function! s:focuswriting_autocmd()
   for windowid in range(1, winnr('$'))
