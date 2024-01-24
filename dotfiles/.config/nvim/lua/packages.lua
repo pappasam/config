@@ -370,9 +370,6 @@ require("nvim-autopairs").setup({
 -- https://github.com/kyazdani42/nvim-tree.lua
 require("nvim-tree").setup({
   disable_netrw = true,
-  -- view = {
-  --   width = 40,
-  -- },
   renderer = {
     full_name = true,
     symlink_destination = false,
