@@ -1,3 +1,68 @@
+" Autocmds {{{
+" Placed at top because some events (like ColorScheme) happen in init.vim
+
+augroup filetype_assignment
+  autocmd!
+  autocmd BufRead,BufNewFile,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
+  autocmd BufRead,BufNewFile,BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
+  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml
+  autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown.mdx
+  autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
+  autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave
+  autocmd BufRead,BufNewFile,BufEnter .envrc set filetype=sh
+  autocmd BufRead,BufNewFile,BufEnter .dockerignore set filetype=conf
+  autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
+  autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
+  autocmd BufRead,BufNewFile,BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+augroup end
+
+augroup filetype_custom
+  autocmd!
+  " indentation
+  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
+  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype go,gomod,make,snippets,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
+  " comments
+  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
+  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
+  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
+  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
+  autocmd FileType sh setlocal formatoptions=jcroql
+  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
+  " iskeyword
+  autocmd FileType nginx setlocal iskeyword+=$
+  autocmd FileType zsh,sh,css setlocal iskeyword+=-
+  autocmd FileType scss setlocal iskeyword+=@-@
+  " keywordprg
+  autocmd FileType vim setlocal keywordprg=:help
+  " nofoldenable nolist
+  autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
+  " window opening
+  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  " spell
+  autocmd FileType markdown* setlocal spell
+augroup end
+
+augroup custom_lsp
+  autocmd!
+  autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
+  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
+augroup end
+
+augroup miscellaneous_custom
+  autocmd!
+  autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
+  autocmd BufWritePre * TrimWhitespace
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+  autocmd ColorScheme *
+        \ highlight! link SignColumn LineNr |
+        \ highlight! link GitSignsAddNr DiffAdd |
+        \ highlight! link GitSignsChangeNr DiffChange |
+        \ highlight! link GitSignsDeleteNr DiffDelete
+augroup end
+
+" }}}
 " Packages {{{
 
 lua require('packages') -- ~/.config/nvim/lua/packages.lua
@@ -146,67 +211,6 @@ let g:repl_default = &shell
 let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 " https://github.com/hrsh7th/vim-vsnip
 let g:vsnip_snippet_dir = expand('~/.config/nvim/snippets')
-
-" }}}
-" Autocmds {{{
-
-augroup filetype_assignment
-  autocmd!
-  autocmd BufRead,BufNewFile,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
-  autocmd BufRead,BufNewFile,BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml
-  autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown.mdx
-  autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
-  autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave
-  autocmd BufRead,BufNewFile,BufEnter .envrc set filetype=sh
-  autocmd BufRead,BufNewFile,BufEnter .dockerignore set filetype=conf
-  autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
-  autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufRead,BufNewFile,BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
-augroup end
-
-augroup filetype_custom
-  autocmd!
-  " indentation
-  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
-  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
-  autocmd Filetype go,gomod,make,snippets,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " comments
-  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
-  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
-  autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-  " iskeyword
-  autocmd FileType nginx setlocal iskeyword+=$
-  autocmd FileType zsh,sh,css setlocal iskeyword+=-
-  autocmd FileType scss setlocal iskeyword+=@-@
-  " keywordprg
-  autocmd FileType vim setlocal keywordprg=:help
-  " nofoldenable nolist
-  autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
-  " window opening
-  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " spell
-  autocmd FileType markdown* setlocal spell
-augroup end
-
-augroup custom_lsp
-  autocmd!
-  autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
-  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
-augroup end
-
-augroup miscellaneous_custom
-  autocmd!
-  autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
-  autocmd BufWritePre * TrimWhitespace
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-  " https://github.com/neovim/neovim/issues/20456
-  autocmd ColorScheme,VimEnter * highlight! link luaParenError Normal | highlight! link luaError Normal | highlight! link luaTable Normal
-augroup end
 
 " }}}
 " Mappings {{{
