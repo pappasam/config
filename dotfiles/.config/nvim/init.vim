@@ -301,6 +301,9 @@ augroup filetype_remap
         \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
   autocmd FileType NvimTree
         \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
+  autocmd FileType markdown inoremap <silent><buffer> <CR> <C-R>=<SID>auto_insert_bullet()<CR>
+  autocmd FileType markdown nnoremap <silent><buffer> o A<C-R>=<SID>auto_insert_bullet()<CR>
+  autocmd FileType markdown inoremap <silent><buffer> <C-t> <Cmd>call <SID>auto_indent_bullet()<CR><C-o>$
 augroup end
 
 " }}}
@@ -479,6 +482,33 @@ function! s:quickfix_tabedit()
   finally
     set nolazyredraw
   endtry
+endfunction
+
+function! s:auto_insert_bullet()
+  let current_line = getline(line('.'))
+  let matched = matchlist(current_line, '\v^\s*(\d+)\.')
+  if current_line =~ '\v^\s*-\s*$'
+    return "\<C-u>\<C-u>\<CR>"
+  elseif current_line =~ '\v^\s*-'
+    return "\<CR>- "
+  elseif current_line =~ '\v^\s*\d+\.\s*$'
+    return "\<C-u>\<C-u>\<CR>"
+  elseif len(matched) > 0
+    let num = 1 + str2nr(matched[1])
+    return "\<CR>" . num . '. '
+  else
+    return "\<CR>"
+  endif
+endfunction
+
+function! s:auto_indent_bullet()
+  let current_line = getline(line('.'))
+  silent! execute "normal! >>"
+  if current_line =~ '\v^\s*\d+\.'
+    " adds one space for indented unordered list
+    silent! s/\v(^\s*)(\d+\.)/ \1-/
+    noh
+  endif
 endfunction
 
 " }}}
