@@ -505,7 +505,7 @@ function! s:auto_indent_bullet()
   let current_line = getline(line('.'))
   silent! execute "normal! >>"
   if current_line =~ '\v^\s*\d+\.'
-    " adds one space for indented unordered list
+    " adds one space for indented unordered list in ordered list
     silent! s/\v(^\s*)(\d+\.)/ \1-/
     noh
   endif
