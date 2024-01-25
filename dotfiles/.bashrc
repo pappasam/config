@@ -134,7 +134,6 @@ alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nv
 
 # Git
 alias g='git status'
-alias gd='git diff'
 alias gg='nvim -c "G | only"'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
@@ -198,6 +197,10 @@ function gop() {
   if [ $return_result -ne 0 ]; then
     return $return_result
   fi
+}
+
+function gd() {
+  git diff "$@" | delta
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
@@ -372,6 +375,7 @@ function rustglobal-install() {
   cargo install cargo-update
   cargo install csvlens
   cargo install fd-find
+  cargo install git-delta
   cargo install mdbook
   cargo install ripgrep
   cargo install sd
