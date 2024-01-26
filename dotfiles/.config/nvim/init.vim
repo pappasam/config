@@ -283,7 +283,7 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), 
 " FileType-specific mappings
 augroup filetype_remap
   autocmd FileType man,info,help,qf
-        \ nnoremap <buffer> d <C-d> |
+        \ nnoremap <buffer> a <C-d> |
         \ nnoremap <buffer> D <C-d> |
         \ nnoremap <buffer> u <C-u> |
         \ nnoremap <buffer> U <C-u> |
@@ -301,9 +301,9 @@ augroup filetype_remap
         \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
   autocmd FileType NvimTree
         \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
-  autocmd FileType markdown inoremap <silent><buffer> <CR> <C-R>=<SID>auto_insert_bullet()<CR>
-  autocmd FileType markdown nnoremap <silent><buffer> o A<C-R>=<SID>auto_insert_bullet()<CR>
-  autocmd FileType markdown inoremap <silent><buffer> <C-t> <Cmd>call <SID>auto_indent_bullet()<CR><C-o>$
+  autocmd FileType markdown inoremap <silent><buffer> <CR> <C-R>=<SID>auto_insert_bullet(line('.'))<CR>
+  autocmd FileType markdown nnoremap <silent><buffer> o A<C-R>=<SID>auto_insert_bullet(line('.'))<CR>
+  autocmd FileType markdown inoremap <silent><buffer> <C-t> <Cmd>call <SID>auto_indent_bullet(line('.'))<CR><C-o>$
 augroup end
 
 " }}}
@@ -484,8 +484,8 @@ function! s:quickfix_tabedit()
   endtry
 endfunction
 
-function! s:auto_insert_bullet()
-  let current_line = getline(line('.'))
+function! s:auto_insert_bullet(lineno)
+  let current_line = getline(a:lineno)
   let matched = matchlist(current_line, '\v^\s*(\d+)\.')
   if current_line =~ '\v^\s*-\s*$'
     return "\<C-u>\<C-u>\<CR>"
@@ -501,12 +501,11 @@ function! s:auto_insert_bullet()
   endif
 endfunction
 
-function! s:auto_indent_bullet()
-  let current_line = getline(line('.'))
-  silent! execute "normal! >>"
-  if current_line =~ '\v^\s*\d+\.'
+function! s:auto_indent_bullet(lineno)
+  silent execute a:lineno .. "normal! >>"
+  if getline(a:lineno) =~ '\v^\s*\d+\.'
     " adds one space for indented unordered list in ordered list
-    silent! s/\v(^\s*)(\d+\.)/ \1-/
+    silent execute a:lineno .. 's/\v(^\s*)(\d+\.)/ \1-/'
     noh
   endif
 endfunction
