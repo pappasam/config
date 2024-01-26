@@ -137,7 +137,7 @@ set nowrap linebreak
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
-set shortmess+=cI
+set shortmess+=c
 set signcolumn=number
 set spelllang=en_us
 set splitright
