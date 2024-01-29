@@ -283,27 +283,24 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), 
 " FileType-specific mappings
 augroup filetype_remap
   autocmd FileType man,info,help,qf
-        \ nnoremap <buffer> a <C-d> |
-        \ nnoremap <buffer> D <C-d> |
-        \ nnoremap <buffer> u <C-u> |
-        \ nnoremap <buffer> U <C-u> |
+        \ nnoremap <buffer> a <C-d>|
+        \ nnoremap <buffer> D <C-d>|
+        \ nnoremap <buffer> u <C-u>|
+        \ nnoremap <buffer> U <C-u>|
         \ nnoremap <buffer> q <Cmd>quit<CR>
   autocmd FileType man,info,help
-        \ nnoremap <buffer> <C-]> <C-]> |
-        \ nnoremap <buffer> <RightMouse> <C-o> |
-        \ nnoremap <buffer> <2-RightMouse> <C-o> |
-        \ nnoremap <buffer> <3-RightMouse> <C-o> |
-        \ nnoremap <buffer> <4-RightMouse> <C-o> |
+        \ nnoremap <buffer> <C-]> <C-]>|
+        \ nnoremap <buffer> <RightMouse> <C-o>|
+        \ nnoremap <buffer> <2-RightMouse> <C-o>|
+        \ nnoremap <buffer> <3-RightMouse> <C-o>|
+        \ nnoremap <buffer> <4-RightMouse> <C-o>|
         \ nmap <buffer> <CR> K
   autocmd FileType qf
-        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR> |
-        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR> |
+        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>|
+        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>|
         \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
   autocmd FileType NvimTree
         \ nnoremap <buffer> <C-g> <Cmd>echo substitute(getcwd(), $HOME . '/', '~/', '')<CR>
-  autocmd FileType markdown inoremap <silent><buffer> <CR> <C-R>=<SID>auto_insert_bullet(line('.'))<CR>
-  autocmd FileType markdown nnoremap <silent><buffer> o A<C-R>=<SID>auto_insert_bullet(line('.'))<CR>
-  autocmd FileType markdown inoremap <silent><buffer> <C-t> <Cmd>call <SID>auto_indent_bullet(line('.'))<CR><C-o>$
 augroup end
 
 " }}}
@@ -482,32 +479,6 @@ function! s:quickfix_tabedit()
   finally
     set nolazyredraw
   endtry
-endfunction
-
-function! s:auto_insert_bullet(lineno)
-  let current_line = getline(a:lineno)
-  let matched = matchlist(current_line, '\v^\s*(\d+)\.')
-  if current_line =~ '\v^\s*-\s*$'
-    return "\<C-u>\<C-u>\<CR>"
-  elseif current_line =~ '\v^\s*-'
-    return "\<CR>- "
-  elseif current_line =~ '\v^\s*\d+\.\s*$'
-    return "\<C-u>\<C-u>\<CR>"
-  elseif len(matched) > 0
-    let num = 1 + str2nr(matched[1])
-    return "\<CR>" . num . '. '
-  else
-    return "\<CR>"
-  endif
-endfunction
-
-function! s:auto_indent_bullet(lineno)
-  silent execute a:lineno .. "normal! >>"
-  if getline(a:lineno) =~ '\v^\s*\d+\.'
-    " adds one space for indented unordered list in ordered list
-    silent execute a:lineno .. 's/\v(^\s*)(\d+\.)/ \1-/'
-    noh
-  endif
 endfunction
 
 " }}}
