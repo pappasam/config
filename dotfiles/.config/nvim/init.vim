@@ -283,7 +283,7 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR><Cmd>echo substitute(getcwd(), 
 " FileType-specific mappings
 augroup filetype_remap
   autocmd FileType man,info,help,qf
-        \ nnoremap <buffer> a <C-d>|
+        \ nnoremap <buffer> d <C-d>|
         \ nnoremap <buffer> D <C-d>|
         \ nnoremap <buffer> u <C-u>|
         \ nnoremap <buffer> U <C-u>|
