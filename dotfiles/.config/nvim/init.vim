@@ -59,7 +59,10 @@ augroup miscellaneous_custom
         \ highlight! link SignColumn LineNr |
         \ highlight! link GitSignsAddNr DiffAdd |
         \ highlight! link GitSignsChangeNr DiffChange |
-        \ highlight! link GitSignsDeleteNr DiffDelete
+        \ highlight! link GitSignsDeleteNr DiffDelete |
+        \ highlight! link NvimTreeExecFile PreProc |
+        \ highlight! link NvimTreeSpecialFile Typedef |
+        \ highlight! link NvimTreeImageFile Boolean
 augroup end
 
 " }}}
