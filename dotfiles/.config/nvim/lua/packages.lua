@@ -269,6 +269,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 vim.treesitter.language.register("terraform", "terraform-vars")
+vim.treesitter.language.register("bash", "zsh")
 
 -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 require("ts_context_commentstring").setup()
