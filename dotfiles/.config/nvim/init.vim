@@ -59,7 +59,12 @@ augroup miscellaneous_custom
         \ highlight! link SignColumn LineNr |
         \ highlight! link GitSignsAddNr DiffAdd |
         \ highlight! link GitSignsChangeNr DiffChange |
-        \ highlight! link GitSignsDeleteNr DiffDelete
+        \ highlight! link GitSignsDeleteNr DiffDelete |
+        \ highlight! link GitSignsDeleteNr DiffDelete |
+        \ highlight! link NvimTreeExecFile Include |
+        \ highlight! link NvimTreeImageFile Special |
+        \ highlight! link NvimTreeSpecialFile Constant |
+        \ highlight! link NvimTreeSymlink Label
 augroup end
 
 " }}}
