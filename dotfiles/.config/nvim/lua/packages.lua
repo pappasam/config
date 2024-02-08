@@ -82,7 +82,6 @@ local language_servers = {
   ltex = {
     filetypes = {
       "bib",
-      "gitcommit",
       "markdown",
       "markdown.mdx",
       "org",
