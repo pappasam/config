@@ -61,9 +61,9 @@ augroup miscellaneous_custom
         \ highlight! link GitSignsChangeNr DiffChange |
         \ highlight! link GitSignsDeleteNr DiffDelete |
         \ highlight! link GitSignsDeleteNr DiffDelete |
-        \ highlight! link NvimTreeExecFile Include |
-        \ highlight! link NvimTreeImageFile Special |
-        \ highlight! link NvimTreeSpecialFile Constant |
+        \ highlight! link NvimTreeExecFile PreProc |
+        \ highlight! link NvimTreeImageFile NvimTreeNormal |
+        \ highlight! link NvimTreeSpecialFile NvimTreeNormal |
         \ highlight! link NvimTreeSymlink NvimTreeNormal
 augroup end
 
