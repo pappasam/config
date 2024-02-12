@@ -56,15 +56,14 @@ augroup miscellaneous_custom
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   autocmd ColorScheme *
-        \ highlight! link SignColumn LineNr |
-        \ highlight! link GitSignsAddNr DiffAdd |
-        \ highlight! link GitSignsChangeNr DiffChange |
-        \ highlight! link GitSignsDeleteNr DiffDelete |
-        \ highlight! link GitSignsDeleteNr DiffDelete |
-        \ highlight! link NvimTreeExecFile PreProc |
-        \ highlight! link NvimTreeImageFile NONE |
-        \ highlight! link NvimTreeSpecialFile NONE |
-        \ highlight! link NvimTreeSymlink NONE
+        \ highlight link GitSignsAddNr DiffAdd |
+        \ highlight link GitSignsChangeNr DiffChange |
+        \ highlight link GitSignsDeleteNr DiffDelete |
+        \ highlight link GitSignsDeleteNr DiffDelete |
+        \ highlight link NvimTreeExecFile PreProc |
+        \ highlight link NvimTreeImageFile NONE |
+        \ highlight link NvimTreeSpecialFile NONE |
+        \ highlight link NvimTreeSymlink NONE
 augroup end
 
 " }}}
