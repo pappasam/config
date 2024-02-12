@@ -183,7 +183,7 @@ require("typescript-tools").setup({
 require("outline").setup()
 
 -- }}}
--- nvim-treesitter + nvim-ts-context-commentstring {{{
+-- nvim-treesitter {{{
 
 -- https://github.com/nvim-treesitter/nvim-treesitter
 require("nvim-treesitter.configs").setup({
@@ -269,9 +269,6 @@ require("nvim-treesitter.configs").setup({
 
 vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
-
--- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-require("ts_context_commentstring").setup()
 
 -- }}}
 -- nvim-colorizer.lua {{{

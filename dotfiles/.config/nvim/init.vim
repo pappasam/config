@@ -39,8 +39,6 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " spell
-  autocmd FileType markdown* setlocal spell
 augroup end
 
 augroup custom_lsp
@@ -69,6 +67,7 @@ augroup end
 " }}}
 " Packages {{{
 
+let g:skip_ts_context_commentstring_module = v:true
 lua require('packages') -- ~/.config/nvim/lua/packages.lua
 
 function! s:packager_init(p) abort
@@ -144,6 +143,7 @@ set shadafile=NONE
 set shortmess+=cI
 set signcolumn=number
 set spelllang=en_us
+set nospell
 set splitright
 set termguicolors
 set updatetime=300
