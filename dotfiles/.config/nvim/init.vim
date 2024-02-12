@@ -123,6 +123,7 @@ digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest wildmode=longest:full
 set cursorline
+set cursorlineopt=number
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
 set expandtab shiftwidth=2 softtabstop=2
@@ -381,10 +382,10 @@ function! s:focuswriting()
   normal! `azz
 endfunction
 function! s:focuswriting_settings_side()
-  setlocal nonumber norelativenumber nocursorline fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal nonumber norelativenumber fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
 endfunction
 function! s:focuswriting_settings_middle()
-  setlocal number norelativenumber wrap nocursorline winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
+  setlocal number norelativenumber wrap winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
   ToggleConceal
 endfunction
 function! s:focuswriting_autocmd()
