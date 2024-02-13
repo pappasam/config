@@ -24,34 +24,29 @@ setopt AUTO_LIST
 setopt COMPLETE_ALIASES
 setopt HIST_IGNORE_SPACE
 setopt INCAPPENDHISTORY
-setopt MENU_COMPLETE
 setopt PROMPT_SUBST
 setopt SHAREHISTORY
+unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
 autoload -Uz zcalc # enables zshell calculator: type with zcalc
 autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
-zstyle ':completion:*' menu select incremental search
+zstyle ':completion:*' menu select incremental
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
 if command -v aws > /dev/null; then complete -C aws_completer aws; fi
 if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
 if command -v kubectl > /dev/null; then source <(kubectl completion zsh); fi
-function c-y-hack-accept-search() {
-  # ^y behaves correctly in isearch mode. I don't understand why this works...
-  zle accept-search
-}
-zle -N c-y-hack-accept-search
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
-bindkey '^y' c-y-hack-accept-search
+bindkey -M menuselect '^y' accept-line
 function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
 function _asdf_complete_plugins() {
   local -a subcmds
