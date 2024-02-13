@@ -1,6 +1,7 @@
 #!/bin/bash
 # Environment {{{
 
+export TMUX_CONFIGURE_OPTIONS='--enable-sixel'
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
 export EDITOR=nvim
