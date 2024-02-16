@@ -61,9 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require("lspconfig")
 
----@diagnostic disable-next-line: undefined-field
-local fs_stat = vim.loop.fs_stat
-
 local getPythonPath = function()
   if vim.env.VIRTUAL_ENV == nil then
     return nil
@@ -107,33 +104,30 @@ local language_servers = {
     },
   },
   lua_ls = {
-    on_init = function(client)
-      local path = client.workspace_folders[1].name
-      if
-        not fs_stat(path .. "/.luarc.json")
-        and not fs_stat(path .. "/.luarc.jsonc")
-      then
-        client.config.settings =
-          vim.tbl_deep_extend("force", client.config.settings, {
-            Lua = {
-              runtime = {
-                version = "LuaJIT",
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                },
-              },
-            },
-          })
-        client.notify(
-          "workspace/didChangeConfiguration",
-          { settings = client.config.settings }
-        )
-      end
-      return true
-    end,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using
+          -- (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {
+            "vim",
+            "require",
+          },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
   },
   mdx_analyzer = {},
   nginx_language_server = {},
@@ -186,6 +180,7 @@ require("outline").setup()
 -- nvim-treesitter {{{
 
 -- https://github.com/nvim-treesitter/nvim-treesitter
+---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true,
