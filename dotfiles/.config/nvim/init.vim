@@ -9,7 +9,7 @@ augroup filetype_assignment
   autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown.mdx
   autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
   autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave
-  autocmd BufRead,BufNewFile,BufEnter .envrc set filetype=sh
+  autocmd BufRead,BufNewFile,BufEnter .envrc,.env,.env.* set filetype=sh
   autocmd BufRead,BufNewFile,BufEnter .dockerignore set filetype=conf
   autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
   autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
