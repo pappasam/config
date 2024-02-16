@@ -74,6 +74,7 @@ compdef _asdf_complete_plugins asdfl
 compdef _asdf_complete_plugins asdfpurge
 compdef _git_branches gdl
 compdef _info info
+compdef _make m
 if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
 # https://github.com/rsteube/carapace-bin/releases
 # https://rsteube.github.io/carapace-bin/completers.html
