@@ -4,9 +4,6 @@
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local cmp_winhighlight = cmp.config.window.bordered({
-  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-})
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -14,8 +11,12 @@ cmp.setup({
     end,
   },
   window = {
-    completion = cmp_winhighlight,
-    documentation = cmp_winhighlight,
+    completion = {
+      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+    },
+    documentation = {
+      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+    },
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-k>"] = cmp.mapping.scroll_docs(-4),
@@ -42,10 +43,6 @@ local default_capabilities = vim.tbl_deep_extend(
 -- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
 default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
   false
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, cmp.config.window.bordered())
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, cmp.config.window.bordered())
 
 -- Disable semantic tokens for all language servers
 vim.api.nvim_create_autocmd("LspAttach", {
