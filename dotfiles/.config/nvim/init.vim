@@ -61,7 +61,7 @@ augroup miscellaneous_custom
         \ highlight link NvimTreeExecFile PreProc |
         \ highlight link NvimTreeImageFile NONE |
         \ highlight link NvimTreeSpecialFile NONE |
-        \ highlight link NvimTreeSymlink NONE
+        \ highlight link NvimTreeSymlink Label
 augroup end
 
 " }}}
