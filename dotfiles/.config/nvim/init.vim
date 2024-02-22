@@ -118,6 +118,9 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
+if $ALACRITTY_TERM_BACKGROUND == 'light'
+  set background=light
+endif
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
@@ -237,6 +240,7 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
 xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
+noremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
 noremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
 noremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
 noremap <Leader>gz <Cmd>edit ~/.zshrc<CR>

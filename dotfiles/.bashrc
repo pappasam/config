@@ -203,7 +203,11 @@ function gop() {
 }
 
 function gd() {
-  git diff "$@" | delta
+  if [[ "$ALACRITTY_TERM_BACKGROUND" == "light" ]]; then
+    git diff "$@" | delta --light
+  else
+    git diff "$@" | delta --dark
+  fi
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
