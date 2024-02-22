@@ -243,6 +243,7 @@ xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line
 noremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
 noremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
 noremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+noremap <Leader>gt <Cmd>edit ~/.config/tmux/tmux.conf<CR>
 noremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 noremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
