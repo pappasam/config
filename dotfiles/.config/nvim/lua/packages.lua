@@ -281,6 +281,20 @@ require("colorizer").setup({
 })
 
 -- }}}
+-- indent-blankline.nvim {{{
+-- https://github.com/lukas-reineke/indent-blankline.nvim
+
+require("ibl").setup({
+  indent = {
+    char = "▏",
+  },
+  scope = {
+    show_start = false,
+    show_end = false,
+  },
+})
+
+-- }}}
 -- gitsigns.nvim {{{
 
 -- https://github.com/lewis6991/gitsigns.nvim

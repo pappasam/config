@@ -49,7 +49,6 @@ augroup end
 
 augroup miscellaneous_custom
   autocmd!
-  autocmd BufWinEnter * execute 'setlocal listchars+=leadmultispace:│' .. repeat('\ ', &shiftwidth - 1)
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
@@ -100,6 +99,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/lewis6991/gitsigns.nvim')
   " Miscellaneous
   call a:p.add('https://github.com/pappasam/papercolor-theme-slim')
+  call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
   call a:p.add('https://github.com/Glench/Vim-Jinja2-Syntax')
   call a:p.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:p.add('https://github.com/fidian/hexmode')
@@ -134,7 +134,7 @@ set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list listchars=tab:>\ ,nbsp:+,lead:│,multispace:-
+set list listchars=tab:>\ ,nbsp:+,lead:\ ,multispace:-
 set mouse=a
 set noshowcmd
 set noshowmode
