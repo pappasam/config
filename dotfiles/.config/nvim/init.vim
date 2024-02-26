@@ -118,9 +118,11 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
-" if $ALACRITTY_TERM_BACKGROUND == 'light'
-"   set background=light
-" endif
+if $ALACRITTY_TERM_BACKGROUND == 'light'
+  set background=light
+else
+  set background=dark
+endif
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
