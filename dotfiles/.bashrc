@@ -327,6 +327,12 @@ function info() { # https://github.com/HiPhish/info.vim
   fi
 }
 
+# Change background from current color to new color
+function togglebackground() {
+  sed -i --follow-symlinks '1{/^ *# /{s///;b};s/^/# /}' "$HOME/.config/alacritty/alacritty.toml"
+  echo 'Background toggled. Restart alacritty for changes to take effect.'
+}
+
 # }}}
 # Installs {{{
 
