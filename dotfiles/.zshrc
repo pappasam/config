@@ -8,7 +8,6 @@ export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
-alias z='nvim ~/config/dotfiles/.zshrc'
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
