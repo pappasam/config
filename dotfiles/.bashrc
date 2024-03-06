@@ -366,7 +366,7 @@ function languageserver-install() {
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
   local for_pipx=(
     # jedi-language-server
-    nginx-language-server
+    # nginx-language-server
     pyright
   )
   # shellcheck disable=SC2128
@@ -463,6 +463,7 @@ function pipx-install() {
       pipx upgrade "$arg"
     done
     pipx inject poetry poetry-plugin-up
+    pipx inject poetry poetry-plugin-export
   else
     echo 'pipx not installed. Install with "pip install pipx"'
   fi

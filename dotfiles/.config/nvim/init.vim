@@ -289,8 +289,8 @@ nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
 nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
 " https://github.com/pappasam/vim-filetype-formatter
-nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
-xnoremap <Leader>f :FiletypeFormat<CR>
+nnoremap <Leader>f <Cmd>FiletypeFormat<CR><Cmd>LspRestart<CR>
+xnoremap <Leader>f :FiletypeFormat<CR><Cmd>LspRestart<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " FileType-specific mappings
