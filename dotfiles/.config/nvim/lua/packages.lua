@@ -251,7 +251,6 @@ require("nvim-treesitter.configs").setup({
     "sql",
     "svelte",
     "terraform",
-    "tmux",
     "toml",
     "tsx",
     "typescript",
