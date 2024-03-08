@@ -430,8 +430,7 @@ ts.setup({
 
 require("presenting").setup({
   options = {
-    -- The width of the slide buffer.
-    width = 50,
+    width = 60,
   },
   separator = {
     markdown = "^#+ ",
