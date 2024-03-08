@@ -41,6 +41,9 @@ local default_capabilities = vim.tbl_deep_extend(
   cmp_nvim_lsp.default_capabilities()
 )
 -- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
+-- Resolved: https://www.reddit.com/r/neovim/comments/1b4bk5h/psa_new_fswatch_watchfunc_backend_available_on/
+-- Must `sudo apt install fswatch`
+-- Keeping code for now because it's highly unstable
 default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
   false
 

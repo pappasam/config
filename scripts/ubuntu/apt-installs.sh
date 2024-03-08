@@ -42,6 +42,7 @@ sudo apt install -y \
   exuberant-ctags \
   flameshot \
   fortune \
+  fswatch \
   gettext \
   gfortran \
   gfortran-11 \
