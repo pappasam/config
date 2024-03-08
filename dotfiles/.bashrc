@@ -145,6 +145,7 @@ alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
 alias pbpaste='xsel --clipboard --output'
 alias publicip='curl -s checkip.amazonaws.com'
 alias m='make'
+alias rg='rg --fixed-strings'
 
 # }}}
 # Functions {{{
