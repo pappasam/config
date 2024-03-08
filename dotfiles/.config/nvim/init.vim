@@ -41,11 +41,12 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
 augroup end
 
-augroup custom_lsp
-  autocmd!
-  autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
-  autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
-augroup end
+" Replaced with fidget, keeping here in case fidget starts bugging out
+" augroup custom_lsp_notifications
+"   autocmd!
+"   autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
+"   autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
+" augroup end
 
 augroup miscellaneous_custom
   autocmd!
@@ -75,6 +76,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/neovim/nvim-lspconfig')
   call a:p.add('https://github.com/pmizio/typescript-tools.nvim')
   call a:p.add('https://github.com/hedyhli/outline.nvim')
+  call a:p.add('https://github.com/j-hui/fidget.nvim.git')
   " Autocompletion
   call a:p.add('https://github.com/hrsh7th/nvim-cmp')
   call a:p.add('https://github.com/hrsh7th/cmp-nvim-lsp')

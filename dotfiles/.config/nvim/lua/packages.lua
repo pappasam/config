@@ -174,7 +174,10 @@ require("typescript-tools").setup({
 })
 
 -- https://github.com/hedyhli/outline.nvim
-require("outline").setup()
+require("outline").setup({})
+
+-- https://github.com/j-hui/fidget.nvim
+require("fidget").setup({})
 
 -- }}}
 -- nvim-treesitter {{{
@@ -435,14 +438,15 @@ require("presenting").setup({
   separator = {
     markdown = "^#+ ",
   },
-  configure_slide_buffer = function(buf)
-    vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
-    vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
-    vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
-    vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
-    vim.api.nvim_set_option_value("wrap", true, { scope = "local" })
-    vim.api.nvim_set_option_value("conceallevel", 3, { scope = "local" })
-    vim.api.nvim_set_option_value("concealcursor", "nc", { scope = "local" })
+  configure_slide_buffer = function(_)
+    vim.cmd([[
+      Fidget suppress
+      setlocal buftype=nofile filetype=markdown bufhidden=wipe nomodifiable wrap conceallevel=3 concealcursor=nc
+      nnoremap <buffer> q <Cmd>Presenting<CR>
+      nnoremap <buffer> <C-w> <NOP>
+      cnoreabbrev <buffer> q Presenting
+      echo
+    ]])
   end,
 })
 
