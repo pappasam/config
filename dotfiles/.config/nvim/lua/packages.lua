@@ -380,6 +380,18 @@ require("nvim-tree").setup({
     full_name = true,
     symlink_destination = false,
     root_folder_label = false,
+    icons = {
+      web_devicons = {
+        file = {
+          enable = true,
+          color = false,
+        },
+        folder = {
+          enable = false,
+          color = true,
+        },
+      },
+    },
   },
   filters = {
     dotfiles = true,
