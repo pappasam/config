@@ -1,0 +1,16 @@
+# schema https://starship.rs/config-schema.json
+
+add_newline = false
+
+[character]
+success_symbol = '[➜](bold green)'
+
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[git_status]
+ignore_submodules = true
+untracked = ""

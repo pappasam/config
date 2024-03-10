@@ -3,6 +3,7 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"; fi
 if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
 fpath=(${ASDF_DIR}/completions /usr/local/share/zsh-completions $fpath $HOME/.zfunc)
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
@@ -13,10 +14,15 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" && zinit light zsh-users/zsh-syntax-highlighting
   zinit ice wait lucid && zinit light zsh-users/zsh-completions
-  zinit ice depth=1 && zinit light romkatv/powerlevel10k
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
-function zinit-update { zinit self-update && zinit update --all ; }
+function zsh-update {
+  echo "Sudo permissions required" \
+    && sudo echo "Permissions granted" \
+    && curl -sS https://starship.rs/install.sh -o /tmp/install-starship.sh \
+    && sh /tmp/install-starship.sh --yes \
+    && zinit self-update \
+    && zinit update --all
+}
 setopt APPENDHISTORY
 setopt AUTOCD
 setopt AUTO_LIST
@@ -80,4 +86,7 @@ if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
 if [ $commands[carapace] ]; then
   source <(carapace docker)
   source <(carapace docker-compose)
+fi
+if [ $commands[starship] ]; then
+  eval "$(starship init zsh)"
 fi

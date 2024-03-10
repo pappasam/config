@@ -5,6 +5,11 @@
   editor = nvim
   autocrlf = input
   safecrlf = true
+  # https://github.com/starship/starship/issues/4305#issuecomment-1509498359
+  fsmonitor = true
+  untrackedCache = true
+[feature]
+  manyFiles = true
 [init]
   defaultBranch = main
 [alias]
