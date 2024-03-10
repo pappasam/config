@@ -529,7 +529,6 @@ function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
-  curl -sS https://starship.rs/install.sh | sh
   asdf update
   asdf plugin-update --all
   pushd .
