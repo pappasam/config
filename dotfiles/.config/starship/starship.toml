@@ -2,14 +2,17 @@
 
 add_newline = false
 
+[aws]
+disabled = true
+
 [character]
 success_symbol = '[\$](bold green)'
 error_symbol = '[\$](bold red)'
 
-[gcloud]
+[cmd_duration]
 disabled = true
 
-[aws]
+[gcloud]
 disabled = true
 
 [git_status]
