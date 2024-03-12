@@ -159,38 +159,6 @@ set splitright
 set termguicolors
 set updatetime=300
 set statusline=[%{mode()}](%t)%y%r%m
-set tabline=%!CustomTabLine()
-function! CustomTabLine()
-  let tabnumber_max = tabpagenr('$')
-  let tabnumber_current = tabpagenr()
-  let s = ''
-  for i in range(1, tabnumber_max)
-    let s ..= tabnumber_current == i ? '%#TabLineSel#' : '%#TabLine#'
-    let s ..= '%' .. i .. 'T' .. ' ' .. i .. ':%{CustomTabLabel(' .. i .. ')} '
-  endfor
-  let s ..= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction
-function! CustomTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let postfix = ''
-  for buf in buflist
-    if bufname(buf) ==# 'focuswriting_abcdefg'
-      let postfix = ':Focus'
-      break
-    endif
-  endfor
-  let bname = bufname(buflist[winnr - 1])
-  let bnamemodified = fnamemodify(bname, ':t')
-  if bnamemodified == ''
-    return 'NONAME' .. postfix
-  elseif bnamemodified =~ 'NvimTree'
-    return 'NvimTree' .. postfix
-  else
-    return bnamemodified .. postfix
-  endif
-endfunction
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = {
       \ 'name': 'xsel',
