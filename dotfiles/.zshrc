@@ -14,14 +14,14 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" && zinit light zsh-users/zsh-syntax-highlighting
   zinit ice wait lucid && zinit light zsh-users/zsh-completions
+  # <https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#plugins-and-snippets>
+  zinit ice as"command" from"gh-r" \
+    atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+    atpull"%atclone" src"init.zsh"
+  zinit light starship/starship
 fi
-function zsh-update {
-  echo "Sudo permissions required" \
-    && sudo echo "Permissions granted" \
-    && curl -sS https://starship.rs/install.sh -o /tmp/install-starship.sh \
-    && sh /tmp/install-starship.sh --yes \
-    && zinit self-update \
-    && zinit update --all
+function zinit-update {
+  zinit self-update && zinit update --all
 }
 setopt APPENDHISTORY
 setopt AUTOCD
@@ -86,7 +86,4 @@ if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
 if [ $commands[carapace] ]; then
   source <(carapace docker)
   source <(carapace docker-compose)
-fi
-if [ $commands[starship] ]; then
-  eval "$(starship init zsh)"
 fi
