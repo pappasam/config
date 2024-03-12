@@ -119,6 +119,7 @@ alias ls='ls --color=auto'
 alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
+alias wpd='pwd'
 
 # Neovim
 alias f='nvim'
