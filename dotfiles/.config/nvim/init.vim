@@ -158,7 +158,7 @@ set nospell
 set splitright
 set termguicolors
 set updatetime=300
-set statusline=%#CursorLine#\ %{mode()}\ %*\ %{&paste?'[P]':''}%{&spell?'[S]':''}%r%t%m%{get(b:,'gitsigns_status','')}%=%v/%{strwidth(getline('.'))}:%l/%L%y%#CursorLine#\ %{&ff}\ %*\ %{strlen(&fenc)?&fenc:'none'}\  " Trailing space
+set statusline=[%{mode()}](%t)%y%r%m
 set tabline=%!CustomTabLine()
 function! CustomTabLine()
   let tabnumber_max = tabpagenr('$')
