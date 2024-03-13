@@ -158,7 +158,7 @@ set nospell
 set splitright
 set termguicolors
 set updatetime=300
-set statusline=[%{mode()}]%y%t%R%M%H%W
+set statusline=%y%t%R%M%H%W
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = {
       \ 'name': 'xsel',
