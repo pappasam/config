@@ -177,7 +177,12 @@ require("typescript-tools").setup({
 require("outline").setup({})
 
 -- https://github.com/j-hui/fidget.nvim
-require("fidget").setup({})
+require("fidget").setup({
+  progress = {
+    suppress_on_insert = true,
+    ignore = { "ltex" },
+  },
+})
 
 -- }}}
 -- nvim-treesitter {{{
