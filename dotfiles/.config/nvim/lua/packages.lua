@@ -245,11 +245,13 @@ require("nvim-treesitter.configs").setup({
     "ocaml",
     "php",
     "prisma",
+    "pymanifest",
     "python",
     "query",
     "r",
     "regex",
     "requirements",
+    "ron",
     "rst",
     "ruby",
     "rust",
@@ -262,6 +264,7 @@ require("nvim-treesitter.configs").setup({
     "typescript",
     "vimdoc",
     "yaml",
+    "zathurarc",
   },
 })
 

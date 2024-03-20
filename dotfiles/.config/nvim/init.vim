@@ -14,6 +14,7 @@ augroup filetype_assignment
   autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
   autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
   autocmd BufRead,BufNewFile,BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+  autocmd BufRead,BufNewFile,BufEnter zathurarc set filetype=zathurarc
 augroup end
 
 augroup filetype_custom
