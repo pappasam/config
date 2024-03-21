@@ -227,10 +227,6 @@ function gitignore() {
   fi
 }
 
-function github-list { # username, organization, page
-  curl -u "$1" "https://api.github.com/orgs/$2/repos?per_page=100&page=$3"
-}
-
 function git-mod() {
   if git branch &>/dev/null; then
     fd --type f --exec git log -1 --format='/%ad..{}' --date=short {} | tree --fromfile -rC . | less -r
