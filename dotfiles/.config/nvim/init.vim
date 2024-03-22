@@ -138,6 +138,7 @@ set cursorlineopt=number
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
 set expandtab shiftwidth=2 softtabstop=2
+set exrc
 set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
