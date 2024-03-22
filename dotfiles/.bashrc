@@ -389,6 +389,7 @@ function rustglobal-install() {
   cargo install csvlens
   cargo install fd-find
   cargo install git-delta
+  cargo install leptosfmt
   cargo install mdbook
   cargo install ripgrep
   cargo install sd
