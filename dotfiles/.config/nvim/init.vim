@@ -42,13 +42,6 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
 augroup end
 
-" Replaced with fidget, keeping here in case fidget starts bugging out
-" augroup custom_lsp_notifications
-"   autocmd!
-"   autocmd LspAttach * echom printf('%s (%s): LSP warming up...', expand('%:t'), &filetype)
-"   autocmd BufReadPre * autocmd DiagnosticChanged * ++once echom printf('%s (%s): LSP ready!', expand('%:t'), &filetype)
-" augroup end
-
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * TrimWhitespace
