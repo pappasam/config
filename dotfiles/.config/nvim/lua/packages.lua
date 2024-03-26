@@ -173,8 +173,8 @@ require("typescript-tools").setup({
   capabilities = default_capabilities,
 })
 
--- https://github.com/hedyhli/outline.nvim
-require("outline").setup({})
+-- https://github.com/stevearc/aerial.nvim
+require("aerial").setup({})
 
 -- https://github.com/j-hui/fidget.nvim
 require("fidget").setup({
