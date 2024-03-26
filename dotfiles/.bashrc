@@ -394,6 +394,7 @@ function rustglobal-install() {
   cargo install ripgrep
   cargo install sd
   cargo install stylua --features lua52 --features luau
+  cargo install --features lsp --locked taplo-cli
   asdf reshim rust
   cargo install-update -a
 }
