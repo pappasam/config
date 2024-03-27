@@ -1,6 +1,5 @@
 #!/usr/bin/zsh
 # shellcheck shell=sh disable=all
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"; fi
 if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
 fpath=(${ASDF_DIR}/completions /usr/local/share/zsh-completions $fpath $HOME/.zfunc)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
