@@ -225,6 +225,8 @@ nnoremap <4-RightMouse> <LeftMouse>za
 nnoremap <C-]> <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
 inoremap <C-s> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <Leader>st <Cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <Leader>si <Cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <Leader>su <Cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <Leader>sr <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
