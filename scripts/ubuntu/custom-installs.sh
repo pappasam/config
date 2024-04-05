@@ -33,6 +33,11 @@ if ! command -v zoom > /dev/null; then
   sudo apt install /tmp/zoom_amd64.deb
 fi
 
+if ! command -v rustup > /dev/null; then
+  echo_bold_italic_underline 'Installing Rust'
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+
 if ! command -v slack > /dev/null; then
   echo_bold_italic_underline 'Installing Slack'
   sudo apt update

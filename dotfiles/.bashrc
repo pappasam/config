@@ -41,6 +41,7 @@ function path_radd() { # $1 path to add
   rm_from_path "$1"
   PATH="${PATH:+"$PATH:"}$1"
 }
+path_ladd "$HOME/.cargo/bin"
 path_ladd "$HOME/bin"
 path_ladd "$HOME/.bin"
 path_ladd "$HOME/.local/bin"
@@ -360,7 +361,7 @@ function languageserver-install() {
     yaml-language-server
   asdfl lua-language-server
   asdfl terraform-ls
-  cargo install --features lsp --locked taplo-cli && asdf reshim rust && cargo install-update taplo-cli
+  cargo install --features lsp --locked taplo-cli && cargo install-update taplo-cli
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
   local for_pipx=(
     # jedi-language-server
@@ -397,7 +398,6 @@ function rustglobal-install() {
   cargo install sd
   cargo install stylua --features lua52 --features luau
   cargo install --features lsp --locked taplo-cli
-  asdf reshim rust
   cargo install-update -a
 }
 

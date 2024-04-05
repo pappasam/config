@@ -39,7 +39,6 @@ asdf_setup R latest
 asdf_setup postgres 13.0
 asdf_setup python latest
 asdf_setup ruby latest
-asdf_setup rust latest
 asdf_setup shellcheck latest
 asdf_setup shfmt latest
 asdf_setup sqlite latest
