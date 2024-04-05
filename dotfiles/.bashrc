@@ -372,6 +372,8 @@ function languageserver-install() {
     pipx install "$arg"
     pipx upgrade "$arg"
   done
+  # Manual installs (download files and bring locally)
+  # https://github.com/artempyanykh/marksman/releases
 }
 
 function ltex-install() {
