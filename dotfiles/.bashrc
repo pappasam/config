@@ -382,9 +382,13 @@ function ltex-install() {
   tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
 }
 
-function rustglobal-install() {
+function rustup-components() {
   rustup component add rust-analyzer
   rustup component add rust-src
+}
+
+function rustglobal-install() {
+  rustup-components
   cargo install bat
   cargo install cargo-deb
   cargo install cargo-edit
