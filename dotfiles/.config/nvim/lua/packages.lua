@@ -129,6 +129,7 @@ local language_servers = {
       },
     },
   },
+  marksman = {},
   mdx_analyzer = {},
   nginx_language_server = {},
   prismals = {},
