@@ -47,6 +47,8 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+  autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
+  autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
   autocmd ColorScheme *
         \ highlight link GitSignsAddNr DiffAdd |
         \ highlight link GitSignsChangeNr DiffChange |
@@ -137,7 +139,7 @@ set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list listchars=tab:>\ ,nbsp:+,lead:\ ,multispace:-
+set list listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
 set mouse=a
 set noshowcmd
 set noshowmode
