@@ -459,3 +459,11 @@ require("presenting").setup({
 })
 
 -- }}}
+-- gx.nvim {{{
+-- https://github.com/chrishrb/gx.nvim
+
+require("gx").setup({
+  open_browser_app = "firefox",
+})
+
+-- }}}

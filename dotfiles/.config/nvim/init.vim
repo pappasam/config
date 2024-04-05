@@ -106,6 +106,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/windwp/nvim-autopairs')
   call a:p.add('https://github.com/machakann/vim-sandwich')
   call a:p.add('https://github.com/HiPhish/info.vim')
+  call a:p.add('https://github.com/chrishrb/gx.nvim')
 endfunction
 
 call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', expand('~/.config/nvim/pack/packager/start/vim-packager')])
@@ -209,8 +210,8 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
-nnoremap gx <Cmd>call jobstart(['firefox', expand('<cfile>')])<CR>
-xnoremap gx <Cmd>call jobstart(['firefox', line('v') == line('.') ? getline(line('.'))[col('v')-1:col('.')-1] : expand('<cfile>')])<CR><Esc>
+nnoremap gx <Cmd>Browse<CR>
+xnoremap gx <Cmd>Browse<CR>
 noremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
 noremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
 noremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
