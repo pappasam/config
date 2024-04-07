@@ -85,7 +85,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')
   call a:p.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
-  call a:p.add('https://github.com/tpope/vim-commentary')
   " Tree
   call a:p.add('https://github.com/kyazdani42/nvim-tree.lua')
   call a:p.add('https://github.com/kyazdani42/nvim-web-devicons')
