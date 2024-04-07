@@ -69,7 +69,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/kristijanhusak/vim-packager')
   " Language Server (LSP)
   call a:p.add('https://github.com/neovim/nvim-lspconfig')
-  call a:p.add('https://github.com/pmizio/typescript-tools.nvim')
   call a:p.add('https://github.com/stevearc/aerial.nvim')
   call a:p.add('https://github.com/j-hui/fidget.nvim.git')
   " Autocompletion

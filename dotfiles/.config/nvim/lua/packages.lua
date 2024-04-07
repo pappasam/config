@@ -145,6 +145,7 @@ local language_servers = {
   svelte = {},
   taplo = {},
   terraformls = {},
+  tsserver = {},
   vimls = {},
   yamlls = {
     filetypes = { "yaml" },
@@ -168,11 +169,6 @@ for server, server_config in pairs(language_servers) do
     capabilities = default_capabilities,
   }, server_config))
 end
-
--- https://github.com/pmizio/typescript-tools.nvim
-require("typescript-tools").setup({
-  capabilities = default_capabilities,
-})
 
 -- https://github.com/stevearc/aerial.nvim
 require("aerial").setup({})
