@@ -63,7 +63,6 @@ augroup end
 " }}}
 " Packages {{{
 
-let g:skip_ts_context_commentstring_module = v:true
 lua require('packages') -- ~/.config/nvim/lua/packages.lua
 
 function! s:packager_init(p) abort
@@ -84,7 +83,6 @@ function! s:packager_init(p) abort
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')
-  call a:p.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   " Tree
   call a:p.add('https://github.com/kyazdani42/nvim-tree.lua')
   call a:p.add('https://github.com/kyazdani42/nvim-web-devicons')
