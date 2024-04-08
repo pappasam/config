@@ -114,9 +114,7 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
-" necessary because auto-detection causes a blink.
-" remove this periodically and see if it's still necessary.
-if $ALACRITTY_TERM_BACKGROUND == 'light'
+if $ALACRITTY_TERM_BACKGROUND == 'light' " logic prevents blink
   set background=light
 else
   set background=dark
