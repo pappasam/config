@@ -208,12 +208,12 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
-noremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
-noremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
-noremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
-noremap <Leader>gt <Cmd>edit ~/.config/tmux/tmux.conf<CR>
-noremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
-noremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
+nnoremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
+nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+nnoremap <Leader>gt <Cmd>edit ~/.config/tmux/tmux.conf<CR>
+nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
+nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <RightMouse> <LeftMouse>za
