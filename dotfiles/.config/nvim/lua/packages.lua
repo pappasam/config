@@ -479,6 +479,17 @@ require("gx").setup({
         end
       end,
     },
+    ruff = {
+      name = "ruff",
+      filetypes = { "python" },
+      handle = function(mode, line, _)
+        local rule =
+          require("gx.helper").find(line, mode, "# noqa: ([A-Z][0-9]+)")
+        if rule then
+          return "https://docs.astral.sh/ruff/rules/" .. rule
+        end
+      end,
+    },
     npmjs = {
       name = "npmjs",
       filename = "package.json",
