@@ -32,7 +32,7 @@ augroup filetype_custom
   autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
   " iskeyword
   autocmd FileType nginx setlocal iskeyword+=$
-  autocmd FileType zsh,sh,css setlocal iskeyword+=-
+  autocmd FileType toml,zsh,sh,bash,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
   " keywordprg
   autocmd FileType vim setlocal keywordprg=:help

@@ -3,7 +3,6 @@
 -- https://github.com/hrsh7th/nvim-cmp
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 local cmp = require("cmp")
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -38,7 +37,7 @@ cmp.setup({
 local default_capabilities = vim.tbl_deep_extend(
   "force",
   vim.lsp.protocol.make_client_capabilities(),
-  cmp_nvim_lsp.default_capabilities()
+  require("cmp_nvim_lsp").default_capabilities()
 )
 -- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
 -- Resolved: https://www.reddit.com/r/neovim/comments/1b4bk5h/psa_new_fswatch_watchfunc_backend_available_on/
@@ -183,8 +182,8 @@ require("fidget").setup({
 
 -- }}}
 -- nvim-treesitter {{{
-
 -- https://github.com/nvim-treesitter/nvim-treesitter
+
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
   highlight = {
@@ -276,8 +275,8 @@ vim.treesitter.language.register("bash", "shell")
 
 -- }}}
 -- nvim-colorizer.lua {{{
-
 -- https://github.com/NvChad/nvim-colorizer.lua
+
 require("colorizer").setup({
   filetypes = { "*" },
   user_default_options = {
@@ -308,8 +307,8 @@ require("ibl").setup({
 
 -- }}}
 -- gitsigns.nvim {{{
-
 -- https://github.com/lewis6991/gitsigns.nvim
+
 require("gitsigns").setup({
   attach_to_untracked = false,
   signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
@@ -370,8 +369,8 @@ require("gitsigns").setup({
 
 -- }}}
 -- nvim-autopairs {{{
-
 -- https://github.com/windwp/nvim-autopairs
+
 require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
@@ -381,8 +380,8 @@ require("nvim-autopairs").setup({
 
 -- }}}
 -- nvim-tree.lua {{{
-
 -- https://github.com/kyazdani42/nvim-tree.lua
+
 require("nvim-tree").setup({
   disable_netrw = true,
   renderer = {
@@ -400,8 +399,8 @@ require("nvim-tree").setup({
 
 -- }}}
 -- nvim-web-devicons {{{
-
 -- https://github.com/kyazdani42/nvim-web-devicons
+
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
@@ -410,12 +409,9 @@ require("nvim-web-devicons").setup({
 
 -- }}}
 -- telescope.nvim {{{
-
 -- https://github.com/nvim-telescope/telescope.nvim
-local ts = require("telescope")
-local actions = require("telescope.actions")
 
-ts.setup({
+require("telescope").setup({
   defaults = {
     file_ignore_patterns = {
       "^node_modules/",
@@ -425,7 +421,7 @@ ts.setup({
     layout_strategy = "flex",
     mappings = {
       i = {
-        ["<esc>"] = actions.close,
+        ["<esc>"] = require("telescope.actions").close,
         ["<C-u>"] = false,
       },
     },
@@ -462,6 +458,38 @@ require("presenting").setup({
 
 require("gx").setup({
   open_browser_app = "firefox",
+  handlers = {
+    cratesio = {
+      name = "cratesio",
+      filename = "Cargo.toml",
+      handle = function(mode, line, _)
+        local pkg = require("gx.helper").find(line, mode, "([^=%s]+)%s-=%s")
+        if pkg then
+          return "https://crates.io/crates/" .. pkg
+        end
+      end,
+    },
+    pypi = {
+      name = "pypi",
+      filename = "pyproject.toml",
+      handle = function(mode, line, _)
+        local pkg = require("gx.helper").find(line, mode, "([^=%s]+)%s-=%s")
+        if pkg then
+          return "https://pypi.org/project/" .. pkg
+        end
+      end,
+    },
+    npmjs = {
+      name = "npmjs",
+      filename = "package.json",
+      handle = function(mode, line, _)
+        local pkg = require("gx.helper").find(line, mode, '"([^"]+)":')
+        if pkg then
+          return "https://www.npmjs.com/package/" .. pkg
+        end
+      end,
+    },
+  },
 })
 
 -- }}}
