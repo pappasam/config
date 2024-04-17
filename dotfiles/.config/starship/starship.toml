@@ -19,6 +19,3 @@ disabled = true
 [git_status]
 ignore_submodules = true
 untracked = ""
-
-[rust]
-disabled = true
