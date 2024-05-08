@@ -49,15 +49,6 @@ augroup miscellaneous_custom
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
-  autocmd ColorScheme *
-        \ highlight link GitSignsAddNr DiffAdd |
-        \ highlight link GitSignsChangeNr DiffChange |
-        \ highlight link GitSignsDeleteNr DiffDelete |
-        \ highlight link GitSignsDeleteNr DiffDelete |
-        \ highlight link NvimTreeExecFile Keyword |
-        \ highlight link NvimTreeImageFile NONE |
-        \ highlight link NvimTreeSpecialFile NONE |
-        \ highlight link NvimTreeSymlink Label
 augroup end
 
 " }}}
