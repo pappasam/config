@@ -120,6 +120,7 @@ set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
+set foldcolumn=auto
 set foldmethod=marker foldnestmax=1
 set grepprg=rg\ --vimgrep
 set history=10
@@ -207,10 +208,6 @@ nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
-nnoremap <RightMouse> <LeftMouse>za
-nnoremap <2-RightMouse> <LeftMouse>za
-nnoremap <3-RightMouse> <LeftMouse>za
-nnoremap <4-RightMouse> <LeftMouse>za
 nnoremap <C-]> <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
 inoremap <C-s> <Cmd>lua vim.lsp.buf.signature_help()<CR>
