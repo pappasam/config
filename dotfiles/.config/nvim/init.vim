@@ -114,14 +114,12 @@ colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest wildmode=longest:full
-set cursorline
-set cursorlineopt=number
+set cursorline cursorlineopt=number
 set dictionary=$HOME/config/docs/dict/american-english-with-propcase.txt
 set diffopt+=internal,algorithm:patience
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
-set foldcolumn=auto
-set foldmethod=marker foldnestmax=1
+set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
