@@ -214,7 +214,6 @@ require("nvim-treesitter.configs").setup({
     "cpp",
     "css",
     "diff",
-    "dockerfile",
     "dot",
     "gdscript",
     "git_config",
