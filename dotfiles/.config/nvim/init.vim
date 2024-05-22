@@ -254,12 +254,10 @@ augroup filetype_remap
         \ nnoremap <buffer> U <C-u>|
         \ nnoremap <buffer> q <Cmd>quit<CR>
   autocmd FileType man,info,help
-        \ nnoremap <buffer> <C-]> <C-]>|
         \ nnoremap <buffer> <RightMouse> <C-o>|
         \ nnoremap <buffer> <2-RightMouse> <C-o>|
         \ nnoremap <buffer> <3-RightMouse> <C-o>|
-        \ nnoremap <buffer> <4-RightMouse> <C-o>|
-        \ nmap <buffer> <CR> K
+        \ nnoremap <buffer> <4-RightMouse> <C-o>
   autocmd FileType qf
         \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>|
         \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>|
