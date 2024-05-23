@@ -129,15 +129,14 @@ set noshowcmd
 set noshowmode
 set noswapfile
 set notimeout
-set nowrap linebreak
+set nowrap linebreak breakat=\ \	,
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
 set shortmess+=cI
 set showtabline=2
 set signcolumn=number
-set spelllang=en_us
-set nospell
+set nospell spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
