@@ -215,6 +215,7 @@ require("nvim-treesitter.configs").setup({
     "css",
     "diff",
     "dot",
+    "dockerfile",
     "gdscript",
     "git_config",
     "git_rebase",
@@ -271,6 +272,13 @@ require("nvim-treesitter.configs").setup({
 vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
+
+-- Fix broken queries
+vim.treesitter.query.set(
+  "dockerfile",
+  "injections",
+  '((comment) @injection.content (#set! injection.language "comment"))'
+)
 
 -- }}}
 -- nvim-colorizer.lua {{{
