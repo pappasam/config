@@ -536,16 +536,17 @@ function upgrade() {
   sudo apt autoremove -y
   asdf update
   asdf plugin-update --all
-  pushd .
-  cd ~/src/lib/alacritty || return
-  git fetch origin
-  if [[ $(git diff origin/master) ]]; then
-    git merge origin/master
-    alacritty-install
-  else
-    echo 'No Alacritty updates, skipping build...'
-  fi
-  popd || return
+  # don't install alacritty for now, it currently broke unicode
+  # pushd .
+  # cd ~/src/lib/alacritty || return
+  # git fetch origin
+  # if [[ $(git diff origin/master) ]]; then
+  #   git merge origin/master
+  #   alacritty-install
+  # else
+  #   echo 'No Alacritty updates, skipping build...'
+  # fi
+  # popd || return
   asdf install neovim latest
   asdf uninstall neovim nightly &&
     asdf install neovim nightly &&
