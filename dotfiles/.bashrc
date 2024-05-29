@@ -536,6 +536,7 @@ function upgrade() {
   sudo apt autoremove -y
   asdf update
   asdf plugin-update --all
+  # pin to commit: https://github.com/alacritty/alacritty/commit/a77f77c48fca298caab3a4834b2d7ab1a98cae88
   # don't install alacritty for now, it currently broke unicode
   # pushd .
   # cd ~/src/lib/alacritty || return
