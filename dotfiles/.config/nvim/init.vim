@@ -214,8 +214,7 @@ nnoremap <Leader>su <Cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <Leader>sr <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
 xnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <Leader>dd <Cmd>lua vim.diagnostic.disable()<CR>
-nnoremap <Leader>de <Cmd>lua vim.diagnostic.enable()<CR>
+nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 nnoremap ]g <Cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap [g <Cmd>lua vim.diagnostic.goto_prev()<CR>
 " https://github.com/stevearc/aerial.nvim
