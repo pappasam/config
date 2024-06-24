@@ -33,9 +33,15 @@ setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
-autoload -Uz zcalc # enables zshell calculator: type with zcalc
-autoload -U compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
+autoload zcalc # enables zshell calculator: type with zcalc
+autoload compinit
+# BEGIN: https://gist.github.com/ctechols/ca1035271ad134841284
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+# END
+autoload +X bashcompinit && bashcompinit
 zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
 zstyle ':completion:*' menu select incremental
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
