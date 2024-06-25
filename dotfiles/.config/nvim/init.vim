@@ -215,8 +215,8 @@ nnoremap <Leader>sr <Cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
 xnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
-nnoremap ]g <Cmd>lua vim.diagnostic.goto_next()<CR>
-nnoremap [g <Cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap ]g <Cmd>lua vim.diagnostic.jump({count = 1})<CR>
+nnoremap [g <Cmd>lua vim.diagnostic.jump({count = -1})<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/hrsh7th/vim-vsnip
