@@ -28,7 +28,7 @@ bindings = [
 program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 
 [window]
-title = "Chez La Couve"
+title = "Sam's World"
 dynamic_title = false
 dynamic_padding = true
 decorations_theme_variant = "Dark"

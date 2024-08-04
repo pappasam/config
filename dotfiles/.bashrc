@@ -538,16 +538,16 @@ function upgrade() {
   asdf plugin-update --all
   # pin to commit: https://github.com/alacritty/alacritty/commit/a77f77c48fca298caab3a4834b2d7ab1a98cae88
   # don't install alacritty for now, it currently broke unicode
-  # pushd .
-  # cd ~/src/lib/alacritty || return
-  # git fetch origin
-  # if [[ $(git diff origin/master) ]]; then
-  #   git merge origin/master
-  #   alacritty-install
-  # else
-  #   echo 'No Alacritty updates, skipping build...'
-  # fi
-  # popd || return
+  pushd .
+  cd ~/src/lib/alacritty || return
+  git fetch origin
+  if [[ $(git diff origin/master) ]]; then
+    git merge origin/master
+    alacritty-install
+  else
+    echo 'No Alacritty updates, skipping build...'
+  fi
+  popd || return
   asdf install neovim latest
   asdf uninstall neovim nightly &&
     asdf install neovim nightly &&
