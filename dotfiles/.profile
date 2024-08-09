@@ -11,8 +11,11 @@
 # this to protect myself from any breakages; hopefully I'm wise enough to grep
 # my dotfiles for "WARNING"
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-        . "$HOME/.bashrc"
-    fi
+  # include .bashrc if it exists
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
+fi
+if [ -n "$TERM" ]; then
+  export TERM=xterm-256color
 fi
