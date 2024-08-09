@@ -29,13 +29,13 @@ asdf_setup direnv latest
 asdf_setup fzf latest
 asdf_setup github-cli latest
 asdf_setup golang latest
-asdf_setup java adopt-openjdk-13.0.2+8
+asdf_setup java latest:adoptopenjdk-11
 asdf_setup lua-language-server latest
 asdf_setup neovim nightly
 asdf_setup nodejs latest
 asdf_setup perl latest
 asdf_setup php latest
-asdf_setup R latest
+asdf_setup r latest
 asdf_setup postgres 13.0
 asdf_setup python latest
 asdf_setup ruby latest

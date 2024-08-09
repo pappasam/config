@@ -26,26 +26,9 @@ if ! command -v docker > /dev/null; then
   sudo usermod -aG docker "$(whoami)"
 fi
 
-if ! command -v zoom > /dev/null; then
-  echo_bold_italic_underline 'Installing Zoom'
-  sudo apt update
-  curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
-  sudo apt install /tmp/zoom_amd64.deb
-fi
-
 if ! command -v rustup > /dev/null; then
   echo_bold_italic_underline 'Installing Rust'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-fi
-
-if ! command -v slack > /dev/null; then
-  echo_bold_italic_underline 'Installing Slack'
-  sudo apt update
-  SLACK_VERSION=4.33.73
-  wget -O /tmp/slack-desktop.deb \
-    "https://downloads.slack-edge.com/releases/linux/$SLACK_VERSION/prod/x64/slack-desktop-$SLACK_VERSION-amd64.deb"
-  sudo apt install /tmp/slack-desktop.deb
-  sudo apt update && sudo apt upgrade slack-desktop
 fi
 
 if ! command -v ghcup > /dev/null; then
