@@ -38,10 +38,10 @@ sudo apt install -y \
   dict-wn \
   enscript \
   entr \
-  expect-dev \
+  expect \
   exuberant-ctags \
   flameshot \
-  fortune \
+  fortune-mod \
   fswatch \
   gettext \
   gfortran \
@@ -57,7 +57,7 @@ sudo apt install -y \
   inkscape \
   less \
   libbz2-dev \
-  libclang-6.0-dev \
+  libclang-14-dev \
   libcurl4-openssl-dev \
   libedit-dev \
   libevent-dev \
@@ -93,7 +93,7 @@ sudo apt install -y \
   libxcb-xfixes0-dev \
   libxml2-dev \
   libxpm-dev \
-  libxslt-dev \
+  libxslt1-dev \
   libyaml-dev \
   libzip-dev \
   llvm \
