@@ -10,12 +10,13 @@
 # system python might break when on the latest version from pyenv. I mention
 # this to protect myself from any breakages; hopefully I'm wise enough to grep
 # my dotfiles for "WARNING"
+
+# Line necessary because I get an error on login on Ubuntu 24.04 without it
+export TERM=xterm-256color
+
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
   if [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
   fi
-fi
-if [ -n "$TERM" ]; then
-  export TERM=xterm-256color
 fi
