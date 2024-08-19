@@ -176,7 +176,6 @@ require("aerial").setup({})
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
-    ignore = { "ltex" },
   },
 })
 
