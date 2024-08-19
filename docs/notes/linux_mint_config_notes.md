@@ -1,12 +1,12 @@
-# Linux Mint Configuration Notes
+# Cinnamon Configuration Notes
 
-Parts of Linux Mint are configured manually through a GUI. Since I cannot script these parts of setup, this document serves as a reminder for those necessary manual steps.
+Cinnamon is configured manually, through a GUI. This documents the required manual steps for a new setup.
 
 ## Shortcuts
 
-| Action           | Command             |
-| ---------------- | ------------------- |
-| Restart cinnamon | `<A-F2>`, r, `<CR>` |
+| Action           | Command               |
+| ---------------- | --------------------- |
+| Restart cinnamon | `<A-F2>`, `r`, `<CR>` |
 
 ## Themes
 
@@ -30,52 +30,45 @@ The following keyboard shortcuts and mappings make it easier to do things withou
 
 ### Shortcuts
 
-- **General**
+- General
   - Main
-    - Show the window selection screen : Ctrl+Alt+J
-    - Show the workspace selection screen : Ctrl+Alt+K
-- **Workspaces**
+    - Show the window selection screen : `Ctrl+Alt+J`
+    - Show the workspace selection screen : `Ctrl+Alt+K`
+- Workspaces
   - Main
-    - Switch to left workspace: Ctrl+Alt+H
-    - Switch to right workspace: Ctrl+Alt+L
+    - Switch to left workspace: `Ctrl+Alt+H`
+    - Switch to right workspace: `Ctrl+Alt+L`
   - Direct Navigation
-    - Switch to workspace 1 : Ctrl+Alt+1
-    - Switch to workspace 2 : Ctrl+Alt+2
-    - Switch to workspace 3 : Ctrl+Alt+3
-    - Switch to workspace 4 : Ctrl+Alt+4
-- **Windows**
+    - Switch to workspace 1 : `Ctrl+Alt+1`
+    - Switch to workspace 2 : `Ctrl+Alt+2`
+    - Switch to workspace 3 : `Ctrl+Alt+3`
+    - Switch to workspace 4 : `Ctrl+Alt+4`
+- Windows
   - Main
-    - Maximize Window : Super+F AND Super+M
-    - Unmaximize Window: Super+U
-    - Close window : Ctrl+Alt+d
+    - Maximize Window : `Super+F` and `Super+M`
+    - Unmaximize Window: `Super+U`
+    - Close window : `Ctrl+Alt+D`
   - Tiling and Snapping
-    - Push tile left : Super+H
-    - Push tile right : Super+L
-    - Push tile up : Super+K
-    - Push tile down : Super+J
+    - Push tile left : `Super+H`
+    - Push tile right : `Super+L`
+    - Push tile up : `Super+K`
+    - Push tile down : `Super+J`
   - Inter-workspace
-    - Move window to left workspace : Shift+Ctrl+Alt+H
-    - Move window to right workspace : Shift+Ctrl+Alt+L
+    - Move window to left workspace : `Shift+Ctrl+Alt+H`
+    - Move window to right workspace : `Shift+Ctrl+Alt+L`
   - Inter-monitor
-    - Move window to left monitor: Shift+Super+H
-    - Move window to right monitor: Shift+Super+L
-    - Move window to up monitor: Shift+Super+K
-    - Move window to down monitor: Shift+Super+J
-- **System**
+    - Move window to left monitor: `Shift+Super+H`
+    - Move window to right monitor: `Shift+Super+L`
+    - Move window to up monitor: `Shift+Super+K`
+    - Move window to down monitor: `Shift+Super+J`
+- System
   - Main
-    - Lock screen: Ctrl+q
+    - Lock screen: `Ctrl+Q`
   - Hardware
-    - Re-detect display devices: remove the Super+P shortcut (easy to hit accidentailly)
-- **Custom**
-  - Alacritty
-    - Command: /usr/bin/alacritty
-    - Ctrl+Alt+i
-  - Screenkey Toggle
-    - Command: ~/bin/sk-toggle
-    - Ctrl+Alt+,
-  - Firefox
-    - Command: firefox
-    - Ctrl+Alt+b
+    - Re-detect display devices: remove `Super+P` (easy to hit accidentailly)
+- Custom
+  - Alacritty: `/usr/bin/alacritty`, `Ctrl+Alt+i`
+  - Firefox: `firefox`, `Ctrl+Alt+b`
 
 ### Layouts
 
@@ -86,15 +79,15 @@ The following keyboard shortcuts and mappings make it easier to do things withou
 ## Windows
 
 - Titlebar
-  - Left side title bar buttons: [Close], [], [], []
-  - Right side title bar buttons: [Minimize], [Maximize]
+  - Left side title bar buttons: `[Close]`, `[]`, `[]`, `[]`
+  - Right side title bar buttons: `[Minimize]`, `[Maximize]`
 - Behavior
   - "Special Key to move and resize windows": change to "Super"
     - Necessary to enable important Inkscape shortcut
   - Edge resistance with other windows: uncheck
     - Moving windows with mouse increases CPU usage a lot
-- Alt-Tab
-  - Alt-Tab switcher style: Icons and window preview
+- `Alt-Tab`
+  - `Alt-Tab` switcher style: Icons and window preview
 
 ## Date and Time
 
@@ -102,7 +95,7 @@ All options off except for "Display the date"
 
 ## Applets
 
-Some system configurations must be configured within the applets menu.
+Some system configurations must be configured within the `applets` menu.
 
 ### Main cinnamon menu
 
@@ -133,9 +126,8 @@ sudo shutdown now
 # wait a minute, then reboot the computer
 # IMPORTANT
 #   after you plug in your headphone jack, open the "Sound"
-#   window in Linux Mint's GUI and select "Headphones built-in audio"
+#   window in the GUI and select "Headphones built-in audio"
 #   the sound should now work
-```
 
 ## Foreign language keys
 
@@ -147,4 +139,5 @@ sudo shutdown now
 ## Fix Nvidia Performance
 
 - To make video performance good, enable FXAA in Nvidia settings
-- Disable this when using alacritty for now (2018-08-25)
+- Disable this when using Alacritty for now (2018-08-25)
+```
