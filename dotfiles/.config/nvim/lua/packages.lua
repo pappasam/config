@@ -92,6 +92,7 @@ local language_servers = {
     settings = {
       ltex = {
         language = "en-US",
+        checkFrequency = "save",
         disabledRules = {
           ["en-US"] = {
             "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
