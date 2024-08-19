@@ -1,4 +1,4 @@
-# Cinnamon Configuration Notes
+# Cinnamon Configuration
 
 Cinnamon is configured manually, through a GUI. This documents the required manual steps for a new setup.
 
