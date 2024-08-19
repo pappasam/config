@@ -75,6 +75,33 @@ local language_servers = {
   graphql = {},
   html = {},
   jsonls = {},
+  ltex = {
+    filetypes = {
+      "bib",
+      "markdown",
+      "markdown.mdx",
+      "org",
+      "pandoc",
+      "plaintex",
+      "quarto",
+      "rmd",
+      "rnoweb",
+      "rst",
+      "tex",
+    },
+    settings = {
+      ltex = {
+        language = "en-US",
+        disabledRules = {
+          ["en-US"] = {
+            "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
+            "MORFOLOGIK_RULE_EN_US",
+            "WHITESPACE_RULE",
+          },
+        },
+      },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
