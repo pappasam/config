@@ -96,7 +96,11 @@ local language_servers = {
         disabledRules = {
           ["en-US"] = {
             "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
+            "ENGLISH_WORD_REPEAT_RULE",
+            "EN_QUOTES",
             "MORFOLOGIK_RULE_EN_US",
+            "PHRASE_REPETITION",
+            "UPPERCASE_SENTENCE_START",
             "WHITESPACE_RULE",
           },
         },
