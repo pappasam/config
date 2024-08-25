@@ -105,11 +105,7 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
-if $ALACRITTY_TERM_BACKGROUND == 'light' " logic prevents blink
-  set background=light
-else
-  set background=dark
-endif
+" NOTE: background is set in packages.lua
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2

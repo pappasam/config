@@ -1,6 +1,7 @@
 #!/bin/bash
 # Environment {{{
 
+export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.txt"
 export TMUX_CONFIGURE_OPTIONS='--enable-sixel'
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
@@ -197,8 +198,12 @@ function gop() {
 }
 
 function gd() {
-  if [[ "$ALACRITTY_TERM_BACKGROUND" == "light" ]]; then
-    git diff "$@" | delta --light
+  if test -f "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
+    if grep -q "light" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
+      git diff "$@" | delta --light
+    else
+      git diff "$@" | delta --dark
+    fi
   else
     git diff "$@" | delta --dark
   fi
@@ -332,13 +337,12 @@ function togglebackground() {
   if ! sed -i --follow-symlinks '1{/^ *# /{s///;b};s/^/# /}' "$filename"; then
     return 1
   fi
-  printf "(toggled-"
+  mkdir -p "$(basename "$ALACRITTY_BACKGROUND_CACHE_FILE")"
   if head -n 1 "$filename" | grep -q "^#"; then
-    printf "dark) "
+    echo "dark" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
   else
-    printf "light) "
+    echo "light" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
   fi
-  printf "restart alacritty for changes to take effect\n"
 }
 
 # }}}
