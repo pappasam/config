@@ -105,7 +105,7 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
-" NOTE: background is set in packages.lua
+lua require('options') -- ~/.config/nvim/lua/options.lua
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
