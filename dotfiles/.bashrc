@@ -337,7 +337,7 @@ function togglebackground() {
   if ! sed -i --follow-symlinks '1{/^ *# /{s///;b};s/^/# /}' "$filename"; then
     return 1
   fi
-  mkdir -p "$(basename "$ALACRITTY_BACKGROUND_CACHE_FILE")"
+  mkdir -p "$(dirname "$ALACRITTY_BACKGROUND_CACHE_FILE")"
   if head -n 1 "$filename" | grep -q "^#"; then
     echo "dark" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
   else
