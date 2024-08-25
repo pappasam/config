@@ -205,19 +205,9 @@ nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
-nnoremap <C-]> <Cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
-inoremap <C-s> <Cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <Leader>st <Cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <Leader>si <Cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <Leader>su <Cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <Leader>sr <Cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
-xnoremap <Leader>sa <Cmd>lua vim.lsp.buf.code_action()<CR>
+" help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
-nnoremap ]g <Cmd>lua vim.diagnostic.jump({count = 1, float = true})<CR>
-nnoremap [g <Cmd>lua vim.diagnostic.jump({count = -1, float = true})<CR>
-nnoremap g? <Cmd>lua vim.diagnostic.open_float()<CR>
+nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/hrsh7th/vim-vsnip
