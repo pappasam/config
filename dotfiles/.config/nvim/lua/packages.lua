@@ -247,6 +247,7 @@ require("nvim-treesitter.configs").setup({
     "markdown",
     "markdown_inline",
     "mermaid",
+    "nginx",
     "ocaml",
     "php",
     "prisma",
