@@ -201,6 +201,7 @@ nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
 nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
+nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
