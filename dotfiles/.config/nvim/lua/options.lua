@@ -11,10 +11,6 @@ local function alacritty_background_setter(filepath)
       vim.o.background = "dark"
     end
   else
-    -- Create an empty file if it doesn't exist
-    file = io.open(filepath, "w")
-    ---@diagnostic disable-next-line: need-check-nil
-    file:close()
     vim.o.background = "dark"
   end
 end
