@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PATH_TMUX="$HOME/.asdf/installs/tmux/3.4/bin/tmux"
+PATH_TMUX="$HOME/.local/share/mise/installs/tmux/latest/bin/tmux"
 
 if ! command -v "$PATH_TMUX" &> /dev/null; then
   notify-send 'entrypoint-alacritty-tmux' "not found '$PATH_TMUX'"

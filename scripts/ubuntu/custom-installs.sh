@@ -15,7 +15,6 @@ function github_install() {
   fi
 }
 
-github_install https://github.com/asdf-vm/asdf.git ~/.asdf
 github_install https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
 
 if ! command -v docker > /dev/null; then
@@ -36,7 +35,6 @@ if ! command -v ghcup > /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 fi
 
-echo_bold_italic_underline 'Done setting up custom software! Now:'
-echo_bold_italic_underline '  1. Close your shell (<C-d>)'
-echo_bold_italic_underline '  2. Re-open your shell'
-echo_bold_italic_underline '  3. run "make setup-asdf"'
+# install mise
+curl https://mise.run | sh
+echo 'now run "mise install"'

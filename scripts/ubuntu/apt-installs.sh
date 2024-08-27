@@ -59,11 +59,15 @@ sudo apt install -y \
   libbz2-dev \
   libclang-14-dev \
   libcurl4-openssl-dev \
+  libdb-dev \
   libedit-dev \
   libevent-dev \
   libffi-dev \
   libfreetype6-dev \
   libgd-dev \
+  libgdbm-dev \
+  libgdbm6 \
+  libgmp-dev \
   libgraphviz-dev \
   libicu-dev \
   libjpeg-dev \
@@ -82,6 +86,7 @@ sudo apt install -y \
   libpng-dev \
   libpq-dev \
   libreadline-dev \
+  libreadline6-dev \
   librsvg2-bin \
   libsasl2-dev \
   libsqlite3-dev \
@@ -104,6 +109,7 @@ sudo apt install -y \
   network-manager-openvpn \
   openssl \
   paprefs \
+  patch \
   peek \
   perl \
   pkg-config \
@@ -112,6 +118,7 @@ sudo apt install -y \
   python-openssl \
   qpdf \
   re2c \
+  rustc \
   scdoc \
   screenkey \
   shellcheck \
@@ -123,6 +130,7 @@ sudo apt install -y \
   typespeed \
   unixodbc-dev \
   unzip \
+  uuid-dev \
   wget \
   xclip \
   xsel \

@@ -48,7 +48,7 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
 if command -v aws > /dev/null; then complete -C aws_completer aws; fi
-if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
+# if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
 if command -v kubectl > /dev/null; then source <(kubectl completion zsh); fi
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
@@ -58,11 +58,6 @@ bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
 function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
-function _asdf_complete_plugins() {
-  local -a subcmds
-  subcmds=($(asdf plugin-list | tr '\n' ' '))
-  _describe 'List installed plugins for zsh completion' subcmds
-}
 function _git_branches() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
   local -a subcmds
@@ -80,8 +75,6 @@ compdef _directories d
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _vplug_completion vplug
 compdef _command ve
-compdef _asdf_complete_plugins asdfl
-compdef _asdf_complete_plugins asdfpurge
 compdef _git_branches gdl
 compdef _info info
 compdef _make m

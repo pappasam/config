@@ -20,10 +20,6 @@ setup-ubuntu: ## Setup Ubuntu for the first time
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
 
-.PHONY: setup-asdf
-setup-asdf: ## Install useful software post asdf installation
-	bash ./scripts/ubuntu/asdf-installs.sh
-
 .PHONY: setup-cinnamon-on-ubuntu
 setup-cinnamon-on-ubuntu: ## Run commands to get cinnamon working, if relevant
 	bash ./scripts/ubuntu/ubuntu-cinnamon.sh

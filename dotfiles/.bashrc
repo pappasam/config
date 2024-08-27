@@ -1,4 +1,16 @@
 #!/bin/bash
+# Mise-en-place {{{
+
+if ! test -f ~/.local/bin/mise; then
+  echo 'Mise not installed, please install. See:'
+  echo 'https://mise.jdx.dev/getting-started.html'
+elif [[ -z "${ZSH_VERSION}" ]]; then
+  eval "$(~/.local/bin/mise activate bash)"
+else
+  eval "$(~/.local/bin/mise activate zsh)"
+fi
+
+# }}}
 # Environment {{{
 
 export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.txt"
@@ -29,7 +41,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1                              # disable pytho
 # shellcheck source=/dev/null
 function include() { [[ -f "$1" ]] && source "$1"; }
 include "$HOME/.config/sensitive/secrets.sh"
-include "$HOME/.asdf/asdf.sh"
 include "$HOME/.ghcup/env"
 function rm_from_path() { # $1: path to remove
   PATH=$(echo "$PATH" | tr ':' '\n' | grep -v "^${1}$" | tr '\n' ':' | sed 's/:$//')
@@ -348,8 +359,6 @@ function togglebackground() {
 # }}}
 # Installs {{{
 
-function asdfl() { asdf install "$1" latest && asdf global "$1" latest; }
-
 function languageserver-install() {
   npm install --no-save -g \
     @mdx-js/language-server \
@@ -363,8 +372,6 @@ function languageserver-install() {
     vim-language-server \
     vscode-langservers-extracted \
     yaml-language-server
-  asdfl lua-language-server
-  asdfl terraform-ls
   cargo install --features lsp --locked taplo-cli && cargo install-update taplo-cli
   go install golang.org/x/tools/gopls@latest && asdf reshim golang
   local for_pipx=(
@@ -414,14 +421,8 @@ function rglobal-install() {
   R -e 'install.packages("formatR", repos="https://ftp.osuosl.org/pub/cran/")'
 }
 
-function rubyglobal-install() {
-  gem install license_finder
-  asdf reshim ruby
-}
-
 function perlglobal-install() {
   cpanm -n App::cpanminus
-  asdf reshim perl
 }
 
 function nodeglobal-install() {
@@ -442,8 +443,7 @@ function pydev-install() {
     ipython \
     mypy \
     pip \
-    wheel &&
-    asdf reshim python
+    wheel
 }
 
 function pyglobal-install() {
@@ -469,7 +469,7 @@ function pipx-install() {
     # shellcheck disable=SC2128
     for arg in $for_pipx; do
       # We avoid reinstall because it won't install uninstalled pacakges
-      pipx install "$arg"
+      pipx install --force "$arg"
       pipx upgrade "$arg"
     done
     pipx inject poetry poetry-plugin-up
@@ -485,7 +485,6 @@ function goglobal-install() {
   go install github.com/jesseduffield/lazygit@latest
   go install github.com/nishanths/license/v5@latest
   go install mvdan.cc/sh/v3/cmd/shfmt@latest
-  asdf reshim golang
 }
 
 function global-install() {
@@ -494,7 +493,6 @@ function global-install() {
   perlglobal-install
   pyglobal-install
   pipx-install
-  rubyglobal-install
   rustglobal-install
 }
 
@@ -521,25 +519,10 @@ function alacritty-install() {
 
 function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
 
-function asdfpurge() {
-  if [ $# -ne 1 ]; then
-    echo 'Usage: asdfpurge <plugin-name>' && return 1
-  fi
-  local plugin_name="$1"
-  for plugin_version in $(asdf list "$plugin_name" | grep -v '\*'); do
-    echo "Uninstalling $plugin_name==$plugin_version..."
-    asdf uninstall "$plugin_name" "$plugin_version"
-  done
-  echo "Reshiming $plugin_name..."
-  asdf reshim "$plugin_name"
-}
-
 function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
-  asdf update
-  asdf plugin-update --all
   # pin to commit: https://github.com/alacritty/alacritty/commit/a77f77c48fca298caab3a4834b2d7ab1a98cae88
   # don't install alacritty for now, it currently broke unicode
   pushd .
@@ -552,15 +535,8 @@ function upgrade() {
     echo 'No Alacritty updates, skipping build...'
   fi
   popd || return
-  asdf install neovim latest
-  asdf uninstall neovim nightly &&
-    asdf install neovim nightly &&
-    asdf global neovim nightly
-  asdf install github-cli latest && asdf global github-cli latest
   languageserver-install
   nodeglobal-install
-  # nvim +PackagerClean +PackagerUpdate ~/.config/nvim/init.vim &&
-  #   nvim +TSUpdate ~/.config/nvim/init.vim
 }
 
 # }}}
