@@ -494,6 +494,7 @@ function global-install() {
   pyglobal-install
   pipx-install
   rustglobal-install
+  languageserver-install
 }
 
 function alacritty-install() {
