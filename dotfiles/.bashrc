@@ -163,6 +163,11 @@ alias rg='rg --fixed-strings'
 # }}}
 # Functions {{{
 
+# Remove when this is resolved: https://github.com/jdx/mise/issues/2174
+function mise-install() {
+  PATH=$PATH:/home/sroeca/.local/share/mise/shims mise install
+}
+
 function despace-filename() {
   if [ $# -eq 0 ]; then
     while read -r filename; do
@@ -360,30 +365,8 @@ function togglebackground() {
 # Installs {{{
 
 function languageserver-install() {
-  npm install --no-save -g \
-    @mdx-js/language-server \
-    @prisma/language-server \
-    bash-language-server \
-    dockerfile-language-server-nodejs \
-    graphql-language-service-cli \
-    svelte-language-server \
-    typescript \
-    typescript-language-server \
-    vim-language-server \
-    vscode-langservers-extracted \
-    yaml-language-server
   cargo install --features lsp --locked taplo-cli && cargo install-update taplo-cli
-  go install golang.org/x/tools/gopls@latest && asdf reshim golang
-  local for_pipx=(
-    # jedi-language-server
-    # nginx-language-server
-    pyright
-  )
-  # shellcheck disable=SC2128
-  for arg in $for_pipx; do
-    pipx install "$arg"
-    pipx upgrade "$arg"
-  done
+  cargo install stylua --features lua52 --features luau
   # Manual installs (download files and bring locally)
   # https://github.com/artempyanykh/marksman/releases
 }
@@ -400,19 +383,6 @@ function rustup-components() {
 
 function rustglobal-install() {
   rustup-components
-  cargo install bat
-  cargo install cargo-deb
-  cargo install cargo-edit
-  cargo install cargo-update
-  cargo install csvlens
-  cargo install fd-find
-  cargo install git-delta
-  cargo install leptosfmt
-  cargo install mdbook
-  cargo install ripgrep
-  cargo install sd
-  cargo install stylua --features lua52 --features luau
-  cargo install --features lsp --locked taplo-cli
   cargo install-update -a
 }
 
@@ -423,18 +393,6 @@ function rglobal-install() {
 
 function perlglobal-install() {
   cpanm -n App::cpanminus
-}
-
-function nodeglobal-install() {
-  npm install --no-save -g \
-    @mermaid-js/mermaid-cli \
-    nginx-linter \
-    nginxbeautifier \
-    prettier \
-    prettier-plugin-prisma \
-    prettier-plugin-svelte \
-    tree-sitter-cli \
-    write-good
 }
 
 function pydev-install() {
@@ -453,46 +411,9 @@ function pyglobal-install() {
     pydev-install
 }
 
-function pipx-install() {
-  local for_pipx=(
-    cookiecutter
-    httpie
-    nginxfmt
-    pgcli
-    poetry
-    pre-commit
-    restview
-    ruff
-    toml-sort
-  )
-  if command -v pipx >/dev/null; then
-    # shellcheck disable=SC2128
-    for arg in $for_pipx; do
-      # We avoid reinstall because it won't install uninstalled pacakges
-      pipx install --force "$arg"
-      pipx upgrade "$arg"
-    done
-    pipx inject poetry poetry-plugin-up
-    pipx inject poetry poetry-plugin-export
-  else
-    echo 'pipx not installed. Install with "pip install pipx"'
-  fi
-}
-
-function goglobal-install() {
-  go install github.com/google/osv-scanner/cmd/osv-scanner@v1
-  go install github.com/jedib0t/go-wordle@latest
-  go install github.com/jesseduffield/lazygit@latest
-  go install github.com/nishanths/license/v5@latest
-  go install mvdan.cc/sh/v3/cmd/shfmt@latest
-}
-
 function global-install() {
-  goglobal-install
-  nodeglobal-install
   perlglobal-install
   pyglobal-install
-  pipx-install
   rustglobal-install
   languageserver-install
 }
@@ -536,8 +457,10 @@ function upgrade() {
     echo 'No Alacritty updates, skipping build...'
   fi
   popd || return
+  mise self-update
+  mise upgrade
+  mise install -y
   languageserver-install
-  nodeglobal-install
 }
 
 # }}}
