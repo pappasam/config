@@ -115,7 +115,7 @@ sudo apt install -y \
   pkg-config \
   pulseaudio-module-gsettings \
   pulseaudio-module-raop \
-  python-openssl \
+  python3-openssl \
   qpdf \
   re2c \
   rustc \
