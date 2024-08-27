@@ -93,6 +93,11 @@ local language_servers = {
       ltex = {
         language = "en-US",
         checkFrequency = "save",
+        markdown = {
+          nodes = {
+            Code = "default",
+          },
+        },
         disabledRules = {
           ["en-US"] = {
             "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
