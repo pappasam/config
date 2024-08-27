@@ -1,16 +1,4 @@
 #!/bin/bash
-# Mise-en-place {{{
-
-if ! test -f ~/.local/bin/mise; then
-  echo 'Mise not installed, please install. See:'
-  echo 'https://mise.jdx.dev/getting-started.html'
-elif [[ -z "${ZSH_VERSION}" ]]; then
-  eval "$(~/.local/bin/mise activate bash)"
-else
-  eval "$(~/.local/bin/mise activate zsh)"
-fi
-
-# }}}
 # Environment {{{
 
 export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.txt"
@@ -460,5 +448,19 @@ function upgrade() {
   mise install -y
   languageserver-install
 }
+
+# }}}
+# Mise-en-place {{{
+
+if [ -e "$HOME/.local/bin/mise" ]; then
+  if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
+    eval "$(~/.local/bin/mise activate zsh)"
+  else
+    eval "$(~/.local/bin/mise activate bash)"
+  fi
+else
+  echo 'Mise not installed, please install. See:'
+  echo 'https://mise.jdx.dev/getting-started.html'
+fi
 
 # }}}
