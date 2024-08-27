@@ -8,12 +8,10 @@ help: ## Print each target and its associated help message
 .PHONY: stow
 stow: ## Run stow on dotfiles directory, linking files to home directory
 	@mkdir -p $(MKDIR_CONFIG)
-	@echo "\033[1m\033[31mNOTE\033[0m: Ignore BUG warnings, they're spurious"
 	stow --target $(HOME) --restow dotfiles
 
 .PHONY: clean
 clean: ## Remove stowed links
-	@echo "\033[1m\033[31mNOTE\033[0m: Ignore BUG warnings, they're spurious"
 	stow --target $(HOME) -D dotfiles
 
 .PHONY: setup-ubuntu
