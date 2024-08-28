@@ -452,15 +452,17 @@ function upgrade() {
 # }}}
 # Mise-en-place {{{
 
-if [ -e "$HOME/.local/bin/mise" ]; then
-  if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
-    eval "$(~/.local/bin/mise activate zsh)"
+if [[ $- == *i* ]]; then # interactive shell
+  if [ -e "$HOME/.local/bin/mise" ]; then
+    if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
+      eval "$(~/.local/bin/mise activate zsh)"
+    else
+      eval "$(~/.local/bin/mise activate bash)"
+    fi
   else
-    eval "$(~/.local/bin/mise activate bash)"
+    echo 'Mise not installed, please install. See:'
+    echo 'https://mise.jdx.dev/getting-started.html'
   fi
-else
-  echo 'Mise not installed, please install. See:'
-  echo 'https://mise.jdx.dev/getting-started.html'
 fi
 
 # }}}
