@@ -443,8 +443,8 @@ function upgrade() {
     echo 'No Alacritty updates, skipping build...'
   fi
   popd || return
-  mise self-update
-  mise upgrade
+  mise self-update -y
+  mise upgrade -y
   mise install -y
   languageserver-install
 }
