@@ -1,2 +1,5 @@
 #!/bin/bash
+
+set -euo pipefail
+
 ~/src/lib/ltex-ls-16.0.0/bin/ltex-ls "$@"
