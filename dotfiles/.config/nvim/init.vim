@@ -136,6 +136,7 @@ set nospell spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
+set shellcmdflag=-ic
 set statusline=\ %t%R%M%H%W
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = {
@@ -265,8 +266,9 @@ command! Gm Git commit
 command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
+command! BackgroundToggle !togglebackground
 
-command! ToggleConceal call s:toggle_conceal()
+command! ConcealToggle call s:toggle_conceal()
 function! s:toggle_conceal()
   if !exists('w:custom_toggle_conceal') || w:custom_toggle_conceal == 0
     set conceallevel=3 concealcursor=nc
@@ -327,7 +329,7 @@ function! s:focuswriting_settings_side()
 endfunction
 function! s:focuswriting_settings_middle()
   setlocal number norelativenumber wrap winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
-  ToggleConceal
+  ConcealToggle
 endfunction
 function! s:focuswriting_autocmd()
   for windowid in range(1, winnr('$'))
