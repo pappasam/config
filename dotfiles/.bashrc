@@ -334,21 +334,6 @@ function info() { # https://github.com/HiPhish/info.vim
   fi
 }
 
-# Change background from current color to new color
-function togglebackground() {
-  local filename
-  filename="$HOME/.config/alacritty/alacritty.toml"
-  if ! sed -i --follow-symlinks '1{/^ *# /{s///;b};s/^/# /}' "$filename"; then
-    return 1
-  fi
-  mkdir -p "$(dirname "$ALACRITTY_BACKGROUND_CACHE_FILE")"
-  if head -n 1 "$filename" | grep -q "^#"; then
-    echo "dark" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
-  else
-    echo "light" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
-  fi
-}
-
 # }}}
 # Installs {{{
 

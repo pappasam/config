@@ -136,7 +136,6 @@ set nospell spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
-set shellcmdflag=-ic
 set statusline=\ %t%R%M%H%W
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = {
