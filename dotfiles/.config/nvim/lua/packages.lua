@@ -198,6 +198,16 @@ require("fidget").setup({
 })
 
 -- }}}
+-- diagnostic.txt {{{
+-- :help diagnostic.txt
+
+vim.diagnostic.config({
+  jump = {
+    float = true,
+  },
+})
+
+-- }}}
 -- nvim-treesitter {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
 

@@ -204,8 +204,6 @@ nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
-nnoremap ]d <Cmd>lua vim.diagnostic.jump({count = 1, float = true})<CR>
-nnoremap [d <Cmd>lua vim.diagnostic.jump({count = -1, float = true})<CR>
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
