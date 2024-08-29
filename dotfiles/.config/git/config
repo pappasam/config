@@ -3,8 +3,8 @@
   name = Sam Roeca
 [core]
   editor = nvim
-  autocrlf = input
-  safecrlf = true
+  autocrlf = false
+  safecrlf = false
 [init]
   defaultBranch = main
 [alias]
