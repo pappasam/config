@@ -2,13 +2,11 @@
 
 set -euo pipefail
 
-filename="$HOME/.config/alacritty/alacritty.toml"
-if ! sed -i --follow-symlinks '1{/^ *# /{s///;b};s/^/# /}' "$filename"; then
-  return 1
-fi
 mkdir -p "$(dirname "$ALACRITTY_BACKGROUND_CACHE_FILE")"
-if head -n 1 "$filename" | grep -q "^#"; then
-  echo "dark" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
+touch "$ALACRITTY_BACKGROUND_CACHE_FILE"
+ALACRITTY_BACKGROUND_LIGHT='import = ["~/.config/alacritty/papercolor_light.toml"]'
+if grep -Fxq "$ALACRITTY_BACKGROUND_LIGHT" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
+  echo '' >"$ALACRITTY_BACKGROUND_CACHE_FILE"
 else
-  echo "light" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
+  echo "$ALACRITTY_BACKGROUND_LIGHT" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
 fi

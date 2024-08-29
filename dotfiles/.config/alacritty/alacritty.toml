@@ -1,4 +1,4 @@
-# import = ["papercolor_light.toml"]
+import = ["~/.cache/alacritty/background.toml"]
 live_config_reload = true
 
 [cursor.style]

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Environment {{{
 
-export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.txt"
+export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.toml"
 export TMUX_CONFIGURE_OPTIONS='--enable-sixel'
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER='/usr/bin/firefox'
