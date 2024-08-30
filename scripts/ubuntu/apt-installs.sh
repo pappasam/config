@@ -8,10 +8,6 @@ function echo_bold_italic_underline() {
 
 echo_bold_italic_underline 'Installing system dependencies with "apt install"'
 
-sudo add-apt-repository -y ppa:git-core/ppa
-sudo add-apt-repository -y ppa:inkscape.dev/stable
-sudo add-apt-repository -y ppa:peek-developers/stable
-
 sudo apt update
 sudo apt upgrade -y
 
@@ -63,10 +59,10 @@ sudo apt install -y \
   libedit-dev \
   libevent-dev \
   libffi-dev \
-  libfreetype6-dev \
+  libfreetype-dev \
   libgd-dev \
   libgdbm-dev \
-  libgdbm6 \
+  libgdbm6t64 \
   libgmp-dev \
   libgraphviz-dev \
   libicu-dev \
@@ -78,10 +74,9 @@ sudo apt install -y \
   libmapnik-dev \
   libmysqlclient-dev \
   libncurses-dev \
-  libncurses5 \
-  libncurses5-dev \
-  libncursesw5 \
-  libncursesw5-dev \
+  libncurses6 \
+  libncurses-dev \
+  libncursesw6 \
   libonig-dev \
   libpng-dev \
   libpq-dev \
