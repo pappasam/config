@@ -5,7 +5,7 @@ add_newline = false
 command_timeout = 1000
 
 [aws]
-symbol = "aws "
+disabled = true
 
 [azure]
 symbol = "az "
@@ -69,10 +69,10 @@ symbol = "fossil "
 symbol = "gcp "
 
 [git_branch]
-symbol = "git "
+symbol = ""
 
 [git_commit]
-tag_symbol = " tag "
+tag_symbol = ""
 
 [git_status]
 ahead = ">"
