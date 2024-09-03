@@ -89,3 +89,7 @@ All options off except for "Display the date"
 
 - OSD
   - Uncheck "Enable workspace OSD". Don't want people seeing my silly workspace names
+
+## Privacy
+
+- Remember recently accessed files: uncheck
