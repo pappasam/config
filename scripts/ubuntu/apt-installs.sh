@@ -2,12 +2,6 @@
 
 set -euo pipefail
 
-function echo_bold_italic_underline() {
-  echo -e "\e[3m\e[1m\e[4m$1\e[0m"
-}
-
-echo_bold_italic_underline 'Installing system dependencies with "apt install"'
-
 sudo apt update
 sudo apt upgrade -y
 
@@ -16,6 +10,7 @@ sudo apt install -y \
   apt-transport-https \
   autoconf \
   automake \
+  biber \
   bison \
   bsdgames \
   bsdgames-nonfree \
@@ -74,8 +69,8 @@ sudo apt install -y \
   libmapnik-dev \
   libmysqlclient-dev \
   libncurses-dev \
-  libncurses6 \
   libncurses-dev \
+  libncurses6 \
   libncursesw6 \
   libonig-dev \
   libpng-dev \
@@ -119,7 +114,12 @@ sudo apt install -y \
   shellcheck \
   software-properties-common \
   stow \
-  texlive-full \
+  texlive-fonts-recommended \
+  texlive-lang-english \
+  texlive-latex-base \
+  texlive-latex-extra \
+  texlive-latex-recommended \
+  texlive-science \
   tk-dev \
   tree \
   typespeed \
@@ -137,5 +137,3 @@ sudo apt install -y \
 
 sudo apt autoclean
 sudo apt autoremove
-
-echo_bold_italic_underline 'Done installing system tools!'
