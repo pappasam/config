@@ -11,10 +11,10 @@ local snippets_by_filetype = {
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>${1:My great website}</title>
-		<meta name="description" content="${2:The greatest website on earth}" />
-		<meta name="author" content="${3:Samuel Roeca}" />
-		<link rel="stylesheet" href="${4:style/custom.css}">
+		<title></title>
+		<meta name="description" content="My Website" />
+		<meta name="author" content="Samuel Roeca" />
+		<link rel="stylesheet" href="style/custom.css">
 	</head>
 	<body>
 		$0
@@ -37,8 +37,8 @@ $1
     {
       trigger = "phony",
       body = [[
-.PHONY: $1
-$1: ## ${2:Description}
+.PHONY: target
+target: ## description
 	$0
       ]],
     },
@@ -47,19 +47,15 @@ $1: ## ${2:Description}
     {
       trigger = "mentor",
       body = [[
-Mentor/Mentee Goals Discussion: ${1:YYYY-MM-DD}
+Mentor/Mentee Goals Discussion: YYYY-MM-DD
 
 ## 1 or 2 abstract goals
 
-- ${2:Goals}
+$0
 
 ## 1 or 2 discrete methods
 
-- ${3:Discrete_Methods}
-
 ## 1 of the aforementioned methods
-
-- ${4:Aforementioned_Methods}
     ]],
     },
     {
@@ -67,15 +63,11 @@ Mentor/Mentee Goals Discussion: ${1:YYYY-MM-DD}
       body = [[
 ## Objective
 
-${1}
+$0
 
 ## Value
 
-${2}
-
 ## Acceptance Criteria
-
-${3}
       ]],
     },
     {
@@ -83,15 +75,11 @@ ${3}
       body = [[
 _Yesterday:_
 
-- ${1}
+$0
 
 _Today:_
 
-- ${2}
-
 _Blockers/Reminders:_
-
-- ${3}
       ]],
     },
   },
