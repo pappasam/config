@@ -42,6 +42,7 @@ sudo apt install -y \
   gnupg-agent \
   graphicsmagick \
   graphviz \
+  groff \
   gthumb \
   htop \
   imagemagick \
