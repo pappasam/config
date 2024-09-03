@@ -2,7 +2,7 @@
 -- https://github.com/hrsh7th/nvim-cmp
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 
-require('custom_snippets').register_cmp_source()
+require("custom_snippets").register_cmp_source()
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
@@ -27,15 +27,12 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "snp" },
+    { name = "custom_snippets" },
     { name = "path" },
     { name = "buffer" },
     { name = "emoji" },
   }),
 })
-
-
-
 
 -- }}}
 -- nvim-lspconfig + lsp.txt + other lsp stuff {{{

@@ -1,10 +1,6 @@
 -- Inspiration:
 -- https://www.reddit.com/r/neovim/comments/1cxfhom/builtin_snippets_so_good_i_removed_luasnip/
 
-local global_snippets = {
-  { trigger = "shebang", body = "#!/bin/sh" },
-}
-
 local snippets_by_filetype = {
   html = {
     {
@@ -22,8 +18,7 @@ local snippets_by_filetype = {
 	<body>
 		$0
 	</body>
-</html>
-      ]],
+</html>]],
     },
   },
   make = {
@@ -34,16 +29,14 @@ local snippets_by_filetype = {
 help: ## Prints each target and its associated help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*\$\$' \$(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", \$\$1, \$\$2}'
-$1
-      ]],
+$0]],
     },
     {
       trigger = "phony",
       body = [[
 .PHONY: target
 target: ## description
-	$0
-      ]],
+	$0]],
     },
   },
   markdown = {
@@ -58,8 +51,7 @@ $0
 
 ## 1 or 2 discrete methods
 
-## 1 of the aforementioned methods
-    ]],
+## 1 of the aforementioned methods]],
     },
     {
       trigger = "shortcut",
@@ -70,8 +62,7 @@ $0
 
 ## Value
 
-## Acceptance Criteria
-      ]],
+## Acceptance Criteria]],
     },
     {
       trigger = "standup",
@@ -82,8 +73,7 @@ $0
 
 _Today:_
 
-_Blockers/Reminders:_
-      ]],
+_Blockers/Reminders:_]],
     },
   },
   sh = {
@@ -91,15 +81,8 @@ _Blockers/Reminders:_
   },
 }
 
-local function get_buf_snips()
-  local ft = vim.bo.filetype
-  local snips = vim.list_slice(global_snippets)
-
-  if ft and snippets_by_filetype[ft] then
-    vim.list_extend(snips, snippets_by_filetype[ft])
-  end
-
-  return snips
+local function get_buf_snippets()
+  return snippets_by_filetype[vim.bo.filetype] or {}
 end
 
 local M = {}
@@ -107,7 +90,6 @@ local M = {}
 function M.register_cmp_source()
   local cmp_source = {}
   local cache = {}
-
   function cmp_source.complete(_, _, callback)
     local bufnr = vim.api.nvim_get_current_buf()
     if not cache[bufnr] then
@@ -121,15 +103,12 @@ function M.register_cmp_source()
           insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
         }
         return item
-      end, get_buf_snips())
-
+      end, get_buf_snippets())
       cache[bufnr] = completion_items
     end
-
     callback(cache[bufnr])
   end
-
-  require("cmp").register_source("snp", cmp_source)
+  require("cmp").register_source("custom_snippets", cmp_source)
 end
 
 return M
