@@ -1,12 +1,13 @@
--- nvim-lspconfig + nvim-cmp + lsp.txt + other lsp stuff {{{
-
+-- nvim-cmp {{{
 -- https://github.com/hrsh7th/nvim-cmp
 -- https://github.com/hrsh7th/cmp-nvim-lsp
+
+require('custom_snippets').register_cmp_source()
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+    expand = function(arg)
+      vim.snippet.expand(arg.body)
     end,
   },
   window = {
@@ -26,12 +27,18 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "vsnip" },
+    { name = "snp" },
     { name = "path" },
     { name = "buffer" },
     { name = "emoji" },
   }),
 })
+
+
+
+
+-- }}}
+-- nvim-lspconfig + lsp.txt + other lsp stuff {{{
 
 -- :help lsp.txt
 local default_capabilities = vim.tbl_deep_extend(

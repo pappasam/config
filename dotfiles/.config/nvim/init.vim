@@ -22,7 +22,7 @@ augroup filetype_custom
   " indentation
   autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
   autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
-  autocmd Filetype go,gomod,make,snippets,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
+  autocmd Filetype go,gomod,make,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " comments
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
   autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
@@ -68,8 +68,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/hrsh7th/cmp-buffer')
   call a:p.add('https://github.com/hrsh7th/cmp-path')
   call a:p.add('https://github.com/hrsh7th/cmp-emoji')
-  call a:p.add('https://github.com/hrsh7th/vim-vsnip')
-  call a:p.add('https://github.com/hrsh7th/cmp-vsnip')
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')
@@ -168,8 +166,6 @@ let g:repl_filetype_commands = {
 let g:repl_default = &shell
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
-" https://github.com/hrsh7th/vim-vsnip
-let g:vsnip_snippet_dir = expand('~/.config/nvim/snippets')
 
 " }}}
 " Mappings {{{
@@ -207,11 +203,6 @@ nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
-" https://github.com/hrsh7th/vim-vsnip
-imap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-smap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-imap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-smap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
 " https://github.com/pappasam/nvim-repl
 nnoremap <Leader>rt <Cmd>ReplToggle<CR>
 nmap <silent> <Leader>rc <Plug>ReplSendCell
