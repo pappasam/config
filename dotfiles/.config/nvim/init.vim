@@ -67,7 +67,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/hrsh7th/cmp-nvim-lsp')
   call a:p.add('https://github.com/hrsh7th/cmp-buffer')
   call a:p.add('https://github.com/hrsh7th/cmp-path')
-  call a:p.add('https://github.com/hrsh7th/cmp-emoji')
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')

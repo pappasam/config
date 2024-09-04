@@ -30,7 +30,6 @@ cmp.setup({
     { name = "custom_snippets" },
     { name = "path" },
     { name = "buffer" },
-    { name = "emoji" },
   }),
 })
 
