@@ -66,10 +66,6 @@ I'm using Jade-1 + Mint-Y. Jade-1 provides window borders that make the currentl
 | Mouse Pointer  | DMZ-White |
 | Desktop        | Mint-Y    |
 
-## Effects
-
-Turn off all effects.
-
 ## Windows
 
 - Titlebar
