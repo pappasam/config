@@ -99,6 +99,7 @@ sudo apt install -y \
   ncurses-doc \
   network-manager-openvpn \
   openssl \
+  pandoc \
   paprefs \
   patch \
   peek \
