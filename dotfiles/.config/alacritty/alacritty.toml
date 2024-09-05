@@ -31,5 +31,4 @@ program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 title = "Sam's World"
 dynamic_title = false
 dynamic_padding = true
-decorations_theme_variant = "Dark"
 padding = {x = 2, y = 2}
