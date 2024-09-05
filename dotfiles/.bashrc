@@ -443,6 +443,9 @@ if [[ $- == *i* ]]; then # interactive shell
     else
       eval "$(~/.local/bin/mise activate bash)"
     fi
+    # mise randomly drops stuff from path. Below prevents that random error
+    PATH=$PATH:/home/sroeca/.local/share/mise/shims
+    export PATH
   else
     echo 'Mise not installed, please install. See:'
     echo 'https://mise.jdx.dev/getting-started.html'
