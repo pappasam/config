@@ -54,23 +54,8 @@ The following keyboard shortcuts and mappings make it easier to do things withou
   - Ctrl position: Caps Lock as Ctrl
   - Position of Compose key: Right Win
 
-## Themes
-
-I'm using Jade-1 + Mint-Y. Jade-1 provides window borders that make the currently active window easy to identify.
-
-| Section        | Setting   |
-| -------------- | --------- |
-| Window borders | Jade-1    |
-| Icons          | Mint-Y    |
-| Controls       | Mint-Y    |
-| Mouse Pointer  | DMZ-White |
-| Desktop        | Mint-Y    |
-
 ## Windows
 
-- Titlebar
-  - Buttons
-    - Buttons layout: `Left`
 - Behavior
   - "Special Key to move and resize windows": change to "Super"
     - Necessary to enable important Inkscape shortcut
