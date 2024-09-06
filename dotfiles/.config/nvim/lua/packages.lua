@@ -417,6 +417,12 @@ require("nvim-autopairs").setup({
 })
 
 -- }}}
+-- nvim-ts-autotag {{{
+-- https://github.com/windwp/nvim-ts-autotag
+
+require("nvim-ts-autotag").setup()
+
+-- }}}
 -- nvim-tree.lua {{{
 -- https://github.com/kyazdani42/nvim-tree.lua
 
