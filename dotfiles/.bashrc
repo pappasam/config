@@ -158,6 +158,31 @@ function mise-install() {
   PATH=$PATH:/home/sroeca/.local/share/mise/shims mise install
 }
 
+function _mise_update_pattern() {
+  local pattern
+  if [[ $# -gt 0 ]]; then
+    pattern="$1"
+  else
+    echo 'usage: mise-update-pattern <pattern>'
+    return 1
+  fi
+  for i in $(mise ls | awk '{ print $1 }' | rg "$pattern"); do
+    mise install --force "$i"
+  done
+}
+
+function mise-update-pipx() {
+  _mise_update_pattern 'pipx:'
+}
+
+function mise-update-npm() {
+  _mise_update_pattern 'npm:'
+}
+
+function mise-update-go() {
+  _mise_update_pattern 'go:'
+}
+
 function despace-filename() {
   if [ $# -eq 0 ]; then
     while read -r filename; do
