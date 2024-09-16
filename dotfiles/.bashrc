@@ -125,6 +125,7 @@ alias c='cd ~/config/'
 
 # Neovim
 alias f='nvim'
+alias ft='nvim /tmp/temp.md'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
 
