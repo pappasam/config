@@ -83,7 +83,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/pappasam/papercolor-theme-slim')
   call a:p.add('https://github.com/sotte/presenting.nvim.git')
   call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
-  call a:p.add('https://github.com/Glench/Vim-Jinja2-Syntax')
+  call a:p.add('https://github.com/HiPhish/jinja.vim')
   call a:p.add('https://github.com/NvChad/nvim-colorizer.lua')
   call a:p.add('https://github.com/fidian/hexmode')
   call a:p.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
