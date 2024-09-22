@@ -458,7 +458,6 @@ require("telescope").setup({
     mappings = {
       i = {
         ["<esc>"] = require("telescope.actions").close,
-        ["<C-u>"] = false,
       },
     },
     prompt_prefix = " ",
