@@ -1,3 +1,8 @@
+[settings]
+experimental = true
+# see here: https://github.com/jdx/mise/issues/1635
+cargo_binstall = true
+
 [tools]
 python = "3.12.6"
 go = "1.23.1"
@@ -9,9 +14,8 @@ act = "latest"
 direnv = "latest"
 github-cli = "latest"
 lua-language-server = "latest"
-perl = "latest"
-php = "latest"
-r = "latest"
+perl = "5.40.0"
+r = "4.4.1"
 postgres = "13.0"
 shellcheck = "latest"
 shfmt = "latest"
@@ -72,8 +76,3 @@ cargo-binstall = "latest"
 "cargo:mdbook" = "latest"
 "cargo:ripgrep" = "latest"
 "cargo:sd" = "latest"
-
-[settings]
-experimental = true
-# see here: https://github.com/jdx/mise/issues/1635
-cargo_binstall = true

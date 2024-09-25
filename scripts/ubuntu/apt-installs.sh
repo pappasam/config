@@ -104,6 +104,7 @@ sudo apt install -y \
   patch \
   peek \
   perl \
+  php \
   pkg-config \
   pulseaudio-module-gsettings \
   pulseaudio-module-raop \
