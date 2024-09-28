@@ -251,6 +251,8 @@ command! WQ wq
 command! Wqa wqa
 command! WQa wqa
 command! WQA wqa
+command! T tabclose
+command! Tabc tabclose
 command! Gm Git commit
 command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
@@ -284,9 +286,6 @@ endfunction
 command! Focus call s:focuswriting()
 function! s:focuswriting()
   normal! ma
-  augroup focuswriting
-    autocmd!
-  augroup end
   let current_buffer = bufnr('%')
   tabe
   try
@@ -307,31 +306,14 @@ function! s:focuswriting()
   execute 'buffer ' .. current_buffer
   call s:focuswriting_settings_middle()
   wincmd =
-  augroup focuswriting
-    autocmd!
-    autocmd WinEnter focuswriting_abcdefg call s:focuswriting_autocmd()
-  augroup end
   normal! `azz
 endfunction
 function! s:focuswriting_settings_side()
-  setlocal nonumber norelativenumber fillchars=vert:\ ,eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
 endfunction
 function! s:focuswriting_settings_middle()
-  setlocal number norelativenumber wrap winfixwidth fillchars=vert:\ ,eob:\ ,stlnc:  statusline=\  colorcolumn=0 nofoldenable winhighlight=StatusLine:StatusLineNC
+  setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
   ConcealToggle
-endfunction
-function! s:focuswriting_autocmd()
-  for windowid in range(1, winnr('$'))
-    if bufname(winbufnr(windowid)) != 'focuswriting_abcdefg'
-      execute windowid .. 'wincmd w'
-      return
-    endif
-  endfor
-  if tabpagenr('$') > 1
-    tabclose
-  else
-    wqall
-  endif
 endfunction
 
 command! CleanUnicode call s:clean_unicode()
