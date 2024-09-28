@@ -288,32 +288,20 @@ function! s:focuswriting()
   normal! ma
   let current_buffer = bufnr('%')
   tabe
-  try
-    file focuswriting_abcdefg
-  catch
-    edit focuswriting_abcdefg
-  endtry
-  setlocal nobuflisted
   " Left Window
-  call s:focuswriting_settings_side()
+  setlocal nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   vsplit
   vsplit
   " Right Window
-  call s:focuswriting_settings_side()
+  setlocal nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
   vertical resize 88
   execute 'buffer ' .. current_buffer
-  call s:focuswriting_settings_middle()
-  wincmd =
-  normal! `azz
-endfunction
-function! s:focuswriting_settings_side()
-  setlocal nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
-endfunction
-function! s:focuswriting_settings_middle()
   setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
   ConcealToggle
+  wincmd =
+  normal! `azz
 endfunction
 
 command! CleanUnicode call s:clean_unicode()
