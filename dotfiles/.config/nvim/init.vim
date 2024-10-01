@@ -289,11 +289,11 @@ function! s:focuswriting()
   let current_buffer = bufnr('%')
   tabe
   " Left Window
-  setlocal nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   vsplit
   vsplit
   " Right Window
-  setlocal nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
   vertical resize 88
