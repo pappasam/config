@@ -13,18 +13,6 @@ normal = {family = "Fira Mono Nerd Font Mono", style = "Medium"}
 import = ["~/.cache/alacritty/background.toml"]
 live_config_reload = true
 
-[keyboard]
-bindings = [
-  {key = "F11", action = "ToggleFullscreen"},
-  {key = "LBracket", mods = "Control", mode = "Vi", action = "ClearSelection"},
-  {key = "Q", mode = "Vi", action = "ScrollToBottom"},
-  {key = "Q", mode = "Vi", action = "ToggleViMode"},
-  {key = "Space", mods = "Shift|Control", action = "None"},
-  {key = 5, mods = "Shift", mode = "Vi", action = "Last"},
-  {key = 6, mods = "Shift", mode = "Vi", action = "Bracket"},
-  {key = 11, mods = "Shift", mode = "Vi", action = "FirstOccupied"}
-]
-
 [terminal.shell]
 program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 
