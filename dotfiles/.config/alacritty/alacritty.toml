@@ -1,6 +1,3 @@
-import = ["~/.cache/alacritty/background.toml"]
-live_config_reload = true
-
 [cursor.style]
 blinking = "Never"
 
@@ -11,6 +8,10 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 [font]
 size = 12.0
 normal = {family = "Fira Mono Nerd Font Mono", style = "Medium"}
+
+[general]
+import = ["~/.cache/alacritty/background.toml"]
+live_config_reload = true
 
 [keyboard]
 bindings = [
@@ -24,7 +25,7 @@ bindings = [
   {key = 11, mods = "Shift", mode = "Vi", action = "FirstOccupied"}
 ]
 
-[shell]
+[terminal.shell]
 program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 
 [window]
