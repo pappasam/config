@@ -428,6 +428,7 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = true,
     exclude = {
+      "/.github",
       "/dotfiles",
     },
   },
