@@ -251,8 +251,6 @@ command! WQ wq
 command! Wqa wqa
 command! WQa wqa
 command! WQA wqa
-command! T tabclose
-command! Tabc tabclose
 command! Gm Git commit
 command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
@@ -283,11 +281,16 @@ function! s:resize_window_width()
   normal! `a
 endfunction
 
-command! Focus call s:focuswriting()
+command! F call s:focuswriting()
 function! s:focuswriting()
+  if exists('t:focuswriting')
+    tabclose
+    return
+  endif
   normal! ma
   let current_buffer = bufnr('%')
   tabe
+  let t:focuswriting = 1
   " Left Window
   setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   vsplit
