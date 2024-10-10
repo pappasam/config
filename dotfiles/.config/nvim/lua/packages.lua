@@ -540,3 +540,8 @@ require("gx").setup({
 })
 
 -- }}}
+-- bigfile.nvim {{{
+
+require("bigfile").setup({})
+
+-- }}}
