@@ -80,7 +80,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/tpope/vim-fugitive')
   call a:p.add('https://github.com/lewis6991/gitsigns.nvim')
   " Miscellaneous
-  call a:p.add('https://github.com/LunarVim/bigfile.nvim')
   call a:p.add('https://github.com/pappasam/papercolor-theme-slim')
   call a:p.add('https://github.com/sotte/presenting.nvim.git')
   call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
