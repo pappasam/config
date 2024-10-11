@@ -185,6 +185,22 @@ for server, server_config in pairs(language_servers) do
   }, server_config))
 end
 
+-- Custom LSP
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "yaml.githubactions",
+  callback = function(args)
+    vim.lsp.start({
+      name = "github-actions-languageserver",
+      cmd = { "github-actions-languageserver", "--stdio" },
+      root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
+      capabilities = default_capabilities,
+      init_options = {
+        session_token = nil,
+      },
+    })
+  end,
+})
+
 -- https://github.com/stevearc/aerial.nvim
 require("aerial").setup({})
 
