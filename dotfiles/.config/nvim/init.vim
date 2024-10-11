@@ -64,10 +64,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/stevearc/aerial.nvim')
   call a:p.add('https://github.com/j-hui/fidget.nvim.git')
   " Autocompletion
-  call a:p.add('https://github.com/hrsh7th/nvim-cmp')
-  call a:p.add('https://github.com/hrsh7th/cmp-nvim-lsp')
-  call a:p.add('https://github.com/hrsh7th/cmp-buffer')
-  call a:p.add('https://github.com/hrsh7th/cmp-path')
+  call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')

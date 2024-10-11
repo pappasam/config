@@ -1,0 +1,7 @@
+{
+  "shell script preamble": {
+    "prefix": "set",
+    "body": "set -euo pipefail",
+    "description": "Shell script security preamble"
+  }
+}

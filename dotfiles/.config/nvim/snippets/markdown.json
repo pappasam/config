@@ -1,0 +1,43 @@
+{
+  "Mentor outline": {
+    "prefix": "mentor",
+    "body": [
+      "Mentor/Mentee Goals Discussion: YYYY-MM-DD",
+      "",
+      "## 1 or 2 abstract goals",
+      "",
+      "$0",
+      "",
+      "## 1 or 2 discrete methods",
+      "",
+      "## 1 of the aforementioned methods"
+    ],
+    "description": "Boilerplate for mentor goals email"
+  },
+  "Shortcut outline": {
+    "prefix": "shortcut",
+    "body": [
+      "## Objective",
+      "",
+      "$0",
+      "",
+      "## Value",
+      "",
+      "## Acceptance Criteria"
+    ],
+    "description": "Boilerplate for Shortcut story"
+  },
+  "Standup outline": {
+    "prefix": "standup",
+    "body": [
+      "_Yesterday:_",
+      "",
+      "$0",
+      "",
+      "_Today:_",
+      "",
+      "_Blockers/Reminders:"
+    ],
+    "description": "Boilerplate for Standup message"
+  }
+}

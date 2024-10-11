@@ -1,0 +1,18 @@
+{
+  "help: target": {
+    "prefix": "help",
+    "body": [
+      ".PHONY: help",
+      "help: ## Prints each target and its associated help message",
+      "\t@grep -E '^[a-zA-Z_-]+:.*?## .*\\$\\$' \\$(MAKEFILE_LIST) | \\",
+      "\t\tawk 'BEGIN {FS = \":.*?## \"}; {printf \"\\033[36m%-30s\\033[0m %s\\n\", \\$\\$1, \\$\\$2}'",
+      "$0"
+    ],
+    "description": "help target for Makefile"
+  },
+  "phony: target": {
+    "prefix": "phony",
+    "body": [".PHONY: target", "target: ## description", "\t$0"],
+    "description": "Boilerplate for a PHONY target"
+  }
+}

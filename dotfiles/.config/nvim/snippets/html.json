@@ -1,0 +1,21 @@
+{
+  "HTML 5": {
+    "prefix": "html5",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html lang=\"en\">",
+      "\t<head>",
+      "\t\t<meta charset=\"utf-8\" />",
+      "\t\t<title></title>",
+      "\t\t<meta name=\"description\" content=\"My Website\" />",
+      "\t\t<meta name=\"author\" content=\"Samuel Roeca\" />",
+      "\t\t<link rel=\"stylesheet\" href=\"style/custom.css\">",
+      "\t</head>",
+      "\t<body>",
+      "\t\t$0",
+      "\t</body>",
+      "</html>"
+    ],
+    "description": "HTML 5 boilerplate"
+  }
+}

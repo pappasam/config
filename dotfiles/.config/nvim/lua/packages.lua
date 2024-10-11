@@ -1,47 +1,19 @@
--- nvim-cmp {{{
--- https://github.com/hrsh7th/nvim-cmp
--- https://github.com/hrsh7th/cmp-nvim-lsp
+-- blink.cmp {{{
+-- https://github.com/Saghen/blink.cmp
 
-require("custom_snippets").register_cmp_source()
-local cmp = require("cmp")
-cmp.setup({
-  snippet = {
-    expand = function(arg)
-      vim.snippet.expand(arg.body)
-    end,
+require("blink-cmp").setup({
+  keymap = {
+    accept = "<C-y>",
+    scroll_documentation_up = "<C-k>",
+    scroll_documentation_down = "<C-j>",
   },
-  window = {
-    completion = {
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-    },
-    documentation = {
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-    },
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-j>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "custom_snippets" },
-    { name = "path" },
-    { name = "buffer" },
-  }),
 })
 
 -- }}}
 -- nvim-lspconfig + lsp.txt + other lsp stuff {{{
 
 -- :help lsp.txt
-local default_capabilities = vim.tbl_deep_extend(
-  "force",
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities()
-)
+local default_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
 -- Resolved: https://www.reddit.com/r/neovim/comments/1b4bk5h/psa_new_fswatch_watchfunc_backend_available_on/
 -- Must `sudo apt install fswatch`
