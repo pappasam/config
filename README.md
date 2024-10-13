@@ -1,6 +1,6 @@
 # ⚙ System Configuration
 
-[Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest versions of [Ubuntu] and [Linux Mint].
+[Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest stable version of [Ubuntu].
 
 ```bash
 sudo apt install git # For version control
@@ -16,7 +16,6 @@ Top-level directories are documented below.
 - `dotfiles/` User dotfiles live here and are automatically organized on your system by [stow].
 - `scripts/` Scripts for things like system setup and program installation.
 
-[Linux Mint]: https://en.wikipedia.org/wiki/Linux_Mint
 [PATH]: https://en.wikipedia.org/wiki/PATH_(variable)
 [Samuel Roeca]: https://samroeca.com
 [Ubuntu]: https://en.wikipedia.org/wiki/Ubuntu

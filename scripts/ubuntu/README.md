@@ -1,7 +1,5 @@
 # Ubuntu Scripts
 
-Most of these scripts will work on the latest stable versions of Ubuntu. Unless the script itself is also prefixed with `ubuntu-`, assume it can also be used on the latest stable version of Linux Mint.
-
 ## Manual commands
 
 This section of the README describes useful programs you will need to install - or configure - manually, when the time is right.
