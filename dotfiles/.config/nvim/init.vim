@@ -69,8 +69,8 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')
   " Tree
-  call a:p.add('https://github.com/kyazdani42/nvim-tree.lua')
-  call a:p.add('https://github.com/kyazdani42/nvim-web-devicons')
+  call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
+  call a:p.add('https://github.com/nvim-tree/nvim-web-devicons')
   " Fuzzy Finder
   call a:p.add('https://github.com/nvim-telescope/telescope.nvim')
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
