@@ -1,3 +1,5 @@
+# :schema https://raw.githubusercontent.com/distinction-dev/alacritty-schema/refs/heads/main/alacritty/reference.json
+
 [cursor.style]
 blinking = "Never"
 
