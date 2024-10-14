@@ -41,6 +41,8 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
+  " disable gitsigns
+  autocmd FileType xxd DisableNoisyPlugins
 augroup end
 
 augroup miscellaneous_custom
@@ -265,6 +267,13 @@ function! s:toggle_conceal()
     set conceallevel=0 concealcursor=
     let w:custom_toggle_conceal = 0
   endif
+endfunction
+
+command! DisableNoisyPlugins call s:disable_noisy_plugins()
+function! s:disable_noisy_plugins()
+  lua vim.diagnostic.enable(false)
+  Gitsigns detach
+  Fidget suppress
 endfunction
 
 command! Fit call s:resize_window_width()
