@@ -4,7 +4,7 @@ set -euo pipefail
 
 mkdir -p "$(dirname "$ALACRITTY_BACKGROUND_CACHE_FILE")"
 touch "$ALACRITTY_BACKGROUND_CACHE_FILE"
-ALACRITTY_BACKGROUND_LIGHT='import = ["~/.config/alacritty/papercolor_light.toml"]'
+ALACRITTY_BACKGROUND_LIGHT='general.import = ["~/.config/alacritty/papercolor_light.toml"]'
 if grep -Fxq "$ALACRITTY_BACKGROUND_LIGHT" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
   echo '' >"$ALACRITTY_BACKGROUND_CACHE_FILE"
 else
