@@ -213,6 +213,7 @@ nmap s <Nop>
 xmap s <Nop>
 " https://github.com/nvim-telescope/telescope.nvim
 nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
+nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
 nnoremap <C-p><C-g> <Cmd>Telescope git_commits<CR>
 nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
