@@ -262,7 +262,6 @@ command! Gm Git commit
 command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
-command! BackgroundToggle !togglebackground
 
 command! ResizeAllTabs call s:resize_all_tabs()
 function! s:resize_all_tabs()
@@ -303,6 +302,7 @@ function! s:resize_window_width()
 endfunction
 
 command! F call s:focuswriting()
+command! Focus call s:focuswriting()
 function! s:focuswriting()
   if exists('t:focuswriting')
     tabclose
