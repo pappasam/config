@@ -450,6 +450,9 @@ require("telescope").setup({
         ["<esc>"] = require("telescope.actions").close,
       },
     },
+    preview = {
+      treesitter = false,
+    },
     prompt_prefix = " ",
   },
 })
