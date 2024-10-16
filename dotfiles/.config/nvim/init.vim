@@ -51,6 +51,7 @@ augroup miscellaneous_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+  autocmd VimResized * ResizeAllTabs
   autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
 augroup end
@@ -261,6 +262,13 @@ command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
 command! BackgroundToggle !togglebackground
+
+command! ResizeAllTabs call s:resize_all_tabs()
+function! s:resize_all_tabs()
+  let current_tab = tabpagenr()
+  tabdo wincmd =
+  execute 'tabnext ' .. current_tab
+endfunction
 
 command! ConcealToggle call s:toggle_conceal()
 function! s:toggle_conceal()
