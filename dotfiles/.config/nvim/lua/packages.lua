@@ -167,7 +167,7 @@ vim.api.nvim_create_autocmd("FileType", {
       root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
       capabilities = default_capabilities,
       init_options = {
-        session_token = nil,
+        session_token = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
       },
     })
   end,
