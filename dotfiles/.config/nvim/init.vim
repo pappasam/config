@@ -168,7 +168,6 @@ let g:repl_filetype_commands = {
       \ 'vim': 'nvim --clean -ERM',
       \ 'zsh': 'zsh',
       \ }
-let g:repl_default = &shell
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
 
@@ -209,9 +208,8 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
-nnoremap <Leader>rt <Cmd>ReplToggle<CR>
-nmap <silent> <Leader>rc <Plug>ReplSendCell
-nmap <silent> <Leader>rr <Plug>ReplSendLine
+nmap <silent> <Leader>c <Plug>ReplSendCell
+nmap <silent> <Leader>r <Plug>ReplSendLine
 xmap <silent> <Leader>r <Plug>ReplSendVisual
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
