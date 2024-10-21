@@ -9,11 +9,6 @@ require("blink-cmp").setup({
     snippet_forward = "<C-j>",
     snippet_backward = "<C-k>",
   },
-  windows = {
-    documentation = {
-      auto_show = false,
-    },
-  },
 })
 
 -- }}}
