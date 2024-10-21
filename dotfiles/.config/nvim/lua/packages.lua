@@ -6,8 +6,13 @@ require("blink-cmp").setup({
     accept = "<C-y>",
     scroll_documentation_up = "<C-k>",
     scroll_documentation_down = "<C-j>",
-    snippet_forward = '<C-j>',
-    snippet_backward = '<C-k>',
+    snippet_forward = "<C-j>",
+    snippet_backward = "<C-k>",
+  },
+  windows = {
+    documentation = {
+      auto_show = false,
+    },
   },
 })
 
