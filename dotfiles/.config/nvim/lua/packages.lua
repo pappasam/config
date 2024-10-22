@@ -9,6 +9,11 @@ require("blink-cmp").setup({
     snippet_forward = "<C-j>",
     snippet_backward = "<C-k>",
   },
+  windows = {
+    documentation = {
+      auto_show = true,
+    },
+  },
 })
 
 -- }}}
@@ -464,9 +469,6 @@ require("telescope").setup({
       i = {
         ["<esc>"] = require("telescope.actions").close,
       },
-    },
-    preview = {
-      treesitter = false,
     },
     prompt_prefix = " ",
   },
