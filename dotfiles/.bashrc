@@ -378,8 +378,10 @@ function ltex-install() {
 }
 
 function rustup-components() {
-  rustup component add rust-analyzer
-  rustup component add rust-src
+  rustup component add --toolchain stable rust-analyzer
+  rustup component add --toolchain stable rust-src
+  rustup component add --toolchain nightly rust-analyzer
+  rustup component add --toolchain nightly rust-src
 }
 
 function rustglobal-install() {
