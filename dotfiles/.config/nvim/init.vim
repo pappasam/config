@@ -77,6 +77,9 @@ function! s:packager_init(p) abort
   " Tree
   call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
   call a:p.add('https://github.com/nvim-tree/nvim-web-devicons')
+  " Wrapping
+  call a:p.add('https://github.com/benlubas/wrapping-paper.nvim')
+  call a:p.add('https://github.com/MunifTanjim/nui.nvim')
   " Fuzzy Finder
   call a:p.add('https://github.com/nvim-telescope/telescope.nvim')
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
@@ -89,16 +92,16 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:p.add('https://github.com/pappasam/vim-keywordprg-commands')
   " Miscellaneous
-  call a:p.add('https://github.com/sotte/presenting.nvim.git')
-  call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
+  call a:p.add('https://github.com/HiPhish/info.vim')
   call a:p.add('https://github.com/HiPhish/jinja.vim')
   call a:p.add('https://github.com/NvChad/nvim-colorizer.lua')
+  call a:p.add('https://github.com/chrishrb/gx.nvim')
   call a:p.add('https://github.com/fidian/hexmode')
   call a:p.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call a:p.add('https://github.com/windwp/nvim-autopairs')
+  call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
   call a:p.add('https://github.com/machakann/vim-sandwich')
-  call a:p.add('https://github.com/HiPhish/info.vim')
-  call a:p.add('https://github.com/chrishrb/gx.nvim')
+  call a:p.add('https://github.com/sotte/presenting.nvim.git')
+  call a:p.add('https://github.com/windwp/nvim-autopairs')
 endfunction
 
 call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', expand('~/.config/nvim/pack/packager/start/vim-packager')])
@@ -216,6 +219,8 @@ nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 nmap <silent> <Leader>c <Plug>ReplSendCell
 nmap <silent> <Leader>r <Plug>ReplSendLine
 xmap <silent> <Leader>r <Plug>ReplSendVisual
+" https://github.com/benlubas/wrapping-paper.nvim
+nnoremap gww <Cmd>lua require("wrapping-paper").wrap_line()<CR>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
@@ -253,6 +258,7 @@ augroup end
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
+command! ConcealOff set conceallevel=0 concealcursor=
 command! Gm Git commit
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
@@ -274,17 +280,6 @@ function! s:resize_all_tabs()
   let current_tab = tabpagenr()
   tabdo wincmd =
   execute 'tabnext ' .. current_tab
-endfunction
-
-command! ConcealToggle call s:toggle_conceal()
-function! s:toggle_conceal()
-  if !exists('w:custom_toggle_conceal') || w:custom_toggle_conceal == 0
-    set conceallevel=3 concealcursor=nc
-    let w:custom_toggle_conceal = 1
-  else
-    set conceallevel=0 concealcursor=
-    let w:custom_toggle_conceal = 0
-  endif
 endfunction
 
 command! DisableNoisyPlugins call s:disable_noisy_plugins()
@@ -329,7 +324,6 @@ function! s:focuswriting()
   vertical resize 88
   execute 'buffer ' .. current_buffer
   setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
-  ConcealToggle
   wincmd =
   normal! `azz
 endfunction
