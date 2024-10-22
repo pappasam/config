@@ -37,9 +37,9 @@ augroup filetype_custom
   autocmd FileType scss setlocal iskeyword+=@-@
   " keywordprg
   autocmd FileType vim setlocal keywordprg=:help
-  autocmd FileType markdown setlocal keywordprg=:DefEng
+  autocmd FileType bib,gitcommit,markdown,org,plaintex,rst,rnoweb,tex,pandoc,quarto,rmd,context,html,xhtml,mail,text setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
-  autocmd FileType sh setlocal keywordprg=:Man
+  autocmd FileType sh,zsh,bash setlocal keywordprg=:Man
   " nofoldenable nolist
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
