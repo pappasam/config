@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+sudo add-apt-repository --yes --no-update ppa:neovim-ppa/unstable
+
 sudo apt update
 sudo apt upgrade -y
 
@@ -97,6 +99,7 @@ sudo apt install -y \
   manpages-dev \
   manpages-posix-dev \
   ncurses-doc \
+  neovim \
   network-manager-openvpn \
   openssl \
   pandoc \
