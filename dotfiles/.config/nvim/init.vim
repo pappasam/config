@@ -38,6 +38,8 @@ augroup filetype_custom
   " keywordprg
   autocmd FileType vim setlocal keywordprg=:help
   autocmd FileType markdown setlocal keywordprg=:DefEng
+  autocmd FileType python setlocal keywordprg=:Pydoc
+  autocmd FileType sh setlocal keywordprg=:Man
   " nofoldenable nolist
   autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
   " window opening
@@ -204,6 +206,7 @@ nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
