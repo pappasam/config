@@ -251,20 +251,23 @@ augroup end
 " Commands {{{
 
 command! -bang Q q<bang>
-command! -bang Qa qa<bang>
 command! -bang QA qa<bang>
-command! W w
-command! Wa wa
-command! WA wa
-command! Wq wq
-command! WQ wq
-command! Wqa wqa
-command! WQa wqa
-command! WQA wqa
+command! -bang Qa qa<bang>
 command! Gm Git commit
-command! Gmv Git commit --verbose
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
+command! Gmv Git commit --verbose
+command! R ReplToggle
+command! Re ReplToggle
+command! Rep ReplToggle
+command! W w
+command! WA wa
+command! WQ wq
+command! WQA wqa
+command! WQa wqa
+command! Wa wa
+command! Wq wq
+command! Wqa wqa
 
 command! ResizeAllTabs call s:resize_all_tabs()
 function! s:resize_all_tabs()
