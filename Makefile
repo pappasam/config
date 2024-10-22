@@ -19,7 +19,3 @@ setup-ubuntu: ## Setup Ubuntu for the first time
 	mkdir -p ~/.config/sensitive
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
-
-.PHONY: setup-cinnamon-on-ubuntu
-setup-cinnamon-on-ubuntu: ## Run commands to get cinnamon working, if relevant
-	bash ./scripts/ubuntu/ubuntu-cinnamon.sh
