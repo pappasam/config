@@ -153,11 +153,6 @@ alias rg='rg --fixed-strings'
 # }}}
 # Functions {{{
 
-# Remove when this is resolved: https://github.com/jdx/mise/issues/2174
-function mise-install() {
-  PATH=$PATH:/home/sroeca/.local/share/mise/shims mise install
-}
-
 function _mise_update_pattern() {
   local pattern
   if [[ $# -gt 0 ]]; then
