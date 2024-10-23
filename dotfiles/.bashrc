@@ -121,7 +121,6 @@ alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
 alias k='cd ~/src/KeplerGroup/ && ls'
-alias c='cd ~/config/ && ls'
 
 # Neovim
 alias f='nvim'
