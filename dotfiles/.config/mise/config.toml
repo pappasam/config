@@ -1,3 +1,4 @@
+# :schema https://github.com/jdx/mise/blob/main/schema/mise.json
 [settings]
 experimental = true
 # see here: https://github.com/jdx/mise/issues/1635
