@@ -120,8 +120,8 @@ alias ls='ls --color=auto'
 alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
-alias k='cd ~/src/KeplerGroup/'
-alias c='cd ~/config/'
+alias k='cd ~/src/KeplerGroup/ && ls'
+alias c='cd ~/config/ && ls'
 
 # Neovim
 alias f='nvim'
@@ -273,7 +273,7 @@ function git-mod() {
 }
 
 function vplug() {
-  cd "$HOME/.config/nvim/pack/packager/start/$1" || return
+  cd "$HOME/.config/nvim/pack/packager/start/$1" && ls || return
 }
 
 VIRTUAL_ENV_DEFAULT=.venv
