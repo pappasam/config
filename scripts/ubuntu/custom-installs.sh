@@ -29,3 +29,10 @@ if ! command -v mise >/dev/null; then
   echo 'INSTALLING: mise-en-place'
   curl https://mise.run | sh
 fi
+
+if ! command -v zoom >/dev/null; then
+  echo 'INSTALLING: zoom'
+  sudo apt update
+  curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
+  sudo apt install /tmp/zoom_amd64.deb
+fi
