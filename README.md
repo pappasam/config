@@ -1,6 +1,6 @@
 # ⚙ System Configuration
 
-[Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest stable version of [Ubuntu].
+[Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest "Long Term Support" version of [Ubuntu].
 
 ```bash
 sudo apt install git # For version control
