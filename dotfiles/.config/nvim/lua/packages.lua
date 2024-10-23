@@ -544,9 +544,3 @@ require("gx").setup({
 })
 
 -- }}}
--- wrapping-paper.nvim {{{
--- https://github.com/benlubas/wrapping-paper.nvim
-
-require("wrapping-paper").setup({})
-
--- }}}

@@ -77,9 +77,6 @@ function! s:packager_init(p) abort
   " Tree
   call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
   call a:p.add('https://github.com/nvim-tree/nvim-web-devicons')
-  " Wrapping
-  call a:p.add('https://github.com/benlubas/wrapping-paper.nvim')
-  call a:p.add('https://github.com/MunifTanjim/nui.nvim')
   " Fuzzy Finder
   call a:p.add('https://github.com/nvim-telescope/telescope.nvim')
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
@@ -219,8 +216,6 @@ nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 nmap <silent> <Leader>c <Plug>ReplSendCell
 nmap <silent> <Leader>r <Plug>ReplSendLine
 xmap <silent> <Leader>r <Plug>ReplSendVisual
-" https://github.com/benlubas/wrapping-paper.nvim
-nnoremap gww <Cmd>lua require("wrapping-paper").wrap_line()<CR>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
