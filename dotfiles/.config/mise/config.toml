@@ -9,6 +9,7 @@ cargo_binstall = true
 python = "3.12.6"
 go = "1.23.1"
 node = "22.8.0"
+vault = "latest"
 java = "latest"
 awscli = "latest"
 act = "latest"
