@@ -338,17 +338,18 @@ require("nvim-autopairs").setup({
 
 require("nvim-tree").setup({
   disable_netrw = true,
-  renderer = {
-    full_name = true,
-    symlink_destination = false,
-    root_folder_label = false,
-  },
   filters = {
     dotfiles = true,
     exclude = {
       "/.github",
       "/dotfiles",
     },
+  },
+  hijack_cursor = true,
+  renderer = {
+    full_name = true,
+    symlink_destination = false,
+    root_folder_label = false,
   },
 })
 
