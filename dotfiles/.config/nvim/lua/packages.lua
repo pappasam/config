@@ -1,10 +1,10 @@
--- aerial.nvim {{{
+-- aerial {{{
 -- https://github.com/stevearc/aerial.nvim
 
 require("aerial").setup({})
 
 -- }}}
--- blink.cmp {{{
+-- blink-cmp {{{
 -- https://github.com/Saghen/blink.cmp
 
 require("blink-cmp").setup({
@@ -18,7 +18,25 @@ require("blink-cmp").setup({
 })
 
 -- }}}
--- fidget.nvim {{{
+-- colorizer {{{
+-- https://github.com/NvChad/nvim-colorizer.lua
+
+require("colorizer").setup({
+  filetypes = { "*" },
+  user_default_options = {
+    RGB = true, -- #RGB hex codes
+    RRGGBB = true, -- #RRGGBB hex codes
+    names = false, -- "Name" codes like Blue or blue
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    AARRGGBB = true, -- 0xAARRGGBB hex codes
+    rgb_fn = true, -- CSS rgb() and rgba() functions
+    hsl_fn = true, -- CSS hsl() and hsla() functions
+    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
+  },
+})
+
+-- }}}
+-- fidget {{{
 -- https://github.com/j-hui/fidget.nvim
 require("fidget").setup({
   progress = {
@@ -27,7 +45,7 @@ require("fidget").setup({
 })
 
 -- }}}
--- gitsigns.nvim {{{
+-- gitsigns {{{
 -- https://github.com/lewis6991/gitsigns.nvim
 
 require("gitsigns").setup({
@@ -89,7 +107,7 @@ require("gitsigns").setup({
 })
 
 -- }}}
--- gx.nvim {{{
+-- gx {{{
 -- https://github.com/chrishrb/gx.nvim
 
 require("gx").setup({
@@ -140,7 +158,7 @@ require("gx").setup({
 })
 
 -- }}}
--- indent-blankline.nvim {{{
+-- indent-blankline {{{
 -- https://github.com/lukas-reineke/indent-blankline.nvim
 
 require("ibl").setup({
@@ -315,25 +333,7 @@ require("nvim-autopairs").setup({
 })
 
 -- }}}
--- nvim-colorizer.lua {{{
--- https://github.com/NvChad/nvim-colorizer.lua
-
-require("colorizer").setup({
-  filetypes = { "*" },
-  user_default_options = {
-    RGB = true, -- #RGB hex codes
-    RRGGBB = true, -- #RRGGBB hex codes
-    names = false, -- "Name" codes like Blue or blue
-    RRGGBBAA = true, -- #RRGGBBAA hex codes
-    AARRGGBB = true, -- 0xAARRGGBB hex codes
-    rgb_fn = true, -- CSS rgb() and rgba() functions
-    hsl_fn = true, -- CSS hsl() and hsla() functions
-    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
-  },
-})
-
--- }}}
--- nvim-tree.lua {{{
+-- nvim-tree {{{
 -- https://github.com/kyazdani42/nvim-tree.lua
 
 require("nvim-tree").setup({
@@ -480,7 +480,7 @@ require("nvim-web-devicons").setup({
 })
 
 -- }}}
--- presenting.nvim {{{
+-- presenting {{{
 -- https://github.com/sotte/presenting.nvim
 
 require("presenting").setup({
@@ -503,7 +503,7 @@ require("presenting").setup({
 })
 
 -- }}}
--- telescope.nvim {{{
+-- telescope {{{
 -- https://github.com/nvim-telescope/telescope.nvim
 
 require("telescope").setup({
