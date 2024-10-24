@@ -12,26 +12,9 @@ require("blink-cmp").setup({
 })
 
 -- }}}
--- nvim-lspconfig + lsp.txt + other lsp stuff {{{
-
--- Disable semantic tokens for all language servers
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-      return
-    end
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-})
-
-local getPythonPath = function()
-  if vim.env.VIRTUAL_ENV == nil then
-    return nil
-  end
-  return vim.env.VIRTUAL_ENV .. "/bin/python"
-end
-
+-- lsp {{{
+-- https://github.com/neovim/nvim-lspconfig
+-- :help lsp.txt
 local language_servers = {
   bashls = {},
   cssls = {},
@@ -102,13 +85,7 @@ local language_servers = {
   mdx_analyzer = {},
   nginx_language_server = {},
   prismals = {},
-  pyright = {
-    settings = {
-      python = {
-        pythonPath = getPythonPath(),
-      },
-    },
-  },
+  pyright = {},
   r_language_server = {},
   rust_analyzer = {},
   svelte = {},
@@ -141,16 +118,23 @@ local language_servers = {
     },
   },
 }
--- :help lsp.txt
-local default_capabilities = vim.lsp.protocol.make_client_capabilities()
--- Neovim is too slow on large codebases: https://github.com/neovim/neovim/issues/23291
-default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
-  false
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false -- https://github.com/neovim/neovim/issues/23291
 for server, server_config in pairs(language_servers) do
   require("lspconfig")[server].setup(vim.tbl_deep_extend("force", {
-    capabilities = default_capabilities,
+    capabilities = capabilities,
   }, server_config))
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    client.server_capabilities.semanticTokensProvider = nil -- disable semantic tokens
+  end,
+})
 
 -- Custom LSP
 vim.api.nvim_create_autocmd("FileType", {
@@ -160,7 +144,7 @@ vim.api.nvim_create_autocmd("FileType", {
       name = "github-actions-languageserver",
       cmd = { "github-actions-languageserver", "--stdio" },
       root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
-      capabilities = default_capabilities,
+      capabilities = capabilities,
       init_options = {
         -- Requires the `repo` and `workflow` scopes
         sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
