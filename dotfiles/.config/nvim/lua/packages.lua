@@ -1,153 +1,3 @@
--- lsp {{{
--- https://github.com/neovim/nvim-lspconfig
--- :help lsp.txt
--- :help diagnostic.txt
-
-local language_servers = {
-  bashls = {},
-  cssls = {},
-  dockerls = {},
-  gopls = {},
-  graphql = {},
-  html = {},
-  jsonls = {},
-  ltex = {
-    filetypes = {
-      "bib",
-      "markdown",
-      "markdown.mdx",
-      "org",
-      "pandoc",
-      "plaintex",
-      "quarto",
-      "rmd",
-      "rnoweb",
-      "rst",
-      "tex",
-    },
-    settings = {
-      ltex = {
-        language = "en-US",
-        checkFrequency = "save",
-        disabledRules = {
-          ["en-US"] = {
-            "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
-            "ENGLISH_WORD_REPEAT_RULE",
-            "EN_QUOTES",
-            "MORFOLOGIK_RULE_EN_US",
-            "PHRASE_REPETITION",
-            "UPPERCASE_SENTENCE_START",
-            "WHITESPACE_RULE",
-          },
-        },
-      },
-    },
-  },
-  lua_ls = {
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using
-          -- (most likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {
-            "vim",
-            "require",
-          },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  },
-  marksman = {},
-  mdx_analyzer = {},
-  nginx_language_server = {},
-  prismals = {},
-  pyright = {},
-  r_language_server = {},
-  rust_analyzer = {},
-  svelte = {},
-  taplo = {},
-  terraformls = {},
-  ts_ls = {},
-  vimls = {},
-  yamlls = {
-    filetypes = { "yaml" },
-    settings = {
-      yaml = {
-        schemas = {
-          kubernetes = "/kubernetes/**",
-          ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
-          ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
-          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
-            "/*open-api*.yml",
-            "/*open-api*.yaml",
-          },
-        },
-        customTags = {
-          "!ENV scalar",
-          "!ENV sequence",
-          "!relative scalar",
-          "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
-          "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
-          "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
-        },
-      },
-    },
-  },
-}
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false -- https://github.com/neovim/neovim/issues/23291
-for server, server_config in pairs(language_servers) do
-  require("lspconfig")[server].setup(vim.tbl_deep_extend("force", {
-    capabilities = capabilities,
-  }, server_config))
-end
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-      return
-    end
-    client.server_capabilities.semanticTokensProvider = nil -- disable semantic tokens
-  end,
-})
-
--- Custom LSP
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "yaml.githubactions",
-  callback = function(args)
-    vim.lsp.start({
-      name = "github-actions-languageserver",
-      cmd = { "github-actions-languageserver", "--stdio" },
-      root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
-      capabilities = capabilities,
-      init_options = {
-        -- Requires the `repo` and `workflow` scopes
-        sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
-      },
-    })
-  end,
-})
-
--- Diagnostic configuration
-vim.diagnostic.config({
-  jump = {
-    float = true,
-  },
-})
--- }}}
 -- aerial.nvim {{{
 -- https://github.com/stevearc/aerial.nvim
 
@@ -303,6 +153,156 @@ require("ibl").setup({
   },
 })
 
+-- }}}
+-- lsp client/framework {{{
+-- https://github.com/neovim/nvim-lspconfig
+-- :help lsp.txt
+-- :help diagnostic.txt
+
+local language_servers = {
+  bashls = {},
+  cssls = {},
+  dockerls = {},
+  gopls = {},
+  graphql = {},
+  html = {},
+  jsonls = {},
+  ltex = {
+    filetypes = {
+      "bib",
+      "markdown",
+      "markdown.mdx",
+      "org",
+      "pandoc",
+      "plaintex",
+      "quarto",
+      "rmd",
+      "rnoweb",
+      "rst",
+      "tex",
+    },
+    settings = {
+      ltex = {
+        language = "en-US",
+        checkFrequency = "save",
+        disabledRules = {
+          ["en-US"] = {
+            "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
+            "ENGLISH_WORD_REPEAT_RULE",
+            "EN_QUOTES",
+            "MORFOLOGIK_RULE_EN_US",
+            "PHRASE_REPETITION",
+            "UPPERCASE_SENTENCE_START",
+            "WHITESPACE_RULE",
+          },
+        },
+      },
+    },
+  },
+  lua_ls = {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using
+          -- (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {
+            "vim",
+            "require",
+          },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  },
+  marksman = {},
+  mdx_analyzer = {},
+  nginx_language_server = {},
+  prismals = {},
+  pyright = {},
+  r_language_server = {},
+  rust_analyzer = {},
+  svelte = {},
+  taplo = {},
+  terraformls = {},
+  ts_ls = {},
+  vimls = {},
+  yamlls = {
+    filetypes = { "yaml" },
+    settings = {
+      yaml = {
+        schemas = {
+          kubernetes = "/kubernetes/**",
+          ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "/*docker-compose.yml",
+          ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
+          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
+            "/*open-api*.yml",
+            "/*open-api*.yaml",
+          },
+        },
+        customTags = {
+          "!ENV scalar",
+          "!ENV sequence",
+          "!relative scalar",
+          "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+          "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+          "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
+        },
+      },
+    },
+  },
+}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false -- https://github.com/neovim/neovim/issues/23291
+for server, server_config in pairs(language_servers) do
+  require("lspconfig")[server].setup(vim.tbl_deep_extend("force", {
+    capabilities = capabilities,
+  }, server_config))
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    client.server_capabilities.semanticTokensProvider = nil -- disable semantic tokens
+  end,
+})
+
+-- Custom LSP
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "yaml.githubactions",
+  callback = function(args)
+    vim.lsp.start({
+      name = "github-actions-languageserver",
+      cmd = { "github-actions-languageserver", "--stdio" },
+      root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
+      capabilities = capabilities,
+      init_options = {
+        -- Requires the `repo` and `workflow` scopes
+        sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
+      },
+    })
+  end,
+})
+
+-- Diagnostic configuration
+vim.diagnostic.config({
+  jump = {
+    float = true,
+  },
+})
 -- }}}
 -- nvim-autopairs {{{
 -- https://github.com/windwp/nvim-autopairs
