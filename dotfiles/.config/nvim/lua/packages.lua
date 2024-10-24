@@ -1,6 +1,8 @@
 -- lsp {{{
 -- https://github.com/neovim/nvim-lspconfig
 -- :help lsp.txt
+-- :help diagnostic.txt
+
 local language_servers = {
   bashls = {},
   cssls = {},
@@ -139,6 +141,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Diagnostic configuration
+vim.diagnostic.config({
+  jump = {
+    float = true,
+  },
+})
+
 -- https://github.com/stevearc/aerial.nvim
 require("aerial").setup({})
 
@@ -160,16 +169,6 @@ require("blink-cmp").setup({
     scroll_documentation_down = "<C-j>",
     snippet_forward = "<C-j>",
     snippet_backward = "<C-k>",
-  },
-})
-
--- }}}
--- diagnostic.txt {{{
--- :help diagnostic.txt
-
-vim.diagnostic.config({
-  jump = {
-    float = true,
   },
 })
 
