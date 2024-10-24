@@ -319,7 +319,7 @@ function! s:focuswriting()
   execute 'buffer ' .. current_buffer
   setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
   wincmd =
-  normal! `azz
+  normal! `azz0
 endfunction
 
 command! CleanUnicode call s:clean_unicode()
