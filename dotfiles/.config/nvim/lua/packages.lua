@@ -1,17 +1,3 @@
--- blink.cmp {{{
--- https://github.com/Saghen/blink.cmp
-
-require("blink-cmp").setup({
-  keymap = {
-    accept = "<C-y>",
-    scroll_documentation_up = "<C-k>",
-    scroll_documentation_down = "<C-j>",
-    snippet_forward = "<C-j>",
-    snippet_backward = "<C-k>",
-  },
-})
-
--- }}}
 -- lsp {{{
 -- https://github.com/neovim/nvim-lspconfig
 -- :help lsp.txt
@@ -160,6 +146,20 @@ require("aerial").setup({})
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
+  },
+})
+
+-- }}}
+-- blink.cmp {{{
+-- https://github.com/Saghen/blink.cmp
+
+require("blink-cmp").setup({
+  keymap = {
+    accept = "<C-y>",
+    scroll_documentation_up = "<C-k>",
+    scroll_documentation_down = "<C-j>",
+    snippet_forward = "<C-j>",
+    snippet_backward = "<C-k>",
   },
 })
 
