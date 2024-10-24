@@ -305,6 +305,55 @@ require("ibl").setup({
 })
 
 -- }}}
+-- nvim-autopairs {{{
+-- https://github.com/windwp/nvim-autopairs
+
+require("nvim-autopairs").setup({
+  map_c_h = true,
+  map_c_w = true,
+  map_cr = true,
+  enable_check_bracket_line = false,
+})
+
+-- }}}
+-- nvim-colorizer.lua {{{
+-- https://github.com/NvChad/nvim-colorizer.lua
+
+require("colorizer").setup({
+  filetypes = { "*" },
+  user_default_options = {
+    RGB = true, -- #RGB hex codes
+    RRGGBB = true, -- #RRGGBB hex codes
+    names = false, -- "Name" codes like Blue or blue
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    AARRGGBB = true, -- 0xAARRGGBB hex codes
+    rgb_fn = true, -- CSS rgb() and rgba() functions
+    hsl_fn = true, -- CSS hsl() and hsla() functions
+    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
+  },
+})
+
+-- }}}
+-- nvim-tree.lua {{{
+-- https://github.com/kyazdani42/nvim-tree.lua
+
+require("nvim-tree").setup({
+  disable_netrw = true,
+  renderer = {
+    full_name = true,
+    symlink_destination = false,
+    root_folder_label = false,
+  },
+  filters = {
+    dotfiles = true,
+    exclude = {
+      "/.github",
+      "/dotfiles",
+    },
+  },
+})
+
+-- }}}
 -- nvim-treesitter {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
@@ -416,59 +465,10 @@ vim.treesitter.query.set(
 )
 
 -- }}}
--- nvim-colorizer.lua {{{
--- https://github.com/NvChad/nvim-colorizer.lua
-
-require("colorizer").setup({
-  filetypes = { "*" },
-  user_default_options = {
-    RGB = true, -- #RGB hex codes
-    RRGGBB = true, -- #RRGGBB hex codes
-    names = false, -- "Name" codes like Blue or blue
-    RRGGBBAA = true, -- #RRGGBBAA hex codes
-    AARRGGBB = true, -- 0xAARRGGBB hex codes
-    rgb_fn = true, -- CSS rgb() and rgba() functions
-    hsl_fn = true, -- CSS hsl() and hsla() functions
-    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
-  },
-})
-
--- }}}
--- nvim-autopairs {{{
--- https://github.com/windwp/nvim-autopairs
-
-require("nvim-autopairs").setup({
-  map_c_h = true,
-  map_c_w = true,
-  map_cr = true,
-  enable_check_bracket_line = false,
-})
-
--- }}}
 -- nvim-ts-autotag {{{
 -- https://github.com/windwp/nvim-ts-autotag
 
 require("nvim-ts-autotag").setup()
-
--- }}}
--- nvim-tree.lua {{{
--- https://github.com/kyazdani42/nvim-tree.lua
-
-require("nvim-tree").setup({
-  disable_netrw = true,
-  renderer = {
-    full_name = true,
-    symlink_destination = false,
-    root_folder_label = false,
-  },
-  filters = {
-    dotfiles = true,
-    exclude = {
-      "/.github",
-      "/dotfiles",
-    },
-  },
-})
 
 -- }}}
 -- nvim-web-devicons {{{
