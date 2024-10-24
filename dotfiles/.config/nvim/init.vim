@@ -306,12 +306,12 @@ function! s:focuswriting()
   tabe
   " Left Window
   let w:focuswriting = 1
-  setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   vsplit
   vsplit
   " Right Window
   let w:focuswriting = 1
-  setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+  setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
   let w:focuswriting = 1
