@@ -56,6 +56,7 @@ augroup miscellaneous_custom
   autocmd VimResized * ResizeAllTabs
   autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
+  autocmd QuitPre * if exists("w:focuswriting") | only | endif
 augroup end
 
 " }}}
@@ -300,22 +301,20 @@ endfunction
 command! F call s:focuswriting()
 command! Focus call s:focuswriting()
 function! s:focuswriting()
-  if exists('t:focuswriting')
-    tabclose
-    return
-  endif
   normal! ma
   let current_buffer = bufnr('%')
   tabe
-  let t:focuswriting = 1
   " Left Window
+  let w:focuswriting = 1
   setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   vsplit
   vsplit
   " Right Window
+  let w:focuswriting = 1
   setlocal readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
   wincmd h
   " Middle Window
+  let w:focuswriting = 1
   vertical resize 88
   execute 'buffer ' .. current_buffer
   setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
