@@ -14,15 +14,6 @@ require("blink-cmp").setup({
 -- }}}
 -- nvim-lspconfig + lsp.txt + other lsp stuff {{{
 
--- :help lsp.txt
-local default_capabilities = vim.lsp.protocol.make_client_capabilities()
--- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
--- Resolved: https://www.reddit.com/r/neovim/comments/1b4bk5h/psa_new_fswatch_watchfunc_backend_available_on/
--- Must `sudo apt install fswatch`
--- Keeping code for now because it's highly unstable
-default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
-  false
-
 -- Disable semantic tokens for all language servers
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -33,9 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     client.server_capabilities.semanticTokensProvider = nil
   end,
 })
-
--- https://github.com/neovim/nvim-lspconfig
-local lspconfig = require("lspconfig")
 
 local getPythonPath = function()
   if vim.env.VIRTUAL_ENV == nil then
@@ -153,8 +141,13 @@ local language_servers = {
     },
   },
 }
+-- :help lsp.txt
+local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+-- Neovim is too slow on large codebases: https://github.com/neovim/neovim/issues/23291
+default_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
+  false
 for server, server_config in pairs(language_servers) do
-  lspconfig[server].setup(vim.tbl_deep_extend("force", {
+  require("lspconfig")[server].setup(vim.tbl_deep_extend("force", {
     capabilities = default_capabilities,
   }, server_config))
 end
