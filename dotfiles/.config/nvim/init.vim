@@ -51,12 +51,12 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * TrimWhitespace
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
-  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-  autocmd VimResized * ResizeAllTabs
   autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
+  autocmd VimResized * ResizeAllTabs
 augroup end
 
 " }}}
