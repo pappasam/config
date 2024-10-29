@@ -9,6 +9,7 @@ require("blink-cmp").setup({}) -- https://github.com/Saghen/blink.cmp
 
 -- }}}
 -- fidget {{{
+
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim
   progress = {
     suppress_on_insert = true,
@@ -19,11 +20,8 @@ require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim
 -- gitsigns {{{
 
 require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim
-  attach_to_untracked = false,
-  signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
-  numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  signcolumn = false,
+  numhl = true,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
