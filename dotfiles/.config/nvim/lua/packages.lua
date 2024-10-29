@@ -8,23 +8,6 @@ require("aerial").setup({}) -- https://github.com/stevearc/aerial.nvim
 require("blink-cmp").setup({}) -- https://github.com/Saghen/blink.cmp
 
 -- }}}
--- colorizer {{{
-
-require("colorizer").setup({ -- https://github.com/NvChad/nvim-colorizer.lua
-  filetypes = { "*" },
-  user_default_options = {
-    RGB = true, -- #RGB hex codes
-    RRGGBB = true, -- #RRGGBB hex codes
-    names = false, -- "Name" codes like Blue or blue
-    RRGGBBAA = true, -- #RRGGBBAA hex codes
-    AARRGGBB = true, -- 0xAARRGGBB hex codes
-    rgb_fn = true, -- CSS rgb() and rgba() functions
-    hsl_fn = true, -- CSS hsl() and hsla() functions
-    sass = { enable = true, parsers = { "css" } }, -- Enable sass colors
-  },
-})
-
--- }}}
 -- fidget {{{
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim
   progress = {
@@ -315,6 +298,11 @@ require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs
   map_cr = true,
   enable_check_bracket_line = false,
 })
+
+-- }}}
+-- nvim-highlight-colors {{{
+
+require("nvim-highlight-colors").setup({}) -- https://github.com/brenoprata10/nvim-highlight-colors
 
 -- }}}
 -- nvim-tree {{{

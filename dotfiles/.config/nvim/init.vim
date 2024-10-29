@@ -92,7 +92,7 @@ function! s:packager_init(p) abort
   " Miscellaneous
   call a:p.add('https://github.com/HiPhish/info.vim')
   call a:p.add('https://github.com/HiPhish/jinja.vim')
-  call a:p.add('https://github.com/NvChad/nvim-colorizer.lua')
+  call a:p.add('https://github.com/brenoprata10/nvim-highlight-colors')
   call a:p.add('https://github.com/chrishrb/gx.nvim')
   call a:p.add('https://github.com/fidian/hexmode')
   call a:p.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
