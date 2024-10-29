@@ -1,19 +1,16 @@
 -- aerial {{{
--- https://github.com/stevearc/aerial.nvim
 
-require("aerial").setup({})
+require("aerial").setup({}) -- https://github.com/stevearc/aerial.nvim
 
 -- }}}
 -- blink-cmp {{{
--- https://github.com/Saghen/blink.cmp
 
-require("blink-cmp").setup({})
+require("blink-cmp").setup({}) -- https://github.com/Saghen/blink.cmp
 
 -- }}}
 -- colorizer {{{
--- https://github.com/NvChad/nvim-colorizer.lua
 
-require("colorizer").setup({
+require("colorizer").setup({ -- https://github.com/NvChad/nvim-colorizer.lua
   filetypes = { "*" },
   user_default_options = {
     RGB = true, -- #RGB hex codes
@@ -29,8 +26,7 @@ require("colorizer").setup({
 
 -- }}}
 -- fidget {{{
--- https://github.com/j-hui/fidget.nvim
-require("fidget").setup({
+require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim
   progress = {
     suppress_on_insert = true,
   },
@@ -38,9 +34,8 @@ require("fidget").setup({
 
 -- }}}
 -- gitsigns {{{
--- https://github.com/lewis6991/gitsigns.nvim
 
-require("gitsigns").setup({
+require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim
   attach_to_untracked = false,
   signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
@@ -100,9 +95,8 @@ require("gitsigns").setup({
 
 -- }}}
 -- gx {{{
--- https://github.com/chrishrb/gx.nvim
 
-require("gx").setup({
+require("gx").setup({ -- https://github.com/chrishrb/gx.nvim
   open_browser_app = "firefox",
   handlers = {
     cratesio = {
@@ -151,9 +145,8 @@ require("gx").setup({
 
 -- }}}
 -- indent-blankline {{{
--- https://github.com/lukas-reineke/indent-blankline.nvim
 
-require("ibl").setup({
+require("ibl").setup({ -- https://github.com/lukas-reineke/indent-blankline.nvim
   indent = {
     char = "▏",
   },
@@ -315,9 +308,8 @@ vim.diagnostic.config({
 })
 -- }}}
 -- nvim-autopairs {{{
--- https://github.com/windwp/nvim-autopairs
 
-require("nvim-autopairs").setup({
+require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs
   map_c_h = true,
   map_c_w = true,
   map_cr = true,
@@ -326,9 +318,8 @@ require("nvim-autopairs").setup({
 
 -- }}}
 -- nvim-tree {{{
--- https://github.com/kyazdani42/nvim-tree.lua
 
-require("nvim-tree").setup({
+require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua
   disable_netrw = true,
   filters = {
     dotfiles = true,
@@ -347,10 +338,9 @@ require("nvim-tree").setup({
 
 -- }}}
 -- nvim-treesitter {{{
--- https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup({ -- https://github.com/nvim-treesitter/nvim-treesitter
   highlight = {
     enable = true,
     disable = function(lang, bufnr)
@@ -458,15 +448,13 @@ vim.treesitter.query.set(
 
 -- }}}
 -- nvim-ts-autotag {{{
--- https://github.com/windwp/nvim-ts-autotag
 
-require("nvim-ts-autotag").setup()
+require("nvim-ts-autotag").setup() -- https://github.com/windwp/nvim-ts-autotag
 
 -- }}}
 -- nvim-web-devicons {{{
--- https://github.com/kyazdani42/nvim-web-devicons
 
-require("nvim-web-devicons").setup({
+require("nvim-web-devicons").setup({ -- https://github.com/kyazdani42/nvim-web-devicons
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true,
@@ -474,9 +462,8 @@ require("nvim-web-devicons").setup({
 
 -- }}}
 -- presenting {{{
--- https://github.com/sotte/presenting.nvim
 
-require("presenting").setup({
+require("presenting").setup({ -- https://github.com/sotte/presenting.nvim
   options = {
     width = 60,
   },
@@ -497,9 +484,8 @@ require("presenting").setup({
 
 -- }}}
 -- telescope {{{
--- https://github.com/nvim-telescope/telescope.nvim
 
-require("telescope").setup({
+require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
   defaults = {
     file_ignore_patterns = {
       "^node_modules/",
