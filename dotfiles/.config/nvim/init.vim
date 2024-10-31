@@ -46,6 +46,8 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " disable gitsigns
   autocmd FileType xxd DisableNoisyPlugins
+  " readonly
+  autocmd FileType man,info,help,qf ReadOnly
 augroup end
 
 augroup miscellaneous_custom
@@ -234,19 +236,6 @@ nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
-" FileType-specific mappings
-augroup filetype_remap
-  autocmd FileType man,info,help,qf
-        \ nnoremap <buffer> d <C-d>|
-        \ nnoremap <buffer> D <C-d>|
-        \ nnoremap <buffer> u <C-u>|
-        \ nnoremap <buffer> U <C-u>|
-        \ nnoremap <buffer> q <Cmd>quit<CR>
-  autocmd FileType qf
-        \ nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>|
-        \ nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>|
-        \ nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
-augroup end
 
 " }}}
 " Commands {{{
@@ -270,6 +259,33 @@ command! WQa wqa
 command! Wa wa
 command! Wq wq
 command! Wqa wqa
+
+command! ReadOnly call s:readonly()
+function s:readonly()
+  if !get(b:, 'readonly', 0)
+    setlocal nomodifiable readonly
+    nnoremap <buffer> d <C-d>
+    nnoremap <buffer> D <C-d>
+    nnoremap <buffer> u <C-u>
+    nnoremap <buffer> U <C-u>
+    nnoremap <buffer> q <Cmd>quit<CR>
+    nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
+    nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
+    nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
+    let b:readonly = 1
+  else
+    setlocal modifiable noreadonly
+    nunmap <buffer> d
+    nunmap <buffer> D
+    nunmap <buffer> u
+    nunmap <buffer> U
+    nunmap <buffer> q
+    nunmap <buffer> <C-v>
+    nunmap <buffer> <C-x>
+    nunmap <buffer> <C-t>
+    let b:readonly = 0
+  endif
+endfunction
 
 command! ResizeAllTabs call s:resize_all_tabs()
 function! s:resize_all_tabs()
