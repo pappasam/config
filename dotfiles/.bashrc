@@ -141,6 +141,7 @@ alias gmv='git commit --verbose'
 alias gma='git add . && git commit'
 alias gmav='git add . && git commit --verbose'
 alias ghastatus="gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' /orgs/keplergroup/actions/runners | jq -C '.runners[] | select(.status == \"online\") | {name, busy}'"
+alias gop='gh browse'
 
 # General
 alias gn='gio open'
@@ -207,21 +208,23 @@ function gdl() {
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
 }
 
-function gop() {
-  local giturl
-  local return_result
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
-  elif ! giturl=$(gh browse --no-browser "$1"); then
-    echo 'Error finding url'
-    return 1
-  fi
-  (nohup firefox --new-window "$giturl" >/dev/null 2>&1 &) >/dev/null 2>&1
-  return_result=$?
-  if [ $return_result -ne 0 ]; then
-    return $return_result
-  fi
-}
+# Commenting out for now, relying on alias instead
+# delete in future if alias works
+# function gop() {
+#   local giturl
+#   local return_result
+#   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+#     return 1
+#   elif ! giturl=$(gh browse --no-browser "$1"); then
+#     echo 'Error finding url'
+#     return 1
+#   fi
+#   (nohup firefox --new-window "$giturl" >/dev/null 2>&1 &) >/dev/null 2>&1
+#   return_result=$?
+#   if [ $return_result -ne 0 ]; then
+#     return $return_result
+#   fi
+# }
 
 function gd() {
   if test -f "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
