@@ -48,6 +48,8 @@ augroup filetype_custom
   autocmd FileType xxd DisableNoisyPlugins
   " readonly
   autocmd FileType man,info,help,qf ReadOnly
+  " quickfix-only
+  autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
 
 augroup miscellaneous_custom
@@ -269,9 +271,6 @@ function s:readonly()
     nnoremap <buffer> u <C-u>
     nnoremap <buffer> U <C-u>
     nnoremap <buffer> q <Cmd>quit<CR>
-    nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
-    nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
-    nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
     let b:readonly = 1
   else
     setlocal modifiable noreadonly
@@ -280,9 +279,6 @@ function s:readonly()
     nunmap <buffer> u
     nunmap <buffer> U
     nunmap <buffer> q
-    nunmap <buffer> <C-v>
-    nunmap <buffer> <C-x>
-    nunmap <buffer> <C-t>
     let b:readonly = 0
   endif
 endfunction
@@ -414,6 +410,12 @@ function! s:quickfix_tabedit()
   finally
     set nolazyredraw
   endtry
+endfunction
+
+function s:set_quickfix_mappings()
+  nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
+  nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
+  nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
 endfunction
 
 " }}}
