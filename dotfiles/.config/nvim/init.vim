@@ -111,7 +111,7 @@ call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', e
 " }}}
 " Settings {{{
 
-aunmenu PopUp.-1-
+aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 lua require('options') -- ~/.config/nvim/lua/options.lua
 colorscheme PaperColorSlim
