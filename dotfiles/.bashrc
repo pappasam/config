@@ -208,24 +208,6 @@ function gdl() {
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
 }
 
-# Commenting out for now, relying on alias instead
-# delete in future if alias works
-# function gop() {
-#   local giturl
-#   local return_result
-#   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-#     return 1
-#   elif ! giturl=$(gh browse --no-browser "$1"); then
-#     echo 'Error finding url'
-#     return 1
-#   fi
-#   (nohup firefox --new-window "$giturl" >/dev/null 2>&1 &) >/dev/null 2>&1
-#   return_result=$?
-#   if [ $return_result -ne 0 ]; then
-#     return $return_result
-#   fi
-# }
-
 function gd() {
   if test -f "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
     if grep -q "light" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
