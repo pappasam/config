@@ -78,6 +78,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
+  call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
   call a:p.add('https://github.com/windwp/nvim-ts-autotag')
   " Tree
   call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
