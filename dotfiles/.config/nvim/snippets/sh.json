@@ -1,7 +1,12 @@
 {
-  "shell script preamble": {
+  "set -euo pipefail": {
     "prefix": "set",
     "body": "set -euo pipefail",
+    "description": "Shell script security preamble"
+  },
+  "bash preamble": {
+    "prefix": "bash",
+    "body": ["#!/bin/bash", "", "set -euo pipefail", "", ""],
     "description": "Shell script security preamble"
   }
 }
