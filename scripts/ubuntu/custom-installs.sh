@@ -36,3 +36,18 @@ if ! command -v zoom >/dev/null; then
   curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb
   sudo apt install /tmp/zoom_amd64.deb
 fi
+
+if ! command -v carapace >/dev/null; then
+  echo 'INSTALLING: carapace'
+  LATEST_DEB=$(
+    curl -s https://api.github.com/repos/carapace-sh/carapace-bin/releases/latest |
+      grep "browser_download_url.*linux_amd64.deb" |
+      cut -d '"' -f 4
+  )
+  if [ -n "$LATEST_DEB" ]; then
+    curl -L -o /tmp/carapace-latest.deb "$LATEST_DEB"
+    sudo apt install /tmp/carapace-latest.deb
+  else
+    echo "Error: Could not find linux_arm64.deb in the latest release"
+  fi
+fi
