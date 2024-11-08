@@ -2,9 +2,10 @@
 # Environment {{{
 
 export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.toml"
-export TMUX_CONFIGURE_OPTIONS='--enable-sixel'
+export TMUX_CONFIGURE_OPTIONS=--enable-sixel
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-export BROWSER='/usr/bin/firefox'
+export BROWSER=/usr/bin/firefox
+export CARAPACE_BRIDGES=zsh,fish,bash,inshellisense
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GDK_SCALE=0             # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling

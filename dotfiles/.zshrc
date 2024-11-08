@@ -47,9 +47,6 @@ zstyle ':completion:*' menu select incremental
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
 zmodload -i zsh/complist
-if command -v aws > /dev/null; then complete -C aws_completer aws; fi
-# if command -v pipx > /dev/null; then eval "$(register-python-argcomplete pipx)"; fi
-if command -v kubectl > /dev/null; then source <(kubectl completion zsh); fi
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
@@ -78,10 +75,14 @@ compdef _command ve
 compdef _git_branches gdl
 compdef _info info
 compdef _make m
-if [ $commands[direnv] ]; then emulate zsh -c "$(direnv hook zsh)"; fi
-# https://github.com/rsteube/carapace-bin/releases
-# https://rsteube.github.io/carapace-bin/completers.html
-if [ $commands[carapace] ]; then
-  source <(carapace docker)
-  source <(carapace docker-compose)
+# Most additional completions
+if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
+  source <(carapace _carapace) # https://rsteube.github.io/carapace-bin/completers.html
+fi
+# Completion that isn't included by carapace
+if command -v pipx > /dev/null; then
+  eval "$(register-python-argcomplete pipx)"
+fi
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init zsh)"
 fi
