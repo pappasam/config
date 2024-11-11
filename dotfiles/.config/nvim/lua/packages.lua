@@ -488,7 +488,7 @@ require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
     width = 60,
   },
   separator = {
-    markdown = "^#+ ",
+    markdown = "^##? ", -- # or ##, but not ###+
   },
   configure_slide_buffer = function(_)
     vim.cmd([[
