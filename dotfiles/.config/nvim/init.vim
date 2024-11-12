@@ -274,7 +274,7 @@ function s:readonly()
     nnoremap <buffer> q <Cmd>quit<CR>
     let b:readonly = 1
   else
-    setlocal modifiable noreadonly
+    setlocal modifiable noreadonly conceallevel=0
     nunmap <buffer> d
     nunmap <buffer> D
     nunmap <buffer> u
