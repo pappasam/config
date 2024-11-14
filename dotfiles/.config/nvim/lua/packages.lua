@@ -33,6 +33,7 @@ local language_servers = {
             "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
             "ENGLISH_WORD_REPEAT_RULE",
             "EN_QUOTES",
+            "FILE_EXTENSIONS_CASE",
             "MORFOLOGIK_RULE_EN_US",
             "PHRASE_REPETITION",
             "UPPERCASE_SENTENCE_START",
