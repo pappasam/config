@@ -258,14 +258,22 @@ function vplug() {
 VIRTUAL_ENV_DEFAULT=.venv
 function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
-  local slashes=${PWD//[^\/]/}
   local current_directory="$PWD"
-  for ((n = ${#slashes}; n > 0; --n)); do
-    if [ -d "$current_directory/$venv_name" ]; then
+  local actual_venv="${VIRTUAL_ENV:-nopath}"
+  while [[ "$current_directory" != "/" ]]; do
+    if [[ -d "$current_directory/$venv_name" ]]; then
       # shellcheck source=/dev/null
-      source "$current_directory/$venv_name/bin/activate" && return
+      if [[ "$actual_venv" == "$current_directory/$venv_name" ]]; then
+        return 0
+      else
+        if command -v deactivate >/dev/null; then
+          deactivate
+        fi
+        # shellcheck source=/dev/null
+        source "$current_directory/$venv_name/bin/activate" && return 0
+      fi
     fi
-    local current_directory="$current_directory/.."
+    current_directory="$(dirname "$current_directory")"
   done
   if command -v deactivate >/dev/null; then
     deactivate
