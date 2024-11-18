@@ -122,6 +122,7 @@ alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
 alias k='cd ~/src/KeplerGroup/ && ls'
+alias p='cd ~/src/pappasam/ && ls'
 
 # Neovim
 alias f='nvim'
@@ -460,9 +461,8 @@ if [[ $- == *i* ]]; then # interactive shell
     else
       eval "$(~/.local/bin/mise activate bash)"
     fi
-    # mise randomly drops stuff from path. Below prevents that random error
+    # may need shims in path during zsh runtime
     PATH="$PATH:$HOME/.local/share/mise/shims"
-    export PATH
   else
     echo 'Mise not installed, please install. See:'
     echo 'https://mise.jdx.dev/getting-started.html'
