@@ -30,6 +30,3 @@ white = '#444444'
 [colors.primary]
 background = '#eeeeee'
 foreground = '#444444'
-
-[env]
-ALACRITTY_TERM_BACKGROUND = "light"
