@@ -261,7 +261,7 @@ function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
   local current_directory="$PWD"
   local actual_venv="${VIRTUAL_ENV:-nopath}"
-  while [[ "$current_directory" != "/" ]]; do
+  while [[ "$current_directory" != "$HOME" && "$current_directory" != "/" ]]; do
     if [[ -d "$current_directory/$venv_name" ]]; then
       # shellcheck source=/dev/null
       if [[ "$actual_venv" == "$current_directory/$venv_name" ]]; then
@@ -273,6 +273,10 @@ function va() {
         # shellcheck source=/dev/null
         source "$current_directory/$venv_name/bin/activate" && return 0
       fi
+    fi
+    # -e checks if is file OR directory
+    if [ -e "$current_directory/.git" ]; then
+      break
     fi
     current_directory="$(dirname "$current_directory")"
   done
