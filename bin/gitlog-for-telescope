@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Workaround because of <https://github.com/nvim-telescope/telescope.nvim/issues/2517>
+
+git log --date=short --pretty="format:%C(auto) %h %ad %s [%an]" --follow "$1" >/tmp/gitlog && echo "" >>/tmp/gitlog && cat /tmp/gitlog

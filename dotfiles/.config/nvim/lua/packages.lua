@@ -517,4 +517,12 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
     },
     prompt_prefix = " ",
   },
+  pickers = {
+    git_commits = {
+      git_command = {
+        "gitlog-for-telescope",
+        ".",
+      },
+    },
+  },
 }) -- }}}
