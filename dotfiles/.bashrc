@@ -122,6 +122,7 @@ alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
 alias k='cd ~/src/KeplerGroup/ && ls'
+alias r='cd ~/src/KeplerGroup/KIP-Rocket/ && ls'
 alias p='cd ~/src/pappasam/ && ls'
 
 # Neovim
