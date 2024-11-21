@@ -510,6 +510,10 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
       "^%.venv/",
     },
     layout_strategy = "flex",
+    layout_config = {
+      height = 0.99999,
+      width = 0.99999,
+    },
     mappings = {
       i = {
         ["<esc>"] = require("telescope.actions").close,
