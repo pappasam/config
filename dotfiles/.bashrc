@@ -462,9 +462,9 @@ function upgrade() {
 if [[ $- == *i* ]]; then # interactive shell
   if [ -e "$HOME/.local/bin/mise" ]; then
     if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
-      eval "$(~/.local/bin/mise activate zsh)"
+      eval "$("$HOME/.local/bin/mise" activate zsh)"
     else
-      eval "$(~/.local/bin/mise activate bash)"
+      eval "$("$HOME/.local/bin/mise" activate bash)"
     fi
     # may need shims in path during zsh runtime
     PATH="$PATH:$HOME/.local/share/mise/shims"
