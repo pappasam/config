@@ -55,6 +55,9 @@ bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
 function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
+function _kepler_completion() { _directories -W "$HOME/src/KeplerGroup"; }
+function _rocket_completion() { _directories -W "$HOME/src/KeplerGroup/KIP-Rocket"; }
+function _pappasam_completion() { _directories -W "$HOME/src/pappasam"; }
 function _git_branches() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
   local -a subcmds
@@ -71,6 +74,9 @@ compdef _vim fn
 compdef _directories d
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _vplug_completion vplug
+compdef _kepler_completion k
+compdef _rocket_completion r
+compdef _pappasam_completion p
 compdef _command ve
 compdef _git_branches gdl
 compdef _info info

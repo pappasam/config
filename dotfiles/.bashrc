@@ -121,9 +121,6 @@ alias ls='ls --color=auto'
 alias sl='ls'
 alias ll='ls -al'
 alias d='cd'
-alias k='cd ~/src/KeplerGroup/ && ls'
-alias r='cd ~/src/KeplerGroup/KIP-Rocket/ && ls'
-alias p='cd ~/src/pappasam/ && ls'
 
 # Neovim
 alias f='nvim'
@@ -155,6 +152,11 @@ alias rg='rg --fixed-strings'
 
 # }}}
 # Functions {{{
+
+function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" && ls || return; }
+function k() { cd "$HOME/src/KeplerGroup/$1" && ls || return; }
+function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" && ls || return; }
+function p() { cd "$HOME/src/pappasam/$1" && ls || return; }
 
 function _mise_update_pattern() {
   local pattern
@@ -251,10 +253,6 @@ function git-mod() {
   else
     return 1
   fi
-}
-
-function vplug() {
-  cd "$HOME/.config/nvim/pack/packager/start/$1" && ls || return
 }
 
 VIRTUAL_ENV_DEFAULT=.venv
@@ -464,8 +462,7 @@ if [[ $- == *i* ]]; then # interactive shell
     if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
       eval "$("$HOME/.local/bin/mise" activate zsh)"
       # https://mise.jdx.dev/dev-tools/shims.html#zshrc-bashrc-files
-      # not necessary right now, but I'll re-add if needed
-      # eval "$(mise hook-env -s zsh)"
+      eval "$(mise hook-env -s zsh)"
     else
       eval "$("$HOME/.local/bin/mise" activate bash)"
     fi
