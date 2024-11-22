@@ -464,7 +464,8 @@ if [[ $- == *i* ]]; then # interactive shell
     if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
       eval "$("$HOME/.local/bin/mise" activate zsh)"
       # https://mise.jdx.dev/dev-tools/shims.html#zshrc-bashrc-files
-      eval "$(mise hook-env -s zsh)"
+      # not necessary right now, but I'll re-add if needed
+      # eval "$(mise hook-env -s zsh)"
     else
       eval "$("$HOME/.local/bin/mise" activate bash)"
     fi
