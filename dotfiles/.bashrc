@@ -463,11 +463,11 @@ if [[ $- == *i* ]]; then # interactive shell
   if [ -e "$HOME/.local/bin/mise" ]; then
     if [[ "$SHELL" == "/usr/bin/zsh" ]]; then
       eval "$("$HOME/.local/bin/mise" activate zsh)"
+      # https://mise.jdx.dev/dev-tools/shims.html#zshrc-bashrc-files
+      eval "$(mise hook-env -s zsh)"
     else
       eval "$("$HOME/.local/bin/mise" activate bash)"
     fi
-    # may need shims in path during zsh runtime
-    PATH="$PATH:$HOME/.local/share/mise/shims"
   else
     echo 'Mise not installed, please install. See:'
     echo 'https://mise.jdx.dev/getting-started.html'
