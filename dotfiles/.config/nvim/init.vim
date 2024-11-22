@@ -316,25 +316,30 @@ endfunction
 command! F call s:focuswriting()
 command! Focus call s:focuswriting()
 function! s:focuswriting()
-  normal! ma
-  let current_buffer = bufnr('%')
-  tabe
-  " Left Window
-  let w:focuswriting = 1
-  setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
-  vsplit
-  vsplit
-  " Right Window
-  let w:focuswriting = 1
-  setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
-  wincmd h
-  " Middle Window
-  let w:focuswriting = 1
-  vertical resize 88
-  execute 'buffer ' .. current_buffer
-  setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
-  wincmd =
-  normal! `azz0
+  set lazyredraw
+  try
+    normal! ma
+    let current_buffer = bufnr('%')
+    tabe
+    " Left Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    vsplit
+    vsplit
+    " Right Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    wincmd h
+    " Middle Window
+    let w:focuswriting = 1
+    vertical resize 88
+    execute 'buffer ' .. current_buffer
+    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
+    wincmd =
+    normal! `azz0
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! CleanUnicode call s:clean_unicode()
