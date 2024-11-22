@@ -288,9 +288,14 @@ endfunction
 
 command! ResizeAllTabs call s:resize_all_tabs()
 function! s:resize_all_tabs()
-  let current_tab = tabpagenr()
-  tabdo wincmd =
-  execute 'tabnext ' .. current_tab
+  set lazyredraw
+  try
+    let current_tab = tabpagenr()
+    tabdo wincmd =
+    execute 'tabnext ' .. current_tab
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! DisableNoisyPlugins call s:disable_noisy_plugins()
@@ -303,14 +308,19 @@ endfunction
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
-    echo 'run `:set nowrap` before resizing window'
+    echom 'run `:set nowrap` before resizing window'
     return
   endif
-  let max_length = max(map(range(1, line('$')), "virtcol([v:val, '$'])"))
-  let leading_space = getwininfo(win_getid())[0].textoff
-  normal! ma
-  execute ':vertical resize ' .. (max_length + leading_space)
-  normal! `a
+  set lazyredraw
+  try
+    let max_length = max(map(range(1, line('$')), "virtcol([v:val, '$'])"))
+    let leading_space = getwininfo(win_getid())[0].textoff
+    normal! ma
+    execute ':vertical resize ' .. (max_length + leading_space)
+    normal! `a
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! F call s:focuswriting()
@@ -344,28 +354,38 @@ endfunction
 
 command! CleanUnicode call s:clean_unicode()
 function! s:clean_unicode()
-  let save = winsaveview()
-  silent! %substitute/”/"/g
-  silent! %substitute/“/"/g
-  silent! %substitute/’/'/g
-  silent! %substitute/‘/'/g
-  silent! %substitute/—/-/g
-  silent! %substitute/…/.../g
-  silent! %substitute/​//g
-  call winrestview(save)
+  set lazyredraw
+  try
+    let save = winsaveview()
+    silent! %substitute/”/"/g
+    silent! %substitute/“/"/g
+    silent! %substitute/’/'/g
+    silent! %substitute/‘/'/g
+    silent! %substitute/—/-/g
+    silent! %substitute/…/.../g
+    silent! %substitute/​//g
+    call winrestview(save)
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
-  let save = winsaveview()
-  if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
-    silent!              %substitute/^\s\+$//e
-    silent! %global/\S\s$/substitute/\s$//g
-    silent!              %substitute/\s\s\s\+$/  /e
-  else
-    silent! %substitute/\s\+$//e
-  endif
-  call winrestview(save)
+  set lazyredraw
+  try
+    let save = winsaveview()
+    if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
+      silent!              %substitute/^\s\+$//e
+      silent! %global/\S\s$/substitute/\s$//g
+      silent!              %substitute/\s\s\s\+$/  /e
+    else
+      silent! %substitute/\s\+$//e
+    endif
+    call winrestview(save)
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! Preview call s:preview()
