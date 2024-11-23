@@ -69,7 +69,6 @@ augroup end
 lua require('packages') -- ~/.config/nvim/lua/packages.lua
 
 function! s:packager_init(p) abort
-  call a:p.add('https://github.com/kristijanhusak/vim-packager')
   " Language Server (LSP)
   call a:p.add('https://github.com/neovim/nvim-lspconfig')
   call a:p.add('https://github.com/stevearc/aerial.nvim')
@@ -106,8 +105,6 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/sotte/presenting.nvim.git')
   call a:p.add('https://github.com/windwp/nvim-autopairs')
 endfunction
-
-call system(['git', 'clone', 'https://github.com/kristijanhusak/vim-packager', expand('~/.config/nvim/pack/packager/start/vim-packager')])
 
 " }}}
 " Settings {{{

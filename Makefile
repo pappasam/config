@@ -11,6 +11,7 @@ setup: dotfiles run-scripts ## Run all system setup steps
 .PHONY: dotfiles
 dotfiles: ## Run stow on dotfiles directory, linking files to home directory
 	@mkdir -p $(MKDIR_CONFIG)
+	@mkdir -p ~/.config/nvim/pack
 	stow --target $(HOME) --restow dotfiles
 
 .PHONY: run-scripts
