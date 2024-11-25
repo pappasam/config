@@ -129,7 +129,8 @@ alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nv
 
 # Git
 alias g='git status'
-alias gg='nvim -c "G | only"'
+alias gg='nvim -c "G" -c "only"'
+alias ghist='nvim -c "GV" -c "tabonly"'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gp='git remote prune origin && git remote set-head origin -a'
