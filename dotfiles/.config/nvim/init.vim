@@ -86,8 +86,9 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/nvim-telescope/telescope.nvim')
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
   " Git
-  call a:p.add('https://github.com/tpope/vim-fugitive')
+  call a:p.add('https://github.com/junegunn/gv.vim')
   call a:p.add('https://github.com/lewis6991/gitsigns.nvim')
+  call a:p.add('https://github.com/tpope/vim-fugitive')
   " My Plugins
   call a:p.add('https://github.com/pappasam/nvim-repl')
   call a:p.add('https://github.com/pappasam/papercolor-theme-slim')
@@ -224,9 +225,8 @@ nmap s <Nop>
 xmap s <Nop>
 " https://github.com/nvim-telescope/telescope.nvim
 nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
-nnoremap <C-p><C-g> <Cmd>Telescope git_commits<CR>
 nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
-nnoremap <C-p><C-f> <Cmd>Telescope live_grep<CR>
+nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
 nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
 nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
