@@ -8,7 +8,9 @@
 [init]
   defaultBranch = main
 [alias]
-  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  ; hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  hist = !nvim -c "GV" -c "tabonly"
+  s = !nvim -c "G" -c "only"
   root = rev-parse --show-toplevel
 [merge "ours"]
   driver = true

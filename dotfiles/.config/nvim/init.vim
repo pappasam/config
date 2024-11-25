@@ -47,7 +47,7 @@ augroup filetype_custom
   " disable gitsigns
   autocmd FileType xxd DisableNoisyPlugins
   " readonly
-  autocmd FileType man,info,help,qf ReadOnly
+  autocmd FileType man,info,help,qf,GV ReadOnly
   " quickfix-only
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
