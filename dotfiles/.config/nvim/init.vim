@@ -263,7 +263,7 @@ command! Wq wq
 command! Wqa wqa
 
 command! ReadOnly call s:readonly()
-function s:readonly()
+function! s:readonly()
   if !get(b:, 'readonly', 0)
     setlocal nomodifiable readonly
     nnoremap <buffer> d <C-d>
@@ -437,7 +437,7 @@ function! s:quickfix_tabedit()
   endtry
 endfunction
 
-function s:set_quickfix_mappings()
+function! s:set_quickfix_mappings()
   nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
   nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
   nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
