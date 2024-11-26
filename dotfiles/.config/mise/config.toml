@@ -1,9 +1,8 @@
 # :schema https://github.com/jdx/mise/blob/main/schema/mise.json
 
 [settings]
+cargo_binstall = true # see here: https://github.com/jdx/mise/issues/1635
 experimental = true
-# see here: https://github.com/jdx/mise/issues/1635
-cargo_binstall = true
 
 [tools]
 act = "latest"
@@ -79,3 +78,4 @@ vault = "latest"
 "pipx:ruff" = "latest"
 "pipx:toml-sort" = "latest"
 "pipx:visidata" = "latest"
+"ubi:artempyanykh/marksman" = "latest"

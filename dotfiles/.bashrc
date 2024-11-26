@@ -358,8 +358,6 @@ function info() { # https://github.com/HiPhish/info.vim
 function languageserver-install() {
   cargo install --features lsp --locked taplo-cli && cargo install-update taplo-cli
   cargo install stylua --features lua52 --features luau
-  # Manual installs (download files and bring locally)
-  # https://github.com/artempyanykh/marksman/releases
 }
 
 function ltex-install() {
