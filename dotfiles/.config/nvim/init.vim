@@ -41,7 +41,7 @@ augroup filetype_custom
   autocmd FileType python setlocal keywordprg=:Pydoc
   autocmd FileType sh,zsh,bash setlocal keywordprg=:Man
   " nofoldenable nolist
-  autocmd FileType gitcommit,checkhealth setlocal nofoldenable nolist
+  autocmd FileType gitcommit,checkhealth,text setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " disable gitsigns
