@@ -355,11 +355,6 @@ function info() { # https://github.com/HiPhish/info.vim
 # }}}
 # Installs {{{
 
-function languageserver-install() {
-  cargo install --features lsp --locked taplo-cli && cargo install-update taplo-cli
-  cargo install stylua --features lua52 --features luau
-}
-
 function ltex-install() {
   curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz >./ltex.tar.gz
   tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
