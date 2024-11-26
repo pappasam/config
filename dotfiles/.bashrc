@@ -355,9 +355,9 @@ function info() { # https://github.com/HiPhish/info.vim
 # }}}
 # Installs {{{
 
-function ltex-install() {
-  curl -L https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0-linux-x64.tar.gz >./ltex.tar.gz
-  tar -xf ./ltex.tar.gz && rm ./ltex.tar.gz && mv ./ltex-ls-16.0.0 ~/src/lib
+function ltex-ls-plus-install() {
+  curl -L https://github.com/ltex-plus/ltex-ls-plus/releases/download/18.2.0/ltex-ls-plus-18.2.0-linux-x64.tar.gz >./ltex-ls-plus.tar.gz
+  tar -xf ./ltex-ls-plus.tar.gz && rm ./ltex-ls-plus.tar.gz && mv ./ltex-ls-plus-18.2.0 ~/src/lib
 }
 
 function rustup-components() {
