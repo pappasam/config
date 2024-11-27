@@ -443,7 +443,6 @@ function upgrade() {
   mise self-update -y
   mise upgrade -y
   mise install -y
-  languageserver-install
 }
 
 # }}}
