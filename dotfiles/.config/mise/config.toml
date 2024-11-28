@@ -73,6 +73,7 @@ vault = "latest"
 "pipx:httpie" = "latest"
 "pipx:nginxfmt" = "latest"
 "pipx:pgcli" = "latest"
+"pipx:poetry" = { version = "latest", pipx_args = "--preinstall poetry-plugin-export" }
 "pipx:pre-commit" = "latest"
 "pipx:pyright" = "latest"
 "pipx:restview" = "latest"
