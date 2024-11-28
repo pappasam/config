@@ -52,6 +52,14 @@ augroup filetype_custom
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
 
+augroup colorscheme_overrides_custom
+  autocmd!
+  " overrides for gv.vim
+  autocmd ColorScheme PaperColorSlim
+        \ highlight def link diffAdded DiffAdd |
+        \ highlight def link diffRemoved DiffDelete
+augroup end
+
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * TrimWhitespace
