@@ -32,6 +32,7 @@ setopt PROMPT_SUBST
 setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
+function chpwd() { ls; } # zsh hook
 function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
 autoload zcalc # enables zshell calculator: type with zcalc
 autoload compinit
