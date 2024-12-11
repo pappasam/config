@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+sudo snap install btop slack
+
 sudo add-apt-repository --yes --no-update ppa:neovim-ppa/unstable
 
 sudo apt update
@@ -16,7 +18,6 @@ sudo apt install -y \
   bison \
   bsdgames \
   bsdgames-nonfree \
-  btop \
   build-essential \
   ca-certificates \
   cmake \
