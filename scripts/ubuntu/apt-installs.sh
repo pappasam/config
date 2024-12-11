@@ -16,6 +16,7 @@ sudo apt install -y \
   bison \
   bsdgames \
   bsdgames-nonfree \
+  btop \
   build-essential \
   ca-certificates \
   cmake \
