@@ -152,10 +152,10 @@ alias rg='rg --fixed-strings'
 # }}}
 # Functions {{{
 
-function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" && ls || return; }
-function k() { cd "$HOME/src/KeplerGroup/$1" && ls || return; }
-function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" && ls || return; }
-function p() { cd "$HOME/src/pappasam/$1" && ls || return; }
+function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
+function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
+function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
+function p() { cd "$HOME/src/pappasam/$1" || return; }
 
 function _mise_update_pattern() {
   local pattern
