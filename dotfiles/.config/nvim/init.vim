@@ -225,8 +225,9 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
-nmap <silent> <Leader>c <Plug>(ReplSendCell)
-nmap <silent> <Leader>r <Plug>(ReplSendLine)
+nnoremap <Leader>c <Cmd>ReplNewCell<CR>
+nmap <silent> <Leader>rc <Plug>(ReplSendCell)
+nmap <silent> <Leader>rr <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
