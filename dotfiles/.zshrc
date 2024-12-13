@@ -84,7 +84,7 @@ compdef _info info
 compdef _make m
 # Most additional completions
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
-  source <(carapace _carapace) # https://rsteube.github.io/carapace-bin/completers.html
+  source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
 # Completion that isn't included by carapace
 if command -v pipx > /dev/null; then
@@ -96,3 +96,4 @@ fi
 if command -v zoxide > /dev/null; then
   eval "$(zoxide init zsh)"
 fi
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
