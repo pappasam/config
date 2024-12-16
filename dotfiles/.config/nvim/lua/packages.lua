@@ -338,9 +338,6 @@ vim.treesitter.query.set(
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
-  sources = {
-    cmdline = {}, -- disables cmdline completions
-  },
 }) -- }}}
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
   progress = {
