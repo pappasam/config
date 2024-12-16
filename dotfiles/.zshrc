@@ -95,7 +95,4 @@ fi
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
-if command -v zoxide > /dev/null; then
-  eval "$(zoxide init zsh)"
-fi
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null

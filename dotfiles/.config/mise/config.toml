@@ -42,7 +42,6 @@ vault = "latest"
 "cargo:stylua" = { version = "latest", features = "lua52,luau" }
 "cargo:taplo-cli" = { version = "latest", features = "lsp" }
 "cargo:usage-cli" = "latest"
-"cargo:zoxide" = "latest"
 "go:github.com/google/osv-scanner/cmd/osv-scanner" = "latest"
 "go:github.com/jedib0t/go-wordle" = "latest"
 "go:github.com/jesseduffield/lazygit" = "latest"
