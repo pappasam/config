@@ -55,10 +55,11 @@ bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
-function _vplug_completion() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
-function _kepler_completion() { _directories -W "$HOME/src/KeplerGroup"; }
-function _rocket_completion() { _directories -W "$HOME/src/KeplerGroup/KIP-Rocket"; }
-function _pappasam_completion() { _directories -W "$HOME/src/pappasam"; }
+function _dircomp_config() { _directories -W "$HOME/config"; }
+function _dircomp_kepler() { _directories -W "$HOME/src/KeplerGroup"; }
+function _dircomp_pappasam() { _directories -W "$HOME/src/pappasam"; }
+function _dircomp_rocket() { _directories -W "$HOME/src/KeplerGroup/KIP-Rocket"; }
+function _dircomp_vplug() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
 function _git_branches() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
   local -a subcmds
@@ -70,18 +71,19 @@ function _info() {
   subcmds=($(/bin/info --output=- --subnodes '(dir)' 2>/dev/null | grep '^\* ' | awk -F: '{print $1}' | sed 's/^* //' | sort | uniq | sed 's/ /%20/g'))
   _describe 'Describe info pages' subcmds
 }
-compdef _vim f
-compdef _vim fn
-compdef _directories d
 compdef "_files -W $GITIGNORE_DIR/" gitignore
-compdef _vplug_completion vplug
-compdef _kepler_completion k
-compdef _rocket_completion r
-compdef _pappasam_completion p
 compdef _command ve
+compdef _dircomp_config c
+compdef _dircomp_kepler k
+compdef _dircomp_pappasam p
+compdef _dircomp_rocket r
+compdef _dircomp_vplug vplug
+compdef _directories d
 compdef _git_branches gdl
 compdef _info info
 compdef _make m
+compdef _vim f
+compdef _vim fn
 # Most additional completions
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
