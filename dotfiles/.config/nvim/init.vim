@@ -152,11 +152,11 @@ set termguicolors
 set updatetime=300
 set statusline=\ %t%R%M%H%W
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = {
-      \ 'name': 'xsel',
-      \ 'cache_enabled': 0,
-      \ 'copy' : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
-      \ 'paste': {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
+let g:clipboard = #{
+      \ name: 'xsel',
+      \ cache_enabled: 0,
+      \ copy : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
+      \ paste: {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
       \ }
 let g:loaded_python3_provider = 0
 let g:loaded_perl_provider = 0
@@ -172,19 +172,19 @@ let g:vim_filetype_formatter_ft_maps = {'yaml.githubactions': 'yaml'}
 packadd vim-filetype-formatter
 let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['ruff']
 " https://github.com/pappasam/nvim-repl
-let g:repl_filetype_commands = {
-      \ 'bash': 'bash',
-      \ 'javascript': 'node',
-      \ 'haskell': 'ghci',
-      \ 'ocaml': #{cmd: 'utop', suffix: ';;'},
-      \ 'python': 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""',
-      \ 'r': 'R',
-      \ 'sh': 'sh',
-      \ 'vim': 'nvim --clean -ERM',
-      \ 'zsh': 'zsh',
+let g:repl_filetype_commands = #{
+      \ bash: 'bash',
+      \ javascript: 'node',
+      \ haskell: 'ghci',
+      \ ocaml: #{cmd: 'utop', suffix: ';;'},
+      \ python: 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""',
+      \ r: 'R',
+      \ sh: 'sh',
+      \ vim: 'nvim --clean -ERM',
+      \ zsh: 'zsh',
       \ }
 " https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_preview_options = {'disable_sync_scroll': 0, 'sync_scroll_type': 'middle'}
+let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
 
 " }}}
 " Mappings {{{

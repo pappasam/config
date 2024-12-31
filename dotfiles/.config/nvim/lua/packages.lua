@@ -241,7 +241,6 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "tsx",
     "typescript",
-    "vimdoc",
     "xml",
     "yaml",
     "zathurarc",
