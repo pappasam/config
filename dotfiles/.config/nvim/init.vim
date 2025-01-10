@@ -139,7 +139,7 @@ set noshowcmd
 set noshowmode
 set noswapfile
 set notimeout
-set nowrap linebreak breakat=\ \	,])/-
+set nowrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
