@@ -95,4 +95,10 @@ fi
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
+if command -v uv > /dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+if command -v uvx > /dev/null; then
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null

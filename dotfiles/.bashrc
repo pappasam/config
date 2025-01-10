@@ -404,17 +404,14 @@ function global-install() {
 }
 
 function alacritty-install() {
-  cargo build --release && cargo build --release && cargo build --release && cargo build --release && cargo build --release # 5 builds required
-
+  cargo build --release
   # Install
   sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
   sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
   sudo desktop-file-install extra/linux/Alacritty.desktop
   sudo update-desktop-database
-
   # terminfo
   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-
   # man page
   sudo mkdir -p /usr/local/share/man/man1
   sudo mkdir -p /usr/local/share/man/man5
@@ -444,6 +441,7 @@ function upgrade() {
   mise self-update -y
   mise upgrade -y
   mise install -y
+  uv self update
 }
 
 # }}}
