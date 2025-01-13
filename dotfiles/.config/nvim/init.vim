@@ -253,7 +253,8 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
-command! ConcealOff set conceallevel=0 concealcursor=
+command! ConcealEnable set conceallevel=3 concealcursor=nc
+command! ConcealDisable set conceallevel=0 concealcursor=
 command! GH Telescope git_commits
 command! Gh Telescope git_commits
 command! Gm Git commit
