@@ -1,11 +1,7 @@
 # :schema https://github.com/jdx/mise/blob/main/schema/mise.json
 
 [settings]
-cargo_binstall = true # see here: https://github.com/jdx/mise/issues/1635
 experimental = true
-
-[settings.pipx]
-uvx = false
 
 [tools]
 act = "latest"
@@ -75,7 +71,7 @@ vault = "latest"
 "pipx:httpie" = "latest"
 "pipx:nginxfmt" = "latest"
 "pipx:pgcli" = "latest"
-"pipx:poetry" = { version = "latest", pipx_args = "--preinstall poetry-plugin-export" }
+"pipx:poetry" = { version = "latest", uvx_args = "--with poetry-plugin-export" }
 "pipx:pre-commit" = "latest"
 "pipx:pyright" = "latest"
 "pipx:restview" = "latest"

@@ -362,15 +362,10 @@ function ltex-ls-plus-install() {
 }
 
 function rustup-components() {
-  rustup component add --toolchain stable rust-analyzer
-  rustup component add --toolchain stable rust-src
-  rustup component add --toolchain nightly rust-analyzer
-  rustup component add --toolchain nightly rust-src
-}
-
-function rustglobal-install() {
-  rustup-components
-  cargo install-update -a
+  rustup component add rust-analyzer rust-src
+  rustup component add --toolchain nightly rust-analyzer rust-src
+  rustup component add --toolchain stable rust-analyzer rust-src
+  rustup component add --toolchain nightly rust-analyzer rust-src
 }
 
 function rglobal-install() {
@@ -399,8 +394,6 @@ function pyglobal-install() {
 function global-install() {
   perlglobal-install
   pyglobal-install
-  rustglobal-install
-  languageserver-install
 }
 
 function alacritty-install() {
