@@ -80,3 +80,4 @@ vault = "latest"
 "pipx:toml-sort" = "latest"
 "pipx:visidata" = "latest"
 "ubi:artempyanykh/marksman" = "latest"
+"ubi:ltex-plus/ltex-ls-plus" = { version = "latest", extract_all = "true", bin_path = "bin", exe = "ltex-ls-plus" }

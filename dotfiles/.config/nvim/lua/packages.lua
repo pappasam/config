@@ -10,7 +10,7 @@ local language_servers = {
   graphql = {},
   html = {},
   jsonls = {},
-  ltex = {
+  ltex_plus = {
     filetypes = {
       "bib",
       "markdown",
