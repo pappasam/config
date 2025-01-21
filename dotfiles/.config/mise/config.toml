@@ -4,6 +4,9 @@
 cargo_binstall = true # see here: https://github.com/jdx/mise/issues/1635
 experimental = true
 
+[settings.pipx]
+uvx = false
+
 [tools]
 act = "latest"
 awscli = "latest"
