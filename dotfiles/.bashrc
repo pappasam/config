@@ -126,6 +126,7 @@ alias d='cd'
 alias f='nvim'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
+alias nvim-profile-colorscheme='nvim -Nu NONE --startuptime colorscheme-startup.txt +colorscheme\ PaperColorSlim +q'
 
 # Git
 alias g='git status'
