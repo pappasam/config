@@ -264,6 +264,7 @@ command! Gmv Git commit --verbose
 command! R ReplToggle
 command! Re ReplToggle
 command! Rep ReplToggle
+command! RA ReplAttach
 command! W w
 command! WA wa
 command! WQ wq
