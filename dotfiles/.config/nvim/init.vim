@@ -222,10 +222,9 @@ nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
+snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
-" help vim.snippet
-nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl

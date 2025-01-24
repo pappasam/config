@@ -337,6 +337,10 @@ vim.treesitter.query.set(
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
+  keymap = {
+    ["<C-k>"] = { "snippet_backward", "fallback" },
+    ["<C-j>"] = { "snippet_forward", "fallback" },
+  },
   sources = {
     cmdline = {}, -- disables cmdline completions
   },
