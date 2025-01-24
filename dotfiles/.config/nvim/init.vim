@@ -74,8 +74,6 @@ augroup end
 " }}}
 " Packages {{{
 
-lua require('packages') -- ~/.config/nvim/lua/packages.lua
-
 function! s:packager_init(p) abort
   " Language Server (LSP)
   call a:p.add('https://github.com/neovim/nvim-lspconfig')
@@ -116,11 +114,16 @@ function! s:packager_init(p) abort
 endfunction
 
 " }}}
+" Lua {{{
+
+lua vim.loader.enable() -- speed up lua load times (experimental)
+lua require('main') -- ~/.config/nvim/lua/main.lua
+
+" }}}
 " Settings {{{
 
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
-lua require('options') -- ~/.config/nvim/lua/options.lua
 colorscheme PaperColorSlim
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2

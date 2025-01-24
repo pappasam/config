@@ -1,4 +1,4 @@
---- background {{{
+-- background
 
 local function alacritty_background_setter(filepath)
   local file = io.open(filepath, "r")
@@ -38,5 +38,3 @@ local function alacritty_background_watcher(filepath)
 end
 
 alacritty_background_watcher(vim.env.ALACRITTY_BACKGROUND_CACHE_FILE)
-
---- }}}
