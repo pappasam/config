@@ -84,7 +84,7 @@ function! s:packager_init(p) abort
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
-  call a:p.add('https://github.com/windwp/nvim-ts-autotag')
+  call a:p.add('https://github.com/tronikelis/ts-autotag.nvim')
   " Tree
   call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
   call a:p.add('https://github.com/nvim-tree/nvim-web-devicons')

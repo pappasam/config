@@ -479,7 +479,7 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
     root_folder_label = false,
   },
 }) -- }}}
-require("nvim-ts-autotag").setup({ -- https://github.com/windwp/nvim-ts-autotag {{{
+require("ts-autotag").setup({ -- https://github.com/tronikelis/ts-autotag.nvim {{{
 }) -- }}}
 require("nvim-web-devicons").setup({ -- https://github.com/kyazdani42/nvim-web-devicons {{{
   -- globally enable default icons (default to false)
