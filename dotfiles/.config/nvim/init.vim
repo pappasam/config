@@ -225,6 +225,7 @@ nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
+nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
