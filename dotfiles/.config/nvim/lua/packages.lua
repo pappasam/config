@@ -461,7 +461,7 @@ require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs {{
   map_cr = true,
   enable_check_bracket_line = false,
 }) -- }}}
-require("nvim-highlight-colors").setup({ -- https://github.com/brenoprata10/nvim-highlight-colors {{{
+require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
   disable_netrw = true,
