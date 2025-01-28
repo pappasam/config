@@ -359,9 +359,9 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
     end
 
     -- Navigation
-    map("n", "]c", function()
+    map("n", "]g", function()
       if vim.wo.diff then
-        return "]c"
+        return "]g"
       end
       vim.schedule(function()
         gs.next_hunk()
@@ -369,9 +369,9 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
       return "<Ignore>"
     end, { expr = true })
 
-    map("n", "[c", function()
+    map("n", "[g", function()
       if vim.wo.diff then
-        return "[c"
+        return "[g"
       end
       vim.schedule(function()
         gs.prev_hunk()
