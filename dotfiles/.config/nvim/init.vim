@@ -101,6 +101,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:p.add('https://github.com/pappasam/vim-keywordprg-commands')
   " Miscellaneous
+  call a:p.add('https://github.com/pteroctopus/faster.nvim')
   call a:p.add('https://github.com/HiPhish/info.vim')
   call a:p.add('https://github.com/HiPhish/jinja.vim')
   call a:p.add('https://github.com/catgoose/nvim-colorizer.lua')

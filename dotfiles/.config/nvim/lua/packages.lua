@@ -341,6 +341,10 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
     cmdline = {}, -- disables cmdline completions
   },
 }) -- }}}
+require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
+}) -- }}}
+require("faster").setup({ -- https://github.com/pteroctopus/faster.nvim {{{
+}) -- }}}
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
   progress = {
     suppress_on_insert = true,
@@ -460,8 +464,6 @@ require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs {{
   map_c_w = true,
   map_cr = true,
   enable_check_bracket_line = false,
-}) -- }}}
-require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
   disable_netrw = true,
