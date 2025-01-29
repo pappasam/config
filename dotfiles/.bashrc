@@ -297,6 +297,13 @@ function poetryinit() {
   touch README.md
 }
 
+# Trace Python calls in current project
+# Ignore everything in PYTHONPATH and only show lines from your cwd
+function pytrace() {
+  # shellcheck disable=SC2046
+  python -m trace --trace $(python -c "import sys; print(' '.join(f'--ignore-dir={p}' for p in sys.path if p))") "$1"
+}
+
 function pyinit() {
   poetryinit || return 1
   gitignore Python.gitignore | grep -v instance/ >.gitignore
