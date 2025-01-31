@@ -428,6 +428,7 @@ function upgrade() {
   sudo apt upgrade -y
   sudo apt autoremove -y
   sudo snap refresh
+  rustup update
   pushd .
   cd ~/src/lib/alacritty || return
   git fetch origin
