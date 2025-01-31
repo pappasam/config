@@ -1,5 +1,5 @@
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 check_untyped_defs = true
 disallow_untyped_defs = true
 no_implicit_optional = true
@@ -12,11 +12,10 @@ nox = "*"
 pyright = "*"
 pytest = "*"
 ruff = "*"
-toml-sort = "*"
 
 [tool.ruff]
 line-length = 79
-target-version = "py311"
+target-version = "py312"
 unsafe-fixes = true
 
 [tool.ruff.lint]
@@ -24,7 +23,7 @@ select = [
   "D", # pydocstyle
   "E", # pycodestyle
   "F", # pyflakes
-  "I" # isort
+  "I", # isort
 ]
 ignore = [
   "D206", # indent-with-spaces
@@ -32,7 +31,7 @@ ignore = [
   "E111", # indentation-with-invalid-multiple
   "E114", # indentation-with-invalid-multiple-comment
   "E117", # over-indented
-  "E501" # line-too-long
+  "E501", # line-too-long
 ]
 
 [tool.ruff.pydocstyle]
