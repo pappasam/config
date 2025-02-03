@@ -476,11 +476,11 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
       "/dotfiles",
     },
   },
-  -- renderer = {
-  --   full_name = true,
-  --   symlink_destination = false,
-  --   root_folder_label = false,
-  -- },
+  renderer = {
+    full_name = true,
+    symlink_destination = false,
+    root_folder_label = false,
+  },
 }) -- }}}
 require("ts-autotag").setup({ -- https://github.com/tronikelis/ts-autotag.nvim {{{
 }) -- }}}
