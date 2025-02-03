@@ -59,8 +59,10 @@ local language_servers = {
           },
         },
         workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+          },
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
