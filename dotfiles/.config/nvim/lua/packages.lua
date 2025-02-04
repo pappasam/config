@@ -474,6 +474,7 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
     exclude = {
       "/.github",
       "/dotfiles",
+      "/__pycache__",
     },
   },
   renderer = {
