@@ -8,7 +8,7 @@ TERM = "tmux-256color"
 WINIT_X11_SCALE_FACTOR = "1.0"
 
 [font]
-size = 12.0
+size = 16.0
 normal = {family = "Fira Mono Nerd Font Mono", style = "Medium"}
 
 [general]
