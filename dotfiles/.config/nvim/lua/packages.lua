@@ -471,10 +471,13 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
   disable_netrw = true,
   filters = {
     dotfiles = true,
+    custom = {
+      "/__pycache__",
+    },
     exclude = {
       "/.github",
       "/dotfiles",
-      "/__pycache__",
+      "/instance",
     },
   },
   renderer = {
