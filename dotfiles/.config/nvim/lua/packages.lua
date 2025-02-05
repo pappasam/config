@@ -522,8 +522,8 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
     },
     layout_strategy = "flex",
     layout_config = {
-      height = 0.99999,
-      width = 0.99999,
+      height = 0.9,
+      width = 0.9,
     },
     mappings = {
       i = {
