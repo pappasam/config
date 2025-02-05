@@ -321,7 +321,6 @@ function pynew() {
     echo "$1 already exists" && return 1
   fi
   mkdir "$1" && cd "$1" && pyinit || return
-  git init && git add . && git commit -m 'Initial commit'
 }
 
 function info() { # https://github.com/HiPhish/info.vim

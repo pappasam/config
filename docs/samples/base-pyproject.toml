@@ -14,7 +14,6 @@ pytest = "*"
 ruff = "*"
 
 [tool.ruff]
-line-length = 79
 target-version = "py312"
 unsafe-fixes = true
 
