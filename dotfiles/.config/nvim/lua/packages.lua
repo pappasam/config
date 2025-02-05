@@ -480,6 +480,9 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
       "/instance",
     },
   },
+  view = {
+    signcolumn = "no",
+  },
   renderer = {
     full_name = true,
     symlink_destination = false,
