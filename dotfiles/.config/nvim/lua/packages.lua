@@ -457,8 +457,7 @@ require("ibl").setup({ -- https://github.com/lukas-reineke/indent-blankline.nvim
     char = "▏",
   },
   scope = {
-    show_start = false,
-    show_end = false,
+    enabled = false,
   },
 }) -- }}}
 require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs {{{
