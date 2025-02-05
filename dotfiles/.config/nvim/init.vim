@@ -146,7 +146,7 @@ set nowrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
-set shortmess+=cI
+set shortmess+=c
 set showtabline=2
 set signcolumn=number
 set nospell spelllang=en_us
