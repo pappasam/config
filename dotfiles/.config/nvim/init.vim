@@ -66,7 +66,7 @@ augroup miscellaneous_custom
   autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="Visual", timeout=150}
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="Visual", timeout=200}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   autocmd VimResized * ResizeAllTabs
 augroup end
