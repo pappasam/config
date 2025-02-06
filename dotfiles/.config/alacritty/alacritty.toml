@@ -9,7 +9,7 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 
 [font]
 size = 16.0
-normal = {family = "Fira Mono Nerd Font Mono", style = "Medium"}
+normal = {family = "Fira Mono Nerd Font Mono", style = "Regular"}
 
 [general]
 import = ["~/.cache/alacritty/background.toml"]
