@@ -9,7 +9,7 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 
 [font]
 size = 16.0
-normal = {family = "Fira Mono Nerd Font Mono", style = "Regular"}
+normal = { family = "Fira Mono Nerd Font Mono", style = "Regular" }
 
 [general]
 import = ["~/.cache/alacritty/background.toml"]
@@ -21,4 +21,4 @@ program = "/home/sroeca/config/bin/entrypoint-alacritty-tmux"
 [window]
 dynamic_title = false
 dynamic_padding = true
-padding = {x = 2, y = 2}
+padding = { x = 2, y = 2 }
