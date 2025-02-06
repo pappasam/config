@@ -377,6 +377,27 @@ function! s:clean_unicode()
     silent! %substitute/—/-/g
     silent! %substitute/…/.../g
     silent! %substitute/​//g
+    silent! %substitute/–/-/g
+    silent! %substitute/‐/-/g
+    silent! %substitute/ / /g
+    silent! %substitute/　/ /g
+    silent! %substitute/′/'/g
+    silent! %substitute/″/"/g
+    silent! %substitute/•/*/g
+    silent! %substitute/·/*/g
+    silent! %substitute/°/^/g
+    silent! %substitute/™/(tm)/g
+    silent! %substitute/©/(c)/g
+    silent! %substitute/®/(r)/g
+    silent! %substitute/×/x/g
+    silent! %substitute/÷/\//g
+    silent! %substitute/±/+\/-/g
+    silent! %substitute/½/1\/2/g
+    silent! %substitute/¼/1\/4/g
+    silent! %substitute/¾/3\/4/g
+    silent! %substitute/‽/?!/g
+    silent! %substitute/¿/?/g
+    silent! %substitute/¡/!/g
     call winrestview(save)
   finally
     set nolazyredraw
