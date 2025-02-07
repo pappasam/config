@@ -3,19 +3,22 @@
 
 augroup filetype_assignment
   autocmd!
-  autocmd BufRead,BufNewFile,BufEnter *.cfg,*.ini,.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
-  autocmd BufRead,BufNewFile,BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
-  autocmd BufRead,BufNewFile,BufEnter docker-compose.* set filetype=yaml
-  autocmd BufRead,BufNewFile,BufEnter *.github/workflows/*.yml set filetype=yaml.githubactions
-  autocmd BufRead,BufNewFile,BufEnter *.mdx set filetype=markdown.mdx
-  autocmd BufRead,BufNewFile,BufEnter *.min.js set filetype=none
-  autocmd BufRead,BufNewFile,BufEnter *.oct set filetype=octave
-  autocmd BufRead,BufNewFile,BufEnter .envrc,.env,.env.* set filetype=sh
-  autocmd BufRead,BufNewFile,BufEnter .dockerignore set filetype=conf
-  autocmd BufRead,BufNewFile,BufEnter renv.lock,.jrnl_config,*.bowerrc,*.babelrc,*.eslintrc,*.slack-term,*.htmlhintrc,*.stylelintrc,*.firebaserc set filetype=json
-  autocmd BufRead,BufNewFile,BufEnter poetry.lock,Pipfile set filetype=toml
-  autocmd BufRead,BufNewFile,BufEnter tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
-  autocmd BufRead,BufNewFile,BufEnter zathurarc set filetype=zathurarc
+  " dosini files
+  autocmd BufRead,BufNewFile *.{cfg,ini},.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
+  " yaml files
+  autocmd BufRead,BufNewFile *.config,.cookiecutterrc,DESCRIPTION,.lintr,docker-compose.* set filetype=yaml
+  autocmd BufRead,BufNewFile *.github/workflows/*.yml set filetype=yaml.githubactions
+  " json files
+  autocmd BufRead,BufNewFile renv.lock,.jrnl_config,*.{bowerrc,babelrc,eslintrc,slack-term,htmlhintrc,stylelintrc,firebaserc} set filetype=json
+  autocmd BufRead,BufNewFile tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
+  " other files
+  autocmd BufRead,BufNewFile *.mdx set filetype=markdown.mdx
+  autocmd BufRead,BufNewFile *.min.js set filetype=none
+  autocmd BufRead,BufNewFile *.oct set filetype=octave
+  autocmd BufRead,BufNewFile .envrc,.env,.env.* set filetype=sh
+  autocmd BufRead,BufNewFile .dockerignore set filetype=conf
+  autocmd BufRead,BufNewFile poetry.lock,Pipfile set filetype=toml
+  autocmd BufRead,BufNewFile zathurarc set filetype=zathurarc
 augroup end
 
 augroup filetype_custom
