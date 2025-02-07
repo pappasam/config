@@ -160,7 +160,7 @@ set statusline=\ %t%R%M%H%W
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = #{
       \ name: 'xsel',
-      \ cache_enabled: 0,
+      \ cache_enabled: 1,
       \ copy : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
       \ paste: {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
       \ }
