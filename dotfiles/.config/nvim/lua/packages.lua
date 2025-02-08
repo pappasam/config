@@ -336,6 +336,34 @@ vim.treesitter.query.set(
 )
 
 -- }}}
+-- AI (Avante): {{{ -- https://github.com/yetone/avante.nvim
+
+require("avante_lib").load()
+require("avante").setup()
+
+-- }}}
+require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
+  disable_netrw = true,
+  filters = {
+    dotfiles = true,
+    custom = {
+      "/__pycache__",
+    },
+    exclude = {
+      "/.github",
+      "/dotfiles",
+      "/instance",
+    },
+  },
+  view = {
+    signcolumn = "no",
+  },
+  renderer = {
+    full_name = true,
+    symlink_destination = false,
+    root_folder_label = false,
+  },
+}) -- }}}
 vim.defer_fn(function() -- lazy loading
   require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
   }) -- }}}
@@ -466,28 +494,6 @@ vim.defer_fn(function() -- lazy loading
     map_c_w = true,
     map_cr = true,
     enable_check_bracket_line = false,
-  }) -- }}}
-  require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
-    disable_netrw = true,
-    filters = {
-      dotfiles = true,
-      custom = {
-        "/__pycache__",
-      },
-      exclude = {
-        "/.github",
-        "/dotfiles",
-        "/instance",
-      },
-    },
-    view = {
-      signcolumn = "no",
-    },
-    renderer = {
-      full_name = true,
-      symlink_destination = false,
-      root_folder_label = false,
-    },
   }) -- }}}
   require("ts-autotag").setup({ -- https://github.com/tronikelis/ts-autotag.nvim {{{
   }) -- }}}
