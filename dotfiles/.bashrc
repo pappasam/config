@@ -42,6 +42,7 @@ function path_radd() { # $1 path to add
   rm_from_path "$1"
   PATH="${PATH:+"$PATH:"}$1"
 }
+path_ladd "$HOME/.local/opt/curl/bin"
 path_ladd "$HOME/.cargo/bin"
 path_ladd "$HOME/bin"
 path_ladd "$HOME/.bin"

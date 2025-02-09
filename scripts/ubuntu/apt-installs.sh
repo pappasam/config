@@ -74,12 +74,13 @@ sudo apt install -y \
   libmapnik-dev \
   libmysqlclient-dev \
   libncurses-dev \
-  libncurses-dev \
   libncurses6 \
   libncursesw6 \
+  libnghttp2-dev \
   libonig-dev \
   libpng-dev \
   libpq-dev \
+  libpsl-dev \
   libreadline-dev \
   libreadline6-dev \
   librsvg2-bin \
@@ -103,6 +104,7 @@ sudo apt install -y \
   ncurses-doc \
   neovim \
   network-manager-openvpn \
+  nghttp2 \
   openssl \
   pandoc \
   paprefs \
