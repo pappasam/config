@@ -272,15 +272,6 @@ require("nvim-treesitter.configs").setup({
       },
       include_surrounding_whitespace = false,
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-      },
-    },
     move = {
       enable = true,
       set_jumps = true,
@@ -339,7 +330,24 @@ vim.treesitter.query.set(
 -- AI (Avante): {{{ -- https://github.com/yetone/avante.nvim
 
 require("avante_lib").load()
-require("avante").setup()
+require("avante").setup({
+  mappings = {
+    --- @class AvanteConflictMappings
+    sidebar = {
+      apply_all = "ca",
+      apply_cursor = "cc",
+    },
+  },
+  windows = {
+    width = 35, -- default % based on available width
+    edit = {
+      start_insert = false,
+    },
+    ask = {
+      start_insert = false,
+    },
+  },
+})
 
 -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
@@ -551,5 +559,15 @@ vim.defer_fn(function() -- lazy loading
   }) -- }}}
   require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
     file_types = { "Avante" },
+    anti_conceal = {
+      enabled = false,
+    },
+    win_options = {
+      concealcursor = {
+        default = "n",
+        -- Used when being rendered, disable concealing text in all modes
+        rendered = "n",
+      },
+    },
   }) -- }}}
 end, 100)
