@@ -89,6 +89,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
   call a:p.add('https://github.com/MunifTanjim/nui.nvim')
   call a:p.add('https://github.com/MeanderingProgrammer/render-markdown.nvim')
+  call a:p.add('https://github.com/HakonHarnes/img-clip.nvim')
   " Autocompletion
   call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
   " Tree Sitter
