@@ -557,17 +557,4 @@ vim.defer_fn(function() -- lazy loading
       },
     },
   }) -- }}}
-  require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
-    file_types = { "Avante" },
-    anti_conceal = {
-      enabled = false,
-    },
-    win_options = {
-      concealcursor = {
-        default = "n",
-        -- Used when being rendered, disable concealing text in all modes
-        rendered = "n",
-      },
-    },
-  }) -- }}}
 end, 100)
