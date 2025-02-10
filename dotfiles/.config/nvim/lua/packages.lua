@@ -331,7 +331,7 @@ vim.treesitter.query.set(
 
 require("avante_lib").load()
 require("avante").setup({
-  provider = "bedrock",
+  provider = vim.env.AVANTE_PROVIDER or "claude",
   mappings = {
     --- @class AvanteConflictMappings
     sidebar = {
