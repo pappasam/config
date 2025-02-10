@@ -6,7 +6,7 @@ set -euo pipefail
 VERSION=8.12.0
 cd ~
 sudo apt-get update -y
-sudo apt-get install -y nghttp2 libnghttp2-dev libssl-dev build-essential wget
+sudo apt-get install -y nghttp2 libnghttp2-dev libssl-dev build-essential libpsl-dev wget
 wget https://curl.haxx.se/download/curl-${VERSION}.tar.gz
 tar -xzvf curl-${VERSION}.tar.gz
 rm -f curl-${VERSION}.tar.gz
