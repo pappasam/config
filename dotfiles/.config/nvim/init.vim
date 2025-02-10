@@ -260,6 +260,7 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
+command! -nargs=? BedrockKeys lua require('bedrock_keys').set_bedrock_keys(<q-args> ~= "" and <q-args> or nil)
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! GH Telescope git_commits
