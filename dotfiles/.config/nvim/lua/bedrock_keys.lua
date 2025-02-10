@@ -11,47 +11,42 @@
 local M = {}
 
 function M.set_bedrock_keys(profile)
-  -- Default to 'default' profile if none specified
   profile = profile or "default"
-
-  -- Get AWS credentials
-  local credentials_handle = io.popen(
-    string.format("aws configure export-credentials --profile %s", profile)
-  )
-  if credentials_handle == nil then
-    vim.notify("error getting AWS credentials", vim.log.levels.ERROR)
+  local credentials = vim
+    .system(
+      { "aws", "configure", "export-credentials", "--profile", profile },
+      { text = true }
+    )
+    :wait()
+  if credentials.code ~= 0 then
+    vim.notify(vim.trim(credentials.stderr), vim.log.levels.ERROR)
     return
   end
-  local credentials = credentials_handle:read("*a")
-  credentials_handle:close()
-
-  -- Parse JSON credentials using vim's json_decode
-  local cred_data = vim.json.decode(credentials)
-
-  -- Get region
-  local region_handle =
-    io.popen(string.format("aws configure get region --profile %s", profile))
-  if region_handle == nil then
-    vim.notify("cannot get AWS region", vim.log.levels.ERROR)
+  local cred_data = vim.json.decode(credentials.stdout)
+  local region = vim
+    .system(
+      { "aws", "configure", "get", "region", "--profile", profile },
+      { text = true }
+    )
+    :wait()
+  if region.code ~= 0 then
+    vim.notify(vim.trim(region.stderr), vim.log.levels.ERROR)
     return
   end
-  local region = region_handle:read("*a"):gsub("%s+", "") -- Remove whitespace
-  region_handle:close()
-
-  -- Construct BEDROCK_KEYS string
+  local region_text = vim.trim(region.stdout)
   local bedrock_keys = table.concat({
     cred_data.AccessKeyId,
     cred_data.SecretAccessKey,
-    region,
+    region_text,
     cred_data.SessionToken,
   }, ",")
-
-  -- Set environment variable in Neovim
   vim.env.BEDROCK_KEYS = bedrock_keys
-
-  -- Notify user
   vim.notify(
-    "BEDROCK_KEYS environment variable has been set",
+    string.format(
+      "BEDROCK_KEYS set for profile %s in region %s",
+      profile,
+      region_text
+    ),
     vim.log.levels.INFO
   )
 end
