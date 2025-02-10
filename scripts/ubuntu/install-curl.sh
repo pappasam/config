@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -euo pipefail
+
 # Check the latest version at <https://github.com/curl/curl/releases>
 VERSION=8.12.0
 cd ~
