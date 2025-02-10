@@ -33,8 +33,10 @@ sudo apt install -y \
   dict-wn \
   enscript \
   entr \
+  espeak \
   expect \
   exuberant-ctags \
+  ffmpeg \
   flameshot \
   fortune-mod \
   fswatch \
@@ -57,6 +59,7 @@ sudo apt install -y \
   libcurl4-openssl-dev \
   libdb-dev \
   libedit-dev \
+  libespeak1 \
   libevent-dev \
   libffi-dev \
   libfreetype-dev \
