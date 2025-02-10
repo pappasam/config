@@ -1,4 +1,12 @@
 -- Create this as 'lua/bedrock_keys.lua' in your Neovim config directory
+-- Basically a re-creation of this bash script
+-- profile="${1:-default}"
+-- credentials="$(aws configure export-credentials --profile "$profile")"
+-- access_key=$(jq -r '.AccessKeyId' <<<"$credentials")
+-- secret_key=$(jq -r '.SecretAccessKey' <<<"$credentials")
+-- session_token=$(jq -r '.SessionToken' <<<"$credentials")
+-- region=$(aws configure get region --profile "$profile")
+-- export BEDROCK_KEYS="$access_key,$secret_key,$region,$session_token"
 
 local M = {}
 
