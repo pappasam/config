@@ -8,6 +8,8 @@
 -- region=$(aws configure get region --profile "$profile")
 -- export BEDROCK_KEYS="$access_key,$secret_key,$region,$session_token"
 
+-- Note: requires curl>=8.12, which resolves some bugs with aws
+
 local M = {}
 
 function M.set_bedrock_keys(profile)
