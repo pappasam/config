@@ -356,7 +356,8 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
     highlight = "Delimiter",
   },
   code = {
-    disable_background = { "diff" },
+    disable_background = true,
+    width = "block",
   },
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
