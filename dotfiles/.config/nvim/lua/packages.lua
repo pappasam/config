@@ -296,6 +296,7 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
   code = {
     disable_background = true,
     width = "block",
+    border = "thick",
   },
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
