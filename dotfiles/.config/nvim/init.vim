@@ -88,6 +88,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/stevearc/dressing.nvim')
   call a:p.add('https://github.com/nvim-lua/plenary.nvim')
   call a:p.add('https://github.com/MunifTanjim/nui.nvim')
+  call a:p.add('https://github.com/MeanderingProgrammer/render-markdown.nvim')
   " Autocompletion
   call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
   " Tree Sitter
@@ -146,7 +147,7 @@ set mouse=a
 set noshowcmd
 set noswapfile
 set notimeout
-set nowrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
+set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
