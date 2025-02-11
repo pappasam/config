@@ -93,7 +93,7 @@ function! s:packager_init(p) abort
   call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
   " Tree Sitter
   call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
-  call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
+  call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter-context')
   call a:p.add('https://github.com/tronikelis/ts-autotag.nvim')
   " Tree
   call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
@@ -230,6 +230,8 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
+" https://github.com/nvim-treesitter/nvim-treesitter-context
+nnoremap [c <Cmd>lua require("treesitter-context").go_to_context(vim.v.count1)<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
