@@ -256,6 +256,8 @@ nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/kyazdani42/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
+" https://github.com/MeanderingProgrammer/render-markdown.nvim
+nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 
 " }}}
 " Commands {{{
@@ -264,8 +266,6 @@ command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 command! -nargs=? BedrockKeys lua require('bedrock_keys').set_bedrock_keys(<q-args> ~= "" and <q-args> or nil)
-command! ConcealEnable set conceallevel=3 concealcursor=nc
-command! ConcealDisable set conceallevel=0 concealcursor=
 command! GH Telescope git_commits
 command! Gh Telescope git_commits
 command! Gm Git commit

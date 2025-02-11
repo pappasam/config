@@ -266,6 +266,7 @@ require("treesitter-context").setup({ -- https://github.com/nvim-treesitter/nvim
 -- }}}
 require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
   file_types = { "Avante", "markdown" },
+  render_modes = true,
   sign = {
     enabled = false,
   },
@@ -274,8 +275,8 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
   },
   win_options = {
     concealcursor = {
-      default = "n",
-      rendered = "n",
+      default = "nvic",
+      rendered = "nvic",
     },
   },
   heading = {
