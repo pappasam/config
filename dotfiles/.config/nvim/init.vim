@@ -19,6 +19,7 @@ augroup filetype_assignment
   autocmd BufRead,BufNewFile .dockerignore set filetype=conf
   autocmd BufRead,BufNewFile poetry.lock,Pipfile set filetype=toml
   autocmd BufRead,BufNewFile zathurarc set filetype=zathurarc
+  autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
 augroup end
 
 augroup filetype_custom
