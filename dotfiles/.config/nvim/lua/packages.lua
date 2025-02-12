@@ -508,7 +508,7 @@ require("avante_lib").load()
 require("avante").setup({
   provider = vim.env.AVANTE_PROVIDER or "claude",
   bedrock = { -- configuration if using bedrock
-    model = "anthropic.claude-3-5-sonnet-20241022-v2:0",
+    model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
   },
 })
 
