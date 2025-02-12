@@ -60,8 +60,11 @@ augroup colorscheme_overrides_custom
   autocmd!
   " overrides for gv.vim
   autocmd ColorScheme PaperColorSlim
-        \ highlight def link diffAdded DiffAdd |
-        \ highlight def link diffRemoved DiffDelete
+        \ highlight link diffAdded DiffAdd |
+        \ highlight link diffRemoved DiffDelete |
+        \ highlight GitSignsAddInline gui=underdouble |
+        \ highlight GitSignsDeleteInline gui=strikethrough |
+        \ highlight GitSignsChangeInline gui=underdouble
 augroup end
 
 augroup miscellaneous_custom
@@ -215,12 +218,12 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
-nnoremap <Leader>ga <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
-nnoremap <Leader>gv <Cmd>edit ~/.config/nvim/init.vim<CR>
-nnoremap <Leader>gl <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
-nnoremap <Leader>gt <Cmd>edit ~/.config/tmux/tmux.conf<CR>
-nnoremap <Leader>gz <Cmd>edit ~/.zshrc<CR>
-nnoremap <Leader>gb <Cmd>edit ~/.bashrc<CR>
+nnoremap <Leader>ea <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
+nnoremap <Leader>ev <Cmd>edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>el <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+nnoremap <Leader>et <Cmd>edit ~/.config/tmux/tmux.conf<CR>
+nnoremap <Leader>ez <Cmd>edit ~/.zshrc<CR>
+nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
@@ -259,6 +262,8 @@ xnoremap <Leader>f :FiletypeFormat<CR>
 nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/MeanderingProgrammer/render-markdown.nvim
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
+" https://github.com/lewis6991/gitsigns.nvim
+nnoremap <Leader>g <Cmd>Gitsigns toggle_linehl<CR><Cmd>Gitsigns toggle_word_diff<CR>
 
 " }}}
 " Commands {{{
