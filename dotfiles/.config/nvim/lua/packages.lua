@@ -346,15 +346,14 @@ require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
 require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
   signcolumn = false,
   numhl = true,
+  linehl = true,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
-
     local function map(mode, l, r, opts)
       opts = opts or {}
       opts.buffer = bufnr
       vim.keymap.set(mode, l, r, opts)
     end
-
     -- Navigation
     map("n", "]g", function()
       if vim.wo.diff then
@@ -365,7 +364,6 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
       end)
       return "<Ignore>"
     end, { expr = true })
-
     map("n", "[g", function()
       if vim.wo.diff then
         return "[g"
@@ -375,7 +373,6 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
       end)
       return "<Ignore>"
     end, { expr = true })
-
     -- Actions
     map({ "n", "v" }, "<leader>hs", "<Cmd>Gitsigns stage_hunk<CR>")
     map({ "n", "v" }, "<leader>hr", "<Cmd>Gitsigns reset_hunk<CR>")
