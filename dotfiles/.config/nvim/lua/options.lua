@@ -37,4 +37,6 @@ local function alacritty_background_watcher(filepath)
   )
 end
 
-alacritty_background_watcher(vim.env.ALACRITTY_BACKGROUND_CACHE_FILE)
+alacritty_background_setter(vim.env.ALACRITTY_BACKGROUND_CACHE_FILE)
+-- Commenting out below because I think this functionality is annoying
+-- alacritty_background_watcher(vim.env.ALACRITTY_BACKGROUND_CACHE_FILE)

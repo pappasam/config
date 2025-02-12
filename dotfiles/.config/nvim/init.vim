@@ -72,7 +72,7 @@ augroup miscellaneous_custom
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
   autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
-  autocmd VimEnter * lua require('main') -- ~/.config/nvim/lua/main.lua
+  autocmd VimEnter * lua require('packages') -- ~/.config/nvim/lua/packages.lua
   autocmd VimResized * ResizeAllTabs
 augroup end
 
@@ -128,6 +128,7 @@ endfunction
 " Settings {{{
 
 lua vim.loader.enable() -- speed up lua load times (experimental)
+lua require("options") -- ~/.config/nvim/lua/options.lua
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 colorscheme PaperColorSlim
