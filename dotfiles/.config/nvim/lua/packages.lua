@@ -260,9 +260,6 @@ vim.treesitter.query.set(
   '((comment) @injection.content (#set! injection.language "comment"))'
 )
 
-require("treesitter-context").setup({ -- https://github.com/nvim-treesitter/nvim-treesitter-context
-})
-
 -- }}}
 require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
   file_types = { "Avante", "markdown" },
