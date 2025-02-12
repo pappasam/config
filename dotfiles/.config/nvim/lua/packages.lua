@@ -302,8 +302,8 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
   },
   code = {
     style = "language",
-    left_margin = 2,
-    left_pad = 3,
+    disable_background = true,
+    left_pad = 2,
     width = "block",
     border = "none",
   },
@@ -510,21 +510,8 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
 require("avante_lib").load()
 require("avante").setup({
   provider = vim.env.AVANTE_PROVIDER or "claude",
-  mappings = {
-    --- @class AvanteConflictMappings
-    sidebar = {
-      apply_all = "ca",
-      apply_cursor = "cc",
-    },
-  },
-  windows = {
-    width = 35, -- default % based on available width
-    edit = {
-      start_insert = false,
-    },
-    ask = {
-      start_insert = false,
-    },
+  bedrock = { -- configuration if using bedrock
+    model = "anthropic.claude-3-5-sonnet-20241022-v2:0",
   },
 })
 
