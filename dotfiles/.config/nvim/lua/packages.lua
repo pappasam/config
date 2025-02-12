@@ -280,8 +280,15 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
     },
   },
   heading = {
-    position = "inline",
     backgrounds = {
+      "Visual",
+      "Visual",
+      "Visual",
+      "Visual",
+      "Visual",
+      "Visual",
+    },
+    foregrounds = {
       "pcsHtmlHeader1",
       "pcsHtmlHeader2",
       "pcsHtmlHeader3",
@@ -294,10 +301,12 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
     highlight = "Delimiter",
   },
   code = {
-    disable_background = true,
+    style = "language",
+    left_margin = 2,
+    left_pad = 2,
     width = "block",
     border = "thin",
-    below = "🬰",
+    below = "%",
   },
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
