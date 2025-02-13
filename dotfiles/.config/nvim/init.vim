@@ -1,3 +1,4 @@
+lua vim.loader.enable() -- speed up lua load times (experimental)
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
@@ -58,12 +59,11 @@ augroup end
 
 augroup colorscheme_overrides_custom
   autocmd!
-  " overrides for gv.vim
-  autocmd ColorScheme PaperColorSlim
+  autocmd ColorScheme PaperColorSlim,PaperColorSlimLight
         \ highlight link diffAdded DiffAdd |
         \ highlight link diffRemoved DiffDelete |
         \ highlight GitSignsAddInline gui=underdouble |
-        \ highlight GitSignsDeleteInline gui=strikethrough |
+        \ highlight GitSignsDeleteInline gui=underdouble |
         \ highlight GitSignsChangeInline gui=underdouble
 augroup end
 
@@ -130,11 +130,14 @@ endfunction
 " }}}
 " Settings {{{
 
-lua vim.loader.enable() -- speed up lua load times (experimental)
 lua require("options") -- ~/.config/nvim/lua/options.lua
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
-colorscheme PaperColorSlim
+if &background == 'dark'
+  colorscheme PaperColorSlim
+else
+  colorscheme PaperColorSlimLight
+endif
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
