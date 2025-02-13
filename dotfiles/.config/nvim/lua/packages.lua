@@ -1,3 +1,59 @@
+-- Packages {{{
+
+require("packager").setup(function(p)
+  -- Language Server (LSP)
+  p.add("https://github.com/neovim/nvim-lspconfig")
+  p.add("https://github.com/stevearc/aerial.nvim")
+  p.add("https://github.com/j-hui/fidget.nvim.git")
+  -- AI
+  p.add("https://github.com/yetone/avante.nvim", { ["do"] = "make" })
+  p.add("https://github.com/stevearc/dressing.nvim")
+  p.add("https://github.com/nvim-lua/plenary.nvim")
+  p.add("https://github.com/MunifTanjim/nui.nvim")
+  p.add("https://github.com/MeanderingProgrammer/render-markdown.nvim")
+  -- Autocompletion
+  p.add(
+    "https://github.com/Saghen/blink.cmp",
+    { ["do"] = "cargo build --release" }
+  )
+  -- Tree Sitter
+  p.add("https://github.com/nvim-treesitter/nvim-treesitter")
+  p.add("https://github.com/tronikelis/ts-autotag.nvim")
+  -- Tree
+  p.add("https://github.com/nvim-tree/nvim-tree.lua")
+  p.add("https://github.com/nvim-tree/nvim-web-devicons")
+  -- Fuzzy Finder
+  p.add("https://github.com/nvim-telescope/telescope.nvim")
+  p.add("https://github.com/nvim-lua/plenary.nvim")
+  -- Git
+  p.add("https://github.com/junegunn/gv.vim")
+  p.add("https://github.com/lewis6991/gitsigns.nvim")
+  p.add("https://github.com/tpope/vim-fugitive")
+  -- My Plugins
+  p.add("https://github.com/pappasam/nvim-repl")
+  p.add("https://github.com/pappasam/papercolor-theme-slim")
+  p.add("https://github.com/pappasam/vim-filetype-formatter")
+  p.add("https://github.com/pappasam/vim-keywordprg-commands")
+  -- Miscellaneous
+  p.add("https://github.com/pteroctopus/faster.nvim")
+  p.add("https://github.com/HiPhish/info.vim")
+  p.add("https://github.com/HiPhish/jinja.vim")
+  p.add("https://github.com/catgoose/nvim-colorizer.lua")
+  p.add("https://github.com/chrishrb/gx.nvim")
+  p.add("https://github.com/fidian/hexmode")
+  p.add(
+    "https://github.com/iamcco/markdown-preview.nvim",
+    { ["do"] = "cd app & yarn install" }
+  )
+  p.add("https://github.com/lukas-reineke/indent-blankline.nvim.git")
+  p.add("https://github.com/machakann/vim-sandwich")
+  p.add("https://github.com/sotte/presenting.nvim.git")
+  p.add("https://github.com/windwp/nvim-autopairs")
+end, {
+  window_cmd = "edit",
+})
+
+-- }}}
 -- Language Servers: https://github.com/neovim/nvim-lspconfig {{{
 -- :help lsp.txt
 -- :help diagnostic.txt

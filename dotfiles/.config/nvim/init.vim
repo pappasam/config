@@ -74,58 +74,9 @@ augroup miscellaneous_custom
   autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
-  autocmd VimEnter * call packager#setup(function('s:packager_init'), {'window_cmd': 'edit'})
   autocmd VimEnter * lua require('packages') -- ~/.config/nvim/lua/packages.lua
   autocmd VimResized * ResizeAllTabs
 augroup end
-
-" }}}
-" Packages {{{
-
-function! s:packager_init(p) abort
-  " Language Server (LSP)
-  call a:p.add('https://github.com/neovim/nvim-lspconfig')
-  call a:p.add('https://github.com/stevearc/aerial.nvim')
-  call a:p.add('https://github.com/j-hui/fidget.nvim.git')
-  " AI
-  call a:p.add('https://github.com/yetone/avante.nvim', {'do': 'make'})
-  call a:p.add('https://github.com/stevearc/dressing.nvim')
-  call a:p.add('https://github.com/nvim-lua/plenary.nvim')
-  call a:p.add('https://github.com/MunifTanjim/nui.nvim')
-  call a:p.add('https://github.com/MeanderingProgrammer/render-markdown.nvim')
-  " Autocompletion
-  call a:p.add('https://github.com/Saghen/blink.cmp', {'do': 'cargo build --release'})
-  " Tree Sitter
-  call a:p.add('https://github.com/nvim-treesitter/nvim-treesitter')
-  call a:p.add('https://github.com/tronikelis/ts-autotag.nvim')
-  " Tree
-  call a:p.add('https://github.com/nvim-tree/nvim-tree.lua')
-  call a:p.add('https://github.com/nvim-tree/nvim-web-devicons')
-  " Fuzzy Finder
-  call a:p.add('https://github.com/nvim-telescope/telescope.nvim')
-  call a:p.add('https://github.com/nvim-lua/plenary.nvim')
-  " Git
-  call a:p.add('https://github.com/junegunn/gv.vim')
-  call a:p.add('https://github.com/lewis6991/gitsigns.nvim')
-  call a:p.add('https://github.com/tpope/vim-fugitive')
-  " My Plugins
-  call a:p.add('https://github.com/pappasam/nvim-repl')
-  call a:p.add('https://github.com/pappasam/papercolor-theme-slim')
-  call a:p.add('https://github.com/pappasam/vim-filetype-formatter')
-  call a:p.add('https://github.com/pappasam/vim-keywordprg-commands')
-  " Miscellaneous
-  call a:p.add('https://github.com/pteroctopus/faster.nvim')
-  call a:p.add('https://github.com/HiPhish/info.vim')
-  call a:p.add('https://github.com/HiPhish/jinja.vim')
-  call a:p.add('https://github.com/catgoose/nvim-colorizer.lua')
-  call a:p.add('https://github.com/chrishrb/gx.nvim')
-  call a:p.add('https://github.com/fidian/hexmode')
-  call a:p.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call a:p.add('https://github.com/lukas-reineke/indent-blankline.nvim.git')
-  call a:p.add('https://github.com/machakann/vim-sandwich')
-  call a:p.add('https://github.com/sotte/presenting.nvim.git')
-  call a:p.add('https://github.com/windwp/nvim-autopairs')
-endfunction
 
 " }}}
 " Settings {{{
