@@ -212,9 +212,7 @@ require('packager').setup(function(packager)
       })
   end})
   packager.add('sonph/onehalf', {rtp = 'vim/'})
-end, {
-    window_cmd = 'edit'}
-})
+end)
 ```
 
 and run `PackagerInstall` or `PackagerUpdate`. See all available commands [here](#commands)
