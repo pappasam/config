@@ -333,6 +333,7 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
     },
   },
   heading = {
+    position = "inline",
     backgrounds = {
       "pcsHtmlHeader1",
       "pcsHtmlHeader2",
