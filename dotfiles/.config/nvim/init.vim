@@ -102,7 +102,7 @@ digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
 set cursorline cursorlineopt=number
-set diffopt+=algorithm:histogram,indent-heuristic,vertical
+set diffopt+=algorithm:histogram,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
@@ -226,9 +226,10 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/MeanderingProgrammer/render-markdown.nvim
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
+nnoremap <Leader>gd <Cmd>Gitsigns diffthis<CR>
 nnoremap <Leader>gg <Cmd>Gitsigns toggle_linehl<CR>
 nnoremap <Leader>gp <Cmd>Gitsigns preview_hunk_inline<CR>
-nnoremap <Leader>gd <Cmd>Gitsigns diffthis<CR>
+nnoremap <Leader>gr <Cmd>Gitsigns reset_hunk<CR>
 
 " }}}
 " Commands {{{
