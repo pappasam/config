@@ -1,4 +1,17 @@
 lua vim.loader.enable() -- speed up lua load times (experimental)
+" Highlights {{{
+
+function s:papercolor_slim()
+  highlight link diffAdded DiffAdd
+  highlight link diffRemoved DiffDelete
+endfunction
+
+function s:papercolor_slim_light()
+  highlight link diffAdded DiffAdd
+  highlight link diffRemoved DiffDelete
+endfunction
+
+" }}}
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
@@ -59,12 +72,8 @@ augroup end
 
 augroup colorscheme_overrides_custom
   autocmd!
-  autocmd ColorScheme PaperColorSlim,PaperColorSlimLight
-        \ highlight link diffAdded DiffAdd |
-        \ highlight link diffRemoved DiffDelete |
-        \ highlight GitSignsAddInline gui=underdouble |
-        \ highlight GitSignsDeleteInline gui=underdouble |
-        \ highlight GitSignsChangeInline gui=underdouble
+  autocmd ColorScheme PaperColorSlim call s:papercolor_slim()
+  autocmd ColorScheme PaperColorSlimLight call s:papercolor_slim_light()
 augroup end
 
 augroup miscellaneous_custom
@@ -217,7 +226,7 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/MeanderingProgrammer/render-markdown.nvim
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
-nnoremap <Leader>gg <Cmd>Gitsigns toggle_linehl<CR><Cmd>Gitsigns toggle_word_diff<CR>
+nnoremap <Leader>gg <Cmd>Gitsigns toggle_linehl<CR>
 nnoremap <Leader>gp <Cmd>Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>gd <Cmd>Gitsigns diffthis<CR>
 
