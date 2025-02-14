@@ -127,6 +127,7 @@ alias d='cd'
 alias f='nvim'
 alias v='nvim -c "cd ~/.config/nvim" ~/.config/nvim/init.vim'
 alias l='nvim -c "cd ~/.config/nvim" ~/.config/nvim/lua/packages.lua'
+alias k3='cd ~/src/KeplerGroup/KIP-3-MVP'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
 
 # Git
