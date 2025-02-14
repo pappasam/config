@@ -29,6 +29,7 @@ require("packager").setup(function(p)
   p.add("https://github.com/junegunn/gv.vim")
   p.add("https://github.com/lewis6991/gitsigns.nvim")
   p.add("https://github.com/tpope/vim-fugitive")
+  p.add("https://github.com/sindrets/diffview.nvim")
   -- My Plugins
   p.add("https://github.com/pappasam/nvim-repl")
   p.add("https://github.com/pappasam/papercolor-theme-slim")
@@ -392,6 +393,21 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
   },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
+}) -- }}}
+require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
+  enhanced_diff_hl = true,
+  show_help_hints = false,
+  file_panel = {
+    listing_style = "tree",
+    win_config = {
+      width = 30,
+    },
+  },
+  hooks = {
+    diff_buf_read = function(_)
+      vim.opt_local.wrap = false
+    end,
+  },
 }) -- }}}
 require("faster").setup({ -- https://github.com/pteroctopus/faster.nvim {{{
 }) -- }}}
