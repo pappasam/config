@@ -4,11 +4,17 @@ lua vim.loader.enable() -- speed up lua load times (experimental)
 function s:papercolor_slim()
   highlight link diffAdded DiffAdd
   highlight link diffRemoved DiffDelete
+  highlight link GitSignsAddInline GitSignsAdd
+  highlight link GitSignsDeleteInline GitSignsDelete
+  highlight link GitSignsChangeInline GitSignsChange
 endfunction
 
 function s:papercolor_slim_light()
   highlight link diffAdded DiffAdd
   highlight link diffRemoved DiffDelete
+  highlight link GitSignsAddInline GitSignsAdd
+  highlight link GitSignsDeleteInline GitSignsDelete
+  highlight link GitSignsChangeInline GitSignsChange
 endfunction
 
 " }}}
@@ -227,7 +233,7 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
 nnoremap <Leader>gd <Cmd>Gitsigns diffthis<CR>
-nnoremap <Leader>gg <Cmd>Gitsigns toggle_linehl<CR>
+nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <Leader>gp <Cmd>Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>gr <Cmd>Gitsigns reset_hunk<CR>
 
