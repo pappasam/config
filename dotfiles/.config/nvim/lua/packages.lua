@@ -543,6 +543,10 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
 require("avante_lib").load()
 require("avante").setup({
   provider = vim.env.AVANTE_PROVIDER or "claude",
+  windows = {
+    width = 40, -- % based on available width
+  },
+  hints = { enabled = false },
   bedrock = { -- configuration if using bedrock
     model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
   },
