@@ -396,6 +396,11 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
       return 0
     end,
   },
+  cmdline = {
+    keymap = {
+      preset = "super-tab",
+    },
+  },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
 }) -- }}}
