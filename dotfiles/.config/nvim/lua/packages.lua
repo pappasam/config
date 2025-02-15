@@ -388,9 +388,6 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
-  sources = {
-    cmdline = {}, -- disables cmdline completions
-  },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
 }) -- }}}
