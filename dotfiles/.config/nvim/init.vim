@@ -263,6 +263,27 @@ command! Wa wa
 command! Wq wq
 command! Wqa wqa
 
+command! C call s:color()
+function! s:color()
+  tabe
+  tcd ~/.config/nvim/pack/packager/start/papercolor-theme-slim
+  edit ./colors/PaperColorSlim.vim
+  set cursorlineopt=both
+  vsplit
+  edit ./colors/PaperColorSlimLight.vim
+  wincmd h
+endfunction
+
+command! CS call s:color_sync()
+function! s:color_sync() " 'scrollbind' does not work with colorizer
+  let current_win = winnr()
+  execute 'windo ' .. line('.')
+  windo normal! z.
+  redraw
+  execute current_win .. 'wincmd w'
+  ColorizerReloadAllBuffers
+endfunction
+
 command! ReadOnly call s:readonly()
 function! s:readonly()
   if !get(b:, 'readonly', 0)
