@@ -401,12 +401,6 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
       range = "full",
     },
   },
-  cmdline = {
-    keymap = {
-      preset = "default",
-      ["<Tab>"] = { "show", "select_and_accept", "fallback" },
-    },
-  },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
 }) -- }}}
