@@ -242,18 +242,19 @@ command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 command! -nargs=? BedrockKeys lua require('bedrock_keys').set_bedrock_keys(<q-args> ~= "" and <q-args> or nil)
-command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! ConcealDisable set conceallevel=0 concealcursor=
+command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! GH Telescope git_commits
 command! Gh Telescope git_commits
 command! Gm Git commit
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
 command! Gmv Git commit --verbose
+command! P PackagerClean | PackagerUpdate
 command! R ReplToggle
+command! RA ReplAttach
 command! Re ReplToggle
 command! Rep ReplToggle
-command! RA ReplAttach
 command! W w
 command! WA wa
 command! WQ wq
