@@ -388,18 +388,13 @@ require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
-  sources = {
-    min_keyword_length = function(ctx)
-      if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
-        return 3 -- so it doesn't show up for wq
-      end
-      return 0
-    end,
-  },
   completion = {
     keyword = {
       range = "full",
     },
+  },
+  cmdline = {
+    enabled = false,
   },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
