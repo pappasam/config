@@ -195,6 +195,7 @@ nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
+xnoremap <Leader>ac :AiderCopy<CR>
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
@@ -483,6 +484,19 @@ function! s:set_quickfix_mappings()
   nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
   nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
   nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
+endfunction
+
+command! -range AiderCopy call s:aider_copy()
+function! s:aider_copy() range
+  let [line_start, _] = getpos("'<")[1:2]
+  let [line_end, _] = getpos("'>")[1:2]
+  let path = expand('%:.')
+  let header = printf("SOURCE: %s\nLINES: %d-%d\n---\n", path, line_start, line_end)
+  let old_reg = getreg('"')
+  let old_regtype = getregtype('"')
+  normal! gvy
+  let @+ = header .. @"
+  call setreg('"', old_reg, old_regtype)
 endfunction
 
 " }}}
