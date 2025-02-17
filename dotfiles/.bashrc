@@ -140,6 +140,7 @@ alias gma='git add . && git commit'
 alias gmav='git add . && git commit --verbose'
 alias ghastatus="gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' /orgs/keplergroup/actions/runners | jq -C '.runners[] | select(.status == \"online\") | {name, busy}'"
 alias gop='gh browse'
+alias aignore='echo ".aider.*" >> .git/info/exclude'
 
 # General
 alias gn='gio open'
