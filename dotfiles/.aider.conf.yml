@@ -1,0 +1,21 @@
+# https://aider.chat/docs/config/aider_conf.html
+
+# Behavior
+suggest-shell-commands: false
+watch-files: true
+
+# Git
+gitignore: false
+auto-commits: false
+dirty-commits: false
+
+# Theme
+code-theme: monokai
+user-input-color: "#d7af5f"
+tool-output-color: "#d0d0d0"
+tool-error-color: "#ff8080"
+tool-warning-color: "#afd700"
+assistant-output-color: "#d0d0d0"
+completion-menu-color: "#d0d0d0"
+completion-menu-bg-color: "#303030"
+completion-menu-current-color: "#585858"
