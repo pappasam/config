@@ -8,6 +8,7 @@ watch-files: true
 suggest-shell-commands: true
 cache-prompts: true
 stream: false # necessary when caching prompts
+read: ["CONVENTIONS.md"]
 
 # Git
 gitignore: false
