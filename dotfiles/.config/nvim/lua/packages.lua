@@ -60,6 +60,7 @@ end, {
 -- :help diagnostic.txt
 
 local language_servers = {
+  basedpyright = {},
   bashls = {},
   cssls = {},
   dockerls = {},
@@ -132,7 +133,6 @@ local language_servers = {
   mdx_analyzer = {},
   nginx_language_server = {},
   prismals = {},
-  pyright = {},
   r_language_server = {},
   rust_analyzer = {},
   svelte = {},
