@@ -491,7 +491,7 @@ function! s:aider_copy() range
   let [line_start, _] = getpos("'<")[1:2]
   let [line_end, _] = getpos("'>")[1:2]
   let path = expand('%:.')
-  let header = printf("SOURCE: %s\nLINES: %d-%d\n---\n", path, line_start, line_end)
+  let header = printf("\nSOURCE: %s\nLINES: %d-%d\n---\n", path, line_start, line_end)
   let old_reg = getreg('"')
   let old_regtype = getregtype('"')
   normal! gvy

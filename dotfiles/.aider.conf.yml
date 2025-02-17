@@ -5,7 +5,7 @@ model: claude-3-5-sonnet-20241022
 
 # Behavior
 watch-files: true
-multiline: true
+multiline: false
 suggest-shell-commands: true
 cache-prompts: true
 stream: false # necessary when caching prompts
