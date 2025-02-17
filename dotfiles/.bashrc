@@ -214,6 +214,13 @@ function gdl() {
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
 }
 
+function gg() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+    return 1
+  fi
+  nvim -c 'G' -c 'only'
+}
+
 function gd() {
   if test -f "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
     if grep -q "light" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
@@ -224,6 +231,15 @@ function gd() {
   else
     git diff "$@" | delta --dark
   fi
+}
+
+function gdd() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+    return 1
+  elif git diff --no-ext-diff --quiet --exit-code; then
+    return
+  fi
+  nvim -c 'DiffviewOpen' -c 'tabonly'
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
