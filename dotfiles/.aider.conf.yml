@@ -4,10 +4,10 @@
 model: claude-3-5-sonnet-20241022
 
 # Behavior
-suggest-shell-commands: false
+watch-files: true
+suggest-shell-commands: true
 cache-prompts: true
 stream: false # necessary when caching prompts
-watch-files: true
 
 # Git
 gitignore: false
