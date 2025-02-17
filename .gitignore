@@ -5,3 +5,4 @@
 dotfiles/.config/nvim/doc/tags
 .aider.chat.*
 .aider.tags.*
+.aider.input.*
