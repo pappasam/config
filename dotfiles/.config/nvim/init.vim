@@ -164,7 +164,6 @@ let g:repl_filetype_commands = #{
       \ }
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
-let g:mkdp_filetypes = ['markdown', 'Avante']
 
 " }}}
 " Mappings {{{
@@ -241,7 +240,6 @@ nnoremap <Leader>gr <Cmd>Gitsigns reset_hunk<CR>
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
-command! -nargs=? BedrockKeys lua require('bedrock_keys').set_bedrock_keys(<q-args> ~= "" and <q-args> or nil)
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! GH Telescope git_commits
@@ -432,8 +430,6 @@ endfunction
 command! Preview call s:preview()
 function! s:preview()
   if &filetype ==? 'markdown' " https://github.com/iamcco/markdown-preview.nvim
-    silent! MarkdownPreview
-  elseif &filetype ==? 'Avante' " https://github.com/iamcco/markdown-preview.nvim
     silent! MarkdownPreview
   else
     echohl WarningMsg | echom ':Preview not supported for this filetype' | echohl None

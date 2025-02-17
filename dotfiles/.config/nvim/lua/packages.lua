@@ -5,12 +5,6 @@ require("packager").setup(function(p)
   p.add("https://github.com/neovim/nvim-lspconfig")
   p.add("https://github.com/stevearc/aerial.nvim")
   p.add("https://github.com/j-hui/fidget.nvim.git")
-  -- AI
-  p.add("https://github.com/yetone/avante.nvim", { ["do"] = "make" })
-  p.add("https://github.com/stevearc/dressing.nvim")
-  p.add("https://github.com/nvim-lua/plenary.nvim")
-  p.add("https://github.com/MunifTanjim/nui.nvim")
-  p.add("https://github.com/MeanderingProgrammer/render-markdown.nvim")
   -- Autocompletion
   p.add(
     "https://github.com/Saghen/blink.cmp",
@@ -36,12 +30,14 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/vim-filetype-formatter")
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
   -- Miscellaneous
+  p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/pteroctopus/faster.nvim")
   p.add("https://github.com/HiPhish/info.vim")
   p.add("https://github.com/HiPhish/jinja.vim")
   p.add("https://github.com/catgoose/nvim-colorizer.lua")
   p.add("https://github.com/chrishrb/gx.nvim")
   p.add("https://github.com/fidian/hexmode")
+  p.add("https://github.com/MeanderingProgrammer/render-markdown.nvim")
   p.add(
     "https://github.com/iamcco/markdown-preview.nvim",
     { ["do"] = "cd app & yarn install" }
@@ -559,18 +555,3 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
     prompt_prefix = " ",
   },
 }) -- }}}
--- AI (Avante): {{{ -- https://github.com/yetone/avante.nvim
-
-require("avante_lib").load()
-require("avante").setup({
-  provider = vim.env.AVANTE_PROVIDER or "claude",
-  windows = {
-    width = 40, -- % based on available width
-  },
-  hints = { enabled = false },
-  bedrock = { -- configuration if using bedrock
-    model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-  },
-})
-
--- }}}
