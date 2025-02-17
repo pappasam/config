@@ -1,5 +1,8 @@
 # https://aider.chat/docs/config/aider_conf.html
 
+# Default Model
+model: claude-3-5-sonnet-20241022
+
 # Behavior
 suggest-shell-commands: false
 watch-files: true
