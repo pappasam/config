@@ -2,11 +2,10 @@
 
 set -euo pipefail
 
-mkdir -p "$(dirname "$ALACRITTY_BACKGROUND_CACHE_FILE")"
-touch "$ALACRITTY_BACKGROUND_CACHE_FILE"
-ALACRITTY_BACKGROUND_LIGHT='general.import = ["~/.config/alacritty/papercolor_light.toml"]'
-if grep -Fxq "$ALACRITTY_BACKGROUND_LIGHT" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
-  echo '' >"$ALACRITTY_BACKGROUND_CACHE_FILE"
+if grep -q -F "include PaperColor Dark.conf" ~/config/dotfiles/.config/kitty/kitty.conf; then
+  sed -i 's/include PaperColor Dark\.conf/include PaperColor Light.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
+  sed -i 's/colorscheme PaperColorSlim/colorscheme PaperColorSlimLight/' ~/config/dotfiles/.config/nvim/init.vim
 else
-  echo "$ALACRITTY_BACKGROUND_LIGHT" >"$ALACRITTY_BACKGROUND_CACHE_FILE"
+  sed -i 's/include PaperColor Light\.conf/include PaperColor Dark.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
+  sed -i 's/colorscheme PaperColorSlimLight/colorscheme PaperColorSlim/' ~/config/dotfiles/.config/nvim/init.vim
 fi
