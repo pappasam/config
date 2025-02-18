@@ -1,4 +1,4 @@
-# ⚙ System Configuration
+# System Configuration
 
 [Samuel Roeca]'s notes / scripts / [dotfiles] to configure the latest "Long Term Support" version of [Ubuntu].
 
