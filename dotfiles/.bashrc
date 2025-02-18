@@ -129,6 +129,7 @@ alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nv
 
 # Git
 alias g='git status'
+alias gd='git diff'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gp='git remote prune origin && git remote set-head origin -a'
@@ -222,18 +223,6 @@ function gg() {
     return 1
   fi
   nvim -c 'G' -c 'only'
-}
-
-function gd() {
-  if test -f "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
-    if grep -q "light" "$ALACRITTY_BACKGROUND_CACHE_FILE"; then
-      git diff "$@" | delta --light
-    else
-      git diff "$@" | delta --dark
-    fi
-  else
-    git diff "$@" | delta --dark
-  fi
 }
 
 function gdd() {
