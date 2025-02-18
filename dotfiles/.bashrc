@@ -142,6 +142,9 @@ alias ghastatus="gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Ap
 alias gop='gh browse'
 alias aignore='echo ".aider.*" >> .git/info/exclude'
 
+# Kitten
+alias icat="kitten icat"
+
 # General
 alias gn='gio open'
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
