@@ -93,11 +93,7 @@ augroup end
 " }}}
 " Settings {{{
 
-if &background == 'light'
-  colorscheme PaperColorSlimLight
-else
-  colorscheme PaperColorSlim
-endif
+colorscheme PaperColorSlim
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
