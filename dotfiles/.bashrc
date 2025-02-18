@@ -460,20 +460,11 @@ function upgrade() {
   sudo apt autoremove -y
   sudo snap refresh
   rustup update
-  pushd .
-  cd ~/src/lib/alacritty || return
-  git fetch origin
-  if [[ $(git diff origin/master) ]]; then
-    git merge origin/master
-    alacritty-install
-  else
-    echo 'No Alacritty updates, skipping build...'
-  fi
-  popd || return
   mise self-update -y
   mise upgrade -y
   mise install -y
   uv self update
+  kitty-install
 }
 
 # }}}
