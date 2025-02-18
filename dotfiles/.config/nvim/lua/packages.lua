@@ -560,6 +560,6 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
 }) -- }}}
 require("kitty-scrollback").setup({ -- https://github.com/mikesmithgh/kitty-scrollback.nvim {{{
 }) -- }}}
-require("image").setup({ -- https://github.com/3rd/image.nvim
+require("image").setup({ -- https://github.com/3rd/image.nvim {{{
   processor = "magick_cli",
 }) -- }}}
