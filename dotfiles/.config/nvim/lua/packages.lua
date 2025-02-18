@@ -31,6 +31,7 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
   -- Miscellaneous
   p.add("https://github.com/nvim-lua/plenary.nvim")
+  p.add("https://github.com/3rd/image.nvim")
   p.add("https://github.com/fladson/vim-kitty")
   p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
   p.add("https://github.com/pteroctopus/faster.nvim")
@@ -558,4 +559,7 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
   },
 }) -- }}}
 require("kitty-scrollback").setup({ -- https://github.com/mikesmithgh/kitty-scrollback.nvim {{{
+}) -- }}}
+require("image").setup({ -- https://github.com/3rd/image.nvim
+  processor = "magick_cli",
 }) -- }}}
