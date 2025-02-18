@@ -1,4 +1,5 @@
 -- background
+-- NOTE: not currently used
 
 local function alacritty_background_setter(filepath)
   local file = io.open(filepath, "r")

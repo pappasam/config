@@ -1,23 +1,4 @@
 lua vim.loader.enable() -- speed up lua load times (experimental)
-" Highlights {{{
-
-function s:papercolor_slim()
-  highlight link diffAdded DiffAdd
-  highlight link diffRemoved DiffDelete
-  highlight link GitSignsAddInline GitSignsAdd
-  highlight link GitSignsDeleteInline GitSignsDelete
-  highlight link GitSignsChangeInline GitSignsChange
-endfunction
-
-function s:papercolor_slim_light()
-  highlight link diffAdded DiffAdd
-  highlight link diffRemoved DiffDelete
-  highlight link GitSignsAddInline GitSignsAdd
-  highlight link GitSignsDeleteInline GitSignsDelete
-  highlight link GitSignsChangeInline GitSignsChange
-endfunction
-
-" }}}
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
@@ -76,6 +57,22 @@ augroup filetype_custom
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
 
+function s:papercolor_slim()
+  highlight link diffAdded DiffAdd
+  highlight link diffRemoved DiffDelete
+  highlight link GitSignsAddInline GitSignsAdd
+  highlight link GitSignsDeleteInline GitSignsDelete
+  highlight link GitSignsChangeInline GitSignsChange
+endfunction
+
+function s:papercolor_slim_light()
+  highlight link diffAdded DiffAdd
+  highlight link diffRemoved DiffDelete
+  highlight link GitSignsAddInline GitSignsAdd
+  highlight link GitSignsDeleteInline GitSignsDelete
+  highlight link GitSignsChangeInline GitSignsChange
+endfunction
+
 augroup colorscheme_overrides_custom
   autocmd!
   autocmd ColorScheme PaperColorSlim call s:papercolor_slim()
@@ -96,14 +93,9 @@ augroup end
 " }}}
 " Settings {{{
 
-lua require("options") -- ~/.config/nvim/lua/options.lua
+colorscheme PaperColorSlim
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
-if &background == 'dark'
-  colorscheme PaperColorSlim
-else
-  colorscheme PaperColorSlimLight
-endif
 digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
