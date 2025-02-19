@@ -228,10 +228,20 @@ function gg() {
 function gdd() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
-  elif git diff --no-ext-diff --quiet --exit-code; then
-    return
   fi
-  nvim -c 'DiffviewOpen' -c 'tabonly'
+  if [ $# -eq 0 ]; then
+    if git diff --no-ext-diff --quiet --exit-code; then
+      return
+    else
+      nvim -c 'DiffviewOpen' -c 'tabonly'
+    fi
+  else
+    if git diff "$1" --no-ext-diff --quiet --exit-code; then
+      return
+    else
+      nvim -c "DiffviewOpen $1" -c 'tabonly'
+    fi
+  fi
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
