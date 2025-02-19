@@ -6,8 +6,7 @@ This section of the README describes useful programs you will need to install - 
 
 ### Fonts
 
-Download relevant nerd fonts from here: <https://www.nerdfonts.com/font-downloads>
+Download a relevant font, place in `~/src/lib/fonts`, and unzip. My favorite at the moment: <https://github.com/theleagueof/league-mono>
 
-1. Download a Nerd Font (I recommend `FiraMono Nerd Font` as of 2023-09-28).
-2. Unzip and copy to `~/.local/share/fonts`. In the past, this was `~/.fonts` and `~/.fontconfig`.
-3. Optionally, run the command `fc-cache -fv` to manually rebuild the font cache.
+1. Copy relevant font files to `~/.local/share/fonts`. Prefer variable fonts, and use TTF (termina-supported fonts).
+2. Run `fc-cache -fv`.
