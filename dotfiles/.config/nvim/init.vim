@@ -1,4 +1,3 @@
-lua vim.loader.enable() -- speed up lua load times (experimental)
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
@@ -97,6 +96,7 @@ colorscheme PaperColorSlim
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
+lua vim.loader.enable() -- speed up lua load times (experimental)
 set cmdheight=2
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
 set cursorline cursorlineopt=number
