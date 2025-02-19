@@ -305,10 +305,6 @@ function va() {
 }
 
 function promptcmd() { # PROMPT_COMMAND=promptcmd
-  # Sets terminal title to full pwd (with ~ for $HOME) using \e]0; to start title and \a to end it
-  # print -Pn "\e]0;%~\a"
-  # Sets terminal title to last 2 dirs of pwd (with ~ for $HOME) using \e]0; to start title and \a to end it
-  print -Pn "\e]0;%2~\a"
   auto_venv_precmd
 }
 

@@ -32,8 +32,18 @@ setopt PROMPT_SUBST
 setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
-function chpwd() { ls; } # zsh hook
-function precmd() { eval "$PROMPT_COMMAND"; } # zsh hook
+function chpwd() { # zsh hook
+  ls
+  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
+  printf "\033]0;%s\007" "$dir"
+}
+function precmd() { # zsh hook
+  eval "$PROMPT_COMMAND";
+}
+function preexec() { # zsh hook
+  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
+  printf "\033]0;%s ($1)\007" "$dir"
+}
 autoload zcalc # enables zshell calculator: type with zcalc
 autoload compinit
 # BEGIN: https://gist.github.com/ctechols/ca1035271ad134841284
