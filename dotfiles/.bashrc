@@ -21,7 +21,7 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=79
 export MESA_DEBUG=silent # silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
 export PAGER='less -R'
-export PROMPT_COMMAND='auto_venv_precmd'                         # commands to execute before a bash prompt.
+export PROMPT_COMMAND='promptcmd'                                # commands to execute before a bash prompt.
 export PYTHON_CONFIGURE_OPTS='--enable-shared'                   # For installing R through ASDF, need shared libraries in Python and R
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
 export SAVEHIST=5000                                             # how many lines of history to save to disk
@@ -292,6 +292,14 @@ function va() {
   if command -v deactivate >/dev/null; then
     deactivate
   fi
+}
+
+function promptcmd() { # PROMPT_COMMAND=promptcmd
+  # Sets terminal title to full pwd (with ~ for $HOME) using \e]0; to start title and \a to end it
+  # print -Pn "\e]0;%~\a"
+  # Sets terminal title to last 2 dirs of pwd (with ~ for $HOME) using \e]0; to start title and \a to end it
+  print -Pn "\e]0;%2~\a"
+  auto_venv_precmd
 }
 
 export AUTO_VIRTUALENV=1
