@@ -29,6 +29,7 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/papercolor-theme-slim")
   p.add("https://github.com/pappasam/vim-filetype-formatter")
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
+  p.add("https://github.com/pappasam/aider.nvim", { branch = "code-fixes" })
   -- Miscellaneous
   p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/fladson/vim-kitty")
