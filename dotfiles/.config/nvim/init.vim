@@ -222,10 +222,9 @@ nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/MeanderingProgrammer/render-markdown.nvim
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
-nnoremap <Leader>gd <Cmd>Gitsigns diffthis<CR>
 nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
-nnoremap <Leader>gp <Cmd>Gitsigns preview_hunk_inline<CR>
-nnoremap <Leader>gr <Cmd>Gitsigns reset_hunk<CR>
+nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
+nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 
 " }}}
 " Commands {{{
