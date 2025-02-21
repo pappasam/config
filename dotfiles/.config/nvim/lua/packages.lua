@@ -133,6 +133,7 @@ local language_servers = {
   prismals = {},
   r_language_server = {},
   rust_analyzer = {},
+  shopify_theme_ls = {},
   svelte = {},
   taplo = {},
   terraformls = {},
