@@ -225,23 +225,30 @@ function gg() {
   nvim -c 'G' -c 'only'
 }
 
+# Git diff: dirty files
 function gdd() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   fi
-  if [ $# -eq 0 ]; then
-    if git diff --no-ext-diff --quiet --exit-code; then
-      return
-    else
-      nvim -c 'DiffviewOpen' -c 'tabonly'
-    fi
+  nvim -c 'DiffviewOpen' -c 'tabonly'
+}
+
+# Git diff: pull request
+function gdp() {
+  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+    return 1
+  fi
+  if [[ $# -gt 0 ]]; then
+    branch_base="$1"
   else
-    if git diff "$1" --no-ext-diff --quiet --exit-code; then
-      return
-    else
-      nvim -c "DiffviewOpen $1" -c 'tabonly'
+    branch_base=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+    if [ -z "$branch_base" ]; then
+      echo 'Cannot connect to remote repo. Check internet connection...'
+      return 2
     fi
   fi
+  # GH uses ... diff: https://stackoverflow.com/a/71741156
+  nvim -c "DiffviewOpen $branch_base...HEAD" -c 'tabonly'
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
