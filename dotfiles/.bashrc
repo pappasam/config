@@ -133,6 +133,7 @@ alias gd='git diff'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gp='git remote prune origin && git remote set-head origin -a'
+alias p='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias pull='git pull'
 alias gm='git commit'
@@ -160,7 +161,7 @@ alias k3='cd ~/src/KeplerGroup/KIP-3-MVP'
 
 function c() { cd "$HOME/config/$1" || return; }
 function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
-function p() { cd "$HOME/src/pappasam/$1" || return; }
+function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
 function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
 
