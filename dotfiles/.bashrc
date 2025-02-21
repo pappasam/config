@@ -225,15 +225,27 @@ function gg() {
   nvim -c 'G' -c 'only'
 }
 
-# Git diff: dirty files
+# Git diff: pure diffs
 function gdd() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   fi
-  nvim -c 'DiffviewOpen' -c 'tabonly'
+  if [ $# -eq 0 ]; then
+    if git diff --no-ext-diff --quiet --exit-code; then
+      return
+    else
+      nvim -c 'DiffviewOpen' -c 'tabonly'
+    fi
+  else
+    if git diff "$1" --no-ext-diff --quiet --exit-code; then
+      return
+    else
+      nvim -c "DiffviewOpen $1" -c 'tabonly'
+    fi
+  fi
 }
 
-# Git diff: pull request
+# Git diff: gh pull request diff
 function gdp() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1

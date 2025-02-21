@@ -93,6 +93,7 @@ compdef _dircomp_vplug vplug
 compdef _directories d
 compdef _git_branches gdl
 compdef _git_branches gdd
+compdef _git_branches gdp
 compdef _info info
 compdef _make m
 compdef _vim f
