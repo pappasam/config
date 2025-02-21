@@ -58,7 +58,19 @@ end, {
 -- :help diagnostic.txt
 
 local language_servers = {
-  basedpyright = {},
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          diagnosticSeverityOverrides = {
+            reportUnusedCallResult = "none",
+            reportUnnecessaryIsInstance = "none",
+            reportUnannotatedClassAttribute = "none",
+          },
+        },
+      },
+    },
+  },
   bashls = {},
   cssls = {},
   dockerls = {},
