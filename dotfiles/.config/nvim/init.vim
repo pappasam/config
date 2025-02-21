@@ -230,6 +230,8 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " Commands {{{
 
 lua require('utils')
+command! AiderDiagnosticsFull lua AiderDiagnosticsFull()
+command! AiderDiagnostics lua AiderDiagnosticsCursor()
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
