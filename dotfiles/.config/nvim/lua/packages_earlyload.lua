@@ -1,0 +1,3 @@
+require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
+  image = { enabled = true },
+}) -- }}}

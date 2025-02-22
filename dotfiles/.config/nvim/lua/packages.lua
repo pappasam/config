@@ -19,6 +19,7 @@ require("packager").setup(function(p)
   -- Fuzzy Finder
   p.add("https://github.com/nvim-telescope/telescope.nvim")
   p.add("https://github.com/nvim-lua/plenary.nvim")
+  p.add("https://github.com/folke/snacks.nvim")
   -- Git
   p.add("https://github.com/junegunn/gv.vim")
   p.add("https://github.com/lewis6991/gitsigns.nvim")
