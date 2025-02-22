@@ -17,9 +17,8 @@ require("packager").setup(function(p)
   p.add("https://github.com/nvim-tree/nvim-tree.lua")
   p.add("https://github.com/nvim-tree/nvim-web-devicons")
   -- Fuzzy Finder
-  p.add("https://github.com/nvim-telescope/telescope.nvim")
-  p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/folke/snacks.nvim")
+  p.add("https://github.com/nvim-lua/plenary.nvim")
   -- Git
   p.add("https://github.com/junegunn/gv.vim")
   p.add("https://github.com/lewis6991/gitsigns.nvim")
@@ -553,26 +552,6 @@ require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
       echo
     ]])
   end,
-}) -- }}}
-require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim {{{
-  defaults = {
-    file_ignore_patterns = {
-      "^node_modules/",
-      "^%.git/",
-      "^%.venv/",
-    },
-    layout_strategy = "flex",
-    layout_config = {
-      height = 0.9,
-      width = 0.9,
-    },
-    mappings = {
-      i = {
-        ["<esc>"] = require("telescope.actions").close,
-      },
-    },
-    prompt_prefix = " ",
-  },
 }) -- }}}
 require("kitty-scrollback").setup({ -- https://github.com/mikesmithgh/kitty-scrollback.nvim {{{
 }) -- }}}

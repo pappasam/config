@@ -214,14 +214,14 @@ xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
-" https://github.com/nvim-telescope/telescope.nvim
-nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
-nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
-nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
-nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
-nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
-nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
-nnoremap z= <Cmd>Telescope spell_suggest<CR>
+" https://github.com/folke/snacks.nvim
+nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
+nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
+nnoremap <C-p><C-g> <Cmd>lua Snacks.picker.grep()<CR>
+nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
+nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
+nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
+nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
