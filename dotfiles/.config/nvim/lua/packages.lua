@@ -374,6 +374,9 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
     width = "block",
     border = "none",
   },
+  latex = {
+    enabled = false,
+  },
 }) -- }}}
 require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
   disable_netrw = true,
