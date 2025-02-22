@@ -178,10 +178,10 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
-nnoremap <Leader>ea <Cmd>edit ~/.config/alacritty/alacritty.toml<CR>
 nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>el <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>et <Cmd>edit ~/.config/tmux/tmux.conf<CR>
 nnoremap <Leader>ev <Cmd>edit ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>ez <Cmd>edit ~/.zshrc<CR>
