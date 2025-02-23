@@ -21,4 +21,5 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
     },
   },
   rename = { enabled = true },
+  words = { enabled = true },
 }) -- }}}
