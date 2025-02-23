@@ -4,7 +4,6 @@ require("packager").setup(function(p)
   -- Language Server (LSP)
   p.add("https://github.com/neovim/nvim-lspconfig")
   p.add("https://github.com/stevearc/aerial.nvim")
-  p.add("https://github.com/j-hui/fidget.nvim.git")
   -- Autocompletion
   p.add(
     "https://github.com/Saghen/blink.cmp",
@@ -215,6 +214,23 @@ vim.diagnostic.config({
   },
 })
 
+-- Notifications: snacks notifier
+vim.api.nvim_create_autocmd("LspProgress", {
+  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+  callback = function(ev)
+    local spinner =
+      { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    vim.notify(vim.lsp.status(), "info", {
+      id = "lsp_progress",
+      title = "LSP Progress",
+      opts = function(notif)
+        notif.icon = ev.data.params.value.kind == "end" and " "
+          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
+    })
+  end,
+})
+
 -- }}}
 -- Treesitter: https://github.com/nvim-treesitter/nvim-treesitter {{{
 -- :help treesitter.txt
@@ -401,11 +417,6 @@ require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
     diff_buf_read = function(_)
       vim.opt_local.wrap = false
     end,
-  },
-}) -- }}}
-require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
-  progress = {
-    suppress_on_insert = true,
   },
 }) -- }}}
 require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{

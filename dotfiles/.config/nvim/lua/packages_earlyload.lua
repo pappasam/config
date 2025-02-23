@@ -2,6 +2,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
   image = { enabled = true },
+  notifier = { enabled = true },
   picker = {
     enabled = true,
     exclude = {
@@ -13,4 +14,5 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
       "/instance/*",
     },
   },
+  rename = { enabled = true },
 }) -- }}}
