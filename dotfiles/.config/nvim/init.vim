@@ -236,6 +236,7 @@ command! AiderDiagnosticsCursor lua AiderDiagnosticsCursor()
 command! AiderDiagnosticsFull lua AiderDiagnosticsFull()
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
+command! LazyGit lua Snacks.lazygit()
 command! GH Telescope git_commits
 command! Gb lua Snacks.gitbrowse()
 command! Gh Telescope git_commits

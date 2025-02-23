@@ -8,6 +8,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
       enabled = false,
     },
   },
+  lazygit = { enabled = true },
   notifier = { enabled = true },
   picker = {
     enabled = true,
