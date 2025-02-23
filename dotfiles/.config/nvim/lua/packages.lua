@@ -40,7 +40,6 @@ require("packager").setup(function(p)
     "https://github.com/iamcco/markdown-preview.nvim",
     { ["do"] = "cd app & yarn install" }
   )
-  p.add("https://github.com/lukas-reineke/indent-blankline.nvim.git")
   p.add("https://github.com/machakann/vim-sandwich")
   p.add("https://github.com/sotte/presenting.nvim.git")
   p.add("https://github.com/windwp/nvim-autopairs")
@@ -496,14 +495,6 @@ require("gx").setup({ -- https://github.com/chrishrb/gx.nvim {{{
         end
       end,
     },
-  },
-}) -- }}}
-require("ibl").setup({ -- https://github.com/lukas-reineke/indent-blankline.nvim {{{
-  indent = {
-    char = "▏",
-  },
-  scope = {
-    enabled = false,
   },
 }) -- }}}
 require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs {{{

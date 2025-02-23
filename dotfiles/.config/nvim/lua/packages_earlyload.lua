@@ -2,6 +2,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
   image = { enabled = true },
+  indent = { enabled = true },
   notifier = { enabled = true },
   picker = {
     enabled = true,
