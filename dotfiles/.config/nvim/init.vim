@@ -185,7 +185,7 @@ nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
 nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/.config/kitty/kitty.conf<CR>
-nnoremap <Leader>el <Cmd>edit ~/.config/nvim/lua/packages.lua<CR>
+nnoremap <Leader>el <Cmd>tabe<CR><Cmd>edit ~/.config/nvim/lua/packages.lua<CR><Cmd>vsplit ~/.config/nvim/lua/packages_earlyload.lua<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>et <Cmd>edit ~/.config/tmux/tmux.conf<CR>
 nnoremap <Leader>ev <Cmd>edit ~/.config/nvim/init.vim<CR>
@@ -238,14 +238,15 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " Commands {{{
 
 lua require('utils')
-command! AiderDiagnosticsFull lua AiderDiagnosticsFull()
-command! AiderDiagnosticsCursor lua AiderDiagnosticsCursor()
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
+command! AiderDiagnosticsCursor lua AiderDiagnosticsCursor()
+command! AiderDiagnosticsFull lua AiderDiagnosticsFull()
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! GH Telescope git_commits
+command! Gb lua Snacks.gitbrowse()
 command! Gh Telescope git_commits
 command! Gm Git commit
 command! Gma Git add . | Git commit
