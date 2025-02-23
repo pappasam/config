@@ -216,11 +216,14 @@ vim.api.nvim_create_autocmd("LspProgress", {
   callback = function(ev)
     local spinner =
       { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    ---@diagnostic disable-next-line: param-type-mismatch
     vim.notify(vim.lsp.status(), "info", {
       id = "lsp_progress",
       title = "LSP Progress",
       opts = function(notif)
+        ---@diagnostic disable-next-line: param-type-mismatch
         notif.icon = ev.data.params.value.kind == "end" and " "
+          ---@diagnostic disable-next-line: undefined-field
           or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
       end,
     })

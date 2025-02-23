@@ -179,10 +179,8 @@ nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
 nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/.config/kitty/kitty.conf<CR>
-nnoremap <Leader>el <Cmd>tabe<CR><Cmd>edit ~/.config/nvim/lua/packages.lua<CR><Cmd>vsplit ~/.config/nvim/lua/packages_earlyload.lua<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
-nnoremap <Leader>et <Cmd>edit ~/.config/tmux/tmux.conf<CR>
-nnoremap <Leader>ev <Cmd>edit ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>ev <Cmd>call <SID>edit_neovim_config()<CR>
 nnoremap <Leader>ez <Cmd>edit ~/.zshrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
@@ -480,6 +478,14 @@ function! s:set_quickfix_mappings()
   nnoremap <buffer> <C-v> <Cmd>call <SID>quickfix_vsplit()<CR>
   nnoremap <buffer> <C-x> <Cmd>call <SID>quickfix_split()<CR>
   nnoremap <buffer> <C-t> <Cmd>call <SID>quickfix_tabedit()<CR>
+endfunction
+
+function! s:edit_neovim_config()
+  edit ~/.config/nvim/init.vim
+  tabe ~/.config/nvim/lua/packages.lua
+  vsplit ~/.config/nvim/lua/packages_earlyload.lua
+  wincmd h
+  tabprevious
 endfunction
 
 " }}}
