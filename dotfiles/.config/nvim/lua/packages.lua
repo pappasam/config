@@ -33,7 +33,6 @@ require("packager").setup(function(p)
   p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/fladson/vim-kitty")
   p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
-  p.add("https://github.com/pteroctopus/faster.nvim")
   p.add("https://github.com/HiPhish/info.vim")
   p.add("https://github.com/HiPhish/jinja.vim")
   p.add("https://github.com/catgoose/nvim-colorizer.lua")
@@ -427,8 +426,6 @@ require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
       vim.opt_local.wrap = false
     end,
   },
-}) -- }}}
-require("faster").setup({ -- https://github.com/pteroctopus/faster.nvim {{{
 }) -- }}}
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
   progress = {
