@@ -1,5 +1,16 @@
 require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
-  image = { enabled = true },
-  picker = { enabled = true },
+  explorer = { enabled = true },
   gitbrowse = { enabled = true },
+  image = { enabled = true },
+  picker = {
+    enabled = true,
+    exclude = {
+      "/__pycache__",
+    },
+    include = {
+      "/.github/*",
+      "/dotfiles/*",
+      "/instance/*",
+    },
+  },
 }) -- }}}

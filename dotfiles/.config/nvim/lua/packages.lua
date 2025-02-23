@@ -13,9 +13,6 @@ require("packager").setup(function(p)
   -- Tree Sitter
   p.add("https://github.com/nvim-treesitter/nvim-treesitter")
   p.add("https://github.com/tronikelis/ts-autotag.nvim")
-  -- Tree
-  p.add("https://github.com/nvim-tree/nvim-tree.lua")
-  p.add("https://github.com/nvim-tree/nvim-web-devicons")
   -- Fuzzy Finder
   p.add("https://github.com/folke/snacks.nvim")
   p.add("https://github.com/nvim-lua/plenary.nvim")
@@ -30,6 +27,7 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/vim-filetype-formatter")
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
   -- Miscellaneous
+  p.add("https://github.com/nvim-tree/nvim-web-devicons")
   p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/fladson/vim-kitty")
   p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
@@ -374,28 +372,6 @@ require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/re
   },
   latex = {
     enabled = false,
-  },
-}) -- }}}
-require("nvim-tree").setup({ -- https://github.com/kyazdani42/nvim-tree.lua {{{
-  disable_netrw = true,
-  filters = {
-    dotfiles = true,
-    custom = {
-      "/__pycache__",
-    },
-    exclude = {
-      "/.github",
-      "/dotfiles",
-      "/instance",
-    },
-  },
-  view = {
-    signcolumn = "no",
-  },
-  renderer = {
-    full_name = true,
-    symlink_destination = false,
-    root_folder_label = false,
   },
 }) -- }}}
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{

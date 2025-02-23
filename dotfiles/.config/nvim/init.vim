@@ -222,11 +222,10 @@ nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
 nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
 nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
 nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
+nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
-" https://github.com/kyazdani42/nvim-tree.lua
-nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/MeanderingProgrammer/render-markdown.nvim
 nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
