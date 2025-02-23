@@ -12,9 +12,6 @@ require("packager").setup(function(p)
   -- Tree Sitter
   p.add("https://github.com/nvim-treesitter/nvim-treesitter")
   p.add("https://github.com/tronikelis/ts-autotag.nvim")
-  -- Fuzzy Finder
-  p.add("https://github.com/folke/snacks.nvim")
-  p.add("https://github.com/nvim-lua/plenary.nvim")
   -- Git
   p.add("https://github.com/junegunn/gv.vim")
   p.add("https://github.com/lewis6991/gitsigns.nvim")
@@ -25,9 +22,9 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/papercolor-theme-slim")
   p.add("https://github.com/pappasam/vim-filetype-formatter")
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
-  -- Miscellaneous
+  -- Remainder
+  p.add("https://github.com/folke/snacks.nvim")
   p.add("https://github.com/nvim-tree/nvim-web-devicons")
-  p.add("https://github.com/nvim-lua/plenary.nvim")
   p.add("https://github.com/fladson/vim-kitty")
   p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
   p.add("https://github.com/HiPhish/info.vim")
