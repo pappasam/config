@@ -87,8 +87,8 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * TrimWhitespace
-  autocmd InsertEnter * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+
-  autocmd InsertLeave * setlocal listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
+  autocmd InsertEnter * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+
+  autocmd InsertLeave * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
   autocmd VimEnter * lua require('packages') -- ~/.config/nvim/lua/packages.lua
@@ -112,7 +112,7 @@ set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set history=10
 set isfname+=@-@,:
-set list listchars=tab:>\ ,lead:\ ,nbsp:+,trail:-
+set list listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
 set mouse=a
 set noshowcmd
 set noswapfile
