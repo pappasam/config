@@ -62,26 +62,20 @@ augroup filetype_custom
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
 
-function s:papercolor_slim()
+function s:papercolor_slim_linking()
   highlight link diffAdded DiffAdd
   highlight link diffRemoved DiffDelete
   highlight link GitSignsAddInline GitSignsAdd
   highlight link GitSignsDeleteInline GitSignsDelete
   highlight link GitSignsChangeInline GitSignsChange
-endfunction
-
-function s:papercolor_slim_light()
-  highlight link diffAdded DiffAdd
-  highlight link diffRemoved DiffDelete
-  highlight link GitSignsAddInline GitSignsAdd
-  highlight link GitSignsDeleteInline GitSignsDelete
-  highlight link GitSignsChangeInline GitSignsChange
+  highlight link SnacksPicker Normal
+  highlight link SnacksPickerBorder Normal
+  highlight link SnacksPickerInputBorder Normal
 endfunction
 
 augroup colorscheme_overrides_custom
   autocmd!
-  autocmd ColorScheme PaperColorSlim call s:papercolor_slim()
-  autocmd ColorScheme PaperColorSlimLight call s:papercolor_slim_light()
+  autocmd ColorScheme PaperColorSlim,PaperColorSlimLight call s:papercolor_slim_linking()
 augroup end
 
 augroup miscellaneous_custom
