@@ -54,6 +54,7 @@ local language_servers = {
     settings = {
       basedpyright = {
         analysis = {
+          diagnosticMode = "workspace",
           diagnosticSeverityOverrides = {
             reportUnusedCallResult = "none",
             reportUnnecessaryIsInstance = "none",
@@ -341,6 +342,32 @@ vim.treesitter.query.set(
 )
 
 -- }}}
+require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
+  explorer = { enabled = true },
+  gitbrowse = { enabled = true },
+  image = { enabled = true },
+  indent = {
+    enabled = true,
+    scope = {
+      enabled = false,
+    },
+  },
+  lazygit = { enabled = true },
+  notifier = { enabled = true },
+  picker = {
+    enabled = true,
+    exclude = {
+      "/__pycache__",
+    },
+    include = {
+      "/.github/*",
+      "/dotfiles/*",
+      "/instance/*",
+    },
+  },
+  rename = { enabled = true },
+  words = { enabled = true },
+}) -- }}}
 require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
   file_types = { "Avante", "markdown" },
   render_modes = true,

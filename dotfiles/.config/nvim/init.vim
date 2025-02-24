@@ -1,7 +1,7 @@
 " Preamble {{{
 
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
-lua require("packages_earlyload")
+lua require("packages")
 
 " }}}
 " Autocmds {{{
@@ -85,7 +85,6 @@ augroup miscellaneous_custom
   autocmd InsertLeave * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
-  autocmd VimEnter * lua require('packages') -- ~/.config/nvim/lua/packages.lua
   autocmd VimResized * ResizeAllTabs
 augroup end
 
@@ -484,7 +483,6 @@ endfunction
 function! s:edit_neovim_config()
   edit ~/.config/nvim/init.vim
   tabe ~/.config/nvim/lua/packages.lua
-  vsplit ~/.config/nvim/lua/packages_earlyload.lua
   wincmd h
   tabprevious
 endfunction
