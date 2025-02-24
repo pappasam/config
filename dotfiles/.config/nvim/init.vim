@@ -1,9 +1,3 @@
-" Preamble {{{
-
-lua vim.loader.enable(true) -- speed up lua load times (experimental)
-lua require("packages")
-
-" }}}
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
@@ -87,6 +81,12 @@ augroup miscellaneous_custom
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
   autocmd VimResized * ResizeAllTabs
 augroup end
+
+" }}}
+" LuaLoads {{{
+
+lua vim.loader.enable(true) -- speed up lua load times (experimental)
+lua require("packages")
 
 " }}}
 " Settings {{{
