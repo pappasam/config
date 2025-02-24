@@ -45,7 +45,7 @@ The following keyboard shortcuts and mappings make it easier to do things withou
   - Hardware
     - Switch monitor configurations: unassign `Super+P`
 - Custom
-  - Alacritty: `/usr/local/bin/alacritty`, `Ctrl+Alt+i`
+  - Kitty: `/home/sroeca/.local/bin/kitty`, `Ctrl+Alt+i`
   - Firefox: `firefox`, `Ctrl+Alt+b`
 
 ### Layouts
