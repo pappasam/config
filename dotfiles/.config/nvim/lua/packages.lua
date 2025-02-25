@@ -344,6 +344,17 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
       "/dotfiles/*",
       "/instance/*",
     },
+    sources = {
+      explorer = {
+        win = {
+          list = {
+            keys = {
+              ["o"] = "confirm",
+            },
+          },
+        },
+      },
+    },
   },
   rename = { enabled = true },
 }) -- }}}
