@@ -23,6 +23,7 @@ require("packager").setup(function(p)
   p.add("https://github.com/pappasam/vim-filetype-formatter")
   p.add("https://github.com/pappasam/vim-keywordprg-commands")
   -- Remainder
+  p.add("https://github.com/j-hui/fidget.nvim.git")
   p.add("https://github.com/folke/snacks.nvim")
   p.add("https://github.com/nvim-tree/nvim-web-devicons")
   p.add("https://github.com/fladson/vim-kitty")
@@ -210,26 +211,6 @@ vim.diagnostic.config({
   },
 })
 
--- Notifications: snacks notifier
-vim.api.nvim_create_autocmd("LspProgress", {
-  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-  callback = function(ev)
-    local spinner =
-      { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    ---@diagnostic disable-next-line: param-type-mismatch
-    vim.notify(vim.lsp.status(), "info", {
-      id = "lsp_progress",
-      title = "LSP Progress",
-      opts = function(notif)
-        ---@diagnostic disable-next-line: param-type-mismatch
-        notif.icon = ev.data.params.value.kind == "end" and " "
-          ---@diagnostic disable-next-line: undefined-field
-          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      end,
-    })
-  end,
-})
-
 -- }}}
 -- Treesitter: https://github.com/nvim-treesitter/nvim-treesitter {{{
 -- :help treesitter.txt
@@ -352,7 +333,6 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
     },
   },
   lazygit = { enabled = true },
-  notifier = { enabled = true },
   picker = {
     enabled = true,
     exclude = {
@@ -551,4 +531,9 @@ require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
   end,
 }) -- }}}
 require("kitty-scrollback").setup({ -- https://github.com/mikesmithgh/kitty-scrollback.nvim {{{
+}) -- }}}
+require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
+  progress = {
+    suppress_on_insert = true,
+  },
 }) -- }}}
