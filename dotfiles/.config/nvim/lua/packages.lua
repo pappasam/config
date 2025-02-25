@@ -54,7 +54,6 @@ local language_servers = {
     settings = {
       basedpyright = {
         analysis = {
-          diagnosticMode = "workspace",
           diagnosticSeverityOverrides = {
             reportUnusedCallResult = "none",
             reportUnnecessaryIsInstance = "none",
