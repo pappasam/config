@@ -1,6 +1,8 @@
 #!/bin/bash
 # Environment {{{
 
+# <https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md#option-3_the-safest-way>
+export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
 export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.toml"
 export TMUX_CONFIGURE_OPTIONS=--enable-sixel
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
