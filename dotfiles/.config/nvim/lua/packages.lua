@@ -365,7 +365,6 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
     },
   },
   rename = { enabled = true },
-  words = { enabled = true },
 }) -- }}}
 require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
   file_types = { "Avante", "markdown" },
