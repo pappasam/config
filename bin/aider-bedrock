@@ -2,7 +2,27 @@
 
 set -euo pipefail
 
-profile="${1:-default}"
+# Default profile
+profile="default"
+
+# Process arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --profile)
+    profile="$2"
+    shift 2
+    ;;
+  --profile=*)
+    profile="${1#*=}"
+    shift
+    ;;
+  *)
+    # Keep all other arguments for aider
+    break
+    ;;
+  esac
+done
+
 credentials="$(aws configure export-credentials --profile "$profile")"
 access_key=$(jq -r '.AccessKeyId' <<<"$credentials")
 secret_key=$(jq -r '.SecretAccessKey' <<<"$credentials")
@@ -14,4 +34,4 @@ AWS_REGION="$region" \
   AWS_SECRET_ACCESS_KEY="$secret_key" \
   AWS_SESSION_TOKEN="$session_token" \
   AWS_PROFILE="$profile" \
-  aider --no-gitignore --model=bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0
+  aider --no-gitignore --model=bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0 "$@"
