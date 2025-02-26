@@ -416,6 +416,11 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
   },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
+  filetypes = {
+    "css",
+    "typescriptreact",
+    "vim",
+  },
 }) -- }}}
 require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
   enhanced_diff_hl = true,
