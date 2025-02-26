@@ -481,8 +481,8 @@ function! s:set_quickfix_mappings()
 endfunction
 
 function! s:edit_neovim_config()
-  edit ~/.config/nvim/init.vim
-  tabe ~/.config/nvim/lua/packages.lua
+  edit  ~/.config/nvim/lua/packages.lua
+  tabe ~/.config/nvim/init.vim
   wincmd h
   tabprevious
 endfunction
