@@ -1,5 +1,5 @@
 ;; extends
 
-((comment) @aicomment
+((_) @aicomment
  (#match? @aicomment "AI[?!]")
  (#set! "priority" 128))
