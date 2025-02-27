@@ -56,9 +56,10 @@ local language_servers = {
       basedpyright = {
         analysis = {
           diagnosticSeverityOverrides = {
-            reportUnusedCallResult = "none",
-            reportUnnecessaryIsInstance = "none",
             reportUnannotatedClassAttribute = "none",
+            reportUninitializedInstanceVariable = "none",
+            reportUnnecessaryIsInstance = "none",
+            reportUnusedCallResult = "none",
           },
         },
       },
