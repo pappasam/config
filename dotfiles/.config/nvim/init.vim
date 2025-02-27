@@ -57,15 +57,16 @@ augroup filetype_custom
 augroup end
 
 function s:papercolor_slim_linking()
-  highlight link diffAdded DiffAdd
-  highlight link diffRemoved DiffDelete
+  highlight link @aicomment Todo
   highlight link GitSignsAddInline GitSignsAdd
-  highlight link GitSignsDeleteInline GitSignsDelete
   highlight link GitSignsChangeInline GitSignsChange
+  highlight link GitSignsDeleteInline GitSignsDelete
   highlight link SnacksPicker Normal
   highlight link SnacksPickerBorder Normal
   highlight link SnacksPickerInputBorder Normal
-  highlight link @aicomment Todo
+  highlight link SnacksPickerPathHidden Normal
+  highlight link diffAdded DiffAdd
+  highlight link diffRemoved DiffDelete
 endfunction
 
 augroup colorscheme_overrides_custom
