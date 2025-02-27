@@ -353,6 +353,9 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
           list = {
             keys = {
               ["o"] = "confirm",
+              ["<c-t>"] = "tab",
+              ["<c-x>"] = "edit_split",
+              ["<c-v>"] = "edit_vsplit",
             },
           },
         },
