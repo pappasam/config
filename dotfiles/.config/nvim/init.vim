@@ -65,6 +65,7 @@ function s:papercolor_slim_linking()
   highlight link SnacksPicker Normal
   highlight link SnacksPickerBorder Normal
   highlight link SnacksPickerInputBorder Normal
+  highlight link @aicomment Todo
 endfunction
 
 augroup colorscheme_overrides_custom

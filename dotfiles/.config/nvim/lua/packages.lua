@@ -323,6 +323,8 @@ vim.treesitter.query.set(
   '((comment) @injection.content (#set! injection.language "comment"))'
 )
 
+vim.api.nvim_set_hl(0, "@aicomment", { link = "Todo" })
+
 -- }}}
 require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   explorer = { enabled = true },
