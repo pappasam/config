@@ -1,5 +1,6 @@
 ;; extends
 
+; Begins or ends with AI? / AI! in comment
 ((_) @aicomment
- (#match? @aicomment "AI[?!]")
+ (#match? @aicomment "^[!@#$%^&*\/\-;]+[ \t]*AI[?!]|[ \t]+AI[?!]$")
  (#set! "priority" 128))
