@@ -229,12 +229,11 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " }}}
 " Commands {{{
 
-lua require('aider-custom')
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
-command! AiderDiagnosticsCursor lua AiderDiagnosticsCursor()
-command! AiderDiagnosticsFull lua AiderDiagnosticsFull()
+command! AiderDiagnosticsCursor lua require('aider-custom').diagnostics_cursor()
+command! AiderDiagnosticsFull lua require('aider-custom').diagnostics_full()
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! LazyGit lua Snacks.lazygit()
