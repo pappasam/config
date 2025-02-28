@@ -229,7 +229,7 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " }}}
 " Commands {{{
 
-lua require('utils')
+lua require('command-utils')
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
