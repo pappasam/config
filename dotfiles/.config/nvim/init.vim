@@ -432,6 +432,23 @@ function! s:preview()
   endif
 endfunction
 
+command! -range XmlEscape <line1>,<line2>call s:xml_escape()
+function! s:xml_escape() range
+  let save_reg = getreg('"')
+  let save_regtype = getregtype('"')
+  normal! gvy
+  let selected_text = getreg('"')
+  let selected_text = substitute(selected_text, '&', '\&amp;', 'g')
+  " ignore these for now: they show up in colorscheme
+  "let selected_text = substitute(selected_text, '<', '\&lt;', 'g')
+  "let selected_text = substitute(selected_text, '>', '\&gt;', 'g')
+  let selected_text = substitute(selected_text, '"', '\&quot;', 'g')
+  let selected_text = substitute(selected_text, "'", '\&apos;', 'g')
+  call setreg('"', selected_text, 'v')
+  normal! gvp
+  call setreg('"', save_reg, save_regtype)
+endfunction
+
 function! s:quickfix_vsplit()
   set lazyredraw
   try

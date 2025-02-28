@@ -442,9 +442,13 @@ function pyglobal-install() {
   pip install -U argcomplete && pydev-install
 }
 
-function global-install() {
-  perlglobal-install
-  pyglobal-install
+function nodeglobal-install() {
+  npm install -g \
+    prettier@latest \
+    prettier-plugin-jinja-template@latest \
+    prettier-plugin-prisma@latest \
+    prettier-plugin-svelte@latest \
+    @prettier/plugin-xml@latest
 }
 
 function kitty-install() {
@@ -456,24 +460,6 @@ function kitty-install() {
   sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
   sed -i "s|Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
   echo 'kitty.desktop' >~/.config/xdg-terminals.list
-}
-
-function alacritty-install() {
-  cargo build --release
-  # Install
-  sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
-  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-  sudo desktop-file-install extra/linux/Alacritty.desktop
-  sudo update-desktop-database
-  # terminfo
-  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-  # man page
-  sudo mkdir -p /usr/local/share/man/man1
-  sudo mkdir -p /usr/local/share/man/man5
-  scdoc <extra/man/alacritty.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty.1.gz >/dev/null
-  scdoc <extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz >/dev/null
-  scdoc <extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz >/dev/null
-  scdoc <extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz >/dev/null
 }
 
 function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
