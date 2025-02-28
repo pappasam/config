@@ -57,7 +57,7 @@ augroup filetype_custom
 augroup end
 
 function s:papercolor_slim_linking()
-  highlight link @aicomment Underlined
+  highlight link @aicomment DiagnosticInfo
   highlight link GitSignsAddInline GitSignsAdd
   highlight link GitSignsChangeInline GitSignsChange
   highlight link GitSignsDeleteInline GitSignsDelete

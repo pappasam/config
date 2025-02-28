@@ -352,6 +352,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
         win = {
           list = {
             keys = {
+              -- NOTE: pick_win triggered by <S-CR>
               ["o"] = "confirm",
               ["<c-t>"] = "tab",
               ["<c-x>"] = "edit_split",
