@@ -447,8 +447,7 @@ function nodeglobal-install() {
     prettier@latest \
     prettier-plugin-jinja-template@latest \
     prettier-plugin-prisma@latest \
-    prettier-plugin-svelte@latest \
-    @prettier/plugin-xml@latest
+    prettier-plugin-svelte@latest
 }
 
 function kitty-install() {
