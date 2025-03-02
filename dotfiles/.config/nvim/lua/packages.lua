@@ -51,6 +51,7 @@ end, {
 -- :help diagnostic.txt
 
 local language_servers = {
+  autotools_ls = {},
   basedpyright = {
     settings = {
       basedpyright = {
