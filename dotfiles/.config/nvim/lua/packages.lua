@@ -97,7 +97,6 @@ local language_servers = {
             "ENGLISH_WORD_REPEAT_RULE",
             "EN_QUOTES",
             "FILE_EXTENSIONS_CASE",
-            "HYPHEN_TO_EN",
             "MORFOLOGIK_RULE_EN_US",
             "PHRASE_REPETITION",
             "UPPERCASE_SENTENCE_START",
