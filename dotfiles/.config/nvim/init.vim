@@ -270,8 +270,8 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " Aider
-nnoremap <Leader>aa <Cmd>AiderDiagnosticsCursor<CR>
-nnoremap <Leader>af <Cmd>AiderDiagnosticsFull<CR>
+nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
+nnoremap <Leader>af <Cmd>lua require('aider-custom').diagnostics_full()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
@@ -307,14 +307,10 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
-command! AiderDiagnosticsCursor lua require('aider-custom').diagnostics_cursor()
-command! AiderDiagnosticsFull lua require('aider-custom').diagnostics_full()
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! LazyGit lua Snacks.lazygit()
-command! GH Telescope git_commits
 command! Gb lua Snacks.gitbrowse()
-command! Gh Telescope git_commits
 command! Gm Git commit
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
