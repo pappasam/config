@@ -3,6 +3,14 @@
 # Default Model
 model: claude-3-7-sonnet-20250219
 
+# AWS Settings
+set-env:
+  - AWS_REGION=us-east-1
+  - AWS_PROFILE=default
+
+alias:
+  - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+
 # Behavior
 watch-files: true
 multiline: false
