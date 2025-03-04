@@ -148,6 +148,9 @@ alias aignore='echo ".aider.*" >> .git/info/exclude'
 # Kitten
 alias icat="kitten icat"
 
+# Aider
+alias aider-kip="aider --no-show-model-warnings --model kip"
+
 # General
 alias gn='gio open'
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
