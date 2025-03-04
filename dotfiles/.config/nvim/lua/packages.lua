@@ -429,6 +429,7 @@ require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {
     "kitty",
     "typescriptreact",
     "vim",
+    "yaml",
   },
 }) -- }}}
 require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
