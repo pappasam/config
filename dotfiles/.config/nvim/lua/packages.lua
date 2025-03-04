@@ -426,6 +426,7 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
   filetypes = {
     "css",
+    "kitty",
     "typescriptreact",
     "vim",
   },
