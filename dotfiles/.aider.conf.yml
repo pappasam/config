@@ -15,8 +15,8 @@ alias:
 watch-files: true
 multiline: false
 suggest-shell-commands: true
-cache-prompts: true
-stream: false # necessary when caching prompts
+cache-prompts: false
+stream: true
 read: ["CONVENTIONS.md"]
 
 # Git
