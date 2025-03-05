@@ -149,6 +149,7 @@ endfunction
 augroup colorscheme_overrides_custom
   autocmd!
   autocmd ColorScheme PaperColorSlim,PaperColorSlimLight call s:papercolor_slim_linking()
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank({higroup="VisualNOS", timeout=200})
 augroup end
 
 augroup miscellaneous_custom
@@ -157,7 +158,6 @@ augroup miscellaneous_custom
   autocmd InsertEnter * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="VisualNOS", timeout=200}
   autocmd VimResized * ResizeAllTabs
 augroup end
 
