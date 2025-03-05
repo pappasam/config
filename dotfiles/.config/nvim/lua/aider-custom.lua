@@ -1,5 +1,39 @@
 local M = {}
 
+function M.add_current_buffer() -- Use kitty broadcast
+  local git_root =
+    vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+  if git_root == "" or vim.v.shell_error ~= 0 then
+    print("Aider: not in a git repository")
+    return
+  end
+  local full_path = vim.fn.expand("%:p")
+  local relative_path = full_path:sub(#git_root + 2) -- +2 to skip the trailing slash
+  local command = "/add " .. relative_path
+  vim.fn.system(
+    "kitten @ send-text --match-tab recent:1 "
+      .. vim.fn.shellescape(command .. "\r")
+  )
+  print("Aider: " .. command)
+end
+
+function M.drop_current_buffer() -- Use kitty broadcast
+  local git_root =
+    vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+  if git_root == "" or vim.v.shell_error ~= 0 then
+    print("Aider: not in a git repository")
+    return
+  end
+  local full_path = vim.fn.expand("%:p")
+  local relative_path = full_path:sub(#git_root + 2) -- +2 to skip the trailing slash
+  local command = "/drop " .. relative_path
+  vim.fn.system(
+    "kitten @ send-text --match-tab recent:1 "
+      .. vim.fn.shellescape(command .. "\r")
+  )
+  print("Aider: " .. command)
+end
+
 function M.diagnostics_full()
   local diagnostics = vim.diagnostic.get(0)
   local commentstring = vim.bo.commentstring
