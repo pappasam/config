@@ -61,7 +61,9 @@ function s:papercolor_slim_linking()
   highlight link SnacksPicker Normal
   highlight link SnacksPickerBorder Normal
   highlight link SnacksPickerInputBorder Normal
-  highlight link SnacksPickerPathHidden Normal
+  highlight link SnacksPickerPathHidden SnacksPickerFile
+  highlight link SnacksPickerPathIgnored SnacksPickerFile
+  highlight link SnacksPickerListCursorLine CursorLine
   highlight link diffAdded DiffAdd
   highlight link diffRemoved DiffDelete
 
