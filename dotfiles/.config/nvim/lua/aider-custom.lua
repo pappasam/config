@@ -1,6 +1,8 @@
 local M = {}
 
-function M.add_current_buffer() -- Use kitty broadcast
+-- Uses kitty broadcast
+-- Assumes aider window is directly to the right of the Neovim window
+function M.add_current_buffer()
   local git_root =
     vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
   if git_root == "" or vim.v.shell_error ~= 0 then
@@ -17,7 +19,9 @@ function M.add_current_buffer() -- Use kitty broadcast
   print("Aider: " .. command)
 end
 
-function M.drop_current_buffer() -- Use kitty broadcast
+-- Uses kitty broadcast
+-- Assumes aider window is directly to the right of the Neovim window
+function M.drop_current_buffer()
   local git_root =
     vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
   if git_root == "" or vim.v.shell_error ~= 0 then
