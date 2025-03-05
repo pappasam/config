@@ -1,41 +1,51 @@
 local M = {}
 
--- Uses kitty broadcast
--- Assumes aider window is directly to the right of the Neovim window
-function M.add_current_buffer()
+local function path_relative_to_git_root(path)
   local git_root =
     vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
   if git_root == "" or vim.v.shell_error ~= 0 then
-    print("Aider: not in a git repository")
-    return
+    error("not in a git repository")
   end
-  local full_path = vim.fn.expand("%:p")
-  local relative_path = full_path:sub(#git_root + 2) -- +2 to skip the trailing slash
-  local command = "/add " .. relative_path
-  vim.fn.system(
-    "kitten @ send-text --match-tab recent:1 "
-      .. vim.fn.shellescape(command .. "\r")
-  )
-  print("Aider: " .. command)
+  return path:sub(#git_root + 2) -- +2 to skip the trailing slash
 end
 
--- Uses kitty broadcast
--- Assumes aider window is directly to the right of the Neovim window
-function M.drop_current_buffer()
-  local git_root =
-    vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
-  if git_root == "" or vim.v.shell_error ~= 0 then
-    print("Aider: not in a git repository")
-    return
+local function broadcast_to_kitty_right_tab(command_str) -- Assumes aider tab is right of Neovim
+  local command = vim.fn.shellescape(command_str .. "\r")
+  vim.fn.system("kitten @ send-text --match-tab recent:1 " .. command)
+  if vim.v.shell_error ~= 0 then
+    error("error broadcasting '" .. command .. "'")
   end
-  local full_path = vim.fn.expand("%:p")
-  local relative_path = full_path:sub(#git_root + 2) -- +2 to skip the trailing slash
-  local command = "/drop " .. relative_path
-  vim.fn.system(
-    "kitten @ send-text --match-tab recent:1 "
-      .. vim.fn.shellescape(command .. "\r")
-  )
-  print("Aider: " .. command)
+  vim.notify("aider: " .. command_str, vim.log.levels.INFO)
+end
+
+function M.add_current_buffer()
+  local success, error_msg = pcall(function()
+    broadcast_to_kitty_right_tab(
+      "/add " .. path_relative_to_git_root(vim.fn.expand("%:p"))
+    )
+  end)
+  if not success then
+    if error_msg ~= nil then
+      vim.notify(error_msg, vim.log.levels.ERROR)
+    else
+      vim.notify("aider error", vim.log.levels.ERROR)
+    end
+  end
+end
+
+function M.drop_current_buffer()
+  local success, error_msg = pcall(function()
+    broadcast_to_kitty_right_tab(
+      "/add " .. path_relative_to_git_root(vim.fn.expand("%:p"))
+    )
+  end)
+  if not success then
+    if error_msg ~= nil then
+      vim.notify(error_msg, vim.log.levels.ERROR)
+    else
+      vim.notify("aider error", vim.log.levels.ERROR)
+    end
+  end
 end
 
 function M.diagnostics_full()
@@ -80,7 +90,9 @@ function M.diagnostics_full()
   vim.api.nvim_buf_set_lines(0, 0, 0, false, { result })
   vim.cmd("normal! m'") -- add to jumplist
   vim.api.nvim_win_set_cursor(0, { 1, 0 })
-  print(string.format("Inserted %d diagnostics below cursor", #diagnostics))
+  local message =
+    string.format("Inserted %d diagnostics below cursor", #diagnostics)
+  vim.notify(message, vim.log.levels.INFO)
 end
 
 function M.diagnostics_cursor()
@@ -139,9 +151,9 @@ function M.diagnostics_cursor()
   vim.api.nvim_buf_set_lines(0, insert_line, insert_line, false, { result })
   vim.cmd("normal! m'") -- add to jumplist
   vim.api.nvim_win_set_cursor(0, { insert_line + 1, 0 })
-  print(
+  local message =
     string.format("Inserted %d diagnostics above cursor", #cursor_diagnostics)
-  )
+  vim.notify(message, vim.log.levels.INFO)
 end
 
 return M
