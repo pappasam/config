@@ -341,12 +341,12 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   picker = {
     enabled = true,
     exclude = {
-      "/__pycache__",
+      "__pycache__",
     },
     include = {
-      "/.github/*",
+      ".github",
       "/dotfiles/*",
-      "/instance/*",
+      "instance",
     },
     sources = {
       explorer = {
