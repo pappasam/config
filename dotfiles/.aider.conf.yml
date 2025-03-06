@@ -19,10 +19,10 @@ cache-prompts: false
 stream: true
 read: ["CONVENTIONS.md"]
 
-# Git
-gitignore: false
-auto-commits: false
-dirty-commits: false
+# Git (I'll try using Aider's Git features)
+# gitignore: false
+# auto-commits: false
+# dirty-commits: false
 
 # Theme
 code-theme: monokai

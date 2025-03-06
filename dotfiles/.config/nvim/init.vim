@@ -289,6 +289,7 @@ nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
 nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
 nnoremap <C-p><C-g> <Cmd>lua Snacks.picker.grep()<CR>
 nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
+nnoremap <C-p><C-l> <Cmd>lua Snacks.picker.highlights()<CR>
 nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
 nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
 nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
