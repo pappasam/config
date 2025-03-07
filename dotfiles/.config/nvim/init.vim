@@ -253,11 +253,11 @@ nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
 nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
-nnoremap <Leader>eb <Cmd>edit ~/.bashrc<CR>
-nnoremap <Leader>ek <Cmd>edit ~/.config/kitty/kitty.conf<CR>
+nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
+nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>ev <Cmd>call <SID>edit_neovim_config()<CR>
-nnoremap <Leader>ez <Cmd>edit ~/.zshrc<CR>
+nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
@@ -573,8 +573,8 @@ function! s:set_quickfix_mappings()
 endfunction
 
 function! s:edit_neovim_config()
-  edit  ~/.config/nvim/init.vim
-  tabe ~/.config/nvim/lua/packages.lua
+  edit  ~/config/dotfiles/.config/nvim/init.vim
+  tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
   wincmd h
   tabprevious
 endfunction
