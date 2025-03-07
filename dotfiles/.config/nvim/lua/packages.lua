@@ -372,7 +372,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   rename = { enabled = true },
 }) -- }}}
 require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
-  file_types = { "Avante", "markdown" },
+  file_types = { "markdown" },
   render_modes = true,
   sign = {
     enabled = false,
