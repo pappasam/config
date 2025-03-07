@@ -297,8 +297,6 @@ nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
-" https://github.com/MeanderingProgrammer/render-markdown.nvim
-nnoremap <Leader>m <Cmd>RenderMarkdown toggle<CR>
 " https://github.com/lewis6991/gitsigns.nvim
 nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>

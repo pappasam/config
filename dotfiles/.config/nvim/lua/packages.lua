@@ -33,7 +33,6 @@ require("packager").setup(function(p)
   p.add("https://github.com/catgoose/nvim-colorizer.lua")
   p.add("https://github.com/chrishrb/gx.nvim")
   p.add("https://github.com/fidian/hexmode")
-  p.add("https://github.com/MeanderingProgrammer/render-markdown.nvim")
   p.add(
     "https://github.com/iamcco/markdown-preview.nvim",
     { ["do"] = "cd app & yarn install" }
@@ -370,54 +369,6 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
     },
   },
   rename = { enabled = true },
-}) -- }}}
-require("render-markdown").setup({ -- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
-  file_types = { "markdown" },
-  render_modes = true,
-  sign = {
-    enabled = false,
-  },
-  anti_conceal = {
-    enabled = false,
-  },
-  win_options = {
-    concealcursor = {
-      default = "nvic",
-      rendered = "nvic",
-    },
-  },
-  heading = {
-    position = "inline",
-    backgrounds = {
-      "htmlH1",
-      "htmlH2",
-      "htmlH3",
-      "htmlH4",
-      "htmlH5",
-      "htmlH6",
-    },
-    foregrounds = {
-      "htmlH1",
-      "htmlH2",
-      "htmlH3",
-      "htmlH4",
-      "htmlH5",
-      "htmlH6",
-    },
-  },
-  bullet = {
-    highlight = "Delimiter",
-  },
-  code = {
-    style = "language",
-    disable_background = true,
-    left_pad = 2,
-    width = "block",
-    border = "none",
-  },
-  latex = {
-    enabled = false,
-  },
 }) -- }}}
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
