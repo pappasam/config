@@ -57,91 +57,80 @@ augroup filetype_custom
 augroup end
 
 function s:papercolor_slim_linking()
-  highlight link @aicomment DiagnosticInfo
-  highlight link SnacksPicker Normal
-  highlight link SnacksPickerBorder Normal
-  highlight link SnacksPickerInputBorder Normal
-  highlight link SnacksPickerListCursorLine CursorLine
-  highlight link diffAdded DiffAdd
-  highlight link diffRemoved DiffDelete
-
+  highlight link @aicomment                     DiagnosticInfo
+  highlight link SnacksPicker                   Normal
+  highlight link SnacksPickerBorder             Normal
+  highlight link SnacksPickerInputBorder        Normal
+  highlight link SnacksPickerListCursorLine     CursorLine
+  highlight link diffAdded                      DiffAdd
+  highlight link diffRemoved                    DiffDelete
   " Regular Git signs
-  highlight link GitSignsAdd          DiffAdd
-  highlight link GitSignsChange       DiffChange
-  highlight link GitSignsDelete       DiffDelete
-  highlight link GitSignsChangedelete GitSignsChange
-  highlight link GitSignsTopdelete    GitSignsDelete
-  highlight link GitSignsUntracked    GitSignsAdd
-
+  highlight link GitSignsAdd                    DiffAdd
+  highlight link GitSignsChange                 DiffChange
+  highlight link GitSignsDelete                 DiffDelete
+  highlight link GitSignsChangedelete           DiffChange
+  highlight link GitSignsTopdelete              DiffDelete
+  highlight link GitSignsUntracked              DiffAdd
   " Number column highlights
-  highlight link GitSignsAddNr          DiffAdd
-  highlight link GitSignsChangeNr       DiffChange
-  highlight link GitSignsDeleteNr       DiffDelete
-  highlight link GitSignsChangedeleteNr GitSignsChangeNr
-  highlight link GitSignsTopdeleteNr    GitSignsDeleteNr
-  highlight link GitSignsUntrackedNr    GitSignsAddNr
-
+  highlight link GitSignsAddNr                  DiffAdd
+  highlight link GitSignsChangeNr               DiffChange
+  highlight link GitSignsDeleteNr               DiffDelete
+  highlight link GitSignsChangedeleteNr         DiffChange
+  highlight link GitSignsTopdeleteNr            DiffDelete
+  highlight link GitSignsUntrackedNr            DiffAdd
   " Line highlights
-  highlight link GitSignsAddLn          DiffAdd
-  highlight link GitSignsChangeLn       DiffChange
-  highlight link GitSignsChangedeleteLn GitSignsChangeLn
-  highlight link GitSignsUntrackedLn    GitSignsAddLn
-
+  highlight link GitSignsAddLn                  DiffAdd
+  highlight link GitSignsChangeLn               DiffChange
+  highlight link GitSignsChangedeleteLn         DiffChange
+  highlight link GitSignsUntrackedLn            DiffAdd
   " Cursor line highlights
-  highlight link GitSignsAddCul          GitSignsAdd
-  highlight link GitSignsChangeCul       GitSignsChange
-  highlight link GitSignsDeleteCul       GitSignsDelete
-  highlight link GitSignsChangedeleteCul GitSignsChangeCul
-  highlight link GitSignsTopdeleteCul    GitSignsDeleteCul
-  highlight link GitSignsUntrackedCul    GitSignsAddCul
-
+  highlight link GitSignsAddCul                 DiffAdd
+  highlight link GitSignsChangeCul              DiffChange
+  highlight link GitSignsDeleteCul              DiffDelete
+  highlight link GitSignsChangedeleteCul        DiffChange
+  highlight link GitSignsTopdeleteCul           DiffDelete
+  highlight link GitSignsUntrackedCul           DiffAdd
   " Staged Git signs
-  highlight link GitSignsStagedAdd          GitSignsAdd
-  highlight link GitSignsStagedChange       GitSignsChange
-  highlight link GitSignsStagedDelete       GitSignsDelete
-  highlight link GitSignsStagedChangedelete GitSignsStagedChange
-  highlight link GitSignsStagedTopdelete    GitSignsStagedDelete
-  highlight link GitSignsStagedUntracked    GitSignsStagedAdd
-
+  highlight link GitSignsStagedAdd              DiffAdd
+  highlight link GitSignsStagedChange           DiffChange
+  highlight link GitSignsStagedDelete           DiffDelete
+  highlight link GitSignsStagedChangedelete     DiffChange
+  highlight link GitSignsStagedTopdelete        DiffDelete
+  highlight link GitSignsStagedUntracked        DiffAdd
   " Staged number column highlights
-  highlight link GitSignsStagedAddNr          GitSignsAddNr
-  highlight link GitSignsStagedChangeNr       GitSignsChangeNr
-  highlight link GitSignsStagedDeleteNr       GitSignsDeleteNr
-  highlight link GitSignsStagedChangedeleteNr GitSignsStagedChangeNr
-  highlight link GitSignsStagedTopdeleteNr    GitSignsStagedDeleteNr
-  highlight link GitSignsStagedUntrackedNr    GitSignsStagedAddNr
-
+  highlight link GitSignsStagedAddNr            DiffAdd
+  highlight link GitSignsStagedChangeNr         DiffChange
+  highlight link GitSignsStagedDeleteNr         DiffDelete
+  highlight link GitSignsStagedChangedeleteNr   DiffChange
+  highlight link GitSignsStagedTopdeleteNr      DiffDelete
+  highlight link GitSignsStagedUntrackedNr      DiffAdd
   " Staged line highlights
-  highlight link GitSignsStagedAddLn          GitSignsAddLn
-  highlight link GitSignsStagedChangeLn       GitSignsChangeLn
-  highlight link GitSignsStagedChangedeleteLn GitSignsStagedChangeLn
-  highlight link GitSignsStagedUntrackedLn    GitSignsStagedAddLn
-
+  highlight link GitSignsStagedAddLn            DiffAdd
+  highlight link GitSignsStagedChangeLn         DiffChange
+  highlight link GitSignsStagedChangedeleteLn   DiffChange
+  highlight link GitSignsStagedUntrackedLn      DiffAdd
   " Staged cursor line highlights
-  highlight link GitSignsStagedAddCul          GitSignsAddCul
-  highlight link GitSignsStagedChangeCul       GitSignsChangeCul
-  highlight link GitSignsStagedDeleteCul       GitSignsDeleteCul
-  highlight link GitSignsStagedChangedeleteCul GitSignsStagedChangeCul
-  highlight link GitSignsStagedTopdeleteCul    GitSignsStagedDeleteCul
-  highlight link GitSignsStagedUntrackedCul    GitSignsStagedAddCul
-
+  highlight link GitSignsStagedAddCul           DiffAdd
+  highlight link GitSignsStagedChangeCul        DiffChange
+  highlight link GitSignsStagedDeleteCul        DiffDelete
+  highlight link GitSignsStagedChangedeleteCul  DiffChange
+  highlight link GitSignsStagedTopdeleteCul     DiffDelete
+  highlight link GitSignsStagedUntrackedCul     DiffAdd
   " Preview highlights
-  highlight link GitSignsAddPreview      DiffAdd
-  highlight link GitSignsDeletePreview   DiffDelete
-  highlight link GitSignsCurrentLineBlame NonText
-
+  highlight link GitSignsAddPreview             DiffAdd
+  highlight link GitSignsDeletePreview          DiffDelete
+  highlight link GitSignsCurrentLineBlame       NonText
   " Inline highlights (using your custom links)
-  highlight link GitSignsAddInline       GitSignsAdd
-  highlight link GitSignsChangeInline    GitSignsChange
-  highlight link GitSignsDeleteInline    GitSignsDelete
-  highlight link GitSignsAddLnInline     GitSignsAddInline
-  highlight link GitSignsChangeLnInline  GitSignsChangeInline
-  highlight link GitSignsDeleteLnInline  GitSignsDeleteInline
-
+  highlight link GitSignsAddInline              DiffAdd
+  highlight link GitSignsChangeInline           DiffChange
+  highlight link GitSignsDeleteInline           DiffDelete
+  highlight link GitSignsAddLnInline            DiffAdd
+  highlight link GitSignsChangeLnInline         DiffChange
+  highlight link GitSignsDeleteLnInline         DiffDelete
   " Virtual line highlights
-  highlight link GitSignsDeleteVirtLn       DiffDelete
-  highlight link GitSignsDeleteVirtLnInLine GitSignsDeleteLnInline
-  highlight link GitSignsVirtLnum           GitSignsDeleteVirtLn
+  highlight link GitSignsDeleteVirtLn           DiffDelete
+  highlight link GitSignsDeleteVirtLnInLine     DiffDelete
+  highlight link GitSignsVirtLnum               DiffDelete
 endfunction
 
 augroup colorscheme_overrides_custom
