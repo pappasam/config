@@ -49,7 +49,7 @@ augroup filetype_custom
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " disable gitsigns
-  autocmd FileType xxd DisableNoisyPlugins
+  autocmd FileType xxd call s:disable_noisy_plugins()
   " readonly
   autocmd FileType man,info,help,qf,GV ReadOnly
   " quickfix-only
@@ -74,11 +74,11 @@ augroup end
 
 augroup miscellaneous_custom
   autocmd!
-  autocmd BufWritePre * TrimWhitespace
+  autocmd BufWritePre * call s:trim_whitespace()
   autocmd InsertEnter * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  autocmd VimResized * ResizeAllTabs
+  autocmd VimResized * call s:resize_all_tabs()
 augroup end
 
 " }}}
@@ -294,25 +294,6 @@ function! s:readonly()
   endif
 endfunction
 
-command! ResizeAllTabs call s:resize_all_tabs()
-function! s:resize_all_tabs()
-  set lazyredraw
-  try
-    let current_tab = tabpagenr()
-    tabdo wincmd =
-    execute 'tabnext ' .. current_tab
-  finally
-    set nolazyredraw
-  endtry
-endfunction
-
-command! DisableNoisyPlugins call s:disable_noisy_plugins()
-function! s:disable_noisy_plugins()
-  lua vim.diagnostic.enable(false)
-  Gitsigns detach
-  Fidget suppress
-endfunction
-
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
   if &wrap
@@ -332,7 +313,6 @@ function! s:resize_window_width()
 endfunction
 
 command! F call s:focuswriting()
-command! Focus call s:focuswriting()
 function! s:focuswriting()
   set lazyredraw
   try
@@ -399,24 +379,6 @@ function! s:clean_unicode()
   endtry
 endfunction
 
-command! TrimWhitespace call s:trim_whitespace()
-function! s:trim_whitespace()
-  set lazyredraw
-  try
-    let save = winsaveview()
-    if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
-      silent!              %substitute/^\s\+$//e
-      silent! %global/\S\s$/substitute/\s$//g
-      silent!              %substitute/\s\s\s\+$/  /e
-    else
-      silent! %substitute/\s\+$//e
-    endif
-    call winrestview(save)
-  finally
-    set nolazyredraw
-  endtry
-endfunction
-
 command! Preview call s:preview()
 function! s:preview()
   if &filetype ==? 'markdown' " https://github.com/iamcco/markdown-preview.nvim
@@ -424,23 +386,6 @@ function! s:preview()
   else
     echohl WarningMsg | echom ':Preview not supported for this filetype' | echohl None
   endif
-endfunction
-
-command! -range XmlEscape <line1>,<line2>call s:xml_escape()
-function! s:xml_escape() range
-  let save_reg = getreg('"')
-  let save_regtype = getregtype('"')
-  normal! gvy
-  let selected_text = getreg('"')
-  let selected_text = substitute(selected_text, '&', '\&amp;', 'g')
-  " ignore these for now: they show up in colorscheme
-  "let selected_text = substitute(selected_text, '<', '\&lt;', 'g')
-  "let selected_text = substitute(selected_text, '>', '\&gt;', 'g')
-  let selected_text = substitute(selected_text, '"', '\&quot;', 'g')
-  let selected_text = substitute(selected_text, "'", '\&apos;', 'g')
-  call setreg('"', selected_text, 'v')
-  normal! gvp
-  call setreg('"', save_reg, save_regtype)
 endfunction
 
 function! s:quickfix_vsplit()
@@ -497,6 +442,40 @@ function! s:edit_neovim_config()
   tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
   wincmd h
   tabprevious
+endfunction
+
+function! s:resize_all_tabs()
+  set lazyredraw
+  try
+    let current_tab = tabpagenr()
+    tabdo wincmd =
+    execute 'tabnext ' .. current_tab
+  finally
+    set nolazyredraw
+  endtry
+endfunction
+
+function! s:disable_noisy_plugins()
+  lua vim.diagnostic.enable(false)
+  Gitsigns detach
+  Fidget suppress
+endfunction
+
+function! s:trim_whitespace()
+  set lazyredraw
+  try
+    let save = winsaveview()
+    if &filetype ==? 'markdown' " Only trailing, 1 trailing, and 2+ trailing
+      silent!              %substitute/^\s\+$//e
+      silent! %global/\S\s$/substitute/\s$//g
+      silent!              %substitute/\s\s\s\+$/  /e
+    else
+      silent! %substitute/\s\+$//e
+    endif
+    call winrestview(save)
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 " }}}
