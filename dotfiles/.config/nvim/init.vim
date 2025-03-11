@@ -215,7 +215,7 @@ nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
 nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
 nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
 nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
-nnoremap <Leader>gl <Cmd>lua Snacks.lazygit()<CR>
+nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
