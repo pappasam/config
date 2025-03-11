@@ -12,7 +12,7 @@ alias:
   - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 
 # Behavior
-watch-files: true
+watch-files: false
 multiline: false
 suggest-shell-commands: true
 cache-prompts: false
