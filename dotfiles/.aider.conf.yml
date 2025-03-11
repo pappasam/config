@@ -18,9 +18,10 @@ suggest-shell-commands: true
 cache-prompts: false
 stream: true
 read: ["CONVENTIONS.md"]
+notifications: true
 
-# Git (I'll try using Aider's Git features)
-# gitignore: false
+# Git
+gitignore: false
 # auto-commits: false
 # dirty-commits: false
 
