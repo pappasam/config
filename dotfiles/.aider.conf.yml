@@ -12,7 +12,7 @@ alias:
   - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 
 # Behavior
-watch-files: false
+watch-files: true
 multiline: false
 suggest-shell-commands: true
 cache-prompts: false
@@ -22,8 +22,8 @@ notifications: true
 
 # Git
 gitignore: false
-# auto-commits: false
-# dirty-commits: false
+auto-commits: false
+dirty-commits: false
 
 # Theme
 code-theme: monokai
