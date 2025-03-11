@@ -195,7 +195,6 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 nnoremap <Leader>aa <Cmd>lua require('aider-custom').add_current_buffer()<CR>
 nnoremap <Leader>ad <Cmd>lua require('aider-custom').drop_current_buffer()<CR>
 nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
-nnoremap <Leader>af <Cmd>lua require('aider-custom').diagnostics_full()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl

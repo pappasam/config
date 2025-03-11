@@ -36,7 +36,7 @@ end
 function M.drop_current_buffer()
   local success, error_msg = pcall(function()
     broadcast_to_kitty_right_tab(
-      "/add " .. path_relative_to_git_root(vim.fn.expand("%:p"))
+      "/drop " .. path_relative_to_git_root(vim.fn.expand("%:p"))
     )
   end)
   if not success then
@@ -46,53 +46,6 @@ function M.drop_current_buffer()
       vim.notify("aider error", vim.log.levels.ERROR)
     end
   end
-end
-
-function M.diagnostics_full()
-  local diagnostics = vim.diagnostic.get(0)
-  local commentstring = vim.bo.commentstring
-  if commentstring == "" then
-    commentstring = "# %s"
-  end
-  local left_comment, right_comment = commentstring:match("(.*)%%s(.*)")
-  if not left_comment then
-    left_comment = "# "
-    right_comment = ""
-  end
-  local formatted_text = {
-    string.format(
-      "%sAI! Please resolve the following linting error(s):%s",
-      left_comment,
-      right_comment
-    ),
-  }
-  for _, d in ipairs(diagnostics) do
-    local start_col = d.col
-    local end_col = d.end_col and d.end_col - 1 or start_col
-    local message = d.message:gsub("\n%s*", " ")
-    local line = string.format(
-      "|%d col %d-%d %s| %s",
-      d.lnum + 2,
-      start_col + 1,
-      end_col + 1,
-      d.severity < 2 and "error" or "warning",
-      message
-    )
-    line = string.format(
-      "%s%s%s",
-      left_comment:gsub("^%s*", ""),
-      line,
-      right_comment
-    )
-    table.insert(formatted_text, line)
-  end
-  local result = table.concat(formatted_text, " || ")
-  vim.api.nvim_buf_set_lines(0, 0, 0, false, { result })
-  vim.cmd("normal! m'") -- add to jumplist
-  vim.api.nvim_win_set_cursor(0, { 1, 0 })
-  local message =
-    string.format("Inserted %d diagnostics below cursor", #diagnostics)
-  vim.notify(message, vim.log.levels.INFO)
 end
 
 function M.diagnostics_cursor()
