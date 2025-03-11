@@ -22,8 +22,8 @@ notifications: true
 
 # Git
 gitignore: false
-auto-commits: false
-dirty-commits: false
+auto-commits: true
+dirty-commits: true # Known Issue: https://github.com/Aider-AI/aider/issues/3049
 
 # Theme
 code-theme: monokai
