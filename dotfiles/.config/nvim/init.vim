@@ -223,6 +223,8 @@ xnoremap <Leader>f :FiletypeFormat<CR>
 nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
+nnoremap <Leader>gm <Cmd>Gitsigns change_base main<CR>
+nnoremap <Leader>gM <Cmd>Gitsigns change_base master<CR>
 
 " }}}
 " Commands {{{
