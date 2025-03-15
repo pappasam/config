@@ -9,9 +9,12 @@ local function path_relative_to_git_root(path)
   return path:sub(#git_root + 2) -- +2 to skip the trailing slash
 end
 
-local function broadcast_to_kitty_right_tab(command_str) -- Assumes aider tab is right of Neovim
+local function broadcast_to_aider_with_kitten(command_str)
   local command = vim.fn.shellescape(command_str .. "\r")
-  vim.fn.system("kitten @ send-text --match-tab recent:1 " .. command)
+  vim.fn.system(vim.fn.join({
+    'kitten @ send-text --exclude-active --match-tab "window_title:\\(.*?aider.*?\\)"',
+    command,
+  }, " "))
   if vim.v.shell_error ~= 0 then
     error("error broadcasting '" .. command .. "'")
   end
@@ -20,7 +23,7 @@ end
 
 function M.add_current_buffer()
   local success, error_msg = pcall(function()
-    broadcast_to_kitty_right_tab(
+    broadcast_to_aider_with_kitten(
       "/add " .. path_relative_to_git_root(vim.fn.expand("%:p"))
     )
   end)
@@ -35,7 +38,7 @@ end
 
 function M.drop_current_buffer()
   local success, error_msg = pcall(function()
-    broadcast_to_kitty_right_tab(
+    broadcast_to_aider_with_kitten(
       "/drop " .. path_relative_to_git_root(vim.fn.expand("%:p"))
     )
   end)
