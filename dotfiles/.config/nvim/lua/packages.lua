@@ -71,41 +71,18 @@ local language_servers = {
   dockerls = {},
   gopls = {},
   graphql = {},
-  html = {},
-  jsonls = {},
-  ltex_plus = {
-    filetypes = {
-      "bib",
-      "markdown",
-      "markdown.mdx",
-      "org",
-      "pandoc",
-      "plaintex",
-      "quarto",
-      "rmd",
-      "rnoweb",
-      "rst",
-      "tex",
-    },
+  harper_ls = {
     settings = {
-      ltex = {
-        language = "en-US",
-        checkFrequency = "save",
-        disabledRules = {
-          ["en-US"] = {
-            "ENGLISH_WORD_REPEAT_BEGINNING_RULE",
-            "ENGLISH_WORD_REPEAT_RULE",
-            "EN_QUOTES",
-            "FILE_EXTENSIONS_CASE",
-            "MORFOLOGIK_RULE_EN_US",
-            "PHRASE_REPETITION",
-            "UPPERCASE_SENTENCE_START",
-            "WHITESPACE_RULE",
-          },
+      ["harper-ls"] = {
+        linters = {
+          SentenceCapitalization = false,
+          SpellCheck = false,
         },
       },
     },
   },
+  html = {},
+  jsonls = {},
   lua_ls = {
     settings = {
       Lua = {
