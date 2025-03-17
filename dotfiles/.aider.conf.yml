@@ -17,7 +17,6 @@ multiline: false
 suggest-shell-commands: true
 cache-prompts: false
 stream: true
-read: ["CONVENTIONS.md"]
 notifications: true
 
 # Git
