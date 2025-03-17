@@ -87,7 +87,7 @@ compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _command ve
 compdef _dircomp_config c
 compdef _dircomp_kepler k
-compdef _dircomp_pappasam p
+compdef _dircomp_pappasam pp
 compdef _dircomp_rocket r
 compdef _dircomp_vplug vplug
 compdef _directories d
