@@ -476,8 +476,6 @@ function upgrade() {
   mise upgrade -y
   mise install -y
   uv self update
-  gh ext install meiji163/gh-notify
-  gh ext upgrade meiji163/gh-notify
   kitty-install
 }
 
