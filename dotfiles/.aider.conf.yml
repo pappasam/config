@@ -18,6 +18,7 @@ suggest-shell-commands: true
 cache-prompts: false
 stream: true
 notifications: true
+notifications-command: notify-send 'Aider has finished answering'
 
 # Git
 gitignore: false
