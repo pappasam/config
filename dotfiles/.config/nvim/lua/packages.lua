@@ -355,6 +355,13 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
       range = "full",
     },
   },
+  cmdline = {
+    completion = {
+      menu = {
+        auto_show = true,
+      },
+    },
+  },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
   filetypes = {
