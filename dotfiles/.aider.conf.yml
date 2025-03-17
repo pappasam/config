@@ -18,7 +18,7 @@ suggest-shell-commands: true
 cache-prompts: false
 stream: true
 notifications: true
-notifications-command: notify-send 'Aider has finished answering'
+notifications-command: kitten @ focus-window; notify-send "Aider has finished running"
 
 # Git
 # Disabled because of: https://github.com/Aider-AI/aider/issues/3049
