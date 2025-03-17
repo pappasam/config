@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Reload Neovim
+kitten @ send-text --exclude-active --match-tab "window_title:\(f.*?\)" ":checktime\r:DiffviewOpen HEAD^1\r"
+kitten @ send-text --exclude-active --match-tab "window_title:\(nvim.*?\)" ":checktime\r:DiffviewOpen HEAD^1\r"
+notify-send 'Aider has finished answering'
