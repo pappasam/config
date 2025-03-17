@@ -21,9 +21,10 @@ notifications: true
 notifications-command: notify-send 'Aider has finished answering'
 
 # Git
+# Disabled because of: https://github.com/Aider-AI/aider/issues/3049
 gitignore: false
-auto-commits: true
-dirty-commits: true # Known Issue: https://github.com/Aider-AI/aider/issues/3049
+auto-commits: false
+dirty-commits: false
 
 # Theme
 code-theme: monokai

@@ -224,7 +224,7 @@ nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " https://github.com/sindrets/diffview.nvim
-nnoremap <Leader>gd <Cmd>DiffviewOpen HEAD^1<CR>
+nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
 
 " }}}
 " Commands {{{
