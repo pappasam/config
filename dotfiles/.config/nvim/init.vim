@@ -381,15 +381,6 @@ function! s:clean_unicode()
   endtry
 endfunction
 
-command! Preview call s:preview()
-function! s:preview()
-  if &filetype ==? 'markdown' " https://github.com/iamcco/markdown-preview.nvim
-    silent! MarkdownPreview
-  else
-    echohl WarningMsg | echom ':Preview not supported for this filetype' | echohl None
-  endif
-endfunction
-
 function! s:quickfix_vsplit()
   set lazyredraw
   try
