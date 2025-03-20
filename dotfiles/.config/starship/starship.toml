@@ -1,5 +1,5 @@
 # schema https://starship.rs/config-schema.json
-# preset: https://starship.rs/presets/plain-text
+# docs https://starship.rs/config/
 
 # color0: black.
 # color1: red.
@@ -17,19 +17,3 @@
 # color13: bright-purple or bright-magenta.
 # color14: bright-cyan.
 # color15: bright-white.
-
-add_newline = false
-command_timeout = 1000
-
-[aws]
-disabled = true
-
-[character]
-success_symbol = '[❯](bold green)'
-error_symbol = '[❯](bold red)'
-
-[cmd_duration]
-disabled = true
-
-[gcloud]
-disabled = true
