@@ -29,7 +29,6 @@ require("packager").setup(function(p)
   p.add("https://github.com/fladson/vim-kitty")
   p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
   p.add("https://github.com/HiPhish/info.vim")
-  p.add("https://github.com/HiPhish/jinja.vim")
   p.add("https://github.com/catgoose/nvim-colorizer.lua")
   p.add("https://github.com/chrishrb/gx.nvim")
   p.add("https://github.com/fidian/hexmode")
@@ -244,6 +243,8 @@ require("nvim-treesitter.configs").setup({
     "ini",
     "java",
     "javascript",
+    "jinja",
+    "jinja_inline",
     "jsdoc",
     "json",
     "json5",
