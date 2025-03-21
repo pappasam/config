@@ -3,5 +3,7 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "editor.fontSize": 16
+  "editor.fontSize": 16,
+  "python.defaultInterpreterPath": "/home/sroeca/src/lib/micrograd/.venv",
+  "editor.tabSize": 2
 }
