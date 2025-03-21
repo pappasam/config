@@ -9,6 +9,7 @@ help: ## Print each target and its associated help message
 install: ## Install stowed dotfiles to home directory
 	@mkdir -p $(MKDIR_CONFIG)
 	@mkdir -p ~/.config/nvim/pack
+	@mkdir -p ~/.config/Code/User
 	stow --target $(HOME) --restow dotfiles
 
 .PHONY: run-scripts
