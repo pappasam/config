@@ -1,0 +1,7 @@
+{
+  "workbench.colorTheme": "Default Light Modern",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "editor.fontSize": 16
+}
