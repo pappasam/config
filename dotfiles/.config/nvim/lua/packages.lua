@@ -494,8 +494,6 @@ require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
     ]])
   end,
 }) -- }}}
-require("kitty-scrollback").setup({ -- https://github.com/mikesmithgh/kitty-scrollback.nvim {{{
-}) -- }}}
 require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
   progress = {
     suppress_on_insert = true,
