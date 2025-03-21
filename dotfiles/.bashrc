@@ -165,6 +165,7 @@ alias k3='cd ~/src/KeplerGroup/KIP-3-MVP'
 
 function c() { cd "$HOME/config/$1" || return; }
 function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
+function l() { cd "$HOME/src/lib/$1" || return; }
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
 function vplug() { cd "$HOME/.config/nvim/pack/packager/start/$1" || return; }
