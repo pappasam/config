@@ -107,20 +107,21 @@ set isfname+=@-@,:
 set list listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
 set mouse=a
 set noshowcmd
+set nospell spelllang=en_us
 set noswapfile
 set notimeout
-set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set number
 set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
 set shortmess+=c
 set showtabline=2
 set signcolumn=number
-set nospell spelllang=en_us
 set splitright
+set statusline=\ %t%R%M%H%W
 set termguicolors
 set updatetime=300
-set statusline=\ %t%R%M%H%W
+set winborder=rounded
+set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = #{
       \ name: 'xsel',
