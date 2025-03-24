@@ -56,6 +56,7 @@ local language_servers = {
         analysis = {
           diagnosticSeverityOverrides = {
             reportAny = "none",
+            reportExplicitAny = "none",
             reportUnannotatedClassAttribute = "none",
             reportUninitializedInstanceVariable = "none",
             reportUnnecessaryIsInstance = "none",
