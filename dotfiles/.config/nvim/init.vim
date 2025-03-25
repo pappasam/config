@@ -146,7 +146,7 @@ let g:repl_filetype_commands = #{
       \ javascript: 'node',
       \ haskell: 'ghci',
       \ ocaml: #{cmd: 'utop', suffix: ';;'},
-      \ python: 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""',
+      \ python: #{cmd: 'ipython --quiet --no-autoindent -i -c "%config InteractiveShell.ast_node_interactivity=\"last_expr_or_assign\""', repl_type: 'ipython'},
       \ r: 'R',
       \ sh: 'sh',
       \ vim: 'nvim --clean -ERM',
