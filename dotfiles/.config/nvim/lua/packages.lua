@@ -352,6 +352,13 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
+  enabled = function()
+    if vim.bo.filetype == 'vim' and vim.bo.buftype == 'nofile' then
+      -- disable in cmdline window (see :help cmdline-window)
+      return false
+    end
+    return true
+  end,
   completion = {
     keyword = {
       range = "full",
