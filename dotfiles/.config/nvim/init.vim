@@ -85,6 +85,7 @@ augroup end
 " LuaLoads {{{
 
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
+lua require("settings")
 lua require("packages")
 
 " }}}
