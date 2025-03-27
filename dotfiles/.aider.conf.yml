@@ -20,7 +20,7 @@ suggest-shell-commands: true
 cache-prompts: false
 stream: true
 notifications: true
-# notifications-command: kitten @ focus-window; notify-send "Aider has finished running"
+notifications-command: nvim --server $NVIM --remote-send '<C-\\><C-n>:call repl#aider_notifications_command()<CR>'; notify-send "Aider has finished running, reloading buffers"
 check-update: false
 show-release-notes: false
 
