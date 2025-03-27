@@ -192,9 +192,7 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
-" Aider
-nnoremap <Leader>aa <Cmd>AiderBuf /add<CR>
-nnoremap <Leader>ad <Cmd>AiderBuf /drop<CR>
+" aider-custom.lua
 nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
@@ -203,6 +201,8 @@ nnoremap <Leader>cc <Cmd>ReplNewCell<CR>
 nmap <silent> <Leader>cr <Plug>(ReplSendCell)
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
+nnoremap <Leader>aa <Cmd>AiderBuf /add<CR>
+nnoremap <Leader>ad <Cmd>AiderBuf /drop<CR>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
