@@ -10,10 +10,8 @@ function _G.custom_tabline()
     else
       s = s .. "%#TabLine#"
     end
-
     -- Add clickable tab functionality with %{tabnr}T
     s = s .. "%" .. i .. "T"
-
     -- Set the tab number
     s = s .. " " .. i .. " "
     -- Get the window number
@@ -53,7 +51,6 @@ function _G.custom_tabline()
     if vim.fn.getbufvar(bufnr, "&modified") == 1 then
       s = s .. "[+] "
     end
-
     -- Close the clickable region
     s = s .. "%T"
   end
@@ -62,7 +59,6 @@ function _G.custom_tabline()
   return s
 end
 
--- Set the tabline
 vim.o.tabline = "%!v:lua.custom_tabline()"
 
 -- }}}
