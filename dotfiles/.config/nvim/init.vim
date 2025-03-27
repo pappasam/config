@@ -241,7 +241,6 @@ command! Gm Git commit
 command! Gma Git add . | Git commit
 command! Gmav Git add . | Git commit --verbose
 command! Gmv Git commit --verbose
-command! Python Repl #{cmd: 'python', open_window: 'tabnew'}
 command! P PackagerClean | PackagerUpdate
 command! R ReplToggle
 command! RA ReplAttach
