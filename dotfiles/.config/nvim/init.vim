@@ -200,8 +200,10 @@ nnoremap <Leader>cc <Cmd>ReplNewCell<CR>
 nmap <silent> <Leader>cr <Plug>(ReplSendCell)
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
+nnoremap <Leader>ao <Cmd>Aider<CR>
 nnoremap <Leader>aa <Cmd>AiderBuf /add<CR>
 nnoremap <Leader>ad <Cmd>AiderBuf /drop<CR>
+nnoremap <Leader>as <Cmd>AiderSend<CR>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
