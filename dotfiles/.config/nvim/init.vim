@@ -103,7 +103,6 @@ set expandtab shiftwidth=2 softtabstop=2
 set exrc
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
-set history=10
 set isfname+=@-@,:
 set list listchars=tab:\ ⇀,lead:\ ,nbsp:+,trail:-
 set mouse=a
