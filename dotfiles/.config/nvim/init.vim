@@ -193,8 +193,8 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " Aider
-nnoremap <Leader>aa <Cmd>lua require('aider-custom').add_current_buffer()<CR>
-nnoremap <Leader>ad <Cmd>lua require('aider-custom').drop_current_buffer()<CR>
+nnoremap <Leader>aa <Cmd>AiderBuf /add<CR>
+nnoremap <Leader>ad <Cmd>AiderBuf /drop<CR>
 nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>

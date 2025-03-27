@@ -1,56 +1,5 @@
 local M = {}
 
-local function path_relative_to_git_root(path)
-  local git_root =
-    vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
-  if git_root == "" or vim.v.shell_error ~= 0 then
-    error("not in a git repository")
-  end
-  return path:sub(#git_root + 2) -- +2 to skip the trailing slash
-end
-
-local function broadcast_to_aider_with_kitten(command_str)
-  local command = vim.fn.shellescape(command_str .. "\r")
-  vim.fn.system(vim.fn.join({
-    'kitten @ send-text --exclude-active --match-tab "window_title:\\(.*?aider.*?\\)"',
-    command,
-  }, " "))
-  if vim.v.shell_error ~= 0 then
-    error("error broadcasting '" .. command .. "'")
-  end
-  vim.notify("aider: " .. command_str, vim.log.levels.INFO)
-end
-
-function M.add_current_buffer()
-  local success, error_msg = pcall(function()
-    broadcast_to_aider_with_kitten(
-      "/add " .. path_relative_to_git_root(vim.fn.expand("%:p"))
-    )
-  end)
-  if not success then
-    if error_msg ~= nil then
-      vim.notify(error_msg, vim.log.levels.ERROR)
-    else
-      vim.notify("aider error", vim.log.levels.ERROR)
-    end
-  end
-end
-
-function M.drop_current_buffer()
-  local success, error_msg = pcall(function()
-    broadcast_to_aider_with_kitten(
-      "/drop " .. path_relative_to_git_root(vim.fn.expand("%:p"))
-    )
-  end)
-  if not success then
-    if error_msg ~= nil then
-      vim.notify(error_msg, vim.log.levels.ERROR)
-    else
-      vim.notify("aider error", vim.log.levels.ERROR)
-    end
-  end
-end
-
 function M.diagnostics_cursor()
   local pos = vim.api.nvim_win_get_cursor(0)
   local line_num = pos[1] - 1 -- Convert to 0-based line number
