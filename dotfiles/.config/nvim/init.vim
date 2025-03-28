@@ -190,8 +190,6 @@ nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
-" aider-custom.lua
-nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
@@ -230,6 +228,7 @@ command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
+command! AiderDiag lua require('aider-custom').diagnostics_cursor()
 command! LazyGit lua Snacks.lazygit()
 command! P PackagerClean | PackagerUpdate
 command! W w
