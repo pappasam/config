@@ -196,15 +196,11 @@ nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
-nnoremap <Leader>cc <Cmd>ReplNewCell<CR>
-nmap <silent> <Leader>cr <Plug>(ReplSendCell)
-nmap <silent> <Leader>r <Plug>(ReplSendLine)
+nmap <silent> <Leader>rr <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
-nnoremap <Leader>aa <Cmd>AiderBuf /add<CR>
-nnoremap <Leader>aA <Cmd>AiderBufAll /add<CR>
-nnoremap <Leader>ad <Cmd>AiderBuf /drop<CR>
-nnoremap <Leader>aD <Cmd>AiderBufAll /drop<CR>
-nnoremap <Leader>as <Cmd>AiderSend<CR>
+nmap <silent> <Leader>rc <Plug>(ReplSendCell)
+nnoremap <Leader>rs <Cmd>ReplSend<CR>
+nnoremap <Leader>ra <Cmd>ReplAiderBufCur /add<CR>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
@@ -238,16 +234,7 @@ command! -bang Qa qa<bang>
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! LazyGit lua Snacks.lazygit()
-command! Gb lua Snacks.gitbrowse()
-command! Gm Git commit
-command! Gma Git add . | Git commit
-command! Gmav Git add . | Git commit --verbose
-command! Gmv Git commit --verbose
 command! P PackagerClean | PackagerUpdate
-command! R ReplToggle
-command! RA ReplAttach
-command! Re ReplToggle
-command! Rep ReplToggle
 command! W w
 command! WA wa
 command! WQ wq
