@@ -145,7 +145,6 @@ let g:repl_filetype_commands = #{
       \ bash: 'bash',
       \ javascript: 'node',
       \ haskell: 'ghci',
-      \ ocaml: #{cmd: 'utop', repl_type: 'utop'},
       \ r: 'R',
       \ sh: 'sh',
       \ vim: 'nvim --clean -ERM',
