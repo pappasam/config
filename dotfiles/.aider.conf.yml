@@ -16,7 +16,7 @@ alias:
 # Behavior
 watch-files: true
 multiline: true
-suggest-shell-commands: true
+suggest-shell-commands: false
 cache-prompts: false
 stream: true
 notifications: true
