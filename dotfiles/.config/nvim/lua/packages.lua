@@ -353,7 +353,7 @@ require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
   enabled = function()
-    if vim.bo.filetype == 'vim' and vim.bo.buftype == 'nofile' then
+    if vim.bo.filetype == "vim" and vim.bo.buftype == "nofile" then
       -- disable in cmdline window (see :help cmdline-window)
       return false
     end
@@ -378,7 +378,9 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
     },
   },
   cmdline = {
-    enabled = false,
+    keymap = {
+      ["<CR>"] = { "accept_and_enter", "fallback" },
+    },
   },
 }) -- }}}
 require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
