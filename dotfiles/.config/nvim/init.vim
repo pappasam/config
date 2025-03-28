@@ -196,11 +196,9 @@ nnoremap <Leader>ac <Cmd>lua require('aider-custom').diagnostics_cursor()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/pappasam/nvim-repl
-nmap <silent> <Leader>rr <Plug>(ReplSendLine)
+nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
-nmap <silent> <Leader>rc <Plug>(ReplSendCell)
-nnoremap <Leader>rs <Cmd>ReplSend<CR>
-nnoremap <Leader>ra <Cmd>ReplAiderBufCur /add<CR>
+nmap <silent> <Leader>c <Plug>(ReplSendCell)
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
