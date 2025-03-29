@@ -16,7 +16,7 @@ alias:
 # Behavior
 cache-prompts: false
 check-update: false
-multiline: true
+multiline: false
 notifications-command: "Aider finished, ready for input"
 notifications: true
 show-release-notes: false
