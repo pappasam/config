@@ -20,3 +20,9 @@
 
 [aws]
 symbol = ' '
+
+[aws.region_aliases]
+ap-southeast-1 = 'sg'
+eu-west-1 = 'ie'
+eu-west-2 = 'uk'
+us-east-1 = 'va'
