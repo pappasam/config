@@ -17,3 +17,6 @@
 # color13: bright-purple or bright-magenta.
 # color14: bright-cyan.
 # color15: bright-white.
+
+[aws]
+symbol = ' '
