@@ -58,9 +58,6 @@ augroup end
 
 function s:papercolor_slim_linking()
   highlight link @aicomment                     DiagnosticInfo
-  highlight link SnacksPicker                   Normal
-  highlight link SnacksPickerBorder             Normal
-  highlight link SnacksPickerInputBorder        Normal
   highlight link SnacksPickerListCursorLine     CursorLine
   highlight link diffAdded                      DiffAdd
   highlight link diffRemoved                    DiffDelete
