@@ -14,15 +14,16 @@ alias:
   - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 
 # Behavior
-watch-files: true
-multiline: true
-suggest-shell-commands: false
 cache-prompts: false
-stream: true
-notifications: true
-notifications-command: "Aider finished, ready for input"
 check-update: false
+multiline: true
+notifications-command: "Aider finished, ready for input"
+notifications: true
 show-release-notes: false
+stream: true
+suggest-shell-commands: false
+watch-files: true
+yes-always: true
 
 # Git
 # Disabled because of: https://github.com/Aider-AI/aider/issues/3049
