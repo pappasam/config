@@ -185,6 +185,7 @@ nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
+nnoremap <Leader>ao <Cmd>ReplAider<CR>
 nnoremap <Leader>aa <Cmd>ReplAiderBufCur /add<CR>
 nnoremap <Leader>ad <Cmd>ReplAiderBufCur /drop<CR>
 nnoremap <Leader>as <Cmd>ReplSend<CR>
