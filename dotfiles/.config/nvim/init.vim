@@ -117,7 +117,6 @@ set splitright
 set statusline=\ %t%R%M%H%W
 set termguicolors
 set updatetime=300
-set winborder=rounded
 set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = #{
