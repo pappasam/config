@@ -9,6 +9,7 @@ require("packager").setup(function(p)
     "https://github.com/Saghen/blink.cmp",
     { ["do"] = "cargo build --release" }
   )
+  p.add("https://github.com/folke/lazydev.nvim")
   -- Tree Sitter
   p.add("https://github.com/nvim-treesitter/nvim-treesitter")
   p.add("https://github.com/tronikelis/ts-autotag.nvim")
@@ -351,6 +352,12 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
 }) -- }}}
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
+require("lazydev").setup({ -- https://github.com/folke/lazydev.nvim {{{
+  library = {
+    -- Load luvit types when the `vim.uv` word is found
+    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  },
+}) -- }}}
 require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
   enabled = function()
     if vim.bo.filetype == "vim" and vim.bo.buftype == "nofile" then
@@ -359,6 +366,17 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
     end
     return true
   end,
+  sources = {
+    default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+    providers = {
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        -- make lazydev completions top priority (see `:h blink.cmp`)
+        score_offset = 100,
+      },
+    },
+  },
   completion = {
     keyword = {
       range = "full",

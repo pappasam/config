@@ -40,7 +40,7 @@ augroup filetype_custom
   autocmd FileType toml,zsh,sh,bash,css setlocal iskeyword+=-
   autocmd FileType scss setlocal iskeyword+=@-@
   " keywordprg
-  autocmd FileType vim setlocal keywordprg=:help
+  autocmd FileType vim,lua setlocal keywordprg=:help
   autocmd FileType bib,gitcommit,markdown,org,plaintex,rst,rnoweb,tex,pandoc,quarto,rmd,context,html,htmldjango,xhtml,mail,text setlocal keywordprg=:DefEng
   autocmd FileType python setlocal keywordprg=:Pydoc
   autocmd FileType sh,zsh,bash setlocal keywordprg=:Man
