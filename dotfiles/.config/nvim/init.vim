@@ -96,6 +96,7 @@ set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
+set fillchars=foldclose:▸,foldopen:▾
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set isfname+=@-@,:
