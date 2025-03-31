@@ -2,61 +2,45 @@
 -- 'tabline' {{{
 
 function _G.custom_tabline()
-  local s = ""
+  local result = {}
   for i = 1, vim.fn.tabpagenr("$") do
-    -- Select the highlighting
     if i == vim.fn.tabpagenr() then
-      s = s .. "%#TabLineSel#"
+      table.insert(result, "%#TabLineSel#")
     else
-      s = s .. "%#TabLine#"
+      table.insert(result, "%#TabLine#")
     end
-    -- Add clickable tab functionality with %{tabnr}T
-    s = s .. "%" .. i .. "T"
-    -- Set the tab number
-    s = s .. " " .. i .. " "
-    -- Get the window number
+    table.insert(result, "%" .. i .. "T") -- BEGIN clickable region %{tabnr}T
+    table.insert(result, " " .. i .. " ") -- set number
     local winnr = vim.fn.tabpagewinnr(i)
-    -- Get the buffer list for this tab
     local buflist = vim.fn.tabpagebuflist(i)
-    -- Get the buffer number of the active buffer in this tab
     local bufnr = buflist[winnr]
-    local filename = vim.fn.bufname(bufnr)
-    -- Format the filename
-    if filename == "" then
-      filename = "[No Name]"
-    else
-      -- Check if this is a terminal buffer
-      if filename:match("^term://") then
-        -- Extract the actual command from the terminal buffer name
-        -- Pattern matches after the process ID section to get just the command
-        local command = filename:match("term://.-//[0-9]+:(.+)")
-        if command then
-          -- Extract just the first word of the command
-          local first_word = command:match("([^%s]+)")
-          if first_word then
-            filename = "[" .. first_word .. "]"
-          else
-            filename = "[term]"
-          end
+    local bufname = vim.fn.bufname(bufnr)
+    local tabfilename
+    if bufname == "" then
+      tabfilename = "[No Name]"
+    elseif bufname:match("^term://") then
+      local command = bufname:match("term://.-//[0-9]+:(.+)")
+      if command then
+        local first_word = command:match("([^%s]+)")
+        if first_word then
+          tabfilename = "[" .. first_word .. "]"
         else
-          filename = "[term]"
+          tabfilename = "[term]"
         end
       else
-        -- Regular file - just show the basename
-        filename = vim.fn.fnamemodify(filename, ":t")
+        tabfilename = "[term]"
       end
+    else
+      tabfilename = vim.fn.fnamemodify(bufname, ":t") -- regular file (basename)
     end
-    s = s .. filename .. " "
-    -- Add modified indicator
+    table.insert(result, tabfilename .. " ")
     if vim.fn.getbufvar(bufnr, "&modified") == 1 then
-      s = s .. "[+] "
+      table.insert(result, "[+] ")
     end
-    -- Close the clickable region
-    s = s .. "%T"
+    table.insert(result, "%T") -- END clickable region
   end
-  -- Fill the rest of the tabline
-  s = s .. "%#TabLineFill#%T"
-  return s
+  table.insert(result, "%#TabLineFill#%T") -- fill rest of tabline
+  return table.concat(result, "")
 end
 
 vim.o.tabline = "%!v:lua.custom_tabline()"
