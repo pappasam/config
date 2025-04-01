@@ -93,7 +93,7 @@ digraph '' 699  " Hawaiian character ʻ
 set cmdheight=2
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
 set cursorline cursorlineopt=number
-set diffopt+=algorithm:histogram,indent-heuristic
+set diffopt+=algorithm:histogram,inline:word,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
 set fillchars=foldclose:▸,foldopen:▾
