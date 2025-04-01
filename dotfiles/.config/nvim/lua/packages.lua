@@ -78,6 +78,7 @@ local language_servers = {
         linters = {
           SentenceCapitalization = false,
           SpellCheck = false,
+          LongSentences = false,
         },
       },
     },

@@ -1,22 +1,6 @@
 # schema https://starship.rs/config-schema.json
 # docs https://starship.rs/config/
-
-# color0: black.
-# color1: red.
-# color2: green.
-# color3: yellow.
-# color4: blue.
-# color5: purple or magenta.
-# color6: cyan.
-# color7: white.
-# color8: bright-black or gray.
-# color9: bright-red.
-# color10: bright-green.
-# color11: bright-yellow.
-# color12: bright-blue.
-# color13: bright-purple or bright-magenta.
-# color14: bright-cyan.
-# color15: bright-white.
+# system colors https://www.ditig.com/256-colors-cheat-sheet
 
 [aws]
 symbol = ' '
