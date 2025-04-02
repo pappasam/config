@@ -340,9 +340,11 @@ require("snacks").setup({
     },
   },
   rename = { enabled = true },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
-require("aerial").setup({}) -- }}}
+require("aerial").setup({})
+-- }}}
 -- https://github.com/folke/lazydev.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("lazydev").setup({
@@ -350,7 +352,8 @@ require("lazydev").setup({
     -- Load luvit types when the `vim.uv` word is found
     { path = "${3rd}/luv/library", words = { "vim%.uv" } },
   },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/Saghen/blink.cmp {{{
 require("blink-cmp").setup({
   enabled = function()
@@ -394,7 +397,8 @@ require("blink-cmp").setup({
       ["<CR>"] = { "accept_and_enter", "fallback" },
     },
   },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/catgoose/nvim-colorizer.lua {{{
 require("colorizer").setup({
   filetypes = {
@@ -404,7 +408,8 @@ require("colorizer").setup({
     "vim",
     "yaml",
   },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/sindrets/diffview.nvim {{{
 require("diffview").setup({
   enhanced_diff_hl = true,
@@ -420,7 +425,8 @@ require("diffview").setup({
       vim.opt_local.wrap = false
     end,
   },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/lewis6991/gitsigns.nvim {{{
 require("gitsigns").setup({
   signcolumn = false,
@@ -454,7 +460,8 @@ require("gitsigns").setup({
       return "<Ignore>"
     end, { expr = true })
   end,
-}) -- }}}
+})
+-- }}}
 -- https://github.com/chrishrb/gx.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("gx").setup({
@@ -502,22 +509,26 @@ require("gx").setup({
       end,
     },
   },
-}) -- }}}
+})
+-- }}}
 -- https://github.com/windwp/nvim-autopairs {{{
 require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
   map_cr = true,
   enable_check_bracket_line = false,
-}) -- }}}
+})
+-- }}}
 -- https://github.com/tronikelis/ts-autotag.nvim {{{
-require("ts-autotag").setup({}) -- }}}
+require("ts-autotag").setup({})
+-- }}}
 -- https://github.com/kyazdani42/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true,
-}) -- }}}
+})
+-- }}}
 -- https://github.com/sotte/presenting.nvim {{{
 require("presenting").setup({
   options = {
@@ -536,10 +547,12 @@ require("presenting").setup({
       echo
     ]])
   end,
-}) -- }}}
+})
+-- }}}
 -- https://github.com/j-hui/fidget.nvim {{{
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
-}) -- }}}
+})
+-- }}}
