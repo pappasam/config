@@ -314,6 +314,7 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   },
   lazygit = {
     enabled = true,
+    ---@diagnostic disable-next-line: missing-fields
     theme = {
       selectedLineBgColor = { bg = "CursorLine" },
     },
@@ -348,7 +349,9 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
 }) -- }}}
 require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
 }) -- }}}
-require("lazydev").setup({ -- https://github.com/folke/lazydev.nvim {{{
+-- require("lazydev") https://github.com/folke/lazydev.nvim {{{
+---@diagnostic disable-next-line: missing-fields
+require("lazydev").setup({
   library = {
     -- Load luvit types when the `vim.uv` word is found
     { path = "${3rd}/luv/library", words = { "vim%.uv" } },
@@ -454,7 +457,9 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
     end, { expr = true })
   end,
 }) -- }}}
-require("gx").setup({ -- https://github.com/chrishrb/gx.nvim {{{
+-- require("gx").setup({ https://github.com/chrishrb/gx.nvim {{{
+---@diagnostic disable-next-line: missing-fields
+require("gx").setup({
   open_browser_app = "firefox",
   handlers = {
     cratesio = {
