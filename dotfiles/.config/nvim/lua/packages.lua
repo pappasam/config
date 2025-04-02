@@ -313,13 +313,6 @@ require("snacks").setup({
       enabled = false,
     },
   },
-  lazygit = {
-    enabled = true,
-    ---@diagnostic disable-next-line: missing-fields
-    theme = {
-      selectedLineBgColor = { bg = "CursorLine" },
-    },
-  },
   picker = {
     enabled = true,
     exclude = {
@@ -349,8 +342,7 @@ require("snacks").setup({
   rename = { enabled = true },
 }) -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
-require("aerial").setup({
-}) -- }}}
+require("aerial").setup({}) -- }}}
 -- https://github.com/folke/lazydev.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("lazydev").setup({
@@ -519,8 +511,7 @@ require("nvim-autopairs").setup({
   enable_check_bracket_line = false,
 }) -- }}}
 -- https://github.com/tronikelis/ts-autotag.nvim {{{
-require("ts-autotag").setup({
-}) -- }}}
+require("ts-autotag").setup({}) -- }}}
 -- https://github.com/kyazdani42/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)

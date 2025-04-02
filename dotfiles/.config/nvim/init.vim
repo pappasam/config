@@ -218,7 +218,6 @@ command! -bang Qa qa<bang>
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! AiderDiag lua require('aider-custom').diagnostics_cursor()
-command! LazyGit lua Snacks.lazygit()
 command! P PackagerClean | PackagerUpdate
 command! W w
 command! WA wa
