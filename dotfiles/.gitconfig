@@ -9,6 +9,10 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
+  decorations = false
+  features = no decorations
+  hunk-header-style = omit
+  file-decoration-style = none
   navigate = true
 [init]
   defaultBranch = main
@@ -29,4 +33,4 @@
 [credential "https://gist.github.com"]
   helper = !gh auth git-credential
 [pager]
-  diff = false
+  diff = delta

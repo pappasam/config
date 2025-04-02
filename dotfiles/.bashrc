@@ -135,12 +135,9 @@ alias gd='git diff'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
 alias gp='git remote prune origin && git remote set-head origin -a'
-alias p='git pull'
+alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias gm='git commit'
-alias gmv='git commit --verbose'
-alias gma='git add . && git commit'
-alias gmav='git add . && git commit --verbose'
+alias gg='lazygit'
 alias ghastatus="gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' /orgs/keplergroup/actions/runners | jq -C '.runners[] | select(.status == \"online\") | {name, busy}'"
 alias gop='gh browse'
 alias aignore='echo ".aider.*" >> .git/info/exclude'
@@ -219,13 +216,6 @@ function gdl() {
   fi
   branch_current=$(git branch --show-current)
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
-}
-
-function gg() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
-  fi
-  nvim -c 'G' -c 'only'
 }
 
 # Git diff: pure diffs
