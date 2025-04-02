@@ -5,15 +5,20 @@
   editor = nvim
   autocrlf = false
   safecrlf = false
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
 [init]
   defaultBranch = main
 [alias]
   hist = !nvim -c "GV" -c "silent!tabonly"
   s = !nvim -c "G" -c "only"
   root = rev-parse --show-toplevel
-[merge "ours"]
+[merge]
   driver = true
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [pull]
   rebase = true
 [push]
