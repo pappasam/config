@@ -49,6 +49,16 @@ end, {
 -- :help lsp.txt
 -- :help diagnostic.txt
 
+vim.lsp.config("*", {
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = false, -- https://github.com/neovim/neovim/issues/23291
+      },
+    },
+  },
+})
+
 local language_servers = {
   autotools_ls = {},
   basedpyright = {
@@ -150,23 +160,9 @@ local language_servers = {
     },
   },
 }
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false -- https://github.com/neovim/neovim/issues/23291
 for server, server_config in pairs(language_servers) do
-  require("lspconfig")[server].setup(vim.tbl_deep_extend("force", {
-    capabilities = capabilities,
-  }, server_config))
+  require("lspconfig")[server].setup(server_config)
 end
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-      return
-    end
-    client.server_capabilities.semanticTokensProvider = nil -- disable semantic tokens
-  end,
-})
 
 -- Custom LSP
 vim.api.nvim_create_autocmd("FileType", {
@@ -176,7 +172,6 @@ vim.api.nvim_create_autocmd("FileType", {
       name = "github-actions-languageserver",
       cmd = { "github-actions-languageserver", "--stdio" },
       root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
-      capabilities = capabilities,
       init_options = {
         -- Requires the `repo` and `workflow` scopes
         sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
