@@ -302,7 +302,8 @@ vim.treesitter.query.set(
 vim.api.nvim_set_hl(0, "@aicomment", { link = "Todo" })
 
 -- }}}
-require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
+-- https://github.com/folke/snacks.nvim {{{
+require("snacks").setup({
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
   image = { enabled = true },
@@ -347,9 +348,10 @@ require("snacks").setup({ -- https://github.com/folke/snacks.nvim {{{
   },
   rename = { enabled = true },
 }) -- }}}
-require("aerial").setup({ -- https://github.com/stevearc/aerial.nvim {{{
+-- https://github.com/stevearc/aerial.nvim {{{
+require("aerial").setup({
 }) -- }}}
--- require("lazydev") https://github.com/folke/lazydev.nvim {{{
+-- https://github.com/folke/lazydev.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("lazydev").setup({
   library = {
@@ -357,7 +359,8 @@ require("lazydev").setup({
     { path = "${3rd}/luv/library", words = { "vim%.uv" } },
   },
 }) -- }}}
-require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
+-- https://github.com/Saghen/blink.cmp {{{
+require("blink-cmp").setup({
   enabled = function()
     if vim.bo.filetype == "vim" and vim.bo.buftype == "nofile" then
       -- disable in cmdline window (see :help cmdline-window)
@@ -400,7 +403,8 @@ require("blink-cmp").setup({ -- https://github.com/Saghen/blink.cmp {{{
     },
   },
 }) -- }}}
-require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {{{
+-- https://github.com/catgoose/nvim-colorizer.lua {{{
+require("colorizer").setup({
   filetypes = {
     "css",
     "kitty",
@@ -409,7 +413,8 @@ require("colorizer").setup({ -- https://github.com/catgoose/nvim-colorizer.lua {
     "yaml",
   },
 }) -- }}}
-require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
+-- https://github.com/sindrets/diffview.nvim {{{
+require("diffview").setup({
   enhanced_diff_hl = true,
   show_help_hints = false,
   file_panel = {
@@ -424,7 +429,8 @@ require("diffview").setup({ -- https://github.com/sindrets/diffview.nvim {{{
     end,
   },
 }) -- }}}
-require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
+-- https://github.com/lewis6991/gitsigns.nvim {{{
+require("gitsigns").setup({
   signcolumn = false,
   numhl = true,
   linehl = false,
@@ -457,7 +463,7 @@ require("gitsigns").setup({ -- https://github.com/lewis6991/gitsigns.nvim {{{
     end, { expr = true })
   end,
 }) -- }}}
--- require("gx").setup({ https://github.com/chrishrb/gx.nvim {{{
+-- https://github.com/chrishrb/gx.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("gx").setup({
   open_browser_app = "firefox",
@@ -505,20 +511,24 @@ require("gx").setup({
     },
   },
 }) -- }}}
-require("nvim-autopairs").setup({ -- https://github.com/windwp/nvim-autopairs {{{
+-- https://github.com/windwp/nvim-autopairs {{{
+require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
   map_cr = true,
   enable_check_bracket_line = false,
 }) -- }}}
-require("ts-autotag").setup({ -- https://github.com/tronikelis/ts-autotag.nvim {{{
+-- https://github.com/tronikelis/ts-autotag.nvim {{{
+require("ts-autotag").setup({
 }) -- }}}
-require("nvim-web-devicons").setup({ -- https://github.com/kyazdani42/nvim-web-devicons {{{
+-- https://github.com/kyazdani42/nvim-web-devicons {{{
+require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true,
 }) -- }}}
-require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
+-- https://github.com/sotte/presenting.nvim {{{
+require("presenting").setup({
   options = {
     width = 60,
   },
@@ -536,7 +546,8 @@ require("presenting").setup({ -- https://github.com/sotte/presenting.nvim {{{
     ]])
   end,
 }) -- }}}
-require("fidget").setup({ -- https://github.com/j-hui/fidget.nvim {{{
+-- https://github.com/j-hui/fidget.nvim {{{
+require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
