@@ -135,8 +135,6 @@ let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.githubactions': 'yaml'}
-" https://github.com/pappasam/nvim-repl
-let g:repl_filetype_commands = {}
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
 
