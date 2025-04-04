@@ -57,7 +57,6 @@ augroup filetype_custom
 augroup end
 
 function s:papercolor_slim_linking()
-  highlight link @aicomment                     DiagnosticInfo
   highlight link SnacksPickerListCursorLine     CursorLine
 endfunction
 
