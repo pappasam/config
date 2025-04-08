@@ -17,7 +17,6 @@ alias:
 cache-prompts: false
 check-update: false
 multiline: false
-notifications-command: "Aider finished, ready for input"
 notifications: true
 show-release-notes: false
 stream: true
