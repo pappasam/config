@@ -112,7 +112,6 @@ set shortmess+=c
 set showtabline=2
 set signcolumn=number
 set splitright
-set statusline=\ %t%R%M%H%W
 set termguicolors
 set updatetime=300
 set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
@@ -285,12 +284,12 @@ function! s:focuswriting()
     tabe
     " Left Window
     let w:focuswriting = 1
-    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
     vsplit
     vsplit
     " Right Window
     let w:focuswriting = 1
-    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
     wincmd h
     " Middle Window
     let w:focuswriting = 1
