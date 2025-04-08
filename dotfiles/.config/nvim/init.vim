@@ -211,21 +211,10 @@ nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
 " }}}
 " Commands {{{
 
-command! -bang Q q<bang>
-command! -bang QA qa<bang>
-command! -bang Qa qa<bang>
 command! ConcealDisable set conceallevel=0 concealcursor=
 command! ConcealEnable set conceallevel=3 concealcursor=nc
 command! AiderDiag lua require('aider-custom').diagnostics_cursor()
 command! P PackagerClean | PackagerUpdate
-command! W w
-command! WA wa
-command! WQ wq
-command! WQA wqa
-command! WQa wqa
-command! Wa wa
-command! Wq wq
-command! Wqa wqa
 
 command! C call s:color()
 function! s:color()
