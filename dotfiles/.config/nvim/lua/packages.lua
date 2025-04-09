@@ -1,47 +1,45 @@
 -- Packages {{{
 
-require("packager").setup(function(p)
+require("paq")({
   -- Language Server (LSP)
-  p.add("https://github.com/neovim/nvim-lspconfig")
-  p.add("https://github.com/stevearc/aerial.nvim")
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/stevearc/aerial.nvim",
   -- Autocompletion
-  p.add(
+  {
     "https://github.com/Saghen/blink.cmp",
-    { ["do"] = "cargo build --release" }
-  )
-  p.add("https://github.com/folke/lazydev.nvim")
+    build = "cargo build --release",
+  },
+  "https://github.com/folke/lazydev.nvim",
   -- Tree Sitter
-  p.add("https://github.com/nvim-treesitter/nvim-treesitter")
-  p.add("https://github.com/tronikelis/ts-autotag.nvim")
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/tronikelis/ts-autotag.nvim",
   -- Git
-  p.add("https://github.com/junegunn/gv.vim")
-  p.add("https://github.com/lewis6991/gitsigns.nvim")
-  p.add("https://github.com/tpope/vim-fugitive")
-  p.add("https://github.com/sindrets/diffview.nvim")
+  "https://github.com/junegunn/gv.vim",
+  "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/tpope/vim-fugitive",
+  "https://github.com/sindrets/diffview.nvim",
   -- My Plugins
-  p.add("https://github.com/pappasam/nvim-repl")
-  p.add("https://github.com/pappasam/papercolor-theme-slim")
-  p.add("https://github.com/pappasam/vim-filetype-formatter")
-  p.add("https://github.com/pappasam/vim-keywordprg-commands")
+  "https://github.com/pappasam/nvim-repl",
+  "https://github.com/pappasam/papercolor-theme-slim",
+  "https://github.com/pappasam/vim-filetype-formatter",
+  "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  p.add("https://github.com/j-hui/fidget.nvim.git")
-  p.add("https://github.com/folke/snacks.nvim")
-  p.add("https://github.com/nvim-tree/nvim-web-devicons")
-  p.add("https://github.com/fladson/vim-kitty")
-  p.add("https://github.com/mikesmithgh/kitty-scrollback.nvim")
-  p.add("https://github.com/HiPhish/info.vim")
-  p.add("https://github.com/catgoose/nvim-colorizer.lua")
-  p.add("https://github.com/chrishrb/gx.nvim")
-  p.add("https://github.com/fidian/hexmode")
-  p.add(
+  "https://github.com/j-hui/fidget.nvim.git",
+  "https://github.com/folke/snacks.nvim",
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/fladson/vim-kitty",
+  "https://github.com/mikesmithgh/kitty-scrollback.nvim",
+  "https://github.com/HiPhish/info.vim",
+  "https://github.com/catgoose/nvim-colorizer.lua",
+  "https://github.com/chrishrb/gx.nvim",
+  "https://github.com/fidian/hexmode",
+  {
     "https://github.com/iamcco/markdown-preview.nvim",
-    { ["do"] = "cd app & yarn install" }
-  )
-  p.add("https://github.com/machakann/vim-sandwich")
-  p.add("https://github.com/sotte/presenting.nvim.git")
-  p.add("https://github.com/windwp/nvim-autopairs")
-end, {
-  window_cmd = "edit",
+    build = "cd app & yarn install",
+  },
+  "https://github.com/machakann/vim-sandwich",
+  "https://github.com/sotte/presenting.nvim.git",
+  "https://github.com/windwp/nvim-autopairs",
 })
 
 -- }}}
