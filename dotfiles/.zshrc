@@ -71,7 +71,7 @@ function _dircomp_config() { _directories -W "$HOME/config"; }
 function _dircomp_kepler() { _directories -W "$HOME/src/KeplerGroup"; }
 function _dircomp_pappasam() { _directories -W "$HOME/src/pappasam"; }
 function _dircomp_rocket() { _directories -W "$HOME/src/KeplerGroup/KIP-Rocket"; }
-function _dircomp_vplug() { _directories -W "$HOME/.config/nvim/pack/packager/start"; }
+function _dircomp_vplug() { _directories -W "$HOME/.local/share/nvim/site/pack/paqs/start"; }
 function _dircomp_lib() { _directories -W "$HOME/src/lib"; }
 function _git_branches() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi

@@ -35,7 +35,7 @@ require("paq")({
   "https://github.com/fidian/hexmode",
   {
     "https://github.com/iamcco/markdown-preview.nvim",
-    build = "cd app & yarn install",
+    build = "npx --yes yarn --cwd app install",
   },
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/sotte/presenting.nvim.git",
