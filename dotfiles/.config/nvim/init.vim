@@ -218,7 +218,7 @@ command! P PaqSync
 command! C call s:color()
 function! s:color()
   tabe
-  tcd ~/.config/nvim/pack/packager/start/papercolor-theme-slim
+  tcd ~/.local/share/nvim/site/pack/paqs/start/papercolor-theme-slim
   edit ./colors/PaperColorSlim.vim
   set cursorlineopt=both
   vsplit
