@@ -290,13 +290,6 @@ vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
--- Fix broken queries
-vim.treesitter.query.set(
-  "dockerfile",
-  "injections",
-  '((comment) @injection.content (#set! injection.language "comment"))'
-)
-
 -- }}}
 -- https://github.com/folke/snacks.nvim {{{
 require("snacks").setup({
