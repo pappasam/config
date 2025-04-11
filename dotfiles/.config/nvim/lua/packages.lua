@@ -363,6 +363,11 @@ require("blink-cmp").setup({
       },
     },
   },
+  fuzzy = {
+    prebuilt_binaries = {
+      ignore_version_mismatch = true,
+    },
+  },
   completion = {
     keyword = {
       range = "full",
