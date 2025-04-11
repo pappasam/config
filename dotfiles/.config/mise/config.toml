@@ -4,7 +4,6 @@
 experimental = true # set now specifically for golang support
 
 [tools]
-act = "latest"
 awscli = "latest"
 bat = "latest"
 cargo-binstall = "latest"
