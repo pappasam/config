@@ -44,8 +44,42 @@ require("paq")({
 
 -- }}}
 -- Language Servers: https://github.com/neovim/nvim-lspconfig {{{
--- :help lsp.txt
+
 -- :help diagnostic.txt
+
+vim.diagnostic.config({
+  jump = {
+    float = true,
+  },
+})
+
+-- :help lsp.txt
+
+vim.lsp.enable("autotools_ls")
+vim.lsp.enable("basedpyright")
+vim.lsp.enable("bashls")
+vim.lsp.enable("cssls")
+vim.lsp.enable("dockerls")
+vim.lsp.enable("gh_actions_ls")
+vim.lsp.enable("gopls")
+vim.lsp.enable("graphql")
+vim.lsp.enable("harper_ls")
+vim.lsp.enable("html")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("marksman")
+vim.lsp.enable("mdx_analyzer")
+vim.lsp.enable("nginx_language_server")
+vim.lsp.enable("prismals")
+vim.lsp.enable("r_language_server")
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("shopify_theme_ls")
+vim.lsp.enable("svelte")
+vim.lsp.enable("taplo")
+vim.lsp.enable("terraformls")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("vimls")
+vim.lsp.enable("yamlls")
 
 vim.lsp.config("*", {
   capabilities = {
@@ -56,9 +90,6 @@ vim.lsp.config("*", {
     },
   },
 })
-
-vim.lsp.enable("autotools_ls")
-vim.lsp.enable("basedpyright")
 vim.lsp.config("basedpyright", {
   settings = {
     basedpyright = {
@@ -75,12 +106,12 @@ vim.lsp.config("basedpyright", {
     },
   },
 })
-vim.lsp.enable("bashls")
-vim.lsp.enable("cssls")
-vim.lsp.enable("dockerls")
-vim.lsp.enable("gopls")
-vim.lsp.enable("graphql")
-vim.lsp.enable("harper_ls")
+vim.lsp.config("gh_actions_ls", {
+  init_options = {
+    -- Requires the `repo` and `workflow` scopes
+    sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
+  },
+})
 vim.lsp.config("harper_ls", {
   settings = {
     ["harper-ls"] = {
@@ -92,9 +123,6 @@ vim.lsp.config("harper_ls", {
     },
   },
 })
-vim.lsp.enable("html")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -123,19 +151,6 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
-vim.lsp.enable("marksman")
-vim.lsp.enable("mdx_analyzer")
-vim.lsp.enable("nginx_language_server")
-vim.lsp.enable("prismals")
-vim.lsp.enable("r_language_server")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("shopify_theme_ls")
-vim.lsp.enable("svelte")
-vim.lsp.enable("taplo")
-vim.lsp.enable("terraformls")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("vimls")
-vim.lsp.enable("yamlls")
 vim.lsp.config("yamlls", {
   filetypes = { "yaml" },
   settings = {
@@ -158,27 +173,6 @@ vim.lsp.config("yamlls", {
         "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
       },
     },
-  },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "yaml.githubactions",
-  callback = function(args)
-    vim.lsp.start({
-      name = "github-actions-languageserver",
-      cmd = { "github-actions-languageserver", "--stdio" },
-      root_dir = vim.fs.root(args.buf, { ".github", ".git" }),
-      init_options = {
-        -- Requires the `repo` and `workflow` scopes
-        sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
-      },
-    })
-  end,
-})
-
-vim.diagnostic.config({
-  jump = {
-    float = true,
   },
 })
 
