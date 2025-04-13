@@ -43,18 +43,15 @@ require("paq")({
 })
 
 -- }}}
--- Language Servers: https://github.com/neovim/nvim-lspconfig {{{
+-- LSP & Diagnostics {{{
 
--- :help diagnostic.txt
+-- :help diagnostic.txt ; :help lsp.txt ; https://github.com/neovim/nvim-lspconfig
 
 vim.diagnostic.config({
   jump = {
     float = true,
   },
 })
-
--- :help lsp.txt
-
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
@@ -80,7 +77,6 @@ vim.lsp.enable("terraformls")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("vimls")
 vim.lsp.enable("yamlls")
-
 vim.lsp.config("*", {
   capabilities = {
     workspace = {
@@ -177,8 +173,8 @@ vim.lsp.config("yamlls", {
 })
 
 -- }}}
--- Treesitter: https://github.com/nvim-treesitter/nvim-treesitter {{{
--- :help treesitter.txt
+-- Treesitter {{{
+-- :help treesitter.txt ; https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
