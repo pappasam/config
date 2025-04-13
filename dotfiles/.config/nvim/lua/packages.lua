@@ -57,112 +57,110 @@ vim.lsp.config("*", {
   },
 })
 
-local language_servers = {
-  autotools_ls = {},
-  basedpyright = {
-    settings = {
-      basedpyright = {
-        analysis = {
-          diagnosticSeverityOverrides = {
-            reportAny = "none",
-            reportExplicitAny = "none",
-            reportUnannotatedClassAttribute = "none",
-            reportUninitializedInstanceVariable = "none",
-            reportUnnecessaryIsInstance = "none",
-            reportUnusedCallResult = "none",
-          },
+vim.lsp.enable("autotools_ls")
+vim.lsp.enable("basedpyright")
+vim.lsp.config("basedpyright", {
+  settings = {
+    basedpyright = {
+      analysis = {
+        diagnosticSeverityOverrides = {
+          reportAny = "none",
+          reportExplicitAny = "none",
+          reportUnannotatedClassAttribute = "none",
+          reportUninitializedInstanceVariable = "none",
+          reportUnnecessaryIsInstance = "none",
+          reportUnusedCallResult = "none",
         },
       },
     },
   },
-  bashls = {},
-  cssls = {},
-  dockerls = {},
-  gopls = {},
-  graphql = {},
-  harper_ls = {
-    settings = {
-      ["harper-ls"] = {
-        linters = {
-          SentenceCapitalization = false,
-          SpellCheck = false,
-          LongSentences = false,
-        },
+})
+vim.lsp.enable("bashls")
+vim.lsp.enable("cssls")
+vim.lsp.enable("dockerls")
+vim.lsp.enable("gopls")
+vim.lsp.enable("graphql")
+vim.lsp.enable("harper_ls")
+vim.lsp.config("harper_ls", {
+  settings = {
+    ["harper-ls"] = {
+      linters = {
+        SentenceCapitalization = false,
+        SpellCheck = false,
+        LongSentences = false,
       },
     },
   },
-  html = {},
-  jsonls = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using
-          -- (most likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
+})
+vim.lsp.enable("html")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("lua_ls")
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {
+          "vim",
+          "require",
         },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {
-            "vim",
-            "require",
-          },
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
         },
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-          },
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
       },
     },
   },
-  marksman = {},
-  mdx_analyzer = {},
-  nginx_language_server = {},
-  prismals = {},
-  r_language_server = {},
-  rust_analyzer = {},
-  shopify_theme_ls = {},
-  svelte = {},
-  taplo = {},
-  terraformls = {},
-  ts_ls = {},
-  vimls = {},
-  yamlls = {
-    filetypes = { "yaml" },
-    settings = {
-      yaml = {
-        schemas = {
-          kubernetes = "/kubernetes/**",
-          ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = "/*docker-compose.yml",
-          ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
-          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
-            "/*open-api*.yml",
-            "/*open-api*.yaml",
-          },
+})
+vim.lsp.enable("marksman")
+vim.lsp.enable("mdx_analyzer")
+vim.lsp.enable("nginx_language_server")
+vim.lsp.enable("prismals")
+vim.lsp.enable("r_language_server")
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("shopify_theme_ls")
+vim.lsp.enable("svelte")
+vim.lsp.enable("taplo")
+vim.lsp.enable("terraformls")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("vimls")
+vim.lsp.enable("yamlls")
+vim.lsp.config("yamlls", {
+  filetypes = { "yaml" },
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = "/kubernetes/**",
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = "/*docker-compose.yml",
+        ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
+        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
+          "/*open-api*.yml",
+          "/*open-api*.yaml",
         },
-        customTags = {
-          "!ENV scalar",
-          "!ENV sequence",
-          "!relative scalar",
-          "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
-          "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
-          "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
-        },
+      },
+      customTags = {
+        "!ENV scalar",
+        "!ENV sequence",
+        "!relative scalar",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+        "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
       },
     },
   },
-}
-for server, server_config in pairs(language_servers) do
-  require("lspconfig")[server].setup(server_config)
-end
+})
 
--- Custom LSP
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "yaml.githubactions",
   callback = function(args)
@@ -178,7 +176,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Diagnostic configuration
 vim.diagnostic.config({
   jump = {
     float = true,
