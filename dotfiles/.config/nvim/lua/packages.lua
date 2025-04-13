@@ -1,6 +1,8 @@
--- Packages {{{
+-- https://github.com/savq/paq-nvim {{{
 
 require("paq")({
+  -- self
+  "https://github.com/savq/paq-nvim",
   -- Language Server (LSP)
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/aerial.nvim",
@@ -24,7 +26,7 @@ require("paq")({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  "https://github.com/j-hui/fidget.nvim.git",
+  "https://github.com/j-hui/fidget.nvim",
   "https://github.com/folke/snacks.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/fladson/vim-kitty",
@@ -38,20 +40,14 @@ require("paq")({
     build = vim.fn["mkdp#util#install"],
   },
   "https://github.com/machakann/vim-sandwich",
-  "https://github.com/sotte/presenting.nvim.git",
+  "https://github.com/sotte/presenting.nvim",
   "https://github.com/windwp/nvim-autopairs",
 })
 
 -- }}}
--- LSP & Diagnostics {{{
+-- lsp.txt {{{
+-- https://github.com/neovim/nvim-lspconfig
 
--- :help diagnostic.txt ; :help lsp.txt ; https://github.com/neovim/nvim-lspconfig
-
-vim.diagnostic.config({
-  jump = {
-    float = true,
-  },
-})
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
@@ -173,8 +169,17 @@ vim.lsp.config("yamlls", {
 })
 
 -- }}}
--- Treesitter {{{
--- :help treesitter.txt ; https://github.com/nvim-treesitter/nvim-treesitter
+-- diagnostic.txt {{{
+
+vim.diagnostic.config({
+  jump = {
+    float = true,
+  },
+})
+
+-- }}}
+-- treesitter.txt {{{
+-- https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
@@ -194,83 +199,7 @@ require("nvim-treesitter.configs").setup({
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
   },
-  ensure_installed = {
-    "bash",
-    "bibtex",
-    "c",
-    "c_sharp",
-    "comment",
-    "cpp",
-    "css",
-    "csv",
-    "cuda",
-    "diff",
-    "dot",
-    "dockerfile",
-    "fortran",
-    "gdscript",
-    "git_config",
-    "git_rebase",
-    "gitattributes",
-    "gitcommit",
-    "gitignore",
-    "go",
-    "gomod",
-    "graphql",
-    "haskell",
-    "haskell_persistent",
-    "hcl",
-    "html",
-    "htmldjango",
-    "http",
-    "ini",
-    "java",
-    "javascript",
-    "jinja",
-    "jinja_inline",
-    "jsdoc",
-    "json",
-    "json5",
-    "jsonc",
-    "julia",
-    "kotlin",
-    "latex",
-    "ledger",
-    "liquid",
-    "lua",
-    "luadoc",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "mermaid",
-    "nginx",
-    "ocaml",
-    "perl",
-    "php",
-    "prisma",
-    "printf",
-    "properties",
-    "pymanifest",
-    "python",
-    "query",
-    "r",
-    "regex",
-    "requirements",
-    "ron",
-    "rst",
-    "ruby",
-    "rust",
-    "scss",
-    "sql",
-    "svelte",
-    "terraform",
-    "toml",
-    "tsx",
-    "typescript",
-    "xml",
-    "yaml",
-    "zathurarc",
-  },
+  ensure_installed = "all",
 })
 
 vim.treesitter.language.register("terraform", "terraform-vars")
