@@ -211,7 +211,13 @@ vim.treesitter.language.register("bash", "shell")
 require("snacks").setup({
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
-  image = { enabled = true },
+  image = {
+    enabled = true,
+    ---@diagnostic disable-next-line: missing-fields
+    convert = {
+      notify = false,
+    },
+  },
   indent = {
     enabled = true,
     scope = {
