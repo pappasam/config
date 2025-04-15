@@ -34,7 +34,6 @@ require("paq")({
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
-  "https://github.com/fidian/hexmode",
   {
     "https://github.com/iamcco/markdown-preview.nvim",
     build = vim.fn["mkdp#util#install"],

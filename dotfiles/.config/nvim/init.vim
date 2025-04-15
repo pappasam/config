@@ -118,9 +118,6 @@ let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
-" https://github.com/fidian/hexmode
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-let g:hexmode_xxd_options = '-g 2'
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
 
