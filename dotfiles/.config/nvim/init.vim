@@ -7,7 +7,6 @@ augroup filetype_assignment
   autocmd BufRead,BufNewFile *.{cfg,ini},.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
   " yaml files
   autocmd BufRead,BufNewFile *.config,.cookiecutterrc,DESCRIPTION,.lintr,docker-compose.* set filetype=yaml
-  autocmd BufRead,BufNewFile *.github/workflows/*.yml set filetype=yaml.github
   " json files
   autocmd BufRead,BufNewFile renv.lock,.jrnl_config,*.{bowerrc,babelrc,eslintrc,slack-term,htmlhintrc,stylelintrc,firebaserc} set filetype=json
   autocmd BufRead,BufNewFile tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
@@ -122,8 +121,6 @@ let g:loaded_netrwPlugin = 1
 " https://github.com/fidian/hexmode
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 let g:hexmode_xxd_options = '-g 2'
-" https://github.com/pappasam/vim-filetype-formatter
-let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
 
