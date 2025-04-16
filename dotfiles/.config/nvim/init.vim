@@ -152,7 +152,7 @@ nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
-nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover({max_width=79})<CR>
 nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 " help vim.snippet
