@@ -50,6 +50,7 @@ require("paq")({
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
+vim.lsp.enable("clangd") -- needs project-level compile-commands.json
 vim.lsp.enable("cssls")
 vim.lsp.enable("dockerls")
 vim.lsp.enable("gh_actions_ls")
