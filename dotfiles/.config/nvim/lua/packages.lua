@@ -1,5 +1,4 @@
 -- savq/paq-nvim {{{
-
 require("paq")({
   -- self
   "https://github.com/savq/paq-nvim",
@@ -42,10 +41,8 @@ require("paq")({
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/windwp/nvim-autopairs",
 })
-
 -- }}}
 -- neovim:lsp.txt {{{
--- https://github.com/neovim/nvim-lspconfig
 
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
