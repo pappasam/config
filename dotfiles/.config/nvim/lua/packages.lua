@@ -42,7 +42,7 @@ require("paq")({
   "https://github.com/windwp/nvim-autopairs",
 })
 -- }}}
--- neovim:lsp.txt {{{
+-- nvim:lsp.txt {{{
 
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
@@ -166,7 +166,7 @@ vim.lsp.config("yamlls", {
 })
 
 -- }}}
--- neovim:diagnostic.txt {{{
+-- nvim:diagnostic.txt {{{
 
 vim.diagnostic.config({
   jump = {
@@ -175,7 +175,7 @@ vim.diagnostic.config({
 })
 
 -- }}}
--- neovim:treesitter.txt {{{
+-- nvim:treesitter.txt {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
