@@ -1,9 +1,0 @@
-# - name: bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0
-#   edit_format: diff
-#   # <https://github.com/Aider-AI/aider/issues/3386>
-#   use_temperature: false # not compatible with thinking mode
-#   extra_params:
-#     max_tokens: 64000 # must be greater than budget_tokens
-#     thinking:
-#       type: enabled
-#       budget_tokens: 32000 # Adjust this number
