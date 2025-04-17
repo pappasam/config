@@ -1,4 +1,4 @@
--- https://github.com/savq/paq-nvim {{{
+-- savq/paq-nvim {{{
 
 require("paq")({
   -- self
@@ -44,7 +44,7 @@ require("paq")({
 })
 
 -- }}}
--- lsp.txt {{{
+-- neovim:lsp.txt {{{
 -- https://github.com/neovim/nvim-lspconfig
 
 vim.lsp.enable("autotools_ls")
@@ -169,7 +169,7 @@ vim.lsp.config("yamlls", {
 })
 
 -- }}}
--- diagnostic.txt {{{
+-- neovim:diagnostic.txt {{{
 
 vim.diagnostic.config({
   jump = {
@@ -178,7 +178,7 @@ vim.diagnostic.config({
 })
 
 -- }}}
--- treesitter.txt {{{
+-- neovim:treesitter.txt {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
@@ -207,7 +207,7 @@ vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
 -- }}}
--- https://github.com/folke/snacks.nvim {{{
+-- folke/snacks.nvim {{{
 require("snacks").setup({
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
@@ -253,10 +253,10 @@ require("snacks").setup({
   rename = { enabled = true },
 })
 -- }}}
--- https://github.com/stevearc/aerial.nvim {{{
+-- stevearc/aerial.nvim {{{
 require("aerial").setup({})
 -- }}}
--- https://github.com/folke/lazydev.nvim {{{
+-- folke/lazydev.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("lazydev").setup({
   library = {
@@ -265,7 +265,7 @@ require("lazydev").setup({
   },
 })
 -- }}}
--- https://github.com/Saghen/blink.cmp {{{
+-- Saghen/blink.cmp {{{
 require("blink-cmp").setup({
   enabled = function()
     if vim.bo.filetype == "vim" and vim.bo.buftype == "nofile" then
@@ -310,7 +310,7 @@ require("blink-cmp").setup({
   },
 })
 -- }}}
--- https://github.com/catgoose/nvim-colorizer.lua {{{
+-- catgoose/nvim-colorizer.lua {{{
 require("colorizer").setup({
   filetypes = {
     "css",
@@ -321,7 +321,7 @@ require("colorizer").setup({
   },
 })
 -- }}}
--- https://github.com/sindrets/diffview.nvim {{{
+-- sindrets/diffview.nvim {{{
 require("diffview").setup({
   enhanced_diff_hl = true,
   show_help_hints = false,
@@ -338,7 +338,7 @@ require("diffview").setup({
   },
 })
 -- }}}
--- https://github.com/lewis6991/gitsigns.nvim {{{
+-- lewis6991/gitsigns.nvim {{{
 require("gitsigns").setup({
   signcolumn = false,
   numhl = true,
@@ -373,7 +373,7 @@ require("gitsigns").setup({
   end,
 })
 -- }}}
--- https://github.com/chrishrb/gx.nvim {{{
+-- chrishrb/gx.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("gx").setup({
   open_browser_app = "firefox",
@@ -422,7 +422,7 @@ require("gx").setup({
   },
 })
 -- }}}
--- https://github.com/windwp/nvim-autopairs {{{
+-- windwp/nvim-autopairs {{{
 require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
@@ -430,17 +430,17 @@ require("nvim-autopairs").setup({
   enable_check_bracket_line = false,
 })
 -- }}}
--- https://github.com/tronikelis/ts-autotag.nvim {{{
+-- tronikelis/ts-autotag.nvim {{{
 require("ts-autotag").setup({})
 -- }}}
--- https://github.com/kyazdani42/nvim-web-devicons {{{
+-- kyazdani42/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true,
 })
 -- }}}
--- https://github.com/sotte/presenting.nvim {{{
+-- sotte/presenting.nvim {{{
 require("presenting").setup({
   options = {
     width = 60,
@@ -460,7 +460,7 @@ require("presenting").setup({
   end,
 })
 -- }}}
--- https://github.com/j-hui/fidget.nvim {{{
+-- j-hui/fidget.nvim {{{
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
