@@ -202,13 +202,20 @@ command! P PaqSync
 
 command! C call s:color()
 function! s:color()
-  tabe
-  tcd ~/.local/share/nvim/site/pack/paqs/start/papercolor-theme-slim
-  edit ./colors/PaperColorSlim.vim
-  set cursorlineopt=both
-  vsplit
-  edit ./colors/PaperColorSlimLight.vim
-  wincmd h
+  set lazyredraw
+  try
+    only
+    cd ~/.local/share/nvim/site/pack/paqs/start/papercolor-theme-slim
+    edit ./colors/PaperColorSlim.vim
+    set cursorlineopt=both
+    vsplit
+    edit ./colors/PaperColorSlimLight.vim
+    wincmd h
+    normal! M
+    CS
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! CS call s:color_sync()
