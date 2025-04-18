@@ -4,6 +4,12 @@
 
 This section of the README describes useful programs you will need to install - or configure - manually, when the time is right.
 
+### Tux Guitar
+
+For musical tab editing
+
+<https://github.com/helge17/tuxguitar>
+
 ### Fonts
 
 Download a relevant font, place in `~/src/lib/fonts`, and unzip. My favorite at the moment: <https://github.com/theleagueof/league-mono>
