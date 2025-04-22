@@ -26,6 +26,7 @@ require("paq")({
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
   "https://github.com/j-hui/fidget.nvim",
+  "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/folke/snacks.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/fladson/vim-kitty",
