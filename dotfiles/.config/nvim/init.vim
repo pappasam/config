@@ -251,10 +251,6 @@ endfunction
 
 command! Fit call s:resize_window_width()
 function! s:resize_window_width()
-  if &wrap
-    echom 'run `:set nowrap` before resizing window'
-    return
-  endif
   set lazyredraw
   try
     let max_length = max(map(range(1, line('$')), "virtcol([v:val, '$'])"))
