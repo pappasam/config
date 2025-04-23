@@ -430,7 +430,6 @@ function pydev-install() {
 }
 
 function pyglobal-install() {
-  pip install --user pipx
   pip install -U argcomplete && pydev-install
 }
 
