@@ -2,6 +2,7 @@
 
 [settings]
 experimental = true # set now specifically for golang support
+idiomatic_version_file_enable_tools = ["rust"]
 
 [tools]
 awscli = "latest"
