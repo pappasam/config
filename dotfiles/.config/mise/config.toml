@@ -1,7 +1,7 @@
 # :schema https://github.com/jdx/mise/blob/main/schema/mise.json
 
 [settings]
-experimental = true # set now specifically for golang support
+experimental = true                            # set now specifically for golang support
 idiomatic_version_file_enable_tools = ["rust"]
 
 [tools]
@@ -22,7 +22,7 @@ minikube = "latest"
 node = "22.8.0"
 perl = "5.40.0"
 postgres = "13.0"
-python = "3.12.6"
+python = "3.13.3"
 r = "4.4.1"
 ripgrep = "latest"
 httpie-go = "latest"
@@ -61,7 +61,7 @@ vault = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:write-good" = "latest"
 "npm:yaml-language-server" = "latest"
-"pipx:aider-chat" = { version = "latest", uvx_args = "--with boto3" }
+"pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12 --with boto3" }
 "pipx:autotools-language-server" = "latest"
 "pipx:basedpyright" = "latest"
 "pipx:cookiecutter" = "latest"
