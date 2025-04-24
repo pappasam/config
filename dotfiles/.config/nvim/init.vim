@@ -155,6 +155,7 @@ nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled(
 nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover({max_width=79})<CR>
 nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
+nnoremap grD <Cmd>lua vim.diagnostic.setqflist()<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
