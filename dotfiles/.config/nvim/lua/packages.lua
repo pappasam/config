@@ -146,7 +146,7 @@ vim.lsp.config("yamlls", {
   settings = {
     yaml = {
       schemas = {
-        kubernetes = "", -- disable since I enable it below
+        kubernetes = "", -- disable built-in kubernetes support because we use specific version below
         ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.28.0-standalone/all.json"] = "*.k8s.yaml",
         ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = {
           "compose.yml",
