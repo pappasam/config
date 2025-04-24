@@ -146,13 +146,13 @@ vim.lsp.config("yamlls", {
   settings = {
     yaml = {
       schemas = {
-        kubernetes = "/kubernetes/**",
-        ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = "/*docker-compose.yml",
-        ["https://raw.githubusercontent.com/threadheap/serverless-ide-vscode/master/packages/serverless-framework-schema/schema.json"] = "/*serverless.yml",
-        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json"] = {
-          "/*open-api*.yml",
-          "/*open-api*.yaml",
+        kubernetes = "", -- disable since I enable it below
+        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.28.0-standalone/all.json"] = "*.k8s.yaml",
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = {
+          "compose.yml",
+          "compose.yaml",
         },
+        ["http://json.schemastore.org/kustomization"] = "kustomization.yaml",
       },
       customTags = {
         "!ENV scalar",
@@ -161,6 +161,13 @@ vim.lsp.config("yamlls", {
         "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
         "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
         "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
+      },
+      -- Add this to help with schema validation
+      validate = true,
+      -- This can help with schema conflicts
+      schemaStore = {
+        enable = false,
+        url = "",
       },
     },
   },
