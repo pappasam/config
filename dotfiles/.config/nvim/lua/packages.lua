@@ -96,6 +96,7 @@ vim.lsp.config("basedpyright", {
   },
 })
 vim.lsp.config("gh_actions_ls", {
+  filetypes = { "yaml.github" },
   init_options = {
     -- Requires the `repo` and `workflow` scopes
     sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
