@@ -4,6 +4,7 @@
     "asvetliakov.vscode-neovim": 1
   },
   "editor.fontSize": 16,
-  "python.defaultInterpreterPath": "/home/sroeca/src/lib/micrograd/.venv",
-  "editor.tabSize": 2
+  "python.defaultInterpreterPath": "/home/sroeca/src/pappasam/toml-sort/.venv",
+  "editor.tabSize": 2,
+  "python.languageServer": "Jedi"
 }
