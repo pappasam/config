@@ -38,8 +38,8 @@ require("paq")({
     "https://github.com/iamcco/markdown-preview.nvim",
     build = vim.fn["mkdp#util#install"],
   },
-  "https://github.com/machakann/vim-sandwich",
   "https://github.com/sotte/presenting.nvim",
+  "https://github.com/kylechui/nvim-surround",
   "https://github.com/windwp/nvim-autopairs",
 })
 -- }}}
@@ -257,6 +257,9 @@ require("snacks").setup({
   },
   rename = { enabled = true },
 })
+-- }}}
+-- kylechui/nvim-surround {{{
+require("nvim-surround").setup({})
 -- }}}
 -- stevearc/aerial.nvim {{{
 require("aerial").setup({})
