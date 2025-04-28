@@ -108,12 +108,7 @@ set termguicolors
 set updatetime=300
 set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = #{
-      \ name: 'xsel',
-      \ cache_enabled: 1,
-      \ copy : {'+': 'xsel --clipboard --input' , '*': 'xsel --clipboard --input' },
-      \ paste: {'+': 'xsel --clipboard --output', '*': 'xsel --clipboard --output'},
-      \ }
+let g:clipboard = 'xsel'
 let g:loaded_python3_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
