@@ -172,6 +172,12 @@ vim.lsp.config("yamlls", {
     },
   },
 })
+-- https://github.com/neovim/neovim/issues/27648
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    vim.lsp.stop_client(vim.lsp.get_active_clients(), true) -- Force kill
+  end,
+})
 
 -- }}}
 -- nvim:diagnostic.txt {{{
