@@ -62,7 +62,8 @@ augroup miscellaneous_custom
   autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank({higroup="VisualNOS", timeout=200})
+  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
+  autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
   autocmd VimResized * call s:resize_all_tabs()
 augroup end
 
