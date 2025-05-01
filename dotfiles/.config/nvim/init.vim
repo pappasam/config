@@ -117,8 +117,6 @@ let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
-" https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_preview_options = #{disable_sync_scroll: 0, sync_scroll_type: 'middle'}
 
 " }}}
 " Mappings {{{
