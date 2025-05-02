@@ -59,8 +59,6 @@ augroup end
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * call s:trim_whitespace()
-  autocmd CursorHold * lua vim.lsp.buf.document_highlight()
-  autocmd CursorMoved * lua vim.lsp.buf.clear_references()
   autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
