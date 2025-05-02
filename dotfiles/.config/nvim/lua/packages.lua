@@ -248,7 +248,7 @@ require("snacks").setup({
   explorer = { enabled = true },
   gitbrowse = { enabled = true },
   image = {
-    enabled = true,
+    enabled = false,
     ---@diagnostic disable-next-line: missing-fields
     convert = {
       notify = false,
