@@ -50,8 +50,6 @@ augroup filetype_custom
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
   " disable gitsigns
   autocmd FileType xxd call s:disable_noisy_plugins()
-  " readonly
-  autocmd FileType man,info,help,qf,GV ReadOnly
   " quickfix-only
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
@@ -222,27 +220,6 @@ function! s:color_sync() " 'scrollbind' does not work with colorizer
   redraw
   execute current_win .. 'wincmd w'
   ColorizerReloadAllBuffers
-endfunction
-
-command! ReadOnly call s:readonly()
-function! s:readonly()
-  if !get(b:, 'readonly', 0)
-    setlocal nomodifiable readonly
-    nnoremap <buffer> d <C-d>
-    nnoremap <buffer> D <C-d>
-    nnoremap <buffer> u <C-u>
-    nnoremap <buffer> U <C-u>
-    nnoremap <buffer> q <Cmd>quit<CR>
-    let b:readonly = 1
-  else
-    setlocal modifiable noreadonly conceallevel=0
-    nunmap <buffer> d
-    nunmap <buffer> D
-    nunmap <buffer> u
-    nunmap <buffer> U
-    nunmap <buffer> q
-    let b:readonly = 0
-  endif
 endfunction
 
 command! Fit call s:resize_window_width()
