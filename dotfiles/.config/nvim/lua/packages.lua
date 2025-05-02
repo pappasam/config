@@ -354,6 +354,7 @@ require("colorizer").setup({
   filetypes = {
     "css",
     "kitty",
+    "markdown",
     "typescriptreact",
     "vim",
     "yaml",
