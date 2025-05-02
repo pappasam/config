@@ -85,11 +85,15 @@ vim.lsp.config("basedpyright", {
       analysis = {
         diagnosticSeverityOverrides = {
           reportAny = "none",
+          reportDeprecated = "none",
           reportExplicitAny = "none",
+          reportMissingParameterType = "none",
           reportUnannotatedClassAttribute = "none",
           reportUninitializedInstanceVariable = "none",
+          reportUnknownParameterType = "none",
           reportUnnecessaryIsInstance = "none",
           reportUnusedCallResult = "none",
+          reportUnusedParameter = "none",
         },
       },
     },
@@ -106,9 +110,10 @@ vim.lsp.config("harper_ls", {
   settings = {
     ["harper-ls"] = {
       linters = {
+        LongSentences = false,
         SentenceCapitalization = false,
         SpellCheck = false,
-        LongSentences = false,
+        ToDoHyphen = false,
       },
     },
   },
