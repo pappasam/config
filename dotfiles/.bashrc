@@ -296,7 +296,7 @@ function git-delete() { # permanently remove a file / folder from git repo
     return 1
   fi
   git filter-branch --force --index-filter \
-    "git rm --cached --ignore-unmatch $1" \
+    "git rm --cached --ignore-unmatch -r $1" \
     --prune-empty --tag-name-filter cat -- --all
   echo 'If successful, we recommend running "git push --all --force"'
 }
