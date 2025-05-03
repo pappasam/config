@@ -85,7 +85,6 @@ vim.lsp.config("basedpyright", {
       analysis = {
         diagnosticSeverityOverrides = {
           reportAny = "none",
-          reportDeprecated = "none",
           reportExplicitAny = "none",
           reportMissingParameterType = "none",
           reportUnannotatedClassAttribute = "none",
