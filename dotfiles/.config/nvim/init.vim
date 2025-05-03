@@ -88,6 +88,7 @@ set exrc
 set fillchars=foldclose:▸,foldopen:▾
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
+set guicursor=n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set isfname+=@-@,:
 set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
 set mouse=a
@@ -104,6 +105,7 @@ set signcolumn=number
 set splitright
 set termguicolors
 set updatetime=300
+set winborder=rounded
 set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = 'xsel'
