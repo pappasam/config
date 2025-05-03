@@ -289,6 +289,18 @@ function git-mod() {
   fi
 }
 
+# https://stackoverflow.com/a/2004311
+function git-delete() { # permanently remove a file / folder from git repo
+  if [ $# -eq 0 ]; then
+    echo '1 argument required'
+    return 1
+  fi
+  git filter-branch --force --index-filter \
+    "git rm --cached --ignore-unmatch $1" \
+    --prune-empty --tag-name-filter cat -- --all
+  echo 'If successful, we recommend running "git push --all --force"'
+}
+
 VIRTUAL_ENV_DEFAULT=.venv
 function va() {
   local venv_name="$VIRTUAL_ENV_DEFAULT"
