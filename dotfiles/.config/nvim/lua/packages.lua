@@ -25,7 +25,6 @@ require("paq")({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  "https://github.com/j-hui/fidget.nvim",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/folke/snacks.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
@@ -44,6 +43,34 @@ require("paq")({
 })
 -- }}}
 -- nvim:lsp.txt {{{
+
+vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local bufnr = ev.buf
+    if client and client.server_capabilities.documentHighlightProvider then
+      local highlight_group = "lsp_document_highlight_" .. bufnr
+      vim.api.nvim_create_augroup(highlight_group, { clear = true })
+      vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        group = highlight_group,
+        callback = function()
+          vim.lsp.buf.document_highlight()
+        end,
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        buffer = bufnr,
+        group = highlight_group,
+        callback = function()
+          vim.lsp.buf.clear_references()
+        end,
+      })
+    end
+  end,
+})
 
 vim.lsp.enable("autotools_ls")
 vim.lsp.enable("basedpyright")
@@ -175,32 +202,6 @@ vim.lsp.config("yamlls", {
       },
     },
   },
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    local bufnr = ev.buf
-    if client and client.server_capabilities.documentHighlightProvider then
-      local highlight_group = "lsp_document_highlight_" .. bufnr
-      vim.api.nvim_create_augroup(highlight_group, { clear = true })
-      vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        group = highlight_group,
-        callback = function()
-          vim.lsp.buf.document_highlight()
-        end,
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        buffer = bufnr,
-        group = highlight_group,
-        callback = function()
-          vim.lsp.buf.clear_references()
-        end,
-      })
-    end
-  end,
 })
 
 -- }}}
@@ -497,12 +498,5 @@ require("presenting").setup({
       echo
     ]])
   end,
-})
--- }}}
--- j-hui/fidget.nvim {{{
-require("fidget").setup({
-  progress = {
-    suppress_on_insert = true,
-  },
 })
 -- }}}
