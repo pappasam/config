@@ -86,7 +86,7 @@ set exrc
 set fillchars=foldclose:▸,foldopen:▾
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
-set guicursor=n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor
+set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set isfname+=@-@,:
 set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
 set mouse=a
