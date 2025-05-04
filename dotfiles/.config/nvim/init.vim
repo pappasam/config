@@ -48,8 +48,6 @@ augroup filetype_custom
   autocmd FileType gitcommit,checkhealth,text,GV setlocal nofoldenable nolist
   " window opening
   autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " disable gitsigns
-  autocmd FileType xxd call s:disable_noisy_plugins()
   " quickfix-only
   autocmd FileType qf call s:set_quickfix_mappings()
 augroup end
@@ -192,15 +190,6 @@ nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
 " Commands {{{
 
 command! P PaqSync
-
-command! -bang Conceal call s:conceal('<bang>')
-function s:conceal(bang)
-  if a:bang == '!'
-    set conceallevel=0 concealcursor=
-  else
-    set conceallevel=3 concealcursor=nc
-  endif
-endfunction
 
 command! C call s:color()
 function! s:color()
@@ -376,12 +365,6 @@ function! s:resize_all_tabs()
   finally
     set nolazyredraw
   endtry
-endfunction
-
-function! s:disable_noisy_plugins()
-  lua vim.diagnostic.enable(false)
-  Gitsigns detach
-  Fidget suppress
 endfunction
 
 function! s:trim_whitespace()
