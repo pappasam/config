@@ -306,13 +306,6 @@ require("lazydev").setup({
 -- }}}
 -- Saghen/blink.cmp {{{
 require("blink-cmp").setup({
-  enabled = function()
-    if vim.bo.filetype == "vim" and vim.bo.buftype == "nofile" then
-      -- disable in cmdline window (see :help cmdline-window)
-      return false
-    end
-    return true
-  end,
   sources = {
     default = { "lazydev", "lsp", "path", "snippets", "buffer" },
     providers = {
@@ -343,9 +336,7 @@ require("blink-cmp").setup({
     },
   },
   cmdline = {
-    keymap = {
-      ["<CR>"] = { "accept_and_enter", "fallback" },
-    },
+    enabled = false,
   },
 })
 -- }}}

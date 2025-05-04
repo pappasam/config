@@ -120,6 +120,14 @@ let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 " Mappings {{{
 
 let g:mapleader = ','
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <A-b> <S-Left>
+cnoremap <A-f> <S-Right>
+cnoremap <C-u> <C-E><C-U>
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
