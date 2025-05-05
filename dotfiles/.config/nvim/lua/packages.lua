@@ -40,7 +40,7 @@ require("paq")({
   },
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/kylechui/nvim-surround",
-  "https://github.com/windwp/nvim-autopairs",
+  "https://github.com/echasnovski/mini.pairs",
 })
 -- }}}
 -- nvim:lsp.txt {{{
@@ -461,12 +461,9 @@ require("gx").setup({
   },
 })
 -- }}}
--- windwp/nvim-autopairs {{{
-require("nvim-autopairs").setup({
-  map_c_h = true,
-  map_c_w = true,
-  map_cr = true,
-  enable_check_bracket_line = false,
+-- echasnovski/mini.pairs {{{
+require("mini.pairs").setup({
+  modes = { insert = true, command = true, terminal = false },
 })
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
