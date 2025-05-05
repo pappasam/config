@@ -289,6 +289,13 @@ require("snacks").setup({
   },
   rename = { enabled = true },
 })
+
+-- https://github.com/folke/snacks.nvim/issues/1552
+Snacks.input = function(...)
+  local opts, fn = ...
+  opts.prompt = opts.prompt .. ": "
+  return vim.ui.input(opts, fn)
+end
 -- }}}
 -- kylechui/nvim-surround {{{
 require("nvim-surround").setup({})
