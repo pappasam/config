@@ -40,7 +40,7 @@ require("paq")({
   },
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/kylechui/nvim-surround",
-  "https://github.com/altermo/ultimate-autopair.nvim",
+  "https://github.com/windwp/nvim-autopairs",
 })
 -- }}}
 -- nvim:lsp.txt {{{
@@ -461,8 +461,12 @@ require("gx").setup({
   },
 })
 -- }}}
--- altermo/ultimate-autopair.nvim {{{
-require("ultimate-autopair").setup({
+-- windwp/nvim-autopairs {{{
+require("nvim-autopairs").setup({
+  map_c_h = true,
+  map_c_w = true,
+  map_cr = true,
+  enable_check_bracket_line = false,
 })
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
