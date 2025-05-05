@@ -154,7 +154,6 @@ alias publicip='curl -s checkip.amazonaws.com'
 alias m='make'
 alias rg='rg --fixed-strings'
 alias k3='cd ~/src/KeplerGroup/KIP-3-MVP'
-alias htop='btm'
 
 # }}}
 # Functions {{{
