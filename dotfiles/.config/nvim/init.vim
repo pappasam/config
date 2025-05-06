@@ -171,7 +171,7 @@ nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
 nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
 nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
 nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
-nnoremap <Leader>i <Cmd>lua Snacks.image.hover()<CR>
+nnoremap <Space>i <Cmd>lua Snacks.image.hover()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
