@@ -3,22 +3,10 @@
 
 augroup filetype_assignment
   autocmd!
-  " dosini files
-  autocmd BufRead,BufNewFile *.{cfg,ini},.coveragerc,*pylintrc,zoomus.conf,credentials,.editorconfig set filetype=dosini
-  " yaml files
-  autocmd BufRead,BufNewFile *.config,.cookiecutterrc,DESCRIPTION,.lintr,docker-compose.* set filetype=yaml
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
-  " json files
-  autocmd BufRead,BufNewFile renv.lock,.jrnl_config,*.{bowerrc,babelrc,eslintrc,slack-term,htmlhintrc,stylelintrc,firebaserc} set filetype=json
-  autocmd BufRead,BufNewFile tsconfig.json,*.jsonc,.markdownlintrc set filetype=jsonc
-  " other files
-  autocmd BufRead,BufNewFile *.mdx set filetype=markdown.mdx
+  autocmd BufRead,BufNewFile renv.lock set filetype=json
+  autocmd BufRead,BufNewFile .markdownlintrc set filetype=jsonc
   autocmd BufRead,BufNewFile *.min.js set filetype=none
-  autocmd BufRead,BufNewFile *.oct set filetype=octave
-  autocmd BufRead,BufNewFile .envrc,.env,.env.* set filetype=sh
-  autocmd BufRead,BufNewFile .dockerignore set filetype=conf
-  autocmd BufRead,BufNewFile poetry.lock,Pipfile set filetype=toml
-  autocmd BufRead,BufNewFile zathurarc set filetype=zathurarc
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
 augroup end
 
