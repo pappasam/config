@@ -13,8 +13,7 @@ augroup end
 augroup filetype_custom
   autocmd!
   " indentation
-  autocmd Filetype markdown setlocal shiftwidth=2 softtabstop=2
-  autocmd Filetype python,c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
+  autocmd Filetype c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
   autocmd Filetype go,gomod,make,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
   " comments
   autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
@@ -101,6 +100,7 @@ let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
+let g:markdown_recommended_style = 0
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 
