@@ -441,9 +441,16 @@ require("gx").setup({
       name = "pypi",
       filename = "pyproject.toml",
       handle = function(mode, line, _)
+        -- Match poetry dependencies (name = "version")
         local pkg = require("gx.helper").find(line, mode, "([^=%s]+)%s-=%s")
         if pkg then
           return "https://pypi.org/project/" .. pkg
+        end
+        -- Match builtin dependencies list format ("name>=version" or "name")
+        local dep_pkg =
+          require("gx.helper").find(line, mode, '"([^>=%s"]+)[^"]*"')
+        if dep_pkg then
+          return "https://pypi.org/project/" .. dep_pkg
         end
       end,
     },
