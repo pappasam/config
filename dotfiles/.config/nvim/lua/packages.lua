@@ -28,6 +28,7 @@ require("paq")({
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
   "https://github.com/folke/snacks.nvim",
+  "https://github.com/hedengran/fga.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/fladson/vim-kitty",
   "https://github.com/mikesmithgh/kitty-scrollback.nvim",
@@ -518,5 +519,10 @@ require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
+})
+-- }}}
+-- hedengran/fga.nvim {{{
+require("fga").setup({
+  install_treesitter_grammar = true,
 })
 -- }}}
