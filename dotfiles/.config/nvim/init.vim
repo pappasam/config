@@ -70,7 +70,6 @@ set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2
 set exrc
-set fillchars=foldclose:▸,foldopen:▾
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
