@@ -64,7 +64,6 @@ colorscheme PaperColorSlim
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
-set cmdheight=1
 set completeopt=menuone,longest,fuzzy wildmode=longest:full
 set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
@@ -74,10 +73,10 @@ set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set isfname+=@-@,:
+set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
 set mouse=a
 set noshowcmd
-set nospell spelllang=en_us
 set noswapfile
 set notimeout
 set number
@@ -86,11 +85,11 @@ set shadafile=NONE
 set shortmess+=c
 set showtabline=2
 set signcolumn=number
+set spelllang=en_us
 set splitright
 set termguicolors
 set updatetime=300
 set winborder=rounded
-set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 let g:clipboard = 'xsel'
 let g:loaded_python3_provider = 0
