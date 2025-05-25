@@ -327,6 +327,7 @@ function! s:set_quickfix_mappings()
 endfunction
 
 function! s:edit_neovim_config()
+  cd ~/config/dotfiles/.config/nvim
   edit  ~/config/dotfiles/.config/nvim/init.vim
   tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
   wincmd h
