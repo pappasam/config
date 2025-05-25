@@ -12,25 +12,8 @@ augroup end
 
 augroup filetype_custom
   autocmd!
-  " indentation
-  autocmd Filetype c,nginx,haskell,rust,kv,asm,nasm,gdscript3 setlocal shiftwidth=4 softtabstop=4
-  autocmd Filetype go,gomod,make,tsv,votl setlocal tabstop=4 softtabstop=0 shiftwidth=0 noexpandtab
-  " comments
-  autocmd FileType dosini setlocal commentstring=#\ %s comments=:#,:;
-  autocmd FileType mermaid setlocal commentstring=\%\%\ %s comments=:\%\%
-  autocmd FileType tmux,python,nginx setlocal commentstring=#\ %s comments=:# formatoptions=jcroql
-  autocmd FileType jsonc setlocal commentstring=//\ %s comments=:// formatoptions=jcroql
-  autocmd FileType sh setlocal formatoptions=jcroql
-  autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
-  " iskeyword
-  autocmd FileType nginx setlocal iskeyword+=$
-  autocmd FileType toml,zsh,sh,bash,css setlocal iskeyword+=-
-  autocmd FileType scss setlocal iskeyword+=@-@
   " keywordprg
-  autocmd FileType vim,lua setlocal keywordprg=:help
   autocmd FileType bib,gitcommit,markdown,org,plaintex,rst,rnoweb,tex,pandoc,quarto,rmd,context,html,htmldjango,xhtml,mail,text setlocal keywordprg=:DefEng
-  autocmd FileType python setlocal keywordprg=:Pydoc
-  autocmd FileType sh,zsh,bash setlocal keywordprg=:Man
   " nofoldenable nolist
   autocmd FileType gitcommit,checkhealth,text,GV setlocal nofoldenable nolist
   " window opening
