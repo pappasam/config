@@ -1,17 +1,13 @@
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
-augroup filetype_assignment
+augroup init_custom
   autocmd!
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
-  autocmd BufRead,BufNewFile renv.lock set filetype=json
-  autocmd BufRead,BufNewFile .markdownlintrc set filetype=jsonc
   autocmd BufRead,BufNewFile *.min.js set filetype=none
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
-augroup end
-
-augroup miscellaneous_custom
-  autocmd!
+  autocmd BufRead,BufNewFile .markdownlintrc set filetype=jsonc
+  autocmd BufRead,BufNewFile renv.lock set filetype=json
   autocmd BufWritePre * call s:trim_whitespace()
   autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
