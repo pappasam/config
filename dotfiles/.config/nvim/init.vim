@@ -10,21 +10,10 @@ augroup filetype_assignment
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
 augroup end
 
-augroup filetype_custom
-  autocmd!
-  " keywordprg
-  autocmd FileType bib,gitcommit,markdown,org,plaintex,rst,rnoweb,tex,pandoc,quarto,rmd,context,html,htmldjango,xhtml,mail,text setlocal keywordprg=:DefEng
-  " nofoldenable nolist
-  autocmd FileType gitcommit,checkhealth,text,GV setlocal nofoldenable nolist
-  " window opening
-  autocmd FileType gitcommit if winnr("$") > 1 | wincmd T | endif
-  " quickfix-only
-  autocmd FileType qf call s:set_quickfix_mappings()
-augroup end
-
 augroup miscellaneous_custom
   autocmd!
   autocmd BufWritePre * call s:trim_whitespace()
+  autocmd FileType qf call s:set_quickfix_mappings()
   autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
