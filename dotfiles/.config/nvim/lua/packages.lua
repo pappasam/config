@@ -12,7 +12,11 @@ require("paq")({
   },
   "https://github.com/folke/lazydev.nvim",
   -- Tree Sitter
-  "https://github.com/nvim-treesitter/nvim-treesitter",
+  {
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    branch = "main",
+  },
   "https://github.com/tronikelis/ts-autotag.nvim",
   -- Git
   "https://github.com/junegunn/gv.vim",
@@ -230,7 +234,7 @@ vim.diagnostic.config({
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
 ---@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
   highlight = {
     enable = true,
     disable = function(lang, bufnr)
@@ -247,7 +251,6 @@ require("nvim-treesitter.configs").setup({
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
   },
-  ensure_installed = "all",
 })
 
 vim.treesitter.language.register("terraform", "terraform-vars")
@@ -523,6 +526,6 @@ require("fidget").setup({
 -- }}}
 -- hedengran/fga.nvim {{{
 require("fga").setup({
-  install_treesitter_grammar = true,
+  install_treesitter_grammar = false,
 })
 -- }}}
