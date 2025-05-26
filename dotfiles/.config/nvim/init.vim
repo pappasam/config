@@ -1,152 +1,3 @@
-" Autocmds {{{
-" Placed at top because some events (like ColorScheme) happen in init.vim
-
-augroup init_custom
-  autocmd!
-  autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
-  autocmd BufRead,BufNewFile *.min.js set filetype=none
-  autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
-  autocmd BufRead,BufNewFile renv.lock set filetype=json
-  autocmd BufWritePre * TrimWhitespace
-  autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
-  autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
-  autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
-  autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
-  autocmd VimResized * ResizeTabs
-augroup end
-
-" }}}
-" LuaLoads {{{
-
-lua vim.loader.enable(true) -- speed up lua load times (experimental)
-lua require("settings")
-lua require("packages")
-
-" }}}
-" Settings {{{
-
-colorscheme PaperColorSlim
-aunmenu PopUp.-2-
-aunmenu PopUp.How-to\ disable\ mouse
-digraph '' 699  " Hawaiian character ʻ
-set completeopt=menuone,longest,fuzzy wildmode=longest:full
-set cursorline cursorlineopt=number
-set diffopt+=algorithm:histogram,inline:word,indent-heuristic
-set expandtab shiftwidth=2 softtabstop=2
-set exrc
-set foldmethod=marker foldnestmax=1 foldcolumn=auto
-set grepprg=rg\ --vimgrep
-set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
-set isfname+=@-@,:
-set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
-set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
-set mouse=a
-set noshowcmd
-set noswapfile
-set notimeout
-set number
-set path+=/usr/include/x86_64-linux-gnu/
-set shadafile=NONE
-set shortmess+=c
-set showtabline=2
-set signcolumn=number
-set spelllang=en_us
-set splitright
-set termguicolors
-set updatetime=300
-set winborder=rounded
-let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = 'xsel'
-let g:loaded_python3_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
-let g:loaded_node_provider = 0
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-let g:markdown_recommended_style = 0
-" https://github.com/pappasam/vim-filetype-formatter
-let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
-
-" }}}
-" Mappings {{{
-
-let g:mapleader = ','
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-d> <Del>
-cnoremap <A-b> <S-Left>
-cnoremap <A-f> <S-Right>
-cnoremap <C-u> <C-E><C-U>
-nnoremap ' ,
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-nnoremap <expr> J v:count == 0 ? '<esc>' : 'J'
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> <Cmd>tablast<CR>
-nnoremap gx <Cmd>Browse<CR>
-xnoremap gx <Cmd>Browse<CR>
-nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
-nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
-nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
-nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
-nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
-xnoremap <Leader>y "+y
-nnoremap <Leader>y "+y
-nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
-" help lsp-defaults
-nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
-nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover({max_width=79})<CR>
-nnoremap K K
-nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
-nnoremap grD <Cmd>lua vim.diagnostic.setqflist()<CR>
-" help vim.snippet
-snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
-nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
-" https://github.com/stevearc/aerial.nvim
-nnoremap <Space>l zR<Cmd>AerialToggle<CR>
-" https://github.com/pappasam/nvim-repl
-nmap <silent> <Leader>r <Plug>(ReplSendLine)
-xmap <silent> <Leader>r <Plug>(ReplSendVisual)
-nmap <silent> <Leader>c <Plug>(ReplSendCell)
-nnoremap <Leader>ao <Cmd>ReplAider<CR>
-nnoremap <Leader>aa <Cmd>ReplAiderBufCur /add<CR>
-nnoremap <Leader>ad <Cmd>ReplAiderBufCur /drop<CR>
-nnoremap <Leader>as <Cmd>ReplSend<CR>
-" https://github.com/folke/snacks.nvim
-nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
-nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
-nnoremap <C-p><C-g> <Cmd>lua Snacks.picker.grep()<CR>
-nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
-nnoremap <C-p><C-l> <Cmd>lua Snacks.picker.highlights()<CR>
-nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
-nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
-nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
-nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
-nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
-nnoremap <Space>i <Cmd>lua Snacks.image.hover()<CR>
-" https://github.com/pappasam/vim-filetype-formatter
-nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
-xnoremap <Leader>f :FiletypeFormat<CR>
-" https://github.com/lewis6991/gitsigns.nvim
-nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
-nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
-nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
-" https://github.com/sindrets/diffview.nvim
-nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
-
-" }}}
 " Commands {{{
 
 command! P PaqSync
@@ -298,5 +149,150 @@ function! s:trim_whitespace()
     set nolazyredraw
   endtry
 endfunction
+
+" }}}
+" Autocmds {{{
+" Placed at top because some events (like ColorScheme) happen in init.vim
+
+augroup init_custom
+  autocmd!
+  autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
+  autocmd BufRead,BufNewFile *.min.js set filetype=none
+  autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
+  autocmd BufRead,BufNewFile renv.lock set filetype=json
+  autocmd BufWritePre * TrimWhitespace
+  autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
+  autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
+  autocmd QuitPre * if exists("w:focuswriting") | only | endif
+  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
+  autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
+  autocmd VimResized * ResizeTabs
+augroup end
+
+" }}}
+" Settings {{{
+
+lua vim.loader.enable(true) -- speed up lua load times (experimental)
+lua require("settings")
+lua require("packages")
+colorscheme PaperColorSlim
+aunmenu PopUp.-2-
+aunmenu PopUp.How-to\ disable\ mouse
+digraph '' 699  " Hawaiian character ʻ
+set completeopt=menuone,longest,fuzzy wildmode=longest:full
+set cursorline cursorlineopt=number
+set diffopt+=algorithm:histogram,inline:word,indent-heuristic
+set expandtab shiftwidth=2 softtabstop=2
+set exrc
+set foldmethod=marker foldnestmax=1 foldcolumn=auto
+set grepprg=rg\ --vimgrep
+set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
+set isfname+=@-@,:
+set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
+set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
+set mouse=a
+set noshowcmd
+set noswapfile
+set notimeout
+set number
+set path+=/usr/include/x86_64-linux-gnu/
+set shadafile=NONE
+set shortmess+=c
+set showtabline=2
+set signcolumn=number
+set spelllang=en_us
+set splitright
+set termguicolors
+set updatetime=300
+set winborder=rounded
+let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
+let g:clipboard = 'xsel'
+let g:loaded_python3_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+let g:markdown_recommended_style = 0
+" https://github.com/pappasam/vim-filetype-formatter
+let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
+
+" }}}
+" Mappings {{{
+
+let g:mapleader = ','
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-d> <Del>
+cnoremap <A-b> <S-Left>
+cnoremap <A-f> <S-Right>
+cnoremap <C-u> <C-E><C-U>
+nnoremap ' ,
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> J v:count == 0 ? '<esc>' : 'J'
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> <Cmd>tablast<CR>
+nnoremap gx <Cmd>Browse<CR>
+xnoremap gx <Cmd>Browse<CR>
+nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
+nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
+nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
+nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
+nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
+xnoremap <Leader>y "+y
+nnoremap <Leader>y "+y
+nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
+" help lsp-defaults
+nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
+nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover({max_width=79})<CR>
+nnoremap K K
+nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
+nnoremap grD <Cmd>lua vim.diagnostic.setqflist()<CR>
+" help vim.snippet
+snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
+nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
+" https://github.com/stevearc/aerial.nvim
+nnoremap <Space>l zR<Cmd>AerialToggle<CR>
+" https://github.com/pappasam/nvim-repl
+nmap <silent> <Leader>r <Plug>(ReplSendLine)
+xmap <silent> <Leader>r <Plug>(ReplSendVisual)
+nmap <silent> <Leader>c <Plug>(ReplSendCell)
+nnoremap <Leader>ao <Cmd>ReplAider<CR>
+nnoremap <Leader>aa <Cmd>ReplAiderBufCur /add<CR>
+nnoremap <Leader>ad <Cmd>ReplAiderBufCur /drop<CR>
+nnoremap <Leader>as <Cmd>ReplSend<CR>
+" https://github.com/folke/snacks.nvim
+nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
+nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
+nnoremap <C-p><C-g> <Cmd>lua Snacks.picker.grep()<CR>
+nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
+nnoremap <C-p><C-l> <Cmd>lua Snacks.picker.highlights()<CR>
+nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
+nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
+nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
+nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
+nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
+nnoremap <Space>i <Cmd>lua Snacks.image.hover()<CR>
+" https://github.com/pappasam/vim-filetype-formatter
+nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
+xnoremap <Leader>f :FiletypeFormat<CR>
+" https://github.com/lewis6991/gitsigns.nvim
+nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
+nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
+nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
+" https://github.com/sindrets/diffview.nvim
+nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
 
 " }}}
