@@ -295,7 +295,9 @@ Snacks.input = function(...)
 end
 -- }}}
 -- kylechui/nvim-surround {{{
-require("nvim-surround").setup({})
+require("nvim-surround").setup({
+  -- Keymaps, see: nvim-surround.config.keymaps
+})
 -- }}}
 -- stevearc/aerial.nvim {{{
 require("aerial").setup({})
