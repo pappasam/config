@@ -78,31 +78,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.lsp.enable("autotools_ls")
-vim.lsp.enable("basedpyright")
-vim.lsp.enable("bashls")
-vim.lsp.enable("clangd") -- needs project-level compile-commands.json
-vim.lsp.enable("cssls")
-vim.lsp.enable("dockerls")
-vim.lsp.enable("gh_actions_ls")
-vim.lsp.enable("gopls")
-vim.lsp.enable("graphql")
-vim.lsp.enable("harper_ls")
-vim.lsp.enable("html")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("marksman")
-vim.lsp.enable("mdx_analyzer")
-vim.lsp.enable("prismals")
-vim.lsp.enable("r_language_server")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("shopify_theme_ls")
-vim.lsp.enable("svelte")
-vim.lsp.enable("taplo")
-vim.lsp.enable("terraformls")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("vimls")
-vim.lsp.enable("yamlls")
+vim.lsp.enable({
+  "autotools_ls",
+  "basedpyright",
+  "bashls",
+  "clangd", -- needs project-level compile-commands.json
+  "cssls",
+  "dockerls",
+  "gh_actions_ls",
+  "gopls",
+  "graphql",
+  "harper_ls",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "marksman",
+  "mdx_analyzer",
+  "prismals",
+  "r_language_server",
+  "rust_analyzer",
+  "shopify_theme_ls",
+  "svelte",
+  "taplo",
+  "terraformls",
+  "ts_ls",
+  "vimls",
+  "yamlls",
+})
+
 vim.lsp.config("*", {
   capabilities = {
     workspace = {
