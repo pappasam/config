@@ -234,27 +234,7 @@ vim.diagnostic.config({
 
 -- }}}
 -- nvim:treesitter.txt {{{
--- https://github.com/nvim-treesitter/nvim-treesitter
-
----@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter").setup({
-  highlight = {
-    enable = true,
-    disable = function(lang, bufnr)
-      if lang == "javascript" then
-        return vim.api.nvim_buf_line_count(bufnr) > 10000
-      end
-      return vim.api.nvim_buf_line_count(bufnr) > 50000
-    end,
-  },
-  indent = {
-    enable = true,
-    ---@diagnostic disable-next-line: unused-local
-    disable = function(lang, bufnr)
-      return vim.api.nvim_buf_line_count(bufnr) > 10000
-    end,
-  },
-})
+-- Manually run the following for new installations -> :TSInstall all
 
 vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
