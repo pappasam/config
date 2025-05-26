@@ -7,13 +7,13 @@ augroup init_custom
   autocmd BufRead,BufNewFile *.min.js set filetype=none
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
   autocmd BufRead,BufNewFile renv.lock set filetype=json
-  autocmd BufWritePre * call s:trim_whitespace()
+  autocmd BufWritePre * TrimWhitespace
   autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
   autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
   autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
-  autocmd VimResized * call s:resize_all_tabs()
+  autocmd VimResized * ResizeTabs
 augroup end
 
 " }}}
@@ -100,7 +100,7 @@ xnoremap gx <Cmd>Browse<CR>
 nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
-nnoremap <Leader>ev <Cmd>call <SID>edit_neovim_config()<CR>
+nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
 nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
@@ -260,7 +260,8 @@ function! s:clean_unicode()
   endtry
 endfunction
 
-function! s:edit_neovim_config()
+command! EditNvimConfig call s:edit_nvim_config()
+function! s:edit_nvim_config()
   cd ~/config/dotfiles/.config/nvim
   edit  ~/config/dotfiles/.config/nvim/init.vim
   tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
@@ -268,7 +269,8 @@ function! s:edit_neovim_config()
   tabprevious
 endfunction
 
-function! s:resize_all_tabs()
+command! ResizeTabs call s:resize_tabs()
+function! s:resize_tabs()
   set lazyredraw
   try
     let current_tab = tabpagenr()
@@ -279,6 +281,7 @@ function! s:resize_all_tabs()
   endtry
 endfunction
 
+command! TrimWhitespace call s:trim_whitespace()
 function! s:trim_whitespace()
   set lazyredraw
   try
