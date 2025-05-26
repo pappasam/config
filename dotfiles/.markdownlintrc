@@ -1,3 +1,4 @@
+// vim:ft=jsonc
 {
   "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/master/schema/markdownlint-config-schema.json",
   "line-length": false,
