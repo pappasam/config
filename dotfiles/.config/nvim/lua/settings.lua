@@ -50,12 +50,6 @@ vim.o.tabline = "%!v:lua.custom_tabline()"
 
 require("vim._extui").enable({
   enable = true,
-  msg = {
-    pos = "box",
-    box = {
-      timeout = 4000,
-    },
-  },
 })
 
 -- }}}
