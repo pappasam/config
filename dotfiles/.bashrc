@@ -408,6 +408,13 @@ function info() { # https://github.com/HiPhish/info.vim
   fi
 }
 
+function kclaude() {
+  CLAUDE_CODE_USE_BEDROCK=1 \
+  ANTHROPIC_MODEL='us.anthropic.claude-opus-4-20250514-v1:0' \
+  ANTHROPIC_SMALL_FAST_MODEL='us.anthropic.claude-3-5-haiku-20241022-v1:0' \
+  claude
+}
+
 # }}}
 # Installs {{{
 
