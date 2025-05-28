@@ -9,7 +9,7 @@ function! s:color()
     only
     cd ~/.local/share/nvim/site/pack/paqs/start/papercolor-theme-slim
     edit ./colors/PaperColorSlim.vim
-    set cursorlineopt=both
+    setlocal cursorlineopt=both
     vsplit
     edit ./colors/PaperColorSlimLight.vim
     wincmd h
@@ -64,7 +64,7 @@ function! s:focuswriting()
     let w:focuswriting = 1
     vertical resize 88
     execute 'buffer ' .. current_buffer
-    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
+    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nc
     wincmd =
     normal! `azz0
   finally
@@ -148,6 +148,17 @@ function! s:trim_whitespace()
   finally
     set nolazyredraw
   endtry
+endfunction
+
+command -bang Con call s:conceal('<bang>')
+function! s:conceal(bang)
+  if a:bang ==# '!'
+    setlocal conceallevel=0
+    setlocal concealcursor=
+  else
+    setlocal conceallevel=3
+    setlocal concealcursor=nc
+  endif
 endfunction
 
 " }}}
