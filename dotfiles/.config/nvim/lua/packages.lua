@@ -52,32 +52,6 @@ require("paq")({
 
 vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    local bufnr = ev.buf
-    if client and client.server_capabilities.documentHighlightProvider then
-      local highlight_group = "lsp_document_highlight_" .. bufnr
-      vim.api.nvim_create_augroup(highlight_group, { clear = true })
-      vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        group = highlight_group,
-        callback = function()
-          vim.lsp.buf.document_highlight()
-        end,
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        buffer = bufnr,
-        group = highlight_group,
-        callback = function()
-          vim.lsp.buf.clear_references()
-        end,
-      })
-    end
-  end,
-})
-
 vim.lsp.enable({
   "autotools_ls",
   "basedpyright",

@@ -150,7 +150,7 @@ function! s:trim_whitespace()
   endtry
 endfunction
 
-command -bang Con call s:conceal('<bang>')
+command! -bang Con call s:conceal('<bang>')
 function! s:conceal(bang)
   if a:bang ==# '!'
     setlocal conceallevel=0
@@ -159,6 +159,14 @@ function! s:conceal(bang)
     setlocal conceallevel=3
     setlocal concealcursor=nc
   endif
+endfunction
+
+command! CtrlL call s:ctrl_l()
+function! s:ctrl_l()
+  silent! lua vim.lsp.buf.clear_references()
+  diffupdate
+  let @/ = '' " clears search highlighting
+  redraw!
 endfunction
 
 " }}}
@@ -272,6 +280,8 @@ nnoremap <C-k> <Cmd>lua vim.lsp.buf.hover({max_width=79})<CR>
 nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap grD <Cmd>lua vim.diagnostic.setqflist()<CR>
+nnoremap <C-h> <Cmd>lua vim.lsp.buf.document_highlight()<CR>
+nnoremap <C-l> <Cmd>CtrlL<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
