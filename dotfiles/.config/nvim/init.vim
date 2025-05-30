@@ -303,6 +303,8 @@ nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
 nnoremap <C-p><C-l> <Cmd>lua Snacks.picker.highlights()<CR>
 nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
 nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
+nnoremap grr <Cmd>lua Snacks.picker.lsp_references()<CR>
+nnoremap gri <Cmd>lua Snacks.picker.lsp_implementations()<CR>
 nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
 nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
 nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
