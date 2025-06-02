@@ -23,6 +23,7 @@ stream: true
 suggest-shell-commands: false
 watch-files: true
 yes-always: true
+chat-mode: ask
 
 # Git
 # Disabled because of: https://github.com/Aider-AI/aider/issues/3049
