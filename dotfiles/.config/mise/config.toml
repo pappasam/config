@@ -64,7 +64,7 @@ vault = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:write-good" = "latest"
 "npm:yaml-language-server" = "latest"
-"pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12 --with boto3" }
+"pipx:aider-chat" = { version = "latest", extras = "playwright", uvx_args = "--python 3.12 --with boto3" }
 "pipx:autotools-language-server" = "latest"
 "pipx:basedpyright" = "latest"
 "pipx:cookiecutter" = "latest"
