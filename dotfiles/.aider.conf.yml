@@ -1,7 +1,7 @@
 # https://aider.chat/docs/config/aider_conf.html
 
 # Default Model
-model: claude-sonnet-4-20250514
+model: claude-3-7-sonnet-20250219
 
 # AWS Settings
 set-env:
@@ -11,7 +11,7 @@ set-env:
 # Recommended
 # Use $AIDER_MODEL to select aliases on different computers
 alias:
-  - "kip:bedrock/us.anthropic.claude-sonnet-4-20250514-v1:0"
+  - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 
 # Behavior
 cache-prompts: false
@@ -29,6 +29,7 @@ yes-always: true
 gitignore: false
 auto-commits: false
 dirty-commits: false
+subtree-only: true
 
 # Theme
 code-theme: monokai
