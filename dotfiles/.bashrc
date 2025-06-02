@@ -450,7 +450,9 @@ function nodeglobal-install() {
     prettier@latest \
     prettier-plugin-jinja-template@latest \
     prettier-plugin-prisma@latest \
-    prettier-plugin-svelte@latest
+    prettier-plugin-svelte@latest \
+    @vue/language-server \
+    @vue/typescript-plugin
 }
 
 function kitty-install() {
