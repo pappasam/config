@@ -173,6 +173,15 @@ endfunction
 " Autocmds {{{
 " Placed at top because some events (like ColorScheme) happen in init.vim
 
+function s:papercolor_slim_linking()
+  highlight link @markup.math.latex NONE
+endfunction
+
+augroup colorscheme_overrides_custom
+  autocmd!
+  autocmd ColorScheme PaperColorSlim,PaperColorSlimLight call s:papercolor_slim_linking()
+augroup end
+
 augroup init_custom
   autocmd!
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
