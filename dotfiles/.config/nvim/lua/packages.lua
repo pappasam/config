@@ -44,7 +44,7 @@ require("paq")({
     build = vim.fn["mkdp#util#install"],
   },
   "https://github.com/sotte/presenting.nvim",
-  "https://github.com/kylechui/nvim-surround",
+  "https://github.com/machakann/vim-sandwich",
   "https://github.com/echasnovski/mini.pairs",
 })
 -- }}}
@@ -289,11 +289,6 @@ Snacks.input = function(...)
   opts.prompt = opts.prompt .. ": "
   return vim.ui.input(opts, fn)
 end
--- }}}
--- kylechui/nvim-surround {{{
-require("nvim-surround").setup({
-  -- Keymaps, see: nvim-surround.config.keymaps
-})
 -- }}}
 -- stevearc/aerial.nvim {{{
 require("aerial").setup({})

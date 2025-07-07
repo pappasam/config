@@ -295,6 +295,9 @@ nnoremap <Leader>ao <Cmd>ReplAider<CR>
 nnoremap <Leader>aa <Cmd>ReplAiderBufCur /add<CR>
 nnoremap <Leader>ad <Cmd>ReplAiderBufCur /drop<CR>
 nnoremap <Leader>as <Cmd>ReplSend<CR>
+" https://github.com/machakann/vim-sandwich
+nmap s <Nop>
+xmap s <Nop>
 " https://github.com/folke/snacks.nvim
 nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
 nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
