@@ -479,7 +479,6 @@ function upgrade() {
   mise install -y
   mise install -f neovim
   uv self update
-  kitty-install
 }
 
 # }}}
