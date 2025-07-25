@@ -16,3 +16,5 @@ Download a relevant font, place in `~/src/lib/fonts`, and unzip. My favorite at 
 
 1. Copy relevant font files to `~/.local/share/fonts`. Prefer variable fonts, and use TTF (TrueType Font data).
 2. Run `fc-cache -fv`.
+
+I also suggest downloading "Symbols NERD Font" from here: <https://www.nerdfonts.com/font-downloads>
