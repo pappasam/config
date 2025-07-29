@@ -10,7 +10,6 @@ require("paq")({
     "https://github.com/Saghen/blink.cmp",
     build = "cargo build --release",
   },
-  "https://github.com/folke/lazydev.nvim",
   -- Tree Sitter
   {
     "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -139,26 +138,39 @@ vim.lsp.config("harper_ls", {
   },
 })
 vim.lsp.config("lua_ls", {
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if
+        path ~= vim.fn.stdpath("config")
+        and (
+          vim.uv.fs_stat(path .. "/.luarc.json")
+          or vim.uv.fs_stat(path .. "/.luarc.jsonc")
+        )
+      then
+        return
+      end
+    end
+    client.config.settings.Lua =
+      vim.tbl_deep_extend("force", client.config.settings.Lua, {
+        runtime = {
+          version = "LuaJIT",
+          path = {
+            "lua/?.lua",
+            "lua/?/init.lua",
+          },
+        },
+        -- Make the server aware of Neovim runtime files
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+          },
+        },
+      })
+  end,
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        -- (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {
-          "vim",
-          "require",
-        },
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-        },
-      },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
@@ -284,6 +296,7 @@ require("snacks").setup({
 })
 
 -- https://github.com/folke/snacks.nvim/issues/1552
+---@diagnostic disable-next-line: undefined-global
 Snacks.input = function(...)
   local opts, fn = ...
   opts.prompt = opts.prompt .. ": "
@@ -293,28 +306,8 @@ end
 -- stevearc/aerial.nvim {{{
 require("aerial").setup({})
 -- }}}
--- folke/lazydev.nvim {{{
----@diagnostic disable-next-line: missing-fields
-require("lazydev").setup({
-  library = {
-    -- Load luvit types when the `vim.uv` word is found
-    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-  },
-})
--- }}}
 -- Saghen/blink.cmp {{{
 require("blink-cmp").setup({
-  sources = {
-    default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-    providers = {
-      lazydev = {
-        name = "LazyDev",
-        module = "lazydev.integrations.blink",
-        -- make lazydev completions top priority (see `:h blink.cmp`)
-        score_offset = 100,
-      },
-    },
-  },
   completion = {
     keyword = {
       range = "full",
