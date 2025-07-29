@@ -163,9 +163,26 @@ vim.lsp.config("lua_ls", {
         -- Make the server aware of Neovim runtime files
         workspace = {
           checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-          },
+          library = vim
+            .iter({
+              (function()
+                local plugins_path = vim.fn.stdpath("data")
+                  .. "/site/pack/paqs/start"
+                local plugin_dirs = {}
+                local plugins = vim.fn.glob(plugins_path .. "/*", false, true)
+                for _, plugin in ipairs(plugins) do
+                  local lua_dir = plugin .. "/lua"
+                  if vim.fn.isdirectory(lua_dir) == 1 then
+                    table.insert(plugin_dirs, lua_dir)
+                  end
+                  table.insert(plugin_dirs, plugin)
+                end
+                return plugin_dirs
+              end)(),
+              vim.env.VIMRUNTIME,
+            })
+            :flatten()
+            :totable(),
         },
       })
   end,
@@ -296,7 +313,6 @@ require("snacks").setup({
 })
 
 -- https://github.com/folke/snacks.nvim/issues/1552
----@diagnostic disable-next-line: undefined-global
 Snacks.input = function(...)
   local opts, fn = ...
   opts.prompt = opts.prompt .. ": "
