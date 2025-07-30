@@ -38,10 +38,7 @@ require("paq")({
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
-  {
-    "https://github.com/iamcco/markdown-preview.nvim",
-    build = vim.fn["mkdp#util#install"],
-  },
+  "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/echasnovski/mini.pairs",
