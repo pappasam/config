@@ -163,7 +163,7 @@ function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
 function l() { cd "$HOME/src/lib/$1" || return; }
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
-function vplug() { cd "$HOME/.local/share/nvim/site/pack/paqs/start/$1" || return; }
+function vplug() { cd "$HOME/.local/share/nvim/site/pack/core/opt/$1" || return; }
 
 function _mise_update_pattern() {
   local pattern

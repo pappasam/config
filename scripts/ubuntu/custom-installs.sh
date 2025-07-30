@@ -7,11 +7,6 @@ if test ! -d ~/.local/share/zinit/zinit.git; then
   git clone https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
 fi
 
-if test ! -d ~/.local/share/nvim/site/pack/paqs/start/paq-nvim; then
-  git clone --depth=1 https://github.com/savq/paq-nvim.git \
-    ~/.local/share/nvim/site/pack/paqs/start/paq-nvim
-fi
-
 if ! command -v docker >/dev/null; then
   # See: https://github.com/docker/docker-install
   echo 'INSTALLING: docker, follow prompted instructions'

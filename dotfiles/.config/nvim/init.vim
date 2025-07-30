@@ -1,13 +1,13 @@
 " Commands {{{
 
-command! P PaqSync
+command! P lua vim.pack.update()
 
 command! C call s:color()
 function! s:color()
   set lazyredraw
   try
     only
-    cd ~/.local/share/nvim/site/pack/paqs/start/papercolor-theme-slim
+    cd ~/.local/share/nvim/site/pack/core/opt/papercolor-theme-slim
     edit ./colors/PaperColorSlim.vim
     setlocal cursorlineopt=both
     vsplit

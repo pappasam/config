@@ -1,20 +1,17 @@
--- savq/paq-nvim {{{
-require("paq")({
-  -- self
-  "https://github.com/savq/paq-nvim",
+-- vim.pack {{{
+vim.pack.add({
   -- Language Server (LSP)
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/aerial.nvim",
   -- Autocompletion
   {
-    "https://github.com/Saghen/blink.cmp",
-    build = "cargo build --release",
+    src = "https://github.com/Saghen/blink.cmp",
+    version = vim.version.range("1.0.0 - 2.0.0"),
   },
   -- Tree Sitter
   {
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    branch = "main",
+    src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    version = "main",
   },
   "https://github.com/tronikelis/ts-autotag.nvim",
   -- Git
@@ -164,7 +161,7 @@ vim.lsp.config("lua_ls", {
             .iter({
               (function()
                 local plugins_path = vim.fn.stdpath("data")
-                  .. "/site/pack/paqs/start"
+                  .. "/site/pack/core/opt"
                 local plugin_dirs = {}
                 local plugins = vim.fn.glob(plugins_path .. "/*", false, true)
                 for _, plugin in ipairs(plugins) do
