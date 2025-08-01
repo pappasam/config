@@ -51,3 +51,18 @@ Act as a CEO with extensive experience in [specify industry sector and market sc
 I will provide the necessary context for this prompt in subsequent messages. As your first response to me, please ask me to specify the information surrounded by [] (if applicable).
 
 <!-- }}} -->
+<!-- Interview Questions {{{ -->
+
+Can you please generate a document called "INTERVIEW_QUESTIONS.md" at the root of this repo that provides me a list of interview questions to ask the candidate during the interview. They'll be sharing their screen with the code running in their IDE. I'd like to ask them questions to determine whether they fully understand their code, if they can add features (e.g., can they edit software while I'm watching), modify existing functionality, update tests, and potentially work with 3rd party APIs. Also, in the document, please provide example acceptable answers. Pretend that I'm not an expert in this codebase, so as an interviewer, I'll need some hand-holding.
+
+<!-- }}} -->
+<!-- AI Code Sniffer {{{ -->
+
+Please examine the git history, tell me the quality of each user commit, and evaluate the overall code quality. This repository was produced by a human candidate. I want to detemine what sort of experience level you would associate with the committer. Also, let me know if the commits more-likely represent AI-generated code, or human-written code.
+
+<!-- }}} -->
+<!-- AI Code Evaluation {{{ -->
+
+Please generate a document called "EVALUATION.md" at the root of this repo that contains the output of the following analysis: please examine the git history, tell me the quality of each user commit, and evaluate the overall code quality. This repository was produced by a human candidate. I want to detemine what sort of experience level you would associate with the committer. Also, let me know if the commits more-likely represent AI-generated code, or human-written code.
+
+<!-- }}} -->
