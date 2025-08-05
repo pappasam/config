@@ -42,17 +42,12 @@ vim.pack.add({
 })
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
   group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
-  callback = function(args)
-    local spec = args.data.spec
+  ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
+  callback = function(event)
     if
-      spec
-      and spec.name == "nvim-treesitter"
-      and args.data.kind == "update"
+      event.data.spec == "nvim-treesitter"
+      and event.data.kind == "update"
     then
-      vim.notify(
-        "nvim-treesitter was updated, running :TSUpdate",
-        vim.log.levels.INFO
-      )
       vim.schedule(function()
         vim.cmd("TSUpdate")
       end)
