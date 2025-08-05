@@ -301,6 +301,7 @@ nnoremap <leader>ab <cmd>ClaudeCodeAdd %<cr>
 xnoremap <leader>as <cmd>ClaudeCodeSend<cr>
 nnoremap <leader>aa <cmd>ClaudeCodeDiffAccept<cr>
 nnoremap <leader>ad <cmd>ClaudeCodeDiffDeny<cr>
+nnoremap <leader>at <cmd>ClaudeCodeTreeAdd<cr>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
