@@ -291,10 +291,16 @@ nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
-nnoremap <Leader>ao <Cmd>ReplAider<CR>
-nnoremap <Leader>aa <Cmd>ReplAiderBufCur /add<CR>
-nnoremap <Leader>ad <Cmd>ReplAiderBufCur /drop<CR>
-nnoremap <Leader>as <Cmd>ReplSend<CR>
+" https://github.com/coder/claudecode.nvim
+nnoremap <leader>ac <cmd>ClaudeCode<cr>
+nnoremap <leader>af <cmd>ClaudeCodeFocus<cr>
+nnoremap <leader>ar <cmd>ClaudeCode --resume<cr>
+nnoremap <leader>aC <cmd>ClaudeCode --continue<cr>
+nnoremap <leader>am <cmd>ClaudeCodeSelectModel<cr>
+nnoremap <leader>ab <cmd>ClaudeCodeAdd %<cr>
+xnoremap <leader>as <cmd>ClaudeCodeSend<cr>
+nnoremap <leader>aa <cmd>ClaudeCodeDiffAccept<cr>
+nnoremap <leader>ad <cmd>ClaudeCodeDiffDeny<cr>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>

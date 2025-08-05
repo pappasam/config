@@ -24,6 +24,8 @@ vim.pack.add({
   "https://github.com/pappasam/papercolor-theme-slim",
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
+  -- AI
+  "https://github.com/coder/claudecode.nvim",
   -- Remainder
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
@@ -273,6 +275,9 @@ vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
+-- }}}
+-- coder/claudecode.nvim {{{
+require("claudecode").setup()
 -- }}}
 -- folke/snacks.nvim {{{
 require("snacks").setup({
