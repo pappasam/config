@@ -29,7 +29,6 @@ vim.pack.add({
   -- Remainder
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
-  "https://github.com/folke/snacks.nvim",
   "https://github.com/hedengran/fga.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/fladson/vim-kitty",
@@ -40,7 +39,7 @@ vim.pack.add({
   "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/machakann/vim-sandwich",
-  "https://github.com/echasnovski/mini.pairs",
+  "https://github.com/echasnovski/mini.nvim",
 })
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
   group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
@@ -279,59 +278,6 @@ vim.treesitter.language.register("bash", "shell")
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
 -- }}}
--- folke/snacks.nvim {{{
-require("snacks").setup({
-  explorer = { enabled = true },
-  gitbrowse = { enabled = true },
-  image = {
-    enabled = false,
-    ---@diagnostic disable-next-line: missing-fields
-    convert = {
-      notify = false,
-    },
-  },
-  indent = {
-    enabled = true,
-    scope = {
-      enabled = false,
-    },
-  },
-  picker = {
-    enabled = true,
-    exclude = {
-      "__pycache__",
-    },
-    include = {
-      ".github",
-      "/dotfiles/*",
-      "instance",
-    },
-    sources = {
-      explorer = {
-        win = {
-          list = {
-            keys = {
-              -- NOTE: pick_win triggered by <S-CR>
-              ["o"] = "confirm",
-              ["<c-t>"] = "tab",
-              ["<c-x>"] = "edit_split",
-              ["<c-v>"] = "edit_vsplit",
-            },
-          },
-        },
-      },
-    },
-  },
-  rename = { enabled = true },
-})
-
--- https://github.com/folke/snacks.nvim/issues/1552
-Snacks.input = function(...)
-  local opts, fn = ...
-  opts.prompt = opts.prompt .. ": "
-  return vim.ui.input(opts, fn)
-end
--- }}}
 -- stevearc/aerial.nvim {{{
 require("aerial").setup({})
 -- }}}
@@ -480,10 +426,25 @@ require("gx").setup({
   },
 })
 -- }}}
--- echasnovski/mini.pairs {{{
+-- echasnovski/mini.nvim {{{
+
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
+
+require("mini.pick").setup({})
+MiniPick.registry.files_fd = function()
+  local command =
+    { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
+  local show_with_icons = function(buf_id, items, query)
+    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+  end
+  local source = { name = "Files fd", show = show_with_icons }
+  return MiniPick.builtin.cli({ command = command }, { source = source })
+end
+
+require("mini.files").setup({})
+
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
 require("ts-autotag").setup({})

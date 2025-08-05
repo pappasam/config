@@ -304,20 +304,12 @@ nnoremap <leader>ad <cmd>ClaudeCodeDiffDeny<cr>
 " https://github.com/machakann/vim-sandwich
 nmap s <Nop>
 xmap s <Nop>
-" https://github.com/folke/snacks.nvim
-nnoremap <C-p><C-b> <Cmd>lua Snacks.picker.buffers()<CR>
-nnoremap <C-p><C-d> <Cmd>lua Snacks.picker.diagnostics()<CR>
-nnoremap <C-p><C-g> <Cmd>lua Snacks.picker.grep()<CR>
-nnoremap <C-p><C-h> <Cmd>lua Snacks.picker.help()<CR>
-nnoremap <C-p><C-l> <Cmd>lua Snacks.picker.highlights()<CR>
-nnoremap <C-p><C-p> <Cmd>lua Snacks.picker.files({ hidden = true })<CR>
-nnoremap <C-p><C-w> <Cmd>lua Snacks.picker.grep_word()<CR>
-nnoremap grr <Cmd>lua Snacks.picker.lsp_references()<CR>
-nnoremap gri <Cmd>lua Snacks.picker.lsp_implementations()<CR>
-nnoremap z= <Cmd>lua Snacks.picker.spelling()<CR>
-nnoremap <Space>j <Cmd>lua Snacks.explorer()<CR>
-nnoremap <Leader>gl <Cmd>lua Snacks.lazygit({ args = { "log" } })<CR>
-nnoremap <Space>i <Cmd>lua Snacks.image.hover()<CR>
+" https://github.com/echasnovski/mini.nvim
+nnoremap <C-p><C-b> <Cmd>Pick buffers<CR>
+nnoremap <C-p><C-g> <Cmd>Pick grep_live<CR>
+nnoremap <C-p><C-h> <Cmd>Pick help<CR>
+nnoremap <C-p><C-p> <Cmd>Pick files tool=files_fd<CR>
+nnoremap <Space>j <Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
