@@ -433,6 +433,7 @@ require("mini.pairs").setup({
 })
 
 require("mini.pick").setup({})
+
 MiniPick.registry.files_fd = function()
   local command =
     { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
@@ -444,6 +445,12 @@ MiniPick.registry.files_fd = function()
 end
 
 require("mini.files").setup({})
+
+_G.minifiles_toggle = function()
+  if not MiniFiles.close() then
+    MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  end
+end
 
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
