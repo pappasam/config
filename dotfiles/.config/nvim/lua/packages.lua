@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
   ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
   callback = function(event)
     if
-      event.data.spec == "nvim-treesitter"
+      event.data.spec.name == "nvim-treesitter"
       and event.data.kind == "update"
     then
       vim.schedule(function()
