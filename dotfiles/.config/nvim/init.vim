@@ -207,6 +207,7 @@ set exrc
 set foldmethod=marker foldnestmax=1 foldcolumn=auto
 set grepprg=rg\ --vimgrep
 set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
+set ignorecase smartcase
 set isfname+=@-@,:
 set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
