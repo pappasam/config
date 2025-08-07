@@ -309,8 +309,8 @@ xmap s <Nop>
 nnoremap <C-p><C-b> <Cmd>Pick buffers<CR>
 nnoremap <C-p><C-g> <Cmd>Pick grep_live<CR>
 nnoremap <C-p><C-h> <Cmd>Pick help<CR>
-nnoremap <C-p><C-p> <Cmd>Pick files<CR>
-nnoremap <C-p><C-i> <Cmd>lua MiniPick.builtin.cli({ command = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" } })<CR>
+nnoremap <C-p><C-p> <Cmd>Pick files_fd<CR>
+nnoremap <C-p><C-i> <Cmd>Pick files_fd_hidden<CR>
 nnoremap <Space>j <Cmd>lua minifiles_toggle()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>

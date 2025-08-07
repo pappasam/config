@@ -275,6 +275,62 @@ vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
 -- }}}
+-- echasnovski/mini.nvim {{{
+
+require("mini.pairs").setup({
+  modes = { insert = true, command = true, terminal = false },
+})
+
+require("mini.pick").setup({})
+
+MiniPick.registry.files_fd_hidden = function()
+  local cmd = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
+  local show_with_icons = function(buf_id, items, query)
+    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+  end
+  local source = { name = "Files fd", show = show_with_icons }
+  return MiniPick.builtin.cli({ command = cmd }, { source = source })
+end
+
+MiniPick.registry.files_fd = function()
+  local cmd = { "fd", "--type=f", "--no-follow", "--color=never" }
+  local show_with_icons = function(buf_id, items, query)
+    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
+  end
+  local source = { name = "Files fd", show = show_with_icons }
+  return MiniPick.builtin.cli({ command = cmd }, { source = source })
+end
+
+require("mini.files").setup({})
+
+_G.minifiles_toggle = function()
+  if not MiniFiles.close() then
+    MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  end
+end
+
+local show_dotfiles = true
+local filter_show = function(_)
+  return true
+end
+local filter_hide = function(fs_entry)
+  return not vim.startswith(fs_entry.name, ".")
+end
+local toggle_dotfiles = function()
+  show_dotfiles = not show_dotfiles
+  local new_filter = show_dotfiles and filter_show or filter_hide
+  MiniFiles.refresh({ content = { filter = new_filter } })
+end
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesBufferCreate",
+  callback = function(args)
+    local buf_id = args.data.buf_id
+    -- Tweak left-hand side of mapping to your liking
+    vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
+  end,
+})
+
+-- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
 -- }}}
@@ -425,54 +481,6 @@ require("gx").setup({
     },
   },
 })
--- }}}
--- echasnovski/mini.nvim {{{
-
-require("mini.pairs").setup({
-  modes = { insert = true, command = true, terminal = false },
-})
-
-require("mini.pick").setup({})
-
-MiniPick.registry.files_fd = function()
-  local command =
-    { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
-  local show_with_icons = function(buf_id, items, query)
-    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
-  end
-  local source = { name = "Files fd", show = show_with_icons }
-  return MiniPick.builtin.cli({ command = command }, { source = source })
-end
-
-require("mini.files").setup({})
-
-_G.minifiles_toggle = function()
-  if not MiniFiles.close() then
-    MiniFiles.open(vim.api.nvim_buf_get_name(0))
-  end
-end
-
-local show_dotfiles = true
-local filter_show = function(fs_entry)
-  return true
-end
-local filter_hide = function(fs_entry)
-  return not vim.startswith(fs_entry.name, ".")
-end
-local toggle_dotfiles = function()
-  show_dotfiles = not show_dotfiles
-  local new_filter = show_dotfiles and filter_show or filter_hide
-  MiniFiles.refresh({ content = { filter = new_filter } })
-end
-vim.api.nvim_create_autocmd("User", {
-  pattern = "MiniFilesBufferCreate",
-  callback = function(args)
-    local buf_id = args.data.buf_id
-    -- Tweak left-hand side of mapping to your liking
-    vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
-  end,
-})
-
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
 require("ts-autotag").setup({})
