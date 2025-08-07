@@ -301,7 +301,13 @@ MiniPick.registry.files_fd = function()
   return MiniPick.builtin.cli({ command = cmd }, { source = source })
 end
 
-require("mini.files").setup({})
+require("mini.files").setup({
+  content = {
+    filter = function(fs_entry)
+      return not vim.startswith(fs_entry.name, ".")
+    end,
+  },
+})
 
 _G.minifiles_toggle = function()
   if not MiniFiles.close() then
@@ -309,7 +315,7 @@ _G.minifiles_toggle = function()
   end
 end
 
-local show_dotfiles = true
+local show_dotfiles = false
 local filter_show = function(_)
   return true
 end
