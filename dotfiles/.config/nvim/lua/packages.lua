@@ -311,6 +311,12 @@ require("mini.files").setup({
 
 _G.minifiles_toggle = function()
   if not MiniFiles.close() then
+    MiniFiles.open()
+  end
+end
+
+_G.minifiles_toggle_current = function()
+  if not MiniFiles.close() then
     MiniFiles.open(vim.api.nvim_buf_get_name(0))
   end
 end

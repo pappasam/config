@@ -313,6 +313,7 @@ nnoremap <C-p><C-h> <Cmd>Pick help<CR>
 nnoremap <C-p><C-p> <Cmd>Pick files_fd<CR>
 nnoremap <C-p><C-i> <Cmd>Pick files_fd_hidden<CR>
 nnoremap <Space>j <Cmd>lua minifiles_toggle()<CR>
+nnoremap <Space>k <Cmd>lua minifiles_toggle_current()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
