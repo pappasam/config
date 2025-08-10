@@ -30,7 +30,6 @@ vim.pack.add({
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
   "https://github.com/hedengran/fga.nvim",
-  "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/fladson/vim-kitty",
   "https://github.com/mikesmithgh/kitty-scrollback.nvim",
   "https://github.com/HiPhish/info.vim",
@@ -282,6 +281,7 @@ require("mini.pairs").setup({
 require('mini.ai').setup({})
 require('mini.surround').setup({})
 require("mini.pick").setup({})
+require('mini.icons').setup({})
 
 MiniPick.registry.files_fd_hidden = function()
   local cmd = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
@@ -515,13 +515,6 @@ require("gx").setup({
 -- }}}
 -- tronikelis/ts-autotag.nvim {{{
 require("ts-autotag").setup({})
--- }}}
--- kyazdani42/nvim-web-devicons {{{
-require("nvim-web-devicons").setup({
-  -- globally enable default icons (default to false)
-  -- will get overriden by `get_icons` option
-  default = true,
-})
 -- }}}
 -- sotte/presenting.nvim {{{
 require("presenting").setup({
