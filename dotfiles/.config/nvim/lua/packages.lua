@@ -38,7 +38,6 @@ vim.pack.add({
   "https://github.com/chrishrb/gx.nvim",
   "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/sotte/presenting.nvim",
-  "https://github.com/machakann/vim-sandwich",
   "https://github.com/echasnovski/mini.nvim",
 })
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
@@ -360,6 +359,8 @@ vim.api.nvim_create_autocmd("User", {
     map_split(buf_id, "<C-t>", "tab")
   end,
 })
+
+require('mini.surround').setup({})
 
 -- }}}
 -- coder/claudecode.nvim {{{
