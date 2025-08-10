@@ -220,7 +220,7 @@ set path+=/usr/include/x86_64-linux-gnu/
 set shadafile=NONE
 set shortmess+=c
 set showtabline=2
-set signcolumn=number
+set signcolumn=yes
 set spelllang=en_us
 set splitright
 set termguicolors
