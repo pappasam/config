@@ -279,7 +279,8 @@ vim.treesitter.language.register("bash", "shell")
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
-
+require('mini.ai').setup({})
+require('mini.surround').setup({})
 require("mini.pick").setup({})
 
 MiniPick.registry.files_fd_hidden = function()
@@ -359,8 +360,6 @@ vim.api.nvim_create_autocmd("User", {
     map_split(buf_id, "<C-t>", "tab")
   end,
 })
-
-require('mini.surround').setup({})
 
 -- }}}
 -- coder/claudecode.nvim {{{
