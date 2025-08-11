@@ -116,7 +116,9 @@ function! s:edit_nvim_config()
   cd ~/config/dotfiles/.config/nvim
   edit  ~/config/dotfiles/.config/nvim/init.vim
   tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
+  tabe ~/config/dotfiles/.config/nvim/lua/settings.lua
   wincmd h
+  tabprevious
   tabprevious
 endfunction
 
