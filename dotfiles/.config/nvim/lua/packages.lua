@@ -1,4 +1,5 @@
 -- vim.pack {{{
+
 vim.pack.add({
   -- Language Server (LSP)
   "https://github.com/neovim/nvim-lspconfig",
@@ -52,6 +53,7 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
     end
   end,
 })
+
 -- }}}
 -- nvim:lsp.txt {{{
 
