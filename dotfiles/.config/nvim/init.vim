@@ -293,16 +293,16 @@ nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
 " https://github.com/coder/claudecode.nvim
-nnoremap <leader>ac <cmd>ClaudeCode<cr>
-nnoremap <leader>af <cmd>ClaudeCodeFocus<cr>
-nnoremap <leader>ar <cmd>ClaudeCode --resume<cr>
-nnoremap <leader>aC <cmd>ClaudeCode --continue<cr>
-nnoremap <leader>am <cmd>ClaudeCodeSelectModel<cr>
-nnoremap <leader>ab <cmd>ClaudeCodeAdd %<cr>
-xnoremap <leader>as <cmd>ClaudeCodeSend<cr>
-nnoremap <leader>aa <cmd>ClaudeCodeDiffAccept<cr>
-nnoremap <leader>ad <cmd>ClaudeCodeDiffDeny<cr>
-nnoremap <leader>at <cmd>ClaudeCodeTreeAdd<cr>
+nnoremap <Leader>ac <Cmd>ClaudeCode<cr>
+nnoremap <Leader>af <Cmd>ClaudeCodeFocus<cr>
+nnoremap <Leader>ar <Cmd>ClaudeCode --resume<cr>
+nnoremap <Leader>aC <Cmd>ClaudeCode --continue<cr>
+nnoremap <Leader>am <Cmd>ClaudeCodeSelectModel<cr>
+nnoremap <Leader>ab <Cmd>ClaudeCodeAdd %<cr>
+xnoremap <Leader>as <Cmd>ClaudeCodeSend<cr>
+nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<cr>
+nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<cr>
+nnoremap <Leader>at <Cmd>ClaudeCodeTreeAdd<cr>
 " https://github.com/echasnovski/mini.nvim
 nnoremap <C-p><C-b> <Cmd>Pick buffers<CR>
 nnoremap <C-p><C-g> <Cmd>Pick grep_live<CR>
@@ -311,13 +311,10 @@ nnoremap <C-p><C-p> <Cmd>Pick files_fd<CR>
 nnoremap <C-p><C-i> <Cmd>Pick files_fd_hidden<CR>
 nnoremap <Space>j <Cmd>lua minifiles_toggle()<CR>
 nnoremap <Space>k <Cmd>lua minifiles_toggle_current()<CR>
+nnoremap <Leader>gh <Cmd>lua MiniDiff.toggle_overlay()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
-" https://github.com/lewis6991/gitsigns.nvim
-nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
-nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
-nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " https://github.com/sindrets/diffview.nvim
 nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
 
