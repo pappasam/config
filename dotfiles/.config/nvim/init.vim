@@ -289,9 +289,10 @@ nnoremap <C-l> <Cmd>CtrlL<CR>
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " https://github.com/stevearc/aerial.nvim
-nnoremap <Space>l zR<Cmd>AerialToggle<CR>
+nnoremap <Leader>ta zR<Cmd>AerialToggle<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
-nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
+nnoremap <Leader>tt <Cmd>NvimTreeToggle<CR>
+nnoremap <Leader>tf <Cmd>NvimTreeFindFile<CR>
 " https://github.com/pappasam/nvim-repl
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
