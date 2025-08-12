@@ -27,6 +27,7 @@ vim.pack.add({
   -- AI
   "https://github.com/coder/claudecode.nvim",
   -- Remainder
+  "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
   "https://github.com/hedengran/fga.nvim",
@@ -281,12 +282,16 @@ require("mini.pairs").setup({
 })
 require("mini.ai").setup({})
 require("mini.surround").setup({})
-require("mini.icons").setup({})
 require("mini.diff").setup({
   view = {
     style = "sign",
   },
 })
+
+require("mini.icons").setup({})
+
+MiniIcons.mock_nvim_web_devicons()
+
 require("mini.pick").setup({})
 
 MiniPick.registry.files_fd_hidden = function()
@@ -307,66 +312,9 @@ MiniPick.registry.files_fd = function()
   return MiniPick.builtin.cli({ command = cmd }, { source = source })
 end
 
-require("mini.files").setup({
-  content = {
-    filter = function(fs_entry)
-      return not vim.startswith(fs_entry.name, ".")
-    end,
-  },
-})
-
-_G.minifiles_toggle = function()
-  if not MiniFiles.close() then
-    MiniFiles.open()
-  end
-end
-
-_G.minifiles_toggle_current = function()
-  if not MiniFiles.close() then
-    MiniFiles.open(vim.api.nvim_buf_get_name(0))
-  end
-end
-
-local show_dotfiles = false
-
-local filter_show = function(_)
-  return true
-end
-
-local filter_hide = function(fs_entry)
-  return not vim.startswith(fs_entry.name, ".")
-end
-
-local toggle_dotfiles = function()
-  show_dotfiles = not show_dotfiles
-  local new_filter = show_dotfiles and filter_show or filter_hide
-  MiniFiles.refresh({ content = { filter = new_filter } })
-end
-
-local map_split = function(buf_id, lhs, direction)
-  local rhs = function()
-    local cur_target = MiniFiles.get_explorer_state().target_window
-    local new_target = vim.api.nvim_win_call(cur_target, function()
-      vim.cmd(direction .. " split")
-      return vim.api.nvim_get_current_win()
-    end)
-    MiniFiles.set_target_window(new_target)
-  end
-  local desc = "Split " .. direction
-  vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
-end
-
-vim.api.nvim_create_autocmd("User", {
-  pattern = "MiniFilesBufferCreate",
-  callback = function(args)
-    local buf_id = args.data.buf_id
-    vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
-    map_split(buf_id, "<C-s>", "belowright horizontal")
-    map_split(buf_id, "<C-v>", "belowright vertical")
-    map_split(buf_id, "<C-t>", "tab")
-  end,
-})
-
+-- }}}
+-- nvim-tree/nvim-tree.lua {{{
+require("nvim-tree").setup({})
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()

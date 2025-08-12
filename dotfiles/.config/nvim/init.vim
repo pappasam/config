@@ -290,6 +290,8 @@ snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
+" https://github.com/nvim-tree/nvim-tree.lua
+nnoremap <Space>j <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/pappasam/nvim-repl
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
@@ -311,8 +313,6 @@ nnoremap <C-p><C-g> <Cmd>Pick grep_live<CR>
 nnoremap <C-p><C-h> <Cmd>Pick help<CR>
 nnoremap <C-p><C-p> <Cmd>Pick files_fd<CR>
 nnoremap <C-p><C-i> <Cmd>Pick files_fd_hidden<CR>
-nnoremap <Space>j <Cmd>lua minifiles_toggle()<CR>
-nnoremap <Space>k <Cmd>lua minifiles_toggle_current()<CR>
 nnoremap <Leader>gh <Cmd>lua MiniDiff.toggle_overlay()<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
