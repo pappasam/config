@@ -285,7 +285,6 @@ require("mini.diff").setup({
     style = "sign",
   },
 })
-
 require("mini.icons").setup({})
 
 MiniIcons.mock_nvim_web_devicons() -- call before nvim-tree setup
