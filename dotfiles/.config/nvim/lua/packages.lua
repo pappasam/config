@@ -312,7 +312,6 @@ end
 
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{
-
 require("nvim-tree").setup({
   disable_netrw = true,
   filters = {
@@ -330,14 +329,6 @@ require("nvim-tree").setup({
     full_name = true,
   },
 })
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  group = vim.api.nvim_create_augroup("NvimTreeEnter", { clear = true }),
-  callback = function()
-    require("nvim-tree.api").tree.open()
-  end,
-})
-
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
