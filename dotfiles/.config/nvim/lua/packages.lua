@@ -259,13 +259,11 @@ vim.lsp.config("yamlls", {
 
 -- }}}
 -- nvim:diagnostic.txt {{{
-
 vim.diagnostic.config({
   jump = {
     float = true,
   },
 })
-
 -- }}}
 -- nvim:treesitter.txt {{{
 -- Manually run the following for new installations -> :TSInstall all
@@ -314,7 +312,23 @@ end
 
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{
-require("nvim-tree").setup({})
+require("nvim-tree").setup({
+  disable_netrw = true,
+  filters = {
+    dotfiles = true,
+    custom = {
+      "/__pycache__",
+    },
+    exclude = {
+      "/.github",
+      "/dotfiles",
+      "/instance",
+    },
+  },
+  renderer = {
+    full_name = true,
+  },
+})
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
