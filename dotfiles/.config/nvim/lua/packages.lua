@@ -40,6 +40,7 @@ vim.pack.add({
   "https://github.com/sotte/presenting.nvim",
   "https://github.com/echasnovski/mini.nvim",
 })
+
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
   group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
   ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
@@ -311,6 +312,7 @@ end
 
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{
+
 require("nvim-tree").setup({
   disable_netrw = true,
   filters = {
@@ -328,6 +330,14 @@ require("nvim-tree").setup({
     full_name = true,
   },
 })
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  group = vim.api.nvim_create_augroup("NvimTreeEnter", { clear = true }),
+  callback = function()
+    require("nvim-tree.api").tree.open()
+  end,
+})
+
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
