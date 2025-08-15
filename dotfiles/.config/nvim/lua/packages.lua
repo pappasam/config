@@ -303,7 +303,6 @@ require("nvim-tree").setup({
     },
     exclude = {
       "/.github",
-      "/.claude",
       "/dotfiles",
       "/instance",
     },
