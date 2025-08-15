@@ -16,23 +16,30 @@ function _G.custom_tabline()
     local bufnr = buflist[winnr]
     local bufname = vim.fn.bufname(bufnr)
     local tabfilename
+    local icon = ""
     if bufname == "" then
       tabfilename = "[No Name]"
+      icon, _ = MiniIcons.get("file", "[No Name]")
     elseif bufname:match("^term://") then
       local command = bufname:match("term://.-//[0-9]+:(.+)")
       if command then
         local first_word = command:match("([^%s]+)")
         if first_word then
           tabfilename = "[" .. first_word .. "]"
+          icon, _ = MiniIcons.get("filetype", "terminal")
         else
           tabfilename = "[term]"
+          icon, _ = MiniIcons.get("filetype", "terminal")
         end
       else
         tabfilename = "[term]"
+        icon, _ = MiniIcons.get("filetype", "terminal")
       end
     else
       tabfilename = vim.fn.fnamemodify(bufname, ":t") -- regular file (basename)
+      icon, _ = MiniIcons.get("file", bufname)
     end
+    table.insert(result, icon .. " ")
     table.insert(result, tabfilename .. " ")
     if vim.fn.getbufvar(bufnr, "&modified") == 1 then
       table.insert(result, "[+] ")
@@ -48,8 +55,8 @@ vim.o.tabline = "%!v:lua.custom_tabline()"
 -- }}}
 -- vim._extui (experimental feature) {{{
 
-require("vim._extui").enable({
-  enable = true,
-})
+-- require("vim._extui").enable({
+--   enable = true,
+-- })
 
 -- }}}
