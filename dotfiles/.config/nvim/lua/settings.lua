@@ -16,11 +16,8 @@ function _G.custom_tabline()
     local bufnr = buflist[winnr]
     local bufname = vim.fn.bufname(bufnr)
     local tabfilename
-    local icon = ""
-    if bufname == "" then
-      tabfilename = "[No Name]"
-      icon, _ = MiniIcons.get("file", "[No Name]")
-    elseif bufname:match("^term://") then
+    local icon, _, is_default = MiniIcons.get("filetype", "")
+    if bufname:match("^term://") then
       local command = bufname:match("term://.-//[0-9]+:(.+)")
       if command then
         local first_word = command:match("([^%s]+)")
@@ -37,7 +34,11 @@ function _G.custom_tabline()
       end
     else
       tabfilename = vim.fn.fnamemodify(bufname, ":t") -- regular file (basename)
-      icon, _ = MiniIcons.get("file", bufname)
+      icon, _, is_default = MiniIcons.get("file", bufname)
+      if is_default and vim.bo.filetype ~= "" then
+        tabfilename = vim.bo.filetype
+        icon, _ = MiniIcons.get("filetype", vim.bo.filetype)
+      end
     end
     table.insert(result, icon .. " ")
     table.insert(result, tabfilename .. " ")
