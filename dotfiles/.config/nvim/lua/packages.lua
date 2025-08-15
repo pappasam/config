@@ -1,46 +1,48 @@
 -- vim.pack {{{
 
 vim.pack.add({
-  -- Language Server (LSP)
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/stevearc/aerial.nvim",
-  -- Autocompletion
-  {
-    src = "https://github.com/Saghen/blink.cmp",
-    version = vim.version.range("1.0.0 - 2.0.0"),
-  },
-  -- Tree Sitter
+  -- Treesitter
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
     version = "main",
   },
   "https://github.com/tronikelis/ts-autotag.nvim",
+  -- Language server protocol (LSP)
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/stevearc/aerial.nvim",
+  "https://github.com/j-hui/fidget.nvim",
+  -- AI
+  "https://github.com/coder/claudecode.nvim",
+  -- Autocompletion
+  {
+    src = "https://github.com/Saghen/blink.cmp",
+    version = vim.version.range("1.0.0 - 2.0.0"),
+  },
+  -- File pickers
+  "https://github.com/nvim-tree/nvim-tree.lua",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
   -- Git
   "https://github.com/junegunn/gv.vim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/sindrets/diffview.nvim",
-  -- My Plugins
+  -- Kitty
+  "https://github.com/fladson/vim-kitty",
+  "https://github.com/mikesmithgh/kitty-scrollback.nvim",
+  -- My plugins
   "https://github.com/pappasam/nvim-repl",
   "https://github.com/pappasam/papercolor-theme-slim",
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
-  -- AI
-  "https://github.com/coder/claudecode.nvim",
   -- Remainder
-  "https://github.com/nvim-tree/nvim-tree.lua",
-  "https://github.com/nvim-telescope/telescope.nvim",
-  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/echasnovski/mini.nvim",
   "https://github.com/fei6409/log-highlight.nvim",
-  "https://github.com/j-hui/fidget.nvim",
   "https://github.com/hedengran/fga.nvim",
-  "https://github.com/fladson/vim-kitty",
-  "https://github.com/mikesmithgh/kitty-scrollback.nvim",
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
   "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/sotte/presenting.nvim",
-  "https://github.com/echasnovski/mini.nvim",
 })
 
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
