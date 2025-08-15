@@ -292,26 +292,6 @@ require("mini.icons").setup({})
 
 MiniIcons.mock_nvim_web_devicons() -- call before nvim-tree setup
 
-require("mini.pick").setup({})
-
-MiniPick.registry.files_fd_hidden = function()
-  local cmd = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden" }
-  local show_with_icons = function(buf_id, items, query)
-    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
-  end
-  local source = { name = "Files fd", show = show_with_icons }
-  return MiniPick.builtin.cli({ command = cmd }, { source = source })
-end
-
-MiniPick.registry.files_fd = function()
-  local cmd = { "fd", "--type=f", "--no-follow", "--color=never" }
-  local show_with_icons = function(buf_id, items, query)
-    return MiniPick.default_show(buf_id, items, query, { show_icons = true })
-  end
-  local source = { name = "Files fd", show = show_with_icons }
-  return MiniPick.builtin.cli({ command = cmd }, { source = source })
-end
-
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
