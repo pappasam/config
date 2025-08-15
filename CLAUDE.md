@@ -54,15 +54,12 @@ The repository uses GNU Stow to manage symlinks from the `dotfiles/` directory t
 1. Shell Configuration
    - `.zshrc`: Zsh shell configuration with completions, prompts, and plugins
    - `.bashrc`: Bash configuration and utility functions
-
 2. Git Configuration
    - `.gitconfig`: Global git settings and aliases
-
 3. Neovim Configuration
    - `.config/nvim/init.vim`: Main Neovim configuration
-   - `.config/nvim/lua/packages.lua`: Plugin management using vim.pack
+   - `.config/nvim/lua/packages.lua`: Manage plugins using vim.pack
    - `.config/nvim/lua/settings.lua`: Additional Neovim settings
-
 4. Terminal Configuration
    - `.config/kitty/kitty.conf`: Kitty terminal configuration
 
@@ -73,7 +70,6 @@ The repository contains several scripts for system setup and maintenance:
 1. System Setup
    - `scripts/ubuntu/apt-installs.sh`: Installs common system packages
    - `scripts/ubuntu/custom-installs.sh`: Installs specialized tools and development environments
-
 2. Developer Tooling
    - Functions in `.bashrc` for setting up Python, Rust, and other development environments
    - Custom utilities for managing Git repositories and virtual environments
