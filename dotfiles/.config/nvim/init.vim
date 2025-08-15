@@ -308,13 +308,14 @@ xnoremap <Leader>as <Cmd>ClaudeCodeSend<cr>
 nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<cr>
 nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<cr>
 nnoremap <Leader>at <Cmd>ClaudeCodeTreeAdd<cr>
-" https://github.com/echasnovski/mini.nvim
-nnoremap <C-p><C-b> <Cmd>Pick buffers<CR>
-nnoremap <C-p><C-g> <Cmd>Pick grep_live<CR>
-nnoremap <C-p><C-h> <Cmd>Pick help<CR>
-nnoremap <C-p><C-p> <Cmd>Pick files_fd<CR>
-nnoremap <C-p><C-i> <Cmd>Pick files_fd_hidden<CR>
-nnoremap <Leader>gh <Cmd>lua MiniDiff.toggle_overlay()<CR>
+" https://github.com/nvim-telescope/telescope.nvim
+nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
+nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
+nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
+nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
+nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
+nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
+nnoremap z= <Cmd>Telescope spell_suggest<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>

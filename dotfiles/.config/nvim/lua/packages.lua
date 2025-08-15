@@ -28,6 +28,8 @@ vim.pack.add({
   "https://github.com/coder/claudecode.nvim",
   -- Remainder
   "https://github.com/nvim-tree/nvim-tree.lua",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/j-hui/fidget.nvim",
   "https://github.com/hedengran/fga.nvim",
@@ -329,6 +331,28 @@ require("nvim-tree").setup({
     full_name = true,
   },
 })
+-- }}}
+-- telescope {{{
+require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim {{{
+  defaults = {
+    file_ignore_patterns = {
+      "^node_modules/",
+      "^%.git/",
+      "^%.venv/",
+    },
+    layout_strategy = "flex",
+    layout_config = {
+      height = 0.9,
+      width = 0.9,
+    },
+    mappings = {
+      i = {
+        ["<esc>"] = require("telescope.actions").close,
+      },
+    },
+    prompt_prefix = " ",
+  },
+}) -- }}}
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
