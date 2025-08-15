@@ -312,8 +312,8 @@ require("nvim-tree").setup({
   },
 })
 -- }}}
--- telescope {{{
-require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim {{{
+-- nvim-telescope/telescope.nvim {{{
+require("telescope").setup({
   defaults = {
     file_ignore_patterns = {
       "^node_modules/",
@@ -332,7 +332,7 @@ require("telescope").setup({ -- https://github.com/nvim-telescope/telescope.nvim
     },
     prompt_prefix = " ",
   },
-}) -- }}}
+})
 -- }}}
 -- coder/claudecode.nvim {{{
 require("claudecode").setup()
