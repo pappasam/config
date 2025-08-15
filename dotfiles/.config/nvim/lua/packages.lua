@@ -283,7 +283,6 @@ vim.treesitter.language.register("bash", "shell")
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
-require("mini.statusline").setup({})
 require("mini.surround").setup({})
 require("mini.diff").setup({
   view = {
