@@ -22,7 +22,8 @@ function _G.custom_tabline()
       if command then
         local first_word = command:match("([^%s]+)")
         if first_word then
-          tabfilename = "[" .. first_word .. "]"
+          local last_part = first_word:match("([^/]+)$") or first_word
+          tabfilename = "[" .. last_part .. "]"
           icon, _ = MiniIcons.get("filetype", "terminal")
         else
           tabfilename = "[term]"
