@@ -280,6 +280,9 @@ vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
 -- }}}
+-- nvim-tree/nvim-web-devicons {{{
+require("nvim-web-devicons").setup({})
+-- }}}
 -- echasnovski/mini.nvim {{{
 
 require("mini.pairs").setup({
@@ -287,9 +290,6 @@ require("mini.pairs").setup({
 })
 require("mini.surround").setup({})
 
--- }}}
--- nvim-tree/nvim-web-devicons {{{
-require("nvim-web-devicons").setup({})
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
