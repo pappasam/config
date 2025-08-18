@@ -309,6 +309,10 @@ xnoremap <Leader>as <Cmd>ClaudeCodeSend<cr>
 nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<cr>
 nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<cr>
 nnoremap <Leader>at <Cmd>ClaudeCodeTreeAdd<cr>
+" https://github.com/lewis6991/gitsigns.nvim
+nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
+nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
+nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " https://github.com/nvim-telescope/telescope.nvim
 nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
 nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
