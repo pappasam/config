@@ -292,6 +292,9 @@ require("mini.diff").setup({
 })
 
 -- }}}
+-- nvim-tree/nvim-web-devicons {{{
+require("nvim-web-devicons").setup({})
+-- }}}
 -- nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
   disable_netrw = true,

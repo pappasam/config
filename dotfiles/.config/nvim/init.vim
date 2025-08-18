@@ -196,9 +196,9 @@ augroup end
 " Settings {{{
 
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
+colorscheme PaperColorSlim " https://vimcolorschemes.com
 lua require("settings")
 lua require("packages")
-colorscheme PaperColorSlim " https://vimcolorschemes.com
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
