@@ -20,6 +20,7 @@ vim.pack.add({
   },
   -- File pickers
   "https://github.com/nvim-tree/nvim-tree.lua",
+  "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/nvim-lua/plenary.nvim",
   -- Git
@@ -289,9 +290,6 @@ require("mini.diff").setup({
     style = "sign",
   },
 })
-require("mini.icons").setup({})
-
-MiniIcons.mock_nvim_web_devicons() -- call before nvim-tree setup
 
 -- }}}
 -- nvim-tree/nvim-tree.lua {{{

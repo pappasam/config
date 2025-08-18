@@ -3,6 +3,7 @@
 
 function _G.custom_tabline()
   local result = {}
+  local devicons = require("nvim-web-devicons")
   for i = 1, vim.fn.tabpagenr("$") do
     if i == vim.fn.tabpagenr() then
       table.insert(result, "%#TabLineSel#")
@@ -16,32 +17,38 @@ function _G.custom_tabline()
     local bufnr = buflist[winnr]
     local bufname = vim.fn.bufname(bufnr)
     local tabfilename
-    local icon, _, is_default = MiniIcons.get("filetype", "")
+    local icon
     if bufname:match("^term://") then
       local command = bufname:match("term://.-//[0-9]+:(.+)")
       if command then
         local first_word = command:match("([^%s]+)")
         if first_word then
           local last_part = first_word:match("([^/]+)$") or first_word
-          tabfilename = "[" .. last_part .. "]"
-          icon, _ = MiniIcons.get("filetype", "terminal")
+          tabfilename = last_part
+          icon = devicons.get_icon_by_filetype("terminal")
         else
-          tabfilename = "[term]"
-          icon, _ = MiniIcons.get("filetype", "terminal")
+          tabfilename = "term"
+          icon = devicons.get_icon_by_filetype("terminal")
         end
       else
-        tabfilename = "[term]"
-        icon, _ = MiniIcons.get("filetype", "terminal")
+        tabfilename = "term"
+        icon = devicons.get_icon_by_filetype("terminal")
       end
     else
       tabfilename = vim.fn.fnamemodify(bufname, ":t") -- regular file (basename)
-      icon, _, is_default = MiniIcons.get("file", bufname)
-      if is_default and vim.bo.filetype ~= "" then
-        tabfilename = vim.bo.filetype
-        icon, _ = MiniIcons.get("filetype", vim.bo.filetype)
+      local extension = vim.fn.fnamemodify(bufname, ":e")
+      icon = devicons.get_icon(tabfilename, extension, { default = true })
+
+      -- Fallback to filetype if no specific file icon found
+      if not icon or icon == "" then
+        local ft = vim.bo[bufnr].filetype
+        if ft and ft ~= "" then
+          tabfilename = ft
+          icon = devicons.get_icon_by_filetype(ft)
+        end
       end
     end
-    table.insert(result, icon .. " ")
+    table.insert(result, (icon or "") .. " ")
     table.insert(result, tabfilename .. " ")
     if vim.fn.getbufvar(bufnr, "&modified") == 1 then
       table.insert(result, "[+] ")
