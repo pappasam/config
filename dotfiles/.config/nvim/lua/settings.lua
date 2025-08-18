@@ -19,27 +19,20 @@ function _G.custom_tabline()
     local tabfilename
     local icon
     if bufname:match("^term://") then
+      tabfilename = "term"
+      icon = devicons.get_icon_by_filetype("terminal")
       local command = bufname:match("term://.-//[0-9]+:(.+)")
       if command then
         local first_word = command:match("([^%s]+)")
         if first_word then
           local last_part = first_word:match("([^/]+)$") or first_word
           tabfilename = last_part
-          icon = devicons.get_icon_by_filetype("terminal")
-        else
-          tabfilename = "term"
-          icon = devicons.get_icon_by_filetype("terminal")
         end
-      else
-        tabfilename = "term"
-        icon = devicons.get_icon_by_filetype("terminal")
       end
     else
       tabfilename = vim.fn.fnamemodify(bufname, ":t") -- regular file (basename)
       local extension = vim.fn.fnamemodify(bufname, ":e")
       icon = devicons.get_icon(tabfilename, extension, { default = true })
-
-      -- Fallback to filetype if no specific file icon found
       if not icon or icon == "" then
         local ft = vim.bo[bufnr].filetype
         if ft and ft ~= "" then
