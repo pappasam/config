@@ -33,7 +33,7 @@ function _G.custom_tabline()
     local icon
     if is_current_tab and is_telescope_active() then
       tabfilename = "Telescope"
-      icon = "🔍︎"
+      icon = " "
     elseif bufname:match("^term://") then
       tabfilename = "term"
       icon = devicons.get_icon_by_filetype("terminal") .. " "
