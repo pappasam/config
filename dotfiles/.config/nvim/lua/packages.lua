@@ -1,4 +1,4 @@
--- vim.pack {{{
+-- https://neovim.io/doc/user/pack.html#vim.pack {{{
 
 vim.pack.add({
   -- Treesitter
@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 })
 
 -- }}}
--- nvim:lsp.txt {{{
+-- https://neovim.io/doc/user/lsp.html {{{
 
 vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
 
@@ -265,14 +265,14 @@ vim.lsp.config("yamlls", {
 })
 
 -- }}}
--- nvim:diagnostic.txt {{{
+-- https://neovim.io/doc/user/diagnostic.html {{{
 vim.diagnostic.config({
   jump = {
     float = true,
   },
 })
 -- }}}
--- nvim:treesitter.txt {{{
+-- https://neovim.io/doc/user/treesitter.html {{{
 -- Manually run the following for new installations -> :TSInstall all
 
 vim.treesitter.language.register("terraform", "terraform-vars")
@@ -280,10 +280,10 @@ vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
 -- }}}
--- nvim-tree/nvim-web-devicons {{{
+-- https://github.com/nvim-tree/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({})
 -- }}}
--- echasnovski/mini.nvim {{{
+-- https://github.com/echasnovski/mini.nvim {{{
 
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
@@ -291,7 +291,7 @@ require("mini.pairs").setup({
 require("mini.surround").setup({})
 
 -- }}}
--- nvim-tree/nvim-tree.lua {{{
+-- https://github.com/nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
   disable_netrw = true,
   filters = {
@@ -310,7 +310,7 @@ require("nvim-tree").setup({
   },
 })
 -- }}}
--- nvim-telescope/telescope.nvim {{{
+-- https://github.com/nvim-telescope/telescope.nvim {{{
 require("telescope").setup({
   defaults = {
     file_ignore_patterns = {
@@ -327,7 +327,7 @@ require("telescope").setup({
   },
 })
 -- }}}
--- lewis6991/gitsigns.nvim {{{
+-- https://github.com/lewis6991/gitsigns.nvim {{{
 require("gitsigns").setup({
   signcolumn = true,
   numhl = true,
@@ -362,13 +362,13 @@ require("gitsigns").setup({
   end,
 })
 -- }}}
--- coder/claudecode.nvim {{{
+-- https://github.com/coder/claudecode.nvim {{{
 require("claudecode").setup()
 -- }}}
--- stevearc/aerial.nvim {{{
+-- https://github.com/stevearc/aerial.nvim {{{
 require("aerial").setup({})
 -- }}}
--- Saghen/blink.cmp {{{
+-- https://github.com/Saghen/blink.cmp {{{
 require("blink-cmp").setup({
   completion = {
     keyword = {
@@ -393,7 +393,7 @@ require("blink-cmp").setup({
   },
 })
 -- }}}
--- catgoose/nvim-colorizer.lua {{{
+-- https://github.com/catgoose/nvim-colorizer.lua {{{
 require("colorizer").setup({
   filetypes = {
     "css",
@@ -405,7 +405,7 @@ require("colorizer").setup({
   },
 })
 -- }}}
--- sindrets/diffview.nvim {{{
+-- https://github.com/sindrets/diffview.nvim {{{
 require("diffview").setup({
   enhanced_diff_hl = true,
   show_help_hints = false,
@@ -422,7 +422,7 @@ require("diffview").setup({
   },
 })
 -- }}}
--- chrishrb/gx.nvim {{{
+-- https://github.com/chrishrb/gx.nvim {{{
 ---@diagnostic disable-next-line: missing-fields
 require("gx").setup({
   open_browser_app = "firefox",
@@ -478,10 +478,10 @@ require("gx").setup({
   },
 })
 -- }}}
--- tronikelis/ts-autotag.nvim {{{
+-- https://github.com/tronikelis/ts-autotag.nvim {{{
 require("ts-autotag").setup({})
 -- }}}
--- sotte/presenting.nvim {{{
+-- https://github.com/sotte/presenting.nvim {{{
 require("presenting").setup({
   options = {
     width = 60,
@@ -501,14 +501,14 @@ require("presenting").setup({
   end,
 })
 -- }}}
--- j-hui/fidget.nvim {{{
+-- https://github.com/j-hui/fidget.nvim {{{
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
 })
 -- }}}
--- hedengran/fga.nvim {{{
+-- https://github.com/hedengran/fga.nvim {{{
 require("fga").setup({
   install_treesitter_grammar = false,
 })
