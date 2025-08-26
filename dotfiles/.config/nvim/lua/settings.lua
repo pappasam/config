@@ -78,3 +78,10 @@ end
 vim.o.tabline = "%!v:lua.custom_tabline()"
 
 -- }}}
+-- vim._extui (experimental feature) {{{
+
+-- require("vim._extui").enable({
+--   enable = true,
+-- })
+
+-- }}}
