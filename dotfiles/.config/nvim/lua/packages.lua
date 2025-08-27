@@ -289,6 +289,7 @@ require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
 require("mini.surround").setup({})
+require("mini.statusline").setup({})
 
 -- }}}
 -- https://github.com/nvim-tree/nvim-tree.lua {{{
