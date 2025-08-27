@@ -23,8 +23,7 @@ function _G.custom_tabline()
     else
       table.insert(result, "%#TabLine#")
     end
-    table.insert(result, "%" .. i .. "T") -- BEGIN clickable region %{tabnr}T
-    table.insert(result, " " .. i .. " ") -- set number
+    table.insert(result, "%" .. i .. "T ") -- BEGIN clickable region %{tabnr}T
     local winnr = vim.fn.tabpagewinnr(i)
     local buflist = vim.fn.tabpagebuflist(i)
     local bufnr = buflist[winnr]
