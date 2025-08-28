@@ -69,6 +69,7 @@ vault = "latest"
 "pipx:cookiecutter" = "latest"
 "pipx:nginxfmt" = "latest"
 "pipx:pgcli" = "latest"
+"pipx:poethepoet" = "latest"
 "pipx:poetry" = { version = "latest", uvx_args = "--with poetry-plugin-export" }
 "pipx:pre-commit" = "latest"
 "pipx:pyright" = "latest"
