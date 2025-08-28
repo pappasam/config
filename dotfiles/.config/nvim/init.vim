@@ -290,6 +290,9 @@ nnoremap <C-l> <Cmd>CtrlL<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
+" https://github.com/machakann/vim-sandwich
+nmap s <Nop>
+xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l zR<Cmd>AerialToggle<CR>
 " https://github.com/nvim-tree/nvim-tree.lua

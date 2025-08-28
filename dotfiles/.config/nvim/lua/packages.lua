@@ -38,6 +38,7 @@ vim.pack.add({
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
   "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/hedengran/fga.nvim",
   "https://github.com/HiPhish/info.vim",
@@ -288,7 +289,6 @@ require("nvim-web-devicons").setup({})
 require("mini.pairs").setup({
   modes = { insert = true, command = true, terminal = false },
 })
-require("mini.surround").setup({})
 require("mini.statusline").setup({})
 
 -- }}}
