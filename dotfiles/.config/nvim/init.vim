@@ -163,6 +163,9 @@ augroup end
 " }}}
 " Settings {{{
 
+" https://github.com/pappasam/vim-filetype-formatter
+let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
+
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
 colorscheme PaperColorSlim " https://vimcolorschemes.com
 lua require("settings")
@@ -206,8 +209,6 @@ let g:loaded_node_provider = 0
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 let g:markdown_recommended_style = 0
-" https://github.com/pappasam/vim-filetype-formatter
-let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 
 " }}}
 " Mappings {{{
