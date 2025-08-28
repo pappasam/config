@@ -37,7 +37,7 @@ vim.pack.add({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  "https://github.com/echasnovski/mini.nvim",
+  "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/hedengran/fga.nvim",
   "https://github.com/HiPhish/info.vim",
