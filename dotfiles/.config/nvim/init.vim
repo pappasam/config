@@ -181,7 +181,6 @@ set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set ignorecase smartcase
 set isfname+=@-@,:
 set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
-set list
 set mouse=a
 set noshowcmd
 set noshowmode
