@@ -44,34 +44,6 @@ function! s:resize_window_width()
   endtry
 endfunction
 
-command! F call s:focuswriting()
-function! s:focuswriting()
-  set lazyredraw
-  try
-    normal! ma
-    let current_buffer = bufnr('%')
-    tabe
-    " Left Window
-    let w:focuswriting = 1
-    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
-    vsplit
-    vsplit
-    " Right Window
-    let w:focuswriting = 1
-    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
-    wincmd h
-    " Middle Window
-    let w:focuswriting = 1
-    vertical resize 88
-    execute 'buffer ' .. current_buffer
-    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nc
-    wincmd =
-    normal! `azz0
-  finally
-    set nolazyredraw
-  endtry
-endfunction
-
 command! CleanUnicode call s:clean_unicode()
 function! s:clean_unicode()
   set lazyredraw
@@ -183,11 +155,9 @@ augroup init_custom
   autocmd BufRead,BufNewFile poetry.lock set filetype=toml
   autocmd BufRead,BufNewFile renv.lock set filetype=json
   autocmd BufWritePre * TrimWhitespace
-  autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
   autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
   autocmd VimResized * ResizeTabs
-  autocmd FocusGained,VimResume * checktime
 augroup end
 
 " }}}
