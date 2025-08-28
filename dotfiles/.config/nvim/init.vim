@@ -216,6 +216,7 @@ set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
 set mouse=a
 set noshowcmd
+set noshowmode
 set noswapfile
 set notimeout
 set number
