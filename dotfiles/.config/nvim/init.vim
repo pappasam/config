@@ -183,8 +183,6 @@ augroup init_custom
   autocmd BufRead,BufNewFile poetry.lock set filetype=toml
   autocmd BufRead,BufNewFile renv.lock set filetype=json
   autocmd BufWritePre * TrimWhitespace
-  autocmd InsertEnter * setlocal listchars=tab:│—→,lead:\ ,nbsp:+
-  autocmd InsertLeave * setlocal listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
   autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
@@ -213,7 +211,7 @@ set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
 set ignorecase smartcase
 set isfname+=@-@,:
 set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
-set list listchars=tab:│—→,lead:\ ,nbsp:+,trail:-
+set list
 set mouse=a
 set noshowcmd
 set noshowmode
