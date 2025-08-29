@@ -12,7 +12,10 @@ vim.pack.add({
   "https://github.com/stevearc/aerial.nvim",
   "https://github.com/j-hui/fidget.nvim",
   -- AI
-  "https://github.com/coder/claudecode.nvim",
+  {
+    src = "https://github.com/coder/claudecode.nvim",
+    version = "thomask33/feat_redesign_diff_view_with_horizontal_layout_and_new_tab_options",
+  },
   -- Autocompletion
   {
     src = "https://github.com/Saghen/blink.cmp",
