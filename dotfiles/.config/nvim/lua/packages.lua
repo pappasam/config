@@ -41,6 +41,7 @@ vim.pack.add({
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
   "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/windwp/nvim-autopairs",
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/hedengran/fga.nvim",
@@ -287,13 +288,13 @@ vim.treesitter.language.register("bash", "shell")
 -- https://github.com/nvim-tree/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({})
 -- }}}
--- https://github.com/echasnovski/mini.nvim {{{
-
-require("mini.pairs").setup({
-  modes = { insert = true, command = true, terminal = false },
+-- https://github.com/windwp/nvim-autopairs {{{
+require("nvim-autopairs").setup({
+  map_c_h = true,
+  map_c_w = true,
+  map_cr = true,
+  enable_check_bracket_line = false,
 })
-require("mini.statusline").setup({})
-
 -- }}}
 -- https://github.com/nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
@@ -367,7 +368,12 @@ require("gitsigns").setup({
 })
 -- }}}
 -- https://github.com/coder/claudecode.nvim {{{
-require("claudecode").setup()
+require("claudecode").setup({
+  diff_opts = {
+    open_in_new_tab = true,
+    hide_terminal_in_new_tab = true,
+  },
+})
 -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
 require("aerial").setup({})
