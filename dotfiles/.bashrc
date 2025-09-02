@@ -151,9 +151,7 @@ alias gn='gio open'
 alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
 alias pbpaste='xsel --clipboard --output'
 alias publicip='curl -s checkip.amazonaws.com'
-alias m='make'
 alias rg='rg --fixed-strings'
-alias k3='cd ~/src/KeplerGroup/KIP-3-MVP'
 
 # }}}
 # Functions {{{
