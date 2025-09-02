@@ -1,11 +1,17 @@
 -- https://neovim.io/doc/user/pack.html#vim.pack {{{
 
 vim.pack.add({
-  -- Treesitter
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
     version = "main",
   },
+  -- Completion
+  {
+    src = "https://github.com/Saghen/blink.cmp",
+    version = vim.version.range("1.0.0 - 2.0.0"),
+  },
+  -- Pairs
+  "https://github.com/windwp/nvim-autopairs",
   "https://github.com/tronikelis/ts-autotag.nvim",
   -- Language server protocol (LSP)
   "https://github.com/neovim/nvim-lspconfig",
@@ -13,11 +19,6 @@ vim.pack.add({
   "https://github.com/j-hui/fidget.nvim",
   -- AI
   "https://github.com/coder/claudecode.nvim",
-  -- Autocompletion
-  {
-    src = "https://github.com/Saghen/blink.cmp",
-    version = vim.version.range("1.0.0 - 2.0.0"),
-  },
   -- File pickers
   "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/nvim-tree/nvim-web-devicons",
@@ -37,8 +38,6 @@ vim.pack.add({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  "https://github.com/nvim-mini/mini.nvim",
-  "https://github.com/windwp/nvim-autopairs",
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/hedengran/fga.nvim",
