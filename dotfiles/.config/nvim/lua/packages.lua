@@ -12,10 +12,7 @@ vim.pack.add({
   "https://github.com/stevearc/aerial.nvim",
   "https://github.com/j-hui/fidget.nvim",
   -- AI
-  {
-    src = "https://github.com/coder/claudecode.nvim",
-    version = "thomask33/feat_redesign_diff_view_with_horizontal_layout_and_new_tab_options",
-  },
+  "https://github.com/coder/claudecode.nvim",
   -- Autocompletion
   {
     src = "https://github.com/Saghen/blink.cmp",
@@ -368,12 +365,7 @@ require("gitsigns").setup({
 })
 -- }}}
 -- https://github.com/coder/claudecode.nvim {{{
-require("claudecode").setup({
-  diff_opts = {
-    open_in_new_tab = true,
-    hide_terminal_in_new_tab = true,
-  },
-})
+require("claudecode").setup()
 -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
 require("aerial").setup({})
