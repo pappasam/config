@@ -12,7 +12,7 @@ vim.pack.add({
   },
   -- Pairs
   "https://github.com/windwp/nvim-autopairs",
-  "https://github.com/tronikelis/ts-autotag.nvim",
+  "https://github.com/windwp/nvim-ts-autotag",
   -- Language server protocol (LSP)
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/aerial.nvim",
@@ -292,6 +292,9 @@ require("nvim-autopairs").setup({
   enable_check_bracket_line = false,
 })
 -- }}}
+-- https://github.com/windwp/nvim-ts-autotag {{{
+require("nvim-ts-autotag").setup()
+-- }}}
 -- https://github.com/nvim-tree/nvim-tree.lua {{{
 require("nvim-tree").setup({
   disable_netrw = true,
@@ -478,9 +481,6 @@ require("gx").setup({
     },
   },
 })
--- }}}
--- https://github.com/tronikelis/ts-autotag.nvim {{{
-require("ts-autotag").setup({})
 -- }}}
 -- https://github.com/sotte/presenting.nvim {{{
 require("presenting").setup({
