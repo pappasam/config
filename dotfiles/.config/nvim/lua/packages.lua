@@ -40,7 +40,6 @@ vim.pack.add({
   -- Remainder
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
-  "https://github.com/hedengran/fga.nvim",
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
@@ -507,10 +506,5 @@ require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
-})
--- }}}
--- https://github.com/hedengran/fga.nvim {{{
-require("fga").setup({
-  install_treesitter_grammar = false,
 })
 -- }}}
