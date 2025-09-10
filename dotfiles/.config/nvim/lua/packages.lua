@@ -366,7 +366,15 @@ require("gitsigns").setup({
 })
 -- }}}
 -- https://github.com/coder/claudecode.nvim {{{
-require("claudecode").setup()
+require("claudecode").setup({
+  diff_opts = {
+    layout = "vertical",
+    open_in_new_tab = true,
+    hide_terminal_in_new_tab = true,
+    keep_terminal_focus = false,
+    on_new_file_reject = "close_window",
+  },
+})
 -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
 require("aerial").setup({})
