@@ -279,6 +279,18 @@ vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TSUpdate",
+  callback = function()
+    require("nvim-treesitter.parsers").fga = {
+      install_info = {
+        url = "https://github.com/matoous/tree-sitter-fga",
+        queries = "queries", -- also install queries from given directory
+      },
+    }
+  end,
+})
+
 -- }}}
 -- https://github.com/nvim-tree/nvim-web-devicons {{{
 require("nvim-web-devicons").setup({})
