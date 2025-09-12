@@ -271,7 +271,7 @@ nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
 " https://github.com/coder/claudecode.nvim
-nnoremap <Leader>ac <Cmd>ClaudeCode<cr>
+nnoremap <Leader>ac <Cmd>ClaudeCode<cr><Cmd>wincmd T<cr>
 nnoremap <Leader>af <Cmd>ClaudeCodeFocus<cr>
 nnoremap <Leader>ar <Cmd>ClaudeCode --resume<cr>
 nnoremap <Leader>aC <Cmd>ClaudeCode --continue<cr>
