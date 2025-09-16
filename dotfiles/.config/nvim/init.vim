@@ -262,16 +262,21 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 nmap s <Nop>
 xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
-nnoremap <Space>l zR<Cmd>AerialToggle<CR>
+nnoremap <Leader>oo <Cmd>AerialOpen<CR>
+nnoremap <Leader>oc <Cmd>AerialClose<CR>
+nnoremap <Leader>of <Cmd>AerialOpen<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
-nnoremap <Space>j <Cmd>NvimTreeToggle<CR>
-nnoremap <Space>f <Cmd>NvimTreeFindFile<CR>
+nnoremap <Leader>to <Cmd>NvimTreeOpen<CR>
+nnoremap <Leader>tc <Cmd>NvimTreeClose<CR>
+nnoremap <Leader>ts <Cmd>NvimTreeFindFile<CR>
+nnoremap <Leader>tf <Cmd>NvimTreeFocus<CR>
 " https://github.com/pappasam/nvim-repl
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
 " https://github.com/coder/claudecode.nvim
-nnoremap <Leader>ac <Cmd>ClaudeCode<cr><Cmd>wincmd T<cr>
+nnoremap <Leader>ao <Cmd>ClaudeCode<cr><Cmd>wincmd T<cr>
+nnoremap <Leader>ac <Cmd>ClaudeCodeClose<cr>
 nnoremap <Leader>af <Cmd>ClaudeCodeFocus<cr>
 nnoremap <Leader>ar <Cmd>ClaudeCode --resume<cr>
 nnoremap <Leader>aC <Cmd>ClaudeCode --continue<cr>
