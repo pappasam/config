@@ -144,73 +144,6 @@ function! s:ctrl_l()
 endfunction
 
 " }}}
-" Autocmds {{{
-" Placed at top because some events (like ColorScheme) happen in init.vim
-
-augroup init_custom
-  autocmd!
-  autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
-  autocmd BufRead,BufNewFile *.min.js set filetype=none
-  autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
-  autocmd BufRead,BufNewFile poetry.lock set filetype=toml
-  autocmd BufRead,BufNewFile renv.lock set filetype=json
-  autocmd BufWritePre * TrimWhitespace
-  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
-  autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
-  autocmd VimResized * ResizeTabs
-augroup end
-
-" }}}
-" Settings {{{
-
-" https://github.com/pappasam/vim-filetype-formatter
-let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
-
-lua vim.loader.enable(true) -- speed up lua load times (experimental)
-colorscheme PaperColorSlim " https://vimcolorschemes.com
-lua require("settings")
-lua require("packages")
-aunmenu PopUp.-2-
-aunmenu PopUp.How-to\ disable\ mouse
-digraph '' 699  " Hawaiian character ʻ
-set completeopt=menuone,longest,fuzzy wildmode=longest:full
-set cursorline cursorlineopt=number
-set diffopt+=algorithm:histogram,inline:word,indent-heuristic
-set expandtab shiftwidth=2 softtabstop=2
-set exrc
-set foldmethod=marker foldnestmax=1 foldcolumn=auto
-set grepprg=rg\ --vimgrep
-set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
-set ignorecase smartcase
-set isfname+=@-@,:
-set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
-set mouse=a
-set noshowcmd
-set noshowmode
-set noswapfile
-set notimeout
-set number
-set path+=/usr/include/x86_64-linux-gnu/
-set shadafile=NONE
-set shortmess+=c
-set showtabline=2
-set signcolumn=yes
-set spelllang=en_us
-set splitright
-set termguicolors
-set updatetime=300
-set winborder=rounded
-let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = 'xsel'
-let g:loaded_python3_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
-let g:loaded_node_provider = 0
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-let g:markdown_recommended_style = 0
-
-" }}}
 " Mappings {{{
 
 let g:mapleader = ','
@@ -304,5 +237,71 @@ nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
 " https://github.com/sindrets/diffview.nvim
 nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
+
+" }}}
+" Autocmds {{{
+
+augroup init_custom
+  autocmd!
+  autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
+  autocmd BufRead,BufNewFile *.min.js set filetype=none
+  autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
+  autocmd BufRead,BufNewFile poetry.lock set filetype=toml
+  autocmd BufRead,BufNewFile renv.lock set filetype=json
+  autocmd BufWritePre * TrimWhitespace
+  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
+  autocmd VimLeavePre * lua vim.lsp.stop_client(vim.lsp.get_clients(), true)
+  autocmd VimResized * ResizeTabs
+augroup end
+
+" }}}
+" Settings {{{
+
+" https://github.com/pappasam/vim-filetype-formatter
+let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
+
+lua vim.loader.enable(true) -- speed up lua load times (experimental)
+colorscheme PaperColorSlim " https://vimcolorschemes.com
+lua require("settings")
+lua require("packages")
+aunmenu PopUp.-2-
+aunmenu PopUp.How-to\ disable\ mouse
+digraph '' 699  " Hawaiian character ʻ
+set completeopt=menuone,longest,fuzzy wildmode=longest:full
+set cursorline cursorlineopt=number
+set diffopt+=algorithm:histogram,inline:word,indent-heuristic
+set expandtab shiftwidth=2 softtabstop=2
+set exrc
+set foldmethod=marker foldnestmax=1 foldcolumn=auto
+set grepprg=rg\ --vimgrep
+set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
+set ignorecase smartcase
+set isfname+=@-@,:
+set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
+set mouse=a
+set noshowcmd
+set noshowmode
+set noswapfile
+set notimeout
+set number
+set path+=/usr/include/x86_64-linux-gnu/
+set shadafile=NONE
+set shortmess+=c
+set showtabline=2
+set signcolumn=yes
+set spelllang=en_us
+set splitright
+set termguicolors
+set updatetime=300
+set winborder=rounded
+let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
+let g:clipboard = 'xsel'
+let g:loaded_python3_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+let g:markdown_recommended_style = 0
 
 " }}}
