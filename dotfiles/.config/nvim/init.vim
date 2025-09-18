@@ -146,7 +146,6 @@ endfunction
 " }}}
 " Mappings {{{
 
-let g:mapleader = ' '
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-b> <Left>
