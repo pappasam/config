@@ -146,7 +146,7 @@ endfunction
 " }}}
 " Mappings {{{
 
-let g:mapleader = ','
+let g:mapleader = ' '
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-b> <Left>
@@ -155,7 +155,6 @@ cnoremap <C-d> <Del>
 cnoremap <A-b> <S-Left>
 cnoremap <A-f> <S-Right>
 cnoremap <C-u> <C-E><C-U>
-nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
