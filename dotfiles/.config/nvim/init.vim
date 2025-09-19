@@ -193,11 +193,11 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 nmap s <Nop>
 xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
-nnoremap <Leader>oo <Cmd>AerialOpen<CR>
+nnoremap <Leader>oo <Cmd>AerialToggle<CR>
 nnoremap <Leader>oc <Cmd>AerialClose<CR>
 nnoremap <Leader>of <Cmd>AerialOpen<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
-nnoremap <Leader>to <Cmd>NvimTreeOpen<CR>
+nnoremap <Leader>to <Cmd>NvimTreeToggle<CR>
 nnoremap <Leader>tc <Cmd>NvimTreeClose<CR>
 nnoremap <Leader>ts <Cmd>NvimTreeFindFile<CR>
 nnoremap <Leader>tf <Cmd>NvimTreeFocus<CR>
