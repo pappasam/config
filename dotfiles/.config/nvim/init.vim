@@ -193,11 +193,13 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 nmap s <Nop>
 xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
-nnoremap <Leader>oo <Cmd>AerialToggle<CR>
+nnoremap <Leader>ot <Cmd>AerialToggle<CR>
+nnoremap <Leader>oo <Cmd>AerialOpen<CR>
 nnoremap <Leader>oc <Cmd>AerialClose<CR>
 nnoremap <Leader>of <Cmd>AerialOpen<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
-nnoremap <Leader>to <Cmd>NvimTreeToggle<CR>
+nnoremap <Leader>tt <Cmd>NvimTreeToggle<CR>
+nnoremap <Leader>to <Cmd>NvimTreeOpen<CR>
 nnoremap <Leader>tc <Cmd>NvimTreeClose<CR>
 nnoremap <Leader>ts <Cmd>NvimTreeFindFile<CR>
 nnoremap <Leader>tf <Cmd>NvimTreeFocus<CR>
@@ -206,17 +208,17 @@ nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
 " https://github.com/coder/claudecode.nvim
-nnoremap <Leader>ao <Cmd>ClaudeCode<cr><Cmd>wincmd T<cr>
-nnoremap <Leader>ac <Cmd>ClaudeCodeClose<cr>
-nnoremap <Leader>af <Cmd>ClaudeCodeFocus<cr>
-nnoremap <Leader>ar <Cmd>ClaudeCode --resume<cr>
-nnoremap <Leader>aC <Cmd>ClaudeCode --continue<cr>
-nnoremap <Leader>am <Cmd>ClaudeCodeSelectModel<cr>
-nnoremap <Leader>ab <Cmd>ClaudeCodeAdd %<cr>
-xnoremap <Leader>as <Cmd>ClaudeCodeSend<cr>
-nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<cr>
-nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<cr>
-nnoremap <Leader>at <Cmd>ClaudeCodeTreeAdd<cr>
+nnoremap <Leader>at <Cmd>ClaudeCode<CR>
+nnoremap <Leader>ao <Cmd>ClaudeCodeOpen<CR>
+nnoremap <Leader>ac <Cmd>ClaudeCodeClose<CR>
+nnoremap <Leader>af <Cmd>ClaudeCodeFocus<CR>
+nnoremap <Leader>ar <Cmd>ClaudeCode --resume<CR>
+nnoremap <Leader>aC <Cmd>ClaudeCode --continue<CR>
+nnoremap <Leader>am <Cmd>ClaudeCodeSelectModel<CR>
+nnoremap <Leader>ab <Cmd>ClaudeCodeAdd %<CR>
+xnoremap <Leader>as <Cmd>ClaudeCodeSend<CR>
+nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<CR>
+nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<CR>
 " https://github.com/lewis6991/gitsigns.nvim
 nnoremap <Leader>gg <Cmd>Gitsigns toggle_word_diff<CR>
 nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
