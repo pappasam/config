@@ -410,9 +410,9 @@ require("blink-cmp").setup({
       },
     },
   },
-  cmdline = {
-    enabled = false,
-  },
+  -- cmdline = {
+  --   enabled = false,
+  -- },
 })
 -- }}}
 -- https://github.com/catgoose/nvim-colorizer.lua {{{
