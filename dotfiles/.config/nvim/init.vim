@@ -195,7 +195,7 @@ nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
 nmap s <Nop>
 xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
-nnoremap <Space>o <Cmd>AerialToggle<CR>
+nnoremap <Space>l <Cmd>AerialToggle<CR>
 nnoremap <Leader>ot <Cmd>AerialToggle<CR>
 nnoremap <Leader>oo <Cmd>AerialOpen<CR>
 nnoremap <Leader>oc <Cmd>AerialClose<CR>
@@ -208,7 +208,7 @@ nnoremap <Leader>tc <Cmd>NvimTreeClose<CR>
 nnoremap <Leader>ts <Cmd>NvimTreeFindFile<CR>
 nnoremap <Leader>tf <Cmd>NvimTreeFocus<CR>
 " https://github.com/coder/claudecode.nvim
-nnoremap <Space>l <Cmd>ClaudeCode<CR>
+nnoremap <Space>c <Cmd>ClaudeCode<CR>
 nnoremap <Leader>at <Cmd>ClaudeCode<CR>
 nnoremap <Leader>ao <Cmd>ClaudeCodeOpen<CR>
 nnoremap <Leader>ac <Cmd>ClaudeCodeClose<CR>
