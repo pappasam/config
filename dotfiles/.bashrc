@@ -465,9 +465,17 @@ function kitty-install() {
   echo 'kitty.desktop' >~/.config/xdg-terminals.list
 }
 
-function zoom-install() { sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb; }
+function zoom-install() {
+  sudo apt update && curl -Lsf https://zoom.us/client/latest/zoom_amd64.deb -o /tmp/zoom_amd64.deb && sudo apt install /tmp/zoom_amd64.deb;
+}
+
+function zinit-update {
+  zinit self-update && zinit update --all
+}
 
 function upgrade() {
+  sudo -v
+  zinit-update
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y

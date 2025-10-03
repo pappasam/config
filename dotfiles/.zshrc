@@ -20,9 +20,6 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
     atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
     atpull"%atclone" src"init.zsh"
 fi
-function zinit-update {
-  zinit self-update && zinit update --all
-}
 setopt APPENDHISTORY
 setopt AUTOCD
 setopt AUTO_LIST
