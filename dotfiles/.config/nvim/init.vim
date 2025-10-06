@@ -221,6 +221,7 @@ xnoremap <Leader>as <Cmd>ClaudeCodeSend<CR>
 nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<CR>
 nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<CR>
 " https://github.com/pappasam/nvim-repl
+nnoremap <Space>r <Cmd>ReplToggle<CR>
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
 xmap <silent> <Leader>r <Plug>(ReplSendVisual)
 nmap <silent> <Leader>c <Plug>(ReplSendCell)
