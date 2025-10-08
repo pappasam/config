@@ -104,6 +104,7 @@ vim.lsp.config("*", {
     },
   },
 })
+
 vim.lsp.config("basedpyright", {
   settings = {
     basedpyright = {
@@ -132,6 +133,7 @@ vim.lsp.config("basedpyright", {
     },
   },
 })
+
 vim.lsp.config("gh_actions_ls", {
   filetypes = { "yaml.github" },
   init_options = {
@@ -139,6 +141,7 @@ vim.lsp.config("gh_actions_ls", {
     sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
   },
 })
+
 vim.lsp.config("harper_ls", {
   settings = {
     ["harper-ls"] = {
@@ -152,6 +155,7 @@ vim.lsp.config("harper_ls", {
     },
   },
 })
+
 vim.lsp.config("lua_ls", {
   on_init = function(client)
     if client.workspace_folders then
@@ -210,6 +214,7 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
+
 vim.lsp.config("ts_ls", {
   init_options = {
     plugins = {
@@ -231,6 +236,7 @@ vim.lsp.config("ts_ls", {
     "vue",
   },
 })
+
 vim.lsp.config("yamlls", {
   filetypes = { "yaml" },
   settings = {
@@ -265,11 +271,13 @@ vim.lsp.config("yamlls", {
 
 -- }}}
 -- https://neovim.io/doc/user/diagnostic.html {{{
+
 vim.diagnostic.config({
   jump = {
     float = true,
   },
 })
+
 -- }}}
 -- https://neovim.io/doc/user/treesitter.html {{{
 -- Manually run the following for new installations -> :TSInstall all
@@ -292,20 +300,27 @@ vim.api.nvim_create_autocmd("User", {
 
 -- }}}
 -- https://github.com/nvim-tree/nvim-web-devicons {{{
+
 require("nvim-web-devicons").setup({})
+
 -- }}}
 -- https://github.com/windwp/nvim-autopairs {{{
+
 require("nvim-autopairs").setup({
   map_c_h = true,
   map_c_w = true,
   map_cr = true,
   enable_check_bracket_line = false,
 })
+
 -- }}}
 -- https://github.com/windwp/nvim-ts-autotag {{{
+
 require("nvim-ts-autotag").setup()
+
 -- }}}
 -- https://github.com/nvim-tree/nvim-tree.lua {{{
+
 require("nvim-tree").setup({
   disable_netrw = true,
   filters = {
@@ -323,8 +338,10 @@ require("nvim-tree").setup({
     full_name = true,
   },
 })
+
 -- }}}
 -- https://github.com/nvim-telescope/telescope.nvim {{{
+
 require("telescope").setup({
   defaults = {
     file_ignore_patterns = {
@@ -340,8 +357,10 @@ require("telescope").setup({
     prompt_prefix = " ",
   },
 })
+
 -- }}}
 -- https://github.com/lewis6991/gitsigns.nvim {{{
+
 require("gitsigns").setup({
   signcolumn = true,
   numhl = true,
@@ -375,8 +394,10 @@ require("gitsigns").setup({
     end, { expr = true })
   end,
 })
+
 -- }}}
 -- https://github.com/coder/claudecode.nvim {{{
+
 require("claudecode").setup({
   diff_opts = {
     layout = "vertical",
@@ -386,11 +407,15 @@ require("claudecode").setup({
     on_new_file_reject = "close_window",
   },
 })
+
 -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
+
 require("aerial").setup({})
+
 -- }}}
 -- https://github.com/Saghen/blink.cmp {{{
+
 require("blink-cmp").setup({
   completion = {
     keyword = {
@@ -410,12 +435,11 @@ require("blink-cmp").setup({
       },
     },
   },
-  -- cmdline = {
-  --   enabled = false,
-  -- },
 })
+
 -- }}}
 -- https://github.com/catgoose/nvim-colorizer.lua {{{
+
 require("colorizer").setup({
   filetypes = {
     "css",
@@ -426,8 +450,10 @@ require("colorizer").setup({
     "yaml",
   },
 })
+
 -- }}}
 -- https://github.com/sindrets/diffview.nvim {{{
+
 require("diffview").setup({
   enhanced_diff_hl = true,
   show_help_hints = false,
@@ -443,8 +469,10 @@ require("diffview").setup({
     end,
   },
 })
+
 -- }}}
 -- https://github.com/chrishrb/gx.nvim {{{
+
 ---@diagnostic disable-next-line: missing-fields
 require("gx").setup({
   open_browser_app = "firefox",
@@ -499,8 +527,10 @@ require("gx").setup({
     },
   },
 })
+
 -- }}}
 -- https://github.com/sotte/presenting.nvim {{{
+
 require("presenting").setup({
   options = {
     width = 60,
@@ -519,11 +549,14 @@ require("presenting").setup({
     ]])
   end,
 })
+
 -- }}}
 -- https://github.com/j-hui/fidget.nvim {{{
+
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
   },
 })
+
 -- }}}
