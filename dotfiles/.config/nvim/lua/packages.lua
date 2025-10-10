@@ -68,7 +68,6 @@ vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
 
 vim.lsp.enable({
   "autotools_ls",
-  "basedpyright",
   "bashls",
   "clangd", -- needs project-level compile-commands.json
   "cssls",
@@ -90,6 +89,7 @@ vim.lsp.enable({
   "taplo",
   "terraformls",
   "ts_ls",
+  "ty",
   "vimls",
   "vue_ls",
   "yamlls",
@@ -100,35 +100,6 @@ vim.lsp.config("*", {
     workspace = {
       didChangeWatchedFiles = {
         dynamicRegistration = false, -- https://github.com/neovim/neovim/issues/23291
-      },
-    },
-  },
-})
-
-vim.lsp.config("basedpyright", {
-  settings = {
-    basedpyright = {
-      analysis = {
-        diagnosticSeverityOverrides = {
-          reportAny = false,
-          reportDeprecated = false,
-          reportExplicitAny = false,
-          reportImplicitStringConcatenation = false,
-          reportMissingParameterType = false,
-          reportMissingTypeArgument = false,
-          reportMissingTypeStubs = false,
-          reportUnannotatedClassAttribute = false,
-          reportUninitializedInstanceVariable = false,
-          reportUnknownArgumentType = false,
-          reportUnknownMemberType = false,
-          reportUnknownParameterType = false,
-          reportUnknownVariableType = false,
-          reportUnnecessaryComparison = false,
-          reportUnnecessaryIsInstance = false,
-          reportUnusedCallResult = false,
-          reportUnusedFunction = false,
-          reportUnusedParameter = false,
-        },
       },
     },
   },
