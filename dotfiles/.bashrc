@@ -484,7 +484,7 @@ function upgrade() {
   mise self-update -y
   mise upgrade -y
   mise install -y
-  mise install -f asdf:neovim
+  mise install -f github:neovim/neovim
   uv self update
 }
 
