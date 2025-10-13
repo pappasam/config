@@ -113,20 +113,6 @@ vim.lsp.config("gh_actions_ls", {
   },
 })
 
-vim.lsp.config("harper_ls", {
-  settings = {
-    ["harper-ls"] = {
-      linters = {
-        LongSentences = false,
-        SentenceCapitalization = false,
-        Spaces = false,
-        SpellCheck = false,
-        ToDoHyphen = false,
-      },
-    },
-  },
-})
-
 vim.lsp.config("lua_ls", {
   on_init = function(client)
     if client.workspace_folders then
