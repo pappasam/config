@@ -199,7 +199,7 @@ vim.lsp.config("yamlls", {
   settings = {
     yaml = {
       schemas = {
-        kubernetes = "", -- disable built-in kubernetes support because we use specific version below
+        kubernetes = "", -- Disable built-in Kubernetes support because we use specific version below
         ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.28.0-standalone/all.json"] = "*.k8s.yaml",
         ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = {
           "compose.yml",
@@ -249,7 +249,7 @@ vim.api.nvim_create_autocmd("User", {
     require("nvim-treesitter.parsers").fga = {
       install_info = {
         url = "https://github.com/matoous/tree-sitter-fga",
-        queries = "queries", -- also install queries from given directory
+        queries = "queries", -- Also install queries from given directory
       },
     }
   end,
