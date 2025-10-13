@@ -120,6 +120,7 @@ vim.lsp.config("harper_ls", {
         LongSentences = false,
         SentenceCapitalization = false,
         Spaces = false,
+        SpellCheck = false,
         ToDoHyphen = false,
       },
     },
