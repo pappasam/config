@@ -515,6 +515,9 @@ require("presenting").setup({
       setlocal buftype=nofile filetype=markdown bufhidden=wipe nomodifiable wrap conceallevel=3 concealcursor=nc
       nnoremap <buffer> q <Cmd>Presenting<CR>
       nnoremap <buffer> <C-w> <NOP>
+      nnoremap <buffer> <Space>l <NOP>
+      nnoremap <buffer> <Space>j <NOP>
+      nnoremap <buffer> <Space>c <NOP>
       cnoreabbrev <buffer> q Presenting
       echo
     ]])
