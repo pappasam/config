@@ -143,6 +143,9 @@ vim.lsp.config("gh_actions_ls", {
 })
 
 vim.lsp.config("harper_ls", {
+  filetypes = {
+    "markdown",
+  },
   settings = {
     ["harper-ls"] = {
       linters = {
