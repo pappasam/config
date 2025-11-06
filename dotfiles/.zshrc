@@ -1,5 +1,4 @@
 #!/usr/bin/zsh
-# vim:ft=sh
 # shellcheck shell=sh disable=all
 if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
 fpath=(${ASDF_DIR}/completions /usr/local/share/zsh-completions $fpath $HOME/.zfunc)

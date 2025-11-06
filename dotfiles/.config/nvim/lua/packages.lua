@@ -286,7 +286,6 @@ vim.diagnostic.config({
 -- Manually run the following for new installations -> :TSInstall all
 
 vim.treesitter.language.register("terraform", "terraform-vars")
-vim.treesitter.language.register("bash", "zsh")
 vim.treesitter.language.register("bash", "shell")
 
 vim.api.nvim_create_autocmd("User", {
