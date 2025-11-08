@@ -142,6 +142,7 @@ vim.lsp.config("gh_actions_ls", {
   },
 })
 
+-- https://writewithharper.com/docs/rules
 vim.lsp.config("harper_ls", {
   filetypes = {
     "markdown",
@@ -150,6 +151,7 @@ vim.lsp.config("harper_ls", {
     ["harper-ls"] = {
       linters = {
         LongSentences = false,
+        RoadMap = false,
         SentenceCapitalization = false,
         Spaces = false,
         SpellCheck = false,
