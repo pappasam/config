@@ -149,6 +149,9 @@ vim.lsp.config("harper_ls", {
   },
   settings = {
     ["harper-ls"] = {
+      markdown = {
+        IgnoreLinkTitle = true,
+      },
       linters = {
         LongSentences = false,
         RoadMap = false,
