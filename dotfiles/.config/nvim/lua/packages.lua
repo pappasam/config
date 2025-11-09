@@ -158,6 +158,7 @@ vim.lsp.config("harper_ls", {
         SentenceCapitalization = false,
         Spaces = false,
         SpellCheck = false,
+        SplitWords = false,
         ToDoHyphen = false,
       },
     },
