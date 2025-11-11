@@ -1,0 +1,300 @@
+# oxker config file
+# oxker will also read .jsonc and .json files which use the same key/value structure & format as this file
+# Every key is optional, with defaults that oxker will choose if missing or invalid
+# The `--config-file` cli argument can be used to load configuration files from any readable location
+
+# Docker update interval in ms, minimum effectively 1000
+docker_interval = 1000
+
+# Attempt to colorize the logs, conflicts with "raw"
+color_logs = false
+
+# Show raw logs, default is to remove ansi formatting, conflicts with "color"
+raw_logs = false
+
+# Show self (the oxker container) when running as a docker container
+show_self = false
+
+# Show std_err in logs
+show_std_err = true
+
+# Show a timestamp for every log entry
+show_timestamp = true
+
+# Don't draw gui - for debugging - mostly pointless
+gui = true
+
+# Docker host location
+host = "/var/run/docker.sock"
+
+# Display the container logs timestamp with a given timezone, if timezone is unknown, defaults to UTC
+timezone = "Etc/UTC"
+
+# Display the timestamp in a custom format, if given option is invalid, it will default to %Y-%m-%dT%H:%M:%S.%8f -> 2025-02-18T12:34:56.012345678Z
+# *Should* accept any valid strftime string up to 32 chars, see https://strftime.org/
+timestamp_format = "%Y-%m-%dT%H:%M:%S.%8f"
+
+# Directory for saving exported logs, defaults to `$HOME`, this is automatically *correctly* calculated for Linux, Mac, and Windows
+# save_dir = "$HOME"
+
+# Force use of docker cli when execing into containers, honestly mostly pointless
+use_cli = false
+
+# Show the logs section - this can be changed during operation with the log_section_toggle key
+show_logs = true
+
+# Use case-sensitive matching for logs
+log_search_case_sensitive = true
+
+#################
+# Custom Keymap #
+#################
+
+# Available keys are;
+# 1) a-z and A-Z
+# 2) 0-9
+# WARNING if using the \ key, it needs to be escaped, e.g. log_section_toggle = ["\\"]
+# 3) / \ , . # ' [ ] ; = -
+# 3) F1-F12
+# 4) backspace, tab, backtab, delete, end, esc, home, insert, pagedown, pageup, left, right, up, down
+
+# Each definition can have two keys associated with it
+
+# WARNING "scroll_many" only accepts control, alt, shift, with no secondary option
+
+# If any key clashes are found, oxker will revert to it's default keymap
+
+[keymap]
+# Clear any popup boxes, filter panel, or help panel
+clear = ["c", "esc"]
+# Cancel delete - clear also works here
+delete_deny = ["n"]
+# Confirm Delete
+delete_confirm = ["y"]
+# Exec into the selected container
+exec = ["e"]
+# Enter filter mode
+filter_mode = ["/", "F1"]
+
+# Enter log search mode
+log_search_mode = ["#"]
+
+# Quit at anytime
+quit = ["q"]
+# Save logs of selected container to file on disk
+save_logs = ["s"]
+# scroll down a list by one item
+scroll_down = ["down", "j"]
+
+# scroll down to the end of a list
+scroll_end = ["end"]
+# Modifier to scroll by 10 lines instead of one, used in conjunction with scroll_up/scroll_down
+scroll_many = ["control"]
+# scroll up to the start of a list
+scroll_start = ["home"]
+# scroll up a list by one item
+scroll_up = ["up", "k"]
+# Horizontal scroll of the logs
+log_scroll_forward = ["right"]
+log_scroll_back = ["left"]
+# Select next panel
+select_next_panel = ["tab"]
+# Select previous panel
+select_previous_panel = ["backtab"]
+# Sort the containers based on specific column
+sort_by_name = ["1"]
+sort_by_state = ["2"]
+sort_by_status = ["3"]
+sort_by_cpu = ["4"]
+sort_by_memory = ["5"]
+sort_by_id = ["6"]
+sort_by_image = ["7"]
+sort_by_rx = ["8"]
+sort_by_tx = ["9"]
+# Reset the sorted containers
+sort_reset = ["0"]
+# Toggle the help panel
+toggle_help = ["h"]
+# Toggle mouse capture
+toggle_mouse_capture = ["m"]
+# Reduce the height of the logs list section
+log_section_height_decrease = ["-"]
+log_section_height_increase = ["+"]
+# Toggle visibility of the log section
+log_section_toggle = ["\\"]
+
+
+
+# Force a complete clear & redraw of the screen
+force_redraw = ["f"]
+
+#################
+# Custom Colors #
+#################
+
+# Colors be listed as either;
+# 1) named ANSI: 'red', case insensitive, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+# 2) Hex values: '#FF0000', case insensitive
+# 3) 'reset' for transparency
+
+# Some background/foreground combinations don't work, I *think* this is an issue/feature of ratatui - but I may have just made a mistake somewhere
+
+# The single line bar at the uppermost of the display. Contains name/state/status headings etc
+[colors.headers_bar]
+# Background color of the entire line
+background = "magenta"
+# Animated loading icon at the start of the bar
+loading_spinner = "white"
+# Text color
+text = "black"
+# Text color of a selected header
+text_selected = "gray"
+
+# The borders around the selectable panels - Containers, Commands, Logs
+[colors.borders]
+# Border when selected
+selected = "lightcyan"
+# Border when not selected
+unselected = "grey"
+
+# The containers sections, in the future more color customization options should be made available in this section
+[colors.containers]
+# The icon use to illustrate which container is currently selected - at the moment the  TUI library, ratatui, doesn't seem allow changing the color of the highlight symbol
+icon = "white"
+# Background color of panel
+background = "reset"
+# At the moment, this will only change the color of the name, id, and image columns
+text = "blue"
+# Text color of the RX column
+text_rx = "#FFE9C1"
+# Text color of the TX column
+text_tx = "#CD8C8C"
+
+# The logs panel, will only be applied if color_logs is false
+[colors.logs]
+# Background color of panel
+background = "reset"
+# text color
+text = "reset"
+
+# Each state of a container has a color, which is used in multiple places, i.e. chart titles, state/status/cpu/memory columns in the container section
+[colors.container_state]
+dead = "red"
+exited = "red"
+paused = "yellow"
+removing = "lightred"
+restarting = "lightgreen"
+running_healthy = "green"
+running_unhealthy = "#FFB224"
+unknown = "red"
+
+# The filter panel
+[colors.filter]
+# Background color of panel
+background = "reset"
+# color of text
+text = "gray"
+# background color of the selected filter by item (Name/Image/Status/All)
+selected_filter_background = "gray"
+# text color of the selected filter by item (Name/Image/Status/All)
+selected_filter_text = "black"
+# Highlighted text color
+highlight = "magenta"
+
+
+# The log search panel
+[colors.log_search]
+# Background color of panel
+background = "reset"
+# color of text
+text = "gray"
+# text color of the buttons text
+button_text = "black"
+# Highlighted text color
+highlight = "magenta"
+
+# The color the of Docker commands available for each container
+[colors.commands]
+# Background color of panel
+background = "reset"
+pause = "yellow"
+restart = "magenta"
+stop = "red"
+delete = "gray"
+resume = "blue"
+start = "green"
+
+# The cpu chart
+[colors.chart_cpu]
+# Background color of panel
+background = "reset"
+# Border color
+border = "white"
+# Chart title - only whilst container is running, paused & stopped colors not yet customizable - or could just use state color?
+title = "green"
+# Maximum CPU percentage - again paused & stopped colors not yet customizable
+max = "#FFB224"
+# Points on the chart - again paused & stopped colors not yet customizable
+points = "magenta"
+# The charts y-axis
+y_axis = "white"
+
+# The memory chart
+[colors.chart_memory]
+# Background color of panel
+background = "reset"
+# Border color
+border = "white"
+# Chart title - only whilst container is running, paused & stopped will use colors.container_state
+title = "green"
+# Maximum memory use - again paused & stopped will use colors.container_state
+max = "#FFB224"
+# Points on the chart - again paused & stopped will use colors.container_state
+points = "cyan"
+# The charts y-axis
+y_axis = "white"
+
+# The ports chart
+[colors.chart_ports]
+# Background color of panel
+background = "reset"
+# Border color
+border = "white"
+# Chart title - only whilst container is running, paused & stopped will use colors.container_state
+title = "green"
+# Private/Public/IP headings
+headings = "yellow"
+# Ports & IP listing text
+text = "white"
+
+# The help popup
+[colors.popup_help]
+# Background color
+background = "magenta"
+# Text color
+text = "black"
+# Highlighted text color
+text_highlight = "white"
+
+# The info popup - used to display small messages - such as saving logs to disk, or change of mouse capture settings
+[colors.popup_info]
+# Background color
+background = "blue"
+# Text color
+text = "white"
+
+# The delete popup - used to display a confirmation warning when about to delete a container
+[colors.popup_delete]
+# Background color
+background = "white"
+# Text color
+text = "black"
+# Highlighted text color
+text_highlight = "red"
+
+# The error popup - hopefully you'll never have to see this
+[colors.popup_error]
+# Background color
+background = "red"
+# Text color
+text = "white"
