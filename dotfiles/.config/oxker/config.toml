@@ -270,7 +270,7 @@ text = "white"
 # The help popup
 [colors.popup_help]
 # Background color
-background = "magenta"
+background = "gray"
 # Text color
 text = "black"
 # Highlighted text color
