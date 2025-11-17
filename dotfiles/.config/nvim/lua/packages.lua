@@ -81,6 +81,7 @@ vim.lsp.enable({
   "lua_ls",
   "marksman",
   "mdx_analyzer",
+  "postgres_lsp",
   "prismals",
   "r_language_server",
   "rust_analyzer",
