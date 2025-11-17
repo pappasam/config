@@ -1,7 +1,6 @@
 # :schema https://github.com/jdx/mise/blob/main/schema/mise.json
 
 [settings]
-experimental = true                            # set now specifically for golang support
 idiomatic_version_file_enable_tools = ["rust"]
 
 [tools]
@@ -39,6 +38,8 @@ vault = "latest"
 "cargo:bottom" = "latest"
 "cargo:cargo-deb" = "latest"
 "cargo:cargo-edit" = "latest"
+"cargo:cargo-insta" = "latest"
+"cargo:cargo-nextest" = "latest"
 "cargo:cargo-update" = "latest"
 "cargo:oxker" = "latest"
 "cargo:usage-cli" = "latest"
