@@ -266,8 +266,15 @@ augroup end
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 packadd vim-filetype-formatter
+let g:vim_filetype_formatter_commands.css = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.graphql = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.html = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.javascript = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.javascriptreact = g:vim_filetype_formatter_builtins.biome
 let g:vim_filetype_formatter_commands.json = g:vim_filetype_formatter_builtins.biome
 let g:vim_filetype_formatter_commands.jsonc = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.typescript = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.typescriptreact = g:vim_filetype_formatter_builtins.biome
 
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
 colorscheme PaperColorSlim " https://vimcolorschemes.com
