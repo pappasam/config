@@ -139,6 +139,7 @@ sudo apt install -y \
   unixodbc-dev \
   unzip \
   uuid-dev \
+  webcamoid \
   wget \
   xclip \
   xsel \
