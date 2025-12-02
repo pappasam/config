@@ -174,6 +174,7 @@ nnoremap gx <Cmd>Browse<CR>
 xnoremap gx <Cmd>Browse<CR>
 nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
+nnoremap <Leader>em <Cmd>edit ~/config/dotfiles/.config/mise/config.toml<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
 nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
