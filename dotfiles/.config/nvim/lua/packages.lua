@@ -137,6 +137,9 @@ vim.lsp.config("harper_ls", {
   },
 })
 
+-- Error: libbfd-2.38-system.so: cannot open shared object file: No such file or directory
+-- Solve: sudo ln -s /usr/lib/x86_64-linux-gnu/libbfd-2.42-system.so /usr/lib/x86_64-linux-gnu/libbfd-2.38-system.so
+-- See: <https://github.com/StarRocks/starrocks/issues/50226#issuecomment-2321161899>
 vim.lsp.config("lua_ls", {
   on_init = function(client)
     if client.workspace_folders then
