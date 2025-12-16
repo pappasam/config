@@ -1,15 +1,13 @@
 -- https://neovim.io/doc/user/pack.html#vim.pack {{{
 
 vim.pack.add({
-  {
-    src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    version = "main",
-  },
   -- Completion
   {
     src = "https://github.com/Saghen/blink.cmp",
     version = vim.version.range("1.0.0 - 2.0.0"),
   },
+  -- Treesitter
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   -- Pairs
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/windwp/nvim-ts-autotag",
