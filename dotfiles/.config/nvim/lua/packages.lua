@@ -4,7 +4,7 @@ vim.pack.add({
   -- Completion
   {
     src = "https://github.com/Saghen/blink.cmp",
-    version = vim.version.range("1.0.0 - 2.0.0"),
+    version = vim.version.range("*"),
   },
   -- Treesitter
   "https://github.com/nvim-treesitter/nvim-treesitter",
