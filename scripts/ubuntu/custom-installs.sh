@@ -20,11 +20,6 @@ if ! command -v rustup >/dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
-if ! command -v ghcup >/dev/null; then
-  echo 'INSTALLING: ghcup (haskell tooling)'
-  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-fi
-
 if ! command -v mise >/dev/null; then
   echo 'INSTALLING: mise-en-place'
   curl https://mise.run | sh
