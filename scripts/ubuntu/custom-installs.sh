@@ -30,11 +30,6 @@ if ! command -v mise >/dev/null; then
   curl https://mise.run | sh
 fi
 
-if ! command -v uv >/dev/null; then
-  echo 'INSTALLING: uv'
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
-
 if ! command -v zoom >/dev/null; then
   echo 'INSTALLING: zoom'
   sudo apt update
