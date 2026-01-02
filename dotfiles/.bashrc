@@ -471,7 +471,7 @@ function zoom-install() {
 }
 
 function zinit-update {
-  zinit self-update && zinit update --all
+  zinit self-update && zinit update --all && zinit cclear
 }
 
 function upgrade() {
