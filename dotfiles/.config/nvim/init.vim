@@ -197,30 +197,8 @@ nmap s <Nop>
 xmap s <Nop>
 " https://github.com/stevearc/aerial.nvim
 nnoremap <Space>l <Cmd>AerialToggle<CR>
-nnoremap <Leader>ot <Cmd>AerialToggle<CR>
-nnoremap <Leader>oo <Cmd>AerialOpen<CR>
-nnoremap <Leader>oc <Cmd>AerialClose<CR>
-nnoremap <Leader>of <Cmd>AerialOpen<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeToggle<CR>
-nnoremap <Leader>tt <Cmd>NvimTreeToggle<CR>
-nnoremap <Leader>to <Cmd>NvimTreeOpen<CR>
-nnoremap <Leader>tc <Cmd>NvimTreeClose<CR>
-nnoremap <Leader>ts <Cmd>NvimTreeFindFile<CR>
-nnoremap <Leader>tf <Cmd>NvimTreeFocus<CR>
-" https://github.com/coder/claudecode.nvim
-nnoremap <Space>c <Cmd>ClaudeCode<CR>
-nnoremap <Leader>at <Cmd>ClaudeCode<CR>
-nnoremap <Leader>ao <Cmd>ClaudeCodeOpen<CR>
-nnoremap <Leader>ac <Cmd>ClaudeCodeClose<CR>
-nnoremap <Leader>af <Cmd>ClaudeCodeFocus<CR>
-nnoremap <Leader>ar <Cmd>ClaudeCode --resume<CR>
-nnoremap <Leader>aC <Cmd>ClaudeCode --continue<CR>
-nnoremap <Leader>am <Cmd>ClaudeCodeSelectModel<CR>
-nnoremap <Leader>ab <Cmd>ClaudeCodeAdd %<CR>
-xnoremap <Leader>as <Cmd>ClaudeCodeSend<CR>
-nnoremap <Leader>aa <Cmd>ClaudeCodeDiffAccept<CR>
-nnoremap <Leader>ad <Cmd>ClaudeCodeDiffDeny<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Space>r <Cmd>ReplToggle<CR>
 nmap <silent> <Leader>r <Plug>(ReplSendLine)

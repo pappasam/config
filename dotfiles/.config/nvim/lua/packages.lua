@@ -15,8 +15,6 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/aerial.nvim",
   "https://github.com/j-hui/fidget.nvim",
-  -- AI
-  "https://github.com/coder/claudecode.nvim",
   -- File pickers
   "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/nvim-tree/nvim-web-devicons",
@@ -35,6 +33,7 @@ vim.pack.add({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
+  "https://github.com/cajames/copy-reference.nvim",
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/HiPhish/info.vim",
@@ -377,19 +376,6 @@ require("gitsigns").setup({
 })
 
 -- }}}
--- https://github.com/coder/claudecode.nvim {{{
-
-require("claudecode").setup({
-  diff_opts = {
-    layout = "vertical",
-    open_in_new_tab = true,
-    hide_terminal_in_new_tab = true,
-    keep_terminal_focus = false,
-    on_new_file_reject = "close_window",
-  },
-})
-
--- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
 
 require("aerial").setup({})
@@ -548,5 +534,10 @@ require("fidget").setup({
     suppress_on_insert = true,
   },
 })
+
+-- }}}
+-- https://github.com/cajames/copy-reference.nvim {{{
+
+require("copy-reference").setup({})
 
 -- }}}
