@@ -54,14 +54,25 @@ The repository uses GNU Stow to manage symlinks from the `dotfiles/` directory t
 1. Shell Configuration
    - `.zshrc`: Zsh shell configuration with completions, prompts, and plugins
    - `.bashrc`: Bash configuration and utility functions
+   - `.profile`: Login shell environment setup
 2. Git Configuration
    - `.gitconfig`: Global git settings and aliases
 3. Neovim Configuration
    - `.config/nvim/init.vim`: Main Neovim configuration
    - `.config/nvim/lua/packages.lua`: Manage plugins using vim.pack
    - `.config/nvim/lua/settings.lua`: Additional Neovim settings
-4. Terminal Configuration
+   - `.config/nvim/ftplugin/`: Language-specific configurations (50+ languages)
+   - `.config/nvim/snippets/`: Code snippets for various languages
+4. Terminal and UI Configuration
    - `.config/kitty/kitty.conf`: Kitty terminal configuration
+   - `.config/starship/starship.toml`: Starship prompt customization
+   - `.config/lazygit/config.yml`: Lazygit TUI configuration
+5. Tool Configuration
+   - `.config/mise/config.toml`: Mise tool and language version management
+   - `.config/Code/User/settings.json`: VS Code settings
+   - `.config/stylua/stylua.toml`: Lua formatter configuration
+   - `.config/pypoetry/config.toml`: Poetry configuration
+   - `.rustfmt.toml`, `.npmrc`, `.markdownlintrc`, `.cookiecutterrc`: Various tool configs
 
 ### Scripts and Tools
 
@@ -70,6 +81,8 @@ The repository contains several scripts for system setup and maintenance:
 1. System Setup
    - `scripts/ubuntu/apt-installs.sh`: Installs common system packages
    - `scripts/ubuntu/custom-installs.sh`: Installs specialized tools and development environments
+   - `scripts/ubuntu/firefox-deb.sh`: Installs Firefox from Mozilla's deb repository
+   - `scripts/ubuntu/install-curl.sh`: Installs curl with necessary dependencies
 2. Developer Tooling
    - Functions in `.bashrc` for setting up Python, Rust, and other development environments
    - Custom utilities for managing Git repositories and virtual environments
@@ -80,17 +93,22 @@ The system uses multiple package managers:
 
 1. APT for system packages
 2. Snap for containerized applications
-3. Mise-en-place for programming language version management
-4. Custom installers for specific tools
+3. Mise-en-place for:
+   - Programming language versions (Python, Node, Go, Rust, Java, Perl, R)
+   - CLI tools (ripgrep, fd, bat, delta, lazygit, k9s, etc.)
+   - Language servers (basedpyright, gopls, lua-language-server, typescript-language-server, etc.)
+   - Cargo, npm, and pipx packages
+4. Custom installers for specific tools (Docker, etc.)
 
 ### Development Workflows
 
 The repository includes utilities for various development workflows:
 
-1. Python development with Poetry and virtualenv
+1. Python development with Poetry, uv, and virtualenv
 2. Rust development with Cargo and rustup
-3. Git workflow shortcuts and utilities
-4. Neovim as the primary editor with LSP configuration
+3. Haskell development with ghcup
+4. Git workflow shortcuts and utilities
+5. Neovim as the primary editor with LSP configuration
 
 ## Documentation
 
