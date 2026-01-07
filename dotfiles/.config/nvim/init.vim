@@ -2,7 +2,7 @@
 
 command! P lua vim.pack.update()
 
-command! C call s:color()
+command! Color call s:color()
 function! s:color()
   set lazyredraw
   try
@@ -20,7 +20,7 @@ function! s:color()
   endtry
 endfunction
 
-command! CS call s:color_sync()
+command! ColorSync call s:color_sync()
 function! s:color_sync() " 'scrollbind' does not work with colorizer
   let current_win = winnr()
   execute 'windo ' .. line('.')
@@ -143,6 +143,7 @@ function! s:ctrl_l()
   redraw!
 endfunction
 
+command! -range C <line1>,<line2>call s:copy_reference()
 command! -range CopyReference <line1>,<line2>call s:copy_reference()
 function! s:copy_reference() range
   let path = expand('%:p')
