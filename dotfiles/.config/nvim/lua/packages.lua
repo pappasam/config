@@ -33,7 +33,6 @@ vim.pack.add({
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
-  "https://github.com/cajames/copy-reference.nvim",
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/HiPhish/info.vim",
@@ -534,10 +533,5 @@ require("fidget").setup({
     suppress_on_insert = true,
   },
 })
-
--- }}}
--- https://github.com/cajames/copy-reference.nvim {{{
-
-require("copy-reference").setup({})
 
 -- }}}
