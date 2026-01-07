@@ -156,7 +156,7 @@ function! s:copy_reference() range
     let path = path[len(git_root)+1:]
   endif
   let reference = path .. (a:firstline == a:lastline ? ':' .. a:firstline : ':' .. a:firstline .. '-' .. a:lastline)
-  call setreg('+', reference)
+  call setreg('+', '@' .. reference)
   echo 'Copied: ' .. reference
 endfunction
 
