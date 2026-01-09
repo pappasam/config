@@ -152,7 +152,7 @@ alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
 alias pbpaste='xsel --clipboard --output'
 alias publicip='curl -s checkip.amazonaws.com'
 alias rg='rg --fixed-strings'
-alias claude45='claude --model=global.anthropic.claude-opus-4-5-20251101-v1:0'
+alias claude-opus-4-5='claude --model=global.anthropic.claude-opus-4-5-20251101-v1:0'
 
 # }}}
 # Functions {{{
