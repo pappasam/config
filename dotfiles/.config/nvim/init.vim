@@ -144,7 +144,6 @@ function! s:ctrl_l()
 endfunction
 
 command! -range C <line1>,<line2>call s:copy_reference()
-command! -range CopyReference <line1>,<line2>call s:copy_reference()
 function! s:copy_reference() range
   let path = expand('%')
   if path == ''
