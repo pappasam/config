@@ -14,7 +14,7 @@ function! s:color()
     edit ./colors/PaperColorSlimLight.vim
     wincmd h
     normal! M
-    CS
+    ColorSync
   finally
     set nolazyredraw
   endtry
