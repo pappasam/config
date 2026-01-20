@@ -1,0 +1,5 @@
+# See: https://mdformat.readthedocs.io/en/stable/users/configuration_file.html
+number = true
+
+[plugin.tables]
+compact_tables = true
