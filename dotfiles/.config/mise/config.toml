@@ -79,7 +79,7 @@ vault = "latest"
 "pipx:autotools-language-server" = "latest"
 "pipx:basedpyright" = "latest"
 "pipx:cookiecutter" = "latest"
-"pipx:mdformat" = { version = "latest", uvx_args = "--with mdformat-gfm" }
+"pipx:mdformat" = { version = "latest", uvx_args = "--with mdformat-gfm,mdformat-front-matters" }
 "pipx:nginxfmt" = "latest"
 "pipx:pgcli" = "latest"
 "pipx:poethepoet" = "latest"
