@@ -303,14 +303,8 @@ require("nvim-ts-autotag").setup()
 require("nvim-tree").setup({
   disable_netrw = true,
   filters = {
-    dotfiles = true,
     custom = {
       "/__pycache__",
-    },
-    exclude = {
-      "/.github",
-      "/dotfiles",
-      "/instance",
     },
   },
   renderer = {
