@@ -53,7 +53,7 @@ function! s:clean_unicode()
     silent! %substitute/“/"/g
     silent! %substitute/’/'/g
     silent! %substitute/‘/'/g
-    silent! %substitute/—/-/g
+    silent! %substitute/—/ - /g
     silent! %substitute/…/.../g
     silent! %substitute/​//g
     silent! %substitute/–/-/g
