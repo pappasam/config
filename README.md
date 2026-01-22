@@ -16,8 +16,8 @@ Top-level directories are documented below.
 - `dotfiles/` User dotfiles live here and are automatically organized on your system by [stow].
 - `scripts/` Scripts for things like system setup and program installation.
 
-[PATH]: https://en.wikipedia.org/wiki/PATH_(variable)
-[Samuel Roeca]: https://samroeca.com
-[Ubuntu]: https://en.wikipedia.org/wiki/Ubuntu
 [dotfiles]: https://wiki.archlinux.org/index.php/Dotfiles
+[path]: https://en.wikipedia.org/wiki/PATH_(variable)
+[samuel roeca]: https://samroeca.com
 [stow]: https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
+[ubuntu]: https://en.wikipedia.org/wiki/Ubuntu
