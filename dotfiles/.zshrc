@@ -34,7 +34,6 @@ function chpwd() {
   ls
 }
 function precmd() {
-  eval "$PROMPT_COMMAND";
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
   printf "\033]0;%s(zsh)\007" "$dir"
 }

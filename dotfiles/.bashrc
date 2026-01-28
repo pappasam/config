@@ -23,7 +23,6 @@ export MANPAGER='less'
 export MANWIDTH=79
 export MESA_DEBUG=silent # silence mesa warnings: https://bugzilla.mozilla.org/show_bug.cgi?id=1744389
 export PAGER='less -R'
-export PROMPT_COMMAND='promptcmd'                                # commands to execute before a bash prompt.
 export PYTHON_CONFIGURE_OPTS='--enable-shared'                   # For installing R through ASDF, need shared libraries in Python and R
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' # For installing R through ASDF, need shared libraries in Python and R
 export SAVEHIST=5000                                             # how many lines of history to save to disk
@@ -329,13 +328,6 @@ function va() {
     deactivate
   fi
 }
-
-function promptcmd() { # PROMPT_COMMAND=promptcmd
-  auto_venv_precmd
-}
-
-export AUTO_VIRTUALENV=1
-function auto_venv_precmd() { if [ "$AUTO_VIRTUALENV" -eq '1' ]; then va; fi; }
 
 function poetryinit() {
   if [ -f pyproject.toml ]; then
