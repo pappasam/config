@@ -30,6 +30,16 @@ setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 autoload zcalc # enables zshell calculator: type with zcalc
+# BEGIN: zsh hooks
+function precmd() {
+  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
+  printf "\033]0;%s(zsh)\007" "$dir"
+}
+function preexec() {
+  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
+  printf "\033]0;%s($1)\007" "$dir"
+}
+# END
 # BEGIN: https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
