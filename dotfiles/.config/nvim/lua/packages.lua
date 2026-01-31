@@ -264,6 +264,7 @@ vim.diagnostic.config({
 
 vim.treesitter.language.register("terraform", "terraform-vars")
 vim.treesitter.language.register("bash", "shell")
+vim.treesitter.language.register("json", "jsonc")
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "TSUpdate",
