@@ -15,12 +15,6 @@ if ! command -v docker >/dev/null; then
   sudo usermod -aG docker "$(whoami)"
 fi
 
-if ! command -v claude >/dev/null; then
-  # See: https://code.claude.com/docs/en/setup
-  echo 'INSTALLING: Claude Code'
-  curl -fsSL https://claude.ai/install.sh | bash
-fi
-
 if ! command -v rustup >/dev/null; then
   echo 'INSTALLING: Rust'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
