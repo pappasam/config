@@ -479,7 +479,6 @@ function upgrade() {
   mise upgrade -y
   mise install -y
   mise install -f asdf:neovim
-  claude update
 }
 
 # }}}
