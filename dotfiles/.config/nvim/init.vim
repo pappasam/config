@@ -124,7 +124,7 @@ function! s:trim_whitespace()
   endtry
 endfunction
 
-command! -bang Con call s:conceal('<bang>')
+command! -bang Conceal call s:conceal('<bang>')
 function! s:conceal(bang)
   if a:bang ==# '!'
     setlocal conceallevel=0
