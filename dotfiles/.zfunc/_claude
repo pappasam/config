@@ -30,6 +30,21 @@ _claude_mcp_commands() {
   _describe -t commands 'mcp command' commands
 }
 
+_claude_plugin_commands() {
+  local -a commands=(
+    'disable:Disable an enabled plugin'
+    'enable:Enable a disabled plugin'
+    'help:Display help for command'
+    'install:Install a plugin from available marketplaces'
+    'list:List installed plugins'
+    'marketplace:Manage Claude Code marketplaces'
+    'uninstall:Uninstall an installed plugin'
+    'update:Update a plugin to the latest version'
+    'validate:Validate a plugin or marketplace manifest'
+  )
+  _describe -t commands 'plugin command' commands
+}
+
 _claude() {
   local curcontext="$curcontext" state line
   typeset -A opt_args
@@ -128,6 +143,53 @@ _claude() {
                     '--host[Host to bind to]:host:'
                   ;;
                 reset-project-choices|list|help)
+                  ;;
+              esac
+              ;;
+          esac
+          ;;
+        plugin)
+          _arguments -C \
+            '1:plugin subcommand:_claude_plugin_commands' \
+            '*::arg:->plugin_args'
+          case $state in
+            plugin_args)
+              case $line[1] in
+                disable)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1::plugin:'
+                  ;;
+                enable)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:plugin:'
+                  ;;
+                install|i)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:plugin:'
+                  ;;
+                list)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)'
+                  ;;
+                uninstall|remove)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:plugin:'
+                  ;;
+                update)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:plugin:'
+                  ;;
+                validate)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:path:_files'
+                  ;;
+                marketplace|help)
                   ;;
               esac
               ;;
