@@ -29,11 +29,7 @@ setopt PROMPT_SUBST
 setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+autoload -Uz compinit && compinit
 function precmd() { # hook
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
   printf "\033]0;%s(zsh)\007" "$dir"
