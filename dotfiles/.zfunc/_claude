@@ -15,6 +15,21 @@ _claude_commands() {
   _describe -t commands 'claude command' commands
 }
 
+_claude_mcp_commands() {
+  local -a commands=(
+    'add:Add an MCP server (stdio or SSE)'
+    'add-from-claude-desktop:Import MCP servers from Claude Desktop'
+    'add-json:Add an MCP server with a JSON string'
+    'get:Get details about an MCP server'
+    'help:Display help for command'
+    'list:List configured MCP servers'
+    'remove:Remove an MCP server'
+    'reset-project-choices:Reset approved/rejected project-scoped servers'
+    'serve:Start the Claude Code MCP server'
+  )
+  _describe -t commands 'mcp command' commands
+}
+
 _claude() {
   local curcontext="$curcontext" state line
   typeset -A opt_args
@@ -74,8 +89,49 @@ _claude() {
             '1:target:(stable latest)'
           ;;
         mcp)
-          _arguments \
-            '1:mcp subcommand:(add remove list)'
+          _arguments -C \
+            '1:mcp subcommand:_claude_mcp_commands' \
+            '*::arg:->mcp_args'
+          case $state in
+            mcp_args)
+              case $line[1] in
+                add)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '(-t --transport)'{-t,--transport}'[Transport type]:transport:(stdio sse)' \
+                    '(-e --env)'{-e,--env}'[Environment variables (KEY=val)]:env:' \
+                    '--header[HTTP headers for SSE]:header:' \
+                    '1:name:' \
+                    '*:command or url:'
+                  ;;
+                add-json)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:name:' \
+                    '2:json:'
+                  ;;
+                add-from-claude-desktop)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)'
+                  ;;
+                get)
+                  _arguments '1:name:'
+                  ;;
+                remove)
+                  _arguments \
+                    '(-s --scope)'{-s,--scope}'[Configuration scope]:scope:(local project user)' \
+                    '1:name:'
+                  ;;
+                serve)
+                  _arguments \
+                    '--port[Port to listen on]:port:' \
+                    '--host[Host to bind to]:host:'
+                  ;;
+                reset-project-choices|list|help)
+                  ;;
+              esac
+              ;;
+          esac
           ;;
       esac
       ;;
