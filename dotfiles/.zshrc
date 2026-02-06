@@ -95,14 +95,12 @@ compdef _info info
 compdef _make m
 compdef _vim f
 compdef _vim fn
+autoload -Uz _claude && compdef _claude claude
 # Most additional completions
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
 # Completion that isn't included by carapace
-if command -v pipx > /dev/null; then
-  eval "$(register-python-argcomplete pipx)"
-fi
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
