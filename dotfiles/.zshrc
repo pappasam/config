@@ -11,8 +11,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-  zinit ice wait lucid atinit "ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" && zinit light zsh-users/zsh-syntax-highlighting
-  zinit ice wait lucid && zinit light zsh-users/zsh-completions
+  zinit light zsh-users/zsh-syntax-highlighting
+  zinit light zsh-users/zsh-completions
   zinit light starship/starship
   # https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#plugins-and-snippets
   zinit ice as"command" from"gh-r" \
@@ -29,7 +29,6 @@ setopt PROMPT_SUBST
 setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
-autoload zcalc # enables zshell calculator: type with zcalc
 autoload -Uz compinit && compinit
 function precmd() { # hook
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
@@ -97,4 +96,3 @@ fi
 if command -v uvx > /dev/null; then
   eval "$(uvx --generate-shell-completion zsh)"
 fi
-[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
