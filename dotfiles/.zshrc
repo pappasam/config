@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 # shellcheck shell=sh disable=all
 if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
-fpath=(${ASDF_DIR}/completions /usr/local/share/zsh-completions $fpath $HOME/.zfunc)
+fpath=($fpath $HOME/.zfunc)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HISTFILE=~/.zsh_history
 export PERIOD=1
@@ -30,25 +30,15 @@ setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 autoload zcalc # enables zshell calculator: type with zcalc
-# BEGIN: zsh hooks
-function precmd() {
+autoload -Uz compinit && compinit
+function precmd() { # hook
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
   printf "\033]0;%s(zsh)\007" "$dir"
 }
-function preexec() {
+function preexec() { # hook
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
   printf "\033]0;%s($1)\007" "$dir"
 }
-# END
-# BEGIN: https://gist.github.com/ctechols/ca1035271ad134841284
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-# END
-autoload +X bashcompinit && bashcompinit
-zstyle ':completion:*:*:git:*' script /usr/local/etc/bash_completion.d/git-completion.bash
 zstyle ':completion:*' menu select incremental
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
@@ -95,12 +85,9 @@ compdef _info info
 compdef _make m
 compdef _vim f
 compdef _vim fn
-autoload -Uz _claude && compdef _claude claude
-# Most additional completions
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
-# Completion that isn't included by carapace
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
