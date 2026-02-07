@@ -53,26 +53,37 @@ The repository uses GNU Stow to manage symlinks from the `dotfiles/` directory t
 
 1. Shell Configuration
     - `.zshrc`: Zsh shell configuration with completions, prompts, and plugins
+    - `.zshenv`: Zsh environment variables (loaded before .zshrc)
     - `.bashrc`: Bash configuration and utility functions
     - `.profile`: Login shell environment setup
+    - `.zfunc/`: Zsh completion functions directory
+        - `_claude`: Completion for Claude CLI
+        - `_dircomp`: Completion for directory navigation commands
+        - `_git_branches`: Completion for git branch operations
+        - `_info`: Completion for info command
 2. Git Configuration
     - `.gitconfig`: Global git settings and aliases
 3. Neovim Configuration
     - `.config/nvim/init.vim`: Main Neovim configuration
     - `.config/nvim/lua/packages.lua`: Manage plugins using vim.pack
     - `.config/nvim/lua/settings.lua`: Additional Neovim settings
-    - `.config/nvim/ftplugin/`: Language-specific configurations (50+ languages)
+    - `.config/nvim/ftplugin/`: Language-specific configurations (70+ languages)
     - `.config/nvim/snippets/`: Code snippets for various languages
 4. Terminal and UI Configuration
     - `.config/kitty/kitty.conf`: Kitty terminal configuration
     - `.config/starship/starship.toml`: Starship prompt customization
     - `.config/lazygit/config.yml`: Lazygit TUI configuration
+    - `.config/zathura/zathurarc`: Zathura PDF viewer configuration
+    - `.config/cmus/rc`: CMus console music player configuration
+    - `.config/oxker/config.toml`: Oxker Docker container management UI
 5. Tool Configuration
     - `.config/mise/config.toml`: Mise tool and language version management
     - `.config/Code/User/settings.json`: VS Code settings
     - `.config/stylua/stylua.toml`: Lua formatter configuration
     - `.config/pypoetry/config.toml`: Poetry configuration
-    - `.rustfmt.toml`, `.npmrc`, `.markdownlintrc`, `.cookiecutterrc`: Various tool configs
+    - `.rustfmt.toml`, `.npmrc`, `.cookiecutterrc`: Various tool configs
+    - `.mdformat.toml`: Markdown formatter configuration
+    - `biome.json`: Biome linter/formatter for JavaScript/TypeScript
 
 ### Scripts and Tools
 
