@@ -217,6 +217,7 @@ xmap s <Nop>
 nnoremap <Space>l <Cmd>AerialToggle<CR>
 " https://github.com/nvim-tree/nvim-tree.lua
 nnoremap <Space>j <Cmd>NvimTreeToggle<CR>
+nnoremap <Space>f <Cmd>NvimTreeFindFileToggle<CR>
 " https://github.com/pappasam/nvim-repl
 nnoremap <Space>r <Cmd>ReplToggle<CR>
 nmap <silent> <Leader>r <Plug>(ReplSendLine)
