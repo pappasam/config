@@ -49,24 +49,9 @@ bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
-function _git_branches() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
-  local -a subcmds
-  subcmds=($(git branch | awk '{print $NF}'))
-  _describe 'Select an existing git branch' subcmds
-}
-function _info() {
-  local -a subcmds
-  subcmds=($(/bin/info --output=- --subnodes '(dir)' 2>/dev/null | grep '^\* ' | awk -F: '{print $1}' | sed 's/^* //' | sort | uniq | sed 's/ /%20/g'))
-  _describe 'Describe info pages' subcmds
-}
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _command ve
 compdef _directories d
-compdef _git_branches gdl
-compdef _git_branches gdd
-compdef _git_branches gdp
-compdef _info info
 compdef _make m
 compdef _vim f
 compdef _vim fn

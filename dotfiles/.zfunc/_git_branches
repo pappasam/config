@@ -1,0 +1,6 @@
+#compdef gdl gdd gdp
+
+if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
+local -a subcmds
+subcmds=($(git branch | awk '{print $NF}'))
+_describe 'Select an existing git branch' subcmds
