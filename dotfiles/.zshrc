@@ -49,13 +49,6 @@ bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
-function _dircomp_config() { _directories -W "$HOME/config"; }
-function _dircomp_kepler() { _directories -W "$HOME/src/KeplerGroup"; }
-function _dircomp_kyu() { _directories -W "$HOME/src/kyucollective"; }
-function _dircomp_pappasam() { _directories -W "$HOME/src/pappasam"; }
-function _dircomp_rocket() { _directories -W "$HOME/src/KeplerGroup/KIP-Rocket"; }
-function _dircomp_vplug() { _directories -W "$HOME/.local/share/nvim/site/pack/core/opt"; }
-function _dircomp_lib() { _directories -W "$HOME/src/lib"; }
 function _git_branches() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null )" ]; then return 0; fi
   local -a subcmds
@@ -69,13 +62,6 @@ function _info() {
 }
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _command ve
-compdef _dircomp_config c
-compdef _dircomp_kepler k
-compdef _dircomp_kyu kk
-compdef _dircomp_lib l
-compdef _dircomp_pappasam pp
-compdef _dircomp_rocket r
-compdef _dircomp_vplug vplug
 compdef _directories d
 compdef _git_branches gdl
 compdef _git_branches gdd

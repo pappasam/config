@@ -1,0 +1,13 @@
+#compdef c k kk l pp r vplug
+
+local -A _dircomp_map=(
+  c       "$HOME/config"
+  k       "$HOME/src/KeplerGroup"
+  kk      "$HOME/src/kyucollective"
+  l       "$HOME/src/lib"
+  pp      "$HOME/src/pappasam"
+  r       "$HOME/src/KeplerGroup/KIP-Rocket"
+  vplug   "$HOME/.local/share/nvim/site/pack/core/opt"
+)
+
+_directories -W "${_dircomp_map[$service]}"
