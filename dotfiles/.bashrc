@@ -139,12 +139,7 @@ alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias gg='lazygit'
-alias ghastatus="gh api -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' /orgs/keplergroup/actions/runners | jq -C '.runners[] | select(.status == \"online\") | {name, busy}'"
 alias gop='gh browse'
-alias aignore='echo ".aider.*" >> .git/info/exclude'
-
-# Kitten
-alias icat="kitten icat"
 
 # General
 alias gn='gio open'
