@@ -55,7 +55,7 @@ vault = "latest"
 "github:YS-L/csvlens" = "latest"
 "github:github/github-mcp-server" = "latest"
 "github:nishanths/license" = "latest"
-"github:supabase-community/postgres-language-server" = "latest"
+"github:supabase-community/postgres-language-server" = { version = "latest", bin = "postgres-language-server" }
 "go:github.com/sibprogrammer/xq" = "latest"
 "go:golang.org/x/tools/gopls" = "latest"
 "npm:@mdx-js/language-server" = "latest"
