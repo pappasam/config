@@ -231,7 +231,8 @@ nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " https://github.com/nvim-telescope/telescope.nvim
 nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
 nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
-nnoremap <C-p><C-g> <Cmd>Telescope live_grep<CR>
+nnoremap <C-p><C-f> <Cmd>Telescope live_grep<CR>
+nnoremap <C-p><C-g> <Cmd>Telescope git_status<CR>
 nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
 nnoremap <C-p><C-w> <Cmd>Telescope grep_string<CR>
