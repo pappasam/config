@@ -277,6 +277,7 @@ let g:vim_filetype_formatter_commands = {
       \ }
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
 colorscheme PaperColorSlim " https://vimcolorschemes.com
+set termguicolors
 lua require("settings")
 lua require("packages")
 aunmenu PopUp.-2-
@@ -306,7 +307,6 @@ set showtabline=2
 set signcolumn=yes
 set spelllang=en_us
 set splitright
-set termguicolors
 set updatetime=300
 set winborder=rounded
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
