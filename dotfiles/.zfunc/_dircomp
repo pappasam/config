@@ -4,7 +4,6 @@ local -A _dircomp_map=(
   c       "$HOME/config"
   k       "$HOME/src/KeplerGroup"
   kk      "$HOME/src/kyucollective"
-  lib       "$HOME/src/lib"
   pp      "$HOME/src/pappasam"
   r       "$HOME/src/KeplerGroup/KIP-Rocket"
   vplug   "$HOME/.local/share/nvim/site/pack/core/opt"

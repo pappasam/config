@@ -154,7 +154,6 @@ alias rg='rg --fixed-strings'
 function c() { cd "$HOME/config/$1" || return; }
 function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
 function kk() { cd "$HOME/src/kyucollective/$1" || return; }
-function lib() { cd "$HOME/src/lib/$1" || return; }
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function r() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
 function vplug() { cd "$HOME/.local/share/nvim/site/pack/core/opt/$1" || return; }
