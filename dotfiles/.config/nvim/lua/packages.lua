@@ -331,6 +331,11 @@ require("telescope").setup({
     prompt_prefix = " ",
     wrap_results = true,
   },
+  pickers = {
+    oldfiles = {
+      cwd_only = true,
+    },
+  },
 })
 
 -- }}}
