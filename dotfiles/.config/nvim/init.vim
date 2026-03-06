@@ -9,9 +9,10 @@ function! s:color()
     only
     cd ~/.local/share/nvim/site/pack/core/opt/papercolor-theme-slim
     edit ./colors/PaperColorSlim.vim
-    setlocal cursorlineopt=both
+    setlocal cursorlineopt=both cursorbind scrollbind
     vsplit
     edit ./colors/PaperColorSlimLight.vim
+    setlocal cursorlineopt=both cursorbind scrollbind
     wincmd h
     normal! M
     ColorSync
