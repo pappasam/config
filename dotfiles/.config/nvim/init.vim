@@ -144,19 +144,19 @@ function! s:ctrl_l()
   redraw!
 endfunction
 
-command! -range C <line1>,<line2>call s:copy_reference(<range>)
-function! s:copy_reference(range_type) range
-  let path = expand('%')
-  if path == ''
+command! -range C <line1>,<line2>call s:copy_reference(<range>, expand('%'))
+command! -range CC <line1>,<line2>call s:copy_reference(<range>, expand('%:p'))
+function! s:copy_reference(range_type, file_path) range
+  if a:file_path == ''
     echohl WarningMsg | echo 'No file to copy' | echohl None
     return
   endif
   if a:range_type == 0
-    let reference = '@' .. path
+    let reference = '@' .. a:file_path
   elseif a:firstline == a:lastline
-    let reference = '@' .. path .. ':' .. a:firstline
+    let reference = '@' .. a:file_path .. ':' .. a:firstline
   else
-    let reference = '@' .. path .. ':' .. a:firstline .. '-' .. a:lastline
+    let reference = '@' .. a:file_path .. ':' .. a:firstline .. '-' .. a:lastline
   endif
   call setreg('+', reference)
   echo 'Copied: ' .. reference
