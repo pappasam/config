@@ -19,6 +19,7 @@ vim.pack.add({
   "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/axkirillov/easypick.nvim",
   "https://github.com/nvim-lua/plenary.nvim",
   -- Git
   "https://github.com/junegunn/gv.vim",
@@ -536,6 +537,35 @@ require("presenting").setup({
 require("fidget").setup({
   progress = {
     suppress_on_insert = true,
+  },
+})
+
+-- }}}
+-- https://github.com/axkirillov/easypick.nvim {{{
+
+local easypick = require("easypick")
+
+-- resolve the default branch dynamically
+local base_branch = vim.fn.trim(
+  vim.fn.system(
+    "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||'"
+  )
+)
+if base_branch == "" then
+  base_branch = "main"
+end
+
+easypick.setup({
+  pickers = {
+    {
+      name = "changed_files",
+      command = "git diff --name-only $(git merge-base HEAD "
+        .. base_branch
+        .. ")",
+      previewer = easypick.previewers.branch_diff({
+        base_branch = base_branch,
+      }),
+    },
   },
 })
 
