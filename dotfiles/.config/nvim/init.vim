@@ -151,12 +151,13 @@ function! s:copy_reference(range_type, file_path) range
     echohl WarningMsg | echo 'No file to copy' | echohl None
     return
   endif
+  let beginning = a:file_path[0] ==# '/' ? a:file_path : '@' .. a:file_path
   if a:range_type == 0
-    let reference = '@' .. a:file_path
+    let reference = beginning
   elseif a:firstline == a:lastline
-    let reference = '@' .. a:file_path .. ':' .. a:firstline
+    let reference = beginning .. ':' .. a:firstline
   else
-    let reference = '@' .. a:file_path .. ':' .. a:firstline .. '-' .. a:lastline
+    let reference = beginning .. ':' .. a:firstline .. '-' .. a:lastline
   endif
   call setreg('+', reference)
   echo 'Copied: ' .. reference
