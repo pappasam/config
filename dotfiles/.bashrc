@@ -96,7 +96,13 @@ function ps1_git_branch() {
     echo ""
   fi
 }
-function ps1_python_virtualenv() { if [[ -z $VIRTUAL_ENV ]]; then echo ""; else echo "($(basename "$VIRTUAL_ENV"))"; fi; }
+function ps1_python_virtualenv() {
+  if [[ -z $VIRTUAL_ENV ]]; then
+    echo ""
+  else
+    echo "($(basename "$VIRTUAL_ENV"))"
+  fi
+}
 PS1_DIR="\[$PS1_BOLD\]\[$PS1_COLOR_BRIGHT_BLUE\]\w"
 PS1_GIT="\[\$(ps1_git_color)\]\[$PS1_BOLD\]\$(ps1_git_branch)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
 PS1_VIRTUAL_ENV="\[$PS1_BOLD\]\$(ps1_python_virtualenv)\[$PS1_BOLD\]\[$PS1_COLOR_RESET\]"
