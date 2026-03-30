@@ -1,6 +1,10 @@
 #!/usr/bin/zsh
-# shellcheck shell=sh disable=all
-if [[ -f "$HOME/.bashrc" ]]; then source "$HOME/.bashrc"; else echo "$HOME/.bashrc not found, zsh loading default shell" && return 0; fi
+if [[ -f "$HOME/.bashrc" ]]; then
+  source "$HOME/.bashrc"
+else
+  echo "$HOME/.bashrc not found, zsh loading default shell"
+  return 0
+fi
 fpath=($fpath $HOME/.zfunc)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HISTFILE=~/.zsh_history
