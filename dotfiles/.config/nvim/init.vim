@@ -268,17 +268,6 @@ augroup end
 
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
-let g:vim_filetype_formatter_commands = {
-      \ 'css': 'biome',
-      \ 'graphql' : 'biome',
-      \ 'html' : 'biome',
-      \ 'javascript' : 'biome',
-      \ 'javascriptreact' : 'biome',
-      \ 'json' : 'biome',
-      \ 'jsonc' : 'biome',
-      \ 'typescript' : 'biome',
-      \ 'typescriptreact' : 'biome',
-      \ }
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
 colorscheme PaperColorSlim " https://vimcolorschemes.com
 set termguicolors
