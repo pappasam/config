@@ -254,7 +254,7 @@ vim.lsp.config("yamlls", {
 -- https://neovim.io/doc/user/diagnostic.html {{{
 
 vim.diagnostic.config({
-  jump = {
+  on_jump = {
     float = true,
   },
 })
