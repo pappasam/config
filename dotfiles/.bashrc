@@ -478,6 +478,7 @@ function upgrade() {
   mise self-update -y
   mise upgrade -y
   mise install -y
+  mise install -f neovim@nightly
   claude update
 }
 
