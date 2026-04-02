@@ -77,3 +77,10 @@ end
 vim.o.tabline = "%!v:lua.custom_tabline()"
 
 -- }}}
+-- vim._core.ui2 (experimental) {{{
+
+require("vim._core.ui2").enable({
+  enable = true,
+})
+
+-- }}}
