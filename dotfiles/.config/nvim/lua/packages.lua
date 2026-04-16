@@ -314,6 +314,7 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "f", function()
     local explorer = require("nvim-tree.core").get_explorer()
     if explorer then
+      ---@diagnostic disable-next-line: param-type-mismatch
       explorer:expand_all(nil)
     end
     api.filter.live.start()
@@ -329,7 +330,7 @@ require("nvim-tree").setup({
     },
   },
   live_filter = {
-    prefix = " 🔍 ",
+    prefix = "  🔍 ",
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
