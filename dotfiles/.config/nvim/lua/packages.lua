@@ -310,7 +310,7 @@ local function on_attach(bufnr)
   local function opts(desc)
     return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
-  api.config.mappings.default_on_attach(bufnr)
+  api.map.on_attach.default(bufnr)
   vim.keymap.set("n", "f", function()
     api.tree.expand_all()
     api.filter.live.start()
