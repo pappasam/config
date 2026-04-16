@@ -312,7 +312,10 @@ local function on_attach(bufnr)
   end
   api.map.on_attach.default(bufnr)
   vim.keymap.set("n", "f", function()
-    api.tree.expand_all()
+    local explorer = require("nvim-tree.core").get_explorer()
+    if explorer then
+      explorer:expand_all(nil)
+    end
     api.filter.live.start()
   end, opts("Live Filter (recursive)"))
 end
