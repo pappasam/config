@@ -326,7 +326,7 @@ require("nvim-tree").setup({
     },
   },
   live_filter = {
-    prefix = "[FILTER]: ",
+    prefix = " 🔍 ",
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
