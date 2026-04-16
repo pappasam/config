@@ -308,7 +308,13 @@ local api = require("nvim-tree.api")
 
 local function on_attach(bufnr)
   local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    return {
+      desc = "nvim-tree: " .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true,
+    }
   end
   api.map.on_attach.default(bufnr)
   vim.keymap.set("n", "f", function()
@@ -321,12 +327,19 @@ local function on_attach(bufnr)
   end, opts("Live Filter (recursive)"))
 end
 
+local tree_disable_folders = {
+  ".git",
+  ".venv",
+  "__pycache__",
+  "node_modules",
+}
+
 require("nvim-tree").setup({
   on_attach = on_attach,
   disable_netrw = true,
   actions = {
     expand_all = {
-      exclude = { ".git", "node_modules", ".venv", "__pycache__" },
+      exclude = tree_disable_folders,
     },
   },
   live_filter = {
@@ -334,9 +347,7 @@ require("nvim-tree").setup({
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
-    custom = {
-      "/__pycache__",
-    },
+    custom = tree_disable_folders,
   },
   renderer = {
     full_name = true,
