@@ -408,14 +408,15 @@ function info() { # https://github.com/HiPhish/info.vim
 #   2. The current git branch name (if no argument given)
 # Usage: sop [string]
 function sop() {
-  local input id
+  local input
   if [[ -n "$1" ]]; then
     input="$1"
   elif ! input=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); then
     echo "error: not a git repository" >&2
     return 1
   fi
-  id=$(echo "$input" | grep -oP '\d+' | head -1)
+  local id
+  id=$(echo "$input" | grep -oE 'sc-[0-9]+|/[0-9]+|^[0-9]+' | grep -oE '[0-9]+' | head -1)
   if [[ -z "$id" ]]; then
     echo "error: no shortcut ID found in '$input'" >&2
     return 1
