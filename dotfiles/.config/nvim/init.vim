@@ -144,7 +144,7 @@ function! s:ctrl_l()
   redraw!
 endfunction
 
-command! -range C <line1>,<line2>call s:copy_reference(<range>, expand('%'))
+command! -range C <line1>,<line2>call s:copy_reference(<range>, expand('%:.'))
 command! -range CC <line1>,<line2>call s:copy_reference(<range>, expand('%:p'))
 function! s:copy_reference(range_type, file_path) range
   if a:file_path == ''
