@@ -147,7 +147,7 @@ alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias gg='lazygit'
-alias gop='gh browse'
+alias gop='gh pr view --web || gh browse'
 
 # General
 alias gn='gio open'
