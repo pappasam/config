@@ -244,6 +244,7 @@ local function set_cursor(meta)
     local line = meta.cursor_buf_line or vim.fn.line("$")
     local col = (meta.cursor_buf_col or 0) + 1
     vim.fn.cursor(line, col)
+    vim.cmd("normal! zb")
   end)
 end
 
