@@ -53,13 +53,69 @@ def handle_result(args, result, target_window_id, boss: Boss):
     }
 
     text = w.as_text(as_ansi=True, add_history=True, add_wrap_markers=True)
-    # With add_wrap_markers: every line ends with \r.
-    # Real newlines are \r\n, soft wraps are \r alone.
-    # Replace \r\n (real newline) with a placeholder, strip remaining \r (soft wraps), restore.
-    text = text.replace("\r\n", "\x00")
-    text = text.replace("\r", "")
-    text = text.replace("\x00", "\n")
-    text = "\n".join(line + "\x1b[0m" for line in text.split("\n"))
+
+    # Compute which terminal row the cursor is on (0-indexed in the full text).
+    # The screen area is the last `screen.lines` rows of the text.
+    # cursor_y is 1-indexed within the screen area.
+    raw_rows = text.split("\r\n")
+    # Last element may be empty after final \r\n
+    if raw_rows and raw_rows[-1] == "":
+        raw_rows.pop()
+    # Each raw_row may contain \r for soft-wrap joins within it — but actually
+    # after split on \r\n, soft-wrap \r chars are still inside rows.
+    # Count terminal rows: split each raw_row on remaining \r to get sub-rows.
+    terminal_rows = []
+    for raw_row in raw_rows:
+        sub_rows = raw_row.split("\r")
+        if sub_rows and sub_rows[-1] == "":
+            sub_rows.pop()
+        if not sub_rows:
+            sub_rows = [""]
+        terminal_rows.extend(sub_rows)
+
+    total_term_rows = len(terminal_rows)
+    cursor_term_row = total_term_rows - screen.lines + screen.cursor.y  # 0-indexed
+
+    # Now rejoin: soft wraps (\r without \n) get merged.
+    # Track which terminal row maps to which buffer line and column offset.
+    buf_line = 0
+    col_offset = 0  # byte offset within the buffer line for each terminal row start
+    cursor_buf_line = 0
+    cursor_buf_col = 0
+
+    result_lines = []
+    current_parts = []
+    term_row_idx = 0
+
+    for raw_row in raw_rows:
+        sub_rows = raw_row.split("\r")
+        if sub_rows and sub_rows[-1] == "":
+            sub_rows.pop()
+        if not sub_rows:
+            sub_rows = [""]
+        for i, sub_row in enumerate(sub_rows):
+            if term_row_idx == cursor_term_row:
+                cursor_buf_line = buf_line
+                # Strip ANSI escapes to count visible columns up to cursor_x
+                import re
+                plain = re.sub(r'\x1b\[[^A-Za-z]*[A-Za-z]', '', "".join(current_parts))
+                cursor_buf_col = len(plain.encode('utf-8')) + screen.cursor.x + 1
+            current_parts.append(sub_row)
+            term_row_idx += 1
+        # End of a real line (\r\n boundary)
+        result_lines.append("".join(current_parts))
+        current_parts = []
+        buf_line += 1
+
+    if current_parts:
+        if term_row_idx > cursor_term_row >= term_row_idx - len(current_parts):
+            cursor_buf_line = buf_line
+        result_lines.append("".join(current_parts))
+
+    metadata["cursor_buf_line"] = cursor_buf_line + 1  # 1-indexed for nvim
+    metadata["cursor_buf_col"] = cursor_buf_col
+
+    text = "\n".join(line + "\x1b[0m" for line in result_lines)
 
     fd, meta_path = tempfile.mkstemp(prefix="ksb_", suffix=".json")
     text_path = meta_path.replace(".json", ".ansi")

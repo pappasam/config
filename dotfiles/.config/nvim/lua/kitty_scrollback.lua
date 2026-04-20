@@ -226,36 +226,9 @@ end
 
 local function set_cursor(meta)
   vim.schedule(function()
-    local x = meta.cursor_x - 1
-    local y = meta.cursor_y - 1
-    local scrolled_by = meta.scrolled_by
-    local lines = meta.lines
-    if vim.fn.has("nvim-0.12") == 1 then
-      lines = lines - 1
-    end
-    if y < 0 then
-      lines = lines + math.abs(y)
-      y = 0
-    end
-
-    vim.o.scrolloff = 0
-    vim.o.virtualedit = "all"
-    vim.fn.cursor(vim.fn.line("$"), 1)
-    if lines ~= 0 then
-      vim.cmd.normal({ lines .. "k", bang = true })
-    end
-    if y ~= 0 then
-      vim.cmd.normal({ y .. "j", bang = true })
-    end
-    if x ~= 0 then
-      vim.cmd.normal({ x .. "l", bang = true })
-    end
-    if scrolled_by > 0 then
-      vim.cmd.normal({
-        vim.api.nvim_replace_termcodes(scrolled_by .. "<C-y>", true, false, true),
-        bang = true,
-      })
-    end
+    local line = meta.cursor_buf_line or vim.fn.line("$")
+    local col = (meta.cursor_buf_col or 0) + 1
+    vim.fn.cursor(line, col)
   end)
 end
 
