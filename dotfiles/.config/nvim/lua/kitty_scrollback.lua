@@ -90,12 +90,7 @@ local function set_keymaps(meta)
   vim.keymap.set("n", "q", quit, { buffer = true })
   vim.keymap.set("n", "<Esc>", quit, { buffer = true })
   vim.keymap.set("v", "y", function()
-    vim.cmd.normal({ "y", bang = true })
-    local text = vim.fn.getreg('"')
-    vim.system(
-      { meta.kitty_path, "+kitten", "clipboard", "/dev/stdin" },
-      { stdin = text }
-    ):wait()
+    vim.cmd.normal({ '"+y', bang = true })
     quit()
   end, { buffer = true })
 end
