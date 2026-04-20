@@ -3,7 +3,9 @@ import os
 import tempfile
 
 from kitty.boss import Boss
-from kitty.utils import which
+from kitty.fast_data_types import Color, get_options
+from kitty.rgb import color_as_sharp, color_from_int
+from kitty.utils import natsort_ints, which
 from kittens.tui.handler import result_handler
 
 
@@ -28,6 +30,16 @@ def handle_result(args, result, target_window_id, boss: Boss):
         boss.show_error("kitty_scrollback", "Cannot find nvim in PATH")
         return
 
+    # Gather colors directly from kitty's API (avoids deadlock from subprocess)
+    opts = get_options()
+    color_dict = {k: getattr(opts, k) for k in opts if isinstance(getattr(opts, k), Color)}
+    for k, v in w.current_colors.items():
+        if v is None:
+            color_dict.pop(k, None)
+        elif isinstance(v, int):
+            color_dict[k] = color_from_int(v)
+    kitty_colors = {k: color_as_sharp(v) for k, v in color_dict.items()}
+
     screen = w.screen
     metadata = {
         "kitty_path": kitty_path,
@@ -37,20 +49,29 @@ def handle_result(args, result, target_window_id, boss: Boss):
         "lines": screen.lines + 1,
         "columns": screen.columns,
         "window_id": int(target_window_id),
+        "colors": kitty_colors,
     }
 
     text = w.as_text(as_ansi=True, add_history=True, add_wrap_markers=True)
+    # With add_wrap_markers: every line ends with \r.
+    # Real newlines are \r\n, soft wraps are \r alone.
+    # Replace \r\n (real newline) with a placeholder, strip remaining \r (soft wraps), restore.
+    text = text.replace("\r\n", "\x00")
     text = text.replace("\r", "")
+    text = text.replace("\x00", "\n")
     text = "\n".join(line + "\x1b[0m" for line in text.split("\n"))
 
-    fd, data_path = tempfile.mkstemp(prefix="ksb_", suffix=".json")
+    fd, meta_path = tempfile.mkstemp(prefix="ksb_", suffix=".json")
+    text_path = meta_path.replace(".json", ".ansi")
     with os.fdopen(fd, "w") as f:
-        json.dump({"text": text, "metadata": metadata}, f)
+        json.dump({"metadata": metadata, "text_path": text_path}, f)
+    with open(text_path, "w") as f:
+        f.write(text)
 
     lua_cmd = (
         " lua"
         " vim.opt.runtimepath:append(vim.fn.stdpath('config'))"
-        f" require('kitty_scrollback').launch([[{data_path}]])"
+        f" require('kitty_scrollback').launch([[{meta_path}]])"
     )
 
     cmd = (
