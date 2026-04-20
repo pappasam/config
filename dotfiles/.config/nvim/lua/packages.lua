@@ -26,8 +26,6 @@ vim.pack.add({
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/sindrets/diffview.nvim",
-  -- Kitty
-  "https://github.com/mikesmithgh/kitty-scrollback.nvim",
   -- My plugins
   "https://github.com/pappasam/nvim-repl",
   "https://github.com/pappasam/papercolor-theme-slim",
