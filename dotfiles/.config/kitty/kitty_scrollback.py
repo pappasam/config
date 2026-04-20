@@ -98,7 +98,7 @@ def handle_result(args, result, target_window_id, boss: Boss):
                 cursor_buf_line = buf_line
                 # Strip ANSI escapes to count visible columns up to cursor_x
                 import re
-                plain = re.sub(r'\x1b\[[^A-Za-z]*[A-Za-z]', '', "".join(current_parts))
+                plain = re.sub(r'\x1b\[[^A-Za-z]*[A-Za-z]|\x1b\].*?(?:\x07|\x1b\\)', '', "".join(current_parts))
                 cursor_buf_col = len(plain.encode('utf-8')) + screen.cursor.x + 1
             current_parts.append(sub_row)
             term_row_idx += 1
