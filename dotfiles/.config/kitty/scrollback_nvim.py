@@ -11,11 +11,12 @@ from kittens.tui.handler import result_handler
 
 
 def main():
+    """Required entry point for kitty's kitten protocol, even with no_ui=True."""
     raise SystemExit("Must be run as kitten kitty_scrollback")
 
 
 @result_handler(type_of_input=None, no_ui=True, has_ready_notification=False)
-def handle_result(args, result, target_window_id, boss: Boss):
+def handle_result(_args, _result, target_window_id: int, boss: Boss):
     w = boss.window_id_map.get(target_window_id)
     if w is None:
         raise Exception(f"Failed to get window with id: {target_window_id}")
@@ -51,7 +52,7 @@ def handle_result(args, result, target_window_id, boss: Boss):
         "cursor_y": screen.cursor.y + 1,
         "lines": screen.lines + 1,
         "columns": screen.columns,
-        "window_id": int(target_window_id),
+        "window_id": target_window_id,
         "colors": kitty_colors,
     }
 
