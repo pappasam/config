@@ -1,11 +1,12 @@
 import json
 import os
+import re
 import tempfile
 
 from kitty.boss import Boss
 from kitty.fast_data_types import Color, get_options
 from kitty.rgb import color_as_sharp, color_from_int
-from kitty.utils import natsort_ints, which
+from kitty.utils import which
 from kittens.tui.handler import result_handler
 
 
@@ -54,65 +55,42 @@ def handle_result(args, result, target_window_id, boss: Boss):
 
     text = w.as_text(as_ansi=True, add_history=True, add_wrap_markers=True)
 
-    # Compute which terminal row the cursor is on (0-indexed in the full text).
-    # The screen area is the last `screen.lines` rows of the text.
-    # cursor_y is 1-indexed within the screen area.
+    # Split on \r\n (real newlines). Remaining \r within a row = soft wraps to rejoin.
     raw_rows = text.split("\r\n")
-    # Last element may be empty after final \r\n
     if raw_rows and raw_rows[-1] == "":
         raw_rows.pop()
-    # Each raw_row may contain \r for soft-wrap joins within it — but actually
-    # after split on \r\n, soft-wrap \r chars are still inside rows.
-    # Count terminal rows: split each raw_row on remaining \r to get sub-rows.
-    terminal_rows = []
-    for raw_row in raw_rows:
-        sub_rows = raw_row.split("\r")
-        if sub_rows and sub_rows[-1] == "":
-            sub_rows.pop()
-        if not sub_rows:
-            sub_rows = [""]
-        terminal_rows.extend(sub_rows)
 
-    total_term_rows = len(terminal_rows)
-    cursor_term_row = total_term_rows - screen.lines + screen.cursor.y  # 0-indexed
-
-    # Now rejoin: soft wraps (\r without \n) get merged.
-    # Track which terminal row maps to which buffer line and column offset.
-    buf_line = 0
-    col_offset = 0  # byte offset within the buffer line for each terminal row start
-    cursor_buf_line = 0
-    cursor_buf_col = 0
-
+    # Single forward pass: rejoin soft-wrapped sub-rows, track count per line.
+    strip_ansi = re.compile(r'\x1b\[[^A-Za-z]*[A-Za-z]|\x1b\].*?(?:\x07|\x1b\\)').sub
     result_lines = []
-    current_parts = []
-    term_row_idx = 0
-
+    sub_row_counts = []
     for raw_row in raw_rows:
         sub_rows = raw_row.split("\r")
         if sub_rows and sub_rows[-1] == "":
             sub_rows.pop()
         if not sub_rows:
             sub_rows = [""]
-        for i, sub_row in enumerate(sub_rows):
-            if term_row_idx == cursor_term_row:
-                cursor_buf_line = buf_line
-                # Strip ANSI escapes to count visible columns up to cursor_x
-                import re
-                plain = re.sub(r'\x1b\[[^A-Za-z]*[A-Za-z]|\x1b\].*?(?:\x07|\x1b\\)', '', "".join(current_parts))
+        result_lines.append("".join(sub_rows))
+        sub_row_counts.append(len(sub_rows))
+
+    # Backward scan for cursor position (bounded by screen.lines).
+    rows_from_end = screen.lines - 1 - screen.cursor.y
+    cursor_buf_line = len(result_lines) - 1
+    cursor_buf_col = screen.cursor.x + 1
+    for i in range(len(sub_row_counts) - 1, -1, -1):
+        if rows_from_end < sub_row_counts[i]:
+            cursor_buf_line = i
+            preceding = sub_row_counts[i] - rows_from_end - 1
+            if preceding > 0:
+                parts = raw_rows[i].split("\r")
+                if parts and parts[-1] == "":
+                    parts.pop()
+                plain = strip_ansi('', "".join(parts[:preceding]))
                 cursor_buf_col = len(plain.encode('utf-8')) + screen.cursor.x + 1
-            current_parts.append(sub_row)
-            term_row_idx += 1
-        # End of a real line (\r\n boundary)
-        result_lines.append("".join(current_parts))
-        current_parts = []
-        buf_line += 1
+            break
+        rows_from_end -= sub_row_counts[i]
 
-    if current_parts:
-        if term_row_idx > cursor_term_row >= term_row_idx - len(current_parts):
-            cursor_buf_line = buf_line
-        result_lines.append("".join(current_parts))
-
-    metadata["cursor_buf_line"] = cursor_buf_line + 1  # 1-indexed for nvim
+    metadata["cursor_buf_line"] = cursor_buf_line + 1
     metadata["cursor_buf_col"] = cursor_buf_col
 
     text = "\n".join(line + "\x1b[0m" for line in result_lines)

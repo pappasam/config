@@ -69,6 +69,20 @@ local function make_hl_key(fg, bg, bold, italic, underline, reverse, strikethrou
     .. (strikethrough and "s" or "")
 end
 
+local function skip_escape(line, pos, line_len)
+  local next_byte = line:byte(pos + 1)
+  if next_byte == 93 then -- ']' OSC: skip to BEL or ST
+    local bel = line:find("\007", pos + 2, true)
+    local st = line:find("\027\\", pos + 2, true)
+    if bel and st then return bel < st and bel + 1 or st + 2 end
+    return bel and bel + 1 or st and st + 2 or line_len + 1
+  elseif next_byte == 91 then -- '[' non-SGR CSI: skip to terminator
+    local seq_end = line:find("[A-Za-z]", pos + 2)
+    return seq_end and seq_end + 1 or pos + 1
+  end
+  return pos + 2
+end
+
 local function parse_ansi_lines(text, color_for)
   local plain_lines = {}
   local line_extmarks = {}
@@ -81,7 +95,7 @@ local function parse_ansi_lines(text, color_for)
     local extmarks = {}
     local col = 0
     local span_start = 0
-    local span_key = make_hl_key(fg, bg, bold, italic, underline, reverse, strikethrough)
+    local span_has_style = fg ~= nil or bg ~= nil or bold or italic or underline or reverse or strikethrough
     local span_fg, span_bg = fg, bg
     local span_bold, span_italic, span_underline = bold, italic, underline
     local span_reverse, span_strikethrough = reverse, strikethrough
@@ -89,101 +103,80 @@ local function parse_ansi_lines(text, color_for)
     local pos = 1
     local line_len = #raw_line
     while pos <= line_len do
-      -- Find next escape or end of line
       local esc_pos = raw_line:find("\027", pos, true)
       if esc_pos and esc_pos == pos then
-        local next_byte = raw_line:byte(pos + 1)
-        if next_byte == 93 then -- ']' OSC sequence
-          local bel = raw_line:find("\007", pos + 2, true)
-          local st = raw_line:find("\027\\", pos + 2, true)
-          local osc_end
-          if bel and st then
-            osc_end = bel < st and bel + 1 or st + 2
-          elseif bel then
-            osc_end = bel + 1
-          elseif st then
-            osc_end = st + 2
-          else
-            osc_end = line_len + 1
+        local seq_end
+        if raw_line:byte(pos + 1) == 91 then -- '[' CSI
+          seq_end = raw_line:find("[A-Za-z]", pos + 2)
+        end
+        if seq_end and raw_line:byte(seq_end) == 109 then -- SGR 'm'
+          if col > span_start and span_has_style then
+            table.insert(extmarks, {
+              span_start, col,
+              span_fg, span_bg,
+              span_bold, span_italic, span_underline,
+              span_reverse, span_strikethrough,
+            })
           end
-          pos = osc_end
-        elseif next_byte == 91 then -- '[' CSI sequence
-          local seq_end = raw_line:find("[A-Za-z]", pos + 2)
-          if seq_end then
-            local code = raw_line:byte(seq_end)
-            if code == 109 then -- 'm'
-              if col > span_start and span_key ~= ":::::::" and span_key ~= "::" then
-                table.insert(extmarks, {
-                  span_start, col,
-                  span_fg, span_bg,
-                  span_bold, span_italic, span_underline,
-                  span_reverse, span_strikethrough,
-                })
-              end
 
-              local param_str = raw_line:sub(pos + 2, seq_end - 1)
-              local i_param = 1
-              local params = {}
-              for n in param_str:gmatch("([^;]+)") do
-                params[i_param] = tonumber(n) or 0
-                i_param = i_param + 1
-              end
-              if i_param == 1 then params[1] = 0; i_param = 2 end
+          local param_str = raw_line:sub(pos + 2, seq_end - 1)
+          local i_param = 1
+          local params = {}
+          for n in param_str:gmatch("([^;]+)") do
+            params[i_param] = tonumber(n) or 0
+            i_param = i_param + 1
+          end
+          if i_param == 1 then params[1] = 0; i_param = 2 end
 
-              local i = 1
-              local count = i_param - 1
-              while i <= count do
-                local p = params[i]
-                if p == 0 then
-                  fg, bg = nil, nil
-                  bold, italic, underline, reverse, strikethrough = false, false, false, false, false
-                elseif p == 1 then bold = true
-                elseif p == 3 then italic = true
-                elseif p == 4 then underline = true
-                elseif p == 7 then reverse = true
-                elseif p == 9 then strikethrough = true
-                elseif p == 22 then bold = false
-                elseif p == 23 then italic = false
-                elseif p == 24 then underline = false
-                elseif p == 27 then reverse = false
-                elseif p == 29 then strikethrough = false
-                elseif p >= 30 and p <= 37 then fg = color_for(p - 30)
-                elseif p == 38 then
-                  if params[i + 1] == 5 and params[i + 2] then
-                    fg = color_for(params[i + 2]); i = i + 2
-                  elseif params[i + 1] == 2 and params[i + 4] then
-                    fg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
-                  end
-                elseif p == 39 then fg = nil
-                elseif p >= 40 and p <= 47 then bg = color_for(p - 40)
-                elseif p == 48 then
-                  if params[i + 1] == 5 and params[i + 2] then
-                    bg = color_for(params[i + 2]); i = i + 2
-                  elseif params[i + 1] == 2 and params[i + 4] then
-                    bg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
-                  end
-                elseif p == 49 then bg = nil
-                elseif p >= 90 and p <= 97 then fg = color_for(p - 90 + 8)
-                elseif p >= 100 and p <= 107 then bg = color_for(p - 100 + 8)
-                end
-                i = i + 1
+          local i = 1
+          local count = i_param - 1
+          while i <= count do
+            local p = params[i]
+            if p == 0 then
+              fg, bg = nil, nil
+              bold, italic, underline, reverse, strikethrough = false, false, false, false, false
+            elseif p == 1 then bold = true
+            elseif p == 3 then italic = true
+            elseif p == 4 then underline = true
+            elseif p == 7 then reverse = true
+            elseif p == 9 then strikethrough = true
+            elseif p == 22 then bold = false
+            elseif p == 23 then italic = false
+            elseif p == 24 then underline = false
+            elseif p == 27 then reverse = false
+            elseif p == 29 then strikethrough = false
+            elseif p >= 30 and p <= 37 then fg = color_for(p - 30)
+            elseif p == 38 then
+              if params[i + 1] == 5 and params[i + 2] then
+                fg = color_for(params[i + 2]); i = i + 2
+              elseif params[i + 1] == 2 and params[i + 4] then
+                fg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
               end
-
-              span_start = col
-              span_key = make_hl_key(fg, bg, bold, italic, underline, reverse, strikethrough)
-              span_fg, span_bg = fg, bg
-              span_bold, span_italic, span_underline = bold, italic, underline
-              span_reverse, span_strikethrough = reverse, strikethrough
+            elseif p == 39 then fg = nil
+            elseif p >= 40 and p <= 47 then bg = color_for(p - 40)
+            elseif p == 48 then
+              if params[i + 1] == 5 and params[i + 2] then
+                bg = color_for(params[i + 2]); i = i + 2
+              elseif params[i + 1] == 2 and params[i + 4] then
+                bg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
+              end
+            elseif p == 49 then bg = nil
+            elseif p >= 90 and p <= 97 then fg = color_for(p - 90 + 8)
+            elseif p >= 100 and p <= 107 then bg = color_for(p - 100 + 8)
             end
-            pos = seq_end + 1
-          else
-            pos = pos + 1
+            i = i + 1
           end
+
+          span_start = col
+          span_has_style = fg ~= nil or bg ~= nil or bold or italic or underline or reverse or strikethrough
+          span_fg, span_bg = fg, bg
+          span_bold, span_italic, span_underline = bold, italic, underline
+          span_reverse, span_strikethrough = reverse, strikethrough
+          pos = seq_end + 1
         else
-          pos = pos + 2
+          pos = skip_escape(raw_line, pos, line_len)
         end
       else
-        -- Grab all plain text up to next escape (or end)
         local chunk_end = esc_pos and esc_pos - 1 or line_len
         local chunk = raw_line:sub(pos, chunk_end)
         table.insert(plain, chunk)
@@ -192,8 +185,7 @@ local function parse_ansi_lines(text, color_for)
       end
     end
 
-    -- Flush trailing span
-    if col > span_start and span_key ~= ":::::::" and span_key ~= "::" then
+    if col > span_start and span_has_style then
       table.insert(extmarks, {
         span_start, col,
         span_fg, span_bg,
