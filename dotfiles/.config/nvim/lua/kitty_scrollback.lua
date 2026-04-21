@@ -338,14 +338,10 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
             })
             hl_cache[key] = group
           end
-          vim.api.nvim_buf_add_highlight(
-            bufnr,
-            ns,
-            hl_cache[key],
-            lnum - 1,
-            start_col,
-            end_col
-          )
+          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum - 1, start_col, {
+            end_col = end_col,
+            hl_group = hl_cache[key],
+          })
         end
       end
     end
@@ -371,7 +367,7 @@ local function set_cursor(meta)
   end)
 end
 
-local function set_keymaps(meta)
+local function set_keymaps(_)
   local quit = function()
     vim.cmd("quitall!")
   end
