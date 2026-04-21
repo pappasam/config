@@ -38,7 +38,6 @@ vim.pack.add({
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
   "https://github.com/brianhuster/live-preview.nvim",
-  "https://github.com/sotte/presenting.nvim",
 })
 
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
@@ -542,31 +541,6 @@ require("gx").setup({
       end,
     },
   },
-})
-
--- }}}
--- https://github.com/sotte/presenting.nvim {{{
-
-require("presenting").setup({
-  options = {
-    width = 60,
-  },
-  separator = {
-    markdown = "^##? ", -- # or ##, but not ###+
-  },
-  configure_slide_buffer = function(_)
-    vim.cmd([[
-      Fidget suppress
-      setlocal buftype=nofile filetype=markdown bufhidden=wipe nomodifiable wrap conceallevel=3 concealcursor=nc
-      nnoremap <buffer> q <Cmd>Presenting<CR>
-      nnoremap <buffer> <C-w> <NOP>
-      nnoremap <buffer> <Space>l <NOP>
-      nnoremap <buffer> <Space>j <NOP>
-      nnoremap <buffer> <Space>c <NOP>
-      cnoreabbrev <buffer> q Presenting
-      echo
-    ]])
-  end,
 })
 
 -- }}}
