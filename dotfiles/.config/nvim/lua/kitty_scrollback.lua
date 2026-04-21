@@ -209,34 +209,58 @@ local function parse_ansi_lines(text, color_for)
   return plain_lines, line_extmarks
 end
 
-local function apply_highlights(bufnr, line_extmarks)
+local function setup_lazy_highlights(bufnr, line_extmarks)
   local ns = vim.api.nvim_create_namespace("kitty_scrollback")
   local hl_cache = {}
   local hl_idx = 0
-  for lnum, extmarks in ipairs(line_extmarks) do
-    for _, em in ipairs(extmarks) do
-      local start_col, end_col = em[1], em[2]
-      local em_fg, em_bg = em[3], em[4]
-      local em_bold, em_italic, em_underline = em[5], em[6], em[7]
-      local em_reverse, em_strikethrough = em[8], em[9]
+  local hl_min = math.huge
+  local hl_max = -1
+  local total = #line_extmarks
+  local margin = 200
 
-      local key = make_hl_key(em_fg, em_bg, em_bold, em_italic, em_underline, em_reverse, em_strikethrough)
-      if not hl_cache[key] then
-        hl_idx = hl_idx + 1
-        local group = "KsbHl" .. hl_idx
-        vim.api.nvim_set_hl(0, group, {
-          fg = em_reverse and em_bg or em_fg,
-          bg = em_reverse and em_fg or em_bg,
-          bold = em_bold,
-          italic = em_italic,
-          underline = em_underline,
-          strikethrough = em_strikethrough,
-        })
-        hl_cache[key] = group
+  local function highlight_range(from, to)
+    from = math.max(1, from)
+    to = math.min(total, to)
+    if from >= hl_min and to <= hl_max then return end
+    local start = from < hl_min and from or hl_max + 1
+    local stop = to > hl_max and to or hl_min - 1
+    for lnum = start, stop do
+      local extmarks = line_extmarks[lnum]
+      if extmarks then
+        for _, em in ipairs(extmarks) do
+          local start_col, end_col = em[1], em[2]
+          local em_fg, em_bg = em[3], em[4]
+          local em_bold, em_italic, em_underline = em[5], em[6], em[7]
+          local em_reverse, em_strikethrough = em[8], em[9]
+          local key = make_hl_key(em_fg, em_bg, em_bold, em_italic, em_underline, em_reverse, em_strikethrough)
+          if not hl_cache[key] then
+            hl_idx = hl_idx + 1
+            local group = "KsbHl" .. hl_idx
+            vim.api.nvim_set_hl(0, group, {
+              fg = em_reverse and em_bg or em_fg,
+              bg = em_reverse and em_fg or em_bg,
+              bold = em_bold,
+              italic = em_italic,
+              underline = em_underline,
+              strikethrough = em_strikethrough,
+            })
+            hl_cache[key] = group
+          end
+          vim.api.nvim_buf_add_highlight(bufnr, ns, hl_cache[key], lnum - 1, start_col, end_col)
+        end
       end
-      vim.api.nvim_buf_add_highlight(bufnr, ns, hl_cache[key], lnum - 1, start_col, end_col)
     end
+    hl_min = math.min(hl_min, from)
+    hl_max = math.max(hl_max, to)
   end
+
+  local function highlight_visible()
+    local top = vim.fn.line("w0")
+    local bot = vim.fn.line("w$")
+    highlight_range(top - margin, bot + margin)
+  end
+
+  return highlight_visible
 end
 
 local function set_cursor(meta)
@@ -300,10 +324,18 @@ function M.launch(data_path)
       local bufnr = vim.api.nvim_get_current_buf()
       vim.api.nvim_set_option_value("swapfile", false, { buf = bufnr })
       vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, plain_lines)
-      apply_highlights(bufnr, line_extmarks)
+
+      local highlight_visible = setup_lazy_highlights(bufnr, line_extmarks)
       vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
 
       set_cursor(meta)
+      highlight_visible()
+      local group = vim.api.nvim_create_augroup("KittyScrollbackHL", { clear = true })
+      vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
+        group = group,
+        buffer = bufnr,
+        callback = highlight_visible,
+      })
       set_keymaps(meta)
     end,
   })
