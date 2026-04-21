@@ -33,7 +33,9 @@ def handle_result(args, result, target_window_id, boss: Boss):
 
     # Gather colors directly from kitty's API (avoids deadlock from subprocess)
     opts = get_options()
-    color_dict = {k: getattr(opts, k) for k in opts if isinstance(getattr(opts, k), Color)}
+    color_dict = {
+        k: getattr(opts, k) for k in opts if isinstance(getattr(opts, k), Color)
+    }
     for k, v in w.current_colors.items():
         if v is None:
             color_dict.pop(k, None)
@@ -61,7 +63,7 @@ def handle_result(args, result, target_window_id, boss: Boss):
         raw_rows.pop()
 
     # Single forward pass: rejoin soft-wrapped sub-rows, track count per line.
-    strip_ansi = re.compile(r'\x1b\[[^A-Za-z]*[A-Za-z]|\x1b\].*?(?:\x07|\x1b\\)').sub
+    strip_ansi = re.compile(r"\x1b\[[^A-Za-z]*[A-Za-z]|\x1b\].*?(?:\x07|\x1b\\)").sub
     result_lines = []
     sub_row_counts = []
     for raw_row in raw_rows:
@@ -85,8 +87,8 @@ def handle_result(args, result, target_window_id, boss: Boss):
                 parts = raw_rows[i].split("\r")
                 if parts and parts[-1] == "":
                     parts.pop()
-                plain = strip_ansi('', "".join(parts[:preceding]))
-                cursor_buf_col = len(plain.encode('utf-8')) + screen.cursor.x + 1
+                plain = strip_ansi("", "".join(parts[:preceding]))
+                cursor_buf_col = len(plain.encode("utf-8")) + screen.cursor.x + 1
             break
         rows_from_end -= sub_row_counts[i]
 
@@ -111,11 +113,17 @@ def handle_result(args, result, target_window_id, boss: Boss):
     cmd = (
         "launch",
         "--copy-env",
-        "--type", "overlay",
-        "--title", "kitty-scrollback",
+        "--type",
+        "overlay",
+        "--title",
+        "kitty-scrollback",
         nvim_path,
-        "--clean", "--noplugin", "-n",
-        "-c", "let g:mapleader = ','",
-        "--cmd", lua_cmd,
+        "--clean",
+        "--noplugin",
+        "-n",
+        "-c",
+        "let g:mapleader = ','",
+        "--cmd",
+        lua_cmd,
     )
     boss.call_remote_control(w, cmd)

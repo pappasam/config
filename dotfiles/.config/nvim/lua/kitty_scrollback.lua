@@ -39,22 +39,40 @@ local function build_palette(colors)
   end
 
   local basic = {
-    [0] = "#000000", "#800000", "#008000", "#808000",
-    "#000080", "#800080", "#008080", "#c0c0c0",
-    "#808080", "#ff0000", "#00ff00", "#ffff00",
-    "#0000ff", "#ff00ff", "#00ffff", "#ffffff",
+    [0] = "#000000",
+    "#800000",
+    "#008000",
+    "#808000",
+    "#000080",
+    "#800080",
+    "#008080",
+    "#c0c0c0",
+    "#808080",
+    "#ff0000",
+    "#00ff00",
+    "#ffff00",
+    "#0000ff",
+    "#ff00ff",
+    "#00ffff",
+    "#ffffff",
   }
 
   return function(n)
-    if palette[n] then return palette[n] end
-    if n < 16 then return basic[n] end
+    if palette[n] then
+      return palette[n]
+    end
+    if n < 16 then
+      return basic[n]
+    end
     if n < 232 then
       local idx = n - 16
       local b = idx % 6
       idx = (idx - b) / 6
       local g = idx % 6
       local r = (idx - g) / 6
-      local function v(c) return c == 0 and 0 or 55 + 40 * c end
+      local function v(c)
+        return c == 0 and 0 or 55 + 40 * c
+      end
       return string.format("#%02x%02x%02x", v(r), v(g), v(b))
     end
     local gray = 8 + 10 * (n - 232)
@@ -62,10 +80,23 @@ local function build_palette(colors)
   end
 end
 
-local function make_hl_key(fg, bg, bold, italic, underline, reverse, strikethrough)
-  return (fg or "") .. ":" .. (bg or "") .. ":"
-    .. (bold and "b" or "") .. (italic and "i" or "")
-    .. (underline and "u" or "") .. (reverse and "r" or "")
+local function make_hl_key(
+  fg,
+  bg,
+  bold,
+  italic,
+  underline,
+  reverse,
+  strikethrough
+)
+  return (fg or "")
+    .. ":"
+    .. (bg or "")
+    .. ":"
+    .. (bold and "b" or "")
+    .. (italic and "i" or "")
+    .. (underline and "u" or "")
+    .. (reverse and "r" or "")
     .. (strikethrough and "s" or "")
 end
 
@@ -74,7 +105,9 @@ local function skip_escape(line, pos, line_len)
   if next_byte == 93 then -- ']' OSC: skip to BEL or ST
     local bel = line:find("\007", pos + 2, true)
     local st = line:find("\027\\", pos + 2, true)
-    if bel and st then return bel < st and bel + 1 or st + 2 end
+    if bel and st then
+      return bel < st and bel + 1 or st + 2
+    end
     return bel and bel + 1 or st and st + 2 or line_len + 1
   elseif next_byte == 91 then -- '[' non-SGR CSI: skip to terminator
     local seq_end = line:find("[A-Za-z]", pos + 2)
@@ -88,14 +121,21 @@ local function parse_ansi_lines(text, color_for)
   local line_extmarks = {}
 
   local fg, bg = nil, nil
-  local bold, italic, underline, reverse, strikethrough = false, false, false, false, false
+  local bold, italic, underline, reverse, strikethrough =
+    false, false, false, false, false
 
   for raw_line in (text .. "\n"):gmatch("([^\n]*)\n") do
     local plain = {}
     local extmarks = {}
     local col = 0
     local span_start = 0
-    local span_has_style = fg ~= nil or bg ~= nil or bold or italic or underline or reverse or strikethrough
+    local span_has_style = fg ~= nil
+      or bg ~= nil
+      or bold
+      or italic
+      or underline
+      or reverse
+      or strikethrough
     local span_fg, span_bg = fg, bg
     local span_bold, span_italic, span_underline = bold, italic, underline
     local span_reverse, span_strikethrough = reverse, strikethrough
@@ -112,10 +152,15 @@ local function parse_ansi_lines(text, color_for)
         if seq_end and raw_line:byte(seq_end) == 109 then -- SGR 'm'
           if col > span_start and span_has_style then
             table.insert(extmarks, {
-              span_start, col,
-              span_fg, span_bg,
-              span_bold, span_italic, span_underline,
-              span_reverse, span_strikethrough,
+              span_start,
+              col,
+              span_fg,
+              span_bg,
+              span_bold,
+              span_italic,
+              span_underline,
+              span_reverse,
+              span_strikethrough,
             })
           end
 
@@ -126,7 +171,10 @@ local function parse_ansi_lines(text, color_for)
             params[i_param] = tonumber(n) or 0
             i_param = i_param + 1
           end
-          if i_param == 1 then params[1] = 0; i_param = 2 end
+          if i_param == 1 then
+            params[1] = 0
+            i_param = 2
+          end
 
           local i = 1
           local count = i_param - 1
@@ -134,41 +182,78 @@ local function parse_ansi_lines(text, color_for)
             local p = params[i]
             if p == 0 then
               fg, bg = nil, nil
-              bold, italic, underline, reverse, strikethrough = false, false, false, false, false
-            elseif p == 1 then bold = true
-            elseif p == 3 then italic = true
-            elseif p == 4 then underline = true
-            elseif p == 7 then reverse = true
-            elseif p == 9 then strikethrough = true
-            elseif p == 22 then bold = false
-            elseif p == 23 then italic = false
-            elseif p == 24 then underline = false
-            elseif p == 27 then reverse = false
-            elseif p == 29 then strikethrough = false
-            elseif p >= 30 and p <= 37 then fg = color_for(p - 30)
+              bold, italic, underline, reverse, strikethrough =
+                false, false, false, false, false
+            elseif p == 1 then
+              bold = true
+            elseif p == 3 then
+              italic = true
+            elseif p == 4 then
+              underline = true
+            elseif p == 7 then
+              reverse = true
+            elseif p == 9 then
+              strikethrough = true
+            elseif p == 22 then
+              bold = false
+            elseif p == 23 then
+              italic = false
+            elseif p == 24 then
+              underline = false
+            elseif p == 27 then
+              reverse = false
+            elseif p == 29 then
+              strikethrough = false
+            elseif p >= 30 and p <= 37 then
+              fg = color_for(p - 30)
             elseif p == 38 then
               if params[i + 1] == 5 and params[i + 2] then
-                fg = color_for(params[i + 2]); i = i + 2
+                fg = color_for(params[i + 2])
+                i = i + 2
               elseif params[i + 1] == 2 and params[i + 4] then
-                fg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
+                fg = string.format(
+                  "#%02x%02x%02x",
+                  params[i + 2],
+                  params[i + 3],
+                  params[i + 4]
+                )
+                i = i + 4
               end
-            elseif p == 39 then fg = nil
-            elseif p >= 40 and p <= 47 then bg = color_for(p - 40)
+            elseif p == 39 then
+              fg = nil
+            elseif p >= 40 and p <= 47 then
+              bg = color_for(p - 40)
             elseif p == 48 then
               if params[i + 1] == 5 and params[i + 2] then
-                bg = color_for(params[i + 2]); i = i + 2
+                bg = color_for(params[i + 2])
+                i = i + 2
               elseif params[i + 1] == 2 and params[i + 4] then
-                bg = string.format("#%02x%02x%02x", params[i + 2], params[i + 3], params[i + 4]); i = i + 4
+                bg = string.format(
+                  "#%02x%02x%02x",
+                  params[i + 2],
+                  params[i + 3],
+                  params[i + 4]
+                )
+                i = i + 4
               end
-            elseif p == 49 then bg = nil
-            elseif p >= 90 and p <= 97 then fg = color_for(p - 90 + 8)
-            elseif p >= 100 and p <= 107 then bg = color_for(p - 100 + 8)
+            elseif p == 49 then
+              bg = nil
+            elseif p >= 90 and p <= 97 then
+              fg = color_for(p - 90 + 8)
+            elseif p >= 100 and p <= 107 then
+              bg = color_for(p - 100 + 8)
             end
             i = i + 1
           end
 
           span_start = col
-          span_has_style = fg ~= nil or bg ~= nil or bold or italic or underline or reverse or strikethrough
+          span_has_style = fg ~= nil
+            or bg ~= nil
+            or bold
+            or italic
+            or underline
+            or reverse
+            or strikethrough
           span_fg, span_bg = fg, bg
           span_bold, span_italic, span_underline = bold, italic, underline
           span_reverse, span_strikethrough = reverse, strikethrough
@@ -187,10 +272,15 @@ local function parse_ansi_lines(text, color_for)
 
     if col > span_start and span_has_style then
       table.insert(extmarks, {
-        span_start, col,
-        span_fg, span_bg,
-        span_bold, span_italic, span_underline,
-        span_reverse, span_strikethrough,
+        span_start,
+        col,
+        span_fg,
+        span_bg,
+        span_bold,
+        span_italic,
+        span_underline,
+        span_reverse,
+        span_strikethrough,
       })
     end
 
@@ -213,7 +303,9 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
   local function highlight_range(from, to)
     from = math.max(1, from)
     to = math.min(total, to)
-    if from >= hl_min and to <= hl_max then return end
+    if from >= hl_min and to <= hl_max then
+      return
+    end
     local start = from < hl_min and from or hl_max + 1
     local stop = to > hl_max and to or hl_min - 1
     for lnum = start, stop do
@@ -224,7 +316,15 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
           local em_fg, em_bg = em[3], em[4]
           local em_bold, em_italic, em_underline = em[5], em[6], em[7]
           local em_reverse, em_strikethrough = em[8], em[9]
-          local key = make_hl_key(em_fg, em_bg, em_bold, em_italic, em_underline, em_reverse, em_strikethrough)
+          local key = make_hl_key(
+            em_fg,
+            em_bg,
+            em_bold,
+            em_italic,
+            em_underline,
+            em_reverse,
+            em_strikethrough
+          )
           if not hl_cache[key] then
             hl_idx = hl_idx + 1
             local group = "KsbHl" .. hl_idx
@@ -238,7 +338,14 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
             })
             hl_cache[key] = group
           end
-          vim.api.nvim_buf_add_highlight(bufnr, ns, hl_cache[key], lnum - 1, start_col, end_col)
+          vim.api.nvim_buf_add_highlight(
+            bufnr,
+            ns,
+            hl_cache[key],
+            lnum - 1,
+            start_col,
+            end_col
+          )
         end
       end
     end
@@ -322,7 +429,8 @@ function M.launch(data_path)
 
       set_cursor(meta)
       highlight_visible()
-      local group = vim.api.nvim_create_augroup("KittyScrollbackHL", { clear = true })
+      local group =
+        vim.api.nvim_create_augroup("KittyScrollbackHL", { clear = true })
       vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
         group = group,
         buffer = bufnr,
