@@ -387,6 +387,9 @@ local function set_keymaps(meta)
   vim.keymap.set({ "n", "x" }, "j", function()
     return vim.v.count == 0 and "gj" or "j"
   end, { buffer = true, expr = true })
+  vim.keymap.set("n", "J", function()
+    return vim.v.count == 0 and "<Esc>" or "J"
+  end, { buffer = true, expr = true })
 end
 
 function M.launch(data_path)
