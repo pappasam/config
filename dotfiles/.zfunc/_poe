@@ -12,8 +12,8 @@ _POE_CACHE_MAX_HITS=10
 
 # Cache policy: invalidate after 1 hour
 _poe_caching_policy() {
-    local -a oldp
-    oldp=( "$1"(Nmh+1) )  # Files modified more than 1 hour ago
+  local -a oldp
+  oldp=( "$1"(Nmh+1) )  # Files modified more than 1 hour ago
     (( $#oldp ))
 }
 
@@ -21,322 +21,322 @@ _poe_caching_policy() {
 # Sets the reply array with task description lines.
 # Usage: _poe_fetch_tasks "$effective_path" "$target_path"
 _poe_fetch_tasks() {
-    local effective_path="$1"
-    local target_path="$2"
-    local cache_id="poe_tasks_${effective_path//\//_}"
-    local -a _poe_disk_tasks
-    local cache_hit=0
+  local effective_path="$1"
+  local target_path="$2"
+  local cache_id="poe_tasks_${effective_path//\//_}"
+  local -a _poe_disk_tasks
+  local cache_hit=0
 
-    reply=()
+  reply=()
 
-    if (( _POE_CACHE_ENABLED )); then
-        # Try disk cache first (conventional, works if use-cache enabled)
-        if ! { _cache_invalid $cache_id || ! _retrieve_cache $cache_id _poe_disk_tasks } && (( ${#_poe_disk_tasks[@]} > 0 )); then
-            reply=($_poe_disk_tasks)
-            cache_hit=1
-        # Fall back to in-memory cache (with TTL check)
-        elif [[ -v _poe_mem_tasks[$effective_path] ]] && (( (SECONDS - ${_poe_mem_tasks_time[$effective_path]:-0}) < _POE_CACHE_TTL )); then
-            reply=(${(f)_poe_mem_tasks[$effective_path]})
-            cache_hit=1
-        fi
-        # Force refresh after N cache hits
-        if (( cache_hit )); then
-            (( _poe_cache_hits_tasks[$effective_path]++ ))
-            if (( _poe_cache_hits_tasks[$effective_path] >= _POE_CACHE_MAX_HITS )); then
-                cache_hit=0
-            fi
-        fi
+  if (( _POE_CACHE_ENABLED )); then
+    # Try disk cache first (conventional, works if use-cache enabled)
+    if ! { _cache_invalid $cache_id || ! _retrieve_cache $cache_id _poe_disk_tasks } && (( ${#_poe_disk_tasks[@]} > 0 )); then
+      reply=($_poe_disk_tasks)
+      cache_hit=1
+      # Fall back to in-memory cache (with TTL check)
+    elif [[ -v _poe_mem_tasks[$effective_path] ]] && (( (SECONDS - ${_poe_mem_tasks_time[$effective_path]:-0}) < _POE_CACHE_TTL )); then
+      reply=(${(f)_poe_mem_tasks[$effective_path]})
+      cache_hit=1
     fi
-
-    if (( ! cache_hit )); then
-        local result
-        result="$(poe _zsh_describe_tasks $target_path 2>/dev/null)"
-        # Fall back to _list_tasks if command failed or returned help text
-        # (older poe versions don't have _zsh_describe_tasks)
-        if [[ -z "$result" || "$result" == *"Poe the Poet"* || "$result" == *"Usage"* ]]; then
-            local tasks
-            tasks="$(poe _list_tasks $target_path 2>/dev/null)"
-            result=""
-            for task in ${=tasks}; do
-                result+="$task:"$'\n'
-            done
-        fi
-        if (( _POE_CACHE_ENABLED )) && [[ -n "$result" ]]; then
-            _poe_disk_tasks=(${(f)result})
-            _store_cache $cache_id _poe_disk_tasks
-            _poe_mem_tasks[$effective_path]="$result"
-            _poe_mem_tasks_time[$effective_path]=$SECONDS
-            _poe_cache_hits_tasks[$effective_path]=0
-        fi
-        reply=(${(f)result})
+    # Force refresh after N cache hits
+    if (( cache_hit )); then
+      (( _poe_cache_hits_tasks[$effective_path]++ ))
+      if (( _poe_cache_hits_tasks[$effective_path] >= _POE_CACHE_MAX_HITS )); then
+        cache_hit=0
+      fi
     fi
+  fi
+
+  if (( ! cache_hit )); then
+    local result
+    result="$(poe _zsh_describe_tasks $target_path 2>/dev/null)"
+    # Fall back to _list_tasks if command failed or returned help text
+    # (older poe versions don't have _zsh_describe_tasks)
+    if [[ -z "$result" || "$result" == *"Poe the Poet"* || "$result" == *"Usage"* ]]; then
+      local tasks
+      tasks="$(poe _list_tasks $target_path 2>/dev/null)"
+      result=""
+      for task in ${=tasks}; do
+        result+="$task:"$'\n'
+      done
+    fi
+    if (( _POE_CACHE_ENABLED )) && [[ -n "$result" ]]; then
+      _poe_disk_tasks=(${(f)result})
+      _store_cache $cache_id _poe_disk_tasks
+      _poe_mem_tasks[$effective_path]="$result"
+      _poe_mem_tasks_time[$effective_path]=$SECONDS
+      _poe_cache_hits_tasks[$effective_path]=0
+    fi
+    reply=(${(f)result})
+  fi
 }
 
 function _poe {
-    local state
+  local state
 
-    local DIR_ARGS=("-C" "--directory" "--root")
-    # Other options that take a value (must skip their value when finding task name)
-    local VALUE_OPTS=("-e" "--executor" "-h" "--help" "-X" "--executor-opt")
+  local DIR_ARGS=("-C" "--directory" "--root")
+  # Other options that take a value (must skip their value when finding task name)
+  local VALUE_OPTS=("-e" "--executor" "-h" "--help" "-X" "--executor-opt")
 
-    local target_path=""
-    local current_task=""
-    local current_task_idx=0
-    local after_separator=0
+  local target_path=""
+  local current_task=""
+  local current_task_idx=0
+  local after_separator=0
 
-    # In-memory cache fallback (used when disk cache not enabled)
-    (( ${+_poe_mem_tasks} )) || typeset -gA _poe_mem_tasks
-    (( ${+_poe_mem_args} )) || typeset -gA _poe_mem_args
-    # Timestamps for in-memory cache TTL (using $SECONDS)
-    (( ${+_poe_mem_tasks_time} )) || typeset -gA _poe_mem_tasks_time
-    (( ${+_poe_mem_args_time} )) || typeset -gA _poe_mem_args_time
-    # Hit counters for max cache hits (force refresh after N hits)
-    (( ${+_poe_cache_hits_tasks} )) || typeset -gA _poe_cache_hits_tasks
-    (( ${+_poe_cache_hits_args} )) || typeset -gA _poe_cache_hits_args
+  # In-memory cache fallback (used when disk cache not enabled)
+  (( ${+_poe_mem_tasks} )) || typeset -gA _poe_mem_tasks
+  (( ${+_poe_mem_args} )) || typeset -gA _poe_mem_args
+  # Timestamps for in-memory cache TTL (using $SECONDS)
+  (( ${+_poe_mem_tasks_time} )) || typeset -gA _poe_mem_tasks_time
+  (( ${+_poe_mem_args_time} )) || typeset -gA _poe_mem_args_time
+  # Hit counters for max cache hits (force refresh after N hits)
+  (( ${+_poe_cache_hits_tasks} )) || typeset -gA _poe_cache_hits_tasks
+  (( ${+_poe_cache_hits_args} )) || typeset -gA _poe_cache_hits_args
 
-    # Set cache policy for poe completions (1 hour TTL)
-    # Use wildcard pattern scoped to command name (${0#_} strips leading _ from
-    # function name _poe -> poe). Must not use ${curcontext} because _arguments -C
-    # modifies curcontext when entering states (e.g. poe -> poe-args), so a literal
-    # context set here won't match the modified context when _cache_invalid looks
-    # it up later. The trailing * in ${0#_}* matches these state suffixes.
-    zstyle ":completion:*:${0#_}*:*" cache-policy _poe_caching_policy
+  # Set cache policy for poe completions (1 hour TTL)
+  # Use wildcard pattern scoped to command name (${0#_} strips leading _ from
+  # function name _poe -> poe). Must not use ${curcontext} because _arguments -C
+  # modifies curcontext when entering states (e.g. poe -> poe-args), so a literal
+  # context set here won't match the modified context when _cache_invalid looks
+  # it up later. The trailing * in ${0#_}* matches these state suffixes.
+  zstyle ":completion:*:${0#_}*:*" cache-policy _poe_caching_policy
 
-    # Find target_path from -C/--directory/--root, potential task, and -- separator
-    for ((i=2; i<${#words[@]}; i++)); do
-        if [[ "${words[i]}" == "--" ]]; then
-            after_separator=1
-            break
-        fi
-        # Once we have a task, stop parsing global options - rest belongs to task
-        if [[ -n "$current_task" ]]; then
-            continue
-        fi
-        # Handle --option=value style (e.g. --directory=/path, --executor=poetry)
-        # zsh keeps these as a single word in $words
-        if [[ "${words[i]}" == -*=* ]]; then
-            local _opt="${words[i]%%=*}"
-            if (( $DIR_ARGS[(Ie)$_opt] )); then
-                target_path="${words[i]#*=}"
-            fi
-            # Value is consumed in the same word — skip to next
-            continue
-        fi
-        if (( $DIR_ARGS[(Ie)${words[i]}] )); then
-            if (( ($i+1) >= ${#words[@]} )); then
-                _files
-                return
-            fi
-            target_path="${words[i+1]}"
-            i=$i+1
-        elif (( $VALUE_OPTS[(Ie)${words[i]}] )); then
-            # Skip the value for this option (don't treat it as task name)
-            i=$i+1
-        elif [[ "${words[i]}" != -* && -z "$current_task" ]]; then
-            # First non-option word is potential task (validated later if needed)
-            current_task="${words[i]}"
-            current_task_idx=$i
-        fi
-    done
-
-    # After --, only offer file completions (pass-through args to task)
-    if (( after_separator )); then
+  # Find target_path from -C/--directory/--root, potential task, and -- separator
+  for ((i=2; i<${#words[@]}; i++)); do
+    if [[ "${words[i]}" == "--" ]]; then
+      after_separator=1
+      break
+    fi
+    # Once we have a task, stop parsing global options - rest belongs to task
+    if [[ -n "$current_task" ]]; then
+      continue
+    fi
+    # Handle --option=value style (e.g. --directory=/path, --executor=poetry)
+    # zsh keeps these as a single word in $words
+    if [[ "${words[i]}" == -*=* ]]; then
+      local _opt="${words[i]%%=*}"
+      if (( $DIR_ARGS[(Ie)$_opt] )); then
+        target_path="${words[i]#*=}"
+      fi
+      # Value is consumed in the same word — skip to next
+      continue
+    fi
+    if (( $DIR_ARGS[(Ie)${words[i]}] )); then
+      if (( ($i+1) >= ${#words[@]} )); then
         _files
         return
+      fi
+      target_path="${words[i+1]}"
+      i=$i+1
+    elif (( $VALUE_OPTS[(Ie)${words[i]}] )); then
+      # Skip the value for this option (don't treat it as task name)
+      i=$i+1
+    elif [[ "${words[i]}" != -* && -z "$current_task" ]]; then
+      # First non-option word is potential task (validated later if needed)
+      current_task="${words[i]}"
+      current_task_idx=$i
+    fi
+  done
+
+  # After --, only offer file completions (pass-through args to task)
+  if (( after_separator )); then
+    _files
+    return
+  fi
+
+  local ALL_EXLC=("-h" "--help" "--version")
+
+  # If we already identified a task and cursor is past it, skip global options and go straight to task args
+  if [[ -n "$current_task" && CURRENT -gt $current_task_idx ]]; then
+    state="args"
+    # Replicate the $words/$CURRENT stripping that _arguments -C
+    # does for *::arg:->args — keep task name as $words[1] and
+    # only task args after it, so the args handler and its inner
+    # _arguments -s call see the correct context.
+    (( CURRENT -= current_task_idx - 1 ))
+    words=("${(@)words[$current_task_idx,-1]}")
+  else
+    _arguments -C \
+      "($ALL_EXLC)"{--help,-h}"[Show this help page and exit, optionally supply a task.]::task:->help_task" \
+      "($ALL_EXLC)--version[Print the version and exit]" \
+      "(--verbose -v)"{--verbose,-v}"[Increase output (repeatable)]" \
+      "(--quiet -q)"{--quiet,-q}"[Decrease output (repeatable)]" \
+      "(--dry-run -d)"{--dry-run,-d}"[Print the task contents but don't actually run it]" \
+      "(--directory -C)"{--directory,-C}"=[Specify where to find the pyproject.toml]:directory:_files" \
+      "(--executor -e)"{--executor,-e}"=[Override the default task executor]:executor:(auto poetry simple uv virtualenv)" \
+      "(--executor-opt -X)"{--executor-opt,-X}"=[Set executor configuration for this run.]:opt:()" \
+      "(--ansi --no-ansi)--ansi[Force enable ANSI output]" \
+      "(--ansi --no-ansi)--no-ansi[Force disable ANSI output]" \
+      "1: :->task" \
+      "*::arg:->args"
+  fi
+
+  # Handle states (may be space-separated when ambiguous)
+  # Check for each state as a word using " $state " pattern
+  if [[ " $state " == *" help_task "* ]]; then
+    local effective_path="${target_path:-$PWD}"
+    _poe_fetch_tasks "$effective_path" "$target_path"
+    local -a task_descriptions=("${reply[@]}")
+    _describe 'task' task_descriptions
+  elif [[ " $state " == *" task "* ]]; then
+    # Don't show tasks if user is typing an option (starts with -)
+    [[ ${words[CURRENT]} == -* ]] && return
+
+    local effective_path="${target_path:-$PWD}"
+    _poe_fetch_tasks "$effective_path" "$target_path"
+    local -a task_descriptions=("${reply[@]}")
+    _describe 'task' task_descriptions
+  elif [[ " $state " == *" args "* ]]; then
+    # Complete task-specific arguments using _arguments
+    local -a arg_specs
+    local opts arg_type help_text choices val_compl
+
+    [[ -z "$current_task" ]] && { _files; return; }
+
+    # Count existing options in command line for filtering
+    # Strip =value suffix so --opt=val counts against --opt
+    local -A option_counts
+    for ((i=2; i<${#words[@]}; i++)); do
+      local w="${words[i]}"
+      if [[ "$w" == -*=* ]]; then
+        (( option_counts[${w%%=*}]++ ))
+      elif [[ "$w" == -* && "$w" != "--" ]]; then
+        (( option_counts[$w]++ ))
+      fi
+    done
+
+    # Check cache for task args (hybrid: disk cache -> in-memory -> fetch)
+    local effective_path="${target_path:-$PWD}"
+    local args_cache_id="poe_args_${current_task}_${effective_path//\//_}"
+    local args_cache_key="${effective_path}|$current_task"
+    local task_args_data
+    local -a _poe_disk_args
+    local cache_hit=0
+
+    # Try caches first (if caching enabled)
+    if (( _POE_CACHE_ENABLED )); then
+      # Try disk cache first (conventional, works if use-cache enabled)
+      # Note: _retrieve_cache sets arrays, so join with newlines to get string
+      if ! { _cache_invalid $args_cache_id || ! _retrieve_cache $args_cache_id _poe_disk_args } && (( ${#_poe_disk_args[@]} > 0 )); then
+        task_args_data="${(pj:\n:)_poe_disk_args}"
+        cache_hit=1
+        # Fall back to in-memory cache (with TTL check)
+      elif [[ -v _poe_mem_args[$args_cache_key] ]] && (( (SECONDS - ${_poe_mem_args_time[$args_cache_key]:-0}) < _POE_CACHE_TTL )); then
+        task_args_data="${_poe_mem_args[$args_cache_key]}"
+        cache_hit=1
+      fi
+      # Check max cache hits (force refresh after N hits)
+      if (( cache_hit )); then
+        (( _poe_cache_hits_args[$args_cache_key]++ ))
+        if (( _poe_cache_hits_args[$args_cache_key] >= _POE_CACHE_MAX_HITS )); then
+          cache_hit=0
+        fi
+      fi
     fi
 
-    local ALL_EXLC=("-h" "--help" "--version")
-
-    # If we already identified a task and cursor is past it, skip global options and go straight to task args
-    if [[ -n "$current_task" && CURRENT -gt $current_task_idx ]]; then
-        state="args"
-        # Replicate the $words/$CURRENT stripping that _arguments -C
-        # does for *::arg:->args — keep task name as $words[1] and
-        # only task args after it, so the args handler and its inner
-        # _arguments -s call see the correct context.
-        (( CURRENT -= current_task_idx - 1 ))
-        words=("${(@)words[$current_task_idx,-1]}")
-    else
-        _arguments -C \
-        "($ALL_EXLC)"{--help,-h}"[Show this help page and exit, optionally supply a task.]::task:->help_task" \
-        "($ALL_EXLC)--version[Print the version and exit]" \
-        "(--verbose -v)"{--verbose,-v}"[Increase output (repeatable)]" \
-        "(--quiet -q)"{--quiet,-q}"[Decrease output (repeatable)]" \
-        "(--dry-run -d)"{--dry-run,-d}"[Print the task contents but don't actually run it]" \
-        "(--directory -C)"{--directory,-C}"=[Specify where to find the pyproject.toml]:directory:_files" \
-        "(--executor -e)"{--executor,-e}"=[Override the default task executor]:executor:(auto poetry simple uv virtualenv)" \
-        "(--executor-opt -X)"{--executor-opt,-X}"=[Set executor configuration for this run.]:opt:()" \
-        "(--ansi --no-ansi)--ansi[Force enable ANSI output]" \
-        "(--ansi --no-ansi)--no-ansi[Force disable ANSI output]" \
-        "1: :->task" \
-        "*::arg:->args"
+    # Fetch fresh if no cache hit
+    if (( ! cache_hit )); then
+      task_args_data="$(poe _describe_task_args "$current_task" $target_path 2>/dev/null)"
+      # Store to caches (if caching enabled and there are args)
+      if (( _POE_CACHE_ENABLED )) && [[ -n "$task_args_data" ]]; then
+        # Split string into array for disk cache (one line per element)
+        _poe_disk_args=("${(f)task_args_data}")
+        _store_cache $args_cache_id _poe_disk_args
+        _poe_mem_args[$args_cache_key]="$task_args_data"
+        _poe_mem_args_time[$args_cache_key]=$SECONDS
+        _poe_cache_hits_args[$args_cache_key]=0
+      fi
     fi
 
-    # Handle states (may be space-separated when ambiguous)
-    # Check for each state as a word using " $state " pattern
-    if [[ " $state " == *" help_task "* ]]; then
-            local effective_path="${target_path:-$PWD}"
-            _poe_fetch_tasks "$effective_path" "$target_path"
-            local -a task_descriptions=("${reply[@]}")
-            _describe 'task' task_descriptions
-    elif [[ " $state " == *" task "* ]]; then
-            # Don't show tasks if user is typing an option (starts with -)
-            [[ ${words[CURRENT]} == -* ]] && return
+    while IFS=$'\t' read -r opts arg_type help_text choices; do
+      [[ -z "$opts" ]] && continue
 
-            local effective_path="${target_path:-$PWD}"
-            _poe_fetch_tasks "$effective_path" "$target_path"
-            local -a task_descriptions=("${reply[@]}")
-            _describe 'task' task_descriptions
-    elif [[ " $state " == *" args "* ]]; then
-            # Complete task-specific arguments using _arguments
-            local -a arg_specs
-            local opts arg_type help_text choices val_compl
+      # Convert "_" placeholder back to empty (zsh read skips consecutive tabs)
+      [[ "$choices" == "_" ]] && choices=""
 
-            [[ -z "$current_task" ]] && { _files; return; }
+      # Skip options that have already been used (positional args have their own rules)
+      # BUT: don't skip if we're completing the value for this option (prev word is the option)
+      if [[ "$arg_type" != "positional" ]]; then
+        local prev_word="${words[CURRENT-1]}"
+        local -a opt_arr=(${(s:,:)opts})
 
-            # Count existing options in command line for filtering
-            # Strip =value suffix so --opt=val counts against --opt
-            local -A option_counts
-            for ((i=2; i<${#words[@]}; i++)); do
-                local w="${words[i]}"
-                if [[ "$w" == -*=* ]]; then
-                    (( option_counts[${w%%=*}]++ ))
-                elif [[ "$w" == -* && "$w" != "--" ]]; then
-                    (( option_counts[$w]++ ))
-                fi
-            done
+        # Check if we're completing value for this option
+        local completing_value=0
+        for opt in $opt_arr; do
+          [[ "$prev_word" == "$opt" ]] && completing_value=1
+        done
 
-            # Check cache for task args (hybrid: disk cache -> in-memory -> fetch)
-            local effective_path="${target_path:-$PWD}"
-            local args_cache_id="poe_args_${current_task}_${effective_path//\//_}"
-            local args_cache_key="${effective_path}|$current_task"
-            local task_args_data
-            local -a _poe_disk_args
-            local cache_hit=0
+        # Only filter if not completing value for this option
+        if (( ! completing_value )); then
+          local total_count=0
+          for opt in $opt_arr; do
+            (( total_count += ${option_counts[$opt]:-0} ))
+          done
+          # Skip if already used
+          (( total_count >= 1 )) && continue
+        fi
+      fi
 
-            # Try caches first (if caching enabled)
-            if (( _POE_CACHE_ENABLED )); then
-                # Try disk cache first (conventional, works if use-cache enabled)
-                # Note: _retrieve_cache sets arrays, so join with newlines to get string
-                if ! { _cache_invalid $args_cache_id || ! _retrieve_cache $args_cache_id _poe_disk_args } && (( ${#_poe_disk_args[@]} > 0 )); then
-                    task_args_data="${(pj:\n:)_poe_disk_args}"
-                    cache_hit=1
-                # Fall back to in-memory cache (with TTL check)
-                elif [[ -v _poe_mem_args[$args_cache_key] ]] && (( (SECONDS - ${_poe_mem_args_time[$args_cache_key]:-0}) < _POE_CACHE_TTL )); then
-                    task_args_data="${_poe_mem_args[$args_cache_key]}"
-                    cache_hit=1
-                fi
-                # Check max cache hits (force refresh after N hits)
-                if (( cache_hit )); then
-                    (( _poe_cache_hits_args[$args_cache_key]++ ))
-                    if (( _poe_cache_hits_args[$args_cache_key] >= _POE_CACHE_MAX_HITS )); then
-                        cache_hit=0
-                    fi
-                fi
-            fi
+      # Build value completion spec: use choices if available
+      if [[ -n "$choices" ]]; then
+        val_compl=":value:($choices)"
+      else
+        val_compl=":value:()"
+      fi
 
-            # Fetch fresh if no cache hit
-            if (( ! cache_hit )); then
-                task_args_data="$(poe _describe_task_args "$current_task" $target_path 2>/dev/null)"
-                # Store to caches (if caching enabled and there are args)
-                if (( _POE_CACHE_ENABLED )) && [[ -n "$task_args_data" ]]; then
-                    # Split string into array for disk cache (one line per element)
-                    _poe_disk_args=("${(f)task_args_data}")
-                    _store_cache $args_cache_id _poe_disk_args
-                    _poe_mem_args[$args_cache_key]="$task_args_data"
-                    _poe_mem_args_time[$args_cache_key]=$SECONDS
-                    _poe_cache_hits_args[$args_cache_key]=0
-                fi
-            fi
+      if [[ "$opts" == *,* ]]; then
+        # Multiple option forms - split and add with mutual exclusivity
+        local -a opt_arr=(${(s:,:)opts})
+        local excl="(${(j: :)opt_arr})"
 
-            while IFS=$'\t' read -r opts arg_type help_text choices; do
-                [[ -z "$opts" ]] && continue
-
-                # Convert "_" placeholder back to empty (zsh read skips consecutive tabs)
-                [[ "$choices" == "_" ]] && choices=""
-
-                # Skip options that have already been used (positional args have their own rules)
-                # BUT: don't skip if we're completing the value for this option (prev word is the option)
-                if [[ "$arg_type" != "positional" ]]; then
-                    local prev_word="${words[CURRENT-1]}"
-                    local -a opt_arr=(${(s:,:)opts})
-
-                    # Check if we're completing value for this option
-                    local completing_value=0
-                    for opt in $opt_arr; do
-                        [[ "$prev_word" == "$opt" ]] && completing_value=1
-                    done
-
-                    # Only filter if not completing value for this option
-                    if (( ! completing_value )); then
-                        local total_count=0
-                        for opt in $opt_arr; do
-                            (( total_count += ${option_counts[$opt]:-0} ))
-                        done
-                        # Skip if already used
-                        (( total_count >= 1 )) && continue
-                    fi
-                fi
-
-                # Build value completion spec: use choices if available
-                if [[ -n "$choices" ]]; then
-                    val_compl=":value:($choices)"
-                else
-                    val_compl=":value:()"
-                fi
-
-                if [[ "$opts" == *,* ]]; then
-                    # Multiple option forms - split and add with mutual exclusivity
-                    local -a opt_arr=(${(s:,:)opts})
-                    local excl="(${(j: :)opt_arr})"
-
-                    for opt in $opt_arr; do
-                        case "$arg_type" in
-                            boolean)
-                                arg_specs+=("${excl}${opt}"'['"$help_text"']')
-                                ;;
-                            *)
-                                arg_specs+=("${excl}${opt}="'['"$help_text"']'"$val_compl")
-                                ;;
-                        esac
-                    done
-                else
-                    # Single option form
-                    case "$arg_type" in
-                        boolean)
-                            arg_specs+=("$opts"'['"$help_text"']')
-                            ;;
-                        positional)
-                            # Use choices if available, otherwise file completion
-                            if [[ -n "$choices" ]]; then
-                                if [[ -n "$help_text" ]]; then
-                                    arg_specs+=(":$opts -- $help_text:($choices)")
-                                else
-                                    arg_specs+=(":$opts:($choices)")
-                                fi
-                            else
-                                if [[ -n "$help_text" ]]; then
-                                    arg_specs+=(":$opts -- $help_text:_files")
-                                else
-                                    arg_specs+=(":$opts:_files")
-                                fi
-                            fi
-                            ;;
-                        *)
-                            arg_specs+=("$opts="'['"$help_text"']'"$val_compl")
-                            ;;
-                    esac
-                fi
-            done <<< "$task_args_data"
-
-            # Fallback to _files if no args defined
-            if (( ${#arg_specs[@]} == 0 )); then
-                _files
+        for opt in $opt_arr; do
+          case "$arg_type" in
+            boolean)
+              arg_specs+=("${excl}${opt}"'['"$help_text"']')
+              ;;
+            *)
+              arg_specs+=("${excl}${opt}="'['"$help_text"']'"$val_compl")
+              ;;
+          esac
+        done
+      else
+        # Single option form
+        case "$arg_type" in
+          boolean)
+            arg_specs+=("$opts"'['"$help_text"']')
+            ;;
+          positional)
+            # Use choices if available, otherwise file completion
+            if [[ -n "$choices" ]]; then
+              if [[ -n "$help_text" ]]; then
+                arg_specs+=(":$opts -- $help_text:($choices)")
+              else
+                arg_specs+=(":$opts:($choices)")
+              fi
             else
-                _arguments -s "${arg_specs[@]}" '*:file:_files'
+              if [[ -n "$help_text" ]]; then
+                arg_specs+=(":$opts -- $help_text:_files")
+              else
+                arg_specs+=(":$opts:_files")
+              fi
             fi
-    
+            ;;
+          *)
+            arg_specs+=("$opts="'['"$help_text"']'"$val_compl")
+            ;;
+        esac
+      fi
+    done <<< "$task_args_data"
+
+    # Fallback to _files if no args defined
+    if (( ${#arg_specs[@]} == 0 )); then
+      _files
+    else
+      _arguments -s "${arg_specs[@]}" '*:file:_files'
     fi
+
+  fi
 
 }
 
