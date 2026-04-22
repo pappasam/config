@@ -107,8 +107,8 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
 
     lua_cmd = (
         " lua"
-        " vim.opt.runtimepath:append(vim.fn.stdpath('config'))"
-        f" require('kitty_scrollback').launch([[{meta_path}]])"
+        " vim.opt.runtimepath:append(vim.fn.expand('~/.config/kitty'))"
+        f" require('scrollback').launch([[{meta_path}]])"
     )
 
     cmd = (
