@@ -167,9 +167,52 @@ local function parse_ansi_lines(text, color_for)
           local param_str = raw_line:sub(pos + 2, seq_end - 1)
           local i_param = 1
           local params = {}
-          for n in param_str:gmatch("([^;]+)") do
-            params[i_param] = tonumber(n) or 0
-            i_param = i_param + 1
+          for segment in param_str:gmatch("([^;]+)") do
+            if segment:find(":", 1, true) then
+              -- ISO 8613-6 colon-separated sub-parameters (kitty uses these for extended colors)
+              local subs = {}
+              local nsubs = 0
+              for s in (segment .. ":"):gmatch("([^:]*):") do
+                nsubs = nsubs + 1
+                subs[nsubs] = tonumber(s)
+              end
+              local code = subs[1]
+              if (code == 38 or code == 48) and subs[2] then
+                if subs[2] == 5 and subs[3] then
+                  params[i_param] = code
+                  i_param = i_param + 1
+                  params[i_param] = 5
+                  i_param = i_param + 1
+                  params[i_param] = subs[3]
+                  i_param = i_param + 1
+                elseif subs[2] == 2 then
+                  local r, g, b
+                  if nsubs >= 6 then
+                    r, g, b = subs[4], subs[5], subs[6]
+                  elseif nsubs >= 5 then
+                    r, g, b = subs[3], subs[4], subs[5]
+                  end
+                  if r and g and b then
+                    params[i_param] = code
+                    i_param = i_param + 1
+                    params[i_param] = 2
+                    i_param = i_param + 1
+                    params[i_param] = r
+                    i_param = i_param + 1
+                    params[i_param] = g
+                    i_param = i_param + 1
+                    params[i_param] = b
+                    i_param = i_param + 1
+                  end
+                end
+              elseif code then
+                params[i_param] = code
+                i_param = i_param + 1
+              end
+            else
+              params[i_param] = tonumber(segment) or 0
+              i_param = i_param + 1
+            end
           end
           if i_param == 1 then
             params[1] = 0
