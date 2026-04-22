@@ -14,7 +14,6 @@ vim.pack.add({
   -- Language server protocol (LSP)
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/aerial.nvim",
-  "https://github.com/j-hui/fidget.nvim",
   -- File pickers
   "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/nvim-tree/nvim-web-devicons",
@@ -540,15 +539,6 @@ require("gx").setup({
         end
       end,
     },
-  },
-})
-
--- }}}
--- https://github.com/j-hui/fidget.nvim {{{
-
-require("fidget").setup({
-  progress = {
-    suppress_on_insert = true,
   },
 })
 
