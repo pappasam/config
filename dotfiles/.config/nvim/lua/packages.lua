@@ -301,6 +301,7 @@ end
 
 local tree_disable_folders = {
   ".git",
+  ".pytest_cache",
   ".venv",
   "__pycache__",
   "node_modules",
