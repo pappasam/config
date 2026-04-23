@@ -397,6 +397,12 @@ require("aerial").setup({})
 -- https://github.com/Saghen/blink.cmp {{{
 
 require("blink-cmp").setup({
+  enabled = function()
+    return not vim.tbl_contains(
+      { "NvimTree", "NvimTreeFilter" },
+      vim.bo.filetype
+    )
+  end,
   completion = {
     keyword = {
       range = "full",
