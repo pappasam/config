@@ -315,8 +315,6 @@ local diff_review_ns = vim.api.nvim_create_namespace("diff_review")
 local diff_review_status_label = {
   A = { "[a]", "DiffAdd" },
   M = { "[m]", "DiffChange" },
-  R = { "[r]", "DiffChange" },
-  C = { "[c]", "DiffAdd" },
 }
 
 local function tree_custom_filter(absolute_path)
@@ -338,15 +336,16 @@ end
 
 local function diff_review_start(base)
   base = base
-    or vim.fn.trim(vim.fn.system(
-      "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"
-        .. " | sed 's|refs/remotes/origin/||'"
-    ))
+    or vim.fn.trim(
+      vim.fn.system(
+        "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"
+          .. " | sed 's|refs/remotes/origin/||'"
+      )
+    )
   if base == "" then
     base = "main"
   end
-  local merge_base =
-    vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
+  local merge_base = vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
   local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
   local output = vim.fn.system("git diff --name-status " .. merge_base)
   local allowed = {}
@@ -354,11 +353,8 @@ local function diff_review_start(base)
   local first_file = nil
   for line in output:gmatch("[^\n]+") do
     local status, rest = line:match("^(%a)%d*\t(.+)$")
-    if status and rest and status ~= "D" then
+    if status and rest and (status == "A" or status == "M") then
       local file = rest
-      if status == "R" or status == "C" then
-        file = rest:match("\t(.+)$") or rest
-      end
       local abs = root .. "/" .. file
       if not first_file then
         first_file = abs
