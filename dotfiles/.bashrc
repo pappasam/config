@@ -3,8 +3,6 @@
 
 # <https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md#option-3_the-safest-way>
 export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
-export ALACRITTY_BACKGROUND_CACHE_FILE="$HOME/.cache/alacritty/background.toml"
-export TMUX_CONFIGURE_OPTIONS=--enable-sixel
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER=/usr/bin/firefox
 export CARAPACE_BRIDGES=zsh,fish,bash,inshellisense
@@ -15,8 +13,6 @@ export HISTCONTROL=ignorespace # ignore leading space, where to save history to 
 export HISTFILE=~/.bash_history
 export HISTSIZE=5000 # how many lines of history to keep in memory
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-export LD_LIBRARY_PATH="$HOME/src/lib/nccl_2.18.3-1+cuda11.0_x86_64/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH"
 export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --mouse --wheel-lines=3'
 export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
 export MANPAGER='nvim +Man! --cmd "nnoremap d <C-d>" --cmd "nnoremap u <C-u>"'
