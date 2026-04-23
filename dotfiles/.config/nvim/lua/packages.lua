@@ -324,9 +324,9 @@ local function tree_custom_filter(absolute_path)
 end
 
 local function diff_review_goto_first_hunk()
-  vim.schedule(function()
-    require("gitsigns").nav_hunk("first")
-  end)
+  vim.defer_fn(function()
+    pcall(require("gitsigns").nav_hunk, "first")
+  end, 200)
 end
 
 local function diff_review_start(base)
