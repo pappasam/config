@@ -312,11 +312,11 @@ end
 
 local diff_review = { active = false, allowed = {}, statuses = {} }
 local diff_review_ns = vim.api.nvim_create_namespace("diff_review")
-local diff_review_status_hl = {
-  A = "DiffAdd",
-  M = "DiffChange",
-  R = "DiffChange",
-  C = "DiffAdd",
+local diff_review_status_label = {
+  A = { "[a]", "DiffAdd" },
+  M = { "[m]", "DiffChange" },
+  R = { "[r]", "DiffChange" },
+  C = { "[c]", "DiffAdd" },
 }
 
 local function tree_custom_filter(absolute_path)
@@ -378,6 +378,7 @@ local function diff_review_start(base)
   diff_review.statuses = statuses
   require("gitsigns").change_base(base, true)
   api.tree.open()
+  api.tree.resize({ absolute = 50 })
   api.tree.reload()
   api.tree.expand_all()
   if first_file then
@@ -394,6 +395,7 @@ local function diff_review_stop()
   diff_review.allowed = {}
   diff_review.statuses = {}
   require("gitsigns").reset_base(true)
+  api.tree.resize()
   api.tree.reload()
 end
 
@@ -444,13 +446,12 @@ api.events.subscribe(api.events.Event.TreeRendered, function(payload)
   for i, line in ipairs(lines) do
     for abs, status in pairs(diff_review.statuses) do
       local basename = vim.fn.fnamemodify(abs, ":t")
-      local col = line:find(basename, 1, true)
-      if col then
-        local hl = diff_review_status_hl[status]
-        if hl then
-          vim.api.nvim_buf_set_extmark(bufnr, diff_review_ns, i - 1, col - 1, {
-            end_col = col - 1 + #basename,
-            hl_group = hl,
+      if line:find(basename, 1, true) then
+        local label = diff_review_status_label[status]
+        if label then
+          vim.api.nvim_buf_set_extmark(bufnr, diff_review_ns, i - 1, 0, {
+            virt_text = { { label[1], label[2] } },
+            virt_text_pos = "eol",
           })
         end
         break
