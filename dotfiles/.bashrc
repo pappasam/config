@@ -216,26 +216,6 @@ function gdl() {
   git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
 }
 
-# Git diff: pure diffs
-function gdd() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
-  fi
-  if [ $# -eq 0 ]; then
-    if git diff --no-ext-diff --quiet --exit-code; then
-      return
-    else
-      nvim -c 'DiffviewOpen' -c 'tabonly'
-    fi
-  else
-    if git diff "$1" --no-ext-diff --quiet --exit-code; then
-      return
-    else
-      nvim -c "DiffviewOpen $1" -c 'tabonly'
-    fi
-  fi
-}
-
 # Git diff: gh pull request diff
 function gdp() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
@@ -250,8 +230,7 @@ function gdp() {
       return 2
     fi
   fi
-  # GH uses ... diff: https://stackoverflow.com/a/71741156
-  nvim -c "DiffviewOpen $branch_base...HEAD" -c 'tabonly'
+  nvim -c "DiffReview $branch_base"
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"

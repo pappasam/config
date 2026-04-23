@@ -23,7 +23,6 @@ vim.pack.add({
   "https://github.com/junegunn/gv.vim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/sindrets/diffview.nvim",
   -- My plugins
   "https://github.com/pappasam/nvim-repl",
   "https://github.com/pappasam/papercolor-theme-slim",
@@ -306,6 +305,97 @@ local tree_disable_folders = {
   "node_modules",
 }
 
+local tree_disable_set = {}
+for _, name in ipairs(tree_disable_folders) do
+  tree_disable_set[name] = true
+end
+
+local diff_review = { active = false, allowed = {} }
+
+local function tree_custom_filter(absolute_path)
+  local name = vim.fn.fnamemodify(absolute_path, ":t")
+  if tree_disable_set[name] then
+    return true
+  end
+  if diff_review.active then
+    return not diff_review.allowed[absolute_path]
+  end
+  return false
+end
+
+local function diff_review_goto_first_hunk()
+  vim.defer_fn(function()
+    pcall(require("gitsigns").nav_hunk, "first")
+  end, 200)
+end
+
+local function diff_review_start(base)
+  base = base
+    or vim.fn.trim(vim.fn.system(
+      "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"
+        .. " | sed 's|refs/remotes/origin/||'"
+    ))
+  if base == "" then
+    base = "main"
+  end
+  local merge_base =
+    vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
+  local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
+  local output = vim.fn.system("git diff --name-only " .. merge_base)
+  local allowed = {}
+  local first_file = nil
+  for file in output:gmatch("[^\n]+") do
+    local abs = root .. "/" .. file
+    if not first_file then
+      first_file = abs
+    end
+    allowed[abs] = true
+    local dir = vim.fn.fnamemodify(abs, ":h")
+    while dir ~= root and dir ~= "/" do
+      allowed[dir] = true
+      dir = vim.fn.fnamemodify(dir, ":h")
+    end
+  end
+  allowed[root] = true
+  diff_review.active = true
+  diff_review.allowed = allowed
+  require("gitsigns").change_base(base, true)
+  api.tree.open()
+  api.tree.reload()
+  api.tree.expand_all()
+  if first_file then
+    api.tree.find_file({ buf = first_file, focus = true })
+    vim.cmd("wincmd l")
+    vim.cmd("edit " .. vim.fn.fnameescape(first_file))
+    vim.opt_local.foldenable = false
+    diff_review_goto_first_hunk()
+  end
+end
+
+local function diff_review_stop()
+  diff_review.active = false
+  diff_review.allowed = {}
+  require("gitsigns").reset_base(true)
+  api.tree.reload()
+end
+
+vim.api.nvim_create_user_command("DiffReview", function(args)
+  diff_review_start(args.args ~= "" and args.args or nil)
+end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("DiffReviewClose", function()
+  diff_review_stop()
+end, {})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if diff_review.active and vim.bo.buftype == "" then
+      vim.opt_local.foldenable = false
+      diff_review_goto_first_hunk()
+    end
+  end,
+})
+
 require("nvim-tree").setup({
   on_attach = on_attach,
   disable_netrw = true,
@@ -319,7 +409,7 @@ require("nvim-tree").setup({
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
-    custom = tree_disable_folders,
+    custom = tree_custom_filter,
   },
   renderer = {
     full_name = true,
@@ -444,25 +534,6 @@ require("colorizer").setup({
     "typescriptreact",
     "vim",
     "yaml",
-  },
-})
-
--- }}}
--- https://github.com/sindrets/diffview.nvim {{{
-
-require("diffview").setup({
-  enhanced_diff_hl = true,
-  show_help_hints = false,
-  file_panel = {
-    listing_style = "tree",
-    win_config = {
-      width = 30,
-    },
-  },
-  hooks = {
-    diff_buf_read = function(_)
-      vim.opt_local.wrap = false
-    end,
   },
 })
 

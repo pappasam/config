@@ -245,8 +245,8 @@ nnoremap z= <Cmd>Telescope spell_suggest<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <Leader>f :FiletypeFormat<CR>
-" https://github.com/sindrets/diffview.nvim
-nnoremap <Leader>gd <Cmd>DiffviewOpen<CR>
+nnoremap <Leader>gd <Cmd>DiffReview<CR>
+nnoremap <Leader>gD <Cmd>DiffReviewClose<CR>
 
 " }}}
 " Autocmds {{{
