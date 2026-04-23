@@ -236,7 +236,7 @@ nnoremap <C-p><C-b> <Cmd>Telescope buffers<CR>
 nnoremap <C-p><C-d> <Cmd>Telescope diagnostics<CR>
 nnoremap <C-p><C-f> <Cmd>Telescope live_grep<CR>
 "nnoremap <C-p><C-g> <Cmd>Telescope git_status<CR>
-nnoremap <C-p><C-g> <Cmd>Easypick changed_files<CR>
+nnoremap <C-p><C-g> <Cmd>Telescope git_status<CR>
 nnoremap <C-p><C-h> <Cmd>Telescope help_tags<CR>
 nnoremap <C-p><C-o> <Cmd>Telescope oldfiles<CR>
 nnoremap <C-p><C-p> <Cmd>Telescope find_files hidden=true<CR>
