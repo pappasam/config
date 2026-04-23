@@ -359,10 +359,7 @@ local function diff_review_start(base)
   allowed[root] = true
   diff_review.active = true
   diff_review.allowed = allowed
-  local gs = require("gitsigns")
-  gs.change_base(base, true)
-  gs.toggle_linehl(true)
-  gs.toggle_word_diff(true)
+  require("gitsigns").change_base(base, true)
   api.tree.open()
   api.tree.reload()
   api.tree.expand_all()
@@ -378,10 +375,7 @@ end
 local function diff_review_stop()
   diff_review.active = false
   diff_review.allowed = {}
-  local gs = require("gitsigns")
-  gs.reset_base(true)
-  gs.toggle_linehl(false)
-  gs.toggle_word_diff(false)
+  require("gitsigns").reset_base(true)
   api.tree.reload()
 end
 
