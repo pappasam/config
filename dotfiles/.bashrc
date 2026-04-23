@@ -230,6 +230,12 @@ function gdp() {
       return 2
     fi
   fi
+  local merge_base
+  merge_base=$(git merge-base HEAD "$branch_base")
+  if git diff --quiet "$merge_base"; then
+    echo 'no diff'
+    return 1
+  fi
   nvim -c "DiffReview $branch_base"
 }
 
