@@ -1,11 +1,11 @@
-#compdef c k kk l pp r vplug
+#compdef c k kk kr pp vplug
 
 local -A _dircomp_map=(
   c       "$HOME/config"
   k       "$HOME/src/KeplerGroup"
   kk      "$HOME/src/kyucollective"
+  kr      "$HOME/src/KeplerGroup/KIP-Rocket"
   pp      "$HOME/src/pappasam"
-  r       "$HOME/src/KeplerGroup/KIP-Rocket"
   vplug   "$HOME/.local/share/nvim/site/pack/core/opt"
 )
 
