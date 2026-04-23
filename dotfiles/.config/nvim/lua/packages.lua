@@ -75,17 +75,15 @@ vim.lsp.enable({
   "marksman",
   "mdx_analyzer",
   "postgres_lsp",
-  "prismals",
   "r_language_server",
   "rust_analyzer",
   "shopify_theme_ls",
   "svelte",
   "taplo",
   "terraformls",
-  "ts_ls",
+  "tsgo",
   "ty",
   "vimls",
-  "vue_ls",
   "yamlls",
 })
 
@@ -189,28 +187,6 @@ vim.lsp.config("lua_ls", {
         enable = false,
       },
     },
-  },
-})
-
-vim.lsp.config("ts_ls", {
-  init_options = {
-    plugins = {
-      -- Vue support. Will need to manually update if node version updated
-      {
-        name = "@vue/typescript-plugin",
-        location = vim.fn.expand(
-          "$HOME/.local/share/mise/installs/node/22.8.0/lib/node_modules/@vue/typescript-plugin/"
-        ),
-        languages = { "javascript", "typescript", "vue" },
-      },
-    },
-  },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
   },
 })
 
