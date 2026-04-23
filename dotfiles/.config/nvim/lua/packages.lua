@@ -323,6 +323,12 @@ local function tree_custom_filter(absolute_path)
   return false
 end
 
+local function diff_review_goto_first_hunk()
+  vim.schedule(function()
+    require("gitsigns").nav_hunk("first")
+  end)
+end
+
 local function diff_review_start(base)
   base = base
     or vim.fn.trim(vim.fn.system(
@@ -337,8 +343,12 @@ local function diff_review_start(base)
   local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
   local output = vim.fn.system("git diff --name-only " .. merge_base)
   local allowed = {}
+  local first_file = nil
   for file in output:gmatch("[^\n]+") do
     local abs = root .. "/" .. file
+    if not first_file then
+      first_file = abs
+    end
     allowed[abs] = true
     local dir = vim.fn.fnamemodify(abs, ":h")
     while dir ~= root and dir ~= "/" do
@@ -349,16 +359,29 @@ local function diff_review_start(base)
   allowed[root] = true
   diff_review.active = true
   diff_review.allowed = allowed
-  require("gitsigns").change_base(base, true)
+  local gs = require("gitsigns")
+  gs.change_base(base, true)
+  gs.toggle_linehl(true)
+  gs.toggle_word_diff(true)
   api.tree.open()
   api.tree.reload()
   api.tree.expand_all()
+  if first_file then
+    api.tree.find_file({ buf = first_file, focus = true })
+    vim.cmd("wincmd l")
+    vim.cmd("edit " .. vim.fn.fnameescape(first_file))
+    vim.opt_local.foldenable = false
+    diff_review_goto_first_hunk()
+  end
 end
 
 local function diff_review_stop()
   diff_review.active = false
   diff_review.allowed = {}
-  require("gitsigns").reset_base(true)
+  local gs = require("gitsigns")
+  gs.reset_base(true)
+  gs.toggle_linehl(false)
+  gs.toggle_word_diff(false)
   api.tree.reload()
 end
 
@@ -369,6 +392,15 @@ end, { nargs = "?" })
 vim.api.nvim_create_user_command("DiffReviewClose", function()
   diff_review_stop()
 end, {})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    if diff_review.active and vim.bo.buftype == "" then
+      vim.opt_local.foldenable = false
+      diff_review_goto_first_hunk()
+    end
+  end,
+})
 
 require("nvim-tree").setup({
   on_attach = on_attach,
