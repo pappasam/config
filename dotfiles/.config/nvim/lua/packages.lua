@@ -310,7 +310,14 @@ for _, name in ipairs(tree_disable_folders) do
   tree_disable_set[name] = true
 end
 
-local diff_review = { active = false, allowed = {} }
+local diff_review = { active = false, allowed = {}, statuses = {} }
+local diff_review_ns = vim.api.nvim_create_namespace("diff_review")
+local diff_review_status_hl = {
+  A = "DiffAdd",
+  M = "DiffChange",
+  R = "DiffChange",
+  C = "DiffAdd",
+}
 
 local function tree_custom_filter(absolute_path)
   local name = vim.fn.fnamemodify(absolute_path, ":t")
@@ -341,24 +348,34 @@ local function diff_review_start(base)
   local merge_base =
     vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
   local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
-  local output = vim.fn.system("git diff --name-only " .. merge_base)
+  local output = vim.fn.system("git diff --name-status " .. merge_base)
   local allowed = {}
+  local statuses = {}
   local first_file = nil
-  for file in output:gmatch("[^\n]+") do
-    local abs = root .. "/" .. file
-    if not first_file then
-      first_file = abs
-    end
-    allowed[abs] = true
-    local dir = vim.fn.fnamemodify(abs, ":h")
-    while dir ~= root and dir ~= "/" do
-      allowed[dir] = true
-      dir = vim.fn.fnamemodify(dir, ":h")
+  for line in output:gmatch("[^\n]+") do
+    local status, rest = line:match("^(%a)%d*\t(.+)$")
+    if status and rest and status ~= "D" then
+      local file = rest
+      if status == "R" or status == "C" then
+        file = rest:match("\t(.+)$") or rest
+      end
+      local abs = root .. "/" .. file
+      if not first_file then
+        first_file = abs
+      end
+      allowed[abs] = true
+      statuses[abs] = status
+      local dir = vim.fn.fnamemodify(abs, ":h")
+      while dir ~= root and dir ~= "/" do
+        allowed[dir] = true
+        dir = vim.fn.fnamemodify(dir, ":h")
+      end
     end
   end
   allowed[root] = true
   diff_review.active = true
   diff_review.allowed = allowed
+  diff_review.statuses = statuses
   require("gitsigns").change_base(base, true)
   api.tree.open()
   api.tree.reload()
@@ -375,6 +392,7 @@ end
 local function diff_review_stop()
   diff_review.active = false
   diff_review.allowed = {}
+  diff_review.statuses = {}
   require("gitsigns").reset_base(true)
   api.tree.reload()
 end
@@ -415,6 +433,31 @@ require("nvim-tree").setup({
     full_name = true,
   },
 })
+
+api.events.subscribe(api.events.Event.TreeRendered, function(payload)
+  if not diff_review.active then
+    return
+  end
+  local bufnr = payload.bufnr
+  vim.api.nvim_buf_clear_namespace(bufnr, diff_review_ns, 0, -1)
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  for i, line in ipairs(lines) do
+    for abs, status in pairs(diff_review.statuses) do
+      local basename = vim.fn.fnamemodify(abs, ":t")
+      local col = line:find(basename, 1, true)
+      if col then
+        local hl = diff_review_status_hl[status]
+        if hl then
+          vim.api.nvim_buf_set_extmark(bufnr, diff_review_ns, i - 1, col - 1, {
+            end_col = col - 1 + #basename,
+            hl_group = hl,
+          })
+        end
+        break
+      end
+    end
+  end
+end)
 
 -- }}}
 -- https://github.com/nvim-telescope/telescope.nvim {{{
