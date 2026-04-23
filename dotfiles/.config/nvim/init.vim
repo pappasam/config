@@ -4,6 +4,12 @@ command! P lua vim.pack.update()
 command! PackUpdate lua vim.pack.update()
 command! PackClean lua vim.pack.del(vim.iter(vim.pack.get()):filter(function(x) return not x.active end):map(function(x) return x.spec.name end):totable())
 
+command! GG call s:gitsigns_toggle()
+function! s:gitsigns_toggle()
+  Gitsigns toggle_deleted
+  Gitsigns toggle_linehl
+endfunction
+
 command! Color call s:color()
 function! s:color()
   set lazyredraw
