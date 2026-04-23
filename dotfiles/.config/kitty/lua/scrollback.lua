@@ -80,10 +80,27 @@ local function build_palette(colors)
   end
 end
 
+local function dim_color(hex, default_fg)
+  local color = hex or default_fg
+  if not color then
+    return nil
+  end
+  local r = tonumber(color:sub(2, 3), 16)
+  local g = tonumber(color:sub(4, 5), 16)
+  local b = tonumber(color:sub(6, 7), 16)
+  return string.format(
+    "#%02x%02x%02x",
+    math.floor(r * 0.75),
+    math.floor(g * 0.75),
+    math.floor(b * 0.75)
+  )
+end
+
 local function make_hl_key(
   fg,
   bg,
   bold,
+  dim,
   italic,
   underline,
   reverse,
@@ -94,6 +111,7 @@ local function make_hl_key(
     .. (bg or "")
     .. ":"
     .. (bold and "b" or "")
+    .. (dim and "d" or "")
     .. (italic and "i" or "")
     .. (underline and "u" or "")
     .. (reverse and "r" or "")
@@ -121,8 +139,8 @@ local function parse_ansi_lines(text, color_for)
   local line_extmarks = {}
 
   local fg, bg = nil, nil
-  local bold, italic, underline, reverse, strikethrough =
-    false, false, false, false, false
+  local bold, dim, italic, underline, reverse, strikethrough =
+    false, false, false, false, false, false
 
   for raw_line in (text .. "\n"):gmatch("([^\n]*)\n") do
     local plain = {}
@@ -132,12 +150,14 @@ local function parse_ansi_lines(text, color_for)
     local span_has_style = fg ~= nil
       or bg ~= nil
       or bold
+      or dim
       or italic
       or underline
       or reverse
       or strikethrough
     local span_fg, span_bg = fg, bg
-    local span_bold, span_italic, span_underline = bold, italic, underline
+    local span_bold, span_dim = bold, dim
+    local span_italic, span_underline = italic, underline
     local span_reverse, span_strikethrough = reverse, strikethrough
 
     local pos = 1
@@ -157,6 +177,7 @@ local function parse_ansi_lines(text, color_for)
               span_fg,
               span_bg,
               span_bold,
+              span_dim,
               span_italic,
               span_underline,
               span_reverse,
@@ -225,10 +246,12 @@ local function parse_ansi_lines(text, color_for)
             local p = params[i]
             if p == 0 then
               fg, bg = nil, nil
-              bold, italic, underline, reverse, strikethrough =
-                false, false, false, false, false
+              bold, dim, italic, underline, reverse, strikethrough =
+                false, false, false, false, false, false
             elseif p == 1 then
               bold = true
+            elseif p == 2 then
+              dim = true
             elseif p == 3 then
               italic = true
             elseif p == 4 then
@@ -239,6 +262,7 @@ local function parse_ansi_lines(text, color_for)
               strikethrough = true
             elseif p == 22 then
               bold = false
+              dim = false
             elseif p == 23 then
               italic = false
             elseif p == 24 then
@@ -293,12 +317,14 @@ local function parse_ansi_lines(text, color_for)
           span_has_style = fg ~= nil
             or bg ~= nil
             or bold
+            or dim
             or italic
             or underline
             or reverse
             or strikethrough
           span_fg, span_bg = fg, bg
-          span_bold, span_italic, span_underline = bold, italic, underline
+          span_bold, span_dim = bold, dim
+          span_italic, span_underline = italic, underline
           span_reverse, span_strikethrough = reverse, strikethrough
           pos = seq_end + 1
         else
@@ -320,6 +346,7 @@ local function parse_ansi_lines(text, color_for)
         span_fg,
         span_bg,
         span_bold,
+        span_dim,
         span_italic,
         span_underline,
         span_reverse,
@@ -334,7 +361,7 @@ local function parse_ansi_lines(text, color_for)
   return plain_lines, line_extmarks
 end
 
-local function setup_lazy_highlights(bufnr, line_extmarks)
+local function setup_lazy_highlights(bufnr, line_extmarks, default_fg)
   local ns = vim.api.nvim_create_namespace("kitty_scrollback")
   local hl_cache = {}
   local hl_idx = 0
@@ -357,12 +384,14 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
         for _, em in ipairs(extmarks) do
           local start_col, end_col = em[1], em[2]
           local em_fg, em_bg = em[3], em[4]
-          local em_bold, em_italic, em_underline = em[5], em[6], em[7]
-          local em_reverse, em_strikethrough = em[8], em[9]
+          local em_bold, em_dim = em[5], em[6]
+          local em_italic, em_underline = em[7], em[8]
+          local em_reverse, em_strikethrough = em[9], em[10]
           local key = make_hl_key(
             em_fg,
             em_bg,
             em_bold,
+            em_dim,
             em_italic,
             em_underline,
             em_reverse,
@@ -371,8 +400,12 @@ local function setup_lazy_highlights(bufnr, line_extmarks)
           if not hl_cache[key] then
             hl_idx = hl_idx + 1
             local group = "KsbHl" .. hl_idx
+            local hl_fg = em_reverse and em_bg or em_fg
+            if em_dim then
+              hl_fg = dim_color(hl_fg, default_fg)
+            end
             vim.api.nvim_set_hl(0, group, {
-              fg = em_reverse and em_bg or em_fg,
+              fg = hl_fg,
               bg = em_reverse and em_fg or em_bg,
               bold = em_bold,
               italic = em_italic,
@@ -471,7 +504,8 @@ function M.launch(data_path)
       vim.api.nvim_set_option_value("swapfile", false, { buf = bufnr })
       vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, plain_lines)
 
-      local highlight_visible = setup_lazy_highlights(bufnr, line_extmarks)
+      local highlight_visible =
+        setup_lazy_highlights(bufnr, line_extmarks, colors.foreground)
       vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
 
       set_cursor(meta)
