@@ -30,7 +30,6 @@ vim.pack.add({
   "https://github.com/pappasam/vim-keywordprg-commands",
   -- Remainder
   "https://github.com/machakann/vim-sandwich",
-  "https://github.com/fei6409/log-highlight.nvim",
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/chrishrb/gx.nvim",
