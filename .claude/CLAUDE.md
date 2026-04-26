@@ -1,4 +1,4 @@
-# CLAUDE.md
+# Agent Configuration
 
 This repository contains system configuration files, scripts, and dotfiles for managing an Ubuntu setup.
 
@@ -12,5 +12,5 @@ This repository contains system configuration files, scripts, and dotfiles for m
 
 - Lua files are formatted with Stylua.
 - Always run Stylua with the tracked repo config:
-  `stylua --config-path dotfiles/.config/stylua/stylua.toml <files>`
+    - `stylua --config-path dotfiles/.config/stylua/stylua.toml <files>`
 - Do not run bare `stylua` from the repo root; it will not discover the stowed config.
