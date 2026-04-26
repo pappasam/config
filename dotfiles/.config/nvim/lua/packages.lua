@@ -52,191 +52,8 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 })
 
 -- }}}
--- https://neovim.io/doc/user/lsp.html {{{
-
-vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
-
-vim.lsp.enable({
-  "autotools_ls",
-  "bashls",
-  "clangd", -- needs project-level compile-commands.json
-  "cssls",
-  "dockerls",
-  "gh_actions_ls",
-  "gopls",
-  "graphql",
-  "harper_ls",
-  "html",
-  "jsonls",
-  "lua_ls",
-  "marksman",
-  "mdx_analyzer",
-  "postgres_lsp",
-  "r_language_server",
-  "rust_analyzer",
-  "shopify_theme_ls",
-  "svelte",
-  "taplo",
-  "terraformls",
-  "tsgo",
-  "ty",
-  "vimls",
-  "yamlls",
-})
-
-vim.lsp.config("*", {
-  capabilities = {
-    workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = false, -- https://github.com/neovim/neovim/issues/23291
-      },
-    },
-  },
-})
-
-vim.lsp.config("gh_actions_ls", {
-  filetypes = { "yaml.github" },
-  init_options = {
-    -- Requires the `repo` and `workflow` scopes
-    sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
-  },
-})
-
--- https://writewithharper.com/docs/rules
-vim.lsp.config("harper_ls", {
-  filetypes = {
-    "markdown",
-  },
-  settings = {
-    ["harper-ls"] = {
-      markdown = {
-        IgnoreLinkTitle = true,
-      },
-      linters = {
-        LongSentences = false,
-        RoadMap = false,
-        SentenceCapitalization = false,
-        Spaces = false,
-        SpellCheck = false,
-        SplitWords = false,
-        ToDoHyphen = false,
-      },
-    },
-  },
-})
-
--- Error: libbfd-2.38-system.so: cannot open shared object file: No such file or directory
--- Solve: sudo ln -s /usr/lib/x86_64-linux-gnu/libbfd-2.42-system.so /usr/lib/x86_64-linux-gnu/libbfd-2.38-system.so
--- See: <https://github.com/StarRocks/starrocks/issues/50226#issuecomment-2321161899>
-vim.lsp.config("lua_ls", {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if
-        path ~= vim.fn.stdpath("config")
-        and (
-          vim.uv.fs_stat(path .. "/.luarc.json")
-          or vim.uv.fs_stat(path .. "/.luarc.jsonc")
-        )
-      then
-        return
-      end
-    end
-    client.config.settings.Lua =
-      vim.tbl_deep_extend("force", client.config.settings.Lua, {
-        runtime = {
-          version = "LuaJIT",
-          path = {
-            "lua/?.lua",
-            "lua/?/init.lua",
-          },
-        },
-        -- Make the server aware of Neovim runtime files
-        workspace = {
-          checkThirdParty = false,
-          library = vim
-            .iter({
-              (function()
-                local plugins_path = vim.fn.stdpath("data")
-                  .. "/site/pack/core/opt"
-                local plugin_dirs = {}
-                local plugins = vim.fn.glob(plugins_path .. "/*", false, true)
-                for _, plugin in ipairs(plugins) do
-                  local lua_dir = plugin .. "/lua"
-                  if vim.fn.isdirectory(lua_dir) == 1 then
-                    table.insert(plugin_dirs, lua_dir)
-                  end
-                  table.insert(plugin_dirs, plugin)
-                end
-                return plugin_dirs
-              end)(),
-              vim.env.VIMRUNTIME,
-            })
-            :flatten()
-            :totable(),
-        },
-      })
-  end,
-  settings = {
-    Lua = {
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-})
-
-vim.lsp.config("yamlls", {
-  filetypes = { "yaml" },
-  settings = {
-    yaml = {
-      schemas = {
-        kubernetes = "", -- Disable built-in Kubernetes support because we use specific version below
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.35.0-standalone/all.json"] = "*.k8s.yaml",
-        ["https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"] = {
-          "compose.yml",
-          "compose.yaml",
-        },
-        ["http://json.schemastore.org/kustomization"] = "kustomization.yaml",
-      },
-      customTags = {
-        "!ENV scalar",
-        "!ENV sequence",
-        "!relative scalar",
-        "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
-        "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
-        "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
-      },
-      -- Add this to help with schema validation
-      validate = true,
-      -- This can help with schema conflicts
-      schemaStore = {
-        enable = false,
-        url = "",
-      },
-    },
-  },
-})
-
--- }}}
--- https://neovim.io/doc/user/diagnostic.html {{{
-
-vim.diagnostic.config({
-  jump = {
-    on_jump = function()
-      vim.diagnostic.open_float()
-    end,
-  },
-})
-
--- }}}
--- https://neovim.io/doc/user/treesitter.html {{{
+-- https://github.com/nvim-treesitter/nvim-treesitter {{{
 -- Manually run the following for new installations -> :TSInstall all
-
-vim.treesitter.language.register("terraform", "terraform-vars")
-vim.treesitter.language.register("bash", "shell")
-vim.treesitter.language.register("json", "jsonc")
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "TSUpdate",
@@ -274,6 +91,7 @@ require("nvim-ts-autotag").setup()
 -- https://github.com/nvim-tree/nvim-tree.lua {{{
 
 local api = require("nvim-tree.api")
+local diff_review = require("diff-review")
 
 local function on_attach(bufnr)
   local function opts(desc)
@@ -296,127 +114,12 @@ local function on_attach(bufnr)
   end, opts("Live Filter (recursive)"))
 end
 
-local tree_disable_folders = {
-  ".git",
-  ".pytest_cache",
-  ".venv",
-  "__pycache__",
-  "node_modules",
-}
-
-local tree_disable_set = {}
-for _, name in ipairs(tree_disable_folders) do
-  tree_disable_set[name] = true
-end
-
-local diff_review = { active = false, allowed = {}, statuses = {} }
-local diff_review_ns = vim.api.nvim_create_namespace("diff_review")
-local diff_review_status_label = {
-  A = { "[a]", "DiffAdd" },
-  M = { "[m]", "DiffChange" },
-}
-
-local function tree_custom_filter(absolute_path)
-  local name = vim.fn.fnamemodify(absolute_path, ":t")
-  if tree_disable_set[name] then
-    return true
-  end
-  if diff_review.active then
-    return not diff_review.allowed[absolute_path]
-  end
-  return false
-end
-
-local function diff_review_goto_first_hunk()
-  vim.defer_fn(function()
-    pcall(require("gitsigns").nav_hunk, "first")
-  end, 200)
-end
-
-local function diff_review_start(base)
-  base = base
-    or vim.fn.trim(
-      vim.fn.system(
-        "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"
-          .. " | sed 's|refs/remotes/origin/||'"
-      )
-    )
-  if base == "" then
-    base = "main"
-  end
-  local merge_base = vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
-  local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
-  local output = vim.fn.system("git diff --name-status " .. merge_base)
-  local allowed = {}
-  local statuses = {}
-  local first_file = nil
-  for line in output:gmatch("[^\n]+") do
-    local status, rest = line:match("^(%a)%d*\t(.+)$")
-    if status and rest and (status == "A" or status == "M") then
-      local file = rest
-      local abs = root .. "/" .. file
-      if not first_file then
-        first_file = abs
-      end
-      allowed[abs] = true
-      statuses[abs] = status
-      local dir = vim.fn.fnamemodify(abs, ":h")
-      while dir ~= root and dir ~= "/" do
-        allowed[dir] = true
-        dir = vim.fn.fnamemodify(dir, ":h")
-      end
-    end
-  end
-  allowed[root] = true
-  diff_review.active = true
-  diff_review.allowed = allowed
-  diff_review.statuses = statuses
-  require("gitsigns").change_base(base, true)
-  api.tree.open()
-  api.tree.resize({ absolute = 50 })
-  api.tree.reload()
-  api.tree.expand_all()
-  if first_file then
-    api.tree.find_file({ buf = first_file, focus = true })
-    vim.cmd("wincmd l")
-    vim.cmd("edit " .. vim.fn.fnameescape(first_file))
-    vim.opt_local.foldenable = false
-    diff_review_goto_first_hunk()
-  end
-end
-
-local function diff_review_stop()
-  diff_review.active = false
-  diff_review.allowed = {}
-  diff_review.statuses = {}
-  require("gitsigns").reset_base(true)
-  api.tree.resize()
-  api.tree.reload()
-end
-
-vim.api.nvim_create_user_command("DiffReview", function(args)
-  diff_review_start(args.args ~= "" and args.args or nil)
-end, { nargs = "?" })
-
-vim.api.nvim_create_user_command("DiffReviewClose", function()
-  diff_review_stop()
-end, {})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    if diff_review.active and vim.bo.buftype == "" then
-      vim.opt_local.foldenable = false
-      diff_review_goto_first_hunk()
-    end
-  end,
-})
-
 require("nvim-tree").setup({
   on_attach = on_attach,
   disable_netrw = true,
   actions = {
     expand_all = {
-      exclude = tree_disable_folders,
+      exclude = diff_review.disable_folders,
     },
   },
   live_filter = {
@@ -424,36 +127,14 @@ require("nvim-tree").setup({
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
-    custom = tree_custom_filter,
+    custom = diff_review.tree_custom_filter,
   },
   renderer = {
     full_name = true,
   },
 })
 
-api.events.subscribe(api.events.Event.TreeRendered, function(payload)
-  if not diff_review.active then
-    return
-  end
-  local bufnr = payload.bufnr
-  vim.api.nvim_buf_clear_namespace(bufnr, diff_review_ns, 0, -1)
-  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-  for i, line in ipairs(lines) do
-    for abs, status in pairs(diff_review.statuses) do
-      local basename = vim.fn.fnamemodify(abs, ":t")
-      if line:find(basename, 1, true) then
-        local label = diff_review_status_label[status]
-        if label then
-          vim.api.nvim_buf_set_extmark(bufnr, diff_review_ns, i - 1, 0, {
-            virt_text = { { label[1], label[2] } },
-            virt_text_pos = "eol",
-          })
-        end
-        break
-      end
-    end
-  end
-end)
+diff_review.setup()
 
 -- }}}
 -- https://github.com/nvim-telescope/telescope.nvim {{{
