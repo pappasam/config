@@ -37,21 +37,32 @@ local function goto_first_hunk()
   end, 200)
 end
 
+local function git_output(args)
+  local command = { "git" }
+  vim.list_extend(command, args)
+  local result = vim.system(command, { text = true }):wait()
+  if result.code ~= 0 then
+    return ""
+  end
+  return vim.trim(result.stdout or "")
+end
+
+local function default_base()
+  local symbolic_ref =
+    git_output({ "symbolic-ref", "refs/remotes/origin/HEAD" })
+  local base = symbolic_ref:match("^refs/remotes/origin/(.+)$")
+  return base or ""
+end
+
 local function start(base)
   local api = require("nvim-tree.api")
-  base = base
-    or vim.fn.trim(
-      vim.fn.system(
-        "git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"
-          .. " | sed 's|refs/remotes/origin/||'"
-      )
-    )
+  base = base or default_base()
   if base == "" then
     base = "main"
   end
-  local merge_base = vim.fn.trim(vim.fn.system("git merge-base HEAD " .. base))
-  local root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
-  local output = vim.fn.system("git diff --name-status " .. merge_base)
+  local merge_base = git_output({ "merge-base", "HEAD", base })
+  local root = git_output({ "rev-parse", "--show-toplevel" })
+  local output = git_output({ "diff", "--name-status", merge_base })
   local allowed = {}
   local statuses = {}
   local first_file = nil
