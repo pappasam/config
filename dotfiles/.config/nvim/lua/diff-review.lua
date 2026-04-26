@@ -33,7 +33,11 @@ end
 
 local function goto_first_hunk()
   vim.defer_fn(function()
-    pcall(require("gitsigns").nav_hunk, "first")
+    if pcall(require("gitsigns").nav_hunk, "first") then
+      vim.defer_fn(function()
+        vim.cmd("normal! z.")
+      end, 50)
+    end
   end, 200)
 end
 
