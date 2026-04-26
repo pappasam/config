@@ -177,12 +177,18 @@ require("gitsigns").setup({
       vim.keymap.set(mode, l, r, opts)
     end
     -- Navigation
+    local function center_after_hunk_jump()
+      vim.defer_fn(function()
+        vim.cmd("normal! z.")
+      end, 50)
+    end
     map("n", "]g", function()
       if vim.wo.diff then
         return "]g"
       end
       vim.schedule(function()
         gs.next_hunk()
+        center_after_hunk_jump()
       end)
       return "<Ignore>"
     end, { expr = true })
@@ -192,6 +198,7 @@ require("gitsigns").setup({
       end
       vim.schedule(function()
         gs.prev_hunk()
+        center_after_hunk_jump()
       end)
       return "<Ignore>"
     end, { expr = true })
