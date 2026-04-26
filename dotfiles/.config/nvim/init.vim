@@ -98,9 +98,11 @@ function! s:edit_nvim_config()
   edit  ~/config/dotfiles/.config/nvim/init.vim
   tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
   tabe ~/config/dotfiles/.config/nvim/lua/settings.lua
+  tabe ~/config/dotfiles/.config/nvim/lua/lsp.lua
+  tabe ~/config/dotfiles/.config/nvim/lua/treesitter.lua
+  tabe ~/config/dotfiles/.config/nvim/lua/diff-review.lua
   wincmd h
-  tabprevious
-  tabprevious
+  2tabnext
 endfunction
 
 command! ResizeTabs call s:resize_tabs()
@@ -277,6 +279,8 @@ lua vim.loader.enable(true) -- speed up lua load times (experimental)
 colorscheme PaperColorSlim " https://vimcolorschemes.com
 set termguicolors
 lua require("settings")
+lua require("lsp")
+lua require("treesitter")
 lua require("packages")
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
