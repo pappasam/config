@@ -180,7 +180,7 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
                     continue
 
                 dr = placement["dest_rect"]
-                col = round((dr["left"] + 1.0) / dx)
+                col = round((dr["left"] + 1.0) / dx) + 1
                 row_top = round((1.0 - dr["top"]) / dy)
                 width_cells = round((dr["right"] - dr["left"]) / dx)
                 height_cells = round((dr["top"] - dr["bottom"]) / dy)
@@ -188,6 +188,11 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
                     continue
 
                 buf_line = bisect.bisect_right(cumulative, row_top) + 1
+
+                if img["width"] > 0 and img["height"] > 0:
+                    pixel_w = width_cells * cell_width
+                    pixel_h = pixel_w * img["height"] / img["width"]
+                    height_cells = max(1, round(pixel_h / cell_height))
 
                 if iid not in written_pngs:
                     is_rgba = len(img["data"]) == img["width"] * img["height"] * 4
