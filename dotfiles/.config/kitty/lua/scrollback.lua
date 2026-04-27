@@ -1,5 +1,19 @@
 local M = {}
 
+local function load_ui_img()
+  -- Derive the real nvim runtime from the running binary,
+  -- since --clean in an overlay may use the system runtimepath.
+  local exe = vim.v.progpath
+  local bindir = vim.fn.fnamemodify(exe, ":h")
+  local rtdir = vim.fn.fnamemodify(bindir, ":h") .. "/share/nvim/runtime/lua"
+  if not package.path:find(rtdir, 1, true) then
+    package.path = rtdir .. "/?.lua;" .. rtdir .. "/?/init.lua;" .. package.path
+  end
+  package.loaded["vim.ui.img"] = nil
+  local ok, m = pcall(require, "vim.ui.img")
+  return ok and m or nil
+end
+
 local function set_options()
   vim.o.termguicolors = true
   vim.o.number = false
@@ -434,6 +448,48 @@ local function setup_lazy_highlights(bufnr, line_extmarks, default_fg)
   return highlight_visible
 end
 
+local function setup_images(meta)
+  local images = meta.images
+  if not images or #images == 0 then
+    return {}
+  end
+  local img_mod = load_ui_img()
+  if not img_mod then
+    return {}
+  end
+  local ids = {}
+  for _, img in ipairs(images) do
+    local ok, png = pcall(vim.fn.readblob, img.png_path)
+    if ok then
+      local id = img_mod.set(png, {
+        row = img.buf_line,
+        col = img.buf_col,
+        width = img.width,
+        height = img.height,
+        zindex = img.zindex,
+      })
+      table.insert(ids, id)
+    end
+  end
+  if meta.image_tmpdir then
+    for _, img in ipairs(images) do
+      pcall(os.remove, img.png_path)
+    end
+    pcall(os.remove, meta.image_tmpdir)
+  end
+  return ids
+end
+
+local function cleanup_images(image_ids)
+  local img_mod = load_ui_img()
+  if not img_mod then
+    return
+  end
+  for _, id in ipairs(image_ids) do
+    img_mod.del(id)
+  end
+end
+
 local function set_cursor(meta)
   vim.schedule(function()
     local line = meta.cursor_buf_line or vim.fn.line("$")
@@ -443,8 +499,9 @@ local function set_cursor(meta)
   end)
 end
 
-local function set_keymaps(_)
+local function set_keymaps(_, image_ids)
   local quit = function()
+    cleanup_images(image_ids)
     vim.cmd("quitall!")
   end
   vim.keymap.set("n", "q", quit, { buffer = true })
@@ -508,6 +565,11 @@ function M.launch(data_path)
         setup_lazy_highlights(bufnr, line_extmarks, colors.foreground)
       vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
 
+      local img_ok, image_ids = pcall(setup_images, meta)
+      if not img_ok then
+        image_ids = {}
+      end
+
       set_cursor(meta)
       highlight_visible()
       local group =
@@ -517,7 +579,7 @@ function M.launch(data_path)
         buffer = bufnr,
         callback = highlight_visible,
       })
-      set_keymaps(meta)
+      set_keymaps(meta, image_ids)
     end,
   })
 end

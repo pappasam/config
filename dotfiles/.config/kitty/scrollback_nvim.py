@@ -1,13 +1,32 @@
+import bisect
 import json
 import os
 import re
+import struct
 import tempfile
+import zlib
 
 from kitty.boss import Boss
-from kitty.fast_data_types import Color, get_options
+from kitty.fast_data_types import Color, cell_size_for_window, get_options
 from kitty.rgb import color_as_sharp, color_from_int
 from kitty.utils import which
 from kittens.tui.handler import result_handler
+
+
+def raw_to_png(data: bytes, width: int, height: int, is_rgba: bool) -> bytes:
+    bpp = 4 if is_rgba else 3
+    color_type = 6 if is_rgba else 2
+    raw_rows = []
+    stride = width * bpp
+    for y in range(height):
+        raw_rows.append(b"\x00" + data[y * stride : (y + 1) * stride])
+    compressed = zlib.compress(b"".join(raw_rows))
+
+    def chunk(tag: bytes, body: bytes) -> bytes:
+        return struct.pack(">I", len(body)) + tag + body + struct.pack(">I", zlib.crc32(tag + body) & 0xFFFFFFFF)
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", compressed) + chunk(b"IEND", b"")
 
 
 def main():
@@ -27,7 +46,22 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     if not kitty_path:
         boss.show_error("kitty_scrollback", "Cannot find kitty in PATH")
         return
-    nvim_path = which("nvim")
+    # Try mise/asdf-managed nvim first, then fall back to system PATH.
+    nvim_path = None
+    mise_path = which("mise")
+    if mise_path:
+        import subprocess
+        try:
+            result = subprocess.run(
+                [mise_path, "which", "nvim"],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                nvim_path = result.stdout.strip()
+        except Exception:
+            pass
+    if not nvim_path:
+        nvim_path = which("nvim")
     if not nvim_path:
         boss.show_error("kitty_scrollback", "Cannot find nvim in PATH")
         return
@@ -46,6 +80,7 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
 
     screen = w.screen
     metadata = {
+        "nvim_path_used": nvim_path,
         "kitty_path": kitty_path,
         "scrolled_by": screen.scrolled_by,
         "cursor_x": screen.cursor.x + 1,
@@ -97,6 +132,86 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     metadata["cursor_buf_col"] = cursor_buf_col
 
     text = "\n".join(line + "\x1b[0m" for line in result_lines)
+
+    # Extract images from the graphics manager
+    images_meta = []
+    grman = screen.grman
+    if grman.image_count > 0:
+        cell_width, cell_height = cell_size_for_window(w.os_window_id)
+        total_rows = sum(sub_row_counts)
+        num_cols = screen.columns
+
+        # Build internal_id -> image data by probing client numbers
+        # (image_for_client_number is read-only; image_for_client_id has a
+        # destructive side effect that creates empty images on miss)
+        images_by_internal = {}
+        found = 0
+        for num in range(0, grman.image_count * 10 + 1):
+            if found >= grman.image_count:
+                break
+            img = grman.image_for_client_number(num)
+            if img is not None and img["internal_id"] not in images_by_internal:
+                images_by_internal[img["internal_id"]] = img
+                found += 1
+
+        if images_by_internal:
+            # Get all placements covering the full scrollback
+            dx = 2.0 / num_cols
+            dy = 2.0 / total_rows
+            scrolled_by = max(0, total_rows - screen.lines)
+            layers = grman.update_layers(
+                scrolled_by, -1.0, 1.0, dx, dy,
+                num_cols, total_rows, cell_width, cell_height,
+            )
+            # Cumulative sub_row_counts for physical-row -> buffer-line mapping
+            cumulative = []
+            acc = 0
+            for c in sub_row_counts:
+                acc += c
+                cumulative.append(acc)
+
+            tmpdir = tempfile.mkdtemp(prefix="ksb_img_")
+            written_pngs = {}
+
+            for placement in layers:
+                iid = placement["image_id"]
+                img = images_by_internal.get(iid)
+                if img is None:
+                    continue
+
+                dr = placement["dest_rect"]
+                col = round((dr["left"] + 1.0) / dx)
+                row_top = round((1.0 - dr["top"]) / dy)
+                width_cells = round((dr["right"] - dr["left"]) / dx)
+                height_cells = round((dr["top"] - dr["bottom"]) / dy)
+                if width_cells <= 0 or height_cells <= 0:
+                    continue
+
+                buf_line = bisect.bisect_right(cumulative, row_top) + 1
+
+                if iid not in written_pngs:
+                    is_rgba = len(img["data"]) == img["width"] * img["height"] * 4
+                    png = raw_to_png(img["data"], img["width"], img["height"], is_rgba)
+                    path = os.path.join(tmpdir, f"img_{iid}.png")
+                    with open(path, "wb") as pf:
+                        pf.write(png)
+                    written_pngs[iid] = path
+
+                images_meta.append({
+                    "png_path": written_pngs[iid],
+                    "buf_line": buf_line,
+                    "buf_col": col,
+                    "width": width_cells,
+                    "height": height_cells,
+                    "zindex": placement["z_index"],
+                })
+
+            if not images_meta:
+                os.rmdir(tmpdir)
+                tmpdir = None
+            metadata["image_tmpdir"] = tmpdir
+
+    metadata["images"] = images_meta
 
     fd, meta_path = tempfile.mkstemp(prefix="ksb_", suffix=".json")
     text_path = meta_path.replace(".json", ".ansi")
