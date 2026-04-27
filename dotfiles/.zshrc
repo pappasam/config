@@ -26,7 +26,6 @@ fi
 setopt APPENDHISTORY
 setopt AUTOCD
 setopt AUTO_LIST
-setopt COMPLETE_ALIASES
 setopt HIST_IGNORE_SPACE
 setopt INCAPPENDHISTORY
 setopt PROMPT_SUBST
@@ -54,11 +53,6 @@ bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^m' accept-line-and-down-history
 bindkey -M menuselect '^y' accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
-compdef _command ve
-compdef _directories d
-compdef _make m
-compdef _vim f
-compdef _vim fn
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
