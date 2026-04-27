@@ -11,6 +11,7 @@ export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
+export CARAPACE_MATCH=1
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
@@ -41,9 +42,9 @@ function preexec() { # hook
   dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
   printf "\033]0;%s($1)\007" "$dir"
 }
-zstyle ':completion:*' menu select incremental
+zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list '' 'm:{a-z\-A-Z}={A-Z\_a-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-A-Z}={A-Z\_a-z}' 'r:|?=** m:{a-z\-A-Z}={A-Z\_a-z}'
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|?=** m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}'
 zmodload -i zsh/complist
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
