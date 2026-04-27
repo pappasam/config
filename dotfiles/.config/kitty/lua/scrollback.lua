@@ -1,19 +1,5 @@
 local M = {}
 
-local function load_ui_img()
-  -- Derive the real nvim runtime from the running binary,
-  -- since --clean in an overlay may use the system runtimepath.
-  local exe = vim.v.progpath
-  local bindir = vim.fn.fnamemodify(exe, ":h")
-  local rtdir = vim.fn.fnamemodify(bindir, ":h") .. "/share/nvim/runtime/lua"
-  if not package.path:find(rtdir, 1, true) then
-    package.path = rtdir .. "/?.lua;" .. rtdir .. "/?/init.lua;" .. package.path
-  end
-  package.loaded["vim.ui.img"] = nil
-  local ok, m = pcall(require, "vim.ui.img")
-  return ok and m or nil
-end
-
 local function set_options()
   vim.o.termguicolors = true
   vim.o.number = false
@@ -448,27 +434,122 @@ local function setup_lazy_highlights(bufnr, line_extmarks, default_fg)
   return highlight_visible
 end
 
+local next_img_id = 0
+local function gen_img_id()
+  next_img_id = next_img_id + 1
+  return next_img_id
+end
+
+local function kitty_seq(control, payload)
+  local parts = { "\027_G" }
+  local tmp = {}
+  for k, v in pairs(control) do
+    tmp[#tmp + 1] = k .. "=" .. v
+  end
+  if #tmp > 0 then
+    parts[#parts + 1] = table.concat(tmp, ",")
+  end
+  if payload and payload ~= "" then
+    parts[#parts + 1] = ";"
+    parts[#parts + 1] = payload
+  end
+  parts[#parts + 1] = "\027\\"
+  return table.concat(parts)
+end
+
+local function kitty_transmit(id, data)
+  local b64 = vim.base64.encode(data)
+  local pos = 1
+  local len = #b64
+  local chunk = 4096
+  while pos <= len do
+    local ep = math.min(pos + chunk - 1, len)
+    local ctrl = {}
+    if pos == 1 then
+      ctrl.f = "100"
+      ctrl.a = "t"
+      ctrl.t = "d"
+      ctrl.i = id
+      ctrl.q = "2"
+    end
+    ctrl.m = ep >= len and "0" or "1"
+    vim.api.nvim_ui_send(kitty_seq(ctrl, b64:sub(pos, ep)))
+    pos = ep + 1
+  end
+end
+
+local function kitty_place(
+  img_id,
+  placement_id,
+  row,
+  col,
+  width,
+  height,
+  zindex
+)
+  local ctrl = {
+    a = "p",
+    i = img_id,
+    p = placement_id,
+    C = "1",
+    q = "2",
+  }
+  if width then
+    ctrl.c = width
+  end
+  if height then
+    ctrl.r = height
+  end
+  if zindex then
+    ctrl.z = zindex
+  end
+  vim.api.nvim_ui_send(
+    string.format("\0277\027[?25l\027[%d;%dH", row, col)
+      .. kitty_seq(ctrl)
+      .. "\0278\027[?25h"
+  )
+end
+
+local function kitty_delete_placement(img_id, placement_id)
+  vim.api.nvim_ui_send(kitty_seq({
+    a = "d",
+    d = "i",
+    i = img_id,
+    p = placement_id,
+    q = "2",
+  }))
+end
+
+local function kitty_delete_image(img_id)
+  vim.api.nvim_ui_send(kitty_seq({
+    a = "d",
+    d = "i",
+    i = img_id,
+    q = "2",
+  }))
+end
+
 local function setup_images(meta)
   local images = meta.images
   if not images or #images == 0 then
     return {}
   end
-  local img_mod = load_ui_img()
-  if not img_mod then
-    return {}
-  end
-  local ids = {}
+
+  local entries = {}
   for _, img in ipairs(images) do
     local ok, png = pcall(vim.fn.readblob, img.png_path)
     if ok then
-      local id = img_mod.set(png, {
-        row = img.buf_line,
-        col = img.buf_col,
+      local img_id = gen_img_id()
+      kitty_transmit(img_id, png)
+      entries[#entries + 1] = {
+        img_id = img_id,
+        placement_id = nil,
+        buf_line = img.buf_line,
+        buf_col = img.buf_col,
         width = img.width,
         height = img.height,
         zindex = img.zindex,
-      })
-      table.insert(ids, id)
+      }
     end
   end
   if meta.image_tmpdir then
@@ -477,16 +558,40 @@ local function setup_images(meta)
     end
     pcall(os.remove, meta.image_tmpdir)
   end
-  return ids
+  return entries
 end
 
-local function cleanup_images(image_ids)
-  local img_mod = load_ui_img()
-  if not img_mod then
-    return
+local function update_image_placements(entries)
+  local top = vim.fn.line("w0")
+  local bot = vim.fn.line("w$")
+  for _, e in ipairs(entries) do
+    local visible = e.buf_line + e.height - 1 >= top and e.buf_line <= bot
+    if visible then
+      local screen_row = e.buf_line - top + 1
+      if not e.placement_id then
+        e.placement_id = gen_img_id()
+      else
+        kitty_delete_placement(e.img_id, e.placement_id)
+      end
+      kitty_place(
+        e.img_id,
+        e.placement_id,
+        screen_row,
+        e.buf_col,
+        e.width,
+        e.height,
+        e.zindex
+      )
+    elseif e.placement_id then
+      kitty_delete_placement(e.img_id, e.placement_id)
+      e.placement_id = nil
+    end
   end
-  for _, id in ipairs(image_ids) do
-    img_mod.del(id)
+end
+
+local function cleanup_images(entries)
+  for _, e in ipairs(entries) do
+    kitty_delete_image(e.img_id)
   end
 end
 
@@ -499,9 +604,9 @@ local function set_cursor(meta)
   end)
 end
 
-local function set_keymaps(_, image_ids)
+local function set_keymaps(_, image_entries)
   local quit = function()
-    cleanup_images(image_ids)
+    cleanup_images(image_entries)
     vim.cmd("quitall!")
   end
   vim.keymap.set("n", "q", quit, { buffer = true })
@@ -565,21 +670,29 @@ function M.launch(data_path)
         setup_lazy_highlights(bufnr, line_extmarks, colors.foreground)
       vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
 
-      local img_ok, image_ids = pcall(setup_images, meta)
+      local img_ok, image_entries = pcall(setup_images, meta)
       if not img_ok then
-        image_ids = {}
+        image_entries = {}
       end
 
       set_cursor(meta)
       highlight_visible()
+      if #image_entries > 0 then
+        update_image_placements(image_entries)
+      end
       local group =
         vim.api.nvim_create_augroup("KittyScrollbackHL", { clear = true })
       vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
         group = group,
         buffer = bufnr,
-        callback = highlight_visible,
+        callback = function()
+          highlight_visible()
+          if #image_entries > 0 then
+            update_image_placements(image_entries)
+          end
+        end,
       })
-      set_keymaps(meta, image_ids)
+      set_keymaps(meta, image_entries)
     end,
   })
 end

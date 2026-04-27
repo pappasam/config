@@ -141,29 +141,80 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
         total_rows = sum(sub_row_counts)
         num_cols = screen.columns
 
-        # Build internal_id -> image data by probing client numbers
-        # (image_for_client_number is read-only; image_for_client_id has a
-        # destructive side effect that creates empty images on miss)
-        images_by_internal = {}
-        found = 0
-        for num in range(0, grman.image_count * 10 + 1):
-            if found >= grman.image_count:
-                break
-            img = grman.image_for_client_number(num)
-            if img is not None and img["internal_id"] not in images_by_internal:
-                images_by_internal[img["internal_id"]] = img
-                found += 1
+        dx = 2.0 / num_cols
+        dy = 2.0 / total_rows
+        scrolled_by = max(0, total_rows - screen.lines)
+        layers = grman.update_layers(
+            scrolled_by, -1.0, 1.0, dx, dy,
+            num_cols, total_rows, cell_width, cell_height,
+        )
 
-        if images_by_internal:
-            # Get all placements covering the full scrollback
-            dx = 2.0 / num_cols
-            dy = 2.0 / total_rows
-            scrolled_by = max(0, total_rows - screen.lines)
-            layers = grman.update_layers(
-                scrolled_by, -1.0, 1.0, dx, dy,
-                num_cols, total_rows, cell_width, cell_height,
-            )
-            # Cumulative sub_row_counts for physical-row -> buffer-line mapping
+        if layers:
+            needed_iids = {p["image_id"] for p in layers}
+            images_by_internal = {}
+
+            # image_for_client_number is safe (read-only) but only returns
+            # the newest image per number.  Scan a small range to pick up
+            # images created with sequential / small client numbers.
+            for num in range(0, grman.image_count * 10 + 1):
+                if needed_iids <= images_by_internal.keys():
+                    break
+                img = grman.image_for_client_number(num)
+                if img is not None and img["internal_id"] in needed_iids:
+                    images_by_internal[img["internal_id"]] = img
+
+            # Fallback: read raw pixel data directly from the disk cache
+            # keyed by (internal_id, frame_id).  This finds images whose
+            # client_number / client_id are random (e.g. kitten icat).
+            if not needed_iids <= images_by_internal.keys():
+                disk_cache = grman.disk_cache
+                for iid in needed_iids - images_by_internal.keys():
+                    for frame_id in range(1, 4):
+                        key = struct.pack("=QI", iid, frame_id)
+                        try:
+                            raw = disk_cache.get(key)
+                        except KeyError:
+                            raw = None
+                        if raw is None:
+                            continue
+                        placements = [
+                            p for p in layers if p["image_id"] == iid
+                        ]
+                        if not placements:
+                            break
+                        dr = placements[0]["dest_rect"]
+                        display_w = (dr["right"] - dr["left"]) / dx * cell_width
+                        display_h = (dr["top"] - dr["bottom"]) / dy * cell_height
+                        if display_w <= 0 or display_h <= 0:
+                            break
+                        aspect = display_w / display_h
+                        sz = len(raw)
+                        width = height = 0
+                        for bpp in (4, 3):
+                            if sz % bpp != 0:
+                                continue
+                            pixels = sz // bpp
+                            h_est = round((pixels / aspect) ** 0.5)
+                            for h in (h_est, h_est - 1, h_est + 1):
+                                if h < 1 or pixels % h != 0:
+                                    continue
+                                w = pixels // h
+                                if w >= 1:
+                                    width, height = w, h
+                                    break
+                            if width:
+                                break
+                        if width and height:
+                            is_rgba = sz == width * height * 4
+                            images_by_internal[iid] = {
+                                "internal_id": iid,
+                                "width": width,
+                                "height": height,
+                                "data": raw,
+                                "is_rgba": is_rgba,
+                            }
+                        break
+
             cumulative = []
             acc = 0
             for c in sub_row_counts:
@@ -195,7 +246,10 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
                     height_cells = max(1, round(pixel_h / cell_height))
 
                 if iid not in written_pngs:
-                    is_rgba = len(img["data"]) == img["width"] * img["height"] * 4
+                    if "is_rgba" in img:
+                        is_rgba = img["is_rgba"]
+                    else:
+                        is_rgba = len(img["data"]) == img["width"] * img["height"] * 4
                     png = raw_to_png(img["data"], img["width"], img["height"], is_rgba)
                     path = os.path.join(tmpdir, f"img_{iid}.png")
                     with open(path, "wb") as pf:
