@@ -1,0 +1,3 @@
+# schema: https://raw.githubusercontent.com/openai/codex/refs/heads/main/codex-rs/core/config.schema.json
+[tui]
+alternate_screen = "always"

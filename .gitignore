@@ -3,4 +3,4 @@
 .vscode/
 .python-version
 dotfiles/.config/nvim/doc/tags
-.codex
+/.codex
