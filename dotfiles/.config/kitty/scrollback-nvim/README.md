@@ -4,7 +4,7 @@ Kitty scrollback viewer backed by a small Neovim Lua module.
 
 ## Kitty config
 
-See ../kitty.conf .
+See `../kitty.conf` for an example configuration.
 
 The second argument to the kitten is the plugin root. The kitten uses it to find `lua/scrollback/init.lua` without assuming where this directory is installed.
 
