@@ -6,6 +6,7 @@ import struct
 import sys
 import tempfile
 import zlib
+from typing import Any
 
 from kitty.boss import Boss
 from kitty.fast_data_types import Color, cell_size_for_window, get_options
@@ -24,20 +25,38 @@ def raw_to_png(data: bytes, width: int, height: int, is_rgba: bool) -> bytes:
     compressed = zlib.compress(b"".join(raw_rows))
 
     def chunk(tag: bytes, body: bytes) -> bytes:
-        return struct.pack(">I", len(body)) + tag + body + struct.pack(">I", zlib.crc32(tag + body) & 0xFFFFFFFF)
+        return (
+            struct.pack(">I", len(body))
+            + tag
+            + body
+            + struct.pack(">I", zlib.crc32(tag + body) & 0xFFFFFFFF)
+        )
 
     ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
-    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", compressed) + chunk(b"IEND", b"")
+    return (
+        b"\x89PNG\r\n\x1a\n"
+        + chunk(b"IHDR", ihdr)
+        + chunk(b"IDAT", compressed)
+        + chunk(b"IEND", b"")
+    )
 
 
 def lua_string(value: str) -> str:
-    return '"' + value.translate(str.maketrans({
-        "\\": "\\\\",
-        '"': '\\"',
-        "\n": "\\n",
-        "\r": "\\r",
-        "\t": "\\t",
-    })) + '"'
+    return (
+        '"'
+        + value.translate(
+            str.maketrans(
+                {
+                    "\\": "\\\\",
+                    '"': '\\"',
+                    "\n": "\\n",
+                    "\r": "\\r",
+                    "\t": "\\t",
+                }
+            )
+        )
+        + '"'
+    )
 
 
 def plugin_root_from_args(args: list[str]) -> str:
@@ -80,10 +99,13 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     mise_path = which("mise")
     if mise_path:
         import subprocess
+
         try:
             result = subprocess.run(
                 [mise_path, "which", "nvim"],
-                capture_output=True, text=True, timeout=5,
+                capture_output=True,
+                text=True,
+                timeout=5,
             )
             if result.returncode == 0 and result.stdout.strip():
                 nvim_path = result.stdout.strip()
@@ -108,7 +130,7 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     kitty_colors = {k: color_as_sharp(v) for k, v in color_dict.items()}
 
     screen = w.screen
-    metadata = {
+    metadata: dict[str, Any] = {
         "nvim_path_used": nvim_path,
         "kitty_path": kitty_path,
         "scrolled_by": screen.scrolled_by,
@@ -163,8 +185,8 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     text = "\n".join(line + "\x1b[0m" for line in result_lines)
 
     # Extract images from the graphics manager
-    images_meta = []
-    grman = screen.grman
+    images_meta: list[dict[str, Any]] = []
+    grman = getattr(screen, "grman")
     if grman.image_count > 0:
         cell_width, cell_height = cell_size_for_window(w.os_window_id)
         total_rows = sum(sub_row_counts)
@@ -174,8 +196,15 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
         dy = 2.0 / total_rows
         scrolled_by = max(0, total_rows - screen.lines)
         layers = grman.update_layers(
-            scrolled_by, -1.0, 1.0, dx, dy,
-            num_cols, total_rows, cell_width, cell_height,
+            scrolled_by,
+            -1.0,
+            1.0,
+            dx,
+            dy,
+            num_cols,
+            total_rows,
+            cell_width,
+            cell_height,
         )
 
         if layers:
@@ -206,9 +235,7 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
                             raw = None
                         if raw is None:
                             continue
-                        placements = [
-                            p for p in layers if p["image_id"] == iid
-                        ]
+                        placements = [p for p in layers if p["image_id"] == iid]
                         if not placements:
                             break
                         dr = placements[0]["dest_rect"]
@@ -285,14 +312,16 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
                         pf.write(png)
                     written_pngs[iid] = path
 
-                images_meta.append({
-                    "png_path": written_pngs[iid],
-                    "buf_line": buf_line,
-                    "buf_col": col,
-                    "width": width_cells,
-                    "height": height_cells,
-                    "zindex": placement["z_index"],
-                })
+                images_meta.append(
+                    {
+                        "png_path": written_pngs[iid],
+                        "buf_line": buf_line,
+                        "buf_col": col,
+                        "width": width_cells,
+                        "height": height_cells,
+                        "zindex": placement["z_index"],
+                    }
+                )
 
             if not images_meta:
                 os.rmdir(tmpdir)
