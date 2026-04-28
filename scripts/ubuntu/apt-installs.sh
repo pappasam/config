@@ -55,6 +55,7 @@ sudo apt install -y \
   inkscape \
   less \
   libbz2-dev \
+  libcap-dev \
   libclang-14-dev \
   libcurl4-openssl-dev \
   libdb-dev \
