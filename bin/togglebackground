@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-if grep -q -F "include PaperColor Dark.conf" ~/config/dotfiles/.config/kitty/kitty.conf; then
-  sed -i 's/include PaperColor Dark\.conf/include PaperColor Light.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
+if grep -q -F "include papercolor-dark.conf" ~/config/dotfiles/.config/kitty/kitty.conf; then
+  sed -i 's/include papercolor-dark\.conf/include papercolor-light.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
   sed -i 's/colorscheme PaperColorSlim/colorscheme PaperColorSlimLight/' ~/config/dotfiles/.config/nvim/init.vim
 else
-  sed -i 's/include PaperColor Light\.conf/include PaperColor Dark.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
+  sed -i 's/include papercolor-light\.conf/include papercolor-dark.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
   sed -i 's/colorscheme PaperColorSlimLight/colorscheme PaperColorSlim/' ~/config/dotfiles/.config/nvim/init.vim
 fi
