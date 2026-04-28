@@ -3,6 +3,7 @@ import json
 import os
 import re
 import struct
+import sys
 import tempfile
 import zlib
 
@@ -27,6 +28,34 @@ def raw_to_png(data: bytes, width: int, height: int, is_rgba: bool) -> bytes:
 
     ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
     return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", compressed) + chunk(b"IEND", b"")
+
+
+def lua_string(value: str) -> str:
+    return '"' + value.translate(str.maketrans({
+        "\\": "\\\\",
+        '"': '\\"',
+        "\n": "\\n",
+        "\r": "\\r",
+        "\t": "\\t",
+    })) + '"'
+
+
+def plugin_root_from_args(args: list[str]) -> str:
+    for arg in args:
+        path = os.path.abspath(os.path.expanduser(arg))
+        if not path.endswith(".py"):
+            return path
+
+    script_path = globals().get("__file__")
+    if script_path:
+        return os.path.dirname(os.path.dirname(os.path.abspath(script_path)))
+
+    try:
+        from kitty.constants import config_dir
+
+        return os.path.join(config_dir, "scrollback-nvim")
+    except Exception:
+        return os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 
 def main():
@@ -279,10 +308,12 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     with open(text_path, "w") as f:
         f.write(text)
 
+    plugin_root = plugin_root_from_args(_args)
+    lua_path = os.path.join(plugin_root, "lua", "scrollback", "init.lua")
     lua_cmd = (
         " lua"
-        " vim.opt.runtimepath:append(vim.fn.expand('~/.config/kitty'))"
-        f" require('scrollback').launch([[{meta_path}]])"
+        f" vim.opt.runtimepath:append({lua_string(plugin_root)})"
+        f" dofile({lua_string(lua_path)}).launch({lua_string(meta_path)})"
     )
 
     cmd = (
