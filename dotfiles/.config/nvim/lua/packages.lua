@@ -32,7 +32,6 @@ vim.pack.add({
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/HiPhish/info.vim",
   "https://github.com/catgoose/nvim-colorizer.lua",
-  "https://github.com/chrishrb/gx.nvim",
   "https://github.com/brianhuster/live-preview.nvim",
 })
 
@@ -261,64 +260,6 @@ require("colorizer").setup({
     "typescriptreact",
     "vim",
     "yaml",
-  },
-})
-
--- }}}
--- https://github.com/chrishrb/gx.nvim {{{
-
----@diagnostic disable-next-line: missing-fields
-require("gx").setup({
-  open_browser_app = "firefox",
-  handlers = {
-    cratesio = {
-      name = "cratesio",
-      filename = "Cargo.toml",
-      handle = function(mode, line, _)
-        local pkg = require("gx.helper").find(line, mode, "([^=%s]+)%s-=%s")
-        if pkg then
-          return "https://crates.io/crates/" .. pkg
-        end
-      end,
-    },
-    pypi = {
-      name = "pypi",
-      filename = "pyproject.toml",
-      handle = function(mode, line, _)
-        -- Match poetry dependencies (name = "version")
-        local pkg = require("gx.helper").find(line, mode, "([^=%s]+)%s-=%s")
-        if pkg then
-          return "https://pypi.org/project/" .. pkg
-        end
-        -- Match builtin dependencies list format ("name>=version" or "name")
-        local dep_pkg =
-          require("gx.helper").find(line, mode, '"([^>=%s"]+)[^"]*"')
-        if dep_pkg then
-          return "https://pypi.org/project/" .. dep_pkg
-        end
-      end,
-    },
-    ruff = {
-      name = "ruff",
-      filetypes = { "python" },
-      handle = function(mode, line, _)
-        local rule =
-          require("gx.helper").find(line, mode, "# noqa: ([A-Z][0-9]+)")
-        if rule then
-          return "https://docs.astral.sh/ruff/rules/" .. rule
-        end
-      end,
-    },
-    npmjs = {
-      name = "npmjs",
-      filename = "package.json",
-      handle = function(mode, line, _)
-        local pkg = require("gx.helper").find(line, mode, '"([^"]+)":')
-        if pkg then
-          return "https://www.npmjs.com/package/" .. pkg
-        end
-      end,
-    },
   },
 })
 

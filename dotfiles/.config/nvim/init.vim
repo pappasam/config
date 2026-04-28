@@ -199,8 +199,6 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
-nnoremap gx <Cmd>Browse<CR>
-xnoremap gx <Cmd>Browse<CR>
 nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>em <Cmd>edit ~/config/dotfiles/.config/mise/config.toml<CR>
