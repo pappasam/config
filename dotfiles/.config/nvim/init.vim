@@ -94,15 +94,15 @@ endfunction
 
 command! EditNvimConfig call s:edit_nvim_config()
 function! s:edit_nvim_config()
-  cd ~/config/dotfiles/.config/nvim
-  edit  ~/config/dotfiles/.config/nvim/init.vim
-  tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
-  tabe ~/config/dotfiles/.config/nvim/lua/settings.lua
-  tabe ~/config/dotfiles/.config/nvim/lua/lsp.lua
-  tabe ~/config/dotfiles/.config/nvim/lua/treesitter.lua
-  tabe ~/config/dotfiles/.config/nvim/lua/diff-review.lua
-  wincmd h
-  2tabnext
+  set lazyredraw
+  try
+    cd ~/config/dotfiles/.config/nvim
+    edit ~/config/dotfiles/.config/nvim/lua/packages.lua
+    tabe  ~/config/dotfiles/.config/nvim/init.vim
+    1tabnext
+  finally
+    set nolazyredraw
+  endtry
 endfunction
 
 command! ResizeTabs call s:resize_tabs()
