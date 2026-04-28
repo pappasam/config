@@ -9,3 +9,6 @@ else
   sed -i 's/include papercolor-light\.conf/include papercolor-dark.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
   sed -i 's/colorscheme PaperColorSlimLight/colorscheme PaperColorSlim/' ~/config/dotfiles/.config/nvim/init.vim
 fi
+
+# https://sw.kovidgoyal.net/kitty/conf/#kitty-conf
+pkill -USR1 -x kitty || true
