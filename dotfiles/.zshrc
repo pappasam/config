@@ -13,10 +13,12 @@ export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export ZSH_AUTOSUGGEST_STRATEGY=(completion)
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE='?(#c1,2)'
 export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='?(#c1,2)'
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
+export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
@@ -29,14 +31,19 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
     atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
     atpull"%atclone" src"init.zsh"
 fi
-setopt APPENDHISTORY
 setopt ALWAYS_TO_END
-setopt AUTOCD
+setopt APPENDHISTORY
 setopt AUTO_LIST
+setopt AUTO_MENU
+setopt AUTOCD
 setopt COMPLETE_IN_WORD
 setopt GLOB_COMPLETE
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt INCAPPENDHISTORY
+setopt LIST_PACKED
 setopt PROMPT_SUBST
 setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
@@ -65,12 +72,15 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zmodload -i zsh/complist
 bindkey -e # emacs
+bindkey '^y' autosuggest-accept
+bindkey '^f' forward-word
 bindkey -M menuselect '^j' menu-complete
 bindkey -M menuselect '^k' reverse-menu-complete
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
-bindkey -M menuselect '^m' accept-line-and-down-history
+bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
+bindkey -M menuselect '^m' accept-line-and-down-history
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
