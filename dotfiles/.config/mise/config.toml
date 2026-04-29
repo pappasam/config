@@ -54,6 +54,7 @@ vault = "latest"
 "cargo:cargo-update" = "latest"
 "cargo:diesel_cli" = "latest"
 "github:YS-L/csvlens" = "latest"
+"github:atuinsh/atuin" = "latest"
 "github:nishanths/license" = "latest"
 "github:supabase-community/postgres-language-server" = { version = "latest", bin = "postgres-language-server" }
 "go:github.com/sibprogrammer/xq" = "latest"

@@ -13,7 +13,7 @@ export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion history)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
 export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
@@ -29,15 +29,6 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
     atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
     atpull"%atclone" src"init.zsh"
 fi
-_zsh_autosuggest_suggest() {
-  emulate -L zsh
-  local suggestion="$1"
-  if [[ -n "$suggestion" ]] && (( $#BUFFER >= 3 )); then
-    POSTDISPLAY="${suggestion#$BUFFER}"
-  else
-    POSTDISPLAY=
-  fi
-}
 setopt ALWAYS_TO_END
 setopt APPENDHISTORY
 setopt AUTO_LIST
@@ -89,6 +80,9 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' accept-line-and-down-history
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+if command -v atuin > /dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
