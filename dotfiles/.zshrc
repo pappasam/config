@@ -12,10 +12,12 @@ export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+  zinit light zsh-users/zsh-autosuggestions
   zinit light zsh-users/zsh-syntax-highlighting
   zinit light zsh-users/zsh-completions
   zinit light starship/starship
@@ -25,8 +27,11 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
     atpull"%atclone" src"init.zsh"
 fi
 setopt APPENDHISTORY
+setopt ALWAYS_TO_END
 setopt AUTOCD
 setopt AUTO_LIST
+setopt COMPLETE_IN_WORD
+setopt GLOB_COMPLETE
 setopt HIST_IGNORE_SPACE
 setopt INCAPPENDHISTORY
 setopt PROMPT_SUBST
@@ -44,7 +49,17 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|?=** m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}'
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- no matches --%f'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zcompcache"
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' complete-options true
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zmodload -i zsh/complist
 bindkey -e # emacs
 bindkey -M menuselect '^j' menu-complete
