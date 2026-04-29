@@ -13,10 +13,8 @@ export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE='?(#c1,2)'
-export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='?(#c1,2)'
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
 export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
@@ -31,6 +29,15 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
     atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
     atpull"%atclone" src"init.zsh"
 fi
+_zsh_autosuggest_suggest() {
+  emulate -L zsh
+  local suggestion="$1"
+  if [[ -n "$suggestion" ]] && (( $#BUFFER >= 3 )); then
+    POSTDISPLAY="${suggestion#$BUFFER}"
+  else
+    POSTDISPLAY=
+  fi
+}
 setopt ALWAYS_TO_END
 setopt APPENDHISTORY
 setopt AUTO_LIST
@@ -74,8 +81,8 @@ zmodload -i zsh/complist
 bindkey -e # emacs
 bindkey '^y' autosuggest-accept
 bindkey '^f' forward-word
-bindkey -M menuselect '^j' menu-complete
-bindkey -M menuselect '^k' reverse-menu-complete
+bindkey -M menuselect '^j' down-line-or-history
+bindkey -M menuselect '^k' up-line-or-history
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
 bindkey -M menuselect '^[' send-break
