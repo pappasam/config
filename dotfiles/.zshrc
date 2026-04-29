@@ -14,6 +14,9 @@ export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include
 export CARAPACE_MATCH=1
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE='?(#c1,2)'
+export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='?(#c1,2)'
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
