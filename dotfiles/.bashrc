@@ -25,7 +25,7 @@ export SAVEHIST=5000                                             # how many line
 export VIRTUAL_ENV_DISABLE_PROMPT=1                              # disable python venv prompt so I can configure myself
 export ENABLE_LSP_TOOL=1                                         # https://github.com/anthropics/claude-code/issues/15619
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-export CLAUDE_CODE_NO_FLICKER=1
+export CLAUDE_CODE_NO_FLICKER=0
 
 # shellcheck source=/dev/null
 function include() { [[ -f "$1" ]] && source "$1"; }
