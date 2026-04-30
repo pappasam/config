@@ -52,7 +52,7 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}'
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=*'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
