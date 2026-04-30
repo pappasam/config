@@ -12,7 +12,7 @@ export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+export CARAPACE_BRIDGES='zsh'
 export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion history)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
@@ -52,7 +52,8 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}'
+zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
@@ -60,7 +61,6 @@ zstyle ':completion:*:warnings' format '%F{red}-- no matches --%f'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$HOME/.zcompcache"
 zstyle ':completion:*' squeeze-slashes true
-zstyle ':completion:*' complete-options true
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zmodload -i zsh/complist
