@@ -75,6 +75,13 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' accept-line-and-down-history
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+if command -v fzf > /dev/null; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_DEFAULT_OPTS='--bind=ctrl-y:accept,ctrl-j:down,ctrl-k:up'
+  export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  eval "$(fzf --zsh)"
+fi
 if command -v atuin > /dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
