@@ -10,6 +10,7 @@ sudo apt update
 sudo apt upgrade -y
 
 sudo apt install -y \
+  alsa-utils \
   apache2-utils \
   apt-transport-https \
   autoconf \
@@ -81,6 +82,7 @@ sudo apt install -y \
   libncurses6 \
   libncursesw6 \
   libnghttp2-dev \
+  libnotify-bin \
   libonig-dev \
   libpng-dev \
   libpq-dev \
@@ -89,6 +91,7 @@ sudo apt install -y \
   libreadline6-dev \
   librsvg2-bin \
   libsasl2-dev \
+  libspa-0.2-bluetooth \
   libsqlite3-dev \
   libssl-dev \
   libtool \
@@ -111,14 +114,13 @@ sudo apt install -y \
   nghttp2 \
   openssl \
   pandoc \
-  paprefs \
   patch \
   peek \
   perl \
   php \
+  pipewire-alsa \
   pkg-config \
-  pulseaudio-module-gsettings \
-  pulseaudio-module-raop \
+  pulseaudio-utils \
   python3-openssl \
   qpdf \
   re2c \
@@ -140,12 +142,16 @@ sudo apt install -y \
   unixodbc-dev \
   unzip \
   uuid-dev \
+  vulkan-tools \
   webcamoid \
   wget \
+  wl-clipboard \
+  wtype \
   xclip \
   xsel \
   xz-utils \
   xzdec \
+  ydotool \
   zathura \
   zlib1g-dev \
   zsh
