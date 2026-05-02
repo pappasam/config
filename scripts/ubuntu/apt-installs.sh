@@ -152,6 +152,7 @@ sudo apt install -y \
   xz-utils \
   xzdec \
   ydotool \
+  ydotoold \
   zathura \
   zlib1g-dev \
   zsh
