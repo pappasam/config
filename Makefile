@@ -17,6 +17,14 @@ run-scripts: ## Run relevant scripts (apt-install, etc) to set up system
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
 
+.PHONY: murmure-import
+murmure-import: ## Import the repo-backed Murmure configuration
+	bash ./scripts/murmure/import-config.sh
+
+.PHONY: murmure-sync
+murmure-sync: ## Refresh the repo-backed Murmure configuration from local app state
+	bash ./scripts/murmure/sync-config.sh
+
 .PHONY: clean
 clean: ## Remove stowed links
 	stow --target $(HOME) -D dotfiles

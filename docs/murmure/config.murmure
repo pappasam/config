@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "settings": {
+    "record_shortcut": "ctrl+alt+m",
+    "last_transcript_shortcut": "ctrl+shift+m",
+    "llm_record_shortcut": "ctrl+alt+space",
+    "command_shortcut": "ctrl+shift+x",
+    "llm_mode_1_shortcut": "ctrl+shift+1",
+    "llm_mode_2_shortcut": "ctrl+shift+2",
+    "llm_mode_3_shortcut": "ctrl+shift+3",
+    "llm_mode_4_shortcut": "ctrl+shift+4",
+    "record_mode": "push_to_talk",
+    "overlay_mode": "recording",
+    "overlay_position": "top",
+    "api_enabled": false,
+    "api_port": 4800,
+    "copy_to_clipboard": false,
+    "paste_method": "direct",
+    "persist_history": false,
+    "language": "en",
+    "sound_enabled": true,
+    "onboarding": {
+      "used_home_shortcut": true,
+      "transcribed_outside_app": true,
+      "added_dictionary_word": true,
+      "congrats_dismissed": true
+    },
+    "cancel_shortcut": "escape",
+    "mic_id": null,
+    "mic_label": null,
+    "log_level": "error",
+    "wake_word_enabled": false,
+    "wake_word_record": "yo mur",
+    "wake_word_command": "alix command",
+    "wake_word_cancel": "alix cancel",
+    "wake_word_validate": "alix validate",
+    "auto_enter_after_wake_word": false,
+    "silence_timeout_ms": 1500,
+    "show_in_dock": true
+  },
+  "llm_connect": {
+    "url": "http://localhost:11434/api",
+    "modes": [
+      {
+        "name": "General",
+        "prompt": "<role>\nYour role is to correct a transcription produced by an ASR. You are not a conversational assistant.\n</role>\n\n<instructions>\nCorrect only the following text according to these strict rules:\n- Correct spelling and grammar.\n- Remove repetitions and hesitations.\n- Replace misrecognized words only if they are phonetically similar to a word from the dictionary. Here are the dictionary words: <lexicon>{{DICTIONARY}}</lexicon>\n- Structure the text into paragraphs or bullet points only if it clearly improves readability.\n- Never modify the meaning or the content.\n- Do not answer questions and do not comment on them.\n- Remove all '*' characters and never add any.\n- Do not generate any comment or introduction.\n- If you do not know or if there is nothing to modify, return the transcription as is.\n</instructions>\n\n<input>{{TRANSCRIPT}}</input>\n",
+        "model": "",
+        "shortcut": "Ctrl+Shift+1",
+        "provider": "local",
+        "wake_word": "alix general"
+      }
+    ],
+    "active_mode_index": 0,
+    "onboarding_completed": false,
+    "remote_url": "",
+    "remote_privacy_acknowledged": false
+  }
+}
