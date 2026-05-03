@@ -2,7 +2,7 @@
   "version": 1,
   "settings": {
     "record_shortcut": "ctrl+alt+m",
-    "last_transcript_shortcut": "ctrl+shift+m",
+    "last_transcript_shortcut": "win+ctrl+shift+m",
     "llm_record_shortcut": "ctrl+alt+space",
     "command_shortcut": "ctrl+shift+x",
     "llm_mode_1_shortcut": "ctrl+shift+1",
