@@ -258,6 +258,7 @@ nnoremap <Leader>gD <Cmd>DiffReviewClose<CR>
 
 augroup init_custom
   autocmd!
+  autocmd BufRead,BufNewFile *.murmure set filetype=json
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
   autocmd BufRead,BufNewFile *.min.js set filetype=none
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
