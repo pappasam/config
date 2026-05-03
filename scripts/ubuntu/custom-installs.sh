@@ -63,3 +63,8 @@ if ! command -v op >/dev/null; then
     sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg &&
     sudo apt update && sudo apt install 1password-cli
 fi
+
+if ! command -v murmure >/dev/null; then
+  echo 'INSTALLING: murmure'
+  curl -fsSL https://raw.githubusercontent.com/Kieirra/murmure/main/install.sh | sh
+fi
