@@ -58,7 +58,6 @@ vault = "latest"
 "github:YS-L/csvlens" = "latest"
 "github:atuinsh/atuin" = "latest"
 "github:nishanths/license" = "latest"
-"github:peteonrails/voxtype" = { version = "latest", asset_pattern = "voxtype-*-linux-x86_64-onnx-avx2", bin = "voxtype" }
 "github:supabase-community/postgres-language-server" = { version = "latest", bin = "postgres-language-server" }
 "go:github.com/sibprogrammer/xq" = "latest"
 "go:golang.org/x/tools/gopls" = "latest"
