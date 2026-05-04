@@ -419,6 +419,10 @@ function ltex-ls-plus-install() {
   tar -xf ./ltex-ls-plus.tar.gz && rm ./ltex-ls-plus.tar.gz && mv ./ltex-ls-plus-18.2.0 ~/src/lib
 }
 
+function ollama-update() {
+  curl -fsSL https://ollama.com/install.sh | sh
+}
+
 function rustup-components() {
   rustup component add rust-analyzer rust-src rustfmt clippy
   rustup component add --toolchain nightly rust-analyzer rust-src rustfmt clippy
