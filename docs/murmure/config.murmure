@@ -1,9 +1,9 @@
 {
   "version": 1,
   "settings": {
-    "record_shortcut": "ctrl+alt+m",
+    "record_shortcut": "ctrl+alt+space",
     "last_transcript_shortcut": "win+ctrl+shift+m",
-    "llm_record_shortcut": "ctrl+alt+space",
+    "llm_record_shortcut": "ctrl+alt+m",
     "command_shortcut": "ctrl+alt+x",
     "llm_mode_1_shortcut": "ctrl+alt+shift+1",
     "llm_mode_2_shortcut": "ctrl+alt+shift+2",
@@ -55,5 +55,110 @@
     "onboarding_completed": true,
     "remote_url": "",
     "remote_privacy_acknowledged": false
+  },
+  "formatting_rules": {
+    "settings": {
+      "built_in": {
+        "convert_text_numbers": false,
+        "short_text_correction": 3,
+        "space_before_punctuation": false,
+        "text_numbers_language": "en",
+        "text_numbers_threshold": 0.0,
+        "trailing_space": true
+      },
+      "rules": [
+        {
+          "enabled": true,
+          "id": "38cd73fc-7a3e-453b-92b4-1699e44f4734",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "um"
+        },
+        {
+          "enabled": true,
+          "id": "4755ce00-ae63-43ad-94f2-1ed77d7aa57a",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "uh huh"
+        },
+        {
+          "enabled": true,
+          "id": "434d92bd-d2e2-4e83-a399-da07daae36b0",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "uh"
+        },
+        {
+          "enabled": true,
+          "id": "33054bcf-6be6-4030-89c3-7ace4daad8c0",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "hmm"
+        },
+        {
+          "enabled": true,
+          "id": "7dd07b72-76cc-4970-ae0d-b68d7a7c0164",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "you know"
+        },
+        {
+          "enabled": true,
+          "id": "0251490f-27f2-4a95-9a64-c2a8e9784245",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "I mean"
+        },
+        {
+          "enabled": true,
+          "id": "facb8d43-c638-4c22-afac-e9fad57c3342",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "like,"
+        },
+        {
+          "enabled": true,
+          "id": "f587999b-659e-4458-8fc0-74f550da540d",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": ", like"
+        },
+        {
+          "enabled": true,
+          "id": "b8180f01-3e8e-40d3-a9a0-463b1fd01363",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "basically"
+        },
+        {
+          "enabled": true,
+          "id": "0bcf680e-8876-4c95-bb16-b3b0638d57b0",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "sort of"
+        },
+        {
+          "enabled": true,
+          "id": "5244c25e-7576-4420-bf4c-4b22e4a15788",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "kind of"
+        },
+        {
+          "enabled": true,
+          "id": "95587100-92f7-437e-a5c9-bca7ddd3bc6f",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "right,"
+        },
+        {
+          "enabled": true,
+          "id": "82112df7-0e08-4751-a645-2df893a275f7",
+          "match_mode": "smart",
+          "replacement": "",
+          "trigger": "actually,"
+        }
+      ]
+    }
   }
 }
