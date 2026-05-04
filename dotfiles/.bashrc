@@ -145,7 +145,9 @@ alias gp='git remote prune origin && git remote set-head origin -a'
 alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias gg='lazygit'
+function gg() {
+  nvim -c G "$@"
+}
 alias gop='gh pr view --web || gh browse'
 
 # General
