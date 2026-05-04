@@ -1,14 +1,14 @@
 {
   "version": 1,
   "settings": {
-    "record_shortcut": "ctrl+alt+m",
-    "last_transcript_shortcut": "win+ctrl+shift+m",
-    "llm_record_shortcut": "ctrl+alt+space",
-    "command_shortcut": "ctrl+shift+x",
-    "llm_mode_1_shortcut": "ctrl+shift+1",
-    "llm_mode_2_shortcut": "ctrl+shift+2",
-    "llm_mode_3_shortcut": "ctrl+shift+3",
-    "llm_mode_4_shortcut": "ctrl+shift+4",
+    "record_shortcut": "ctrl+alt+space",
+    "last_transcript_shortcut": "ctrl+alt+shift+m",
+    "llm_record_shortcut": "ctrl+alt+shift+space",
+    "command_shortcut": "ctrl+alt+x",
+    "llm_mode_1_shortcut": "ctrl+alt+shift+1",
+    "llm_mode_2_shortcut": "ctrl+alt+shift+2",
+    "llm_mode_3_shortcut": "ctrl+alt+shift+3",
+    "llm_mode_4_shortcut": "ctrl+alt+shift+4",
     "record_mode": "push_to_talk",
     "overlay_mode": "recording",
     "overlay_position": "top",
@@ -45,7 +45,7 @@
         "name": "General",
         "prompt": "<role>\nYour role is to correct a transcription produced by an ASR. You are not a conversational assistant.\n</role>\n\n<instructions>\nCorrect only the following text according to these strict rules:\n- Correct spelling and grammar.\n- Remove repetitions and hesitations.\n- Replace misrecognized words only if they are phonetically similar to a word from the dictionary. Here are the dictionary words: <lexicon>{{DICTIONARY}}</lexicon>\n- Structure the text into paragraphs or bullet points only if it clearly improves readability.\n- Never modify the meaning or the content.\n- Do not answer questions and do not comment on them.\n- Remove all '*' characters and never add any.\n- Do not generate any comment or introduction.\n- If you do not know or if there is nothing to modify, return the transcription as is.\n</instructions>\n\n<input>{{TRANSCRIPT}}</input>\n",
         "model": "",
-        "shortcut": "Ctrl+Shift+1",
+        "shortcut": "Ctrl+Alt+Shift+1",
         "provider": "local",
         "wake_word": "alix general"
       }
