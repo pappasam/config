@@ -83,8 +83,10 @@ if command -v fzf > /dev/null; then
   eval "$(fzf --zsh)"
 fi
 if command -v atuin > /dev/null; then
+  zsh_autosuggest_strategy=("${ZSH_AUTOSUGGEST_STRATEGY[@]}")
   eval "$(atuin init zsh --disable-up-arrow)"
-  export ZSH_AUTOSUGGEST_STRATEGY=(completion)
+  export ZSH_AUTOSUGGEST_STRATEGY=("${zsh_autosuggest_strategy[@]}")
+  unset zsh_autosuggest_strategy
 fi
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
