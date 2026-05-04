@@ -146,7 +146,7 @@ alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 function gg() {
-  nvim -c G "$@"
+  nvim -c G -c 'normal ]]' "$@"
 }
 alias gop='gh pr view --web || gh browse'
 
