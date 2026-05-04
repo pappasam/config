@@ -1,0 +1,11 @@
+search_mode = "prefix"
+filter_mode = "host"
+filter_mode_shell_up_key_binding = "directory"
+enter_accept = false
+store_failed = false
+secrets_filter = true
+
+# Keep stale directory jumps out of Atuin's history database.
+history_filter = [
+  "^cd($| )",
+]

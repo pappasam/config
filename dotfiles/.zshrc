@@ -13,7 +13,7 @@ export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_MATCH=1
 export CARAPACE_BRIDGES='zsh'
-export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion history)
+export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
 export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
@@ -84,6 +84,7 @@ if command -v fzf > /dev/null; then
 fi
 if command -v atuin > /dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
+  export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 fi
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
