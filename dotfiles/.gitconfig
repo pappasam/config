@@ -32,5 +32,7 @@
   helper = !gh auth git-credential
 [credential "https://gist.github.com"]
   helper = !gh auth git-credential
+[url "https://github.com/"]
+  insteadOf = git@github.com:
 [pager]
   diff = delta
