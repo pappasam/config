@@ -47,6 +47,7 @@ The following keyboard shortcuts and mappings make it easier to do things withou
 - Custom
     - Kitty: `/home/sroeca/.local/bin/kitty`, `Ctrl+Alt+i`
     - Firefox: `firefox`, `Ctrl+Alt+b`
+    - Flameshot selection to clipboard: `flameshot gui --clipboard --accept-on-select`, `Ctrl+Alt+C`
 
 ### Layouts
 
