@@ -258,6 +258,7 @@ nnoremap <Leader>gD <Cmd>DiffReviewClose<CR>
 
 augroup init_custom
   autocmd!
+  autocmd FileType fugitive nnoremap <buffer> P <Cmd>Git push<CR>
   autocmd BufRead,BufNewFile *.murmure set filetype=json
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
   autocmd BufRead,BufNewFile *.min.js set filetype=none
