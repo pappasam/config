@@ -57,10 +57,17 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 vim.api.nvim_create_autocmd("User", {
   pattern = "TSUpdate",
   callback = function()
-    require("nvim-treesitter.parsers").fga = {
+    local parsers = require("nvim-treesitter.parsers")
+    parsers.fga = {
       install_info = {
         url = "https://github.com/matoous/tree-sitter-fga",
-        queries = "queries", -- Also install queries from given directory
+        queries = "queries",
+      },
+    }
+    parsers.mermaid = {
+      install_info = {
+        path = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
+        queries = "queries",
       },
     }
   end,
