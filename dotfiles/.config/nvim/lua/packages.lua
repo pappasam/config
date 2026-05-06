@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("User", {
     }
     parsers.mermaid = {
       install_info = {
-        path = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
+        url = "https://github.com/pappasam/tree-sitter-mermaid",
         queries = "queries",
       },
     }
