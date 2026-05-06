@@ -172,6 +172,11 @@ function! s:copy_reference(range_type) range
   echo 'Copied: ' .. reference
 endfunction
 
+function! s:fugitive_mappings()
+  nnoremap <buffer> a <Cmd>Git add .<CR>
+  nnoremap <buffer> P <Cmd>Git push<CR>
+endfunction
+
 " }}}
 " Mappings {{{
 
@@ -258,7 +263,7 @@ nnoremap <Leader>gD <Cmd>DiffReviewClose<CR>
 
 augroup init_custom
   autocmd!
-  autocmd FileType fugitive nnoremap <buffer> P <Cmd>Git push<CR>
+  autocmd FileType fugitive call s:fugitive_mappings()
   autocmd BufRead,BufNewFile *.murmure set filetype=json
   autocmd BufRead,BufNewFile *.github/workflows/*.{yml,yaml} set filetype=yaml.github
   autocmd BufRead,BufNewFile *.min.js set filetype=none
