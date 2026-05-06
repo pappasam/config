@@ -59,16 +59,20 @@ vim.api.nvim_create_autocmd("User", {
   callback = function()
     local parsers = require("nvim-treesitter.parsers")
     parsers.fga = {
+      ---@diagnostic disable-next-line: missing-fields
       install_info = {
         url = "https://github.com/matoous/tree-sitter-fga",
         queries = "queries",
       },
+      tier = 4,
     }
     parsers.mermaid = {
+      ---@diagnostic disable-next-line: missing-fields
       install_info = {
         url = "https://github.com/pappasam/tree-sitter-mermaid",
         queries = "queries",
       },
+      tier = 4,
     }
   end,
 })
