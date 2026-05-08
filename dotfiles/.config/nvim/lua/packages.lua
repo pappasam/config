@@ -62,7 +62,6 @@ local function register_custom_treesitter_parsers()
       url = "https://github.com/matoous/tree-sitter-fga",
       queries = "queries",
     },
-    tier = 4,
   }
   parsers.mermaid = {
     ---@diagnostic disable-next-line: missing-fields
@@ -70,7 +69,6 @@ local function register_custom_treesitter_parsers()
       url = "https://github.com/pappasam/tree-sitter-mermaid",
       queries = "queries",
     },
-    tier = 4,
   }
 end
 
