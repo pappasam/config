@@ -54,27 +54,31 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 -- https://github.com/nvim-treesitter/nvim-treesitter {{{
 -- Manually run the following for new installations -> :TSInstall all
 
+local function register_custom_treesitter_parsers()
+  local parsers = require("nvim-treesitter.parsers")
+  parsers.fga = {
+    ---@diagnostic disable-next-line: missing-fields
+    install_info = {
+      url = "https://github.com/matoous/tree-sitter-fga",
+      queries = "queries",
+    },
+    tier = 4,
+  }
+  parsers.mermaid = {
+    ---@diagnostic disable-next-line: missing-fields
+    install_info = {
+      url = "https://github.com/pappasam/tree-sitter-mermaid",
+      queries = "queries",
+    },
+    tier = 4,
+  }
+end
+
+register_custom_treesitter_parsers()
+
 vim.api.nvim_create_autocmd("User", {
   pattern = "TSUpdate",
-  callback = function()
-    local parsers = require("nvim-treesitter.parsers")
-    parsers.fga = {
-      ---@diagnostic disable-next-line: missing-fields
-      install_info = {
-        url = "https://github.com/matoous/tree-sitter-fga",
-        queries = "queries",
-      },
-      tier = 4,
-    }
-    parsers.mermaid = {
-      ---@diagnostic disable-next-line: missing-fields
-      install_info = {
-        url = "https://github.com/pappasam/tree-sitter-mermaid",
-        queries = "queries",
-      },
-      tier = 4,
-    }
-  end,
+  callback = register_custom_treesitter_parsers,
 })
 
 -- }}}
