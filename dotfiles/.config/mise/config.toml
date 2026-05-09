@@ -5,6 +5,7 @@ idiomatic_version_file_enable_tools = ["rust"]
 python.uv_venv_auto = "create|source"
 
 [tools]
+actionlint = "latest"
 awscli = "latest"
 bat = "latest"
 biome = "latest"
