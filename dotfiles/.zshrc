@@ -11,7 +11,7 @@ export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
-export CARAPACE_MATCH=1
+export CARAPACE_UNFILTERED=1
 export CARAPACE_BRIDGES='zsh'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
@@ -52,7 +52,9 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=*'
+zstyle ':completion:*' matcher-list \
+  'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' \
+  'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=* r:|[/_-]=**'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
