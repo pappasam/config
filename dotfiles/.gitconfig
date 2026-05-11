@@ -20,6 +20,7 @@
   hist = !nvim -c "GV" -c "silent!tabonly"
   s = !nvim -c "G" -c "only"
   root = rev-parse --show-toplevel
+  biggest-files = !git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 20 | tac | numfmt --field=4 --to=iec-i --suffix=B
 [merge]
   driver = true
   conflictstyle = zdiff3
