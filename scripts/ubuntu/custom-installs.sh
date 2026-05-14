@@ -38,6 +38,13 @@ if ! command -v zoom >/dev/null; then
   sudo apt install /tmp/zoom_amd64.deb
 fi
 
+if ! command -v session-manager-plugin >/dev/null; then
+  echo 'INSTALLING: aws session-manager-plugin'
+  sudo apt update
+  curl -Lsf https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /tmp/session-manager-plugin.deb
+  sudo apt install /tmp/session-manager-plugin.deb
+fi
+
 if ! command -v gh >/dev/null; then
   echo 'INSTALLING: github-cli'
   (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) &&
