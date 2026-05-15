@@ -70,6 +70,13 @@ local function register_custom_treesitter_parsers()
       queries = "queries",
     },
   }
+  parsers.console = {
+    ---@diagnostic disable-next-line: missing-fields
+    install_info = {
+      url = "https://github.com/pappasam/tree-sitter-console",
+      queries = "queries",
+    },
+  }
 end
 
 register_custom_treesitter_parsers()
