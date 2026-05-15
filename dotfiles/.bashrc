@@ -168,6 +168,14 @@ function kr() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function vplug() { cd "$HOME/.local/share/nvim/site/pack/core/opt/$1" || return; }
 
+vpn() {
+  if nmcli -t -f GENERAL.STATE con show aws 2>/dev/null | grep -q activated; then
+    nmcli con down aws
+  else
+    nmcli con up aws
+  fi
+}
+
 function _mise_update_pattern() {
   local pattern
   if [[ $# -gt 0 ]]; then
