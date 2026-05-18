@@ -260,7 +260,7 @@ augroup init_custom
   autocmd BufRead,BufNewFile *.{1p,1pm,2pm,3pm,4pm,5pm} set filetype=nroff
   autocmd BufRead,BufNewFile *.log set filetype=log
   autocmd BufWritePre * TrimWhitespace
-  autocmd TextYankPost * silent! lua vim.hl.on_yank({higroup="VisualNOS", timeout=250})
+  autocmd TextYankPost,TextPutPost * silent! lua vim.hl.hl_op({higroup="VisualNOS", timeout=250})
   autocmd VimResized * ResizeTabs
 augroup end
 
