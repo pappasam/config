@@ -7,7 +7,8 @@ vim.pack.add({
     version = vim.version.range("*"),
   },
   -- Treesitter
-  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/neovim-treesitter/nvim-treesitter",
+  "https://github.com/neovim-treesitter/treesitter-parser-registry",
   -- Pairs
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/windwp/nvim-ts-autotag",
