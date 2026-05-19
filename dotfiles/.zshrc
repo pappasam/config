@@ -11,6 +11,7 @@ export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
+export CARAPACE_MATCH=1
 export CARAPACE_UNFILTERED=1
 export CARAPACE_BRIDGES='zsh'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
@@ -52,9 +53,13 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' matcher-list \
+  '' \
   'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' \
-  'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=* r:|[/_-]=**'
+  'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=* r:|[/_.-]=**'
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
@@ -88,8 +93,9 @@ if command -v atuin > /dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
-  source <(carapace _carapace) # https://carapace-sh.github.io/carapace-bin/completers.html
+  source <(carapace _carapace zsh) # https://carapace-sh.github.io/carapace-bin/completers.html
 fi
+compdef _files f
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
