@@ -24,6 +24,11 @@ vim.pack.add({
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
   -- My plugins
+  {
+    src = "https://github.com/pappasam/nvim-read-mcp",
+    name = "nvim-context-mcp",
+    version = vim.version.range("*"),
+  },
   "https://github.com/pappasam/nvim-repl",
   "https://github.com/pappasam/papercolor-theme-slim",
   "https://github.com/pappasam/vim-filetype-formatter",
@@ -282,5 +287,10 @@ require("colorizer").setup({
     "yaml",
   },
 })
+
+-- }}}
+-- https://github.com/pappasam/nvim-read-mcp {{{
+
+require("nvim_context_mcp").setup()
 
 -- }}}
