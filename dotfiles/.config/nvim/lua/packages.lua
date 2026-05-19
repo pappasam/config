@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
   callback = function(event)
     if
       event.data.spec.name == "nvim-treesitter"
-      and event.data.kind == "update"
+      and vim.tbl_contains({ "install", "update" }, event.data.kind)
     then
       vim.schedule(function()
         vim.cmd("TSUpdate")
@@ -57,39 +57,51 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
 })
 
 -- }}}
--- https://github.com/nvim-treesitter/nvim-treesitter {{{
--- Manually run the following for new installations -> :TSInstall all
+-- https://github.com/neovim-treesitter/nvim-treesitter {{{
 
-local function register_custom_treesitter_parsers()
-  local parsers = require("nvim-treesitter.parsers")
-  parsers.fga = {
-    ---@diagnostic disable-next-line: missing-fields
-    install_info = {
-      url = "https://github.com/matoous/tree-sitter-fga",
-      queries = "queries",
-    },
-  }
-  parsers.mermaid = {
-    ---@diagnostic disable-next-line: missing-fields
-    install_info = {
-      url = "https://github.com/pappasam/tree-sitter-mermaid",
-      queries = "queries",
-    },
-  }
-  parsers.console = {
-    ---@diagnostic disable-next-line: missing-fields
-    install_info = {
+local custom_treesitter_parsers = {
+  console = {
+    source = {
+      type = "self_contained",
       url = "https://github.com/pappasam/tree-sitter-console",
-      queries = "queries",
+      queries_path = "queries",
     },
-  }
+    filetypes = { "console" },
+  },
+  fga = {
+    source = {
+      type = "self_contained",
+      url = "https://github.com/matoous/tree-sitter-fga",
+      queries_path = "queries",
+    },
+    filetypes = { "fga" },
+  },
+  mermaid = {
+    source = {
+      type = "self_contained",
+      url = "https://github.com/pappasam/tree-sitter-mermaid",
+      queries_path = "queries",
+    },
+    filetypes = { "mermaid" },
+  },
+}
+
+local treesitter_registry = require("treesitter-registry")
+local treesitter_registry_load = treesitter_registry.load
+
+treesitter_registry.load = function(callback, opts)
+  treesitter_registry_load(function(registry, err)
+    if registry then
+      registry = vim.tbl_extend("force", registry, custom_treesitter_parsers)
+      treesitter_registry.loaded = registry
+    end
+
+    callback(registry, err)
+  end, opts)
 end
 
-register_custom_treesitter_parsers()
-
-vim.api.nvim_create_autocmd("User", {
-  pattern = "TSUpdate",
-  callback = register_custom_treesitter_parsers,
+require("nvim-treesitter").setup({
+  local_parsers = custom_treesitter_parsers,
 })
 
 -- }}}
