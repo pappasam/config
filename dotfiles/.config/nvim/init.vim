@@ -1,5 +1,7 @@
 " Commands {{{
 
+command P packupdate
+
 command! GG call s:gitsigns_toggle()
 function! s:gitsigns_toggle()
   Gitsigns toggle_deleted
