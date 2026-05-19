@@ -41,23 +41,56 @@ vim.pack.add({
   "https://github.com/brianhuster/live-preview.nvim",
 })
 
-vim.api.nvim_create_autocmd({ "PackChanged" }, {
-  group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
-  ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
-  callback = function(event)
-    if
-      event.data.spec.name == "nvim-treesitter"
-      and vim.tbl_contains({ "install", "update" }, event.data.kind)
-    then
-      vim.schedule(function()
-        vim.cmd("TSUpdate")
-      end)
-    end
-  end,
-})
-
 -- }}}
 -- https://github.com/neovim-treesitter/nvim-treesitter {{{
+
+local treesitter_parsers = {
+  "bash",
+  "c",
+  "comment",
+  "console",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "dot",
+  "ecma",
+  "editorconfig",
+  "fga",
+  "git_config",
+  "gitcommit",
+  "gitignore",
+  "go",
+  "gomod",
+  "gosum",
+  "haskell",
+  "hcl",
+  "html",
+  "html_tags",
+  "javascript",
+  "json",
+  "json5",
+  "jsx",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "mermaid",
+  "python",
+  "query",
+  "regex",
+  "ruby",
+  "rust",
+  "sql",
+  "terraform",
+  "toml",
+  "tsx",
+  "typescript",
+  "vim",
+  "vimdoc",
+  "yaml",
+  "zsh",
+}
 
 local custom_treesitter_parsers = {
   console = {
@@ -87,21 +120,51 @@ local custom_treesitter_parsers = {
 }
 
 local treesitter_registry = require("treesitter-registry")
+local treesitter_registry_load_key = "load"
 local treesitter_registry_load = treesitter_registry.load
 
-treesitter_registry.load = function(callback, opts)
-  treesitter_registry_load(function(registry, err)
-    if registry then
-      registry = vim.tbl_extend("force", registry, custom_treesitter_parsers)
-      treesitter_registry.loaded = registry
-    end
+rawset(
+  treesitter_registry,
+  treesitter_registry_load_key,
+  function(callback, opts)
+    treesitter_registry_load(function(registry, err)
+      if registry then
+        registry = vim.tbl_extend("force", registry, custom_treesitter_parsers)
+        treesitter_registry.loaded = registry
+      end
 
-    callback(registry, err)
-  end, opts)
-end
+      callback(registry, err)
+    end, opts)
+  end
+)
 
 require("nvim-treesitter").setup({
   local_parsers = custom_treesitter_parsers,
+})
+
+local function run_treesitter_parser_command(command)
+  vim.cmd(command .. " " .. table.concat(treesitter_parsers, " "))
+end
+
+vim.api.nvim_create_user_command("TSInstallConfigured", function()
+  run_treesitter_parser_command("TSInstall")
+end, {
+  desc = "Install configured treesitter parsers",
+})
+
+vim.api.nvim_create_autocmd({ "PackChanged" }, {
+  group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
+  ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
+  callback = function(event)
+    if
+      event.data.spec.name == "nvim-treesitter"
+      and vim.tbl_contains({ "install", "update" }, event.data.kind)
+    then
+      vim.schedule(function()
+        run_treesitter_parser_command("TSInstall")
+      end)
+    end
+  end,
 })
 
 -- }}}
