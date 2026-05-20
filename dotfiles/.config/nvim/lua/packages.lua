@@ -45,54 +45,9 @@ vim.pack.add({
 -- https://github.com/neovim-treesitter/nvim-treesitter {{{
 
 local treesitter_parsers = {
-  "bash",
-  "c",
-  "comment",
-  "console",
-  "cpp",
-  "css",
-  "diff",
-  "dockerfile",
-  "dot",
-  "ecma",
-  "editorconfig",
-  "fga",
-  "git_config",
-  "gitcommit",
-  "gitignore",
-  "go",
-  "gomod",
-  "gosum",
-  "haskell",
-  "hcl",
-  "html",
-  "html_tags",
-  "javascript",
-  "json",
-  "json5",
-  "jsx",
-  "lua",
-  "make",
-  "markdown",
-  "markdown_inline",
-  "mermaid",
-  "python",
-  "query",
-  "regex",
-  "ruby",
-  "rust",
-  "sql",
-  "terraform",
-  "toml",
-  "tsx",
-  "typescript",
-  "vim",
-  "vimdoc",
-  "yaml",
-  "zsh",
-}
-
-local custom_treesitter_parsers = {
+  bash = true,
+  c = true,
+  comment = true,
   console = {
     source = {
       type = "self_contained",
@@ -101,6 +56,13 @@ local custom_treesitter_parsers = {
     },
     filetypes = { "console" },
   },
+  cpp = true,
+  css = true,
+  diff = true,
+  dockerfile = true,
+  dot = true,
+  ecma = true,
+  editorconfig = true,
   fga = {
     source = {
       type = "self_contained",
@@ -109,6 +71,24 @@ local custom_treesitter_parsers = {
     },
     filetypes = { "fga" },
   },
+  git_config = true,
+  gitcommit = true,
+  gitignore = true,
+  go = true,
+  gomod = true,
+  gosum = true,
+  haskell = true,
+  hcl = true,
+  html = true,
+  html_tags = true,
+  javascript = true,
+  json = true,
+  json5 = true,
+  jsx = true,
+  lua = true,
+  make = true,
+  markdown = true,
+  markdown_inline = true,
   mermaid = {
     source = {
       type = "self_contained",
@@ -117,7 +97,31 @@ local custom_treesitter_parsers = {
     },
     filetypes = { "mermaid" },
   },
+  python = true,
+  query = true,
+  regex = true,
+  ruby = true,
+  rust = true,
+  sql = true,
+  terraform = true,
+  toml = true,
+  tsx = true,
+  typescript = true,
+  vim = true,
+  vimdoc = true,
+  yaml = true,
+  zsh = true,
 }
+
+local treesitter_parser_names = vim.tbl_keys(treesitter_parsers)
+table.sort(treesitter_parser_names)
+
+local custom_treesitter_parsers = {}
+for name, parser in pairs(treesitter_parsers) do
+  if parser ~= true then
+    custom_treesitter_parsers[name] = parser
+  end
+end
 
 local treesitter_registry = require("treesitter-registry")
 local treesitter_registry_load_key = "load"
@@ -143,7 +147,7 @@ require("nvim-treesitter").setup({
 })
 
 local function run_treesitter_parser_command(command)
-  vim.cmd(command .. " " .. table.concat(treesitter_parsers, " "))
+  vim.cmd(command .. " " .. table.concat(treesitter_parser_names, " "))
 end
 
 vim.api.nvim_create_user_command("TSInstallConfigured", function()
