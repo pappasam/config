@@ -348,6 +348,12 @@ require("colorizer").setup({
 -- }}}
 -- https://github.com/pappasam/nvim-read-mcp {{{
 
-require("nvim_context_mcp").setup()
+require("nvim_context_mcp").setup({
+  binary = {
+    auto_install = true,
+    expose_on_path = true,
+    bin_dir = vim.fn.expand("~/.local/bin"),
+  },
+})
 
 -- }}}
