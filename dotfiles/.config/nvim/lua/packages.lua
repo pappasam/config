@@ -95,8 +95,8 @@ local treesitter_parsers = {
 local custom_treesitter_parsers = {
   console = {
     source = {
-      type = "self_contained",
-      url = "https://github.com/pappasam/tree-sitter-console",
+      type = "local",
+      path = "/home/sroeca/src/pappasam/tree-sitter-console",
       queries_path = "queries",
     },
     filetypes = { "console" },
@@ -111,8 +111,8 @@ local custom_treesitter_parsers = {
   },
   mermaid = {
     source = {
-      type = "self_contained",
-      url = "https://github.com/pappasam/tree-sitter-mermaid",
+      type = "local",
+      path = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
       queries_path = "queries",
     },
     filetypes = { "mermaid" },
