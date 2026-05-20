@@ -119,25 +119,6 @@ local custom_treesitter_parsers = {
   },
 }
 
-local treesitter_registry = require("treesitter-registry")
-local treesitter_registry_load_key = "load"
-local treesitter_registry_load = treesitter_registry.load
-
-rawset(
-  treesitter_registry,
-  treesitter_registry_load_key,
-  function(callback, opts)
-    treesitter_registry_load(function(registry, err)
-      if registry then
-        registry = vim.tbl_extend("force", registry, custom_treesitter_parsers)
-        treesitter_registry.loaded = registry
-      end
-
-      callback(registry, err)
-    end, opts)
-  end
-)
-
 require("nvim-treesitter").setup({
   local_parsers = custom_treesitter_parsers,
 })
