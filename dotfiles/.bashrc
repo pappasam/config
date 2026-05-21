@@ -145,9 +145,6 @@ alias gp='git remote prune origin && git remote set-head origin -a'
 alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
-function gg() {
-  nvim -c G -c 'normal ]]' -c 'only' "$@"
-}
 alias gop='gh pr view --web || gh browse'
 
 # General
@@ -168,12 +165,19 @@ function kr() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function vplug() { cd "$HOME/.local/share/nvim/site/pack/core/opt/$1" || return; }
 
-vpn() {
+function vpn() { # toggle vpn
   if nmcli -t -f GENERAL.STATE con show aws 2>/dev/null | grep -q activated; then
     nmcli con down aws
   else
     nmcli con up aws
   fi
+}
+
+# vv          # copies current directory
+# vv foo.txt  # copies absolute path to ./foo.txt
+function vv() { # copy paths to clipboard
+  realpath "${1:-.}" |
+    tee >(perl -pe 'chomp if eof' | xsel --clipboard --input)
 }
 
 function _mise_update_pattern() {
@@ -211,6 +215,10 @@ function despace-filename() {
       mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
     done
   fi
+}
+
+function gg() {
+  nvim -c G -c 'normal ]]' -c 'only' "$@"
 }
 
 function gdl() {
