@@ -95,18 +95,24 @@ require("tree-sitter-manager").setup({
     console = {
       install_info = {
         url = "/home/sroeca/src/pappasam/tree-sitter-console",
+        revision = false,
+        branch = "main",
         use_repo_queries = true,
       },
     },
     fga = {
       install_info = {
         url = "https://github.com/matoous/tree-sitter-fga",
+        revision = false,
+        branch = "main",
         use_repo_queries = true,
       },
     },
     mermaid = {
       install_info = {
         url = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
+        revision = false,
+        branch = "main",
         use_repo_queries = true,
       },
     },
