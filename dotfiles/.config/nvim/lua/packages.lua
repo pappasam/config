@@ -181,6 +181,7 @@ require("nvim-tree").setup({
     always_show_folders = false, -- Turn into false from true by default
   },
   filters = {
+    git_ignored = false,
     custom = diff_review.tree_custom_filter,
   },
   renderer = {
