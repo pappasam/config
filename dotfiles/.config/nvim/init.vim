@@ -272,7 +272,11 @@ augroup end
 " https://github.com/pappasam/vim-filetype-formatter
 let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
-colorscheme PaperColorSlim " https://vimcolorschemes.com
+if &background == 'dark'
+  colorscheme PaperColorSlim
+else
+  colorscheme PaperColorSlimLight
+endif
 set termguicolors
 lua require("settings")
 lua require("lsp")
