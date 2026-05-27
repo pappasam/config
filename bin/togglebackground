@@ -2,11 +2,25 @@
 
 set -euo pipefail
 
-if grep -q -F "include papercolor-dark.conf" ~/config/dotfiles/.config/kitty/kitty.conf; then
-  sed -i 's/include papercolor-dark\.conf/include papercolor-light.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
-else
-  sed -i 's/include papercolor-light\.conf/include papercolor-dark.conf/' ~/config/dotfiles/.config/kitty/kitty.conf
+dark="$HOME/.config/kitty/papercolor-dark.conf"
+light="$HOME/.config/kitty/papercolor-light.conf"
+
+socket="${KITTY_LISTEN_ON:-}"
+if [[ -z "$socket" ]]; then
+  for candidate in /tmp/kitty-*; do
+    [[ -S "$candidate" ]] && socket="unix:$candidate" && break
+  done
 fi
 
-# https://sw.kovidgoyal.net/kitty/conf/#kitty-conf
-pkill -USR1 -x kitty || true
+[[ -n "$socket" ]] || exit 1
+
+theme="$dark"
+current_background="$(kitty @ --to "$socket" get-colors --configured | awk '$1 == "background" { print $2; exit }')"
+dark_background="$(awk '$1 == "background" { print $2; exit }' "$dark")"
+[[ "$current_background" == "$dark_background" ]] && theme="$light"
+
+mapfile -t colors < <(
+  awk '/^(foreground|background|cursor|color[0-9]+)[[:space:]]/ { print $1 "=" $2 }' "$theme"
+)
+
+kitty @ --to "$socket" set-colors --all --configured "${colors[@]}"
