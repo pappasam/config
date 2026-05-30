@@ -11,7 +11,6 @@ vim.lsp.enable({
   "gh_actions_ls",
   "gopls",
   "graphql",
-  "harper_ls",
   "html",
   "jsonls",
   "lua_ls",
@@ -45,29 +44,6 @@ vim.lsp.config("gh_actions_ls", {
   init_options = {
     -- Requires the `repo` and `workflow` scopes
     sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
-  },
-})
-
--- https://writewithharper.com/docs/rules
-vim.lsp.config("harper_ls", {
-  filetypes = {
-    "markdown",
-  },
-  settings = {
-    ["harper-ls"] = {
-      markdown = {
-        IgnoreLinkTitle = true,
-      },
-      linters = {
-        LongSentences = false,
-        RoadMap = false,
-        SentenceCapitalization = false,
-        Spaces = false,
-        SpellCheck = false,
-        SplitWords = false,
-        ToDoHyphen = false,
-      },
-    },
   },
 })
 
