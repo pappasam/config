@@ -170,6 +170,38 @@ function! s:copy_reference(range_type) range
   echo 'Copied: ' .. reference
 endfunction
 
+command! -range CD <line1>,<line2>call s:copy_diagnostics_reference(<range>)
+function! s:copy_diagnostics_reference(range_type) range
+  let file_path = expand('%:p')
+  if file_path == ''
+    echohl WarningMsg | echo 'No file to copy' | echohl None
+    return
+  endif
+  if a:range_type == 0
+    let reference = file_path
+    let firstline = 1
+    let lastline = line('$')
+  elseif a:firstline == a:lastline
+    let reference = file_path .. ':' .. a:firstline
+    let firstline = a:firstline
+    let lastline = a:lastline
+  else
+    let reference = file_path .. ':' .. a:firstline .. '-' .. a:lastline
+    let firstline = a:firstline
+    let lastline = a:lastline
+  endif
+
+  let diagnostics = luaeval('require("diagnostic_reference").lines(_A.firstline, _A.lastline)', {'firstline': firstline, 'lastline': lastline})
+  if empty(diagnostics)
+    echo 'No diagnostics found'
+    return
+  endif
+  let output = reference
+  let output ..= "\n" .. join(diagnostics, "\n")
+  call setreg('+', output)
+  echo 'Copied Diagnostics: ' .. reference
+endfunction
+
 " }}}
 " Mappings {{{
 
