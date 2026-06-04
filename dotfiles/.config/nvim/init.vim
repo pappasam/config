@@ -219,6 +219,21 @@ cnoremap <A-b> <S-Left>
 cnoremap <A-f> <S-Right>
 cnoremap <C-u> <C-E><C-U>
 nnoremap ' ,
+nnoremap <C-Space> <Nop>
+inoremap <C-Space> <Nop>
+snoremap <C-Space> <Nop>
+xnoremap <C-Space> <Nop>
+cnoremap <C-Space> <Nop>
+nnoremap <C-@> <Nop>
+inoremap <C-@> <Nop>
+snoremap <C-@> <Nop>
+xnoremap <C-@> <Nop>
+cnoremap <C-@> <Nop>
+nnoremap <Nul> <Nop>
+inoremap <Nul> <Nop>
+snoremap <Nul> <Nop>
+xnoremap <Nul> <Nop>
+cnoremap <Nul> <Nop>
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
