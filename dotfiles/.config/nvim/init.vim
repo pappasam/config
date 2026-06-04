@@ -154,6 +154,10 @@ endfunction
 
 command! -range C <line1>,<line2>call s:copy_reference(<range>)
 function! s:copy_reference(range_type) range
+  if &filetype == 'NvimTree'
+    normal gy
+    return
+  endif
   let file_path = expand('%:p')
   if file_path == ''
     echohl WarningMsg | echo 'No file to copy' | echohl None
