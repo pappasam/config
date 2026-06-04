@@ -1,10 +1,15 @@
 # :schema https://raw.githubusercontent.com/rvben/rumdl/refs/heads/main/rumdl.schema.json
 
-disable = ["MD013", "MD033", "MD036", "MD046", "MD059"]
-flavor = "mkdocs"
+disable = ["MD033", "MD036", "MD046", "MD059"]
+flavor = "standard"
 
 [MD007]
 indent = 4
 
 [MD046]
 style = "fenced"
+
+[MD013] # effectively: un-hard-wrap everything
+line-length = 10000000
+reflow = true
+reflow-mode = "normalize"
