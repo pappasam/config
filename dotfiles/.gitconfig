@@ -27,7 +27,7 @@
 [pull]
   rebase = true
 [push]
-  default = matching
+  default = simple
   autoSetupRemote = true
 [credential "https://github.com"]
   helper = !gh auth git-credential
