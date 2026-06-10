@@ -228,21 +228,96 @@ function gg() {
   nvim -c G -c 'normal ]]' -c 'only' "$@"
 }
 
+# Switch to the default branch, pull, and safely delete the branch you were on.
 function gdl() {
-  if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
-    return 1
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
+
+  local branch_default branch_current
+
+  branch_current="$(git branch --show-current)"
+  if [ -z "$branch_current" ]; then
+    echo "Not on a branch; refusing to delete anything." >&2
+    return 2
   fi
-  local branch_default
-  if [[ $# -gt 0 ]]; then
+
+  if [ "$#" -gt 0 ]; then
     branch_default="$1"
   else
-    branch_default=$(git remote show origin | grep 'HEAD branch' | cut -d ' ' -f 5)
+    branch_default="$(
+      git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null |
+        sed 's#^origin/##'
+    )"
+
     if [ -z "$branch_default" ]; then
-      echo 'Cannot connect to remote repo. Check internet connection...' && return 2
+      git remote set-head origin -a >/dev/null 2>&1 || true
+      branch_default="$(
+        git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null |
+          sed 's#^origin/##'
+      )"
+    fi
+
+    if [ -z "$branch_default" ]; then
+      echo "Cannot determine origin's default branch." >&2
+      return 2
     fi
   fi
-  branch_current=$(git branch --show-current)
-  git checkout "$branch_default" && git pull && git branch -d "$branch_current" && git remote prune origin && git remote set-head origin -a
+
+  if [ "$branch_current" = "$branch_default" ]; then
+    echo "Already on $branch_default; refusing to delete current branch." >&2
+    return 0
+  fi
+
+  git switch "$branch_default" &&
+    git pull --ff-only &&
+    git branch -d "$branch_current" &&
+    git fetch --prune origin &&
+    git remote set-head origin -a >/dev/null 2>&1
+}
+
+# Safely delete local branches already merged into the cleanup target; use -n/--dry-run to preview.
+function gclean() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
+
+  local dry_run=0
+  case "$1" in
+  -n | --dry-run)
+    dry_run=1
+    ;;
+  esac
+
+  git fetch --prune origin
+  git remote set-head origin -a >/dev/null 2>&1 || true
+
+  local current default_branch default_ref
+  current="$(git branch --show-current)"
+
+  default_branch="$(
+    git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null |
+      sed 's#^origin/##'
+  )"
+
+  if [ -z "$default_branch" ]; then
+    default_branch="main"
+  fi
+
+  default_ref="refs/remotes/origin/$default_branch"
+
+  git for-each-ref refs/heads \
+    --merged="$default_ref" \
+    --format='%(refname:short)' |
+    while IFS= read -r branch; do
+      case "$branch" in
+      "$current" | "$default_branch" | main | master | develop | dev)
+        continue
+        ;;
+      esac
+
+      if [ "$dry_run" -eq 1 ]; then
+        printf 'git branch -d %q\n' "$branch"
+      else
+        git branch -d "$branch"
+      fi
+    done
 }
 
 # Git diff: gh pull request diff
