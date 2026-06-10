@@ -342,6 +342,20 @@ function gdp() {
   nvim -c "DiffReview $branch_base"
 }
 
+# Git switch, with fzf
+function gss() {
+  local branch
+  branch="$(
+    git for-each-ref \
+      --sort=-committerdate \
+      --format='%(refname:short)' \
+      refs/heads |
+      fzf
+  )" || return
+
+  [[ -n "$branch" ]] && git switch "$branch"
+}
+
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
 function gitignore() {
   if [ ! -d "$GITIGNORE_DIR" ]; then
