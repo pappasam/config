@@ -5,15 +5,15 @@ else
   echo "$HOME/.bashrc not found, zsh loading default shell"
   return 0
 fi
-fpath=($fpath $HOME/.zfunc)
+fpath=($HOME/.zfunc $fpath)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HISTFILE=~/.zsh_history
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
+export CARAPACE_BRIDGES=zsh
 export CARAPACE_MATCH=1
 export CARAPACE_UNFILTERED=1
-export CARAPACE_BRIDGES='zsh'
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
