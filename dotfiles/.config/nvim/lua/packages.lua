@@ -38,13 +38,6 @@ vim.pack.add({
 -- }}}
 -- https://github.com/romus204/tree-sitter-manager.nvim {{{
 
-local tree_sitter_manager_config = require("tree-sitter-manager.config")
-
-for _, lang in ipairs({ "console", "fga", "mermaid" }) do
-  tree_sitter_manager_config.base_repos[lang] = tree_sitter_manager_config.base_repos[lang]
-    or {}
-end
-
 require("tree-sitter-manager").setup({
   ensure_installed = {
     "bash",
