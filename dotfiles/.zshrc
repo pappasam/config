@@ -82,6 +82,15 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' accept-line-and-down-history
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+if [[ -o interactive ]]; then
+  if [[ -e "$HOME/.local/bin/mise" ]]; then
+    eval "$("$HOME/.local/bin/mise" activate zsh)"
+    eval "$(mise hook-env -s zsh)"
+  else
+    echo 'Mise not installed, please install. See:'
+    echo 'https://mise.jdx.dev/getting-started.html'
+  fi
+fi
 if command -v fzf > /dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_DEFAULT_OPTS='--bind=ctrl-y:accept,ctrl-j:down,ctrl-k:up'
