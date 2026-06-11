@@ -3,12 +3,12 @@
 vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
 
 vim.lsp.enable({
+  "actionsls",
   "autotools_ls",
   "bashls",
   "clangd", -- needs project-level compile-commands.json
   "cssls",
   "dockerls",
-  "gh_actions_ls",
   "gopls",
   "graphql",
   "html",
@@ -36,14 +36,6 @@ vim.lsp.config("*", {
         dynamicRegistration = false, -- https://github.com/neovim/neovim/issues/23291
       },
     },
-  },
-})
-
-vim.lsp.config("gh_actions_ls", {
-  filetypes = { "yaml.github" },
-  init_options = {
-    -- Requires the `repo` and `workflow` scopes
-    sessionToken = os.getenv("GITHUB_ACTIONS_LS_TOKEN"),
   },
 })
 
