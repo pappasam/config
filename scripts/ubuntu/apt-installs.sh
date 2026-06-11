@@ -19,6 +19,7 @@ sudo apt install -y \
   bison \
   bsdgames \
   bsdgames-nonfree \
+  bubblewrap \
   build-essential \
   ca-certificates \
   cmake \
@@ -128,6 +129,7 @@ sudo apt install -y \
   scdoc \
   screenkey \
   shellcheck \
+  socat \
   software-properties-common \
   stow \
   texlive-fonts-recommended \
