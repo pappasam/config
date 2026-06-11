@@ -321,7 +321,7 @@ augroup end
 " Settings {{{
 
 " https://github.com/pappasam/vim-filetype-formatter
-let g:vim_filetype_formatter_ft_maps = {'yaml.github': 'yaml'}
+let g:vim_filetype_formatter_ft_maps = {'yaml.ghactions': 'yaml'}
 lua vim.loader.enable(true) -- speed up lua load times (experimental)
 if &background == 'dark'
   colorscheme PaperColorSlim
