@@ -404,69 +404,11 @@ function git-delete() { # permanently remove a file / folder from git repo
   echo "  git push --force --mirror"
 }
 
-VIRTUAL_ENV_DEFAULT=.venv
-function va() {
-  local venv_name="$VIRTUAL_ENV_DEFAULT"
-  local current_directory="$PWD"
-  local actual_venv="${VIRTUAL_ENV:-nopath}"
-  while [[ "$current_directory" != "$HOME" && "$current_directory" != "/" ]]; do
-    if [[ -d "$current_directory/$venv_name" ]]; then
-      # shellcheck source=/dev/null
-      if [[ "$actual_venv" == "$current_directory/$venv_name" ]]; then
-        return 0
-      else
-        if command -v deactivate >/dev/null; then
-          deactivate
-        fi
-        # shellcheck source=/dev/null
-        source "$current_directory/$venv_name/bin/activate" && return 0
-      fi
-    fi
-    # -e checks if is file OR directory
-    if [ -e "$current_directory/.git" ]; then
-      break
-    fi
-    current_directory="$(dirname "$current_directory")"
-  done
-  if command -v deactivate >/dev/null; then
-    deactivate
-  fi
-}
-
-function poetryinit() {
-  if [ -f pyproject.toml ]; then
-    echo 'pyproject.toml exists, aborting' && return 1
-  fi
-  poetry init --no-interaction &>/dev/null
-  cat ~/config/docs/samples/base-pyproject.toml >>pyproject.toml
-  toml-sort --in-place pyproject.toml
-  touch README.md
-}
-
 # Trace Python calls in current project
 # Ignore everything in PYTHONPATH and only show lines from your cwd
 function pytrace() {
   # shellcheck disable=SC2046
   python -m trace --trace $(python -c "import sys; print(' '.join(f'--ignore-dir={p}' for p in sys.path if p))") "$1"
-}
-
-function pyinit() {
-  poetryinit || return 1
-  gitignore Python.gitignore | grep -v instance/ >.gitignore
-  python -m venv .venv && va && poetry install --no-root || return
-  cp ~/config/docs/samples/base-main.py ./main.py
-  cp ~/config/docs/samples/noxfile.py .
-  cp ~/config/docs/samples/Makefile.python ./Makefile
-}
-
-function pynew() {
-  if [ $# -ne 1 ]; then
-    echo 'pynew <directory>' && return 1
-  fi
-  if [ -d "$1" ]; then
-    echo "$1 already exists" && return 1
-  fi
-  mkdir "$1" && cd "$1" && pyinit || return
 }
 
 function info() { # https://github.com/HiPhish/info.vim
