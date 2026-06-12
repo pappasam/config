@@ -77,6 +77,35 @@ def plugin_root_from_args(args: list[str]) -> str:
         return os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 
+def executable(path: str | None) -> str | None:
+    if path and os.path.isfile(path) and os.access(path, os.X_OK):
+        return path
+    return None
+
+
+def resolve_nvim_path() -> str | None:
+    env_nvim = executable(os.environ.get("NVIM"))
+    if env_nvim:
+        return env_nvim
+
+    path_nvim = which("nvim")
+    if path_nvim:
+        return path_nvim
+
+    mise_data_dir = os.environ.get("MISE_DATA_DIR")
+    if not mise_data_dir:
+        mise_data_dir = os.path.expanduser("~/.local/share/mise")
+
+    for version in ("latest", "nightly"):
+        nvim = executable(
+            os.path.join(mise_data_dir, "installs", "neovim", version, "bin", "nvim")
+        )
+        if nvim:
+            return nvim
+
+    return None
+
+
 def main():
     """Required entry point for kitty's kitten protocol, even with no_ui=True."""
     raise SystemExit("Must be run as kitten kitty_scrollback")
@@ -94,25 +123,7 @@ def handle_result(_args, _result, target_window_id: int, boss: Boss):
     if not kitty_path:
         boss.show_error("kitty_scrollback", "Cannot find kitty in PATH")
         return
-    # Try mise/asdf-managed nvim first, then fall back to system PATH.
-    nvim_path = None
-    mise_path = which("mise")
-    if mise_path:
-        import subprocess
-
-        try:
-            result = subprocess.run(
-                [mise_path, "which", "nvim"],
-                capture_output=True,
-                text=True,
-                timeout=5,
-            )
-            if result.returncode == 0 and result.stdout.strip():
-                nvim_path = result.stdout.strip()
-        except Exception:
-            pass
-    if not nvim_path:
-        nvim_path = which("nvim")
+    nvim_path = resolve_nvim_path()
     if not nvim_path:
         boss.show_error("kitty_scrollback", "Cannot find nvim in PATH")
         return
