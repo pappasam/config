@@ -321,8 +321,8 @@ function gclean() {
     done
 }
 
-# Git diff: gh pull request diff
-function gdp() {
+# Git diff: gh diff review
+function gdr() {
   if [ ! "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     return 1
   fi
@@ -398,7 +398,7 @@ function git-delete() { # permanently remove a file / folder from git repo
   git filter-branch --force --index-filter \
     "git rm --cached --ignore-unmatch -r $1" \
     --prune-empty --tag-name-filter cat -- --all
-  echo 'If successful, we recommend running "git push --all --force"'
+  echo 'If successful, we recommend running "git push --force"'
 }
 
 VIRTUAL_ENV_DEFAULT=.venv

@@ -58,6 +58,18 @@ local function default_base()
   return base or ""
 end
 
+local function allow_file(root, allowed, statuses, file, status)
+  local abs = root .. "/" .. file
+  allowed[abs] = true
+  statuses[abs] = status
+  local dir = vim.fn.fnamemodify(abs, ":h")
+  while dir ~= root and dir ~= "/" do
+    allowed[dir] = true
+    dir = vim.fn.fnamemodify(dir, ":h")
+  end
+  return abs
+end
+
 local function start(base)
   local api = require("nvim-tree.api")
   base = base or default_base()
@@ -74,17 +86,18 @@ local function start(base)
     local status, rest = line:match("^(%a)%d*\t(.+)$")
     if status and rest and (status == "A" or status == "M") then
       local file = rest
-      local abs = root .. "/" .. file
+      local abs = allow_file(root, allowed, statuses, file, status)
       if not first_file then
         first_file = abs
       end
-      allowed[abs] = true
-      statuses[abs] = status
-      local dir = vim.fn.fnamemodify(abs, ":h")
-      while dir ~= root and dir ~= "/" do
-        allowed[dir] = true
-        dir = vim.fn.fnamemodify(dir, ":h")
-      end
+    end
+  end
+  local untracked_output =
+    git_output({ "ls-files", "--others", "--exclude-standard" })
+  for file in untracked_output:gmatch("[^\n]+") do
+    local abs = allow_file(root, allowed, statuses, file, "A")
+    if not first_file then
+      first_file = abs
     end
   end
   allowed[root] = true
