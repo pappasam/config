@@ -389,16 +389,19 @@ function git-mod() {
   fi
 }
 
-# https://stackoverflow.com/a/2004311
 function git-delete() { # permanently remove a file / folder from git repo
-  if [ $# -eq 0 ]; then
-    echo '1 argument required'
-    return 1
-  fi
-  git filter-branch --force --index-filter \
-    "git rm --cached --ignore-unmatch -r $1" \
-    --prune-empty --tag-name-filter cat -- --all
-  echo 'If successful, we recommend running "git push --force"'
+  echo "Coordinate the rewrite first:"
+  echo "  1. Announce a short freeze window for pushes to the repository."
+  echo "  2. Ask everyone to push, stash, or patch any local work before the rewrite."
+  echo "  3. Tell the team they should reclone after the rewritten history is pushed."
+  echo "  4. Warn them not to merge old local branches back into the cleaned repo."
+  echo
+  echo "Use git filter-repo from a fresh mirror clone:"
+  echo "  git clone --mirror <repo-url> repo-cleanup.git"
+  echo "  cd repo-cleanup.git"
+  echo "  git filter-repo --path <path> --invert-paths"
+  echo "  git log --all -- <path>"
+  echo "  git push --force --mirror"
 }
 
 VIRTUAL_ENV_DEFAULT=.venv
