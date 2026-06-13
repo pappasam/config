@@ -51,11 +51,150 @@ local function git_output(args)
   return vim.trim(result.stdout or "")
 end
 
+local function command_output(command)
+  local result = vim.system(command, { text = true }):wait()
+  if result.code ~= 0 then
+    return ""
+  end
+  return vim.trim(result.stdout or "")
+end
+
+local function git_success(args)
+  local command = { "git" }
+  vim.list_extend(command, args)
+  return vim.system(command):wait().code == 0
+end
+
+local function git_ref_exists(ref)
+  return git_output({ "rev-parse", "--verify", "--quiet", ref .. "^{commit}" })
+    ~= ""
+end
+
+local function merged_base_parent(base)
+  local base_name = vim.fn.fnamemodify(base, ":t")
+  local output = git_output({
+    "log",
+    "--first-parent",
+    "--merges",
+    "--pretty=%H%x09%P%x09%s",
+    base .. "..HEAD",
+  })
+
+  for line in output:gmatch("[^\n]+") do
+    local parents, subject = line:match("^[^\t]+\t([^\t]+)\t(.+)$")
+    local first_parent, second_parent =
+      (parents or ""):match("^(%x+)%s+(%x+)")
+    if
+      second_parent
+      and subject:find(base_name, 1, true)
+      and git_success({ "merge-base", "--is-ancestor", base, second_parent })
+      and git_ref_exists(second_parent)
+      and first_parent
+    then
+      return second_parent
+    end
+  end
+
+  return ""
+end
+
+local function comparison_base_for(base)
+  local comparison_base = merged_base_parent(base)
+  if comparison_base ~= "" then
+    return comparison_base
+  end
+  return git_output({ "merge-base", "HEAD", base })
+end
+
 local function default_base()
   local symbolic_ref =
     git_output({ "symbolic-ref", "refs/remotes/origin/HEAD" })
   local base = symbolic_ref:match("^refs/remotes/origin/(.+)$")
-  return base or ""
+  if base and git_ref_exists("origin/" .. base) then
+    return "origin/" .. base
+  end
+
+  for _, ref in ipairs({
+    "upstream/master",
+    "upstream/main",
+    "origin/master",
+    "origin/main",
+    "master",
+    "main",
+  }) do
+    if git_ref_exists(ref) then
+      return ref
+    end
+  end
+
+  return ""
+end
+
+local function pr_base()
+  if vim.fn.executable("gh") ~= 1 then
+    return nil
+  end
+
+  local output = command_output({
+    "gh",
+    "pr",
+    "view",
+    "--json",
+    "baseRefName,baseRefOid",
+    "--jq",
+    "[.baseRefName, .baseRefOid] | @tsv",
+  })
+  local base_name, base_oid = output:match("^([^\t]+)\t([^\t]+)$")
+  if not base_name or not base_oid or base_oid == "" then
+    return nil
+  end
+
+  local candidates = {
+    "upstream/" .. base_name,
+    "origin/" .. base_name,
+    base_name,
+  }
+  for _, ref in ipairs(candidates) do
+    if git_ref_exists(ref) and git_ref_exists(base_oid) then
+      return { ref = ref, comparison_base = base_oid }
+    end
+  end
+
+  if git_ref_exists(base_oid) then
+    return { ref = base_oid, comparison_base = base_oid }
+  end
+
+  return nil
+end
+
+local function review_base(base)
+  if base and base ~= "" then
+    if not git_ref_exists(base) then
+      vim.notify("DiffReview: invalid base " .. base, vim.log.levels.ERROR)
+      return nil
+    end
+
+    return {
+      ref = base,
+      comparison_base = comparison_base_for(base),
+    }
+  end
+
+  local pr = pr_base()
+  if pr then
+    return pr
+  end
+
+  base = default_base()
+  if base == "" then
+    vim.notify("DiffReview: could not find a base branch", vim.log.levels.ERROR)
+    return nil
+  end
+
+  return {
+    ref = base,
+    comparison_base = comparison_base_for(base),
+  }
 end
 
 local function allow_file(root, allowed, statuses, file, status)
@@ -72,13 +211,13 @@ end
 
 local function start(base)
   local api = require("nvim-tree.api")
-  base = base or default_base()
-  if base == "" then
-    base = "main"
+  local base_info = review_base(base)
+  if not base_info or base_info.comparison_base == "" then
+    vim.notify("DiffReview: could not resolve a comparison base", vim.log.levels.ERROR)
+    return
   end
-  local merge_base = git_output({ "merge-base", "HEAD", base })
   local root = git_output({ "rev-parse", "--show-toplevel" })
-  local output = git_output({ "diff", "--name-status", merge_base })
+  local output = git_output({ "diff", "--name-status", base_info.comparison_base })
   local allowed = {}
   local statuses = {}
   local first_file = nil
@@ -104,7 +243,7 @@ local function start(base)
   state.active = true
   state.allowed = allowed
   state.statuses = statuses
-  require("gitsigns").change_base(base, true)
+  require("gitsigns").change_base(base_info.comparison_base, true)
   api.tree.open()
   api.tree.resize({ absolute = 50 })
   api.tree.reload()
