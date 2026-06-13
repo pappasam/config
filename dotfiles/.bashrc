@@ -213,6 +213,83 @@ function mise-update-go() {
   _mise_update_pattern 'go:'
 }
 
+# Create clangd project config:
+#   clangd-init          # use CMake/Meson/Bear when available, otherwise write .clangd
+#   clangd-init --clean  # for Makefiles, run make clean before Bear captures the build
+#   clangd-init builddir # use a custom CMake/Meson build directory
+function clangd-init() {
+  local build_dir="build"
+  local clean=0
+  local fallback=0
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    --clean)
+      clean=1
+      shift
+      ;;
+    --fallback)
+      fallback=1
+      shift
+      ;;
+    *)
+      build_dir="$1"
+      shift
+      ;;
+    esac
+  done
+
+  if [[ $fallback -eq 0 ]]; then
+    if [[ -f CMakeLists.txt ]]; then
+      cmake -S . -B "$build_dir" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON &&
+        ln -sf "$build_dir/compile_commands.json" compile_commands.json
+      return
+    fi
+
+    if [[ -f meson.build ]]; then
+      if [[ -d "$build_dir" ]]; then
+        meson setup "$build_dir" --reconfigure
+      else
+        meson setup "$build_dir"
+      fi &&
+        ln -sf "$build_dir/compile_commands.json" compile_commands.json
+      return
+    fi
+
+    if [[ -f Makefile || -f makefile || -f GNUmakefile ]]; then
+      if command -v bear >/dev/null; then
+        if [[ $clean -eq 1 ]]; then
+          make clean && bear -- make
+        else
+          bear -- make
+        fi
+        if [[ -f compile_commands.json ]] &&
+          ! grep -Eq '"(arguments|command)"' compile_commands.json; then
+          echo 'bear captured no compiler commands; try: clangd-init --clean' >&2
+        fi
+      else
+        echo 'bear is not installed; creating .clangd fallback instead' >&2
+        clangd-init --fallback
+      fi
+      return
+    fi
+  fi
+
+  if [[ -e .clangd ]]; then
+    echo '.clangd already exists; leaving it unchanged' >&2
+    return 0
+  fi
+
+  {
+    echo 'CompileFlags:'
+    echo '  Add:'
+    echo '    - -std=c11'
+    echo '    - -Wall'
+    echo '    - -Wextra'
+    [[ -d include ]] && echo '    - -Iinclude'
+  } >.clangd
+}
+
 function despace-filename() {
   if [ $# -eq 0 ]; then
     while read -r filename; do
