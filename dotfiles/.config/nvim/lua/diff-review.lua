@@ -13,7 +13,7 @@ for _, name in ipairs(M.disable_folders) do
   disable_set[name] = true
 end
 
-local state = { active = false, allowed = {}, statuses = {} }
+local state = { active = false, allowed = {}, statuses = {}, stats = {} }
 local ns = vim.api.nvim_create_namespace("diff_review")
 local status_label = {
   A = { "[a]", "DiffAdd" },
@@ -197,10 +197,11 @@ local function review_base(base)
   }
 end
 
-local function allow_file(root, allowed, statuses, file, status)
+local function allow_file(root, allowed, statuses, stats, file, status, stat)
   local abs = root .. "/" .. file
   allowed[abs] = true
   statuses[abs] = status
+  stats[abs] = stat
   local dir = vim.fn.fnamemodify(abs, ":h")
   while dir ~= root and dir ~= "/" do
     allowed[dir] = true
@@ -218,14 +219,35 @@ local function start(base)
   end
   local root = git_output({ "rev-parse", "--show-toplevel" })
   local output = git_output({ "diff", "--name-status", base_info.comparison_base })
+  local stat_output = git_output({ "diff", "--numstat", base_info.comparison_base })
+  local file_stats = {}
+  for line in stat_output:gmatch("[^\n]+") do
+    local added, removed, file = line:match("^([^\t]+)\t([^\t]+)\t(.+)$")
+    if file then
+      if added == "-" or removed == "-" then
+        file_stats[file] = "bin"
+      else
+        file_stats[file] = "+" .. added .. " -" .. removed
+      end
+    end
+  end
   local allowed = {}
   local statuses = {}
+  local stats = {}
   local first_file = nil
   for line in output:gmatch("[^\n]+") do
     local status, rest = line:match("^(%a)%d*\t(.+)$")
     if status and rest and (status == "A" or status == "M") then
       local file = rest
-      local abs = allow_file(root, allowed, statuses, file, status)
+      local abs = allow_file(
+        root,
+        allowed,
+        statuses,
+        stats,
+        file,
+        status,
+        file_stats[file]
+      )
       if not first_file then
         first_file = abs
       end
@@ -234,7 +256,7 @@ local function start(base)
   local untracked_output =
     git_output({ "ls-files", "--others", "--exclude-standard" })
   for file in untracked_output:gmatch("[^\n]+") do
-    local abs = allow_file(root, allowed, statuses, file, "A")
+    local abs = allow_file(root, allowed, statuses, stats, file, "A", "new")
     if not first_file then
       first_file = abs
     end
@@ -243,6 +265,7 @@ local function start(base)
   state.active = true
   state.allowed = allowed
   state.statuses = statuses
+  state.stats = stats
   require("gitsigns").change_base(base_info.comparison_base, true)
   api.tree.open()
   api.tree.resize({ absolute = 50 })
@@ -262,6 +285,7 @@ local function stop()
   state.active = false
   state.allowed = {}
   state.statuses = {}
+  state.stats = {}
   require("gitsigns").reset_base(true)
   api.tree.resize()
   api.tree.reload()
@@ -300,8 +324,13 @@ function M.setup()
         if line:find(basename, 1, true) then
           local label = status_label[status]
           if label then
+            local stat = state.stats[abs]
+            local text = label[1]
+            if stat then
+              text = text .. " " .. stat
+            end
             vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-              virt_text = { { label[1], label[2] } },
+              virt_text = { { text, label[2] } },
               virt_text_pos = "eol",
             })
           end
