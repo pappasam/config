@@ -21,6 +21,7 @@ vim.lsp.enable({
   "rust_analyzer",
   "shopify_theme_ls",
   "svelte",
+  "tailwindcss",
   "taplo",
   "terraformls",
   "tsgo",
@@ -96,6 +97,16 @@ vim.lsp.config("lua_ls", {
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
+      },
+    },
+  },
+})
+
+vim.lsp.config("cssls", {
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
       },
     },
   },
