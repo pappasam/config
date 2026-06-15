@@ -23,6 +23,8 @@ vim.pack.add({
   "https://github.com/junegunn/gv.vim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
+  -- Scrollbar
+  "https://github.com/dstein64/nvim-scrollview",
   -- My plugins
   "https://github.com/pappasam/nvim-repl",
   "https://github.com/pappasam/papercolor-theme-slim",
@@ -252,6 +254,120 @@ require("gitsigns").setup({
       end)
       return "<Ignore>"
     end, { expr = true })
+  end,
+})
+
+-- }}}
+-- https://github.com/dstein64/nvim-scrollview {{{
+
+require("scrollview").setup({
+  current_only = true,
+  excluded_filetypes = {
+    "NvimTree",
+    "TelescopePrompt",
+    "aerial",
+  },
+  floating_windows = false,
+  mode = "proper",
+  on_startup = false,
+  signs_on_startup = {},
+  visibility = "overflow",
+  winblend = 60,
+  winblend_gui = 45,
+})
+
+vim.opt.mousemoveevent = true
+
+local scrollview_hide_timer
+local scrollview_mouse_down = false
+local scrollview_visible = false
+local scrollview_schedule_hide
+
+local function scrollview_cmd(command)
+  vim.cmd("silent! " .. command)
+end
+
+local function scrollview_stop_hide_timer()
+  if scrollview_hide_timer then
+    scrollview_hide_timer:stop()
+  end
+end
+
+local function scrollview_show()
+  if not scrollview_visible then
+    scrollview_cmd("ScrollViewEnable")
+    scrollview_visible = true
+  end
+end
+
+local function scrollview_hide()
+  if scrollview_mouse_down then
+    scrollview_schedule_hide(250)
+    return
+  end
+
+  if scrollview_visible then
+    scrollview_cmd("ScrollViewDisable")
+    scrollview_visible = false
+  end
+end
+
+scrollview_schedule_hide = function(delay_ms)
+  if scrollview_hide_timer then
+    scrollview_hide_timer:stop()
+  else
+    scrollview_hide_timer = vim.uv.new_timer()
+  end
+
+  scrollview_hide_timer:start(delay_ms, 0, function()
+    vim.schedule(scrollview_hide)
+  end)
+end
+
+local function scrollview_termcode(key)
+  return vim.api.nvim_replace_termcodes(key, true, true, true)
+end
+
+local scrollview_mousemove = scrollview_termcode("<mousemove>")
+local scrollview_leftmouse = scrollview_termcode("<leftmouse>")
+local scrollview_leftdrag = scrollview_termcode("<leftdrag>")
+local scrollview_leftrelease = scrollview_termcode("<leftrelease>")
+
+vim.on_key(function(char)
+  if string.find(char, scrollview_leftmouse, 1, true) then
+    scrollview_mouse_down = true
+    scrollview_stop_hide_timer()
+    return
+  end
+
+  if string.find(char, scrollview_leftdrag, 1, true) then
+    scrollview_mouse_down = true
+    scrollview_stop_hide_timer()
+    return
+  end
+
+  if string.find(char, scrollview_leftrelease, 1, true) then
+    scrollview_mouse_down = false
+    scrollview_schedule_hide(1000)
+    return
+  end
+
+  if string.find(char, scrollview_mousemove, 1, true) then
+    vim.schedule(function()
+      scrollview_show()
+      scrollview_schedule_hide(1000)
+    end)
+  end
+end, vim.api.nvim_create_namespace("scrollview_hover"))
+
+vim.api.nvim_create_autocmd({ "VimLeavePre", "WinClosed" }, {
+  group = vim.api.nvim_create_augroup("scrollview_hover", {
+    clear = true,
+  }),
+  callback = function()
+    scrollview_stop_hide_timer()
+    scrollview_cmd("ScrollViewDisable")
+    scrollview_visible = false
   end,
 })
 
