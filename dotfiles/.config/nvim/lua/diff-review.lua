@@ -13,7 +13,12 @@ for _, name in ipairs(M.disable_folders) do
   disable_set[name] = true
 end
 
-local state = { active = false, allowed = {}, statuses = {}, stats = {} }
+local state = {
+  active = false,
+  allowed = {},
+  statuses = {},
+  stats = {},
+}
 local ns = vim.api.nvim_create_namespace("diff_review")
 local status_label = {
   A = { "[a]", "DiffAdd" },
@@ -82,8 +87,7 @@ local function merged_base_parent(base)
 
   for line in output:gmatch("[^\n]+") do
     local parents, subject = line:match("^[^\t]+\t([^\t]+)\t(.+)$")
-    local first_parent, second_parent =
-      (parents or ""):match("^(%x+)%s+(%x+)")
+    local first_parent, second_parent = (parents or ""):match("^(%x+)%s+(%x+)")
     if
       second_parent
       and subject:find(base_name, 1, true)
@@ -187,7 +191,10 @@ local function review_base(base)
 
   base = default_base()
   if base == "" then
-    vim.notify("DiffReview: could not find a base branch", vim.log.levels.ERROR)
+    vim.notify(
+      "DiffReview: could not find a base branch",
+      vim.log.levels.ERROR
+    )
     return nil
   end
 
@@ -210,16 +217,25 @@ local function allow_file(root, allowed, statuses, stats, file, status, stat)
   return abs
 end
 
+local function enable_word_diff()
+  require("gitsigns").toggle_word_diff(true)
+end
+
 local function start(base)
   local api = require("nvim-tree.api")
   local base_info = review_base(base)
   if not base_info or base_info.comparison_base == "" then
-    vim.notify("DiffReview: could not resolve a comparison base", vim.log.levels.ERROR)
+    vim.notify(
+      "DiffReview: could not resolve a comparison base",
+      vim.log.levels.ERROR
+    )
     return
   end
   local root = git_output({ "rev-parse", "--show-toplevel" })
-  local output = git_output({ "diff", "--name-status", base_info.comparison_base })
-  local stat_output = git_output({ "diff", "--numstat", base_info.comparison_base })
+  local output =
+    git_output({ "diff", "--name-status", base_info.comparison_base })
+  local stat_output =
+    git_output({ "diff", "--numstat", base_info.comparison_base })
   local file_stats = {}
   for line in stat_output:gmatch("[^\n]+") do
     local added, removed, file = line:match("^([^\t]+)\t([^\t]+)\t(.+)$")
@@ -266,6 +282,7 @@ local function start(base)
   state.allowed = allowed
   state.statuses = statuses
   state.stats = stats
+  enable_word_diff()
   require("gitsigns").change_base(base_info.comparison_base, true)
   api.tree.open()
   api.tree.resize({ absolute = 50 })

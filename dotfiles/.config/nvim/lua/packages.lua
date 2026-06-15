@@ -216,6 +216,53 @@ require("telescope").setup({
 -- }}}
 -- https://github.com/lewis6991/gitsigns.nvim {{{
 
+local function set_gitsigns_highlights()
+  vim.api.nvim_set_hl(0, "GitSignsAddInline", {
+    link = "DiffAdd",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsChangeInline", {
+    link = "DiffText",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsDeleteInline", {
+    link = "DiffDelete",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsAddLnInline", {
+    link = "GitSignsAddInline",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsChangeLnInline", {
+    link = "GitSignsChangeInline",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsDeleteLnInline", {
+    link = "GitSignsDeleteInline",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsAddLn", {
+    bg = "NONE",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsChangeLn", {
+    bg = "NONE",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsChangedeleteLn", {
+    link = "GitSignsChangeLn",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsUntrackedLn", {
+    link = "GitSignsAddLn",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsDeleteVirtLn", {
+    link = "DiffDelete",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsDeleteVirtLnInLine", {
+    link = "GitSignsDeleteInline",
+  })
+  vim.api.nvim_set_hl(0, "GitSignsVirtLnum", {
+    link = "GitSignsDeleteVirtLn",
+  })
+end
+
+set_gitsigns_highlights()
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_gitsigns_highlights,
+})
+
 require("gitsigns").setup({
   signcolumn = true,
   numhl = true,
