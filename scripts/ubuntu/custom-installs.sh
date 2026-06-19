@@ -21,6 +21,12 @@ if ! command -v claude >/dev/null; then
   curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+if ! command -v codex >/dev/null; then
+  # See: https://developers.openai.com/codex/cli
+  echo 'INSTALLING: Codex'
+  curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+fi
+
 if ! command -v rustup >/dev/null; then
   echo 'INSTALLING: Rust'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

@@ -629,6 +629,7 @@ function upgrade() {
   mise install -y
   mise install -f neovim@nightly
   claude update
+  codex update
 }
 
 # }}}
