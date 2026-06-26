@@ -102,6 +102,10 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+vim.lsp.config("tsgo", {
+  cmd = { "tsc", "--lsp", "--stdio" },
+})
+
 vim.lsp.config("cssls", {
   settings = {
     css = {
