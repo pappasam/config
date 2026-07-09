@@ -1,5 +1,7 @@
 -- https://neovim.io/doc/user/pack.html#vim.pack {{{
 
+-- temporary workaround until nightly lands: 3e9615b48a
+vim.opt.packlockfile = vim.fn.stdpath('config') .. '/nvim-pack-lock.json'
 vim.pack.add({
   -- Completion
   {
