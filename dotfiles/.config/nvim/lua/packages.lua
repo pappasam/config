@@ -319,10 +319,6 @@ require("blink-cmp").setup({
       vim.bo.filetype
     )
   end,
-  keymap = {
-    preset = "default",
-    ["<C-space>"] = false,
-  },
   completion = {
     keyword = {
       range = "full",
@@ -344,14 +340,6 @@ require("blink-cmp").setup({
   cmdline = {
     enabled = false,
   },
-})
-
--- https://github.com/saghen/blink.cmp/pull/2266
-vim.keymap.set("i", "<C-x><C-o>", function()
-  require("blink-cmp").show()
-end, {
-  desc = "blink.cmp: Show",
-  silent = true,
 })
 
 -- }}}
