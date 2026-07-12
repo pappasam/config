@@ -210,6 +210,7 @@ endfunction
 " Mappings {{{
 
 let g:mapleader = ','
+imap <F2> <Nop>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-b> <Left>
