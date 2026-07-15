@@ -37,12 +37,7 @@ On Cinnamon, set the GTK key theme through Cinnamon’s settings namespace:
 
 ```bash
 gsettings set org.cinnamon.desktop.interface gtk-key-theme "Emacs"
-```
-
-Cinnamon’s XSettings value overrides `~/.config/gtk-3.0/settings.ini`, so configuring only that file may have no effect. Verify the active value with:
-
-```bash
-gtk-query-settings | grep gtk-key-theme-name
+gtk-query-settings | grep gtk-key-theme-name # verify active value
 ```
 
 Fully restart Firefox after changing it. Emacs bindings such as `Ctrl+W`, `Ctrl+A`, and `Ctrl+E` should then work in text fields and the address bar.
