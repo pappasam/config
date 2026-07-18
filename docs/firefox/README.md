@@ -42,6 +42,12 @@ gtk-query-settings | grep gtk-key-theme-name # verify active value
 
 Fully restart Firefox after changing it. Emacs bindings such as `Ctrl+W`, `Ctrl+A`, and `Ctrl+E` should then work in text fields and the address bar.
 
+### Documentation
+
+You can find the Emacs key bindings for gtk documented here: `/usr/share/themes/Emacs/`
+
+Note: select-all is not `<C-a>`. Instead, it is `<C-/>`. See: <https://askubuntu.com/a/607920>
+
 ### Remove Search Bonnet
 
 Firefox's Unified Search Button is annoying. To restore the plain address bar:
