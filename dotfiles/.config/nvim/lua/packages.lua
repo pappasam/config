@@ -1,7 +1,7 @@
 -- https://neovim.io/doc/user/pack.html#vim.pack {{{
 
 -- temporary workaround until nightly lands: 3e9615b48a
-vim.opt.packlockfile = vim.fn.stdpath('config') .. '/nvim-pack-lock.json'
+vim.opt.packlockfile = vim.fn.stdpath("config") .. "/nvim-pack-lock.json"
 vim.pack.add({
   -- Completion
   {
@@ -9,7 +9,8 @@ vim.pack.add({
     version = vim.version.range("*"),
   },
   -- Treesitter
-  "https://github.com/romus204/tree-sitter-manager.nvim",
+  "https://github.com/neovim-treesitter/nvim-treesitter",
+  "https://github.com/neovim-treesitter/treesitter-parser-registry",
   -- Pairs
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/windwp/nvim-ts-autotag",
@@ -38,84 +39,110 @@ vim.pack.add({
 })
 
 -- }}}
--- https://github.com/romus204/tree-sitter-manager.nvim {{{
+-- https://github.com/neovim-treesitter/nvim-treesitter {{{
 
-require("tree-sitter-manager").setup({
-  ensure_installed = {
-    "bash",
-    "c",
-    "comment",
-    "console",
-    "cpp",
-    "css",
-    "diff",
-    "dockerfile",
-    "dot",
-    "ecma",
-    "editorconfig",
-    "fga",
-    "git_config",
-    "gitcommit",
-    "gitignore",
-    "go",
-    "gomod",
-    "gosum",
-    "haskell",
-    "hcl",
-    "html",
-    "html_tags",
-    "javascript",
-    "json",
-    "json5",
-    "jsx",
-    "lua",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "mermaid",
-    "python",
-    "query",
-    "regex",
-    "ruby",
-    "rust",
-    "sql",
-    "terraform",
-    "toml",
-    "tsx",
-    "typescript",
-    "vim",
-    "vimdoc",
-    "yaml",
-    "zsh",
+local treesitter_parsers = {
+  "bash",
+  "c",
+  "comment",
+  "console",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "dot",
+  "ecma",
+  "editorconfig",
+  "fga",
+  "git_config",
+  "gitcommit",
+  "gitignore",
+  "go",
+  "gomod",
+  "gosum",
+  "haskell",
+  "hcl",
+  "html",
+  "html_tags",
+  "javascript",
+  "json",
+  "json5",
+  "jsx",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "mermaid",
+  "python",
+  "query",
+  "regex",
+  "ruby",
+  "rust",
+  "sql",
+  "terraform",
+  "toml",
+  "tsx",
+  "typescript",
+  "vim",
+  "vimdoc",
+  "yaml",
+  "zsh",
+}
+
+local custom_treesitter_parsers = {
+  console = {
+    source = {
+      type = "local",
+      path = "/home/sroeca/src/pappasam/tree-sitter-console",
+      queries_path = "queries",
+    },
+    filetypes = { "console" },
   },
-  languages = {
-    console = {
-      install_info = {
-        url = "/home/sroeca/src/pappasam/tree-sitter-console",
-        revision = false,
-        branch = "main",
-        use_repo_queries = true,
-      },
+  fga = {
+    source = {
+      type = "self_contained",
+      url = "https://github.com/matoous/tree-sitter-fga",
+      queries_path = "queries",
     },
-    fga = {
-      install_info = {
-        url = "https://github.com/matoous/tree-sitter-fga",
-        revision = false,
-        branch = "main",
-        use_repo_queries = true,
-      },
-    },
-    mermaid = {
-      install_info = {
-        url = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
-        revision = false,
-        branch = "main",
-        use_repo_queries = true,
-      },
-    },
+    filetypes = { "fga" },
   },
-  auto_install = false,
-  highlight = false,
+  mermaid = {
+    source = {
+      type = "local",
+      path = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
+      queries_path = "queries",
+    },
+    filetypes = { "mermaid" },
+  },
+}
+
+require("nvim-treesitter").setup({
+  local_parsers = custom_treesitter_parsers,
+})
+
+local function run_treesitter_parser_command(command)
+  vim.cmd(command .. " " .. table.concat(treesitter_parsers, " "))
+end
+
+vim.api.nvim_create_user_command("TSInstallConfigured", function()
+  run_treesitter_parser_command("TSInstall")
+end, {
+  desc = "Install configured treesitter parsers",
+})
+
+vim.api.nvim_create_autocmd("PackChanged", {
+  group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
+  ---@param event {data: {kind: "install" | "update" | "delete", path: string, spec: vim.pack.Spec}}
+  callback = function(event)
+    if
+      event.data.spec.name == "nvim-treesitter"
+      and vim.tbl_contains({ "install", "update" }, event.data.kind)
+    then
+      vim.schedule(function()
+        run_treesitter_parser_command("TSInstall")
+      end)
+    end
+  end,
 })
 
 -- }}}
