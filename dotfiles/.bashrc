@@ -622,7 +622,6 @@ function upgrade() {
   sudo apt update
   sudo apt upgrade -y
   sudo apt autoremove -y
-  sudo snap refresh
   rustup update
   mise self-update -y
   mise upgrade -y
