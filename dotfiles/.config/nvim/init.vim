@@ -347,7 +347,18 @@ set splitright
 set updatetime=300
 set winborder=rounded
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = 'xsel'
+let g:clipboard = {
+      \ 'name': 'pbcopy',
+      \ 'copy': {
+      \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
+      \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
+      \ },
+      \ 'paste': {
+      \   '+': ['xsel', '--clipboard', '--output'],
+      \   '*': ['xsel', '--clipboard', '--output'],
+      \ },
+      \ 'cache_enabled': 0,
+      \ }
 let g:loaded_python3_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
