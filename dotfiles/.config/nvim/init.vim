@@ -218,8 +218,8 @@ cnoremap <C-d> <Del>
 cnoremap <A-b> <S-Left>
 cnoremap <A-f> <S-Right>
 cnoremap <C-u> <C-E><C-U>
-inoremap <C-a> <C-o>g0
-inoremap <C-e> <C-o>g$
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <A-b> <C-Left>
