@@ -31,6 +31,8 @@ javascript:forceBrowserDefault=(e=>{e.stopImmediatePropagation();return true;});
 
 ## Enable Emacs keybindings in GTK and Firefox
 
+_Note: I've gone back and forth because of weird app / website compatibility issues_
+
 <https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly>
 
 On Cinnamon, set the GTK key theme through Cinnamon's settings namespace:
