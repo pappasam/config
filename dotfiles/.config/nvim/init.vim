@@ -206,6 +206,34 @@ function! s:copy_diagnostics_reference(range_type) range
   echo 'Copied Diagnostics: ' .. reference
 endfunction
 
+command! Focus call s:focuswriting()
+function! s:focuswriting()
+  set lazyredraw
+  try
+    normal! ma
+    let current_buffer = bufnr('%')
+    tabe
+    " Left Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    vsplit
+    vsplit
+    " Right Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    wincmd h
+    " Middle Window
+    let w:focuswriting = 1
+    vertical resize 88
+    execute 'buffer ' .. current_buffer
+    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nc
+    wincmd =
+    normal! `azz0
+  finally
+    set nolazyredraw
+  endtry
+endfunction
+
 " }}}
 " Mappings {{{
 
@@ -305,6 +333,7 @@ augroup init_custom
   autocmd BufRead,BufNewFile *.log set filetype=log
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost,TextPutPost * silent! lua vim.hl.hl_op({higroup="VisualNOS", timeout=250})
+  autocmd QuitPre * if exists("w:focuswriting") | only | endif
   autocmd VimResized * ResizeTabs
 augroup end
 
