@@ -1,17 +1,33 @@
 #!/usr/bin/zsh
-if [[ -f "$HOME/.bashrc" ]]; then
-  source "$HOME/.bashrc"
+if [[ -r "$HOME/.config/shell/common.sh" ]]; then
+  source "$HOME/.config/shell/common.sh"
 else
-  echo "$HOME/.bashrc not found, zsh loading default shell"
+  echo "$HOME/.config/shell/common.sh not found; zsh loading default shell" >&2
   return 0
 fi
-fpath=($HOME/.zfunc $fpath)
+
+typeset -U path PATH
+path=(
+  "$HOME/config/bin"
+  "$HOME/.local/bin"
+  "$HOME/.bin"
+  "$HOME/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/.local/opt/curl/bin"
+  $path
+)
+export PATH
+
+fpath=("$HOME/.zfunc" $fpath)
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
 export PERIOD=1
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # delete function characters to include (omitted /=)
 export CARAPACE_BRIDGES=zsh
+export CARAPACE_ENV=0
 export CARAPACE_MATCH=1
 export CARAPACE_UNFILTERED=1
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
@@ -22,7 +38,6 @@ alias pip='noglob pip' # Python: enable things like "pip install 'requests[secur
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit light zsh-users/zsh-autosuggestions
-  zinit light zsh-users/zsh-syntax-highlighting
   zinit light zsh-users/zsh-completions
 fi
 setopt ALWAYS_TO_END
@@ -53,15 +68,15 @@ function preexec() { # hook
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*' matcher-list \
   '' \
   'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' \
   'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-} l:|=* r:|=* r:|[/_.-]=**'
-zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
 zstyle ':completion:*:warnings' format '%F{red}-- no matches --%f'
@@ -74,15 +89,27 @@ zmodload -i zsh/complist
 bindkey -e # emacs
 bindkey '^y' autosuggest-accept
 bindkey '^f' forward-word
+bindkey '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^j' down-line-or-history
 bindkey -M menuselect '^k' up-line-or-history
 bindkey -M menuselect '^h' backward-char
 bindkey -M menuselect '^l' forward-char
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
-bindkey -M menuselect '^m' accept-line-and-down-history
+bindkey -M menuselect '^m' .accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
 compdef _files f
+if command -v carapace > /dev/null; then
+  # Let Carapace fill gaps without replacing native or generated completions.
+  typeset -A _native_completions
+  _native_completions=("${(@kv)_comps}")
+  source <(carapace _carapace zsh)
+  for _command _completer in "${(@kv)_native_completions}"; do
+    _comps[$_command]=$_completer
+  done
+  unset _native_completions _command _completer
+fi
 if [[ -o interactive ]]; then
   if [[ -e "$HOME/.local/bin/mise" ]]; then
     eval "$("$HOME/.local/bin/mise" activate zsh)"
@@ -96,25 +123,16 @@ if command -v fzf > /dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_DEFAULT_OPTS='--bind=ctrl-y:accept,ctrl-j:down,ctrl-k:up'
   export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_R_COMMAND=
   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-  eval "$(fzf --zsh)"
+  source <(fzf --zsh)
 fi
 if command -v atuin > /dev/null; then
-  eval "$(atuin init zsh --disable-up-arrow)"
-fi
-if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
-  source <(carapace _carapace zsh) # https://carapace-sh.github.io/carapace-bin/completers.html
-  compdef _git git
-fi
-if command -v mise > /dev/null; then
-  eval "$(mise completions zsh)"
+  eval "$(atuin init zsh --disable-up-arrow --disable-ai)"
 fi
 if command -v starship > /dev/null; then
   eval "$(starship init zsh)"
 fi
-if command -v uv > /dev/null; then
-  eval "$(uv generate-shell-completion zsh)"
-fi
-if command -v uvx > /dev/null; then
-  eval "$(uvx --generate-shell-completion zsh)"
+if (( $+functions[zinit] )); then
+  zinit light zsh-users/zsh-syntax-highlighting
 fi
