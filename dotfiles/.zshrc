@@ -82,6 +82,7 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' accept-line-and-down-history
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+compdef _files f
 if [[ -o interactive ]]; then
   if [[ -e "$HOME/.local/bin/mise" ]]; then
     eval "$("$HOME/.local/bin/mise" activate zsh)"
@@ -103,8 +104,8 @@ if command -v atuin > /dev/null; then
 fi
 if command -v carapace > /dev/null; then # https://github.com/rsteube/carapace-bin
   source <(carapace _carapace zsh) # https://carapace-sh.github.io/carapace-bin/completers.html
+  compdef _git git
 fi
-compdef _files f
 if command -v mise > /dev/null; then
   eval "$(mise completions zsh)"
 fi
