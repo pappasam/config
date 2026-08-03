@@ -1,5 +1,6 @@
 # Shared interactive-shell configuration for Bash and Zsh.
 # Keep shell-specific history, PATH, prompt, and integrations in their own rc files.
+# Environment {{{
 
 # <https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md#option-3_the-safest-way>
 export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
@@ -7,7 +8,7 @@ export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER=/usr/bin/firefox
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export GDK_SCALE=0             # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
+export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --mouse --wheel-lines=3'
 export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
@@ -28,6 +29,7 @@ function include() { [[ -f "$1" ]] && source "$1"; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.ghcup/env"
 umask 022 # Default access: files (rw-r--r--) & dirs (rwxr-xr-x) with umask 022
+# }}}
 # Aliases {{{
 
 # Navigation

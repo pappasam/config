@@ -84,7 +84,8 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$HOME/.zcompcache"
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# rewrites '#' as '\x23' for code formatter sanity
+zstyle ':completion:*:*:kill:*:processes' list-colors $'=(\x23b) \x23([0-9]\x23)*=0=01;31'
 zmodload -i zsh/complist
 bindkey -e # emacs
 bindkey '^y' autosuggest-accept
@@ -123,7 +124,7 @@ if command -v fzf > /dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_DEFAULT_OPTS='--bind=ctrl-y:accept,ctrl-j:down,ctrl-k:up'
   export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .git'
-  export FZF_CTRL_R_COMMAND=
+  export FZF_CTRL_R_COMMAND=''
   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
   source <(fzf --zsh)
 fi

@@ -1,6 +1,4 @@
 #!/bin/bash
-# Environment {{{
-
 if [[ -r "$HOME/.config/shell/common.sh" ]]; then
   # shellcheck source=/dev/null
   source "$HOME/.config/shell/common.sh"
@@ -30,9 +28,6 @@ path_ladd "$HOME/.bin"
 path_ladd "$HOME/.local/bin"
 path_ladd "$HOME/config/bin"
 export PATH
-
-# }}}
-# Prompt {{{
 
 if [[ -n "${BASH_VERSION-}" ]]; then
   PS1_COLOR_BRIGHT_BLUE="\033[38;5;115m"
@@ -93,9 +88,6 @@ if [[ -n "${BASH_VERSION-}" ]]; then
   PS1="${PS1_DIR} ${PS1_GIT} ${PS1_VIRTUAL_ENV}
 ${PS1_END}"
 fi
-# }}}
-
-# Mise-en-place {{{
 
 if [[ -n "${BASH_VERSION-}" && $- == *i* ]]; then # bash interactive shell
   if [ -e "$HOME/.local/bin/mise" ]; then
@@ -105,5 +97,3 @@ if [[ -n "${BASH_VERSION-}" && $- == *i* ]]; then # bash interactive shell
     echo 'https://mise.jdx.dev/getting-started.html'
   fi
 fi
-
-# }}}

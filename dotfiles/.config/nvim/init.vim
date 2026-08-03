@@ -103,6 +103,22 @@ function! s:edit_nvim_config()
   endtry
 endfunction
 
+command! EditDotfiles call s:edit_dotfiles()
+function! s:edit_dotfiles()
+  set lazyredraw
+  try
+    cd ~
+    edit ~/.config/shell/common.sh
+    tabe ~/.zshrc
+    tabe ~/.bashrc
+    tabe ~/.profile
+    tabe ~/.zshenv
+    1tabnext
+  finally
+    set nolazyredraw
+  endtry
+endfunction
+
 command! ResizeTabs call s:resize_tabs()
 function! s:resize_tabs()
   set lazyredraw
@@ -267,12 +283,11 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> <Cmd>tablast<CR>
-nnoremap <Leader>eb <Cmd>edit ~/config/dotfiles/.bashrc<CR>
 nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>em <Cmd>edit ~/config/dotfiles/.config/mise/config.toml<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
-nnoremap <Leader>ez <Cmd>edit ~/config/dotfiles/.zshrc<CR>
+nnoremap <Leader>ed <Cmd>EditDotfiles<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
