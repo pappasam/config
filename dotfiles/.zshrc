@@ -39,6 +39,7 @@ if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
   zinit light zsh-users/zsh-autosuggestions
   zinit light zsh-users/zsh-completions
+  zinit light wbingli/zsh-claudecode-completion
 fi
 setopt ALWAYS_TO_END
 setopt APPENDHISTORY
