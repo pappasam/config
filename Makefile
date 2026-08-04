@@ -8,23 +8,10 @@ help: ## Print each target and its associated help message
 
 .PHONY: completions
 completions: ## Regenerate native Zsh completions for managed tools
-	@set -eu; \
-	generate() { \
-		target="$$1"; \
-		shift; \
-		tmp="$$(mktemp "$${target}.XXXXXX")"; \
-		if "$$@" > "$$tmp"; then \
-			chmod 0644 "$$tmp"; \
-			mv "$$tmp" "$$target"; \
-		else \
-			rm -f "$$tmp"; \
-			return 1; \
-		fi; \
-	}; \
-	generate "$(COMPLETION_DIR)/_mise" mise completions zsh; \
-	generate "$(COMPLETION_DIR)/_uv" uv generate-shell-completion zsh; \
-	generate "$(COMPLETION_DIR)/_uvx" uvx --generate-shell-completion zsh; \
-	generate "$(COMPLETION_DIR)/_codex" codex completion zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_mise" mise completions zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uv" uv generate-shell-completion zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uvx" uvx --generate-shell-completion zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_codex" codex completion zsh
 
 .PHONY: install
 install: ## Install stowed dotfiles to home directory
