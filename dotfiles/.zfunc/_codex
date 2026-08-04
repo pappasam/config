@@ -34,11 +34,9 @@ _codex() {
 '--cd=[Tell the agent to use the specified directory as its working root]:DIR:_files' \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
 '-a+[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '--ask-for-approval=[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
@@ -813,6 +811,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (app-server)
 _arguments "${_arguments_options[@]}" : \
+'--code-mode-host=[Connect to a remote code-mode host instead of starting a local host]:WS_URL:_default' \
 '--listen=[Transport endpoint URL. Supported values\: \`stdio\://\` (default), \`unix\://\`, \`unix\://PATH\`, \`ws\://IP\:PORT\`, \`off\`]:URL:_default' \
 '--ws-auth=[Websocket auth mode for non-loopback listeners]:MODE:(capability-token signed-bearer-token)' \
 '--ws-token-file=[Absolute path to the capability-token file]:PATH:_files' \
@@ -1176,6 +1175,17 @@ _arguments "${_arguments_options[@]}" : \
 '--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
 ;;
+(pair)
+_arguments "${_arguments_options[@]}" : \
+'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
+'*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'--json[Emit machine-readable JSON]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
 (help)
 _arguments "${_arguments_options[@]}" : \
 ":: :_codex__remote-control__help_commands" \
@@ -1193,6 +1203,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (stop)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(pair)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -1246,8 +1260,10 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (sandbox)
 _arguments "${_arguments_options[@]}" : \
+'(-P --permission-profile -C --cd --include-managed-config)--sandbox-state-json=[JSON value from \`codex/sandbox-state-meta\` to apply directly]:JSON:_default' \
+'*--sandbox-state-readable-root=[Add a readable root to the supplied sandbox state. Repeat for multiple roots]:SANDBOX_STATE_READABLE_ROOT:_default' \
 '-P+[Named permissions profile to apply from the active configuration stack]:NAME:_default' \
-'--permissions-profile=[Named permissions profile to apply from the active configuration stack]:NAME:_default' \
+'--permission-profile=[Named permissions profile to apply from the active configuration stack]:NAME:_default' \
 '-p+[Layer \$CODEX_HOME/<name>.config.toml on top of the base user config]:CONFIG_PROFILE:_default' \
 '--profile=[Layer \$CODEX_HOME/<name>.config.toml on top of the base user config]:CONFIG_PROFILE:_default' \
 '-C+[Working directory used for profile resolution and command execution]:DIR:_files' \
@@ -1256,6 +1272,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'--sandbox-state-disable-network[Disable direct network access in the supplied sandbox state]' \
 '--include-managed-config[Include managed requirements while resolving an explicit permissions profile]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -1544,11 +1561,9 @@ _arguments "${_arguments_options[@]}" : \
 '--cd=[Tell the agent to use the specified directory as its working root]:DIR:_files' \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
 '-a+[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '--ask-for-approval=[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
@@ -1677,11 +1692,9 @@ _arguments "${_arguments_options[@]}" : \
 '--cd=[Tell the agent to use the specified directory as its working root]:DIR:_files' \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
 '-a+[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '--ask-for-approval=[Configure when the model requires human approval before executing a command]:APPROVAL_POLICY:((untrusted\:"Only run "trusted" commands (e.g. ls, cat, sed) without asking for user approval. Will escalate to the user if the model proposes a command that is not in the "trusted" set"
-on-failure\:"DEPRECATED\: Run all commands without asking for user approval. Only asks for approval if a command fails to execute, in which case it will escalate to the user to ask for un-sandboxed execution. Prefer \`on-request\` for interactive runs or \`never\` for non-interactive runs"
 on-request\:"The model decides when to ask the user for approval"
 never\:"Never ask for user approval Execution failures are immediately returned to the model"))' \
 '*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
@@ -2224,6 +2237,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (stop)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(pair)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -3475,8 +3492,14 @@ _codex__help__remote-control_commands() {
     local commands; commands=(
 'start:Start the app-server daemon with remote control enabled' \
 'stop:Stop the app-server daemon' \
+'pair:Create and print a short-lived manual pairing code' \
     )
     _describe -t commands 'codex help remote-control commands' commands "$@"
+}
+(( $+functions[_codex__help__remote-control__pair_commands] )) ||
+_codex__help__remote-control__pair_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex help remote-control pair commands' commands "$@"
 }
 (( $+functions[_codex__help__remote-control__start_commands] )) ||
 _codex__help__remote-control__start_commands() {
@@ -3814,6 +3837,7 @@ _codex__remote-control_commands() {
     local commands; commands=(
 'start:Start the app-server daemon with remote control enabled' \
 'stop:Stop the app-server daemon' \
+'pair:Create and print a short-lived manual pairing code' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'codex remote-control commands' commands "$@"
@@ -3823,6 +3847,7 @@ _codex__remote-control__help_commands() {
     local commands; commands=(
 'start:Start the app-server daemon with remote control enabled' \
 'stop:Stop the app-server daemon' \
+'pair:Create and print a short-lived manual pairing code' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'codex remote-control help commands' commands "$@"
@@ -3831,6 +3856,11 @@ _codex__remote-control__help_commands() {
 _codex__remote-control__help__help_commands() {
     local commands; commands=()
     _describe -t commands 'codex remote-control help help commands' commands "$@"
+}
+(( $+functions[_codex__remote-control__help__pair_commands] )) ||
+_codex__remote-control__help__pair_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex remote-control help pair commands' commands "$@"
 }
 (( $+functions[_codex__remote-control__help__start_commands] )) ||
 _codex__remote-control__help__start_commands() {
@@ -3841,6 +3871,11 @@ _codex__remote-control__help__start_commands() {
 _codex__remote-control__help__stop_commands() {
     local commands; commands=()
     _describe -t commands 'codex remote-control help stop commands' commands "$@"
+}
+(( $+functions[_codex__remote-control__pair_commands] )) ||
+_codex__remote-control__pair_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex remote-control pair commands' commands "$@"
 }
 (( $+functions[_codex__remote-control__start_commands] )) ||
 _codex__remote-control__start_commands() {

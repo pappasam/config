@@ -23,7 +23,8 @@ completions: ## Regenerate native Zsh completions for managed tools
 	}; \
 	generate "$(COMPLETION_DIR)/_mise" mise completions zsh; \
 	generate "$(COMPLETION_DIR)/_uv" uv generate-shell-completion zsh; \
-	generate "$(COMPLETION_DIR)/_uvx" uvx --generate-shell-completion zsh
+	generate "$(COMPLETION_DIR)/_uvx" uvx --generate-shell-completion zsh; \
+	generate "$(COMPLETION_DIR)/_codex" codex completion zsh
 
 .PHONY: install
 install: ## Install stowed dotfiles to home directory
