@@ -51,7 +51,6 @@ alias d='cd'
 
 # Neovim
 alias f='nvim'
-alias v='nvim +EditNvimConfig'
 alias nvim-profiler='nvim --startuptime nvim_startup.txt --cmd "profile start nvim_init_profile.txt" --cmd "profile! file ~/.config/nvim/init.vim"'
 
 # Git
@@ -98,9 +97,9 @@ function vpn() { # toggle vpn
   fi
 }
 
-# vv          # copies current directory
-# vv foo.txt  # copies absolute path to ./foo.txt
-function vv() { # copy paths to clipboard
+# v            # copies current directory
+# v foo.txt    # copies absolute path to ./foo.txt
+function v() { # copy paths to clipboard
   realpath "${1:-.}" |
     tee >(perl -pe 'chomp if eof' | xsel --clipboard --input)
 }
