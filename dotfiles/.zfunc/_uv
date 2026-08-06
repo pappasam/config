@@ -1944,6 +1944,10 @@ _arguments "${_arguments_options[@]}" : \
 '--output-format=[Select the output format]:OUTPUT_FORMAT:((text\:"Display the result in a human-readable format"
 json\:"Display the result in JSON format"
 sarif\:"Display the result in SARIF format"))' \
+'*--ignore=[Ignore a vulnerability by ID]:IGNORE:_default' \
+'*--ignore-until-fixed=[Ignore a vulnerability by ID, but only while no fix is available]:IGNORE_UNTIL_FIXED:_default' \
+'--service-format=[The service format to use for vulnerability lookups]:SERVICE_FORMAT:(osv)' \
+'--service-url=[The URL to vulnerability service API endpoint]:SERVICE_URL:_urls' \
 '*--no-build-package=[Don'\''t build source distributions for a specific package \[env\: \`UV_NO_BUILD_PACKAGE\`=\]]:NO_BUILD_PACKAGE:' \
 '*--no-binary-package=[Don'\''t install pre-built wheels for a specific package \[env\: \`UV_NO_BINARY_PACKAGE\`=\]]:NO_BINARY_PACKAGE:' \
 '*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX:_default' \
@@ -2031,10 +2035,6 @@ wasm32-pyodide2025\:"A wasm32 target using the Pyodide 2025 platform. Meant for 
 arm64-apple-ios\:"An ARM64 target for iOS device"
 arm64-apple-ios-simulator\:"An ARM64 target for iOS simulator"
 x86_64-apple-ios-simulator\:"An \`x86_64\` target for iOS simulator"))' \
-'*--ignore=[Ignore a vulnerability by ID]:IGNORE:_default' \
-'*--ignore-until-fixed=[Ignore a vulnerability by ID, but only while no fix is available]:IGNORE_UNTIL_FIXED:_default' \
-'--service-format=[The service format to use for vulnerability lookups]:SERVICE_FORMAT:(osv)' \
-'--service-url=[The URL to vulnerability service API endpoint]:SERVICE_URL:_urls' \
 '--cache-dir=[Path to the cache directory]:CACHE_DIR:_files -/' \
 '--python-preference=[]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
 managed\:"Prefer managed Python installations over system Python installations"
@@ -3014,6 +3014,61 @@ never\:"Disables colored output"))' \
 '--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
 '-h[Display the concise help for this command]' \
 '--help[Display the concise help for this command]' \
+&& ret=0
+;;
+(audit)
+_arguments "${_arguments_options[@]}" : \
+'--output-format=[Select the output format]:OUTPUT_FORMAT:((text\:"Display the result in a human-readable format"
+json\:"Display the result in JSON format"
+sarif\:"Display the result in SARIF format"))' \
+'*--ignore=[Ignore a vulnerability by ID]:IGNORE:_default' \
+'*--ignore-until-fixed=[Ignore a vulnerability by ID, but only while no fix is available]:IGNORE_UNTIL_FIXED:_default' \
+'--service-format=[The service format to use for vulnerability lookups]:SERVICE_FORMAT:(osv)' \
+'--service-url=[The URL to vulnerability service API endpoint]:SERVICE_URL:_urls' \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files -/' \
+'--python-preference=[]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control the use of color in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'*--allow-insecure-host=[Allow insecure connections to a host]:ALLOW_INSECURE_HOST:_urls' \
+'*--preview-features=[Enable experimental preview features]:PREVIEW_FEATURES:_default' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
+'--project=[Discover a project in the given directory]:PROJECT:_files -/' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'()--all[Audit all installed tools]' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
+'--no-managed-python[Disable use of uv-managed Python versions \[env\: UV_NO_MANAGED_PYTHON=\]]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)*-q[Use quiet output]' \
+'(-v --verbose)*--quiet[Use quiet output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[(Deprecated\: use \`--system-certs\` instead.) Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_NATIVE_TLS=\]]' \
+'--no-native-tls[]' \
+'--system-certs[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_SYSTEM_CERTS=\]]' \
+'--no-system-certs[]' \
+'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
+'--no-offline[]' \
+'--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file \[env\: UV_ISOLATED=\]]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs \[env\: UV_NO_PROGRESS=\]]' \
+'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories \[env\: UV_NO_INSTALLER_METADATA=\]]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'*::name -- The names of the installed tools to audit:' \
 && ret=0
 ;;
 (uninstall)
@@ -6814,11 +6869,17 @@ _uv__tool_commands() {
 'install:Install commands provided by a Python package' \
 'upgrade:Upgrade installed tools' \
 'list:List installed tools' \
+'audit:Audit installed tools and their dependencies' \
 'uninstall:Uninstall a tool' \
 'update-shell:Ensure that the tool executable directory is on the \`PATH\`' \
 'dir:Show the path to the uv tools directory' \
     )
     _describe -t commands 'uv tool commands' commands "$@"
+}
+(( $+functions[_uv__tool__audit_commands] )) ||
+_uv__tool__audit_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv tool audit commands' commands "$@"
 }
 (( $+functions[_uv__tool__dir_commands] )) ||
 _uv__tool__dir_commands() {
