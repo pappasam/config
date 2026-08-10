@@ -6132,6 +6132,9 @@ never\:"Disables colored output"))' \
 ;;
 (size)
 _arguments "${_arguments_options[@]}" : \
+'--output-format=[Select the output format]:OUTPUT_FORMAT:((auto\:"Display a human-readable size in terminals and raw bytes otherwise"
+human\:"Display the cache size in a human-readable format"
+machine\:"Display the cache size in raw bytes"))' \
 '--cache-dir=[Path to the cache directory]:CACHE_DIR:_files -/' \
 '--python-preference=[]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
 managed\:"Prefer managed Python installations over system Python installations"
@@ -6148,8 +6151,8 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'-H[Display the cache size in human-readable format (e.g., \`1.2 GiB\` instead of raw bytes)]' \
-'--human[Display the cache size in human-readable format (e.g., \`1.2 GiB\` instead of raw bytes)]' \
+'(--output-format)-H[Display the cache size in human-readable format (e.g., \`1.2GiB\` instead of raw bytes)]' \
+'(--output-format)--human[Display the cache size in human-readable format (e.g., \`1.2GiB\` instead of raw bytes)]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
