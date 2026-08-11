@@ -1,7 +1,20 @@
-search_mode = "prefix"
-filter_mode = "directory"
-filter_mode_shell_up_key_binding = "directory"
+search_mode = "daemon-fuzzy"
+filter_mode = "global"
+workspaces = true
 enter_accept = false
 store_failed = false
 secrets_filter = true
 
+[search]
+filters = ["workspace", "global", "directory", "session"]
+
+[daemon]
+enabled = true
+autostart = true
+
+[ui]
+columns = [
+  "time",
+  { type = "directory", width = 24 },
+  "command",
+]

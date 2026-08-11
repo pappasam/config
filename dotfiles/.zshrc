@@ -30,7 +30,6 @@ export CARAPACE_BRIDGES=zsh
 export CARAPACE_ENV=0
 export CARAPACE_MATCH=1
 export CARAPACE_UNFILTERED=1
-export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
 export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
@@ -127,10 +126,27 @@ if command -v fzf > /dev/null; then
   export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_CTRL_R_COMMAND=''
   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir d'
   source <(fzf --zsh)
+
+  function fzf-context-widget() {
+    local FZF_COMPLETION_TRIGGER=''
+    fzf-completion
+  }
+  zle -N fzf-context-widget
+  bindkey '^T' fzf-context-widget
 fi
 if command -v atuin > /dev/null; then
   eval "$(atuin init zsh --disable-up-arrow --disable-ai)"
+
+  function _zsh_autosuggest_strategy_atuin_cwd() {
+    typeset -g suggestion
+    suggestion=$(
+      ATUIN_QUERY="$1" atuin search --cwd "$PWD" --exit 0 --cmd-only \
+        --author '$all-user' --limit 1 --search-mode prefix 2>/dev/null
+    )
+  }
+  ZSH_AUTOSUGGEST_STRATEGY=(atuin_cwd completion)
 fi
 if command -v starship > /dev/null; then
   eval "$(starship init zsh)"
