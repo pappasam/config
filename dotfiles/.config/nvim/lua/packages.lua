@@ -73,6 +73,7 @@ local treesitter_parsers = {
   "markdown",
   "markdown_inline",
   "mermaid",
+  "nginx",
   "python",
   "query",
   "regex",
