@@ -368,6 +368,7 @@ lua require("settings")
 lua require("lsp")
 lua require("treesitter")
 lua require("packages")
+lua require("abbreviations").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
