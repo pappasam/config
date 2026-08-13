@@ -259,10 +259,6 @@ function M.setup()
     ),
     callback = function(event)
       local enabled = enabled_filetypes[vim.bo[event.buf].filetype] == true
-      if event.buf == vim.api.nvim_get_current_buf() then
-        vim.wo.spell = enabled
-      end
-
       if enabled then
         install(event.buf)
       else
