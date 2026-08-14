@@ -1,4 +1,9 @@
 #!/bin/bash
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
 if [[ -r "$HOME/.config/shell/common.sh" ]]; then
   # shellcheck source=/dev/null
   source "$HOME/.config/shell/common.sh"

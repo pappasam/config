@@ -1,9 +1,8 @@
 # Notes:
 #
-# This file runs on login. Commands that run here will be available for all
-# shells. Only use simple shell syntax lest you incur the wrath of unwelcoming
-# parsers. Put long running commands here that I want to be available for all
-# of my shells.
+# This file runs for compatible login shells. Keep it fast and use portable
+# shell syntax. Interactive, shell-specific configuration belongs in each
+# shell's rc file.
 #
 # WARNING: Values defined here could cause poorly written applications to
 # break. For example, an application that assumes the default Python is a
@@ -14,9 +13,6 @@
 # Line necessary because I get an error on login on Ubuntu 24.04 without it
 export TERM=xterm-256color
 
-if [ -n "$BASH_VERSION" ]; then
-  # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-  fi
+if [ -n "${BASH_VERSION-}" ] && [ -r "$HOME/.bashrc" ]; then
+  . "$HOME/.bashrc"
 fi
