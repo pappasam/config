@@ -1,4 +1,4 @@
-vim.wo.foldenable = true
+vim.wo.foldenable = false
 vim.wo.foldlevel = 0
 vim.wo.foldmethod = "syntax"
 vim.wo.list = false

@@ -86,6 +86,7 @@ local treesitter_parsers = {
   "typescript",
   "vim",
   "vimdoc",
+  "xml",
   "yaml",
   "zsh",
 }
