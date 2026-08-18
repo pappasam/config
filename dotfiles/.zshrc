@@ -124,7 +124,7 @@ if command -v fzf > /dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_DEFAULT_OPTS='--bind=ctrl-y:accept,ctrl-j:down,ctrl-k:up'
   export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .git'
-  export FZF_CTRL_R_COMMAND=''
+  unset FZF_CTRL_R_COMMAND
   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
   export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir d'
   source <(fzf --zsh)
@@ -135,18 +135,6 @@ if command -v fzf > /dev/null; then
   }
   zle -N fzf-context-widget
   bindkey '^T' fzf-context-widget
-fi
-if command -v atuin > /dev/null; then
-  eval "$(atuin init zsh --disable-up-arrow --disable-ai)"
-
-  function _zsh_autosuggest_strategy_atuin_cwd() {
-    typeset -g suggestion
-    suggestion=$(
-      ATUIN_QUERY="$1" atuin search --cwd "$PWD" --exit 0 --cmd-only \
-        --author '$all-user' --limit 1 --search-mode prefix 2>/dev/null
-    )
-  }
-  ZSH_AUTOSUGGEST_STRATEGY=(atuin_cwd completion)
 fi
 if command -v starship > /dev/null; then
   eval "$(starship init zsh)"

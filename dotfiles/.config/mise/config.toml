@@ -64,7 +64,6 @@ worktrunk = "latest"
 "cargo:diesel_cli" = "latest"
 "github:llvm/llvm-project" = { version = "llvmorg-22.1.7", matching = "LLVM-", filter_bins = "clangd,clang-format" }
 "github:YS-L/csvlens" = "latest"
-"github:atuinsh/atuin" = "latest"
 "github:nishanths/license" = "latest"
 "github:supabase-community/postgres-language-server" = { version = "latest", bin = "postgres-language-server" }
 "go:github.com/sibprogrammer/xq" = "latest"
