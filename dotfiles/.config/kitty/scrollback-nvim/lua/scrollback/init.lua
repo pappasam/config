@@ -5,7 +5,8 @@ local function set_options()
   vim.o.number = false
   vim.o.relativenumber = false
   vim.o.signcolumn = "no"
-  vim.o.laststatus = 0
+  vim.o.laststatus = 2
+  vim.o.statusline = "  KITTY SCROLLBACK  %=  visual y to copy  |  q to quit  "
   vim.o.cmdheight = 0
   vim.o.ruler = false
   vim.o.showmode = false
@@ -28,6 +29,7 @@ local function set_highlights(colors)
       bg = colors.background,
     })
   end
+  vim.api.nvim_set_hl(0, "StatusLine", { bold = true, reverse = true })
 end
 
 local function build_palette(colors)
@@ -610,12 +612,10 @@ local function set_keymaps(_, image_entries)
     vim.cmd("quitall!")
   end
   vim.keymap.set("n", "q", quit, { buffer = true })
-  vim.keymap.set("n", "<Esc>", quit, { buffer = true })
   vim.keymap.set("v", "y", function()
     vim.cmd.normal({ '"+y', bang = true })
     local text = vim.fn.getreg("+")
     vim.fn.setreg("+", text:gsub("\n$", ""))
-    quit()
   end, { buffer = true })
   vim.keymap.set({ "n", "x" }, "k", function()
     return vim.v.count == 0 and "gk" or "k"
