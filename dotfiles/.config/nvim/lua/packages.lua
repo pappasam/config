@@ -336,7 +336,11 @@ require("gitsigns").setup({
 -- }}}
 -- https://github.com/stevearc/aerial.nvim {{{
 
-require("aerial").setup({})
+require("aerial").setup({
+  layout = {
+    resize_to_content = false,
+  },
+})
 
 -- }}}
 -- https://github.com/Saghen/blink.cmp {{{
