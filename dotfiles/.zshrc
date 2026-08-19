@@ -59,12 +59,10 @@ unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 autoload -Uz compinit && compinit
 function precmd() { # hook
-  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
-  printf "\033]0;%s(zsh)\007" "$dir"
+  printf "\033]0;%s\007" "${PWD:t}"
 }
 function preexec() { # hook
-  dir=$(pwd | sed -E -e "s:^${HOME}:~:" -e "s:([^/\.])[^/]+/:\1/:g")
-  printf "\033]0;%s($1)\007" "$dir"
+  printf "\033]0;%s\007" "${PWD:t}"
 }
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
