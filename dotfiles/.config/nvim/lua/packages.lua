@@ -51,6 +51,7 @@ local treesitter_parsers = {
   "diff",
   "dockerfile",
   "dot",
+  "dtd",
   "ecma",
   "editorconfig",
   "fga",
