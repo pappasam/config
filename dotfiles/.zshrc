@@ -30,13 +30,9 @@ export CARAPACE_BRIDGES=zsh
 export CARAPACE_ENV=0
 export CARAPACE_MATCH=1
 export CARAPACE_UNFILTERED=1
-export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line)
-export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(forward-word forward-char)
 alias pip='noglob pip' # Python: enable things like "pip install 'requests[security]'"
 if [ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]; then
   source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-  zinit light zsh-users/zsh-autosuggestions
   zinit light zsh-users/zsh-completions
   zinit light wbingli/zsh-claudecode-completion
 fi
@@ -86,7 +82,6 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*:processes' list-colors $'=(\x23b) \x23([0-9]\x23)*=0=01;31'
 zmodload -i zsh/complist
 bindkey -e # emacs
-bindkey '^y' autosuggest-accept
 bindkey '^f' forward-word
 bindkey '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^j' down-line-or-history
