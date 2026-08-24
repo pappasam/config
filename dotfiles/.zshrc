@@ -98,6 +98,19 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' .accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+function _wtclean() {
+  local -a saved_words=("${words[@]}")
+  local saved_current=$CURRENT
+  local result
+  words=(wt step prune "${saved_words[@]:1}")
+  CURRENT=$((saved_current + 2))
+  _wt_lazy_complete "$@"
+  result=$?
+  words=("${saved_words[@]}")
+  CURRENT=$saved_current
+  return $result
+}
+compdef _wtclean wtclean
 if command -v carapace > /dev/null; then
   # Let Carapace fill gaps without replacing native or generated completions.
   typeset -A _native_completions

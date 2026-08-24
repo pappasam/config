@@ -63,7 +63,6 @@ alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias gop='gh pr view --web || gh browse'
-alias wtc='wt switch --create'
 
 # General
 alias gn='gio open'
@@ -217,6 +216,15 @@ function despace-filename() {
       mv "$filename" "$(echo -n "$filename" | tr -s ' ' '_')"
     done
   fi
+}
+
+# Refresh remote state, then remove worktrees whose branches are integrated
+# into the default branch. Arguments are forwarded to `wt step prune`.
+function wtclean() {
+  git rev-parse --git-dir >/dev/null 2>&1 || return 1
+  git fetch --prune origin || return
+  git remote set-head origin -a >/dev/null 2>&1 || true
+  wt step prune "$@"
 }
 
 function gg() {
