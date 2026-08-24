@@ -24,7 +24,7 @@ vim.lsp.enable({
   "tailwindcss",
   "taplo",
   "terraformls",
-  "tsgo",
+  "tsc",
   "ty",
   "vimls",
   "yamlls",
@@ -100,10 +100,6 @@ vim.lsp.config("lua_ls", {
       },
     },
   },
-})
-
-vim.lsp.config("tsgo", {
-  cmd = { "tsc", "--lsp", "--stdio" },
 })
 
 vim.lsp.config("cssls", {
