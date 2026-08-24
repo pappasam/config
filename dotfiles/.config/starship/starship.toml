@@ -2,5 +2,17 @@
 # docs https://starship.rs/config/
 # system colors https://www.ditig.com/256-colors-cheat-sheet
 
+format = '$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch${custom.worktree}$all'
+
 [aws]
 symbol = ' '
+
+[custom.worktree]
+command = "printf wt"
+when = '''
+git_dir=$(git rev-parse --path-format=absolute --git-dir 2>/dev/null) &&
+common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) &&
+test "$git_dir" != "$common_dir"
+'''
+format = '[\[wt\]]($style) '
+style = "bold yellow"
