@@ -87,6 +87,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '--color=[Specifies color settings for use in the output]:COLOR:(always never auto)' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -126,6 +127,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--image=[Optional image(s) to attach to the prompt sent after resuming]:FILE:_files' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -155,6 +157,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--image=[Optional image(s) to attach to the prompt sent after forking]:FILE:_files' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -183,6 +186,7 @@ _arguments "${_arguments_options[@]}" : \
 '--title=[Optional commit title to display in the review summary]:TITLE:_default' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -254,6 +258,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '--color=[Specifies color settings for use in the output]:COLOR:(always never auto)' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -293,6 +298,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--image=[Optional image(s) to attach to the prompt sent after resuming]:FILE:_files' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -322,6 +328,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--image=[Optional image(s) to attach to the prompt sent after forking]:FILE:_files' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -350,6 +357,7 @@ _arguments "${_arguments_options[@]}" : \
 '--title=[Optional commit title to display in the review summary]:TITLE:_default' \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
+'--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
