@@ -73,7 +73,7 @@ worktrunk = "latest"
 "npm:@mermaid-js/mermaid-cli" = { version = "latest", postinstall = '"$MISE_TOOL_INSTALL_PATH/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/.bin/puppeteer" browsers install chrome-headless-shell' }
 "npm:@shopify/cli" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
-"npm:typescript" = "rc"
+"npm:typescript" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"
 "npm:graphql-language-service-cli" = "latest"
