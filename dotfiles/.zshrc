@@ -140,3 +140,6 @@ fi
 if (( $+functions[zinit] )); then
   zinit light zsh-users/zsh-syntax-highlighting
 fi
+if command -v wt >/dev/null 2>&1; then
+  eval "$(command wt config shell init zsh)"
+fi
