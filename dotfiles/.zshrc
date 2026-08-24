@@ -98,7 +98,6 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' .accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
-compdef _files f
 if command -v carapace > /dev/null; then
   # Let Carapace fill gaps without replacing native or generated completions.
   typeset -A _native_completions
