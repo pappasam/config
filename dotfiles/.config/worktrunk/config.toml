@@ -1,2 +1,10 @@
+worktree-path = "~/worktrees/{{ repo }}/{{ branch | sanitize }}"
+
 [pre-start]
 copy-ignored = "wt step copy-ignored --require-include"
+
+[pre-merge]
+whitespace = "git diff --check {{ target }}...HEAD"
+
+[switch.picker]
+pager = "delta --paging=never"
