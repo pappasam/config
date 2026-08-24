@@ -1,0 +1,2 @@
+[pre-start]
+copy-ignored = "wt step copy-ignored --require-include"
