@@ -503,7 +503,11 @@ if exists('+winborder')
 endif
 
 let $PATH = getcwd() .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = 'xsel'
+if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-paste')
+  let g:clipboard = 'wl-copy'
+elseif executable('xsel')
+  let g:clipboard = 'xsel'
+endif
 let g:markdown_recommended_style = 0
 let g:markdown_syntax_conceal = 1
 let g:vim_markdown_folding_disabled = 1

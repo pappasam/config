@@ -56,7 +56,7 @@ sudo apt install -y \
   less \
   libbz2-dev \
   libcap-dev \
-  libclang-14-dev \
+  libclang-dev \
   libcurl4-openssl-dev \
   libdb-dev \
   libedit-dev \
@@ -87,7 +87,6 @@ sudo apt install -y \
   libpq-dev \
   libpsl-dev \
   libreadline-dev \
-  libreadline6-dev \
   librsvg2-bin \
   libsasl2-dev \
   libspa-0.2-bluetooth \
@@ -152,7 +151,6 @@ sudo apt install -y \
   xz-utils \
   xzdec \
   ydotool \
-  ydotoold \
   zathura \
   zlib1g-dev \
   zsh

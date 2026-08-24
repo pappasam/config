@@ -80,5 +80,8 @@ fi
 if ! command -v murmure >/dev/null; then
   echo 'INSTALLING: murmure'
   curl -fsSL https://raw.githubusercontent.com/Kieirra/murmure/main/install.sh | sh
-  bash "$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/murmure/import-config.sh"
+  murmure_import="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/scripts/murmure/import-config.sh"
+  if [[ -f "$murmure_import" ]]; then
+    bash "$murmure_import"
+  fi
 fi

@@ -3,12 +3,21 @@
 # Environment {{{
 
 # <https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md#option-3_the-safest-way>
-export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+if [[ -x /opt/google/chrome/chrome-sandbox ]]; then
+  export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+else
+  unset CHROME_DEVEL_SANDBOX
+fi
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER=/usr/bin/firefox
 export EDITOR=nvim
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export GDK_SCALE=0 # controls HI-DPI / Non HI_DPI, off because messes up pdf tooling
+# Preserve the PDF-tooling workaround on X11; let Wayland choose the scale for each display.
+if [[ "${XDG_SESSION_TYPE:-}" == x11 ]]; then
+  export GDK_SCALE=0
+else
+  unset GDK_SCALE
+fi
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --mouse --wheel-lines=3'
 export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
@@ -66,8 +75,8 @@ alias gop='gh pr view --web || gh browse'
 
 # General
 alias gn='gio open'
-alias pbcopy="perl -pe 'chomp if eof' | xsel --clipboard --input"
-alias pbpaste='xsel --clipboard --output'
+alias pbcopy='clipboard_copy'
+alias pbpaste='clipboard_paste'
 alias publicip='curl -s checkip.amazonaws.com'
 alias rg='rg --fixed-strings'
 alias icat='kitten icat'
@@ -89,6 +98,38 @@ function ka() {
 function pp() { cd "$HOME/src/pappasam/$1" || return; }
 function vplug() { cd "$HOME/.local/share/nvim/site/pack/core/opt/$1" || return; }
 
+function clipboard_copy() {
+  if [[ "${XDG_SESSION_TYPE:-}" == wayland ]]; then
+    command -v wl-copy >/dev/null || {
+      echo 'wl-copy not found; install wl-clipboard' >&2
+      return 127
+    }
+    perl -pe 'chomp if eof' | wl-copy
+  else
+    command -v xsel >/dev/null || {
+      echo 'xsel not found' >&2
+      return 127
+    }
+    perl -pe 'chomp if eof' | xsel --clipboard --input
+  fi
+}
+
+function clipboard_paste() {
+  if [[ "${XDG_SESSION_TYPE:-}" == wayland ]]; then
+    command -v wl-paste >/dev/null || {
+      echo 'wl-paste not found; install wl-clipboard' >&2
+      return 127
+    }
+    wl-paste --no-newline
+  else
+    command -v xsel >/dev/null || {
+      echo 'xsel not found' >&2
+      return 127
+    }
+    xsel --clipboard --output
+  fi
+}
+
 function vpn() { # toggle vpn
   if nmcli -t -f GENERAL.STATE con show aws 2>/dev/null | grep -q activated; then
     nmcli con down aws
@@ -101,7 +142,7 @@ function vpn() { # toggle vpn
 # v foo.txt    # copies absolute path to ./foo.txt
 function v() { # copy paths to clipboard
   realpath "${1:-.}" |
-    tee >(perl -pe 'chomp if eof' | xsel --clipboard --input)
+    tee >(clipboard_copy)
 }
 
 function _mise_update_pattern() {

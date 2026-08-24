@@ -398,18 +398,33 @@ set splitright
 set updatetime=300
 set winborder=rounded
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-let g:clipboard = {
-      \ 'name': 'pbcopy',
-      \ 'copy': {
-      \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
-      \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
-      \ },
-      \ 'paste': {
-      \   '+': ['xsel', '--clipboard', '--output'],
-      \   '*': ['xsel', '--clipboard', '--output'],
-      \ },
-      \ 'cache_enabled': 0,
-      \ }
+if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-paste')
+  let g:clipboard = {
+        \ 'name': 'pbcopy (Wayland)',
+        \ 'copy': {
+        \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | wl-copy --type text/plain"],
+        \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | wl-copy --type text/plain"],
+        \ },
+        \ 'paste': {
+        \   '+': ['wl-paste', '--no-newline'],
+        \   '*': ['wl-paste', '--no-newline'],
+        \ },
+        \ 'cache_enabled': 0,
+        \ }
+elseif executable('xsel')
+  let g:clipboard = {
+        \ 'name': 'pbcopy (X11)',
+        \ 'copy': {
+        \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
+        \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
+        \ },
+        \ 'paste': {
+        \   '+': ['xsel', '--clipboard', '--output'],
+        \   '*': ['xsel', '--clipboard', '--output'],
+        \ },
+        \ 'cache_enabled': 0,
+        \ }
+endif
 let g:loaded_python3_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
