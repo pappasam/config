@@ -67,7 +67,6 @@ alias g='git status'
 alias gd='git diff'
 alias gl='git --no-pager branch --verbose --list'
 alias gll='git --no-pager branch --verbose --remotes --list'
-alias gp='git remote prune origin && git remote set-head origin -a'
 alias p='git pull'
 alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
@@ -316,6 +315,37 @@ function gdl() {
     git branch -d "$branch_current" &&
     git fetch --prune origin &&
     git remote set-head origin -a >/dev/null 2>&1
+}
+
+# Prune stale origin refs, then force-delete local branches whose upstream is
+# gone. Force is intentional: squash merges do not preserve branch ancestry.
+# Use -n/--dry-run to preview the branches that would be deleted.
+function gp() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
+  local dry_run=0
+  case "${1:-}" in
+  "") ;;
+  -n | --dry-run)
+    dry_run=1
+    ;;
+  *)
+    echo 'Usage: gp [-n|--dry-run]' >&2
+    return 2
+    ;;
+  esac
+  git remote prune origin || return
+  git remote set-head origin -a >/dev/null 2>&1 || true
+  local branch tracking
+  git for-each-ref refs/heads --format='%(refname:short) %(upstream:track)' |
+    while read -r branch tracking; do
+      [ "$tracking" = "[gone]" ] || continue
+
+      if [ "$dry_run" -eq 1 ]; then
+        printf 'git branch -D -- %q\n' "$branch"
+      else
+        git branch -D -- "$branch"
+      fi
+    done
 }
 
 # Safely delete local branches already merged into the cleanup target; use -n/--dry-run to preview.
