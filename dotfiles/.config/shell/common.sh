@@ -271,6 +271,22 @@ function gg() {
   nvim -c G -c 'normal ]]' -c 'only' "$@"
 }
 
+# Delete a local branch safely unless its configured upstream is gone. A gone
+# upstream permits force-deletion because squash merges do not preserve ancestry.
+function _git_delete_local_branch() {
+  local branch tracking
+  branch="$1"
+  tracking="$(
+    git for-each-ref --format='%(upstream:track)' "refs/heads/$branch"
+  )"
+
+  if [ "$tracking" = "[gone]" ]; then
+    git branch -D -- "$branch"
+  else
+    git branch -d -- "$branch"
+  fi
+}
+
 # Switch to the default branch, pull, and safely delete the branch you were on.
 function gdl() {
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
@@ -310,11 +326,11 @@ function gdl() {
     return 0
   fi
 
-  git switch "$branch_default" &&
-    git pull --ff-only &&
-    git branch -d "$branch_current" &&
-    git fetch --prune origin &&
-    git remote set-head origin -a >/dev/null 2>&1
+  git switch "$branch_default" || return
+  git pull --ff-only || return
+  git fetch --prune origin || return
+  git remote set-head origin -a >/dev/null 2>&1 || true
+  _git_delete_local_branch "$branch_current"
 }
 
 # Prune stale origin refs, then force-delete local branches whose upstream is
@@ -343,7 +359,7 @@ function gp() {
       if [ "$dry_run" -eq 1 ]; then
         printf 'git branch -D -- %q\n' "$branch"
       else
-        git branch -D -- "$branch"
+        _git_delete_local_branch "$branch"
       fi
     done
 }
