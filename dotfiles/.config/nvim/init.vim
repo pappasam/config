@@ -268,6 +268,9 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <A-b> <C-Left>
 inoremap <A-f> <C-Right>
+" help ins-completion
+inoremap <C-Space> <C-N>
+inoremap <expr> <C-Y> pumvisible() && complete_info().selected == -1 ? "\<C-N>\<C-Y>" : "\<C-Y>"
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
@@ -369,10 +372,11 @@ lua require("lsp")
 lua require("treesitter")
 lua require("packages")
 lua require("abbreviations").setup()
+lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
-set completeopt=menuone,longest,fuzzy wildmode=longest:full
+set complete=F,o,.,w,b,u completeopt=menuone,noselect,fuzzy,nosort,popup pumborder=rounded pummaxwidth=60 wildmode=longest:full
 set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2

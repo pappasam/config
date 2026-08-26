@@ -3,11 +3,6 @@
 -- temporary workaround until nightly lands: 3e9615b48a
 vim.opt.packlockfile = vim.fn.stdpath("config") .. "/nvim-pack-lock.json"
 vim.pack.add({
-  -- Completion
-  {
-    src = "https://github.com/Saghen/blink.cmp",
-    version = vim.version.range("*"),
-  },
   -- Treesitter
   "https://github.com/neovim-treesitter/nvim-treesitter",
   "https://github.com/neovim-treesitter/treesitter-parser-registry",
@@ -340,39 +335,6 @@ require("gitsigns").setup({
 require("aerial").setup({
   layout = {
     resize_to_content = false,
-  },
-})
-
--- }}}
--- https://github.com/Saghen/blink.cmp {{{
-
-require("blink-cmp").setup({
-  enabled = function()
-    return not vim.tbl_contains(
-      { "NvimTree", "NvimTreeFilter" },
-      vim.bo.filetype
-    )
-  end,
-  completion = {
-    keyword = {
-      range = "full",
-    },
-    documentation = {
-      auto_show = true,
-    },
-    menu = {
-      auto_show = false,
-      draw = {
-        columns = {
-          { "label", "label_description", gap = 1 },
-          { "kind_icon" },
-          { "source_id" },
-        },
-      },
-    },
-  },
-  cmdline = {
-    enabled = false,
   },
 })
 

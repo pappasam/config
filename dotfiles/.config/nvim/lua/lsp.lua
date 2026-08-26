@@ -2,6 +2,120 @@
 
 vim.lsp.handlers["window/showMessage"] = vim.lsp.handlers.notify
 
+local function completion_source_priority(item)
+  if vim.tbl_get(item, "user_data", "nvim", "lsp") then
+    return 1
+  elseif vim.tbl_get(item, "user_data", "config_snippet") then
+    return 2
+  end
+  return 3
+end
+
+local function compare_completion_items(left, right)
+  local left_priority = completion_source_priority(left)
+  local right_priority = completion_source_priority(right)
+  if left_priority ~= right_priority then
+    return left_priority < right_priority
+  end
+
+  local left_score = left._fuzzy_score or 0
+  local right_score = right._fuzzy_score or 0
+  if left_score ~= right_score then
+    return left_score > right_score
+  end
+
+  local left_lsp_item = vim.tbl_get(
+    left,
+    "user_data",
+    "nvim",
+    "lsp",
+    "completion_item"
+  ) or {}
+  local right_lsp_item = vim.tbl_get(
+    right,
+    "user_data",
+    "nvim",
+    "lsp",
+    "completion_item"
+  ) or {}
+  local left_label = left_lsp_item.sortText
+    or left_lsp_item.label
+    or left.abbr
+    or left.word
+    or ""
+  local right_label = right_lsp_item.sortText
+    or right_lsp_item.label
+    or right.abbr
+    or right.word
+    or ""
+  return left_label < right_label
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("NativeLspCompletion", { clear = true }),
+  callback = function(event)
+    local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+    if client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, event.buf, {
+        autotrigger = false,
+        cmp = compare_completion_items,
+      })
+    end
+  end,
+})
+
+local completion_documentation_width = 60
+
+local function apply_completion_documentation_style(winid)
+  if
+    type(winid) ~= "number"
+    or winid == 0
+    or not vim.api.nvim_win_is_valid(winid)
+  then
+    return
+  end
+
+  vim.api.nvim_win_set_config(winid, {
+    border = "rounded",
+    width = math.min(
+      vim.api.nvim_win_get_width(winid),
+      completion_documentation_width
+    ),
+  })
+  vim.wo[winid].wrap = true
+end
+
+local function style_completion_documentation(event)
+  if event.event == "CompleteChanged" then
+    local completed_item = vim.v.event.completed_item or {}
+    local selected = vim.fn.complete_info({ "selected" }).selected
+    if
+      selected
+      and selected >= 0
+      and type(completed_item.info) == "string"
+      and completed_item.info ~= ""
+    then
+      local window = vim.api.nvim__complete_set(selected, {
+        info = completed_item.info,
+      })
+      apply_completion_documentation_style(window.winid)
+    end
+  end
+
+  vim.schedule(function()
+    local info = vim.fn.complete_info({ "preview_winid" })
+    apply_completion_documentation_style(info.preview_winid)
+  end)
+end
+
+vim.api.nvim_create_autocmd({ "CompleteChanged", "WinNew" }, {
+  group = vim.api.nvim_create_augroup(
+    "CompletionDocumentationStyle",
+    { clear = true }
+  ),
+  callback = style_completion_documentation,
+})
+
 vim.lsp.enable({
   "actionsls",
   "autotools_ls",
