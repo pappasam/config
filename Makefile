@@ -9,8 +9,8 @@ help: ## Print each target and its associated help message
 .PHONY: completions
 completions: ## Regenerate native Zsh completions for managed tools
 	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_mise" mise completions zsh
-	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uv" uv generate-shell-completion zsh
-	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uvx" uvx --generate-shell-completion zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uv" mise exec -- uv generate-shell-completion zsh
+	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_uvx" mise exec -- uvx --generate-shell-completion zsh
 	./scripts/dotfiles/gen-completion.sh "$(COMPLETION_DIR)/_codex" codex completion zsh
 
 .PHONY: install

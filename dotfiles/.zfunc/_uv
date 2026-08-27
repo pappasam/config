@@ -5375,6 +5375,7 @@ never\:"Disables colored output"))' \
 '--refresh[Refresh all cached data]' \
 '--no-refresh[]' \
 '--sync[Sync the environment to include module ownership metadata in the output]' \
+'--exact[Perform an exact sync, removing extraneous packages]' \
 '--active[Sync dependencies to the active virtual environment]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
