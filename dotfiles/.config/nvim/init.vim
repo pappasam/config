@@ -269,7 +269,6 @@ inoremap <C-f> <Right>
 inoremap <A-b> <C-Left>
 inoremap <A-f> <C-Right>
 " help ins-completion
-inoremap <C-Space> <C-N>
 inoremap <expr> <C-Y> pumvisible() && complete_info().selected == -1 ? "\<C-N>\<C-Y>" : "\<C-Y>"
 nnoremap ' ,
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
