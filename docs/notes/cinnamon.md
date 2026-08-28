@@ -44,10 +44,12 @@ The following keyboard shortcuts and mappings make it easier to do things withou
         - Lock screen: `Ctrl+Alt+Q`
     - Hardware
         - Switch monitor configurations: unassign `Super+P`
+- Launchers
+    - Launch web browser: `Ctrl+Alt+B`
 - Custom
     - Kitty: `/home/sroeca/.local/bin/kitty`, `Ctrl+Alt+i`
-    - Firefox: `firefox`, `Ctrl+Alt+b`
-    - Flameshot selection to clipboard: `flameshot gui --clipboard --accept-on-select`, `Ctrl+Alt+C`
+    - Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn`
+    - Murmure Record Toggle: `murmure --transcription`, `ScrLck`
 
 ### Layouts
 
