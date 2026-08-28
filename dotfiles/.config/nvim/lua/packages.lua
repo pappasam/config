@@ -94,6 +94,9 @@ local custom_treesitter_parsers = {
       path = "/home/sroeca/src/pappasam/tree-sitter-console",
       queries_path = "queries",
     },
+    parser_manifest = {
+      parser_version = "local",
+    },
     filetypes = { "console" },
   },
   fga = {
@@ -101,6 +104,9 @@ local custom_treesitter_parsers = {
       type = "self_contained",
       url = "https://github.com/matoous/tree-sitter-fga",
       queries_path = "queries",
+    },
+    parser_manifest = {
+      parser_version = "ce72d1c484ba133a18e966d67be66bce85695451",
     },
     filetypes = { "fga" },
   },
