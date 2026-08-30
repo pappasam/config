@@ -107,5 +107,11 @@ set_custom_shortcut \
   'murmure --transcription' \
   Scroll_Lock
 
+set_custom_shortcut \
+  custom2 \
+  'Murmure Record Toggle2' \
+  'murmure --transcription' \
+  AudioMedia
+
 gsettings set "$media" custom-keybindings \
   "['$custom_base/custom0/', '$custom_base/custom1/']"
