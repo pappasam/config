@@ -322,7 +322,6 @@ never\:"Disables colored output"))' \
 '--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
 '-h[Display the concise help for this command]' \
 '--help[Display the concise help for this command]' \
-'::service -- The domain or URL of the service to lookup:_urls' \
 && ret=0
 ;;
 (helper)
@@ -5212,7 +5211,6 @@ never\:"Disables colored output"))' \
 '--skip-existing[]' \
 '--dry-run[Perform a dry run without uploading files]' \
 '--no-attestations[Do not upload attestations for the published files]' \
-'--direct[Use direct upload to the registry]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \

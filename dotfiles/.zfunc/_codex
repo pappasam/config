@@ -1332,6 +1332,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--json[Emit a redacted machine-readable report]' \
+'--feedback[Limit database integrity scans when collecting a feedback attachment]' \
 '--summary[Only show grouped check rows and the final count summary]' \
 '--all[Expand long lists in detailed human output]' \
 '--no-color[Disable ANSI color in human output]' \
