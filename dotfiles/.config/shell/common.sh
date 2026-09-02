@@ -80,6 +80,7 @@ alias pbpaste='clipboard_paste'
 alias publicip='curl -s checkip.amazonaws.com'
 alias rg='rg --fixed-strings'
 alias icat='kitten icat'
+alias oc='ollama launch opencode --model qwen3.6:35b-a3b-coding'
 
 # }}}
 # Functions {{{
