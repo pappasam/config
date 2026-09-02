@@ -2,6 +2,7 @@
 # docs https://starship.rs/config/
 # system colors https://www.ditig.com/256-colors-cheat-sheet
 
+add_newline = false
 format = '$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch${custom.worktree}$all'
 
 [aws]

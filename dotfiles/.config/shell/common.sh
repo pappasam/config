@@ -20,6 +20,7 @@ else
 fi
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --quit-if-one-screen --mouse --wheel-lines=3'
+export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p
 export LS_COLORS='di=1;34:fi=0:ln=1;36:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=1;92:*.rpm=90'
 export MANPAGER='nvim +Man! --cmd "nnoremap d <C-d>" --cmd "nnoremap u <C-u>"'
 export MANWIDTH=79
