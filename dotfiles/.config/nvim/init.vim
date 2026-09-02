@@ -160,14 +160,6 @@ function! s:conceal(bang)
   endif
 endfunction
 
-command! CtrlL call s:ctrl_l()
-function! s:ctrl_l()
-  silent! lua vim.lsp.buf.clear_references()
-  diffupdate
-  let @/ = '' " clears search highlighting
-  redraw!
-endfunction
-
 command! -range C <line1>,<line2>call s:copy_reference(<range>)
 function! s:copy_reference(range_type) range
   if &filetype == 'NvimTree'
@@ -300,7 +292,6 @@ nnoremap K K
 nnoremap grd <Cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap grD <Cmd>lua vim.diagnostic.setqflist()<CR>
 nnoremap <C-h> <Cmd>lua vim.lsp.buf.document_highlight()<CR>
-nnoremap <C-l> <Cmd>CtrlL<CR>
 " help vim.snippet
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 nnoremap <Leader>s <Cmd>lua vim.snippet.stop()<CR>
