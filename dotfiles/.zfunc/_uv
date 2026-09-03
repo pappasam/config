@@ -572,7 +572,9 @@ never\:"Disables colored output"))' \
 '--no-active[Prefer project'\''s virtual environment over an active environment]' \
 '--no-sync[Avoid syncing the virtual environment \[env\: UV_NO_SYNC=\]]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Run without updating the \`uv.lock\` file \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '(-m --module --gui-script)-s[Run the given path as a Python script]' \
 '(-m --module --gui-script)--script[Run the given path as a Python script]' \
 '(-s --script -m --module)--gui-script[Run the given path as a Python GUI script]' \
@@ -791,7 +793,9 @@ never\:"Disables colored output"))' \
 '--lfs[Whether to use Git LFS when adding a dependency from Git]' \
 '--no-sync[Avoid syncing the virtual environment \[env\: UV_NO_SYNC=\]]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Add dependencies without re-locking the project \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--active[Prefer the active virtual environment over the project'\''s virtual environment]' \
 '--no-active[Prefer project'\''s virtual environment over an active environment]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
@@ -919,7 +923,9 @@ never\:"Disables colored output"))' \
 '--active[Prefer the active virtual environment over the project'\''s virtual environment]' \
 '--no-active[Prefer project'\''s virtual environment over an active environment]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Remove dependencies without re-locking the project \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -1046,7 +1052,9 @@ never\:"Disables colored output"))' \
 '--active[Prefer the active virtual environment over the project'\''s virtual environment]' \
 '--no-active[Prefer project'\''s virtual environment over an active environment]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Update the version without re-locking the project \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -1233,7 +1241,9 @@ never\:"Disables colored output"))' \
 '(--only-install-local)--no-install-local[Do not install local path dependencies \[env\: UV_NO_INSTALL_LOCAL=\]]' \
 '(--no-install-local)--only-install-local[Only install local path dependencies]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Sync without updating the \`uv.lock\` file \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--dry-run[Perform a dry run, without writing the lockfile or modifying the project environment]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -1347,7 +1357,10 @@ never\:"Disables colored output"))' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--check-exists -U --upgrade)--check[Check if the lockfile is up-to-date]' \
 '(--check-exists -U --upgrade)--locked[Check if the lockfile is up-to-date \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--check --locked)--check-exists[Assert that a \`uv.lock\` exists without checking if it is up-to-date \[env\: UV_FROZEN=\]]' \
+'(--check-exists --check --locked --dry-run)--frozen[Equivalent to \`--check-exists\`]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '(--check-exists --check --locked)--dry-run[Perform a dry run, without writing the lockfile]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -1542,7 +1555,9 @@ never\:"Disables colored output"))' \
 '(--only-emit-local)--no-emit-local[Do not include local path dependencies in the exported requirements]' \
 '(--no-emit-local)--only-emit-local[Only include local path dependencies in the exported requirements]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Do not update the \`uv.lock\` before exporting \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -1712,7 +1727,9 @@ never\:"Disables colored output"))' \
 '--no-default-groups[Ignore the default dependency groups]' \
 '(--only-group --only-dev)--all-groups[Include dependencies from all dependency groups]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Display the requirements without locking the project \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-build[Don'\''t build source distributions]' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
@@ -1885,7 +1902,9 @@ never\:"Disables colored output"))' \
 '--no-default-groups[Ignore the default dependency groups]' \
 '(--only-group --only-dev)--all-groups[Include dependencies from all dependency groups]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Sync without updating the \`uv.lock\` file \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-sync[Avoid syncing the virtual environment \[env\: UV_NO_SYNC=\]]' \
 '(--no-sync --script --no-project)--no-install-project[Do not install the current project \[env\: UV_NO_INSTALL_PROJECT=\]]' \
 '--isolated[Run checks without mutating project state \[env\: UV_ISOLATED=\]]' \
@@ -2056,7 +2075,9 @@ never\:"Disables colored output"))' \
 '--no-default-groups[Don'\''t audit the default dependency groups]' \
 '(--no-dev)--only-dev[Only audit the development dependency group]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Audit the requirements without locking the project \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '--no-build[Don'\''t build source distributions]' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
@@ -5356,7 +5377,9 @@ never\:"Disables colored output"))' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--frozen -U --upgrade)--locked[Check if the lockfile is up-to-date \[env\: UV_LOCKED=\]]' \
+'--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked)--frozen[Assert that a \`uv.lock\` exists without checking if it is up-to-date \[env\: UV_FROZEN=\]]' \
+'--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
 '(--frozen --locked --sync)--dry-run[Perform a dry run, without writing the lockfile]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
