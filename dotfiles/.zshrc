@@ -136,8 +136,20 @@ if command -v fzf > /dev/null; then
   source <(fzf --zsh)
 
   function fzf-context-widget() {
+    local original_lbuffer=$LBUFFER
+    local state_dir execute_marker
+    state_dir=$(mktemp -d) || return 1
+    execute_marker="$state_dir/execute"
+
     local FZF_COMPLETION_TRIGGER=''
+    local FZF_COMPLETION_OPTS="${FZF_COMPLETION_OPTS-} --bind='enter:execute-silent(touch $execute_marker)+accept'"
     fzf-completion
+
+    if [[ -e $execute_marker && $LBUFFER != $original_lbuffer ]]; then
+      zle accept-line
+    fi
+    command rm -f "$execute_marker"
+    command rmdir "$state_dir"
   }
   zle -N fzf-context-widget
   bindkey '^T' fzf-context-widget
