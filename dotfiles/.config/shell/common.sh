@@ -1,8 +1,5 @@
 # Shared interactive-shell configuration for Bash and Zsh.
 # Keep shell-specific history, PATH, prompt, and integrations in their own rc files.
-# Environment {{{
-
-# <https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md#option-3_the-safest-way>
 if [[ -x /opt/google/chrome/chrome-sandbox ]]; then
   export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
 else
@@ -39,7 +36,7 @@ function include() { [[ -f "$1" ]] && source "$1"; }
 include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.ghcup/env"
 umask 022 # Default access: files (rw-r--r--) & dirs (rwxr-xr-x) with umask 022
-# }}}
+
 # Aliases {{{
 
 # Navigation

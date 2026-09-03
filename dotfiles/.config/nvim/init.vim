@@ -95,24 +95,21 @@ function! s:edit_nvim_config()
   set lazyredraw
   try
     cd ~/config/dotfiles/.config/nvim
-    edit ~/config/dotfiles/.config/nvim/lua/packages.lua
-    tabe  ~/config/dotfiles/.config/nvim/init.vim
+    edit  ~/config/dotfiles/.config/nvim/init.vim
+    tabe ~/config/dotfiles/.config/nvim/lua/packages.lua
     1tabnext
   finally
     set nolazyredraw
   endtry
 endfunction
 
-command! EditDotfiles call s:edit_dotfiles()
-function! s:edit_dotfiles()
+command! EditZsh call s:edit_zsh()
+function! s:edit_zsh()
   set lazyredraw
   try
     cd ~
-    edit ~/.config/shell/common.sh
-    tabe ~/.zshrc
-    tabe ~/.bashrc
-    tabe ~/.profile
-    tabe ~/.zshenv
+    edit ~/.zshrc
+    tabe ~/.config/shell/common.sh
     1tabnext
   finally
     set nolazyredraw
@@ -281,7 +278,7 @@ nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>em <Cmd>edit ~/config/dotfiles/.config/mise/config.toml<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
-nnoremap <Leader>ed <Cmd>EditDotfiles<CR>
+nnoremap <Leader>ez <Cmd>EditZsh<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
