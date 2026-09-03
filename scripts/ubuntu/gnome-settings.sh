@@ -7,6 +7,7 @@ mutter=org.gnome.mutter.keybindings
 shell=org.gnome.shell.keybindings
 media=org.gnome.settings-daemon.plugins.media-keys
 tiling=org.gnome.shell.extensions.tiling-assistant
+tiling_uuid='tiling-assistant@ubuntu.com'
 
 # GNOME's Overview combines Cinnamon's window and workspace selection views.
 gsettings set "$shell" toggle-overview \
@@ -23,7 +24,19 @@ gsettings set "$wm" show-desktop \
   "['<Primary><Super>d', '<Super>d']"
 gsettings set "$shell" toggle-message-tray "['<Super>v']"
 
-# Tiling Assistant, enabled by default in Ubuntu GNOME.
+# Configure GNOME's native tiling as a fallback when Tiling Assistant is off.
+# GNOME 50 moved these bindings to Mutter and calls them "toggle-tiled-*".
+# Disable first so the extension restores the native values it overrides. This
+# also makes rerunning this script safe before the extension is enabled again.
+gnome-extensions disable "$tiling_uuid"
+gsettings set org.gnome.mutter edge-tiling true
+gsettings set "$mutter" toggle-tiled-left \
+  "['<Super>Left', '<Super>KP_4', '<Super>h']"
+gsettings set "$mutter" toggle-tiled-right \
+  "['<Super>Right', '<Super>KP_6', '<Super>l']"
+
+# Tiling Assistant overrides the native bindings while it is enabled and
+# restores them when disabled. Configure both sets, then ensure it is enabled.
 gsettings set "$tiling" tile-left-half \
   "['<Super>Left', '<Super>KP_4', '<Super>h']"
 gsettings set "$tiling" tile-right-half \
@@ -32,6 +45,8 @@ gsettings set "$tiling" tile-top-half \
   "['<Super>KP_8', '<Super>k']"
 gsettings set "$tiling" tile-bottom-half \
   "['<Super>KP_2', '<Super>j']"
+gsettings set "$tiling" enable-tiling-popup false
+gnome-extensions enable "$tiling_uuid"
 
 # Move windows between workspaces.
 gsettings set "$wm" move-to-workspace-left \
@@ -114,4 +129,4 @@ set_custom_shortcut \
   AudioMedia
 
 gsettings set "$media" custom-keybindings \
-  "['$custom_base/custom0/', '$custom_base/custom1/']"
+  "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/']"
