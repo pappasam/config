@@ -80,6 +80,11 @@ gsettings set "$mutter" switch-monitor "['XF86Display']"
 gsettings set org.gnome.desktop.input-sources xkb-options \
   "['ctrl:nocaps', 'compose:rwin']"
 
+# Prefer light application chrome. color-scheme covers modern GNOME/libadwaita
+# apps, while gtk-theme keeps older GTK apps from using the dark theme.
+gsettings set org.gnome.desktop.interface color-scheme prefer-light
+gsettings set org.gnome.desktop.interface gtk-theme Yaru
+
 # Clock and privacy.
 gsettings set org.gnome.desktop.interface clock-format 12h
 gsettings set org.gnome.desktop.privacy remember-recent-files false
