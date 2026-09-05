@@ -2,6 +2,18 @@
 
 set -euo pipefail
 
+# Refresh the GitHub CLI key even when gh is installed, before any apt update.
+# See: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+(
+  github_keyring=$(mktemp)
+  trap 'rm -f "$github_keyring"' EXIT
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o "$github_keyring"
+  sudo mkdir -p -m 755 /etc/apt/keyrings
+  sudo install -o root -g root -m 644 "$github_keyring" /etc/apt/keyrings/githubcli-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |
+    sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+)
+
 if test ! -d ~/.local/share/zinit/zinit.git; then
   echo 'INSTALLING: zinit'
   git clone https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
@@ -41,13 +53,8 @@ fi
 
 if ! command -v gh >/dev/null; then
   echo 'INSTALLING: github-cli'
-  (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) &&
-    sudo mkdir -p -m 755 /etc/apt/keyrings &&
-    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null &&
-    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg &&
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
-    sudo apt update &&
-    sudo apt install gh -y
+  sudo apt update
+  sudo apt install gh -y
 fi
 
 if ! command -v op >/dev/null; then
