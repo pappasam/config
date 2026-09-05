@@ -358,7 +358,6 @@ lua require("settings")
 lua require("lsp")
 lua require("treesitter")
 lua require("packages")
-lua require("abbreviations").setup()
 lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse

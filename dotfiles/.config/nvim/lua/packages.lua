@@ -26,6 +26,7 @@ vim.pack.add({
   "https://github.com/pappasam/papercolor-theme-slim",
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/pappasam/vim-keywordprg-commands",
+  "https://github.com/pappasam/nvim-autocorrect",
   -- Remainder
   "https://github.com/machakann/vim-sandwich",
   "https://github.com/HiPhish/info.vim",
