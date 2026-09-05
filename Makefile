@@ -25,6 +25,10 @@ run-scripts: ## Run relevant scripts (apt-install, etc) to set up system
 	bash ./scripts/ubuntu/apt-installs.sh
 	bash ./scripts/ubuntu/custom-installs.sh
 
+.PHONY: gnome-settings
+gnome-settings: ## Set gnome settings
+	bash ./scripts/ubuntu/gnome-settings.sh
+
 .PHONY: clean
 clean: ## Remove stowed links
 	stow --target $(HOME) -D dotfiles

@@ -8,17 +8,27 @@ shell=org.gnome.shell.keybindings
 media=org.gnome.settings-daemon.plugins.media-keys
 tiling_uuid='tiling-assistant@ubuntu.com'
 
-# GNOME's Overview combines Cinnamon's window and workspace selection views.
-gsettings set "$shell" toggle-overview \
-  "['<Primary><Alt>j', '<Primary><Alt>k']"
+# Use GNOME's default Super tap for the overview.
+gsettings reset org.gnome.mutter overlay-key
+gsettings reset "$shell" toggle-overview
+
+# Reset old overrides so both Alt+Tab and Super+Tab switch applications.
+# Removing a setting from this script does not clear its saved value.
+gsettings reset "$wm" switch-applications
+gsettings reset "$wm" switch-applications-backward
+gsettings reset "$wm" switch-windows
+gsettings reset "$wm" switch-windows-backward
+gsettings reset org.gnome.shell.window-switcher current-workspace-only
 
 # Window actions.
 gsettings set "$wm" maximize "['<Super>m']"
 gsettings set "$wm" unmaximize "['<Super>u']"
 gsettings set "$wm" close "['<Alt>F4', '<Primary><Alt>d']"
 
-# Remove conflicts with Super+H, Super+M, and Ctrl+Alt+D.
-gsettings set "$wm" minimize '@as []'
+# Keep hide on the home row; Super+H is used for tiling left.
+gsettings set "$wm" minimize "['<Super>j']"
+
+# Remove conflicts with Super+M and Ctrl+Alt+D.
 gsettings set "$wm" show-desktop \
   "['<Primary><Super>d', '<Super>d']"
 gsettings set "$shell" toggle-message-tray "['<Super>v']"
@@ -33,9 +43,9 @@ gsettings set "$mutter" toggle-tiled-left \
 gsettings set "$mutter" toggle-tiled-right \
   "['<Super>Right', '<Super>KP_6', '<Super>l']"
 
-# Clear the non-resizing edge-push bindings.
-gsettings set "$wm" move-to-side-w '@as []'
-gsettings set "$wm" move-to-side-e '@as []'
+# Restore the defaults (unbound) for the old non-resizing edge-push actions.
+gsettings reset "$wm" move-to-side-w
+gsettings reset "$wm" move-to-side-e
 
 # Move windows between workspaces.
 gsettings set "$wm" move-to-workspace-left \
@@ -64,17 +74,17 @@ gsettings set "$wm" switch-to-workspace-2 "['<Control><Alt>2']"
 gsettings set "$wm" switch-to-workspace-3 "['<Control><Alt>3']"
 gsettings set "$wm" switch-to-workspace-4 "['<Control><Alt>4']"
 
-# Uncomment these if workspace 1-4 should always exist.
-# gsettings set org.gnome.mutter dynamic-workspaces false
-# gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
+# Keep stable numbered destinations, using GNOME's default count of four.
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings reset org.gnome.desktop.wm.preferences num-workspaces
 
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
 gsettings set "$media" screensaver "['<Control><Alt>q']"
 gsettings set "$media" www "['<Control><Alt>b']"
 
-# Retain the monitor hardware key but remove Super+P.
-gsettings set "$mutter" switch-monitor "['XF86Display']"
+# Restore the default Super+P and monitor hardware key.
+gsettings reset "$mutter" switch-monitor
 
 # Keyboard layout.
 gsettings set org.gnome.desktop.input-sources xkb-options \
@@ -116,11 +126,15 @@ set_custom_shortcut \
   'murmure --transcription' \
   Scroll_Lock
 
+# Reserve the media-player key for Murmure, including the static system binding.
+gsettings set "$media" media '@as []'
+gsettings set "$media" media-static '@as []'
+
 set_custom_shortcut \
   custom2 \
   'Murmure Record Toggle2' \
   'murmure --transcription' \
-  AudioMedia
+  XF86AudioMedia
 
 gsettings set "$media" custom-keybindings \
   "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/']"
