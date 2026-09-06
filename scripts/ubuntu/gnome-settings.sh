@@ -20,6 +20,9 @@ gsettings reset "$wm" switch-windows
 gsettings reset "$wm" switch-windows-backward
 gsettings reset org.gnome.shell.window-switcher current-workspace-only
 
+# Limit application switching to windows on the current workspace.
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
 # Window actions.
 gsettings set "$wm" maximize "['<Super>m']"
 gsettings set "$wm" unmaximize "['<Super>u']"
