@@ -44,6 +44,8 @@ if ! command -v zoom >/dev/null; then
   sudo apt install /tmp/zoom_amd64.deb
 fi
 
+bash "$(dirname "${BASH_SOURCE[0]}")/install-vial.sh"
+
 if ! command -v session-manager-plugin >/dev/null; then
   echo 'INSTALLING: aws session-manager-plugin'
   sudo apt update
