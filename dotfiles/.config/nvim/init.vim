@@ -2,8 +2,6 @@
 
 command P packupdate
 
-command Q quitall!
-
 command! GG call s:gitsigns_toggle()
 function! s:gitsigns_toggle()
   Gitsigns toggle_deleted
