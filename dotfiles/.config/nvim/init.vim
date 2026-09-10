@@ -383,6 +383,7 @@ set path+=/usr/include/x86_64-linux-gnu/
 set shortmess+=c
 set showtabline=2
 set signcolumn=yes
+set smoothscroll
 set spelllang=en_us
 set splitright
 set updatetime=300
