@@ -362,7 +362,7 @@ lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
-set complete=F,o,.,w,b,u completeopt=menuone,noselect,fuzzy,nosort,popup pumborder=rounded pummaxwidth=60 wildmode=longest:full
+set complete=F,o,.,w,b,u completeopt=menuone,noselect,fuzzy,nosort,popup pumborder=single pummaxwidth=60 wildmode=longest:full
 set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
 set expandtab shiftwidth=2 softtabstop=2
@@ -387,7 +387,7 @@ set smoothscroll
 set spelllang=en_us
 set splitright
 set updatetime=300
-set winborder=rounded
+set winborder=single
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-paste')
   let g:clipboard = {
