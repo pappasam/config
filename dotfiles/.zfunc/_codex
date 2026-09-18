@@ -907,6 +907,7 @@ _arguments "${_arguments_options[@]}" : \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
 '(--listen)--stdio[Use stdio as the transport (equivalent to \`--listen stdio\://\`)]' \
 '--remote-control[Enable remote control for this app-server process without changing persistence]' \
+'--managed-daemon[Save loaded threads during managed daemon shutdown]' \
 '--analytics-default-enabled[Controls whether analytics are enabled by default]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -960,6 +961,16 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (restart)
+_arguments "${_arguments_options[@]}" : \
+'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
+'*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(update)
 _arguments "${_arguments_options[@]}" : \
 '*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
@@ -1040,6 +1051,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (restart)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(update)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -1159,6 +1174,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (restart)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(update)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -2379,6 +2398,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(update)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (enable-remote-control)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -2736,6 +2759,7 @@ _codex__app-server__daemon_commands() {
 'bootstrap:Install durable local app-server management for SSH-driven use' \
 'start:Start the local app server daemon if it is not already running' \
 'restart:Restart the local app server daemon' \
+'update:Update the standalone installation and restart the managed daemon (may interrupt work)' \
 'enable-remote-control:Enable remote control for future starts and a currently running managed daemon' \
 'disable-remote-control:Disable remote control for future starts and a currently running managed daemon' \
 'stop:Stop the local app server daemon' \
@@ -2766,6 +2790,7 @@ _codex__app-server__daemon__help_commands() {
 'bootstrap:Install durable local app-server management for SSH-driven use' \
 'start:Start the local app server daemon if it is not already running' \
 'restart:Restart the local app server daemon' \
+'update:Update the standalone installation and restart the managed daemon (may interrupt work)' \
 'enable-remote-control:Enable remote control for future starts and a currently running managed daemon' \
 'disable-remote-control:Disable remote control for future starts and a currently running managed daemon' \
 'stop:Stop the local app server daemon' \
@@ -2815,6 +2840,11 @@ _codex__app-server__daemon__help__stop_commands() {
     local commands; commands=()
     _describe -t commands 'codex app-server daemon help stop commands' commands "$@"
 }
+(( $+functions[_codex__app-server__daemon__help__update_commands] )) ||
+_codex__app-server__daemon__help__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex app-server daemon help update commands' commands "$@"
+}
 (( $+functions[_codex__app-server__daemon__help__version_commands] )) ||
 _codex__app-server__daemon__help__version_commands() {
     local commands; commands=()
@@ -2839,6 +2869,11 @@ _codex__app-server__daemon__start_commands() {
 _codex__app-server__daemon__stop_commands() {
     local commands; commands=()
     _describe -t commands 'codex app-server daemon stop commands' commands "$@"
+}
+(( $+functions[_codex__app-server__daemon__update_commands] )) ||
+_codex__app-server__daemon__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex app-server daemon update commands' commands "$@"
 }
 (( $+functions[_codex__app-server__daemon__version_commands] )) ||
 _codex__app-server__daemon__version_commands() {
@@ -2878,6 +2913,7 @@ _codex__app-server__help__daemon_commands() {
 'bootstrap:Install durable local app-server management for SSH-driven use' \
 'start:Start the local app server daemon if it is not already running' \
 'restart:Restart the local app server daemon' \
+'update:Update the standalone installation and restart the managed daemon (may interrupt work)' \
 'enable-remote-control:Enable remote control for future starts and a currently running managed daemon' \
 'disable-remote-control:Disable remote control for future starts and a currently running managed daemon' \
 'stop:Stop the local app server daemon' \
@@ -2920,6 +2956,11 @@ _codex__app-server__help__daemon__start_commands() {
 _codex__app-server__help__daemon__stop_commands() {
     local commands; commands=()
     _describe -t commands 'codex app-server help daemon stop commands' commands "$@"
+}
+(( $+functions[_codex__app-server__help__daemon__update_commands] )) ||
+_codex__app-server__help__daemon__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex app-server help daemon update commands' commands "$@"
 }
 (( $+functions[_codex__app-server__help__daemon__version_commands] )) ||
 _codex__app-server__help__daemon__version_commands() {
@@ -3406,6 +3447,7 @@ _codex__help__app-server__daemon_commands() {
 'bootstrap:Install durable local app-server management for SSH-driven use' \
 'start:Start the local app server daemon if it is not already running' \
 'restart:Restart the local app server daemon' \
+'update:Update the standalone installation and restart the managed daemon (may interrupt work)' \
 'enable-remote-control:Enable remote control for future starts and a currently running managed daemon' \
 'disable-remote-control:Disable remote control for future starts and a currently running managed daemon' \
 'stop:Stop the local app server daemon' \
@@ -3448,6 +3490,11 @@ _codex__help__app-server__daemon__start_commands() {
 _codex__help__app-server__daemon__stop_commands() {
     local commands; commands=()
     _describe -t commands 'codex help app-server daemon stop commands' commands "$@"
+}
+(( $+functions[_codex__help__app-server__daemon__update_commands] )) ||
+_codex__help__app-server__daemon__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex help app-server daemon update commands' commands "$@"
 }
 (( $+functions[_codex__help__app-server__daemon__version_commands] )) ||
 _codex__help__app-server__daemon__version_commands() {

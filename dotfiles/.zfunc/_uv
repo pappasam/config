@@ -1467,6 +1467,7 @@ cyclonedx1.5\:"Export in \`CycloneDX\` v1.5 JSON format"))' \
 '*--no-editable-package=[Export the specified editable packages as non-editable]:NO_EDITABLE_PACKAGE:' \
 '-o+[Write the exported requirements to the given file]:OUTPUT_FILE:_files' \
 '--output-file=[Write the exported requirements to the given file]:OUTPUT_FILE:_files' \
+'(-o --output-file --script --package --all-packages --extra --all-extras --no-extra --no-all-extras --group --no-group --only-group --all-groups --no-default-groups --dev --no-dev --only-dev)--batch=[Export multiple selections from a TOML manifest containing \`\[\[export\]\]\` entries]:BATCH:_files' \
 '(--only-emit-package)*--no-emit-package=[Do not emit the given package(s)]:NO_EMIT_PACKAGE:' \
 '(--no-emit-package)*--only-emit-package=[Only emit the given package(s)]:ONLY_EMIT_PACKAGE:' \
 '*--index=[The indexes to use when resolving dependencies, in addition to the default index]:INDEX:_default' \
