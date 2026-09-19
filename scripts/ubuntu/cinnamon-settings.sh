@@ -81,6 +81,10 @@ set_custom_shortcut custom1 'Murmure Record Toggle' 'murmure --transcription' Sc
 set_custom_shortcut custom2 'Murmure Record Toggle2' 'murmure --transcription' XF86AudioMedia
 set_custom_shortcut custom3 'Murmure Cancel' 'murmure --cancel' '<Control>Scroll_Lock'
 set_custom_shortcut custom4 'Murmure Paste Last2' 'murmure --paste-last' '<Control>XF86AudioMedia'
+set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard --accept-on-select' Print
+
+# Reserve Print Screen for Flameshot.
+gsettings set "$media" screenshot '@as []'
 
 # Reserve the media-player key for Murmure. Cinnamon has no media-static key.
 gsettings set "$media" media '@as []'
@@ -88,4 +92,4 @@ gsettings set "$media" media '@as []'
 # Cinnamon reloads custom commands only when this list changes. Clear it first
 # so rerunning the script also refreshes existing shortcuts.
 gsettings set "$keys" custom-list '@as []'
-gsettings set "$keys" custom-list "['custom0', 'custom1', 'custom2', 'custom3', 'custom4']"
+gsettings set "$keys" custom-list "['custom0', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5']"

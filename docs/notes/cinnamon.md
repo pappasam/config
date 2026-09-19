@@ -4,13 +4,14 @@ Run `make cinnamon-settings` from the repository root to apply [Cinnamon keybind
 
 ## Keyboard
 
-The script configures window actions, tiling, workspace and monitor navigation, screen locking, browser launch, Kitty, and Murmure. `Super+H/L` tiles left/right, `Super+K/J` tiles up/down, and `Super+P` switches monitor configurations.
+The script configures window actions, tiling, workspace and monitor navigation, screen locking, browser launch, Kitty, Murmure, and Flameshot. `Super+H/L` tiles left/right, `Super+K/J` tiles up/down, and `Super+P` switches monitor configurations.
 
 ### Shortcuts
 
 - Murmure Record Toggle: `murmure --transcription`, `ScrollLock` or `Media`
 - Murmure Cancel: `murmure --cancel`, `Ctrl+ScrollLock`
 - Murmure Paste Last: `murmure --paste-last`, `Ctrl+Media`
+- Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn` (the script disables the built-in screenshot shortcut)
 
 Cinnamon keeps its menu on Super tap and uses its window switcher for both `Alt+Tab` and `Super+Tab`. GNOME's overview and message-tray shortcuts have no direct equivalent in this script.
 
@@ -18,7 +19,6 @@ Optional Cinnamon-only shortcuts to configure through the GUI after running the 
 
 - Show the window selection screen: `Ctrl+Alt+J`
 - Show the workspace selection screen: `Ctrl+Alt+K`
-- Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn` (unassign the built-in screenshot shortcut first)
 
 ### Layouts
 
