@@ -29,6 +29,10 @@ run-scripts: ## Run relevant scripts (apt-install, etc) to set up system
 gnome-settings: ## Set gnome settings
 	bash ./scripts/ubuntu/gnome-settings.sh
 
+.PHONY: cinnamon-settings
+cinnamon-settings: ## Set Cinnamon keybindings
+	bash ./scripts/ubuntu/cinnamon-settings.sh
+
 .PHONY: clean
 clean: ## Remove stowed links
 	stow --target $(HOME) -D dotfiles

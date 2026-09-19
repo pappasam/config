@@ -1,55 +1,24 @@
 # Cinnamon Configuration
 
-Cinnamon is configured manually, through a GUI. This documents the required manual steps for a new setup for Cinnamon `6.0.4`.
+Run `make cinnamon-settings` from the repository root to apply [Cinnamon keybindings](../../scripts/ubuntu/cinnamon-settings.sh), mirroring the GNOME script where applicable. The script manages the custom shortcut list. The remaining GUI settings below were documented for Cinnamon `6.0.4`.
 
 ## Keyboard
 
-The following keyboard shortcuts and mappings make it easier to do things without moving my hands from the home row.
+The script configures window actions, tiling, workspace and monitor navigation, screen locking, browser launch, Kitty, and Murmure. `Super+J` minimizes, `Super+H/L` tiles left/right, and `Super+P` switches monitor configurations.
 
 ### Shortcuts
 
-- General
-    - Main
-        - Show the window selection screen : `Ctrl+Alt+J`
-        - Show the workspace selection screen : `Ctrl+Alt+K`
-- Windows
-    - Main
-        - Maximize Window : `Super+M`
-        - Unmaximize Window: `Super+U`
-        - Close window : `Ctrl+Alt+D`
-    - Tiling and Snapping
-        - Push tile left : `Super+H`
-        - Push tile right : `Super+L`
-        - Push tile up : `Super+K`
-        - Push tile down : `Super+J`
-    - Inter-workspace
-        - Move window to left workspace : `Shift+Ctrl+Alt+H`
-        - Move window to right workspace : `Shift+Ctrl+Alt+L`
-    - Inter-monitor
-        - Move window to left monitor: `Shift+Super+H`
-        - Move window to right monitor: `Shift+Super+L`
-        - Move window to up monitor: `Shift+Super+K`
-        - Move window to down monitor: `Shift+Super+J`
-- Workspaces
-    - Main
-        - Switch to left workspace: `Ctrl+Alt+H`
-        - Switch to right workspace: `Ctrl+Alt+L`
-    - Direct Navigation
-        - Switch to workspace 1 : `Ctrl+Alt+1`
-        - Switch to workspace 2 : `Ctrl+Alt+2`
-        - Switch to workspace 3 : `Ctrl+Alt+3`
-        - Switch to workspace 4 : `Ctrl+Alt+4`
-- System
-    - Main
-        - Lock screen: `Ctrl+Alt+Q`
-    - Hardware
-        - Switch monitor configurations: unassign `Super+P`
-- Launchers
-    - Launch web browser: `Ctrl+Alt+B`
-- Custom
-    - Kitty: `/home/sroeca/.local/bin/kitty`, `Ctrl+Alt+i`
-    - Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn`
-    - Murmure Record Toggle: `murmure --transcription`, `ScrLck`
+- Murmure Record Toggle: `murmure --transcription`, `ScrollLock` or `Media`
+- Murmure Cancel: `murmure --cancel`, `Ctrl+ScrollLock`
+- Murmure Paste Last: `murmure --paste-last`, `Ctrl+Media`
+
+Cinnamon keeps its menu on Super tap and uses its window switcher for both `Alt+Tab` and `Super+Tab`. GNOME's overview and message-tray shortcuts have no direct equivalent in this script.
+
+Optional Cinnamon-only shortcuts to configure through the GUI after running the script:
+
+- Show the window selection screen: `Ctrl+Alt+J`
+- Show the workspace selection screen: `Ctrl+Alt+K`
+- Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn` (unassign the built-in screenshot shortcut first)
 
 ### Layouts
 

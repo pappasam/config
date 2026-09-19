@@ -114,7 +114,7 @@ gsettings set "$media" media-static '@as []'
 
 set_custom_shortcut custom2 'Murmure Record Toggle2' 'murmure --transcription' XF86AudioMedia
 
-set_custom_shortcut custom3 'Murmure Paste Last' 'murmure --paste-last' '<Control>Scroll_Lock'
+set_custom_shortcut custom3 'Murmure Cancel' 'murmure --cancel' '<Control>Scroll_Lock'
 
 set_custom_shortcut custom4 'Murmure Paste Last2' 'murmure --paste-last' '<Control>XF86AudioMedia'
 
