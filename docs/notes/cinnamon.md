@@ -4,7 +4,7 @@ Run `make cinnamon-settings` from the repository root to apply [Cinnamon keybind
 
 ## Keyboard
 
-The script configures window actions, tiling, workspace and monitor navigation, screen locking, browser launch, Kitty, and Murmure. `Super+J` minimizes, `Super+H/L` tiles left/right, and `Super+P` switches monitor configurations.
+The script configures window actions, tiling, workspace and monitor navigation, screen locking, browser launch, Kitty, and Murmure. `Super+H/L` tiles left/right, `Super+K/J` tiles up/down, and `Super+P` switches monitor configurations.
 
 ### Shortcuts
 

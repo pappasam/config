@@ -18,7 +18,8 @@ gsettings set org.cinnamon alttab-switcher-show-all-workspaces false
 gsettings set "$wm" maximize "['<Super>m']"
 gsettings set "$wm" unmaximize "['<Super>u']"
 gsettings set "$wm" close "['<Alt>F4', '<Primary><Alt>d']"
-gsettings set "$wm" minimize "['<Super>j']"
+# Free Super+J for tiling down.
+gsettings reset "$wm" minimize
 gsettings set "$wm" show-desktop "['<Primary><Super>d', '<Super>d']"
 
 # Free Super+L from Looking Glass, Cinnamon's debugger.
@@ -28,9 +29,9 @@ gsettings set "$keys" looking-glass-keybinding '@as []'
 gsettings set org.cinnamon.muffin edge-tiling true
 gsettings set "$wm" push-tile-left "['<Super>Left', '<Super>KP_4', '<Super>h']"
 gsettings set "$wm" push-tile-right "['<Super>Right', '<Super>KP_6', '<Super>l']"
-# Clear the old home-row tiling overrides, especially Super+J (now minimize).
-gsettings reset "$wm" push-tile-up
-gsettings reset "$wm" push-tile-down
+gsettings set "$wm" push-tile-up "['<Super>Up', '<Super>k']"
+gsettings set "$wm" push-tile-down "['<Super>Down', '<Super>j']"
+# Clear the old non-resizing edge-push overrides.
 gsettings reset "$wm" move-to-side-w
 gsettings reset "$wm" move-to-side-e
 
