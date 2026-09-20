@@ -120,7 +120,10 @@ set_custom_shortcut custom4 'Murmure Cancel (Media)' 'murmure --cancel' '<Contro
 
 set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard --accept-on-select' Print
 
+set_custom_shortcut custom6 'Murmure Record Toggle (TouchpadOff)' 'murmure --transcription' '<Shift><Super>XF86TouchpadOff'
+set_custom_shortcut custom7 'Murmure Cancel (TouchpadOff)' 'murmure --cancel' '<Control><Shift><Super>XF86TouchpadOff'
+
 # Reserve Print Screen for Flameshot, matching Cinnamon.
 gsettings set "$shell" show-screenshot-ui '@as []'
 
-gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/']"
+gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/']"

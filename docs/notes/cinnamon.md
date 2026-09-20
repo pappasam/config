@@ -8,8 +8,8 @@ The script configures window actions, tiling, workspace and monitor navigation, 
 
 ### Shortcuts
 
-- Murmure Record Toggle: `murmure --transcription`, `ScrollLock` or `Media`
-- Murmure Cancel: `murmure --cancel`, `Ctrl+ScrollLock` or `Ctrl+Media`
+- Murmure Record Toggle: `murmure --transcription`, `ScrollLock`, `Media`, or `Shift+Super+TouchpadOff`
+- Murmure Cancel: `murmure --cancel`, `Ctrl+ScrollLock`, `Ctrl+Media`, or `Ctrl+Shift+Super+TouchpadOff`
 - Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn` (the script disables the built-in screenshot shortcut)
 
 Cinnamon keeps its menu on Super tap and uses its window switcher for both `Alt+Tab` and `Super+Tab`. GNOME's overview and message-tray shortcuts have no direct equivalent in this script.
