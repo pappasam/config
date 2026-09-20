@@ -80,7 +80,7 @@ set_custom_shortcut custom0 Kitty /home/sroeca/.local/bin/kitty '<Control><Alt>i
 set_custom_shortcut custom1 'Murmure Record Toggle' 'murmure --transcription' Scroll_Lock
 set_custom_shortcut custom2 'Murmure Record Toggle2' 'murmure --transcription' XF86AudioMedia
 set_custom_shortcut custom3 'Murmure Cancel' 'murmure --cancel' '<Control>Scroll_Lock'
-set_custom_shortcut custom4 'Murmure Paste Last2' 'murmure --paste-last' '<Control>XF86AudioMedia'
+set_custom_shortcut custom4 'Murmure Cancel (Media)' 'murmure --cancel' '<Control>XF86AudioMedia'
 set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard --accept-on-select' Print
 
 # Reserve Print Screen for Flameshot.
