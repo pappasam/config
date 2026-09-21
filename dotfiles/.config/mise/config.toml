@@ -4,6 +4,9 @@
 idiomatic_version_file_enable_tools = ["rust"]
 python.uv_venv_auto = "create|source"
 
+[settings.github]
+credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
+
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 
