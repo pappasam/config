@@ -5394,7 +5394,6 @@ never\:"Disables colored output"))' \
 '--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked)--frozen[Assert that a \`uv.lock\` exists without checking if it is up-to-date \[env\: UV_FROZEN=\]]' \
 '--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
-'(--frozen --locked --sync)--dry-run[Perform a dry run, without writing the lockfile]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
