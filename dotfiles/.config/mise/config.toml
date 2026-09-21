@@ -74,7 +74,9 @@ worktrunk = "latest"
 "npm:@actions/languageserver" = "latest"
 "npm:@mdx-js/language-server" = "latest"
 "npm:@mermaid-js/mermaid-cli" = { version = "latest", postinstall = '"$MISE_TOOL_INSTALL_PATH/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/.bin/puppeteer" browsers install chrome-headless-shell' }
-"npm:@playwright/cli" = { version = "latest", postinstall = "playwright-cli install-browser --with-deps" }
+# Install system dependencies interactively: playwright-cli install-browser --with-deps
+# Keep sudo prompts out of mise's captured postinstall output.
+"npm:@playwright/cli" = { version = "latest", postinstall = "playwright-cli install-browser" }
 "npm:@shopify/cli" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 "npm:bash-language-server" = "latest"
