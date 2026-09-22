@@ -89,39 +89,39 @@ local treesitter_parsers = {
 
 local custom_treesitter_parsers = {
   console = {
-    source = {
-      type = "local",
+    install_info = {
       path = "/home/sroeca/src/pappasam/tree-sitter-console",
-      queries_path = "queries",
+      queries = "queries",
     },
-    parser_manifest = {
-      parser_version = "local",
-    },
-    filetypes = { "console" },
   },
   fga = {
-    source = {
-      type = "self_contained",
+    install_info = {
       url = "https://github.com/matoous/tree-sitter-fga",
-      queries_path = "queries",
+      revision = "ce72d1c484ba133a18e966d67be66bce85695451",
+      queries = "queries",
     },
-    parser_manifest = {
-      parser_version = "ce72d1c484ba133a18e966d67be66bce85695451",
-    },
-    filetypes = { "fga" },
   },
   mermaid = {
-    source = {
-      type = "local",
+    install_info = {
       path = "/home/sroeca/src/pappasam/tree-sitter-mermaid",
-      queries_path = "queries",
+      queries = "queries",
     },
-    filetypes = { "mermaid" },
   },
 }
 
-require("nvim-treesitter").setup({
-  local_parsers = custom_treesitter_parsers,
+-- The parser registry is reloaded before installs and updates.
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup(
+    "TreesitterCustomParsers",
+    { clear = true }
+  ),
+  pattern = "TSUpdate",
+  callback = function()
+    local parsers = require("nvim-treesitter.parsers")
+    for language, parser in pairs(custom_treesitter_parsers) do
+      parsers[language] = parser
+    end
+  end,
 })
 
 local function run_treesitter_parser_command(command)
