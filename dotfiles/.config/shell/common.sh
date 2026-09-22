@@ -572,9 +572,7 @@ function ollama-update() {
 
 function rustup-components() {
   rustup component add rust-analyzer rust-src rustfmt clippy
-  rustup component add --toolchain nightly rust-analyzer rust-src rustfmt clippy
   rustup component add --toolchain stable rust-analyzer rust-src rustfmt clippy
-  rustup component add --toolchain nightly rust-analyzer rust-src rustfmt clippy
 }
 
 function rglobal-install() {
