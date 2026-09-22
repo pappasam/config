@@ -55,12 +55,6 @@ setopt SHAREHISTORY
 unsetopt MENU_COMPLETE
 unsetopt AUTOREMOVESLASH
 autoload -Uz compinit && compinit
-function precmd() { # hook
-  printf "\033]0;%s\007" "${PWD:t}"
-}
-function preexec() { # hook
-  printf "\033]0;%s\007" "${PWD:t}"
-}
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' completer _complete _approximate
