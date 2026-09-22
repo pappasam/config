@@ -4,8 +4,7 @@
 vim.opt.packlockfile = vim.fn.stdpath("config") .. "/nvim-pack-lock.json"
 vim.pack.add({
   -- Treesitter
-  "https://github.com/neovim-treesitter/nvim-treesitter",
-  "https://github.com/neovim-treesitter/treesitter-parser-registry",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   -- Pairs
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/windwp/nvim-ts-autotag",
@@ -35,7 +34,7 @@ vim.pack.add({
 })
 
 -- }}}
--- https://github.com/neovim-treesitter/nvim-treesitter {{{
+-- https://github.com/nvim-treesitter/nvim-treesitter {{{
 
 local treesitter_parsers = {
   "bash",
