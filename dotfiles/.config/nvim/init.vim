@@ -239,6 +239,23 @@ function! s:focuswriting()
   endtry
 endfunction
 
+command! CustomQuitPre call s:custom_quit_pre()
+function! s:custom_quit_pre()
+  if exists("w:focuswriting")
+    silent only
+    return
+  endif
+  " Close sidebars before quitting the only file window in this tab.
+  " Ignore floating windows, including the experimental UI's command line.
+  let sidebar_filetypes = ['NvimTree', 'aerial']
+  if index(sidebar_filetypes, &filetype) < 0
+        \ && len(filter(getwininfo(), {_, win -> win.tabnr == tabpagenr()
+        \ && nvim_win_get_config(win.winid).relative ==# ''
+        \ && index(sidebar_filetypes, getbufvar(win.bufnr, '&filetype')) < 0})) == 1
+    silent only
+  endif
+endfunction
+
 " }}}
 " Mappings {{{
 
@@ -338,9 +355,7 @@ augroup init_custom
   autocmd BufRead,BufNewFile *.log set filetype=log
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost,TextPutPost * silent! lua vim.hl.hl_op({higroup="VisualNOS", timeout=250})
-  autocmd QuitPre * if exists("w:focuswriting") | only | endif
-  " Close the tree before quitting the only file window in this tab.
-  autocmd QuitPre * if winnr('$') == 2 && getwinvar(3 - winnr(), '&filetype') ==# 'NvimTree' | NvimTreeClose | endif
+  autocmd QuitPre * CustomQuitPre
   autocmd VimResized * ResizeTabs
 augroup end
 
