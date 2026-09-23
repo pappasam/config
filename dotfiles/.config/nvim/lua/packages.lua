@@ -369,6 +369,7 @@ require("colorizer").setup({
 -- https://github.com/pappasam/nvim-autocorrect {{{
 
 require("autocorrect").setup({
+  filetypes = { "markdown", "gitcommit", "text", "lua", "python", "bash" },
   correct_capitalized = true,
 })
 
