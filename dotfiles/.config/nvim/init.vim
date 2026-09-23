@@ -339,6 +339,8 @@ augroup init_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost,TextPutPost * silent! lua vim.hl.hl_op({higroup="VisualNOS", timeout=250})
   autocmd QuitPre * if exists("w:focuswriting") | only | endif
+  " Close the tree before quitting the only file window in this tab.
+  autocmd QuitPre * if winnr('$') == 2 && getwinvar(3 - winnr(), '&filetype') ==# 'NvimTree' | NvimTreeClose | endif
   autocmd VimResized * ResizeTabs
 augroup end
 
