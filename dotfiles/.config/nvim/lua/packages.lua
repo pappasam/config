@@ -366,7 +366,7 @@ require("colorizer").setup({
 })
 
 -- }}}
--- "https://github.com/pappasam/nvim-autocorrect" {{{
+-- https://github.com/pappasam/nvim-autocorrect {{{
 
 require("autocorrect").setup({
   correct_capitalized = true,
