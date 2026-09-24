@@ -379,6 +379,7 @@ lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
+set autowrite autowriteall
 set complete=F,o,.,w,b,u completeopt=menuone,noselect,fuzzy,nosort,popup pumborder=single pummaxwidth=60 wildmode=longest:full
 set cursorline cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
