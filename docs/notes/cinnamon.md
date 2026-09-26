@@ -11,6 +11,7 @@ The script configures window actions, tiling, workspace and monitor navigation, 
 - Murmure Record Toggle: `murmure --transcription`, `ScrollLock`, `Media`, or `Shift+Super+TouchpadOff`
 - Murmure Cancel: `murmure --cancel`, `Ctrl+ScrollLock`, `Ctrl+Media`, or `Ctrl+Shift+Super+TouchpadOff`
 - Flameshot to clipboard: `flameshot gui --clipboard --accept-on-select`, `PrintScrn` (the script disables the built-in screenshot shortcut)
+- Shut Down: `Ctrl+Alt+End` opens the shared [shutdown confirmation](../../bin/confirm-shutdown), also configured by `make gnome-settings`. Press Enter to shut down, or Escape to cancel; there is no countdown. Requires `zenity` (included in the apt install script). The script uses systemd to power off and honors system shutdown inhibitors; it does not run the desktop's application logout/save-dialog sequence.
 
 Cinnamon keeps its menu on Super tap and uses its window switcher for both `Alt+Tab` and `Super+Tab`. GNOME's overview and message-tray shortcuts have no direct equivalent in this script.
 

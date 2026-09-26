@@ -122,8 +122,9 @@ set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard 
 
 set_custom_shortcut custom6 'Murmure Record Toggle (TouchpadOff)' 'murmure --transcription' '<Shift><Super>XF86TouchpadOff'
 set_custom_shortcut custom7 'Murmure Cancel (TouchpadOff)' 'murmure --cancel' '<Control><Shift><Super>XF86TouchpadOff'
+set_custom_shortcut custom8 'Shut Down' "\"$HOME/config/bin/confirm-shutdown\"" '<Control><Alt>End'
 
 # Reserve Print Screen for Flameshot, matching Cinnamon.
 gsettings set "$shell" show-screenshot-ui '@as []'
 
-gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/']"
+gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"

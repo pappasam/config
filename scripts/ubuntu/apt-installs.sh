@@ -152,6 +152,7 @@ sudo apt install -y \
   xzdec \
   ydotool \
   zathura \
+  zenity \
   zlib1g-dev \
   zsh
 

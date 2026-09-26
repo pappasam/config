@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Zenity selects OK by default. Cancel, Escape, closing the window, or a
+# dialog error must all leave the computer running. There is no timeout.
+if ! zenity --question \
+  --title='Shut Down' \
+  --text='Shut down this computer?' \
+  --ok-label='Shut Down' \
+  --cancel-label='Cancel'; then
+  exit 0
+fi
+
+# Honor shutdown inhibitors even though a keyboard shortcut has no terminal.
+if ! error=$(systemctl --check-inhibitors=yes poweroff 2>&1); then
+  zenity --error --title='Unable to Shut Down' --no-markup --text="$error"
+  exit 1
+fi
