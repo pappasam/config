@@ -56,6 +56,8 @@ gsettings set org.cinnamon.muffin dynamic-workspaces false
 gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 4
 
 # System and launcher shortcuts.
+# Free Ctrl+Alt+End for the custom shutdown confirmation; keep the power key.
+gsettings set "$media" shutdown "['XF86PowerOff']"
 gsettings set "$media" screensaver "['<Control><Alt>q']"
 gsettings set "$media" www "['<Control><Alt>b']"
 gsettings reset "$wm" switch-monitor
