@@ -378,18 +378,26 @@ lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
-set autowrite autowriteall
-set complete=F,o,.,w,b,u completeopt=menuone,noselect,fuzzy,nosort,popup pumborder=single pummaxwidth=60 wildmode=longest:full
-set cursorline cursorlineopt=number
+set autowrite
+set autowriteall
+set breakat=\ \	,])/-
+set breakindent
+set breakindentopt=list:-1
+set complete=F,o,.,w,b,u
+set completeopt=menuone,noselect,fuzzy,nosort,popup
+set cursorline
+set cursorlineopt=number
 set diffopt+=algorithm:histogram,inline:word,indent-heuristic
-set expandtab shiftwidth=2 softtabstop=2
+set expandtab
 set exrc
-set foldmethod=marker foldnestmax=1 foldcolumn=auto
+set foldcolumn=auto
+set foldmethod=marker
+set foldnestmax=1
 set grepprg=rg\ --vimgrep
 set guicursor=n-v-sm:block-Cursor,i-ci-c-ve:ver25-Cursor,r-cr-o:hor20-Cursor
-set ignorecase smartcase
+set ignorecase
 set isfname+=@-@,:
-set linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
+set linebreak
 set mouse=a
 set noshowcmd
 set noshowmode
@@ -397,13 +405,19 @@ set noswapfile
 set notimeout
 set number
 set path+=/usr/include/x86_64-linux-gnu/
+set pumborder=single
+set pummaxwidth=60
+set shiftwidth=2
 set shortmess+=c
 set showtabline=2
 set signcolumn=yes
+set smartcase
 set smoothscroll
+set softtabstop=2
 set spelllang=en_us
 set splitright
 set updatetime=300
+set wildmode=longest:full
 set winborder=single
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
 if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-paste')
