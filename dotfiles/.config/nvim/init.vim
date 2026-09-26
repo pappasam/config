@@ -1,6 +1,6 @@
 " Commands {{{
 
-command P packupdate
+command! P packupdate | tabonly
 
 command! GG call s:gitsigns_toggle()
 function! s:gitsigns_toggle()
