@@ -78,6 +78,7 @@ alias rg='rg --fixed-strings'
 alias icat='kitten icat'
 alias oc='ollama launch opencode --model qwen3.6:35b-a3b-coding'
 alias playwright-install-browser='playwright-cli install-browser --with-deps'
+alias docker-clean='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # }}}
 # Functions {{{
