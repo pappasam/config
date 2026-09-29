@@ -299,6 +299,7 @@ xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 vnoremap <LeftRelease> "+ygv
 vnoremap <2-LeftRelease> "+ygv
+vnoremap <3-LeftRelease> "+ygv
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
