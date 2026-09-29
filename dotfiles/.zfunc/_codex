@@ -2076,6 +2076,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
+'--proxy-private-ips-via-upstream[Allow permitted private IP destinations to use the configured upstream proxy. If no valid upstream proxy applies to the request protocol, connect directly. Loopback stays local. This flag does not require upstream routing]' \
 '(--aws-sigv4)--use-agent-identity-auth[Use Agent Identity auth from CODEX_ACCESS_TOKEN for remote registration]' \
 '--aws-sigv4[Sign Direct registration and WebSocket handshake requests with AWS SigV4]' \
 '--exit-on-stdin-close[Exit when the parent-owned standard-input pipe closes]' \
@@ -2107,6 +2108,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
+'--proxy-private-ips-via-upstream[Allow permitted private IP destinations to use the configured upstream proxy. If no valid upstream proxy applies to the request protocol, connect directly. Loopback stays local. This flag does not require upstream routing]' \
 '(--aws-sigv4)--use-agent-identity-auth[Use Agent Identity auth from CODEX_ACCESS_TOKEN for remote registration]' \
 '--aws-sigv4[Sign Direct registration and WebSocket handshake requests with AWS SigV4]' \
 '--exit-on-stdin-close[Exit when the parent-owned standard-input pipe closes]' \
