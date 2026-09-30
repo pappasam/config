@@ -61,6 +61,11 @@ gsettings set "$wm" move-to-monitor-up "['<Super><Shift>Up', '<Super><Shift>k']"
 gsettings set "$wm" move-to-monitor-down "['<Super><Shift>Down', '<Super><Shift>j']"
 
 # Navigate workspaces.
+# Dell defaults also bind Ctrl+Alt+3 to launching the third dock application.
+# Clear both GNOME Shell's binding and Ubuntu Dock's overlapping bindings.
+gsettings set "$shell" switch-to-application-3 '@as []'
+gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-3 '@as []'
+gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-3 '@as []'
 gsettings set "$wm" switch-to-workspace-left "['<Super>Page_Up', '<Control><Alt>Left', '<Control><Alt>h']"
 gsettings set "$wm" switch-to-workspace-right "['<Super>Page_Down', '<Control><Alt>Right', '<Control><Alt>l']"
 gsettings set "$wm" switch-to-workspace-1 "['<Super>Home', '<Control><Alt>1']"
