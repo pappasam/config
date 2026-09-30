@@ -255,6 +255,20 @@ function! s:is_last_file_window()
         \ && index(sidebar_filetypes, getbufvar(win.bufnr, '&filetype')) < 0})) == 1
 endfunction
 
+command! CopySelection call s:copy_selection()
+function! s:copy_selection()
+  call setreg('+', getregion(getpos('v'), getpos('.'), #{type: mode()}), mode() . 'u')
+endfunction
+
+function! s:copy_clipboard(lines, regtype)
+  " Preserve the existing behavior of trimming one trailing newline.
+  let lines = copy(a:lines)
+  if !empty(lines) && lines[-1] ==# ''
+    call remove(lines, -1)
+  endif
+  call luaeval("require('vim.ui.clipboard.osc52').copy('+')(_A)", lines)
+endfunction
+
 " }}}
 " Mappings {{{
 
@@ -297,9 +311,9 @@ nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
 nnoremap <Leader>ez <Cmd>EditZsh<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
-vnoremap <LeftRelease> "+ygv
-vnoremap <2-LeftRelease> "+ygv
-vnoremap <3-LeftRelease> "+ygv
+vnoremap <LeftRelease> <Cmd>CopySelection<CR>
+vnoremap <2-LeftRelease> <Cmd>CopySelection<CR>
+vnoremap <3-LeftRelease> <Cmd>CopySelection<CR>
 nnoremap <expr> za line('.') == 1 ? 'za' : 'kjza'
 " help lsp-defaults
 nnoremap <Leader>d <Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
@@ -423,12 +437,12 @@ set updatetime=300
 set wildmode=longest:full
 set winborder=single
 let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-paste')
+if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-paste')
   let g:clipboard = {
-        \ 'name': 'pbcopy (Wayland)',
+        \ 'name': 'OSC 52 copy / wl-paste',
         \ 'copy': {
-        \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | wl-copy --type text/plain"],
-        \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | wl-copy --type text/plain"],
+        \   '+': function('s:copy_clipboard'),
+        \   '*': function('s:copy_clipboard'),
         \ },
         \ 'paste': {
         \   '+': ['wl-paste', '--no-newline'],
@@ -438,10 +452,10 @@ if $XDG_SESSION_TYPE ==# 'wayland' && executable('wl-copy') && executable('wl-pa
         \ }
 elseif executable('xsel')
   let g:clipboard = {
-        \ 'name': 'pbcopy (X11)',
+        \ 'name': 'OSC 52 copy / xsel paste',
         \ 'copy': {
-        \   '+': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
-        \   '*': ['sh', '-c', "perl -pe 'chomp if eof' | xsel --clipboard --input"],
+        \   '+': function('s:copy_clipboard'),
+        \   '*': function('s:copy_clipboard'),
         \ },
         \ 'paste': {
         \   '+': ['xsel', '--clipboard', '--output'],
