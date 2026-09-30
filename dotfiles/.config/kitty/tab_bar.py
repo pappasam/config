@@ -1,4 +1,4 @@
-"""Compact project labels with application-provided status indicators."""
+"""Compact project labels with worktree and application status indicators."""
 
 from pathlib import Path
 from typing import Any
@@ -20,24 +20,36 @@ def status_indicator(title: str) -> str:
     return ""
 
 
-def project_name(cwd: str) -> str:
+def project_info(cwd: str) -> tuple[str, bool]:
     if not cwd:
-        return "terminal"
+        return "terminal", False
 
     directory = Path(cwd)
     # A .git file also marks a worktree or submodule root.
     for candidate in (directory, *directory.parents):
-        if (candidate / ".git").exists():
-            return candidate.name or "/"
+        git_entry = candidate / ".git"
+        if git_entry.exists():
+            worktree = False
+            if git_entry.is_file():
+                try:
+                    content = git_entry.read_text().strip()
+                    if content.startswith("gitdir: "):
+                        git_dir = candidate / content.removeprefix("gitdir: ")
+                        # Submodules also use .git files, but do not have commondir.
+                        worktree = (git_dir / "commondir").is_file()
+                except (OSError, UnicodeError):
+                    pass
+            return candidate.name or "/", worktree
     if directory == Path.home():
-        return "~"
-    return directory.name or "/"
+        return "~", False
+    return directory.name or "/", False
 
 
 def draw_title(data: dict[str, Any]) -> str:
     tab = get_boss().tab_for_id(data["tab_id"])
+    project, worktree = project_info(data["tab"].active_oldest_wd)
     # Keep kitty's explicit tab renaming available for same-project tasks.
-    name = tab.name if tab and tab.name else project_name(data["tab"].active_oldest_wd)
+    name = tab.name if tab and tab.name else project
     name = "".join(character for character in name if character.isprintable())
     width = max(1, min(20, data["max_title_length"]))
     # Read the window title directly: the template title can be a manual tab name.
@@ -63,6 +75,8 @@ def draw_title(data: dict[str, Any]) -> str:
     width -= wcswidth(prefix)
     if width <= 0:
         return status
+    suffix = " [wt]" if worktree and width > 5 else ""
+    width -= wcswidth(suffix)
     if wcswidth(name) > width:
         name = name[: truncate_point_for_length(name, width - 1)] + "…"
-    return prefix + name
+    return prefix + name + suffix
