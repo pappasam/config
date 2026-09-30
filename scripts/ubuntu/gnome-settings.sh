@@ -15,13 +15,15 @@ gsettings reset "$shell" toggle-overview
 # Make Caps Lock an additional Control key; keep right Super as Compose.
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
 
-# Reset old overrides so both Alt+Tab and Super+Tab switch applications.
-# Removing a setting from this script does not clear its saved value.
-gsettings reset "$wm" switch-applications
-gsettings reset "$wm" switch-applications-backward
-gsettings reset "$wm" switch-windows
-gsettings reset "$wm" switch-windows-backward
-gsettings reset org.gnome.shell.window-switcher current-workspace-only
+# Use Alt+Tab for individual windows; keep Super+Tab for applications.
+gsettings set "$wm" switch-applications "['<Super>Tab']"
+gsettings set "$wm" switch-applications-backward "['<Shift><Super>Tab']"
+gsettings set "$wm" switch-windows "['<Alt>Tab']"
+gsettings set "$wm" switch-windows-backward "['<Shift><Alt>Tab']"
+
+# Show window thumbnails and app icons, limited to the current workspace.
+gsettings set org.gnome.shell.window-switcher current-workspace-only true
+gsettings set org.gnome.shell.window-switcher app-icon-mode 'both'
 
 # Limit application switching to windows on the current workspace.
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
