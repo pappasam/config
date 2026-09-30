@@ -8,9 +8,12 @@ shell=org.gnome.shell.keybindings
 media=org.gnome.settings-daemon.plugins.media-keys
 tiling_uuid='tiling-assistant@ubuntu.com'
 
-# Use GNOME's default Super tap for the overview.
-gsettings reset org.gnome.mutter overlay-key
+# Open the overview on Super tap explicitly: Dell's system defaults disable it.
+gsettings set org.gnome.mutter overlay-key 'Super'
 gsettings reset "$shell" toggle-overview
+
+# Make Caps Lock an additional Control key; keep right Super as Compose.
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
 
 # Reset old overrides so both Alt+Tab and Super+Tab switch applications.
 # Removing a setting from this script does not clear its saved value.
@@ -76,9 +79,6 @@ gsettings set "$media" www "['<Control><Alt>b']"
 
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
-
-# Keyboard layout.
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
 
 # Prefer light application chrome. color-scheme covers modern GNOME/libadwaita
 # apps, while gtk-theme keeps older GTK apps from using the dark theme.
