@@ -35,6 +35,9 @@ bash "$(dirname "${BASH_SOURCE[0]}")/gnome-aatws.sh"
 # Cinnamon-style bottom taskbar and application menu.
 bash "$(dirname "${BASH_SOURCE[0]}")/gnome-taskbar.sh"
 
+# Show notification banners in the top-right corner.
+bash "$(dirname "${BASH_SOURCE[0]}")/gnome-notifications.sh"
+
 # Window actions.
 gsettings set "$wm" maximize "['<Super>m']"
 gsettings set "$wm" unmaximize "['<Super>u']"
