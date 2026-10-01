@@ -8,9 +8,10 @@ shell=org.gnome.shell.keybindings
 media=org.gnome.settings-daemon.plugins.media-keys
 tiling_uuid='tiling-assistant@ubuntu.com'
 
-# Open the overview on Super tap explicitly: Dell's system defaults disable it.
-gsettings set org.gnome.mutter overlay-key 'Super'
-gsettings reset "$shell" toggle-overview
+# Enable left Super tap explicitly; ArcMenu handles it when enabled below.
+gsettings set org.gnome.mutter overlay-key 'Super_L'
+# Keep GNOME's original overview accessible alongside the Mint-style menu.
+gsettings set "$shell" toggle-overview "['<Control><Alt>j']"
 
 # Make Caps Lock an additional Control key; keep right Super as Compose.
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
@@ -21,12 +22,18 @@ gsettings set "$wm" switch-applications-backward "['<Shift><Super>Tab']"
 gsettings set "$wm" switch-windows "['<Alt>Tab']"
 gsettings set "$wm" switch-windows-backward "['<Shift><Alt>Tab']"
 
-# Show window thumbnails and app icons, limited to the current workspace.
+# Keep the native switcher usable until AATWS is loaded after first installation.
 gsettings set org.gnome.shell.window-switcher current-workspace-only true
 gsettings set org.gnome.shell.window-switcher app-icon-mode 'both'
 
 # Limit application switching to windows on the current workspace.
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
+# Install and configure full-size window previews with a visible switcher row.
+bash "$(dirname "${BASH_SOURCE[0]}")/gnome-aatws.sh"
+
+# Cinnamon-style bottom taskbar and application menu.
+bash "$(dirname "${BASH_SOURCE[0]}")/gnome-taskbar.sh"
 
 # Window actions.
 gsettings set "$wm" maximize "['<Super>m']"

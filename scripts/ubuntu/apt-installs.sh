@@ -44,6 +44,7 @@ sudo apt install -y \
   gfortran \
   gfortran-11 \
   gfortran-12 \
+  gir1.2-gmenu-3.0 \
   git \
   gnupg-agent \
   graphicsmagick \
@@ -68,6 +69,7 @@ sudo apt install -y \
   libgdbm-dev \
   libgdbm6t64 \
   libgmp-dev \
+  libgnome-menu-3-0 \
   libgraphviz-dev \
   libicu-dev \
   libjpeg-dev \
@@ -119,6 +121,7 @@ sudo apt install -y \
   pipewire-alsa \
   pkg-config \
   pulseaudio-utils \
+  python3-gi \
   python3-openssl \
   qpdf \
   re2c \
