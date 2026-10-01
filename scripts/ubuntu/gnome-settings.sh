@@ -10,7 +10,7 @@ tiling_uuid='tiling-assistant@ubuntu.com'
 
 # Enable left Super tap explicitly; ArcMenu handles it when enabled below.
 gsettings set org.gnome.mutter overlay-key 'Super_L'
-# Keep GNOME's original overview accessible alongside the Mint-style menu.
+# Cinnamon-style window selection, alongside the Mint-style menu.
 gsettings set "$shell" toggle-overview "['<Control><Alt>j']"
 
 # Make Caps Lock an additional Control key; keep right Super as Compose.
@@ -87,6 +87,9 @@ gsettings set "$wm" switch-to-workspace-4 "['<Control><Alt>4']"
 # Keep stable numbered destinations, using GNOME's default count of four.
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces
+
+# Give Ctrl+Alt+K its own workspace picker, separate from Ctrl+Alt+J.
+bash "$(dirname "${BASH_SOURCE[0]}")/gnome-workspace-picker.sh"
 
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
