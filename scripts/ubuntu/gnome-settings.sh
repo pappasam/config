@@ -99,10 +99,8 @@ gsettings set "$media" www "['<Control><Alt>b']"
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
 
-# Prefer light application chrome. color-scheme covers modern GNOME/libadwaita
-# apps, while gtk-theme keeps older GTK apps from using the dark theme.
-gsettings set org.gnome.desktop.interface color-scheme prefer-light
-gsettings set org.gnome.desktop.interface gtk-theme Yaru
+# Match Appearance's Default style and preserve the selected GTK/accent theme.
+gsettings set org.gnome.desktop.interface color-scheme default
 
 # Clock and privacy.
 gsettings set org.gnome.desktop.interface clock-format 12h
@@ -137,13 +135,13 @@ set_custom_shortcut custom3 'Murmure Cancel' 'murmure --cancel' '<Control>Scroll
 
 set_custom_shortcut custom4 'Murmure Cancel (Media)' 'murmure --cancel' '<Control>XF86AudioMedia'
 
-set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard --accept-on-select' Print
+set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard --accept-on-select' ''
 
 set_custom_shortcut custom6 'Murmure Record Toggle (TouchpadOff)' 'murmure --transcription' '<Shift><Super>XF86TouchpadOff'
 set_custom_shortcut custom7 'Murmure Cancel (TouchpadOff)' 'murmure --cancel' '<Control><Shift><Super>XF86TouchpadOff'
 set_custom_shortcut custom8 'Shut Down' "\"$HOME/config/bin/confirm-shutdown\"" '<Control><Alt>End'
 
-# Reserve Print Screen for Flameshot, matching Cinnamon.
-gsettings set "$shell" show-screenshot-ui '@as []'
+# Use GNOME's native screenshot UI on Wayland.
+gsettings set "$shell" show-screenshot-ui "['Print']"
 
 gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"
