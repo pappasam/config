@@ -18,9 +18,8 @@ Cinnamon keeps its menu on Super tap and uses its window switcher for both `Alt+
 Optional Cinnamon-only shortcuts to configure through the GUI after running the script:
 
 - Show the window selection screen: `Ctrl+Alt+J`
-- Show the workspace selection screen: `Ctrl+Alt+K`
 
-On GNOME, `make gnome-settings` maps `Ctrl+Alt+J` to the window overview and `Ctrl+Alt+K` to a separate [Workspace Matrix](https://extensions.gnome.org/extension/1485/workspace-matrix/) picker. The picker keeps four workspaces in one row; choose with the arrow keys and Enter, or close with Escape. After first installation, log out and back in, then run `bash scripts/ubuntu/gnome-workspace-picker.sh` to enable it.
+On GNOME, `make gnome-settings` maps `Ctrl+Alt+J` to the window overview. Use `Ctrl+Alt+1–4` to switch directly between the four workspaces, or `Ctrl+Alt+H/L` to move left/right.
 
 ### Layouts
 

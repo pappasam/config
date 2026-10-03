@@ -88,9 +88,6 @@ gsettings set "$wm" switch-to-workspace-4 "['<Control><Alt>4']"
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces
 
-# Give Ctrl+Alt+K its own workspace picker, separate from Ctrl+Alt+J.
-bash "$(dirname "${BASH_SOURCE[0]}")/gnome-workspace-picker.sh"
-
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
 gsettings set "$media" screensaver "['<Control><Alt>q']"
