@@ -2086,12 +2086,13 @@ never\:"Disables colored output"))' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--no-dev[Don'\''t audit the development dependency group \[env\: UV_NO_DEV=\]]' \
-'--no-default-groups[Don'\''t audit the default dependency groups]' \
+'--no-default-groups[Don'\''t audit dependency groups unless explicitly requested]' \
 '(--no-dev)--only-dev[Only audit the development dependency group]' \
 '(--frozen -U --upgrade)--locked[Assert that the \`uv.lock\` will remain unchanged \[env\: UV_LOCKED=\]]' \
 '--no-locked[Disable locked mode, overriding \`UV_LOCKED\`]' \
 '(--locked -U --upgrade --no-sources)--frozen[Audit the requirements without locking the project \[env\: UV_FROZEN=\]]' \
 '--no-frozen[Disable frozen mode, overriding \`UV_FROZEN\`]' \
+'--offline[]' \
 '--no-build[Don'\''t build source distributions]' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
@@ -2119,7 +2120,6 @@ never\:"Disables colored output"))' \
 '--no-native-tls[]' \
 '--system-certs[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_SYSTEM_CERTS=\]]' \
 '--no-system-certs[]' \
-'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
 '--no-offline[]' \
 '--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
 '--no-preview[]' \
@@ -3078,6 +3078,7 @@ never\:"Disables colored output"))' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '()--all[Audit all installed tools]' \
+'--offline[]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
@@ -3093,7 +3094,6 @@ never\:"Disables colored output"))' \
 '--no-native-tls[]' \
 '--system-certs[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_SYSTEM_CERTS=\]]' \
 '--no-system-certs[]' \
-'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
 '--no-offline[]' \
 '--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
 '--no-preview[]' \
@@ -5250,6 +5250,7 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'--offline[]' \
 '--skip-existing[]' \
 '--dry-run[Perform a dry run without uploading files]' \
 '--no-attestations[Do not upload attestations for the published files]' \
@@ -5268,7 +5269,6 @@ never\:"Disables colored output"))' \
 '--no-native-tls[]' \
 '--system-certs[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_SYSTEM_CERTS=\]]' \
 '--no-system-certs[]' \
-'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
 '--no-offline[]' \
 '--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
 '--no-preview[]' \
