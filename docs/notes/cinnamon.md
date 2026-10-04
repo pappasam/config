@@ -19,7 +19,7 @@ Optional Cinnamon-only shortcuts to configure through the GUI after running the 
 
 - Show the window selection screen: `Ctrl+Alt+J`
 
-On GNOME, `make gnome-settings` maps `Ctrl+Alt+J` to the window overview. Use `Ctrl+Alt+1–4` to switch directly between the four workspaces, or `Ctrl+Alt+H/L` to move left/right.
+On GNOME, `make gnome-settings` restores Super tap for the window overview. Use `Ctrl+Alt+1–4` to switch directly between the four workspaces, or `Ctrl+Alt+H/L` to move left/right.
 
 ### Layouts
 
