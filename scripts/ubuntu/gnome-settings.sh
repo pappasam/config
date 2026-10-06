@@ -87,6 +87,7 @@ gsettings set "$wm" switch-to-workspace-4 "['<Control><Alt>4']"
 # Keep stable numbered destinations, using GNOME's default count of four.
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces
+gsettings set org.gnome.desktop.wm.preferences workspace-names "['Build', 'Communicate', 'Meet', 'Explore']"
 
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
