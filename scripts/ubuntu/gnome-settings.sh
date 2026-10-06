@@ -32,8 +32,8 @@ gsettings set "$wm" switch-windows-backward "['<Shift><Alt>Tab']"
 gsettings set org.gnome.shell.window-switcher current-workspace-only true
 gsettings set org.gnome.shell.window-switcher app-icon-mode 'both'
 
-# Limit application switching to windows on the current workspace.
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
+# Switch applications across all workspaces with Super+Tab.
+gsettings set org.gnome.shell.app-switcher current-workspace-only false
 
 # Window actions.
 gsettings set "$wm" maximize "['<Super>m']"
