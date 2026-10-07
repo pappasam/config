@@ -2,6 +2,15 @@
 
 set -euo pipefail
 
+# Hide ImageMagick launchers from app search while keeping the CLI tools available.
+applications_dir="${XDG_DATA_HOME:-$HOME/.local/share}/applications"
+for desktop_file in /usr/share/applications/display-im*.desktop; do
+  [[ -f "$desktop_file" ]] || continue
+  mkdir -p "$applications_dir"
+  sed '/^NoDisplay=/d; /^\[Desktop Entry\]$/a NoDisplay=true' \
+    "$desktop_file" > "$applications_dir/$(basename "$desktop_file")"
+done
+
 wm=org.gnome.desktop.wm.keybindings
 mutter=org.gnome.mutter.keybindings
 shell=org.gnome.shell.keybindings
