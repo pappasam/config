@@ -19,6 +19,9 @@ done
 gsettings set org.gnome.mutter overlay-key 'Super'
 gsettings reset "$shell" toggle-overview
 
+# Disable the hot corner that opens the overview.
+gsettings set org.gnome.desktop.interface enable-hot-corners false
+
 # Make Caps Lock an additional Control key; keep right Super as Compose.
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
 
@@ -62,6 +65,10 @@ gsettings reset "$wm" move-to-side-e
 # Move windows between workspaces.
 gsettings set "$wm" move-to-workspace-left "['<Super><Shift>Page_Up', '<Control><Shift><Alt>Left', '<Control><Shift><Alt>h']"
 gsettings set "$wm" move-to-workspace-right "['<Super><Shift>Page_Down', '<Control><Shift><Alt>Right', '<Control><Shift><Alt>l']"
+gsettings set "$wm" move-to-workspace-1 "['<Control><Shift><Alt>1']"
+gsettings set "$wm" move-to-workspace-2 "['<Control><Shift><Alt>2']"
+gsettings set "$wm" move-to-workspace-3 "['<Control><Shift><Alt>3']"
+gsettings set "$wm" move-to-workspace-4 "['<Control><Shift><Alt>4']"
 
 # Move windows between monitors.
 gsettings set "$wm" move-to-monitor-left "['<Super><Shift>Left', '<Super><Shift>h']"
