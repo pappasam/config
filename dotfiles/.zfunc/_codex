@@ -108,6 +108,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '--color=[Specifies color settings for use in the output]:COLOR:(always never auto)' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -149,6 +150,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -180,6 +182,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -210,6 +213,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -283,6 +287,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '--color=[Specifies color settings for use in the output]:COLOR:(always never auto)' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -324,6 +329,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -355,6 +361,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
@@ -385,6 +392,7 @@ _arguments "${_arguments_options[@]}" : \
 '-m+[Model the agent should use]:MODEL:_default' \
 '--model=[Model the agent should use]:MODEL:_default' \
 '--thread-source=[Source classification for newly created or forked threads]:SOURCE:_default' \
+'--cyber-access-program=[Request an experimental Cyber access program for this turn (OpenAI provider only). Omit to use server defaults. Not supported with review; fork requires a prompt]:PROGRAM:(standard daybreak_blue daybreak_red)' \
 '--output-schema=[Path to a JSON Schema file describing the model'\''s final response shape]:FILE:_files' \
 '-o+[Specifies file where the last message from the agent should be written]:FILE:_files' \
 '--output-last-message=[Specifies file where the last message from the agent should be written]:FILE:_files' \
