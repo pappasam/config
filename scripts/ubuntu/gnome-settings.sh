@@ -115,15 +115,20 @@ gsettings set "$media" screensaver "['<Control><Alt>q']"
 # Restore GNOME's screen reader shortcut; Dell's Ctrl+Alt+S conflicts with Slack.
 gsettings set "$media" screenreader "['<Alt><Super>s']"
 
-# Activate Firefox, Slack, and kitty through GNOME Shell, reusing the most recently
+# Activate Firefox, Slack, kitty, and Google Meet through GNOME Shell, reusing the most recently
 # used window on Wayland and across workspaces, or launching the app if closed.
-# Shell's application shortcuts address favorites by position; pin these three first.
+# Shell's application shortcuts address favorites by position; pin these four first.
 /usr/bin/python3 - <<'PY'
 from gi.repository import Gio
 
 settings = Gio.Settings.new('org.gnome.shell')
 favorites = settings.get_strv('favorite-apps')
-pinned = ['firefox.desktop', 'slack.desktop', 'kitty.desktop']
+pinned = [
+    'firefox.desktop',
+    'slack.desktop',
+    'kitty.desktop',
+    'chrome-kjgfgldnnfoeklkmfkjfagphfepbbdan-Profile_6.desktop',
+]
 settings.set_strv('favorite-apps', pinned + [app for app in favorites if app not in pinned])
 Gio.Settings.sync()
 PY
@@ -133,6 +138,7 @@ gsettings set "$media" terminal '@as []'
 gsettings set "$shell" switch-to-application-1 "['<Control><Alt>b']"
 gsettings set "$shell" switch-to-application-2 "['<Control><Alt>s']"
 gsettings set "$shell" switch-to-application-3 "['<Control><Alt>i']"
+gsettings set "$shell" switch-to-application-4 "['<Control><Alt>m']"
 
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
