@@ -8,6 +8,11 @@ This repository contains system configuration files, scripts, and dotfiles for m
 - `bin/` scripts are on PATH
 - Run `make help` to see available Makefile targets
 
+## Desktop Preferences
+
+- Use vanilla GNOME behavior and built-in settings. Do not install or rely on GNOME extensions for requested changes.
+- If a requested behavior is unavailable natively, explain the limitation rather than introducing an extension dependency.
+
 ## Formatting
 
 - Lua files are formatted with Stylua.
