@@ -128,11 +128,11 @@ settings.set_strv('favorite-apps', pinned + [app for app in favorites if app not
 Gio.Settings.sync()
 PY
 gsettings set "$media" www '@as []'
-# Free Ctrl+Alt+T from the generic terminal launcher; Ctrl+Alt+I still opens a new kitty.
+# Disable the generic terminal launcher; use kitty's own shortcut for new windows.
 gsettings set "$media" terminal '@as []'
 gsettings set "$shell" switch-to-application-1 "['<Control><Alt>b']"
 gsettings set "$shell" switch-to-application-2 "['<Control><Alt>s']"
-gsettings set "$shell" switch-to-application-3 "['<Control><Alt>t']"
+gsettings set "$shell" switch-to-application-3 "['<Control><Alt>i']"
 
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
@@ -159,7 +159,10 @@ set_custom_shortcut() {
   gsettings set "$custom_schema:$path" binding "$binding"
 }
 
-set_custom_shortcut custom0 Kitty /home/sroeca/.local/bin/kitty '<Control><Alt>i'
+# Remove the old new-window launcher so Ctrl+Alt+I only activates kitty.
+for key in name command binding; do
+  gsettings reset "$custom_schema:$custom_base/custom0/" "$key"
+done
 
 set_custom_shortcut custom1 'Murmure Record Toggle' 'murmure --transcription' Scroll_Lock
 
@@ -182,4 +185,4 @@ set_custom_shortcut custom8 'Shut Down' "\"$HOME/config/bin/confirm-shutdown\"" 
 # Use GNOME's native screenshot UI on Wayland.
 gsettings set "$shell" show-screenshot-ui "['Print']"
 
-gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"
+gsettings set "$media" custom-keybindings "['$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"
