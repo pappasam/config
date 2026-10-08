@@ -1,5 +1,7 @@
 # Ubuntu Scripts
 
+Run `make gnome-settings` to apply GNOME shortcuts. `Ctrl+Alt+B/S/T` focuses the most recently used Firefox/Slack/kitty window across workspaces, or launches the app if closed. These apps occupy the first three Favorites slots. `Ctrl+Alt+I` opens a new kitty window.
+
 ## Manual commands
 
 This section of the README describes useful programs you will need to install - or configure - manually, when the time is right.
