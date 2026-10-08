@@ -111,7 +111,20 @@ gsettings set org.gnome.mutter workspaces-only-on-primary true
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
 gsettings set "$media" screensaver "['<Control><Alt>q']"
-gsettings set "$media" www "['<Control><Alt>b']"
+
+# Activate Firefox through GNOME Shell so an existing window is reused, including
+# on Wayland and across workspaces. The generic www launcher opens a new window.
+# Shell's application shortcuts address favorites by position; keep Firefox first.
+/usr/bin/python3 - <<'PY'
+from gi.repository import Gio
+
+settings = Gio.Settings.new('org.gnome.shell')
+favorites = settings.get_strv('favorite-apps')
+settings.set_strv('favorite-apps', ['firefox.desktop'] + [app for app in favorites if app != 'firefox.desktop'])
+Gio.Settings.sync()
+PY
+gsettings set "$media" www '@as []'
+gsettings set "$shell" switch-to-application-1 "['<Control><Alt>b']"
 
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
