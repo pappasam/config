@@ -1,6 +1,8 @@
 # Ubuntu Scripts
 
-Run `make gnome-settings` to apply GNOME shortcuts. `Ctrl+Alt+B/S/I/M` focuses the most recently used Firefox/Slack/kitty/Google Meet window across workspaces, or launches the app if closed. These apps occupy the first four Favorites slots. Google Meet uses the installed Chrome app in Profile 6. Use `Ctrl+Shift+I` inside kitty to open a new window.
+Run `make gnome-settings` to apply GNOME shortcuts. `Ctrl+Alt+B/S/I/M` launches Firefox/Slack/kitty/Google Meet by desktop ID using native custom shortcuts. Favorites can be reordered freely. Google Meet requires the installed Chrome app in Profile 6; missing launchers fail instead of opening another application.
+
+Window reuse depends on the application: kitty opens a new window. Vanilla GNOME does not provide a general focus-existing-window command for custom shortcuts on Wayland. Use `Super+Tab` to switch between running applications across workspaces. `Ctrl+Shift+I` inside kitty opens a new window in the existing window's directory.
 
 ## Manual commands
 

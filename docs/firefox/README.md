@@ -8,9 +8,9 @@ Step-by-step instructions to configure local files that customize Firefox.
 4. Go to `about:config` and set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
 5. Close all open Firefox windows, then re-open them. Changes should take effect!
 
-## Focus or launch
+## Launch shortcut
 
-On GNOME, `make gnome-settings` configures `Ctrl+Alt+B` to focus an existing Firefox window, switching workspaces if needed, or launch Firefox if none is open. This uses [GNOME's application activation](https://gnome.pages.gitlab.gnome.org/gnome-shell/shell/method.App.activate.html) and works on Wayland. Firefox must stay first in Favorites; the script pins it there and preserves the other favorites.
+On GNOME, `make gnome-settings` configures `Ctrl+Alt+B` as a native custom shortcut running `gtk-launch firefox.desktop`. It targets Firefox directly regardless of Favorites order. This launches Firefox using its desktop entry and may open a new window; it does not guarantee focusing an existing window. Use `Super+Tab` to switch between running applications across workspaces.
 
 Use Firefox's New Window action or `Ctrl+N` when you explicitly want another window.
 

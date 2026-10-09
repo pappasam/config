@@ -118,30 +118,10 @@ gsettings set "$media" screensaver "['<Control><Alt>q']"
 # Restore GNOME's screen reader shortcut; Dell's Ctrl+Alt+S conflicts with Slack.
 gsettings set "$media" screenreader "['<Alt><Super>s']"
 
-# Activate Firefox, Slack, kitty, and Google Meet through GNOME Shell, reusing the most recently
-# used window on Wayland and across workspaces, or launching the app if closed.
-# Shell's application shortcuts address favorites by position; pin these four first.
-/usr/bin/python3 - <<'PY'
-from gi.repository import Gio
-
-settings = Gio.Settings.new('org.gnome.shell')
-favorites = settings.get_strv('favorite-apps')
-pinned = [
-    'firefox.desktop',
-    'slack.desktop',
-    'kitty.desktop',
-    'chrome-kjgfgldnnfoeklkmfkjfagphfepbbdan-Profile_6.desktop',
-]
-settings.set_strv('favorite-apps', pinned + [app for app in favorites if app not in pinned])
-Gio.Settings.sync()
-PY
+# Application launchers below use desktop IDs, independently of Favorites order.
 gsettings set "$media" www '@as []'
-# Disable the generic terminal launcher; use kitty's own shortcut for new windows.
+# Disable the generic terminal launcher in favor of the explicit kitty shortcut.
 gsettings set "$media" terminal '@as []'
-gsettings set "$shell" switch-to-application-1 "['<Control><Alt>b']"
-gsettings set "$shell" switch-to-application-2 "['<Control><Alt>s']"
-gsettings set "$shell" switch-to-application-3 "['<Control><Alt>i']"
-gsettings set "$shell" switch-to-application-4 "['<Control><Alt>m']"
 # Reserve Ctrl+Alt+8 for GNOME's magnifier.
 gsettings set "$shell" switch-to-application-8 '@as []'
 
@@ -170,10 +150,12 @@ set_custom_shortcut() {
   gsettings set "$custom_schema:$path" binding "$binding"
 }
 
-# Remove the old new-window launcher so Ctrl+Alt+I only activates kitty.
-for key in name command binding; do
-  gsettings reset "$custom_schema:$custom_base/custom0/" "$key"
-done
+# Native custom shortcuts launch desktop entries; window reuse is app-specific.
+# A missing desktop entry fails instead of activating an unrelated favorite.
+set_custom_shortcut custom0 'kitty' 'gtk-launch kitty.desktop' '<Control><Alt>i'
+set_custom_shortcut custom9 'Firefox' 'gtk-launch firefox.desktop' '<Control><Alt>b'
+set_custom_shortcut custom10 'Slack' 'gtk-launch slack.desktop' '<Control><Alt>s'
+set_custom_shortcut custom11 'Google Meet' 'gtk-launch chrome-kjgfgldnnfoeklkmfkjfagphfepbbdan-Profile_6.desktop' '<Control><Alt>m'
 
 set_custom_shortcut custom1 'Murmure Record Toggle' 'murmure --transcription' Scroll_Lock
 
@@ -196,4 +178,4 @@ set_custom_shortcut custom8 'Shut Down' "\"$HOME/config/bin/confirm-shutdown\"" 
 # Use GNOME's native screenshot UI on Wayland.
 gsettings set "$shell" show-screenshot-ui "['Print']"
 
-gsettings set "$media" custom-keybindings "['$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"
+gsettings set "$media" custom-keybindings "['$custom_base/custom0/', '$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/', '$custom_base/custom9/', '$custom_base/custom10/', '$custom_base/custom11/']"
