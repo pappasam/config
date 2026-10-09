@@ -89,6 +89,7 @@ _arguments "${_arguments_options[@]}" : \
 '--auth-token-stdin[Read the initial bearer from stdin]' \
 '--auth-token-updates-stdin[Read replacement bearers from stdin and stop when the controlling pipe closes]' \
 '--connect-headers-stdin[Read a JSON list of extension-header name/value pairs before the first bearer]' \
+'--diagnostics-json[Emit credential-safe JSON diagnostics on stderr instead of human-readable errors]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
@@ -1274,6 +1275,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--json[Emit machine-readable JSON]' \
+'--no-daemon[Run an embedded app-server in the foreground until Ctrl-C]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 ":: :_codex__remote-control_commands" \
@@ -1411,8 +1413,54 @@ _arguments "${_arguments_options[@]}" : \
 '--include-managed-config[Include managed requirements while resolving an explicit permissions profile]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
-'*::command -- Full command args to run under the Linux sandbox:_default' \
+'::command -- Full command args to run under the Linux sandbox:_default' \
+":: :_codex__sandbox_commands" \
+"*::: :->sandbox" \
 && ret=0
+
+    case $state in
+    (sandbox)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:codex-sandbox-command-$line[2]:"
+        case $line[2] in
+            (uninstall)
+_arguments "${_arguments_options[@]}" : \
+'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
+'*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_codex__sandbox__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:codex-sandbox-help-command-$line[1]:"
+        case $line[1] in
+            (uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
 ;;
 (debug)
 _arguments "${_arguments_options[@]}" : \
@@ -2540,7 +2588,23 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (sandbox)
 _arguments "${_arguments_options[@]}" : \
+":: :_codex__help__sandbox_commands" \
+"*::: :->sandbox" \
 && ret=0
+
+    case $state in
+    (sandbox)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:codex-help-sandbox-command-$line[1]:"
+        case $line[1] in
+            (uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
 ;;
 (debug)
 _arguments "${_arguments_options[@]}" : \
@@ -3926,8 +3990,15 @@ _codex__help__review_commands() {
 }
 (( $+functions[_codex__help__sandbox_commands] )) ||
 _codex__help__sandbox_commands() {
-    local commands; commands=()
+    local commands; commands=(
+'uninstall:Remove the legacy Windows sandbox'\''s machine-wide accounts and network rules' \
+    )
     _describe -t commands 'codex help sandbox commands' commands "$@"
+}
+(( $+functions[_codex__help__sandbox__uninstall_commands] )) ||
+_codex__help__sandbox__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex help sandbox uninstall commands' commands "$@"
 }
 (( $+functions[_codex__help__stdio-to-uds_commands] )) ||
 _codex__help__stdio-to-uds_commands() {
@@ -4312,8 +4383,34 @@ _codex__review_commands() {
 }
 (( $+functions[_codex__sandbox_commands] )) ||
 _codex__sandbox_commands() {
-    local commands; commands=()
+    local commands; commands=(
+'uninstall:Remove the legacy Windows sandbox'\''s machine-wide accounts and network rules' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
     _describe -t commands 'codex sandbox commands' commands "$@"
+}
+(( $+functions[_codex__sandbox__help_commands] )) ||
+_codex__sandbox__help_commands() {
+    local commands; commands=(
+'uninstall:Remove the legacy Windows sandbox'\''s machine-wide accounts and network rules' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'codex sandbox help commands' commands "$@"
+}
+(( $+functions[_codex__sandbox__help__help_commands] )) ||
+_codex__sandbox__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex sandbox help help commands' commands "$@"
+}
+(( $+functions[_codex__sandbox__help__uninstall_commands] )) ||
+_codex__sandbox__help__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex sandbox help uninstall commands' commands "$@"
+}
+(( $+functions[_codex__sandbox__uninstall_commands] )) ||
+_codex__sandbox__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex sandbox uninstall commands' commands "$@"
 }
 (( $+functions[_codex__stdio-to-uds_commands] )) ||
 _codex__stdio-to-uds_commands() {
