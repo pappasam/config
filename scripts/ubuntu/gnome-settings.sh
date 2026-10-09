@@ -49,8 +49,9 @@ gsettings set org.gnome.shell.window-switcher app-icon-mode 'both'
 gsettings set org.gnome.shell.app-switcher current-workspace-only false
 
 # Window actions.
-gsettings set "$wm" maximize "['<Super>m']"
-gsettings set "$wm" unmaximize "['<Super>u']"
+gsettings set "$wm" maximize '@as []'
+gsettings set "$wm" unmaximize '@as []'
+gsettings set "$wm" toggle-maximized "['<Alt>F10', '<Super>m']"
 gsettings set "$wm" close "['<Alt>F4', '<Primary><Alt>d']"
 
 # Keep hide on the home row; Super+H is used for tiling left.
@@ -100,6 +101,8 @@ gsettings set "$wm" switch-to-workspace-1 "['<Super>Home', '<Control><Alt>1']"
 gsettings set "$wm" switch-to-workspace-2 "['<Control><Alt>2']"
 gsettings set "$wm" switch-to-workspace-3 "['<Control><Alt>3']"
 gsettings set "$wm" switch-to-workspace-4 "['<Control><Alt>4']"
+# Reserve Ctrl+Alt+End for the shutdown confirmation.
+gsettings set "$wm" switch-to-workspace-last '@as []'
 
 # Keep stable numbered destinations, using GNOME's default count of four.
 gsettings set org.gnome.mutter dynamic-workspaces false
@@ -139,6 +142,8 @@ gsettings set "$shell" switch-to-application-1 "['<Control><Alt>b']"
 gsettings set "$shell" switch-to-application-2 "['<Control><Alt>s']"
 gsettings set "$shell" switch-to-application-3 "['<Control><Alt>i']"
 gsettings set "$shell" switch-to-application-4 "['<Control><Alt>m']"
+# Reserve Ctrl+Alt+8 for GNOME's magnifier.
+gsettings set "$shell" switch-to-application-8 '@as []'
 
 # Restore the default Super+P and monitor hardware key.
 gsettings reset "$mutter" switch-monitor
