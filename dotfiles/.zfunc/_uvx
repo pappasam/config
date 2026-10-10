@@ -20,11 +20,11 @@ _uvx() {
 '*--with=[Run with the given packages installed]:WITH:' \
 '*--with-editable=[Run with the given packages installed in editable mode]:WITH_EDITABLE:_files -/' \
 '*--with-requirements=[Run with the packages listed in the given files]:WITH_REQUIREMENTS:_files' \
-'*-c+[Constrain versions using the given requirements files]:CONSTRAINTS:_files' \
-'*--constraints=[Constrain versions using the given requirements files]:CONSTRAINTS:_files' \
-'*-b+[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINTS:_files' \
-'*--build-constraints=[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINTS:_files' \
-'*--overrides=[Override versions using the given requirements files]:OVERRIDES:_files' \
+'*-c+[Constrain versions using the given requirements files \[env\: \`UV_CONSTRAINT\`=\]]:CONSTRAINTS:_files' \
+'*--constraints=[Constrain versions using the given requirements files \[env\: \`UV_CONSTRAINT\`=\]]:CONSTRAINTS:_files' \
+'*-b+[Constrain build dependencies using the given requirements files when building source distributions \[env\: \`UV_BUILD_CONSTRAINT\`=\]]:BUILD_CONSTRAINTS:_files' \
+'*--build-constraints=[Constrain build dependencies using the given requirements files when building source distributions \[env\: \`UV_BUILD_CONSTRAINT\`=\]]:BUILD_CONSTRAINTS:_files' \
+'*--overrides=[Override versions using the given requirements files \[env\: \`UV_OVERRIDE\`=\]]:OVERRIDES:_files' \
 '*--env-file=[Load environment variables from a \`.env\` file]:ENV_FILE:_files' \
 '*--index=[The indexes to use when resolving dependencies, in addition to the default index]:INDEX:_default' \
 '--default-index=[The default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX:_default' \
@@ -171,7 +171,7 @@ xpu\:"Use the PyTorch index for Intel XPU"))' \
 managed\:"Prefer managed Python installations over system Python installations"
 system\:"Prefer system Python installations over managed Python installations"
 only-system\:"Only use system Python installations; never use managed Python installations"))' \
-'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+'--python-fetch=[Deprecated option for configuring automatic Python downloads]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
 manual\:"Do not automatically download managed Python installations; require explicit installation"
 never\:"Do not ever allow Python downloads"))' \
 '(--no-color)--color=[Control the use of color in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
@@ -200,6 +200,8 @@ never\:"Disables colored output"))' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
 '--binary[]' \
+'--require-build-hashes[Require hashes for all build dependencies]' \
+'--no-require-build-hashes[Do not require hashes for every build dependency]' \
 '--refresh[Refresh all cached data]' \
 '--no-refresh[]' \
 '--lfs[Whether to use Git LFS when adding a dependency from Git]' \
