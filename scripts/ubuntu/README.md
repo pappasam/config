@@ -1,6 +1,6 @@
 # Ubuntu Scripts
 
-Run `make gnome-settings` to apply GNOME shortcuts. `Ctrl+Alt+B/S/I/M` focuses an existing Firefox/Slack/kitty/Google Meet window across workspaces, or launches the app if closed, using GNOME's built-in Favorites shortcuts. `Ctrl+Shift+I` inside kitty opens a new window in the existing window's directory.
+Run `make gnome-settings` to apply GNOME shortcuts. `Super+B/S/K/M` focuses an existing Firefox/Slack/kitty/Google Meet window across workspaces, or launches the app if closed, using GNOME's built-in Favorites shortcuts. `Ctrl+Shift+I` inside kitty opens a new window in the existing window's directory.
 
 The script detects installed desktop launchers, pins available apps first in that order, and assigns shortcuts to their actual positions. It recognizes common native, Snap, and Flatpak IDs and detects Meet's Chrome app across profiles. Missing apps leave their shortcuts disabled. Other available Favorites are preserved after the managed apps; stale launcher IDs are removed. When multiple installations exist, an existing Favorite is preferred, followed by the native/Snap/Flatpak candidate order. Multiple Meet profiles require an existing Favorite or an explicit override.
 
