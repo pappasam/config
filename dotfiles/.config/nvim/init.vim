@@ -395,8 +395,6 @@ lua require("snippets").setup()
 aunmenu PopUp.-2-
 aunmenu PopUp.How-to\ disable\ mouse
 digraph '' 699  " Hawaiian character ʻ
-set autowrite
-set autowriteall
 set breakat=\ \	,])/-
 set breakindent
 set breakindentopt=list:-1
