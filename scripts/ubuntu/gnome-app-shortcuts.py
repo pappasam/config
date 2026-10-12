@@ -12,7 +12,7 @@ import sys
 APPS = {
     "firefox": ("b", ("firefox.desktop", "firefox_firefox.desktop", "org.mozilla.firefox.desktop")),
     "slack": ("s", ("slack.desktop", "slack_slack.desktop", "com.slack.Slack.desktop")),
-    "kitty": ("k", ("kitty.desktop", "net.kovidgoyal.kitty.desktop")),
+    "kitty": ("i", ("kitty.desktop", "net.kovidgoyal.kitty.desktop")),
     "meet": ("m", ()),
 }
 MEET_ID = re.compile(r"chrome-kjgfgldnnfoeklkmfkjfagphfepbbdan-.+\.desktop")
@@ -49,7 +49,7 @@ def make_plan(installed, favorites, overrides):
     # Drop stale IDs so GNOME cannot silently collapse a slot in this layout.
     remaining = list(dict.fromkeys(app for app in favorites if app in installed and app not in pinned))
     bindings = {
-        pinned.index(app) + 1: f"<Super>{APPS[name][0]}"
+        pinned.index(app) + 1: f"<Control><Alt>{APPS[name][0]}"
         for name, app in selected.items() if app is not None
     }
     return selected, pinned + remaining, bindings
@@ -79,7 +79,7 @@ def main():
         parser.error(str(error))
 
     for name, desktop_id in selected.items():
-        shortcut = f"Super+{APPS[name][0].upper()}"
+        shortcut = f"Ctrl+Alt+{APPS[name][0].upper()}"
         if desktop_id is None:
             print(f"{shortcut}: disabled ({name}: no unique launcher found; override in {config})")
         else:
@@ -93,17 +93,6 @@ def main():
     def set_strv(settings, key, value):
         if not settings.set_strv(key, value):
             raise RuntimeError(f"Could not set {key}")
-
-    # Also free these keys when the helper is run without gnome-settings.sh.
-    reserved = {f"<Super>{key}" for key, _ in APPS.values()}
-    wm = Gio.Settings.new("org.gnome.desktop.wm.keybindings")
-    for settings, key in (
-        (wm, "toggle-maximized"),
-        (keys, "toggle-overview"),
-        (keys, "toggle-message-tray"),
-        (keys, "toggle-quick-settings"),
-    ):
-        set_strv(settings, key, [binding for binding in settings.get_strv(key) if binding not in reserved])
 
     # Remove the previous positional mapping before changing the Favorites order.
     for slot in range(1, 5):

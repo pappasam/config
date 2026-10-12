@@ -20,7 +20,7 @@ FILES = "org.gnome.Nautilus.desktop"
 class ShortcutPlanTests(unittest.TestCase):
     def test_missing_apps_never_redirect_shortcuts_to_files(self):
         apps = [FIREFOX, SLACK, KITTY, MEET]
-        expected_keys = dict(zip(apps, "bskm"))
+        expected_keys = dict(zip(apps, "bsim"))
         for count in range(5):
             for available in combinations(apps, count):
                 with self.subTest(available=available):
@@ -32,7 +32,7 @@ class ShortcutPlanTests(unittest.TestCase):
                     for slot, binding in bindings.items():
                         target = favorites[slot - 1]
                         self.assertIn(target, available)
-                        self.assertEqual(binding, f"<Super>{expected_keys[target]}")
+                        self.assertEqual(binding, f"<Control><Alt>{expected_keys[target]}")
                     self.assertEqual(sum(app is not None for app in selected.values()), len(available))
 
     def test_snap_and_flatpak_launchers(self):
@@ -41,7 +41,7 @@ class ShortcutPlanTests(unittest.TestCase):
         self.assertEqual(selected["firefox"], "firefox_firefox.desktop")
         self.assertEqual(selected["slack"], "com.slack.Slack.desktop")
         self.assertEqual(favorites[2], KITTY)
-        self.assertEqual(bindings[3], "<Super>k")
+        self.assertEqual(bindings[3], "<Control><Alt>i")
 
     def test_keep_existing_installation_and_other_favorites(self):
         flatpak = "org.mozilla.firefox.desktop"

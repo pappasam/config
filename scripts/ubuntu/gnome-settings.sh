@@ -26,7 +26,7 @@ done
 
 # Open the overview on Super tap explicitly: Dell's system defaults disable it.
 gsettings set org.gnome.mutter overlay-key 'Super'
-# Reserve Super+S for Slack; Super tap still opens overview.
+# Free Dell's Ctrl+Alt+S overview shortcut for Slack; Super still opens overview.
 gsettings set "$shell" toggle-overview '@as []'
 
 # Disable the hot corner that opens the overview.
@@ -51,8 +51,7 @@ gsettings set org.gnome.shell.app-switcher current-workspace-only false
 # Window actions.
 gsettings set "$wm" maximize '@as []'
 gsettings set "$wm" unmaximize '@as []'
-# Reserve Super+M for Meet; Alt+F10 still toggles maximization.
-gsettings set "$wm" toggle-maximized "['<Alt>F10']"
+gsettings set "$wm" toggle-maximized "['<Alt>F10', '<Super>m']"
 gsettings set "$wm" close "['<Alt>F4', '<Primary><Alt>d']"
 
 # Keep hide on the home row; Super+H is used for tiling left.
@@ -61,8 +60,8 @@ gsettings set "$wm" minimize "['<Super>j']"
 # Remove conflicts with Super+M and Ctrl+Alt+D.
 gsettings set "$wm" show-desktop "['<Primary><Super>d', '<Super>d']"
 gsettings set "$shell" toggle-message-tray "['<Super>v']"
-# Reserve Super+S for Slack; Quick Settings remains available from the top bar.
-gsettings set "$shell" toggle-quick-settings '@as []'
+# Restore Super+S after moving application shortcuts back to Ctrl+Alt.
+gsettings reset "$shell" toggle-quick-settings
 
 # Use GNOME's native half-screen tiling without an extension.
 # GNOME 50 moved these bindings to Mutter and calls them "toggle-tiled-*".
@@ -118,7 +117,7 @@ gsettings set org.gnome.mutter workspaces-only-on-primary true
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
 gsettings set "$media" screensaver "['<Control><Alt>q']"
-# Use GNOME's standard screen reader shortcut.
+# Restore GNOME's screen reader shortcut; Dell's Ctrl+Alt+S conflicts with Slack.
 gsettings set "$media" screenreader "['<Alt><Super>s']"
 
 # Favorites shortcuts below focus existing windows or launch installed applications.
