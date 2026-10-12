@@ -344,14 +344,14 @@ nnoremap <Leader>g= <Cmd>Gitsigns preview_hunk_inline<CR>
 nnoremap <Leader>gh <Cmd>Gitsigns preview_hunk<CR>
 nnoremap <Leader>gu <Cmd>Gitsigns reset_hunk<CR>
 " https://github.com/nvim-telescope/telescope.nvim
-nnoremap <C-t><C-b> <Cmd>Telescope buffers<CR>
-nnoremap <C-t><C-d> <Cmd>Telescope diagnostics<CR>
-nnoremap <C-t><C-f> <Cmd>Telescope live_grep<CR>
-nnoremap <C-t><C-g> <Cmd>Telescope git_status<CR>
-nnoremap <C-t><C-h> <Cmd>Telescope help_tags<CR>
-nnoremap <C-t><C-o> <Cmd>Telescope oldfiles<CR>
-nnoremap <C-t><C-t> <Cmd>Telescope find_files hidden=true<CR>
-nnoremap <C-t><C-w> <Cmd>Telescope grep_string<CR>
+nnoremap <Leader>tb  <Cmd>Telescope buffers<CR>
+nnoremap <Leader>td  <Cmd>Telescope diagnostics<CR>
+nnoremap <Leader>tf  <Cmd>Telescope live_grep<CR>
+nnoremap <Leader>tg  <Cmd>Telescope git_status<CR>
+nnoremap <Leader>th  <Cmd>Telescope help_tags<CR>
+nnoremap <Leader>to  <Cmd>Telescope oldfiles<CR>
+nnoremap <Leader>tt  <Cmd>Telescope find_files hidden=true<CR>
+nnoremap <Leader>tw  <Cmd>Telescope grep_string<CR>
 nnoremap z= <Cmd>Telescope spell_suggest<CR>
 " https://github.com/pappasam/vim-filetype-formatter
 nnoremap <Leader>f <Cmd>FiletypeFormat<CR>
