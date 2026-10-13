@@ -111,8 +111,8 @@ gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces
 gsettings set org.gnome.desktop.wm.preferences workspace-names "['Build', 'Communicate', 'Meet', 'Explore']"
 
-# Keep secondary displays visible while switching workspaces on the primary display.
-gsettings set org.gnome.mutter workspaces-only-on-primary true
+# Switch workspaces on all monitors.
+gsettings set org.gnome.mutter workspaces-only-on-primary false
 
 # System and launcher shortcuts.
 # Removing Super+L is necessary because it is used for tiling right.
