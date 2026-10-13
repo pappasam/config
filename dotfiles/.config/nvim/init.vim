@@ -242,17 +242,9 @@ endfunction
 command! CustomQuitPre call s:custom_quit_pre()
 function! s:custom_quit_pre()
   " Close sidebars before quitting the only file window in this tab.
-  if exists("w:focuswriting") || s:is_last_file_window()
+  if exists("w:focuswriting")
     silent only
   endif
-endfunction
-function! s:is_last_file_window()
-  " Ignore floating windows, including the experimental UI's command line.
-  let sidebar_filetypes = ['NvimTree', 'aerial']
-  return index(sidebar_filetypes, &filetype) < 0
-        \ && len(filter(getwininfo(), {_, win -> win.tabnr == tabpagenr()
-        \ && nvim_win_get_config(win.winid).relative ==# ''
-        \ && index(sidebar_filetypes, getbufvar(win.bufnr, '&filetype')) < 0})) == 1
 endfunction
 
 command! CopySelection call s:copy_selection()
