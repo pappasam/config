@@ -8,6 +8,7 @@ fi
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export BROWSER=/usr/bin/firefox
 export EDITOR=nvim
+export VISUAL=gedit-nvim-kitty-wrapper.sh
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # Preserve the PDF-tooling workaround on X11; let Wayland choose the scale for each display.
 if [[ "${XDG_SESSION_TYPE:-}" == x11 ]]; then
