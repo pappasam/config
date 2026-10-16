@@ -642,7 +642,6 @@ function upgrade() {
   mise install -f neovim@nightly
   claude update
   codex update
-  make -C "$HOME/config" completions
 }
 
 # }}}
