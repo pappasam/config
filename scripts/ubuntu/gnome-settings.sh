@@ -24,16 +24,17 @@ for uuid in 'advanced-alt-tab@G-dH.github.com' 'arcmenu@arcmenu.com' 'dash-to-pa
   fi
 done
 
-# Open the overview on Super tap explicitly: Dell's system defaults disable it.
-gsettings set org.gnome.mutter overlay-key 'Super'
+# Keep the overview on left Super; right Super is reserved for Murmure.
+# Set this explicitly because Dell's system defaults disable the overview key.
+gsettings set org.gnome.mutter overlay-key 'Super_L'
 # Free Dell's Ctrl+Alt+S overview shortcut for Slack; Super still opens overview.
 gsettings set "$shell" toggle-overview '@as []'
 
 # Disable the hot corner that opens the overview.
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 
-# Make Caps Lock an additional Control key; keep right Super as Compose.
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:rwin']"
+# Make Caps Lock an additional Control key; leave right Super available as Super_R.
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 # Use Alt+Tab for individual windows; keep Super+Tab for applications.
 gsettings set "$wm" switch-applications "['<Super>Tab']"
@@ -169,11 +170,13 @@ set_custom_shortcut custom5 'Flameshot to clipboard' 'flameshot gui --clipboard 
 set_custom_shortcut custom6 'Murmure Record Toggle (TouchpadOff)' 'murmure --transcription' '<Shift><Super>XF86TouchpadOff'
 set_custom_shortcut custom7 'Murmure Cancel (TouchpadOff)' 'murmure --cancel' '<Control><Shift><Super>XF86TouchpadOff'
 set_custom_shortcut custom8 'Shut Down' "\"$HOME/config/bin/confirm-shutdown\"" '<Control><Alt>End'
+set_custom_shortcut custom9 'Murmure Record Toggle (Right Super)' 'murmure --transcription' Super_R
+set_custom_shortcut custom10 'Murmure Cancel (Right Super)' 'murmure --cancel' '<Control>Super_R'
 
 # Use GNOME's native screenshot UI on Wayland.
 gsettings set "$shell" show-screenshot-ui "['Print']"
 
-gsettings set "$media" custom-keybindings "['$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/']"
+gsettings set "$media" custom-keybindings "['$custom_base/custom1/', '$custom_base/custom2/', '$custom_base/custom3/', '$custom_base/custom4/', '$custom_base/custom5/', '$custom_base/custom6/', '$custom_base/custom7/', '$custom_base/custom8/', '$custom_base/custom9/', '$custom_base/custom10/']"
 
 # Resolve this computer's launchers and bind their actual Favorites positions.
 /usr/bin/python3 "$(dirname "${BASH_SOURCE[0]}")/gnome-app-shortcuts.py"

@@ -6,6 +6,12 @@
 
 Just use the direct commands for Linux.
 
+Run `make gnome-settings` to configure GNOME shortcuts. Right Super toggles recording (`murmure --transcription`); Ctrl+Right Super cancels (`murmure --cancel`). Left Super opens the overview. The script removes the old Right Super Compose assignment and binds the standard `Super_R` keysym, so the shortcut works across keyboards that send Right Super without device-specific keycodes or GNOME extensions.
+
+If the current session retains the old Compose mapping after applying the settings, log out and back in to reload the keymap and shortcuts.
+
+Scroll Lock, Media, and Shift+Super+TouchpadOff remain recording shortcuts; adding Ctrl cancels.
+
 ## LLM Connect
 
 If using LLM Connect, current settings
