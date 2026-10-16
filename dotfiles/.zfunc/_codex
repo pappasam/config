@@ -1397,7 +1397,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (sandbox)
 _arguments "${_arguments_options[@]}" : \
-'(-P --permission-profile -C --cd --include-managed-config)--sandbox-state-json=[JSON value from \`codex/sandbox-state-meta\` to apply directly]:JSON:_default' \
+'(-P --permission-profile -C --cd --include-managed-config)--sandbox-state-json=[Opaque JSON value from \`codex/sandbox-state\` to apply directly]:JSON:_default' \
 '*--sandbox-state-readable-root=[Add a readable root to the supplied sandbox state. Repeat for multiple roots]:SANDBOX_STATE_READABLE_ROOT:_default' \
 '-P+[Named permissions profile to apply from the active configuration stack]:NAME:_default' \
 '--permission-profile=[Named permissions profile to apply from the active configuration stack]:NAME:_default' \
