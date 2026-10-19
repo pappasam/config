@@ -71,13 +71,16 @@ alias pull='git pull'
 alias push='git push -u origin "$(git rev-parse --abbrev-ref HEAD)"'
 alias gop='gh pr view --web || gh browse'
 
+# Kittens
+alias icat='kitten icat'
+alias dnd='kitten dnd'
+
 # General
 alias gn='gio open </dev/null >/dev/null 2>&1'
 alias pbcopy='clipboard_copy'
 alias pbpaste='clipboard_paste'
 alias publicip='curl -s checkip.amazonaws.com'
 alias rg='rg --fixed-strings'
-alias icat='kitten icat'
 alias oc='ollama launch opencode --model qwen3.6:35b-a3b-coding'
 alias playwright-install-browser='playwright-cli install-browser --with-deps'
 alias docker-clean='docker ps -q | xargs -r docker stop && docker container prune'
