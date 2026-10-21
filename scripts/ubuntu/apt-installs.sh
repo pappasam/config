@@ -37,7 +37,6 @@ sudo apt install -y \
   expect \
   exuberant-ctags \
   ffmpeg \
-  flameshot \
   fortune-mod \
   fswatch \
   gettext \
