@@ -10,7 +10,6 @@ sudo apt upgrade -y
 sudo apt install -y \
   alsa-utils \
   apache2-utils \
-  apt-transport-https \
   autoconf \
   automake \
   biber \
@@ -35,7 +34,6 @@ sudo apt install -y \
   entr \
   espeak \
   expect \
-  exuberant-ctags \
   ffmpeg \
   fortune-mod \
   fswatch \
@@ -44,7 +42,7 @@ sudo apt install -y \
   gfortran-11 \
   gfortran-12 \
   git \
-  gnupg-agent \
+  gpg-agent \
   graphicsmagick \
   graphviz \
   groff \
@@ -112,7 +110,6 @@ sudo apt install -y \
   openssl \
   pandoc \
   patch \
-  peek \
   perl \
   php \
   pipewire-alsa \
@@ -123,7 +120,6 @@ sudo apt install -y \
   re2c \
   rustc \
   scdoc \
-  screenkey \
   shellcheck \
   socat \
   software-properties-common \
@@ -137,6 +133,7 @@ sudo apt install -y \
   tk-dev \
   tree \
   typespeed \
+  universal-ctags \
   unixodbc-dev \
   unzip \
   uuid-dev \
@@ -144,9 +141,6 @@ sudo apt install -y \
   webcamoid \
   wget \
   wl-clipboard \
-  wtype \
-  xclip \
-  xsel \
   xz-utils \
   xzdec \
   ydotool \
