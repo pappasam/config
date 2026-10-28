@@ -1,3 +1,4 @@
+# Environment {{{
 # Shared interactive-shell configuration for Bash and Zsh.
 # Keep shell-specific history, PATH, prompt, and integrations in their own rc files.
 if [[ -x /opt/google/chrome/chrome-sandbox ]]; then
@@ -38,6 +39,7 @@ include "$HOME/.config/sensitive/secrets.sh"
 include "$HOME/.ghcup/env"
 umask 022 # Default access: files (rw-r--r--) & dirs (rwxr-xr-x) with umask 022
 
+# }}}
 # Aliases {{{
 
 # Navigation
@@ -92,7 +94,7 @@ function c() { cd "$HOME/config/$1" || return; }
 function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
 function kk() { cd "$HOME/src/kyucollective/$1" || return; }
 function kr() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
-function kc() { cd "$HOME/worktrees/kip-containers/sc-307282-separate-assets-from-ads/kip-containers/apps/streamlit/kip-ads/creative-intake" || return; }
+function kc() { cd "$HOME/src/KeplerGroup/KIP-Airlock/repos/kip-containers/apps/streamlit/kip-ads/creative-intake " || return; }
 function ka() {
   if [[ $# -eq 0 ]]; then
     cd "$HOME/src/KeplerGroup/KIP-Airlock" || return
