@@ -94,7 +94,40 @@ function c() { cd "$HOME/config/$1" || return; }
 function k() { cd "$HOME/src/KeplerGroup/$1" || return; }
 function kk() { cd "$HOME/src/kyucollective/$1" || return; }
 function kr() { cd "$HOME/src/KeplerGroup/KIP-Rocket/$1" || return; }
-function kc() { cd "$HOME/src/KeplerGroup/KIP-Airlock/repos/kip-containers/apps/streamlit/kip-ads/creative-intake " || return; }
+# List checked-out branches, or resolve one to its worktree directory.
+function _kc_worktrees() {
+  local entry worktree branch
+  while IFS= read -r -d '' entry; do
+    case "$entry" in
+    'worktree '*) worktree="${entry#worktree }" ;;
+    'branch refs/heads/'*)
+      branch="${entry#branch refs/heads/}"
+      if [[ $# -eq 0 ]]; then
+        printf '%s\n' "$branch"
+      elif [[ "$branch" == "$1" ]]; then
+        printf '%s\n' "$worktree"
+        return 0
+      fi
+      ;;
+    esac
+  done < <(git -C "$HOME/src/KeplerGroup/KIP-Airlock/repos/kip-containers" worktree list --porcelain -z)
+  [[ $# -eq 0 ]]
+}
+
+function kc() {
+  local worktree="$HOME/src/KeplerGroup/KIP-Airlock/repos/kip-containers"
+  if [[ $# -gt 1 ]]; then
+    echo 'usage: kc [branch]' >&2
+    return 1
+  fi
+  if [[ $# -eq 1 ]]; then
+    worktree="$(_kc_worktrees "$1")" || {
+      printf 'kc: no worktree found for branch: %s\n' "$1" >&2
+      return 1
+    }
+  fi
+  cd "$worktree/apps/streamlit/kip-ads/creative-intake" || return
+}
 function ka() {
   if [[ $# -eq 0 ]]; then
     cd "$HOME/src/KeplerGroup/KIP-Airlock" || return

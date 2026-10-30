@@ -88,6 +88,13 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' .accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
+function _kc() {
+  local -a branches
+  [[ $CURRENT -eq 2 ]] || return 1
+  branches=("${(@f)$(_kc_worktrees)}")
+  compadd -a branches
+}
+compdef _kc kc
 function _wtclean() {
   local -a saved_words=("${words[@]}")
   local saved_current=$CURRENT
