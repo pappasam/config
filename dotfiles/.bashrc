@@ -11,16 +11,15 @@ else
   echo "$HOME/.config/shell/common.sh not found; bash loading without shared configuration" >&2
 fi
 
-function _kc_complete() {
-  local branch
+function _worktree_shortcut_complete() {
+  local branch directory="${_worktree_shortcuts[${COMP_WORDS[0]}]}"
   COMPREPLY=()
   [[ $COMP_CWORD -eq 1 ]] || return 0
   while IFS= read -r branch; do
     [[ "$branch" == "${COMP_WORDS[COMP_CWORD]}"* ]] && COMPREPLY+=("$branch")
-  done < <(_kc_worktrees)
+  done < <(_worktree_targets "$directory" 2>/dev/null)
   return 0
 }
-complete -F _kc_complete kc
 
 export HISTCONTROL=ignorespace
 export HISTFILE=~/.bash_history

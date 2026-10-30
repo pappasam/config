@@ -88,13 +88,17 @@ bindkey -M menuselect '^[' send-break
 bindkey -M menuselect '^y' accept-line
 bindkey -M menuselect '^m' .accept-line
 compdef "_files -W $GITIGNORE_DIR/" gitignore
-function _kc() {
+function _worktree_shortcut() {
   local -a branches
   [[ $CURRENT -eq 2 ]] || return 1
-  branches=("${(@f)$(_kc_worktrees)}")
+  branches=("${(@f)$(_worktree_targets "${_worktree_shortcuts[${words[1]}]}" 2>/dev/null)}")
   compadd -a branches
 }
-compdef _kc kc
+# Shortcuts in common.sh are registered before compinit is available.
+for _shortcut in "${(@k)_worktree_shortcuts}"; do
+  compdef _worktree_shortcut "$_shortcut"
+done
+unset _shortcut
 function _wtclean() {
   local -a saved_words=("${words[@]}")
   local saved_current=$CURRENT
