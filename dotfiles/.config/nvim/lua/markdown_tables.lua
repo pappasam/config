@@ -226,6 +226,12 @@ local function render_table(buf, ns, node, available)
         add(chunks, (" "):rep(padding - left + 1), "Normal")
         add(chunks, "│", border_hl)
       end
+      -- Stripe logical body rows, including all their wrapped lines.
+      if index % 2 == 0 then
+        for _, chunk in ipairs(chunks) do
+          chunk[2] = { chunk[2], "CursorLine" }
+        end
+      end
       lines[#lines + 1] = chunks
     end
     if index == #rows and #rows > 1 then
