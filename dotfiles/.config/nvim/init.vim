@@ -206,6 +206,8 @@ function! s:focuswriting()
   try
     normal! ma
     let current_buffer = bufnr('%')
+    let original_window = win_getid()
+    let focus_origin = get(w:, 'focuswriting_origin', original_window)
     tabe
     " Left Window
     let w:focuswriting = 1
@@ -223,9 +225,25 @@ function! s:focuswriting()
     setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nvic
     wincmd =
     normal! `azz0
+    let w:focuswriting_origin = focus_origin
+    call nvim_win_set_var(original_window, 'focuswriting_origin', focus_origin)
   finally
     set nolazyredraw
   endtry
+endfunction
+
+function! s:focuswriting_sync()
+  " Native scrollbind only works within a tab; carry the view across tabs.
+  if !exists('w:focuswriting_origin')
+    return
+  endif
+  let view = winsaveview()
+  for window in getwininfo()
+    if window.winid != win_getid() && window.bufnr == bufnr('%')
+          \ && get(window.variables, 'focuswriting_origin', 0) == w:focuswriting_origin
+      call win_execute(window.winid, 'call winrestview(' .. string(view) .. ')')
+    endif
+  endfor
 endfunction
 
 command! CustomQuitPre call s:custom_quit_pre()
@@ -353,6 +371,7 @@ augroup init_custom
   autocmd BufWritePre * TrimWhitespace
   autocmd TextYankPost,TextPutPost * silent! lua vim.hl.hl_op({higroup="VisualNOS", timeout=250})
   autocmd QuitPre * CustomQuitPre
+  autocmd WinLeave * call s:focuswriting_sync()
   autocmd VimResized * ResizeTabs
 augroup end
 
