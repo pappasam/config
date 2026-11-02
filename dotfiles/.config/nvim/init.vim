@@ -146,17 +146,6 @@ function! s:trim_whitespace()
   endtry
 endfunction
 
-command! -bang Conceal call s:conceal('<bang>')
-function! s:conceal(bang)
-  if a:bang ==# '!'
-    setlocal conceallevel=0
-    setlocal concealcursor=
-  else
-    setlocal conceallevel=3
-    setlocal concealcursor=nc
-  endif
-endfunction
-
 command! -range C <line1>,<line2>call s:copy_reference(<range>)
 function! s:copy_reference(range_type) range
   if &filetype == 'NvimTree'
@@ -231,7 +220,7 @@ function! s:focuswriting()
     let w:focuswriting = 1
     vertical resize 88
     execute 'buffer ' .. current_buffer
-    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nc
+    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable conceallevel=3 concealcursor=nvic
     wincmd =
     normal! `azz0
   finally
