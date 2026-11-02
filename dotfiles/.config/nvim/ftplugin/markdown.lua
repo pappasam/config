@@ -6,3 +6,4 @@ vim.bo.softtabstop = 4
 vim.bo.expandtab = true
 vim.diagnostic.enable(false)
 vim.treesitter.start()
+require("markdown_tables").setup()
