@@ -25,10 +25,9 @@ vim.pack.add({
   "https://github.com/pappasam/vim-keywordprg-commands",
   "https://github.com/pappasam/nvim-autocorrect",
   -- Remainder
-  "https://github.com/HiPhish/info.vim",
-  "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-  "https://github.com/catgoose/nvim-colorizer.lua",
   "https://github.com/machakann/vim-sandwich",
+  "https://github.com/HiPhish/info.vim",
+  "https://github.com/catgoose/nvim-colorizer.lua",
 })
 
 -- }}}
@@ -369,22 +368,6 @@ require("colorizer").setup({
 require("autocorrect").setup({
   filetypes = { "markdown", "gitcommit", "text", "lua", "python", "bash" },
   correct_capitalized = true,
-})
-
--- }}}
--- https://github.com/MeanderingProgrammer/render-markdown.nvim {{{
-
-require("render-markdown").setup({
-  --- BEGIN: enable across all modes
-  render_modes = true,
-  anti_conceal = {
-    enabled = false,
-  },
-  win_options = {
-    concealcursor = {
-      rendered = "nvic",
-    },
-  }, --- END
 })
 
 -- }}}
