@@ -9,6 +9,9 @@ credential_command = 'gh auth token --hostname "$MISE_CREDENTIAL_HOST"'
 
 [env]
 UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
+# Playwright CLI/MCP: use system Chrome (patched by apt) with the sandbox on
+PLAYWRIGHT_MCP_BROWSER = "chrome"
+PLAYWRIGHT_MCP_SANDBOX = "true"
 
 [tools]
 actionlint = "latest"
