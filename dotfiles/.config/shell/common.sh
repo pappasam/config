@@ -461,9 +461,10 @@ function gss() {
 # Git review
 function gr() {
   git rev-parse --show-toplevel >/dev/null 2>&1 || return
-  local pr_number
-  pr_number=$(gh pr view --json number --jq '.number') || return
-  nvim "/tmp/pr_review_${pr_number}.md"
+  local key
+  # Must match REVIEW_KEY in the kepler pr-review skill: <owner>_<repo>_<number>.
+  key=$(gh pr view --json url --jq '.url | split("/") | "\(.[3])_\(.[4])_\(.[6])"') || return
+  nvim "/tmp/pr_review_${key}.md"
 }
 
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
