@@ -458,6 +458,14 @@ function gss() {
   [[ -n "$branch" ]] && git switch "$branch"
 }
 
+# Git review
+function gr() {
+  git rev-parse --show-toplevel >/dev/null 2>&1 || return
+  local pr_number
+  pr_number=$(gh pr view --json number --jq '.number') || return
+  nvim "/tmp/pr_review_${pr_number}.md"
+}
+
 export GITIGNORE_DIR="$HOME/src/lib/gitignore"
 function gitignore() {
   if [ ! -d "$GITIGNORE_DIR" ]; then
