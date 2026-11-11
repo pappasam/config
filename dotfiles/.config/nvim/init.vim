@@ -363,6 +363,7 @@ nnoremap <Leader>gD <Cmd>DiffReviewClose<CR>
 
 augroup init_custom
   autocmd!
+  autocmd BufRead,BufNewFile *.mdx set filetype=markdown
   autocmd BufRead,BufNewFile *.murmure set filetype=json
   autocmd BufRead,BufNewFile */.github/workflows/*.yml,*/.github/workflows/*.yaml set filetype=yaml.ghactions
   autocmd BufRead,BufNewFile *.min.js set filetype=none
