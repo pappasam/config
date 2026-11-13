@@ -299,10 +299,13 @@ function _git_delete_local_branch() {
 }
 
 # Switch to the default branch, pull, and safely delete the branch you were on.
+# In a linked worktree, return to the main checkout and let Worktrunk remove
+# only the worktree you left, retaining its branch if it is not integrated.
 function gdl() {
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
 
   local branch_default branch_current
+  local git_directory git_common_directory worktree_current worktree_main
 
   branch_current="$(git branch --show-current)"
   if [ -z "$branch_current" ]; then
@@ -337,10 +340,32 @@ function gdl() {
     return 0
   fi
 
+  git_directory="$(git rev-parse --absolute-git-dir)" || return
+  git_common_directory="$(git rev-parse --path-format=absolute --git-common-dir)" || return
+  if [ "$git_directory" != "$git_common_directory" ]; then
+    command -v wt >/dev/null 2>&1 || {
+      echo "Worktrunk is required to clean up a linked worktree." >&2
+      return 127
+    }
+    worktree_current="$(git rev-parse --show-toplevel)" || return
+    # Git lists the main checkout first; use NUL records for paths with spaces.
+    IFS= read -r -d '' worktree_main < <(git worktree list --porcelain -z) || return
+    worktree_main="${worktree_main#worktree }"
+    if [ "$(git -C "$worktree_main" rev-parse --is-bare-repository)" != false ]; then
+      echo "No main checkout to return to; refusing to remove this worktree." >&2
+      return 2
+    fi
+    builtin cd -- "$worktree_main" || return
+  fi
+
   git switch "$branch_default" || return
   git pull --ff-only || return
   git fetch --prune origin || return
   git remote set-head origin -a >/dev/null 2>&1 || true
+  if [ -n "$worktree_current" ]; then
+    wt remove --foreground -- "$worktree_current"
+    return
+  fi
   _git_delete_local_branch "$branch_current"
 }
 
