@@ -103,13 +103,13 @@ function! s:edit_nvim_config()
   endtry
 endfunction
 
-command! EditZsh call s:edit_zsh()
-function! s:edit_zsh()
+command! EditShell call s:edit_shell()
+function! s:edit_shell()
   set lazyredraw
   try
     cd ~
-    edit ~/.zshrc
-    tabe ~/.config/shell/common.sh
+    edit ~/.config/shell/common.sh
+    tabe ~/.zshrc
     1tabnext
   finally
     set nolazyredraw
@@ -307,7 +307,7 @@ nnoremap <Leader>ek <Cmd>edit ~/config/dotfiles/.config/kitty/kitty.conf<CR>
 nnoremap <Leader>em <Cmd>edit ~/config/dotfiles/.config/mise/config.toml<CR>
 nnoremap <Leader>ep <Cmd>edit ~/config/docs/samples/ai-prompts.md<CR>
 nnoremap <Leader>ev <Cmd>EditNvimConfig<CR>
-nnoremap <Leader>ez <Cmd>EditZsh<CR>
+nnoremap <Leader>es <Cmd>EditShell<CR>
 xnoremap <Leader>y "+y
 nnoremap <Leader>y "+y
 vnoremap <LeftRelease> <Cmd>CopySelection<CR>
