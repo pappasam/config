@@ -70,7 +70,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
-'--no-daemon[The agents overview requires a shared server; this option is rejected]' \
+'--no-daemon[Run the agents overview with an embedded app server]' \
 '--no-alt-screen[Disable alternate screen mode]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -78,15 +78,17 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (tcp-tunnel)
 _arguments "${_arguments_options[@]}" : \
-'--proxy-url=[HTTPS origin of the HTTP/3 proxy]:PROXY_URL:_default' \
-'--proxy-origins-file=[File containing one exact approved HTTPS proxy origin per line]:PROXY_ORIGINS_FILE:_files' \
-'--target=[CONNECT target authority, including a nonzero port]:TARGET:_default' \
-'--listen-addr=[]:LISTEN_ADDR:_default' \
+'--proxy-url=[HTTPS proxy origin. With --environment-id, defaults to the public Portals gateway]:PROXY_URL:_default' \
+'--proxy-origins-file=[Listener mode\: file containing one exact approved HTTPS proxy origin per line]:PROXY_ORIGINS_FILE:_files' \
+'(--environment-id)--target=[SSH environment ID and port (ENV\:PORT), or the CONNECT authority in listener mode]:TARGET:_default' \
+'(--auth-token-stdin)--environment-id=[Open an SSH stdio tunnel to this canonical Portals environment]:ENVIRONMENT_ID:_default' \
+'--port=[Published SSH port for --environment-id (default 22)]:PORT:_default' \
+'--listen-addr=[Loopback listener address (default 127.0.0.1\:0)]:LISTEN_ADDR:_default' \
 '*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
-'--auth-token-stdin[Read the initial bearer from stdin]' \
+'--auth-token-stdin[Start a listener and read its bearer from stdin. Otherwise relay SSH over stdio using the Codex login]' \
 '--auth-token-updates-stdin[Read replacement bearers from stdin and stop when the controlling pipe closes]' \
 '--connect-headers-stdin[Read a JSON list of extension-header name/value pairs before the first bearer]' \
 '--diagnostics-json[Emit credential-safe JSON diagnostics on stderr instead of human-readable errors]' \
@@ -125,6 +127,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -166,6 +169,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -196,6 +200,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -228,6 +233,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -304,6 +310,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -345,6 +352,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -375,6 +383,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -407,6 +416,7 @@ _arguments "${_arguments_options[@]}" : \
 '--dangerously-bypass-hook-trust[Run enabled hooks without requiring persisted hook trust for this invocation. DANGEROUS. Intended only for automation that already vets hook sources]' \
 '--worktree[Run the session in a new managed Git worktree]' \
 '--skip-git-repo-check[Allow running Codex outside a Git repository]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '--ephemeral[Run without persisting session files to disk]' \
 '--ignore-user-config[Do not load \`\$CODEX_HOME/config.toml\`; auth still uses \`CODEX_HOME\`]' \
 '--ignore-rules[Do not load user or project execpolicy \`.rules\` files]' \
@@ -462,6 +472,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
+'--trust[Save trust for this project and future chats, including MCP commands outside the sandbox. Persists even with --ephemeral. Does not override an explicitly untrusted project]' \
 '(--base --commit)--uncommitted[Review staged, unstaged, and untracked changes]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -529,6 +540,17 @@ esac
         esac
     ;;
 esac
+;;
+(git-credential)
+_arguments "${_arguments_options[@]}" : \
+'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
+'*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':operation:(get store erase capability)' \
+&& ret=0
 ;;
 (logout)
 _arguments "${_arguments_options[@]}" : \
@@ -921,6 +943,8 @@ esac
 ;;
 (app-server)
 _arguments "${_arguments_options[@]}" : \
+'--startup-client-info=[ClientInfo JSON used for configuration/auth request identity]:STARTUP_CLIENT_INFO:_default' \
+'--cloud-skills-snapshot=[Load frozen cloud skills from a JSON snapshot instead of a live skill service]:PATH:_files' \
 '--code-mode-host=[Connect to a remote code-mode host instead of starting a local host]:URL:_default' \
 '--listen=[Transport endpoint URL. Supported values\: \`stdio\://\` (default), \`unix\://\`, \`unix\://PATH\`, \`ws\://IP\:PORT\`, \`off\`]:URL:_default' \
 '--ws-auth=[Authentication mode for incoming WebSocket connections]:MODE:(capability-token signed-bearer-token)' \
@@ -934,6 +958,8 @@ _arguments "${_arguments_options[@]}" : \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'--startup-sign-out[Sign out using the managed auth path before loading fresh startup requirements]' \
+'(--listen --stdio --remote-control --managed-daemon)--print-startup-config[Validate configuration and print requirements as JSON without starting the app server]' \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
 '(--listen)--stdio[Use stdio as the transport (equivalent to \`--listen stdio\://\`)]' \
 '--remote-control[Enable remote control for this app-server process without changing persistence]' \
@@ -1386,6 +1412,7 @@ _arguments "${_arguments_options[@]}" : \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--json[Emit a redacted machine-readable report]' \
+'--network-only[Run config, network environment, provider HTTP, and Responses WebSocket checks]' \
 '--feedback[Limit database integrity scans when collecting a feedback attachment]' \
 '--summary[Only show grouped check rows and the final count summary]' \
 '--all[Expand long lists in detailed human output]' \
@@ -1789,10 +1816,11 @@ _arguments "${_arguments_options[@]}" : \
 '-C+[Tell the agent to use the specified directory as its working root]:DIR:_files' \
 '--cd=[Tell the agent to use the specified directory as its working root]:DIR:_files' \
 '*--add-dir=[Additional directories that should be writable alongside the primary workspace]:DIR:_files -/' \
-'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
-'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*-c+[Override a startup configuration value (key=value). Queued messages use the thread'\''s model.]:key=value:_default' \
+'*--config=[Override a startup configuration value (key=value). Queued messages use the thread'\''s model.]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
+'--resume[After queueing, try to resume the thread on the local daemon or selected --remote server. A failed resume produces a warning and the command still succeeds]' \
 '--oss[Use open-source provider]' \
 '(-s --sandbox --dangerously-bypass-approvals-and-sandbox)--approve-for-me[Route approval requests through automatic review using the workspace-write sandbox]' \
 '--dangerously-bypass-approvals-and-sandbox[Skip all confirmation prompts and execute commands without sandboxing. EXTREMELY DANGEROUS. Intended solely for running in environments that are externally sandboxed]' \
@@ -1877,6 +1905,17 @@ _arguments "${_arguments_options[@]}" : \
 '--apply[Publish the migration. Without this flag the command only reports eligible sessions]' \
 '--json[Emit the complete per-thread report as JSON]' \
 '--verbose[Print one line for every inspected rollout]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(migrate-nfs-db)
+_arguments "${_arguments_options[@]}" : \
+'--staging-dir=[Use a local directory with space for the database and WAL files. The default is the system temporary directory]:STAGING_DIR:_files' \
+'*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
+'*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
+'*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
@@ -2088,11 +2127,16 @@ _arguments "${_arguments_options[@]}" : \
 '--server-info=[Path to a JSON file to write startup info (single line). Includes {"port"\: <u16>}]:FILE:_files' \
 '--upstream-url=[Absolute URL the proxy should forward requests to (defaults to OpenAI)]:UPSTREAM_URL:_default' \
 '--dump-dir=[Directory where request/response dumps should be written as JSON]:DIR:_files' \
+'--oidc-audience=[Audience configured on the OpenAI workload identity provider]:AUDIENCE:_default' \
+'--identity-provider-id=[OpenAI workload identity provider ID]:ID:_default' \
+'--service-account-id=[OpenAI service account ID selected by the provider mapping]:ID:_default' \
+'--github-oidc-request-url=[HTTPS token-request URL from GitHub'\''s runner-provided ACTIONS_ID_TOKEN_REQUEST_URL]:URL:_default' \
 '*-c+[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--config=[Override a configuration value that would otherwise be loaded from \`~/.codex/config.toml\`. Use a dotted path (\`foo.bar.baz\`) to override nested values. The \`value\` portion is parsed as TOML. If it fails to parse as TOML, the raw string is used as a literal]:key=value:_default' \
 '*--enable=[Enable a feature (repeatable). Equivalent to \`-c features.<name>=true\`]:FEATURE:_default' \
 '*--disable=[Disable a feature (repeatable). Equivalent to \`-c features.<name>=false\`]:FEATURE:_default' \
 '--http-shutdown[Enable HTTP shutdown endpoint at GET /shutdown]' \
+'--github-oidc[Authenticate to the OpenAI API using GitHub Actions workload identity. In this mode stdin supplies the GitHub OIDC request token, not an API key]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
@@ -2124,6 +2168,7 @@ _arguments "${_arguments_options[@]}" : \
 '--remote-transport=[Transport used for the remote executor connection]:REMOTE_TRANSPORT:(noise direct)' \
 '--environment-id=[Environment id to attach to when registering remotely]:ID:_default' \
 '--name=[Human-readable environment name]:NAME:_default' \
+'--chatgpt-account-id=[ChatGPT account ID. Must match the token'\''s account claim when present]:ID:_default' \
 '--aws-profile=[AWS profile used for SigV4 authentication]:PROFILE:_default' \
 '--aws-region=[AWS signing region. Uses the SDK region chain when omitted]:REGION:_default' \
 '--aws-service=[AWS signing service]:SERVICE:_default' \
@@ -2134,6 +2179,9 @@ _arguments "${_arguments_options[@]}" : \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
 '--proxy-private-ips-via-upstream[Allow permitted private IP destinations to use the configured upstream proxy. If no valid upstream proxy applies to the request protocol, connect directly. Loopback stays local. This flag does not require upstream routing]' \
 '(--aws-sigv4)--use-agent-identity-auth[Use Agent Identity auth from CODEX_ACCESS_TOKEN for remote registration]' \
+'(--use-agent-identity-auth --executor-credential-stdin --aws-sigv4)--registration-bearer-stdin[Read one registration bearer from stdin]' \
+'(--use-agent-identity-auth --aws-sigv4)--executor-credential-stdin[Read rotating executor credentials from stdin; exit when the pipe closes]' \
+'(--use-agent-identity-auth --aws-sigv4 --executor-credential-stdin --registration-bearer-stdin)--chatgpt-token-stdin[Read a ChatGPT access token from stdin for HTTPS registration]' \
 '--aws-sigv4[Sign Direct registration and WebSocket handshake requests with AWS SigV4]' \
 '--exit-on-stdin-close[Exit when the parent-owned standard-input pipe closes]' \
 '-h[Print help (see more with '\''--help'\'')]' \
@@ -2166,6 +2214,8 @@ _arguments "${_arguments_options[@]}" : \
 '--strict-config[Error out when config.toml contains fields that are not recognized by this version of Codex]' \
 '--proxy-private-ips-via-upstream[Allow permitted private IP destinations to use the configured upstream proxy. If no valid upstream proxy applies to the request protocol, connect directly. Loopback stays local. This flag does not require upstream routing]' \
 '(--aws-sigv4)--use-agent-identity-auth[Use Agent Identity auth from CODEX_ACCESS_TOKEN for remote registration]' \
+'(--use-agent-identity-auth --executor-credential-stdin --aws-sigv4)--registration-bearer-stdin[Read one registration bearer from stdin]' \
+'(--use-agent-identity-auth --aws-sigv4)--executor-credential-stdin[Read rotating executor credentials from stdin; exit when the pipe closes]' \
 '--aws-sigv4[Sign Direct registration and WebSocket handshake requests with AWS SigV4]' \
 '--exit-on-stdin-close[Exit when the parent-owned standard-input pipe closes]' \
 '-h[Print help (see more with '\''--help'\'')]' \
@@ -2357,6 +2407,10 @@ _arguments "${_arguments_options[@]}" : \
         esac
     ;;
 esac
+;;
+(git-credential)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
 ;;
 (logout)
 _arguments "${_arguments_options[@]}" : \
@@ -2702,6 +2756,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(migrate-nfs-db)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (unarchive)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -2818,12 +2876,13 @@ esac
 (( $+functions[_codex_commands] )) ||
 _codex_commands() {
     local commands; commands=(
-'agents:Browse all agent sessions on the shared local app-server daemon' \
-'tcp-tunnel:Internal\: forward a local TCP socket through an HTTP/3 CONNECT proxy' \
+'agents:Open the agent command center to browse and switch sessions' \
+'tcp-tunnel:Internal\: forward SSH stdio or a local TCP socket through an HTTP/3 CONNECT proxy' \
 'exec:Run Codex non-interactively' \
 'e:Run Codex non-interactively' \
 'review:Run a code review non-interactively' \
 'login:Manage login' \
+'git-credential:Supply the existing Codex login to Git'\''s credential-helper protocol' \
 'logout:Remove stored authentication credentials' \
 'mcp:Manage external MCP servers for Codex' \
 'plugin:Manage Codex plugins' \
@@ -2842,6 +2901,7 @@ _codex_commands() {
 'archive:Archive a saved session by id or session name' \
 'delete:Permanently delete a saved session by id or session name' \
 'migrate-rollouts:Inspect or migrate legacy local sessions to paginated thread history' \
+'migrate-nfs-db:\[experimental\] Migrate configured SQLite databases to DELETE mode in place' \
 'unarchive:Unarchive a saved session by id or session name' \
 'fork:Fork a previous interactive session (picker by default; use --last to fork the most recent)' \
 'cloud:\[EXPERIMENTAL\] Browse tasks from Codex Cloud and apply changes locally' \
@@ -3507,14 +3567,20 @@ _codex__fork_commands() {
     local commands; commands=()
     _describe -t commands 'codex fork commands' commands "$@"
 }
+(( $+functions[_codex__git-credential_commands] )) ||
+_codex__git-credential_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex git-credential commands' commands "$@"
+}
 (( $+functions[_codex__help_commands] )) ||
 _codex__help_commands() {
     local commands; commands=(
-'agents:Browse all agent sessions on the shared local app-server daemon' \
-'tcp-tunnel:Internal\: forward a local TCP socket through an HTTP/3 CONNECT proxy' \
+'agents:Open the agent command center to browse and switch sessions' \
+'tcp-tunnel:Internal\: forward SSH stdio or a local TCP socket through an HTTP/3 CONNECT proxy' \
 'exec:Run Codex non-interactively' \
 'review:Run a code review non-interactively' \
 'login:Manage login' \
+'git-credential:Supply the existing Codex login to Git'\''s credential-helper protocol' \
 'logout:Remove stored authentication credentials' \
 'mcp:Manage external MCP servers for Codex' \
 'plugin:Manage Codex plugins' \
@@ -3532,6 +3598,7 @@ _codex__help_commands() {
 'archive:Archive a saved session by id or session name' \
 'delete:Permanently delete a saved session by id or session name' \
 'migrate-rollouts:Inspect or migrate legacy local sessions to paginated thread history' \
+'migrate-nfs-db:\[experimental\] Migrate configured SQLite databases to DELETE mode in place' \
 'unarchive:Unarchive a saved session by id or session name' \
 'fork:Fork a previous interactive session (picker by default; use --last to fork the most recent)' \
 'cloud:\[EXPERIMENTAL\] Browse tasks from Codex Cloud and apply changes locally' \
@@ -3820,6 +3887,11 @@ _codex__help__fork_commands() {
     local commands; commands=()
     _describe -t commands 'codex help fork commands' commands "$@"
 }
+(( $+functions[_codex__help__git-credential_commands] )) ||
+_codex__help__git-credential_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex help git-credential commands' commands "$@"
+}
 (( $+functions[_codex__help__help_commands] )) ||
 _codex__help__help_commands() {
     local commands; commands=()
@@ -3883,6 +3955,11 @@ _codex__help__mcp__logout_commands() {
 _codex__help__mcp__remove_commands() {
     local commands; commands=()
     _describe -t commands 'codex help mcp remove commands' commands "$@"
+}
+(( $+functions[_codex__help__migrate-nfs-db_commands] )) ||
+_codex__help__migrate-nfs-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex help migrate-nfs-db commands' commands "$@"
 }
 (( $+functions[_codex__help__migrate-rollouts_commands] )) ||
 _codex__help__migrate-rollouts_commands() {
@@ -4146,6 +4223,11 @@ _codex__mcp__logout_commands() {
 _codex__mcp__remove_commands() {
     local commands; commands=()
     _describe -t commands 'codex mcp remove commands' commands "$@"
+}
+(( $+functions[_codex__migrate-nfs-db_commands] )) ||
+_codex__migrate-nfs-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'codex migrate-nfs-db commands' commands "$@"
 }
 (( $+functions[_codex__migrate-rollouts_commands] )) ||
 _codex__migrate-rollouts_commands() {
