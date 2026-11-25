@@ -32,6 +32,7 @@ export ENABLE_LSP_TOOL=1                                         # https://githu
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1
 export CLAUDE_CODE_SCROLL_SPEED=3
+export VFOX_PYTHON_USE_UV_BUILD=1
 
 # shellcheck source=/dev/null
 function include() { [[ -f "$1" ]] && source "$1"; }
